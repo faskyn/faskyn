@@ -29,6 +29,8 @@ gem 'bootstrap-will_paginate', '~> 0.0.10'
 gem 'jbuilder', '~> 2.0'
 #populating fake data
 gem 'faker', '~> 1.5.0'
+#storing ENV credentials
+gem 'figaro', '~> 1.1.1'
 #qucik authentication
 gem 'devise', '~> 3.5.2'
 # bundle exec rake doc:rails generates the API under doc/api.
