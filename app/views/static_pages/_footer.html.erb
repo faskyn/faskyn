@@ -1,0 +1,20 @@
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-left">
+        <div class= "footer-logo">
+          <%= link_to image_tag("firstlogosmall.png", size: "40x40"), root_path, class: "navbar-brand" %>
+        </div>
+        <%= link_to "| Fastest way to ask and get things done.", root_path %>
+      </div>
+      <nav>
+        <ul>
+          <li><%= link_to "Contact", static_pages_contact_path %></li>
+          <li><%= link_to "About", static_pages_about_path %></li>
+          <li><%= link_to "Help", static_pages_help_path %></li>
+          <li><%= link_to "Privacy Policy", static_pages_privacypolicy_path %></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
