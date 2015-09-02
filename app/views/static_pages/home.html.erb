@@ -1,3 +1,70 @@
-<h1>Home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
-<%= render "footer" %>
+<% if user_signed_in? %>
+  <!-- redirect_to -->
+
+<%else%>
+  <div class= "jumbotron">
+    <div class= "container">
+      <div class= "hero-title">
+        <h1>Ask for something and get things done!</h1>
+      </div>
+      <div class= "hero-description">
+        <h3>With faskyn you can simply and quickly assign a  task or ask for a favor.</h3>
+      </div>
+      <div class = "hero-button">
+        <%= link_to "Get Started", new_user_registration_path , class: "btn btn-primary btn-lg" %>
+      </div>
+    </div>
+  </div>
+
+  <div class = "details">
+    <div class= "container">
+      <div class = "row">
+        <div class = "col-md-4">
+          <span class="glyphicon-stack">
+            <i class="glyphicon glyphicon-circle glyphicon-stack-2x"></i>
+            <i class="glyphicon glyphicon-phone-alt glyphicon-stack glyphicon-stack-1x"></i>
+          </span>
+          <h4>Get and stay in touch with your industry fellows</h4>
+          <p>Make and maintain win-win connections with people who you make business together</p>
+        </div>
+        <div class = "col-md-4">
+          <span class="glyphicon-stack">
+            <i class="glyphicon glyphicon-circle glyphicon-stack-2x"></i>
+            <i class="glyphicon glyphicon-user glyphicon-stack glyphicon-stack-1x"></i>
+            </span>
+          <h4>Ask a targeted favor or assign a task</h4>
+          <p>Assign a task to your lawyer, VC or fellow startup, or ask for a targeted favor from guys who you think could help.</p>
+        </div>
+        <div class = "col-md-4">
+          <span class="glyphicon-stack">
+            <i class="glyphicon glyphicon-circle glyphicon-stack-2x"></i>
+            <i class="glyphicon glyphicon-ok glyphicon-stack glyphicon-stack-1x"></i>
+          </span>
+          <h4>Return the favor or get assigned</h4>
+          <p>Enjoy the quick results and get ready to be assigned or return the favor within your area of expertise.</p>    
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="examples">
+    <div class= "container">
+      <div class="row">
+        <h1>YREASDGF</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="get-started">
+    <div class="container">
+      <h4>Time to speed up and get things done.
+      <span><div class = "hero-button">
+        <%= link_to "Get Started", new_user_registration_path , class: "btn btn-primary btn-lg" %>
+      </div></span>
+      </h4>
+    </div>
+  </div>
+
+
+  <%= render "footer" %>
+<%end%>
