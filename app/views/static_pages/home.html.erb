@@ -2,16 +2,18 @@
   <!-- redirect_to -->
 
 <%else%>
-  <div class= "jumbotron">
-    <div class= "container">
-      <div class= "hero-title">
-        <h1>Ask for something and get things done!</h1>
-      </div>
-      <div class= "hero-description">
-        <h3>With faskyn you can simply and quickly assign a  task or ask for a favor.</h3>
-      </div>
-      <div class = "hero-button">
-        <%= link_to "Get Started", new_user_registration_path , class: "btn btn-primary btn-lg" %>
+  <div id="home">
+    <div class= "jumbotron">
+      <div class= "container">
+        <div class= "hero-title">
+          <h1>Ask for something and get things done!</h1>
+        </div>
+        <div class= "hero-description">
+          <h3>With faskyn you can simply and quickly assign a  task or ask for a favor.</h3>
+        </div>
+        <div class = "hero-button">
+          <%= link_to "Get Started", new_user_registration_path , class: "btn btn-primary btn-lg" %>
+        </div>
       </div>
     </div>
   </div>
@@ -20,28 +22,34 @@
     <div class= "container">
       <div class = "row">
         <div class = "col-md-4">
-          <span class="glyphicon-stack">
-            <i class="glyphicon glyphicon-circle glyphicon-stack-2x"></i>
-            <i class="glyphicon glyphicon-phone-alt glyphicon-stack glyphicon-stack-1x"></i>
-          </span>
-          <h4>Get and stay in touch with your industry fellows</h4>
-          <p>Make and maintain win-win connections with people who you make business together</p>
-        </div>
-        <div class = "col-md-4">
-          <span class="glyphicon-stack">
-            <i class="glyphicon glyphicon-circle glyphicon-stack-2x"></i>
-            <i class="glyphicon glyphicon-user glyphicon-stack glyphicon-stack-1x"></i>
+          <div class="col-padding">
+            <span class="glyphicon-stack">
+              <i class="glyphicon glyphicon-circle glyphicon-stack-2x"></i>
+              <i class="glyphicon glyphicon-phone-alt glyphicon-stack glyphicon-stack-1x"></i>
             </span>
-          <h4>Ask a targeted favor or assign a task</h4>
-          <p>Assign a task to your lawyer, VC or fellow startup, or ask for a targeted favor from guys who you think could help.</p>
+            <h4>Get and stay in touch with your industry fellows</h4>
+            <p>Make and maintain win-win connections with people who you make business together</p>
+          </div>
         </div>
         <div class = "col-md-4">
-          <span class="glyphicon-stack">
-            <i class="glyphicon glyphicon-circle glyphicon-stack-2x"></i>
-            <i class="glyphicon glyphicon-ok glyphicon-stack glyphicon-stack-1x"></i>
-          </span>
-          <h4>Return the favor or get assigned</h4>
-          <p>Enjoy the quick results and get ready to be assigned or return the favor within your area of expertise.</p>    
+          <div class="col-padding">
+            <span class="glyphicon-stack">
+              <i class="glyphicon glyphicon-circle glyphicon-stack-2x"></i>
+              <i class="glyphicon glyphicon-user glyphicon-stack glyphicon-stack-1x"></i>
+              </span>
+            <h4>Ask a targeted favor or assign a task</h4>
+            <p>Assign a task to your lawyer, VC or fellow startup, or ask for a targeted favor from guys who you think could help.</p>
+          </div>
+        </div>
+        <div class = "col-md-4">
+          <div class="col-padding">
+            <span class="glyphicon-stack">
+              <i class="glyphicon glyphicon-circle glyphicon-stack-2x"></i>
+              <i class="glyphicon glyphicon-ok glyphicon-stack glyphicon-stack-1x"></i>
+            </span>
+            <h4>Return the favor or get assigned</h4>
+            <p>Enjoy the quick results and get ready to be assigned or return the favor within your area of expertise.</p>
+          </div>    
         </div>
       </div>
     </div>
@@ -50,7 +58,38 @@
   <div class="examples">
     <div class= "container">
       <div class="row">
-        <h1>YREASDGF</h1>
+        <div class="col-md-4">
+          <div class="col-padding">
+            <p>"These guys look good at distribution, but they may need some help with coding. Let's get in touch with them."</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="col-padding">
+            <p>"Hey Joe, we'd like to consult with you about sales. In exchange we can help you make your front-end better."</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="col-padding">
+            <p>"Hey Kate, sounds good. Let's meet next Wednesday."</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="col-padding">
+            <p>"Our accountant hasn't sent over yet the latest copies."</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="col-padding">
+            <p>"Nancy, please send over the docs in 2 days."</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="col-padding">
+            <p>"Jack, it's done. Let me know if you need anything else."</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>

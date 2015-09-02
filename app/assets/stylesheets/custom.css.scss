@@ -29,7 +29,7 @@ $jumbotron-bg:   */
 
 
 $gray-medium-light: #eaeaea;
-$blue: #007cc3;
+$garmin-blue: #007cc3;
 $dropbox-dark-grey: #47525d;
 $dropbox-light-grey: #7b8994;
 $orange: #ff6600;
@@ -68,6 +68,10 @@ footer {
       margin-left: 15px;
     }
   }
+}
+
+.footer-nav {
+  vertical-align: middle;
 }
 
 /* navbar */

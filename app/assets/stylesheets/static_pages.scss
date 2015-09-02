@@ -5,26 +5,29 @@
 
 /*home not signed in */
 $gray-medium-light: #eaeaea;
-$blue: #007cc3;
+$garmin-blue: #007cc3;
 $dropbox-dark-grey: #47525d;
 $dropbox-light-grey: #7b8994;
 $orange: #ff6600;
 
-.jumbotron {
-  height: 600px;
-  background-image: image_url('jumbotron.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-.jumbotron .container {
-  color: #2c2c2c;
-  text-align: center;
-  vertical-align: middle;
-  position: relative;
-  top: 150px;
-  margin-top: 0px;
+
+#home {
+	.jumbotron {
+		height: 600px;
+		background-image: image_url('jumbotron.png');
+		background-size: cover;
+		background-repeat: no-repeat;
+		margin-top: 0px;
+		margin-bottom: 0px;
+		.container {
+		  color: white; /*#2c2c2c;*/
+		  text-align: center;
+		  vertical-align: middle;
+		  position: relative;
+		  top: 150px;
+		  margin-top: 0px;
+		}
+	}
 }
 
 .hero-title {
@@ -45,7 +48,9 @@ $orange: #ff6600;
 .details {
 	text-align: center;
 	margin-top: 40px;
+	padding-bottom: 40px;
 	border-bottom: 1px solid $gray-medium-light;
+	background: #fff;
 }
 
 .glyphicon-stack {
@@ -63,7 +68,7 @@ $orange: #ff6600;
 	width: 100%;
 	height: auto;
 	padding-top: 100%;
-	background: #2c2c2c;
+	background: $garmin-blue; /*#2c2c2c;*/
 }
 
 .glyphicon-stack-1x {
@@ -82,9 +87,78 @@ $orange: #ff6600;
 	font-size: 2em;
 }
 
+.examples {
+	padding-top: 40px;
+	padding-bottom: 40px;
+	border-bottom: 1px solid $gray-medium-light;
+	text-align: center;
+	background: $garmin-blue;
+	color: white;
+}
+
+.col-padding {
+	/*background-color: transparent;
+  background-image: linear-gradient(to bottom, rgba(30, 87, 153, 0.2) 0%, rgba(125, 185, 232, 0) 100%);
+  background-repeat: repeat;
+  border-radius:10px; */
+  padding: 25px 25px 25px 25px;
+}
+
 .get-started {
 	text-align: center;
+	margin-bottom: 40px;
+	margin-top: 40px;
+	.container {
+		background: #ffffff;
+	}
 }
+
+/* about */
+
+/*#mission {
+	background-color: $garmin-blue;
+	color: white;
+	text-align: center;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}*/
+
+#mission {
+	.jumbotron {
+		height: 600px;
+		background-image: image_url('mission.png');
+		background-size: cover;
+		background-repeat: no-repeat;
+		margin-top: 0px;
+		margin-bottom: 0px;
+		.container {
+		  color: white;
+		  text-align: center;
+		  vertical-align: middle;
+		  position: relative;
+		  top: 170px;
+		  margin-top: 0px;
+		}
+	}
+}
+
+#about {
+	padding: 40px 0 50px 0;
+	/*color: white;
+	background: $garmin-blue;*/
+
+	.container {
+		max-width: 700px
+	}
+	h1 {
+		text-align: center;
+		padding-bottom: 15px;
+	}
+	p {
+		text-align: justify;
+	}
+}
+
 
 /*.details-col-style {
 	text-align: center;
