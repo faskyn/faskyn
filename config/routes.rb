@@ -1,14 +1,11 @@
 Rails.application.routes.draw do
   get 'static_pages/home'
-
   get 'static_pages/contact'
+  get 'static_pages/about', path: 'about'
+  get 'static_pages/help', path: 'help'
+  get 'static_pages/privacypolicy', path: 'privacypolicy'
 
-  get 'static_pages/about'
-
-  get 'static_pages/help'
-
-  get 'static_pages/privacypolicy'
-
+  resources :contacts
   devise_for :users
   root 'static_pages#home'
   # The priority is based upon order of creation: first created -> highest priority.
