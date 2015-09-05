@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   get 'static_pages/home'
-  get 'static_pages/contact'
   get 'static_pages/about', path: 'about'
   get 'static_pages/help', path: 'help'
   get 'static_pages/privacypolicy', path: 'privacypolicy'

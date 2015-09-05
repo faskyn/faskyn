@@ -81,15 +81,19 @@ footer {
   height: 100%;
 }
 
-.navbar-static-top {
+/*.navbar-static-top {
   margin-bottom: 15px;
-  /*min-height: 80px;*/
+  /*min-height: 80px;
+}*/
+
+.navbar-static-top {
+  margin-bottom: 0px;
 }
 
 .navbar-static-bottom {
   margin-bottom: 0px;
 }
-
+/*
 p.notice {
   display: none;
 }
@@ -97,4 +101,4 @@ p.notice {
 p.alert {
   display: none;
 }
-
+*/
