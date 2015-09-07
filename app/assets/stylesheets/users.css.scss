@@ -1,0 +1,46 @@
+$gray-medium-light: #eaeaea;
+$garmin-blue: #007cc3;
+$dropbox-dark-grey: #47525d;
+$dropbox-light-grey: #7b8994;
+$orange: #ff6600;
+
+
+.user-profile-index {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  li {
+    padding: 10px 0 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+  .user {
+    margin-top: 5em;
+    padding-top: 0;
+  }
+  .company {
+    display: block;
+    margin-left: 60px;
+  }
+  .job_title {
+    color: $dropbox-light-grey;
+    display: block;
+    margin-left: 60px;
+  }
+  .avatar {
+    float: left;
+    margin-right: 15px;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    vertical-align: middle;
+  }
+}
+
+.container-show {
+  padding-top: 15px;
+}
+
+.users-profile-show {
+  
+}
+
