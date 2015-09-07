@@ -1,21 +1,5 @@
-<% if user_signed_in? %>
-  <% if current_user.profile %>
-    <%= link_to "Edit Profile", edit_user_profile_path(current_user) %>
-  <% end %> 
 
-<div id="home_loggedin">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-2 col-aside">
-      </div>
-      <div class= "col-md-10 col-middle">
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<%else%>
+<% unless user_signed_in? %>
   <div id="home_loggedout">
     <div class= "jumbotron">
       <div class= "container">

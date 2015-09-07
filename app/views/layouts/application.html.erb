@@ -21,7 +21,11 @@
   </div>
 <% end %>
 
-<%= yield %>
+<% if user_signed_in? %>
+  <%= render 'layouts/sidebar' %>
+<% else %>
+  <%= yield %>
+<% end %>
 
 
 </body>
