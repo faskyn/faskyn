@@ -1,20 +1,20 @@
 <div class="container container-show">
   <div class="user-profile-show">
     <div class="avatar-name"%>
-      <%= image_tag @user.profile.avatar.url(:thumb), class: 'avatar' %>
-      <%= @user.profile.first_name %> <%= @user.profile.last_name %>
+      <%= image_tag @user.profile.avatar.url(:thumb), class: "avatar" %>
+      <h3><%= @user.profile.first_name %> <%= @user.profile.last_name %></h3>
     </div>
     <div class="company">
-      <%= @user.profile.company %>
+      <h4>Company: <%= @user.profile.company %></h4>
     </div>
     <div class="job-title">
-      <%= @user.profile.job_title %>
+      <p>Job title: <%= @user.profile.job_title %></p>
     </div>
     <div class="phone-number">
-      <%= @user.profile.phone_number %>
+      <p>Phone number: <%= @user.profile.phone_number %></p>
     </div>
     <div class="description">
-      <%= @user.profile.description %>
+      <p><%= @user.profile.description %></p>
     </div>
   </div>
 </div>  

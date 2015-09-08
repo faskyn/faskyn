@@ -1,23 +1,27 @@
 <% provide(:title, 'All users') %>
-<h1 style="text-align:center">Users</h1>
-  <ol class="user-profile-index">
-    <% @users.each do |user| %>
-      <div class="col-md-4">
-      <li>
-        <% if user.profile %>
-          <% if user.profile.avatar %>
-            <%= link_to user do %>
-              <%= image_tag user.profile.avatar.url(:thumb), class: 'avatar' %>
+<div class="container">
+  <div class="row">
+    <h1 style="text-align:center">Users</h1>
+    <ol class="user-profile-index">
+      <% @users.each do |user| %>
+        <div class="col-md-4">
+          <li>
+            <% if user.profile %>
+              <% if user.profile.avatar %>
+                <%= link_to user do %>
+                  <%= image_tag user.profile.avatar.url(:thumb), class: 'avatar' %>
+                <% end %>
+              <% end %>
+              <span class="user"><%= link_to user do %>
+               <%= user.profile.first_name %> <%= user.profile.last_name %>
+               <% end %></span>
+              <span class="company"><%= user.profile.company %></span>
+              <span class="job_title"><%= user.profile.job_title%></span> 
             <% end %>
-          <% end %>
-          <span class="user"><%= link_to user do %>
-           <%= user.profile.first_name %> <%= user.profile.last_name %>
-           <% end %></span>
-          <span class="company"><%= user.profile.company %></span>
-          <span class="job_title"><%= user.profile.job_title%></span> 
-        <% end %>
-      </li>
-      </div>
-    <% end %>
-  </ol>
+          </li>
+        </div>
+      <% end %>
+    </ol>
+  </div>
+</div>
 

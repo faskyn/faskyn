@@ -40,7 +40,15 @@ $orange: #ff6600;
   padding-top: 15px;
 }
 
-.users-profile-show {
-  
+.user-profile-show {
+  .avatar-name {
+    .avatar{
+      float: left;
+      margin-right: 15px;
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+    }
+  }
 }
 
