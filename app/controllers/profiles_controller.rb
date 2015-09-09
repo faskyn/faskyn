@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_action :only_current_user
+  before_action :if_profile_exists, only: [:new, :create]
 
   def new
     # form where a user can fill out his own profile
@@ -44,6 +45,12 @@ class ProfilesController < ApplicationController
     def only_current_user
       @user = User.find(params[:user_id])
       redirect_to user_path unless @user == current_user
+    end
+
+    def if_profile_exists
+      if @user.profile(current_user)
+        redirect_to edit_user_profile_path(current_user)
+      end
     end
 
 end

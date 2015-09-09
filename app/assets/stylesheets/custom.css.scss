@@ -128,9 +128,13 @@ html, body {
 
 .col-aside {
   background: $garmin-blue;
+  text-decoration: none;
   min-height: 100%;
   height: 100%;
   max-width: 250px;
+  a {
+    color:white;
+  }
 }
 
 .col-middle {
@@ -138,7 +142,6 @@ html, body {
   min-height: 100%;
   height: 100%;
 }
-
 
 
 /*#home_loggedin {
