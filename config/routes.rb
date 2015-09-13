@@ -8,6 +8,14 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users do
     resource :profile
+    resources :tasks do
+      member do
+        patch :complete
+      end
+      collection do
+        get :incoming_tasks, :outgoing_tasks
+      end
+    end
   end
   root 'static_pages#home'
   # The priority is based upon order of creation: first created -> highest priority.

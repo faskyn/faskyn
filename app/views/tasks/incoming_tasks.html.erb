@@ -1,0 +1,7 @@
+<% @executed_tasks.each do |task| %>
+  <%= link_to user_task_path(id: task.id) do %>
+    <%= task.name %>
+  <% end %>
+  <%= task.content %>
+  <%= task.assigner.profile.first_name %>
+<% end %>

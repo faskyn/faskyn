@@ -9,6 +9,14 @@
         <%= link_to "Index user", users_path %>
         <br />
         <%= link_to "Edit user", edit_user_profile_path(current_user) %>
+        <br />
+        <%= link_to "New Task", new_user_task_path(current_user) %>
+        <br />
+        <%= link_to "Index tasks", user_tasks_path(current_user) %>
+        <br />
+        <%= link_to "Incoming tasks", incoming_tasks_user_tasks_path(current_user) %>
+        <br />
+        <%= link_to "Outgoing tasks", outgoing_tasks_user_tasks_path(current_user) %>
         </div>
       </div>
       <div class= "col-md-10 col-middle">
