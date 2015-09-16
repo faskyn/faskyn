@@ -6,3 +6,4 @@
   <%= @task.assigner.profile.first_name %> <%= @task.assigner.profile.last_name %>
 <% end %>
 <%= @task.deadline %>
+<%= link_to "Edit task", edit_user_task_path(id: @task.id) %>

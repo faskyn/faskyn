@@ -1,0 +1,76 @@
+$gray-medium-light: #eaeaea;
+$garmin-blue: #007cc3;
+$dropbox-dark-grey: #47525d;
+$dropbox-light-grey: #7b8994;
+$orange: #ff6600;
+
+
+.task-container {
+	margin: 40px;
+}
+
+#todo_items_wrapper {
+	.row {
+		width: 100%;
+		border-bottom: 1px solid $dropbox-dark-grey;
+		.assigner {
+			width: 25%;
+			float: left;
+			text-align: left;
+			border-right: 1px solid $dropbox-dark-grey;
+			border-left: 1px solid $dropbox-dark-grey;
+			padding: 0.5em 1em;
+		}
+		.executor {
+			width: 25%;
+			float: left;
+			text-align: left;
+			border-right: 1px solid $dropbox-dark-grey;
+			border-left: 1px solid $dropbox-dark-grey;
+			padding: 0.5em 1em;
+		}
+		.name {
+			width: 10%;
+			float: left;
+			border-right: 1px solid $dropbox-dark-grey;
+			text-decoration: none;
+			text-align: center;
+			padding: 0.5em 0;
+		}
+		.content {
+			width: 30%;
+			float: left;
+			text-align: center;
+			border-right: 1px solid $dropbox-dark-grey;
+			padding: 0.5em 0;
+		}
+		.deadline {
+			width: 20%;
+			float: left;
+			text-align: center;
+			border-right: 1px solid $dropbox-dark-grey;
+			padding: 0.5em 0;
+		}
+		.complete {
+			width: 8%;
+			float: left;
+			text-align: center;
+			border-right: 1px solid $dropbox-dark-grey;
+			padding: 0.5em 0;
+		}
+		.destroy {
+			width: 7%;
+			float: left;
+			text-align: center;
+			border-right: 1px solid $dropbox-dark-grey;
+			padding: 0.5em 0;
+		}
+		i {
+			color: $dropbox-dark-grey;
+			transition: all .4s ease-in-out;
+			&:hover {
+				color: $dropbox-light-grey;
+			}
+		}
+	}
+}

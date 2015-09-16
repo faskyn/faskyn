@@ -1,7 +1,45 @@
-<% @assigned_tasks.each do |task| %>
-  <%= link_to user_task_path(id: task.id) do %> 
-    <%= task.name %> 
-  <% end %> 
-  <%= task.content %>
-  <%= task.executor.profile.first_name %>
-<% end %>
+<div class= "container task-container">
+  <h2>Outgoing Task List</h2>
+  <div id = "todo_items_wrapper">
+    <div class= "row clearfix" style="border-top: 1px solid black;">
+      <div class = "assigner"><strong>Name /Company name</strong></div>
+      <div class= "name"><strong>Task Name</strong></div>
+      <div class = "content"><strong>Content</strong></div>
+      <div class = "deadline"><strong>Deadline</strong></div>
+      <div class = "complete"><strong>Complete</strong></div>
+      <div class = "destroy"><strong>Delete</strong></div>
+    </div>
+    <% @assigned_tasks.each do |task| %>
+      <div class= "row clearfix">
+        <div class = "executor">
+          <%= link_to user_path(id: task.executor.id) do %>
+            <%= task.executor.profile.first_name %> <%= task.executor.profile.last_name%> / <%= task.executor.profile.company %>
+          <% end %>
+        </div>
+        <div class = "name">
+          <%= link_to user_task_path(id: task.id) do %>
+            <%= task.name %>
+          <% end %>
+        </div>
+        <div class = "content">
+          <%= link_to user_task_path(id: task.id) do %>
+            <%= task.content %>
+          <% end %>
+        </div>
+        <div class= "deadline">
+          <%= task.deadline %>
+        </div>
+        <div class = "complete">
+          <%= link_to complete_user_task_path(id: task.id), method: :patch do %>
+            <i class="fa fa-check"></i>
+          <% end %>
+        </div>
+        <div class = "destroy">
+          <%= link_to user_task_path(id: task.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+            <i class="fa fa-trash"></i>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

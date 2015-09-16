@@ -10,10 +10,10 @@ Rails.application.routes.draw do
     resource :profile
     resources :tasks do
       member do
-        patch :complete
+        patch :complete, :uncomplete
       end
       collection do
-        get :incoming_tasks, :outgoing_tasks
+        get :incoming_tasks, :outgoing_tasks, :completed_tasks, :completed_incoming_tasks, :completed_outgoing_tasks
       end
     end
   end

@@ -1,27 +1,29 @@
-
-<div id="home_loggedin">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-2 col-aside">
-        <div id="white">
-        <%= link_to "Show user", user_path(current_user) %>
-        <br />
-        <%= link_to "Index user", users_path %>
-        <br />
-        <%= link_to "Edit user", edit_user_profile_path(current_user) %>
-        <br />
-        <%= link_to "New Task", new_user_task_path(current_user) %>
-        <br />
-        <%= link_to "Index tasks", user_tasks_path(current_user) %>
-        <br />
-        <%= link_to "Incoming tasks", incoming_tasks_user_tasks_path(current_user) %>
-        <br />
-        <%= link_to "Outgoing tasks", outgoing_tasks_user_tasks_path(current_user) %>
-        </div>
-      </div>
-      <div class= "col-md-10 col-middle">
-        <%= yield %>
-      </div>
-    </div>
-  </div>
+<div id= "sidebar">
+  <br />
+  <br />
+  <br />
+  <br />
+  <%= current_user.profile.first_name %> <%= current_user.profile.last_name %>
+  <br />
+  <%= current_user.profile.company %>
+  <br />
+  <br />
+  <%= link_to "Show user", user_path(current_user) %>
+  <br />
+  <%= link_to "Index user", users_path %>
+  <br />
+  <%= link_to "Edit user", edit_user_profile_path(current_user) %>
+  <br />
+  <%= link_to "New Task", new_user_task_path(current_user) %>
+  <br />
+  <%= link_to "Index tasks", user_tasks_path(current_user) %>
+  <br />
+  <%= link_to "Incoming tasks", incoming_tasks_user_tasks_path(current_user) %>
+  <br />
+  <%= link_to "Outgoing tasks", outgoing_tasks_user_tasks_path(current_user) %>
+  <br />
+  <%= link_to "Completed tasks", completed_tasks_user_tasks_path(current_user) %>
+</div>
+<div id = "main">
+  <%= yield %>
 </div>

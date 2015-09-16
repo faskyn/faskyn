@@ -1,0 +1,9 @@
+<div class= "container task-container">
+  <div id = "todo_items_wrapper">
+    <% @executed_tasks.each do |task| %>   
+      <%= task.name %>
+      <%= task.completed_at %>
+      <%= link_to "Uncomplete", uncomplete_user_task_path(id: task.id), method: :patch %>
+      <% end %>     
+  </div>
+</div>
