@@ -3,9 +3,9 @@ class TasksController < ApplicationController
 
   def index
     @user = current_user
-    @tasks = @user.tasks #defined in model
-    #@assigned_tasks = @user.assigned_tasks.uncompleted.order("created_at DESC")
-    #@executed_tasks = @user.executed_tasks.uncompleted.order("created_at DESC")
+    #@tasks = @user.tasks #defined in model
+    @assigned_tasks = @user.assigned_tasks.uncompleted.order("created_at DESC")
+    @executed_tasks = @user.executed_tasks.uncompleted.order("created_at DESC")
   end
 
   def show
