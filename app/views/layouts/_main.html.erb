@@ -1,0 +1,21 @@
+<div id = "main">
+  <br />
+  <% if notice %>
+    <div class="container">
+      <div class="alert alert-success"><%= notice %></div>
+    </div>
+  <% end %>
+  <% if alert %>
+    <div class="container">
+      <div class="alert alert-success"><%= alert %></div>
+    </div>
+  <% end %>
+  <% if ( !notice && !alert ) && !flash.empty? %>
+  <div class="container">
+    <% flash.each do |key, value| %>
+      <%= content_tag :div, value, class: "alert alert-#{key}" %>
+    <% end %>
+  </div>
+<% end %>
+  <%= yield %>
+</div>
