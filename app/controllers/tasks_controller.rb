@@ -1,9 +1,12 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
+  before_action :only_current_user
 
   def index
     @user = current_user
+    #@tasks = @user.indextasks.uncompleted
     #@tasks = @user.tasks #defined in model
+    #@tasks = current_user.tasks
     @assigned_tasks = @user.assigned_tasks.uncompleted.order("created_at DESC")
     @executed_tasks = @user.executed_tasks.uncompleted.order("created_at DESC")
   end
@@ -117,6 +120,11 @@ class TasksController < ApplicationController
 
     def task_params
       params.require(:task).permit(:executor_id, :name, :content, :deadline).merge(assigner_id: current_user.id)
+    end
+
+    def only_current_user
+      @user = User.find(params[:user_id])
+      redirect_to user_tasks_path(current_user) unless @user == current_user
     end
 
 end

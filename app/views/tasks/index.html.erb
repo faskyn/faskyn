@@ -1,13 +1,12 @@
 <div class= "container">
   <div class = "row">
     <% @assigned_tasks.each do |task| %>
-      <% unless task.completed? %>
         <%= link_to user_task_path(id: task.id) do %> 
           <%= task.name %> 
         <% end %> 
         <%= task.content %>
         <%= task.executor.profile.first_name %>
-      <% end %>
+        <br />
     <% end %>
     <br />
     <br />
@@ -18,6 +17,7 @@
         <% end %>
         <%= task.content %>
         <%= task.assigner.profile.first_name %>
+        <br />
       <% end %> 
     <% end %>
   </div>

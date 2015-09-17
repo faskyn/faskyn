@@ -1,3 +1,4 @@
+
 $gray-medium-light: #eaeaea;
 $garmin-blue: #007cc3;
 $dropbox-dark-grey: #47525d;
@@ -6,7 +7,11 @@ $orange: #ff6600;
 
 
 .task-container {
-	margin: 40px;
+	/*margin: 40px;*/
+	.btn {
+		float: right;
+		margin-right: 15px;
+	}
 }
 
 #todo_items_wrapper {

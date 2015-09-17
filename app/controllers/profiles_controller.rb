@@ -44,7 +44,7 @@ class ProfilesController < ApplicationController
 
     def only_current_user
       @user = User.find(params[:user_id])
-      redirect_to user_path unless @user == current_user
+      redirect_to user_path(current_user) unless @user == current_user
     end
 
     def if_profile_exists

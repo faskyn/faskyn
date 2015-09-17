@@ -35,6 +35,8 @@ gem 'figaro', '~> 1.1.1'
 gem 'devise', '~> 3.5.2'
 #attaching pics
 gem 'paperclip', '~> 4.3.0'
+#storing production files on amazon
+gem 'aws-sdk', '~> 2.1.22'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 

@@ -7,8 +7,18 @@ class Task < ActiveRecord::Base
 
   scope :completed, -> { where.not(completed_at: nil) }
   scope :uncompleted, -> { where(completed_at: nil) }
+  scope :index_incoming, -> { where('executor_id = ?', current_user.id)}
+  scope :index_outgoing, -> { where('assigner_id = ?', current_user.id)}
 
   def completed?
     !completed_at.blank?
   end
+=begin
+  def indextasks
+    indextasks = []
+    indextasks << @assigned_tasks.uncompleted
+    indextasks << @expired_tasks.uncompleted
+    indextasks.sort_by { |h| h[:created_at] }.reverse!
+  end
+=end
 end

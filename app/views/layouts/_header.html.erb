@@ -15,9 +15,10 @@
       <ul class="nav navbar-nav navbar-right">
 
       <% if user_signed_in? %>
-        <% unless has_profile? %>
-          <li><%= link_to "Create Profile", new_user_profile_path(current_user) %></li>
-          <li><%= link_to "New Task", new_user_task_path(current_user) %></li>
+        <% if has_profile? %>
+          <li><p class="navbar-btn"><%= link_to "New Task", new_user_task_path(current_user), class: "btn btn-primary" %></p></li>
+        <% else %>
+          <li><p class="navbar-btn"><%= link_to "Create Profile", new_user_profile_path(current_user), class: "btn btn-primary" %></p></li>
         <% end %>
         <li><%= link_to "Settings", edit_user_registration_path %></li>
         <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>

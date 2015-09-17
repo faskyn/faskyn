@@ -3,9 +3,11 @@
   <br />
   <br />
   <br />
+  <%if has_profile? %>
   <%= current_user.profile.first_name %> <%= current_user.profile.last_name %>
   <br />
   <%= current_user.profile.company %>
+  <% end %>
   <br />
   <br />
   <%= link_to "Show user", user_path(current_user) %>
@@ -23,7 +25,4 @@
   <%= link_to "Outgoing tasks", outgoing_tasks_user_tasks_path(current_user) %>
   <br />
   <%= link_to "Completed tasks", completed_tasks_user_tasks_path(current_user) %>
-</div>
-<div id = "main">
-  <%= yield %>
 </div>

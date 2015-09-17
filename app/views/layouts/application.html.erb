@@ -9,25 +9,14 @@
 </head>
 <body>
 
-<%= render 'layouts/header' %>
+  <%= render 'layouts/header' %>
 
-<% if notice %>
-  <div class="container">
-    <div class="alert alert-info"><%= notice %></div>
-  </div>
-<% end %>
-<% if alert %>
-  <div class="container">
-    <div class="alert alert-warning"><%= alert %></div>
-  </div>
-<% end %>
-
-<% if user_signed_in? %>
-  <%= render 'layouts/sidebar' %>
-<% else %>
-  <%= yield %>
-<% end %>
-
+  <% if user_signed_in? %>
+    <%= render 'layouts/sidebar' %>
+    <%= render 'layouts/main' %>
+  <% else %>
+    <%= yield %>
+  <% end %>
 
 </body>
 </html>

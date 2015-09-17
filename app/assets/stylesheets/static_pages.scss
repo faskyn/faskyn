@@ -12,6 +12,8 @@ $orange: #ff6600;
 
 
 #home_loggedout {
+	overflow: visible !important;
+	height: auto !important;
 	.jumbotron {
 		height: 600px;
 		background-image: image_url('jumbotron.png');

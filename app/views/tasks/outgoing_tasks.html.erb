@@ -1,5 +1,5 @@
 <div class= "container task-container">
-  <h2>Outgoing Task List</h2>
+  <h2>Outgoing Task List<%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-primary" %> <%= link_to "New Task", new_user_task_path(current_user), class: "btn btn-primary" %></h2>
   <div id = "todo_items_wrapper">
     <div class= "row clearfix" style="border-top: 1px solid black;">
       <div class = "assigner"><strong>Name /Company name</strong></div>

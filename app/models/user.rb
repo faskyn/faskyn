@@ -14,10 +14,11 @@ class User < ActiveRecord::Base
     tasks << @expired_tasks
     tasks.sort_by { |h| h[:created_at] }.reverse!
   end
-=end
+
   
-  def tasks
+  def indextasks
     Task.find_by_sql ["SELECT tasks.* FROM tasks WHERE  assigner_id = ? OR executor_id = ? order by created_at DESC", self.id, self.id]
   end
+=end
 
 end
