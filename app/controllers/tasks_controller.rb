@@ -2,6 +2,8 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :only_current_user
 
+  require 'will_paginate/array'
+
   def index
     @user = current_user
     #@tasks = @user.indextasks.uncompleted
@@ -10,6 +12,7 @@ class TasksController < ApplicationController
     @assigned_tasks = @user.assigned_tasks.uncompleted.order("created_at DESC")
     @executed_tasks = @user.executed_tasks.uncompleted.order("created_at DESC")
     #@tasks = @user.alltasks(current_user).uncompleted
+    @tasks = @user.tasks_uncompleted.paginate(page: params[:page], per_page: 12)
 
   end
 
@@ -25,12 +28,12 @@ class TasksController < ApplicationController
 
   def outgoing_tasks
     @user = current_user
-    @assigned_tasks = @user.assigned_tasks.uncompleted.order("created_at DESC")
+    @assigned_tasks = @user.assigned_tasks.uncompleted.order("created_at DESC").paginate(page: params[:page], per_page: 12)
   end
 
   def incoming_tasks
     @user =current_user
-    @executed_tasks = @user.executed_tasks.uncompleted.order("created_at DESC")
+    @executed_tasks = @user.executed_tasks.uncompleted.order("created_at DESC").paginate(page: params[:page], per_page: 12)
   end
 
   def new
@@ -67,6 +70,7 @@ class TasksController < ApplicationController
     @user = current_user
     @assigned_tasks = @user.assigned_tasks.completed.order("completed_at DESC")
     @executed_tasks = @user.executed_tasks.completed.order("completed_at DESC")
+    @tasks = @user.tasks_completed.paginate(page: params[:page], per_page: 12)
   end
 
   def completed_incoming_tasks

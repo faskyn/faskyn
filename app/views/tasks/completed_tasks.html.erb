@@ -9,7 +9,7 @@
       <div class = "complete"><strong>Uncomp.</strong></div>
       <div class = "destroy"><strong>Delete</strong></div>
     </div>
-    <% @user.tasks_completed.each do |task| %>      
+    <% @tasks.each do |task| %>     
       <% if task.assigner_id == current_user.id %>
         <div class= "row clearfix assigner-row">
           <div class = "executor">
@@ -50,5 +50,6 @@
           </div>
         </div>
     <% end %>
+    <%= will_paginate @tasks %>
   </div>
 </div>

@@ -9,9 +9,13 @@ class Task < ActiveRecord::Base
   scope :uncompleted, -> { where(completed_at: nil) }
   scope :alltasks, -> (u) { where('executor_id = ? OR assigner_id = ?', u.id, u.id) }
 
+  #self.per_page = 12
+
   def completed?
     !completed_at.blank?
   end
+
+
 =begin
   def indextasks
     indextasks = []
