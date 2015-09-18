@@ -18,6 +18,15 @@ $orange: #ff6600;
 	.row {
 		width: 100%;
 		border-bottom: 1px solid $dropbox-dark-grey;
+		.assigner_executor {
+			width: 25%;
+			float: left;
+			text-align: left;
+			border-right: 1px solid $dropbox-dark-grey;
+			border-left: 1px solid $dropbox-dark-grey;
+			padding: 0.5em 1em;
+
+		}
 		.assigner {
 			width: 25%;
 			float: left;
@@ -49,14 +58,14 @@ $orange: #ff6600;
 			border-right: 1px solid $dropbox-dark-grey;
 			padding: 0.5em 0;
 		}
-		.deadline {
+		.deadline, .completed-at {
 			width: 20%;
 			float: left;
 			text-align: center;
 			border-right: 1px solid $dropbox-dark-grey;
 			padding: 0.5em 0;
 		}
-		.complete {
+		.complete, .uncomplete {
 			width: 8%;
 			float: left;
 			text-align: center;
@@ -78,4 +87,12 @@ $orange: #ff6600;
 			}
 		}
 	}
+}
+
+.assigner-row {
+	background: $gray-medium-light;
+}
+
+.executor-row {
+	background: $dropbox-light-grey;
 }

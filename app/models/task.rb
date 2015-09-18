@@ -7,8 +7,7 @@ class Task < ActiveRecord::Base
 
   scope :completed, -> { where.not(completed_at: nil) }
   scope :uncompleted, -> { where(completed_at: nil) }
-  scope :index_incoming, -> { where('executor_id = ?', current_user.id)}
-  scope :index_outgoing, -> { where('assigner_id = ?', current_user.id)}
+  scope :alltasks, -> (u) { where('executor_id = ? OR assigner_id = ?', u.id, u.id) }
 
   def completed?
     !completed_at.blank?

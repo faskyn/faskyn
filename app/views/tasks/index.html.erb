@@ -1,16 +1,62 @@
-<div class= "container">
-  <div class = "row">
-    <% @assigned_tasks.each do |task| %>
-        <%= link_to user_task_path(id: task.id) do %> 
-          <%= task.name %> 
-        <% end %> 
-        <%= task.content %>
-        <%= task.executor.profile.first_name %>
-        <br />
+<div class= "container task-container">
+  <h2>Task List<%= link_to "Outgoing Tasks", outgoing_tasks_user_tasks_path(current_user), class: "btn btn-primary" %> <%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-primary" %> <%= link_to "New Task", new_user_task_path(current_user), class: "btn btn-primary" %></h2>
+  <div id = "todo_items_wrapper">
+    <div class= "row clearfix" style="border-top: 1px solid black;">
+      <div class = "assigner_executor"><strong>Name /Company name</strong></div>
+      <div class= "name"><strong>Task Name</strong></div>
+      <div class = "content"><strong>Content</strong></div>
+      <div class = "deadline"><strong>Deadline</strong></div>
+      <div class = "complete"><strong>Complete</strong></div>
+      <div class = "destroy"><strong>Delete</strong></div>
+    </div>
+    <% @user.tasks_uncompleted.each do |task| %>      
+      <% if task.assigner_id == current_user.id %>
+        <div class= "row clearfix assigner-row">
+          <div class = "executor">
+            <%= link_to user_path(id: task.executor.id) do %>
+              <%= task.executor.profile.first_name %> <%= task.executor.profile.last_name%> / <%= task.executor.profile.company %>
+            <% end %>
+          </div>
+      <% else %>
+        <div class= "row clearfix executor-row">
+          <div class = "assigner">
+            <%= link_to user_path(id: task.assigner.id) do %>
+              <%= task.assigner.profile.first_name %> <%= task.assigner.profile.last_name%> / <%= task.assigner.profile.company %>
+            <% end %>
+          </div>
+      <% end %>
+          <div class = "name">
+            <%= link_to user_task_path(id: task.id) do %>
+              <%= task.name %>
+            <% end %>
+          </div>
+          <div class = "content">
+            <%= link_to user_task_path(id: task.id) do %>
+              <%= task.content %>
+            <% end %>
+          </div>
+          <div class= "deadline">
+            <%= task.deadline %>
+          </div>
+          <div class = "complete">
+            <%= link_to complete_user_task_path(id: task.id), method: :patch do %>
+              <i class="fa fa-check"></i>
+            <% end %>
+          </div>
+          <div class = "destroy">
+            <%= link_to user_task_path(id: task.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+              <i class="fa fa-trash"></i>
+            <% end %>
+          </div>
+        </div>
     <% end %>
+  </div>
+</div>
+
+
+<!--<br />
     <br />
-    <br />
-    <% @executed_tasks.each do |task| %>
+   <% @executed_tasks.each do |task| %>
       <% unless task.completed? %>
         <%= link_to user_task_path(id: task.id) do %>
           <%= task.name %>
@@ -21,4 +67,4 @@
       <% end %> 
     <% end %>
   </div>
-</div>
+</div> -->

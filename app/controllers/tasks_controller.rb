@@ -9,6 +9,8 @@ class TasksController < ApplicationController
     #@tasks = current_user.tasks
     @assigned_tasks = @user.assigned_tasks.uncompleted.order("created_at DESC")
     @executed_tasks = @user.executed_tasks.uncompleted.order("created_at DESC")
+    #@tasks = @user.alltasks(current_user).uncompleted
+
   end
 
   def show
