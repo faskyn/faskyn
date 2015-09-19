@@ -14,8 +14,10 @@
   <br />
   <%= link_to "Index user", users_path %>
   <br />
+  <%if has_profile? %>
   <%= link_to "Edit user", edit_user_profile_path(current_user) %>
   <br />
+  <% end %>
   <%= link_to "New Task", new_user_task_path(current_user) %>
   <br />
   <%= link_to "Index tasks", user_tasks_path(current_user) %>
