@@ -148,14 +148,6 @@ footer {
   }
 }
 
-.clearfix:after {
-  content: ".";
-  display: block;
-  height: 0;
-  visibility: hidden;
-  clear: both;
-}
-
 #main {
   margin-left: 250px;
   background: #fff;
@@ -163,6 +155,27 @@ footer {
   overflow: hidden;
 }
 
+#rightside {
+  background: $garmin-blue;
+  text-decoration: none;
+  min-height: 100%;
+  height: 100%;
+  width: 250px;
+  max-width: 250px;
+  margin-right: 0px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  visibility: hidden;
+  clear: both;
+}
 
 /*#home_loggedin {
   .container {
