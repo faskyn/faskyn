@@ -16,7 +16,7 @@ class ContactsController < ApplicationController
       redirect_to new_contact_path
     else
       flash[:danger] = "Error occured."
-      redirect_to new_contact_path
+      render action: :new
     end
   end
 

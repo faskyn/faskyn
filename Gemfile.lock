@@ -36,6 +36,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    addressable (2.3.8)
     arel (6.0.3)
     autoprefixer-rails (6.0.3)
       execjs
@@ -79,6 +80,9 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    devise_invitable (1.5.2)
+      actionmailer (>= 3.2.6, < 5)
+      devise (>= 3.2.0)
     erubis (2.7.0)
     execjs (2.6.0)
     faker (1.5.0)
@@ -99,6 +103,10 @@ GEM
       railties (>= 3.1.0)
       turbolinks
     json (1.8.3)
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -167,6 +175,9 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    simple_form (3.1.1)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
     spring (1.4.0)
     sprockets (3.3.4)
       rack (~> 1.0)
@@ -205,11 +216,13 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   devise (~> 3.5.2)
+  devise_invitable (~> 1.5.2)
   faker (~> 1.5.0)
   figaro (~> 1.1.1)
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks (~> 2.1.0)
+  letter_opener (~> 1.4.1)
   paperclip (~> 4.3.0)
   pg (~> 0.18.2)
   puma (~> 2.13.4)
@@ -218,6 +231,7 @@ DEPENDENCIES
   rails_12factor (~> 0.0.3)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  simple_form (~> 3.1.1)
   spring
   sqlite3
   turbolinks

@@ -27,4 +27,10 @@
   <%= link_to "Outgoing tasks", outgoing_tasks_user_tasks_path(current_user) %>
   <br />
   <%= link_to "Completed tasks", completed_tasks_user_tasks_path(current_user) %>
+  <br/>
+  <br/>
+  <%= simple_form_for(User.new, url: user_invitation_path, html: { class: 'form-inline' }) do |f| %>
+    <%= f.input :email, placeholder: 'Email', label: false %>
+    <%= f.button :submit, 'Invite User', class: 'btn btn-primary' %>
+  <% end %>
 </div>
