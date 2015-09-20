@@ -25,6 +25,8 @@ gem 'bootstrap-sass', '~> 3.3.5.1'
 gem 'will_paginate', '~> 3.0.7'
 #pagination w/ bootstrap
 gem 'bootstrap-will_paginate', '~> 0.0.10'
+#simple form
+gem 'simple_form', '~> 3.1.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 #populating fake data
@@ -33,6 +35,8 @@ gem 'faker', '~> 1.5.0'
 gem 'figaro', '~> 1.1.1'
 #qucik authentication
 gem 'devise', '~> 3.5.2'
+#inviting users via email
+gem 'devise_invitable', '~> 1.5.2'
 #attaching pics
 gem 'paperclip', '~> 4.3.0'
 #storing production files on amazon
@@ -52,6 +56,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development do
   gem 'better_errors', '~> 2.1.1'
   gem 'quiet_assets', '~> 1.1.0'
+  #letter opener for dev env
+  gem 'letter_opener', '~> 1.4.1'
 end
 
 group :development, :test do
