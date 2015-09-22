@@ -1,4 +1,5 @@
 class StaticPagesController < ApplicationController
+  #layout :static_pages_layout
   def home
   end
 
@@ -9,5 +10,11 @@ class StaticPagesController < ApplicationController
   end
 
   def privacypolicy
+  end
+
+  private
+
+  def static_pages_layout
+    "staticpages"
   end
 end

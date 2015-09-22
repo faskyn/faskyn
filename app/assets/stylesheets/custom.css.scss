@@ -109,10 +109,16 @@ footer {
   }
 }*/
 
-/*html, body {
+html, body {
   height: 100%;
   overflow: hidden;
-}*/
+}
+
+html .staticpages {
+    height: auto;
+    overflow: visible;
+}
+
 
 #home_loggedout {
   overflow: visible;

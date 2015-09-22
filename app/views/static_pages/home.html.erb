@@ -1,8 +1,13 @@
-
 <% unless user_signed_in? %>
   <div id="home_loggedout">
     <div class= "jumbotron">
       <div class= "container">
+        <% if notice %>
+          <div class="alert alert-success"><%= notice %></div>
+        <% end %>
+        <% if alert %>
+          <div class="alert alert-danger"><%= alert %></div>
+        <% end %>
         <div class= "hero-title">
           <h1>Ask for something and get things done!</h1>
         </div>

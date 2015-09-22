@@ -46,12 +46,12 @@ class ProfilesController < ApplicationController
       @user = User.find(params[:user_id])
       redirect_to user_path(current_user) unless @user == current_user
     end
-
+=begin
     def if_profile_exists
       if @user.profile(current_user)
         redirect_to edit_user_profile_path(current_user)
       end
     end
-
+=end
 end
 
