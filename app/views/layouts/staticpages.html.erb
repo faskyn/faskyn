@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="loggedouthtml">
 <head>
   <title><%= yield(:title) %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
-<body>
+<body class="loggedoutbody">
 
   <%= render 'layouts/header' %>
   <%= yield %>

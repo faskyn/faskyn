@@ -41,6 +41,8 @@ gem 'devise_invitable', '~> 1.5.2'
 gem 'paperclip', '~> 4.3.0'
 #storing production files on amazon
 gem 'aws-sdk', '< 2.0'
+#for emails
+gem 'sidekiq', '~> 3.5.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
@@ -58,6 +60,7 @@ group :development do
   gem 'quiet_assets', '~> 1.1.0'
   #letter opener for dev env
   gem 'letter_opener', '~> 1.4.1'
+  gem 'launchy', '~> 2.4.3'
 end
 
 group :development, :test do

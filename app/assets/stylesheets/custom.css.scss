@@ -114,9 +114,14 @@ html, body {
   overflow: hidden;
 }
 
-html .staticpages {
-    height: auto;
-    overflow: visible;
+.loggedouthtml {
+  height: auto;
+  overflow: visible;
+}
+
+.loggedoutbody {
+  height: auto;
+  overflow: visible;
 }
 
 
