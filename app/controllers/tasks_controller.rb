@@ -45,6 +45,7 @@ class TasksController < ApplicationController
     @user = current_user
     @task = Task.new(task_params)
     if @task.save
+      TaskMailer.task_created(current_user, @task).deliver_later
       flash[:success] = "Task saved!"
       redirect_to user_tasks_path(current_user)
     else
