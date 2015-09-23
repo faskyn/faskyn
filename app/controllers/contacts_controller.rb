@@ -10,7 +10,12 @@ class ContactsController < ApplicationController
       email = params[:contact][:email]
       body = params[:contact][:comment]
 
-      ContactMailer.contact_email(name, email, body).deliver_later
+      h = JSON.generate({ 'name' => params[:contact][:name],
+                        'email' => params[:contact][:email],
+                        'message' => params[:contact][:comment] })
+
+      PostmanWorker.perform_async(h, 5)
+      #ContactMailer.contact_email(name, email, body).deliver_later
       
       flash[:success] = "Message sent."
       redirect_to new_contact_path

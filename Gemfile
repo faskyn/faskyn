@@ -41,8 +41,10 @@ gem 'devise_invitable', '~> 1.5.2'
 gem 'paperclip', '~> 4.3.0'
 #storing production files on amazon
 gem 'aws-sdk', '< 2.0'
-#for emails
+#for email async
 gem 'sidekiq', '~> 3.5.0'
+#sinatra for sidekiq dashboard
+gem 'sinatra', '~> 1.4.6', :require => nil
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 

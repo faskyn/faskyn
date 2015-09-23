@@ -1,4 +1,7 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
+
   get 'static_pages/home'
   get 'static_pages/about', path: 'about'
   get 'static_pages/help', path: 'help'
@@ -18,6 +21,10 @@ Rails.application.routes.draw do
     end
   end
   root 'static_pages#home'
+
+  mount Sidekiq::Web => '/sidekiq'
+
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
