@@ -293,6 +293,7 @@ DEPENDENCIES
   quiet_assets (~> 1.1.0)
   rails (= 4.2.4)
   rails_12factor (~> 0.0.3)
+  redis (~> 3.2.1)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   sidekiq (~> 3.5.0)
