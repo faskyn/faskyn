@@ -3,11 +3,7 @@
   <br />
   <br />
   <br />
-  <%if has_profile? %>
-  <%= current_user.profile.first_name %> <%= current_user.profile.last_name %>
-  <br />
-  <%= current_user.profile.company %>
-  <% end %>
+  
   <br />
   <br />
   <%= link_to "Show user", user_path(current_user) %>
@@ -29,8 +25,12 @@
   <%= link_to "Completed tasks", completed_tasks_user_tasks_path(current_user) %>
   <br/>
   <br/>
-  <%= simple_form_for(User.new, url: user_invitation_path, html: { class: 'form-inline' }) do |f| %>
-    <%= f.input :email, placeholder: 'Email', label: false %>
-    <%= f.button :submit, 'Invite User', class: 'btn btn-primary' %>
-  <% end %>
+  <div class="invite">  
+    <%= simple_form_for(User.new, url: user_invitation_path, html: { class: 'form-inline' }) do |f| %>
+      <%= f.input :email, placeholder: 'Invite via email', label: false %>
+      <%= f.button :submit, 'Invite User', class: 'btn btn-warning' %>
+    <% end %>
+  </div>
+  <br />
+  <%= render 'users/user_search' %>
 </div>

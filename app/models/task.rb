@@ -15,7 +15,6 @@ class Task < ActiveRecord::Base
     !completed_at.blank?
   end
 
-
 =begin
   def indextasks
     indextasks = []

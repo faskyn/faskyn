@@ -1,8 +1,13 @@
 class StaticPagesController < ApplicationController
   #layout :static_pages_layout
+
   def home
-    if user_signed_in?
-      redirect_to users_path
+    if user_signed_in? 
+      if has_profile_controller?
+        redirect_to user_tasks_path(current_user)
+      else
+        redirect_to users_path
+      end
     end
   end
 

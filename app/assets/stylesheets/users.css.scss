@@ -52,3 +52,35 @@ $orange: #ff6600;
   }
 }
 
+#users-bar {
+  padding-left: 10px;
+  .users {
+    list-style: none;
+    padding-top: 10px;
+    ol {
+      padding-left: 0px;
+    }
+    li {
+      margin: 5px 0 5px 0;
+      clear: left;
+      list-style: none;
+      height: 40px;
+      vertical-align: middle;
+    }
+    .avatar {
+      float: left;
+      margin-right: 8px;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      vertical-align: middle;
+    }
+    .userrr {
+      margin-top: 4px;
+    }
+    .company {
+      margin-top: 2px;
+      display: block;
+    }
+  }
+}

@@ -2,13 +2,12 @@ class UsersController < ApplicationController
   include ApplicationHelper
   
   def index
-    #if has_profile?
-    @users = User.all
+    #it's in the appliaction controller!!:@q = User.ransack(params[:q])
+    @users = @q.result(distinct: true).includes(:profile).paginate(page: params[:page], per_page: 12)
     respond_to do |format|
       format.html
       format.js
     end
-    #end
   end
 
   def show

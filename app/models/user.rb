@@ -34,4 +34,5 @@ class User < ActiveRecord::Base
     tasks_completed.sort_by { |h| h[:completed_at] }.reverse!
   end
 
+
 end

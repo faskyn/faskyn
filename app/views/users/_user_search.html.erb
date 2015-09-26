@@ -1,0 +1,30 @@
+<div id = "users-bar">
+  <div class="search">
+    <%= search_form_for @q, html: { class: "form-inline"} do |f| %>
+      <% f.search_field :profile_first_name_or_profile_last_name_cont, url: request.url, placeholder: "Search user..", class: 'form-control' %>
+    <% end %>
+  </div>
+  <div class = "users">
+    <ol>
+      <% @users3.each do |user| %>
+        <li>
+          <% if user.profile %>
+            <% if user.profile.avatar %>
+              <%= link_to user do %>
+                <%= image_tag user.profile.avatar.url(:thumb), class: 'avatar' %>
+              <% end %>
+            <% end %>
+            <span class="userrr">
+              <%= link_to user do %>
+                <%= user.profile.first_name %> <%= user.profile.last_name %>
+              <% end %>
+            </span>
+            <span class="company">
+              <%= user.profile.company %>
+            </span>
+          <% end %>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+</div>

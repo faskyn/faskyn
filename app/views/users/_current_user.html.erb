@@ -1,0 +1,9 @@
+
+<%if has_profile? %>
+  <%= link_to user do %>
+    <%= image_tag current_user.profile.avatar.url(:thumb), class: 'avatar' %>
+  <% end %>
+  <%= current_user.profile.first_name %> <%= current_user.profile.last_name %>
+  <br />
+  <%= current_user.profile.company %>
+<% end %>

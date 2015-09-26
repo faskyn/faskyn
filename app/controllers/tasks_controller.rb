@@ -13,7 +13,8 @@ class TasksController < ApplicationController
     @executed_tasks = @user.executed_tasks.uncompleted.order("created_at DESC")
     #@tasks = @user.alltasks(current_user).uncompleted
     @tasks = @user.tasks_uncompleted.paginate(page: params[:page], per_page: 12)
-
+    #@q = Task.search(params[:q])
+    #@tasks = @q.result.tasks_uncompleted
   end
 
   def show
