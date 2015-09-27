@@ -2,10 +2,16 @@
     <div class= "jumbotron">
       <div class= "container">
         <% if notice %>
-          <div class="alert alert-success"><%= notice %></div>
+          <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <%= notice %>
+          </div>
         <% end %>
         <% if alert %>
-          <div class="alert alert-danger"><%= alert %></div>
+          <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <%= alert %>
+          </div>
         <% end %>
         <div class= "hero-title">
           <h1>Ask for something and get things done!</h1>
