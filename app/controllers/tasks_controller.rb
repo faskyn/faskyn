@@ -1,6 +1,8 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :only_current_user
+  before_action :if_no_profile_exists
+  before_action :other_user_profile_exists, only: [:create]
 
   require 'will_paginate/array'
 
@@ -44,7 +46,7 @@ class TasksController < ApplicationController
 
   def create
     @user = current_user
-    @task = Task.new(task_params)
+    #check for other_user_profile_exists before filter (@task = Task.new(task_params))
     if @task.save
       TaskMailer.task_created(current_user, @task).deliver_later
       flash[:success] = "Task saved!"

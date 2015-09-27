@@ -1,0 +1,24 @@
+<%= form_for ([@user, @task]) do |f| %>
+
+  <%= render 'layouts/error_messages', object: f.object %>
+
+  <div class="field form-group">
+    <%= f.label :executor_id %>
+    <%= f.collection_select(:executor_id, User.all, :id, :email, class: "form-control") %>
+  </div>
+  <div class="field form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <div class="field form-group">
+    <%= f.label :content %>
+    <%= f.text_area :content, class: "form-control" %>
+  </div>
+  <div class="field form-group">
+    <%= f.label :deadline %>
+    <%= f.date_select :deadline, class: "form-control" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Create Task", class: 'btn btn-primary' %>
+  </div>
+<% end %>

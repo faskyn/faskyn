@@ -27,7 +27,9 @@
                <%= user.profile.first_name %> <%= user.profile.last_name %>
                <% end %></span>
               <span class="company"><%= user.profile.company %></span>
-              <span class="job_title"><%= user.profile.job_title%></span> 
+              <% unless user.profile.job_title.blank? %>
+                <span class="job_title"><%= user.profile.job_title%></span>
+              <% end %> 
             <% end %>
           </li>
         </div>

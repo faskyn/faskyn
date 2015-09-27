@@ -1,9 +1,9 @@
 class Profile < ActiveRecord::Base
-  validates :first_name, presence: true,
+  validates :first_name, :presence => { :message => "can not be blank" },
                    length: { maximum: 50 }
-  validates :last_name, presence: true,
+  validates :last_name, :presence => { :message => "can not be blank" },
                    length: { maximum: 50 }
-  validates :company, presence: true,
+  validates :company, :presence => { :message => "can not be blank" },
                    length: { maximum: 50 }
   validates :job_title, presence: true,
                    length: { maximum: 50 }
