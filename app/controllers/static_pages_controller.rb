@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  #layout :static_pages_layout
+  layout "staticpages"
 
   def home
     if user_signed_in? 
@@ -20,9 +20,4 @@ class StaticPagesController < ApplicationController
   def privacypolicy
   end
 
-  private
-
-  def static_pages_layout
-    "staticpages"
-  end
 end
