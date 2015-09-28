@@ -48,7 +48,17 @@ class TasksController < ApplicationController
     @user = current_user
     #check for other_user_profile_exists before filter (@task = Task.new(task_params))
     if @task.save
-      TaskMailer.task_created(current_user, @task).deliver_later
+      #@assigner = @task.assigner
+      #h = JSON.generate({ 'name' => @assigner.profile.name })
+      h = JSON.generate( {'task_assigner_first_name' => @current_user.profile.first_name,
+                          'task_assigner_last_name' => @current_user.profile.last_name,
+                          'task_executor_first_name' => @task.executor.profile.first_name,
+                          'task_executor_email' => @task.executor.email,
+                          'task_executor_id' => @task.executor_id,
+                          'task_id' => @task.id
+                           } )
+      TaskcreatorWorker.perform_async(h, 5)
+      #TaskMailer.task_created(current_user, @task).deliver_later
       flash[:success] = "Task saved!"
       redirect_to user_tasks_path(current_user)
     else
