@@ -1,6 +1,6 @@
 <p>Hi <%= @task.executor.profile.first_name%>,</p>
 
-<p><%= @current_user.profile.first_name %> <%= @current_user.profile.last_name %> just sent you a new task/favor.</p>
+<p><%= @task.assigner.profile.first_name %> <%= @task.assigner.profile.last_name %> just sent you a new task/favor.</p>
 
 <p>You can check it out <%= link_to "here", user_task_url(@task.executor_id, @task.id) %>.</p>
 

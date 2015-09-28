@@ -1,0 +1,8 @@
+Hi <%= "#{@task.executor.profile.first_name}" %>,
+
+<%= "#{@task.assigner.profile.first_name}" %> <%= "#{@task.assigner.profile.last_name}" %> just sent you a new task/favor.
+
+You can check it out <%= link_to "here", user_task_url(@task.executor_id, @task.id) %>.
+
+Cheers,
+Faskyn Team
