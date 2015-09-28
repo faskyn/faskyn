@@ -2,7 +2,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4 col-md-offset-4">
-      <h1 style="text-align:center; vertical-align:text-top">Users</h1>
+      <div class="user-desc" style="text-align:center">
+        <h1>Users</h1>
+      </div>
     </div>
     <div class="col-md-4">
       <div class = "user-search" style="text-align:right">
@@ -17,24 +19,22 @@
       <% @users.each do |user| %>
         <% if user.profile %>
           <div class="col-md-4">
+            <%= link_to user do %>
             <div class="well">         
               <div class="span">
                 <% if user.profile.avatar %>
-                  <%= link_to user do %>
-                    <%= image_tag user.profile.avatar.url(:thumb), class: 'avatar' %>
-                  <% end %>
+                  <%= image_tag user.profile.avatar.url(:thumb), class: 'avatar' %>
                 <% end %>
               </div>
               <div class="span">
-                <h4><%= link_to user do %>
-                  <%= user.profile.first_name %> <%= user.profile.last_name %>
-                <% end %></h4>
+                <h4><%= user.profile.first_name %> <%= user.profile.last_name %></h4>
                 <h5><%= user.profile.company %></h5>
                 <% unless user.profile.job_title.blank? %>
                   <h5><%= user.profile.job_title%></h5>
                 <% end %>
               </div>
             </div>
+            <% end %>
           </div>
         <% end %>
       <% end %>

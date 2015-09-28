@@ -1,4 +1,4 @@
-<div class="container container-show">
+<!--<div class="container container-show">
   <div class="user-profile-show">
     <div class="avatar-name"%>
       <%= image_tag @user.profile.avatar.url(:thumb), class: "avatar" %>
@@ -17,4 +17,27 @@
       <p><%= @user.profile.description %></p>
     </div>
   </div>
-</div>  
+</div>-->
+<div class="container">
+  <div class="user-profile-show">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= @user.profile.first_name %> <%= @user.profile.last_name %></h3>
+      </div>
+      <div class="panel-body">
+        <%= image_tag @user.profile.avatar.url(:thumb), class: "avatar" %>
+        <p><%= @user.profile.company %></p>
+        <p><%= @user.profile.job_title %></p>
+        <p><%= @user.profile.phone_number %></p>
+      </div>
+      <div class="panel-footer">
+        <p><%= @user.profile.description %></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
