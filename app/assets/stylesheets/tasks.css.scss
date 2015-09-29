@@ -7,14 +7,29 @@ $orange: #ff6600;
 
 
 .task-container {
-	/*margin: 40px;*/
-	.btn {
-		float: right;
-		margin-right: 15px;
+	table {
+		margin-bottom: 0px;
+	}
+	h2 {
+		margin-right:15px;
+		margin-left: 15px;
+		.btn {
+			float: right;
+			margin-left: 10px;
+		}
+	}
+	table {
+		text-align: center;
+		th {
+			text-align: center;
+		}
+		a {
+			text-decoration: none;
+		}
 	}
 }
 
-#todo_items_wrapper {
+/*#todo_items_wrapper {
 	.row {
 		width: 100%;
 		border-bottom: 1px solid $dropbox-dark-grey;
@@ -50,9 +65,9 @@ $orange: #ff6600;
 			text-decoration: none;
 			text-align: center;
 			padding: 0.5em 0;
-		}
+		/
 		.content {
-			width: 30%;
+			width: 40%;
 			float: left;
 			text-align: center;
 			border-right: 1px solid $dropbox-dark-grey;
@@ -87,7 +102,9 @@ $orange: #ff6600;
 			}
 		}
 	}
-}
+}*/
+
+
 
 .assigner-row {
 	background: $gray-medium-light;

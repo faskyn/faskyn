@@ -1,71 +1,58 @@
 <div class= "container task-container">
+  <div class="row task-header">
   <h2>Task List<%= link_to "Outgoing Tasks", outgoing_tasks_user_tasks_path(current_user), class: "btn btn-primary" %> <%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-primary" %> <%= link_to "New Task", new_user_task_path(current_user), class: "btn btn-primary" %></h2>
-  <div id = "todo_items_wrapper">
-    <div class= "row clearfix" style="border-top: 1px solid black;">
-      <div class = "assigner_executor"><strong>Name /Company name</strong></div>
-      <div class= "name"><strong>Task Name</strong></div>
-      <div class = "content"><strong>Content</strong></div>
-      <div class = "deadline"><strong>Deadline</strong></div>
-      <div class = "complete"><strong>Complete</strong></div>
-      <div class = "destroy"><strong>Delete</strong></div>
-    </div>
-    <% @tasks.each do |task| %>     
-      <% if task.assigner_id == current_user.id %>
-        <div class= "row clearfix assigner-row">
-          <div class = "executor">
-            <%= link_to user_path(id: task.executor.id) do %>
-              <%= task.executor.profile.first_name %> <%= task.executor.profile.last_name%> / <%= task.executor.profile.company %>
-            <% end %>
-          </div>
-      <% else %>
-        <div class= "row clearfix executor-row">
-          <div class = "assigner">
-            <%= link_to user_path(id: task.assigner.id) do %>
-              <%= task.assigner.profile.first_name %> <%= task.assigner.profile.last_name%> / <%= task.assigner.profile.company %>
-            <% end %>
-          </div>
-      <% end %>
-          <div class = "name">
-            <%= link_to user_task_path(id: task.id) do %>
-              <%= task.name %>
-            <% end %>
-          </div>
-          <div class = "content">
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th class="col-md-3">Name /Company name</th>
+        <th class="col-md-4">Content</th>
+        <th class="col-md-3">Deadline</th>
+        <th class="col-md-1">Complete</th>
+        <th class="col-md-1">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tasks.each do |task| %>
+        <% if task.assigner_id == current_user.id %>
+          <tr style="background: #eaeaea">
+            <td class="col-md-3">
+              <%= link_to user_path(id: task.executor.id) do %>
+                <%= task.executor.profile.first_name %> <%= task.executor.profile.last_name%> / <%= task.executor.profile.company %>
+              <% end %>
+            </td>
+        <% else %>
+          <tr>
+            <td class="col-md-3">
+              <%= link_to user_path(id: task.assigner.id) do %>
+                <%= task.assigner.profile.first_name %> <%= task.assigner.profile.last_name%> / <%= task.assigner.profile.company %>
+              <% end %>
+            </td>
+        <% end %>
+          <td class="col-md-4">
             <%= link_to user_task_path(id: task.id) do %>
               <%= task.content %>
             <% end %>
-          </div>
-          <div class= "deadline">
+          </td>
+          <td class="col-md-3">
             <%= task.deadline %>
-          </div>
-          <div class = "complete">
+          </td>
+          <td class="col-md-1">
             <%= link_to complete_user_task_path(id: task.id), method: :patch do %>
               <i class="fa fa-check"></i>
             <% end %>
-          </div>
-          <div class = "destroy">
+          </td>
+          <td class="col-md-1">
             <%= link_to user_task_path(id: task.id), method: :delete, data: { confirm: "Are you sure?" } do %>
               <i class="fa fa-trash"></i>
             <% end %>
-          </div>
-        </div>
+          </td>
+        </tr>
       <% end %>
-    <%= will_paginate @tasks %>
-  </div>
+    </tbody>
+  </table>
+  <%= will_paginate @tasks %>
 </div>
 
 
-<!--<br />
-    <br />
-   <% @executed_tasks.each do |task| %>
-      <% unless task.completed? %>
-        <%= link_to user_task_path(id: task.id) do %>
-          <%= task.name %>
-        <% end %>
-        <%= task.content %>
-        <%= task.assigner.profile.first_name %>
-        <br />
-      <% end %> 
-    <% end %>
-  </div>
-</div> -->
