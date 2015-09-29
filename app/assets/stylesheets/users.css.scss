@@ -1,5 +1,5 @@
 $gray-medium-light: #eaeaea;
-$garmin-blue: #007cc3;
+$garmin-blue: #337ab7; /*#007cc3;*/
 $dropbox-dark-grey: #47525d;
 $dropbox-light-grey: #7b8994;
 $orange: #ff6600;
@@ -20,7 +20,7 @@ $orange: #ff6600;
 .user-profile-index {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin-top:10px;
   li {
     padding: 10px 0 10px 0;
   }

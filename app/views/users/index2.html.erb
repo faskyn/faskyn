@@ -37,3 +37,18 @@
     </ol>
   </div>
 </div>
+
+<!--<div class="well">         
+  <div class="span">
+    <% if user.profile.avatar %>
+      <%= image_tag user.profile.avatar.url(:thumb), class: 'avatar' %>
+    <% end %>
+  </div>
+  <div class="span">
+    <h4><%= user.profile.first_name %> <%= user.profile.last_name %></h4>
+    <h5><%= user.profile.company %></h5>
+    <% unless user.profile.job_title.blank? %>
+      <h5><%= user.profile.job_title%></h5>
+    <% end %>
+  </div>
+</div>-->

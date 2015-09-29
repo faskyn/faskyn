@@ -9,7 +9,7 @@
     <div class="col-md-4">
       <div class = "user-search" style="text-align:right">
         <%= search_form_for @q, html: { class: "form-inline"} do |f| %>
-          <% f.search_field :profile_first_name_or_profile_last_name_cont, placeholder: "Search...", class: 'form-control' %>
+          <% f.search_field :profile_first_name_or_profile_last_name_cont, placeholder: "Search user..", class: 'form-control' %>
         <% end %>
       </div>
     </div>
@@ -20,25 +20,23 @@
         <% if user.profile %>
           <div class="col-md-4">
             <%= link_to user do %>
-            <div class="well">         
-              <div class="span">
-                <% if user.profile.avatar %>
-                  <%= image_tag user.profile.avatar.url(:thumb), class: 'avatar' %>
-                <% end %>
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                </div>
+                <div class="panel-body">
+                  <% if user.profile.avatar %>
+                    <%= image_tag user.profile.avatar.url(:thumb), class: "avatar" %>
+                  <% end %>
+                  <h4><%= user.profile.first_name %> <%= user.profile.last_name %></h4>
+                  <h5><%= user.profile.company %></h5>
+                  <h5><%= user.profile.job_title %></h5>
+                </div>
               </div>
-              <div class="span">
-                <h4><%= user.profile.first_name %> <%= user.profile.last_name %></h4>
-                <h5><%= user.profile.company %></h5>
-                <% unless user.profile.job_title.blank? %>
-                  <h5><%= user.profile.job_title%></h5>
-                <% end %>
-              </div>
-            </div>
             <% end %>
           </div>
         <% end %>
       <% end %>
-    </ol>
+    </div>
   </div>
 </div>
 
