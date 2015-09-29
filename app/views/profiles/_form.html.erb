@@ -1,40 +1,40 @@
-<%= form_for @profile, url: user_profile_path, html: { multipart: true } do |f| %>
-  <div class="col-md-4 col-md-offset-2">
 
-    <%= render 'layouts/error_messages', object: f.object %>
-    
-    <div class="form-group">
-      <%= f.label :first_name %>
-      <%= f.text_field :first_name, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :last_name %>
-      <%= f.text_field :last_name, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :avatar %>
-      <%= f.file_field :avatar, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :company %>
-      <%= f.text_field :company, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.submit "Update profile", class: 'btn btn-primary' %>
-    </div>
+<%= form_for @profile, url: user_profile_path, html: { multipart: true } do |f| %>
+  
+  <%= render 'layouts/error_messages', object: f.object %>
+  <div class="col-md-4 col-md-offset-2">
+  
+  <div class="form-group">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, class: 'form-control' %>
   </div>
-  <div class="col-md-4">
-    <div class="form-group">
-      <%= f.label :job_title %>
-      <%= f.text_field :job_title, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :phone_number %>
-      <%= f.text_field :phone_number, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :description %>
-      <%= f.text_area :description, class: 'form-control' %>
-    </div>
+  <div class="form-group">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :avatar %>
+    <%= f.file_field :avatar, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :company %>
+    <%= f.text_field :company, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.submit "Update profile", class: 'btn btn-primary' %>
+  </div>
+</div>
+<div class="col-md-4">
+  <div class="form-group">
+    <%= f.label :job_title %>
+    <%= f.text_field :job_title, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :phone_number %>
+    <%= f.text_field :phone_number, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: 'form-control' %>
   </div>
 <%end%>
