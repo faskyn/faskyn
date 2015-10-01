@@ -51,8 +51,6 @@ gem 'aws-sdk', '< 2.0'
 gem 'sidekiq', '~> 3.5.0'
 #sinatra for sidekiq dashboard
 gem 'sinatra', '~> 1.4.6', :require => nil
-#part of sinatra; as of writing must be <2.0 because of bug
-gem 'tilt', '>= 1.3.4', '~> 1.3'
 #redis for sidekiq
 gem 'redis', '~> 3.2.1'
 #searching gem
