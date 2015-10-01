@@ -19,6 +19,12 @@ gem 'jquery-rails'
 gem 'jquery-turbolinks', '~> 2.1.0'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+#database
+gem 'pg', '~> 0.18.3'
+#fay+private_pub for chatting
+gem 'private_pub', '~> 1.0.3'
+#server
+gem 'puma', '~> 2.13.4'
 #bootstrap
 gem 'bootstrap-sass', '~> 3.3.5.1'
 #pagination
@@ -45,12 +51,16 @@ gem 'aws-sdk', '< 2.0'
 gem 'sidekiq', '~> 3.5.0'
 #sinatra for sidekiq dashboard
 gem 'sinatra', '~> 1.4.6', :require => nil
+#part of sinatra; as of writing must be <2.0 because of bug
+gem 'tilt', '>= 1.3.4', '~> 1.3'
 #redis for sidekiq
 gem 'redis', '~> 3.2.1'
 #searching gem
 gem 'ransack', '~> 1.7.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+#running servers easily
+gem 'foreman', '~> 0.78.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -70,7 +80,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   # Access an IRB console on exception pages or by using <%= console %> in views
@@ -80,8 +89,6 @@ group :development, :test do
 end
 
 group :production do
-  gem 'pg', '~> 0.18.2'
   gem 'rails_12factor', '~> 0.0.3'
-  gem 'puma', '~> 2.13.4'
 end
 
