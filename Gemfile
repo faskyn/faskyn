@@ -53,6 +53,8 @@ gem 'sidekiq', '~> 3.5.0'
 gem 'sinatra', '~> 1.4.6', :require => nil
 #redis for sidekiq
 gem 'redis', '~> 3.2.1'
+#newrelic preformance checking
+gem 'newrelic_rpm'
 #searching gem
 gem 'ransack', '~> 1.7.0'
 # bundle exec rake doc:rails generates the API under doc/api.
