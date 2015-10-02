@@ -25,7 +25,9 @@
         <h3 class="panel-title"><%= @user.profile.first_name %> <%= @user.profile.last_name %></h3>
       </div>
       <div class="panel-body">
-        <%= image_tag @user.profile.avatar.url(:thumb), class: "avatar" %>
+        <% if user.profile.avatar %>
+          <%= image_tag @user.profile.avatar.url(:thumb), class: "avatar" %>
+        <% end %>
         <p><%= @user.profile.company %></p>
         <p><%= @user.profile.job_title %></p>
         <p><%= @user.profile.phone_number %></p>
