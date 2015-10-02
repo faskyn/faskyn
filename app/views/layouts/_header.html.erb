@@ -1,5 +1,5 @@
 <nav class="navbar navbar-static-top navbar-default" role="navigation">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar-header">
        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
         <span class="sr-only">Toggle navigation</span>
@@ -7,16 +7,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to image_tag("firstlogosmall.png", size: "40x40"), root_path, class: "navbar-brand" %>
-      <%= link_to "faskyn", root_path, class: "navbar-brand" %>
+      <%= link_to image_tag("firstlogosmall.png", size: "40x40"), root_path, class: "navbar-brand", style: "margin-left:0px;padding-top:9px;padding-bottom:9px" %>
+      <%= link_to "faskyn", root_path, class: "navbar-brand", style: "padding-left:7px" %>
     </div>
 
     <div class="collapse navbar-collapse navbar-ex1-collapse">
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right" style="margin-right:20px">
 
       <% if user_signed_in? %>
         <% if has_profile? %>
-          <li><p class="navbar-btn"><%= link_to "New Task", new_user_task_path(current_user), class: "btn btn-primary" %></p></li>
+          <li><p class="navbar-btn"><%= link_to "New Task", new_user_task_path(current_user), class: "btn btn-primary", style: "margin-right:10px;" %></p></li>
         <% else %>
           <li><p class="navbar-btn"><%= link_to "Create Profile", new_user_profile_path(current_user), class: "btn btn-primary" %></p></li>
         <% end %>

@@ -22,10 +22,10 @@
 
 <nav class= "navbar navbar-static-bottom navbar-default">
   <footer class="footer">
-    <div class="container">
-      <div class="navbar-header">
-        <%= link_to image_tag("firstlogosmall.png", size: "40x40"), root_path, class: "navbar-brand" %>
-        <%= link_to "faskyn | Fastest way to ask and get things done.", root_path %>
+    <div class="container-fluid">
+      <div class="navbar-header" style="min-width:400px;vertical-align:middle">
+        <%= link_to image_tag("firstlogosmall.png", size: "40x40"), root_path, class: "navbar-brand", style: "margin-left:0px;padding-top:9px;padding-bottom:9px"  %>
+        <%= link_to "faskyn | Fastest way to ask and get things done.", root_path, style: "min-width:250px;vertical-align:middle" %>
       </div>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Contact", new_contact_path %></li>
