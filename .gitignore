@@ -21,4 +21,7 @@
 
 # Ignore the postgresql local db
 
+# Ignore uploaded test images.
+/public/uploads
+
 /config/database.yml

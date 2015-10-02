@@ -25,7 +25,7 @@
                 </div>
                 <div class="panel-body">
                   <% if user.profile.avatar %>
-                    <%= image_tag user.profile.avatar.url(:thumb), class: "avatar" %>
+                    <%= image_tag user.profile.avatar.url(:base_thumb), class: "avatar" %>
                   <% end %>
                   <h4><%= user.profile.first_name %> <%= user.profile.last_name %></h4>
                   <h5><%= user.profile.company %></h5>

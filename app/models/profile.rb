@@ -1,4 +1,8 @@
 class Profile < ActiveRecord::Base
+  belongs_to :user
+
+  mount_uploader :avatar, AvatarUploader
+
   validates :first_name, :presence => { :message => "can not be blank" },
                    length: { maximum: 50 }
   validates :last_name, :presence => { :message => "can not be blank" },
@@ -8,8 +12,4 @@ class Profile < ActiveRecord::Base
   validates :job_title, presence: true,
                    length: { maximum: 50 }
 
-  belongs_to :user
-
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 end

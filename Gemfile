@@ -43,10 +43,10 @@ gem 'figaro', '~> 1.1.1'
 gem 'devise', '~> 3.5.2'
 #inviting users via email
 gem 'devise_invitable', '~> 1.5.2'
-#attaching pics
-gem 'paperclip', '~> 4.3.0'
-#storing production files on amazon
-gem 'aws-sdk', '< 2.0'
+#image and file uploading+AWS S3 storage
+gem 'carrierwave', '~> 0.10.0'
+gem 'fog', '~> 1.34.0'
+gem 'mini_magick', '~> 4.3.3'
 #for email async
 gem 'sidekiq', '~> 3.5.0'
 #sinatra for sidekiq dashboard

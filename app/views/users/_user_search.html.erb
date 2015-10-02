@@ -11,7 +11,7 @@
           <% if user.profile %>
             <% if user.profile.avatar %>
               <%= link_to user do %>
-                <%= image_tag user.profile.avatar.url(:thumb), class: 'avatar' %>
+                <%= image_tag user.profile.avatar.url(:base_thumb), class: 'avatar' %>
               <% end %>
             <% end %>
             <span class="userrr">
