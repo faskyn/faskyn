@@ -10,7 +10,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   if Rails.env.production?
     storage :fog
   else
-    storage :fog
+    storage :file
   end
 
   # Override the directory where uploaded files will be stored.
@@ -60,5 +60,9 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+  def default_url
+    [version_name, "default.png"].compact.join('_')
+  end
 
 end
