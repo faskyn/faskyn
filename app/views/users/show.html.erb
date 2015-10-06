@@ -17,6 +17,10 @@
       </div>
     </div>
   </div>
+  <%= link_to "Send message", "#", class: "btn btn-success btn-xs start-conversation", "data-sid" => current_user.id, "data-rip" => @user.id %>
+  <%if @conversation%>
+  <%= render 'conversations/show' %>
+  <% end %>
 </div>
 
 

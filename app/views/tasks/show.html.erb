@@ -1,7 +1,3 @@
-
-
-
-
 <%= @task.content %>
 <% if @user.id == @task.assigner.id %>
   <%= @task.executor.profile.first_name %> <%= @task.executor.profile.last_name %>

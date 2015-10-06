@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   helper_method :if_no_profile_exists
   helper_method :other_user_profile_exists
 
-  before_filter :set_search
+  before_action :set_search
 
   def if_profile_exists
     if @user.profile(current_user)
@@ -37,6 +37,48 @@ class ApplicationController < ActionController::Base
   def set_search
     @q = User.ransack(params[:q])
     @users3 = @q.result(distinct: true).includes(:profile).paginate(page: params[:page], per_page: 3)
+  end
+
+  #from show conversation for partial
+=begin
+  def set_conversation
+    @user = User.find(params[:id])
+    if Conversation.where("(sender_id = ? AND recipient_id = ?) OR (sender_id = ? AND recipient_id = ?)", current_user.id, @user.id, @user.id, current_user.id).present?
+      @conversation = Conversation.where("(sender_id = ? AND recipient_id = ?) OR (sender_id = ? AND recipient_id = ?)", current_user.id, @user.id, @user.id, current_user.id).first
+      #@conversation = Conversation.find(params[:id])
+      if current_user == @conversation.recipient
+        @reciever = @conversation.sender
+      else
+        @reciever = @conversation.recipient
+      end
+      #@reciever = interlocutor(@conversation)
+      @messages = @conversation.messages
+      @message = Message.new
+      #render json: { conversation_id: @conversation.id }
+    end
+  end
+=end
+  def set_conversation
+    @user = User.find(params[:id])
+    #if Conversation.where("(sender_id = ? AND recipient_id = ?) OR (sender_id = ? AND recipient_id = ?)", current_user.id, @user.id, @user.id, current_user.id).present?
+      #@conversation = Conversation.involving(@user)
+      #@conversation = Conversation.where("(sender_id = ? AND recipient_id = ?) OR (sender_id = ? AND recipient_id = ?)", current_user.id, @user.id, @user.id, current_user.id).first
+    if Conversation.between(current_user.id, @user.id).present?
+      @conversation = Conversation.between(current_user.id, @user.id).first
+      @reciever = interlocutor(@conversation)
+      @messages = @conversation.messages
+      @message = Message.new
+    end
+  end
+
+  private
+
+  #def conversation_params
+    #params.permit(:sender_id, :recipient_id)
+  #end
+
+  def interlocutor(conversation)
+    current_user == conversation.recipient ? conversation.sender : conversation.recipient
   end
 
 end

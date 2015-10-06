@@ -20,6 +20,11 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resources :conversations do
+    resources :messages
+  end
+  
   root 'static_pages#home'
 
   mount Sidekiq::Web => '/sidekiq'

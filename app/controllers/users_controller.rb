@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   include ApplicationHelper
+
+  before_action :set_conversation, only: [:show]
   
   def index
     #it's in the appliaction controller!!:@q = User.ransack(params[:q])
@@ -13,4 +15,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
+
+  
 end

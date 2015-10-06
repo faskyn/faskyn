@@ -3,6 +3,7 @@ class TasksController < ApplicationController
   before_action :only_current_user
   before_action :if_no_profile_exists
   before_action :other_user_profile_exists, only: [:create]
+  #before_action :set_conversation, only: [:show]
 
   require 'will_paginate/array'
 
@@ -61,6 +62,8 @@ class TasksController < ApplicationController
       TaskcreatorWorker.perform_async(@task.id, @user.id, 5)
       #TaskMailer.task_created(current_user, @task).deliver_later
       flash[:success] = "Task saved!"
+      #Conversation.create_conversation(@task.assigner_id, @task.executor_id)
+      Conversation.create(sender_id: @task.assigner_id, recipient_id: @task.executor_id)
       redirect_to user_tasks_path(current_user)
     else
       render action: :new

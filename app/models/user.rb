@@ -3,11 +3,15 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
+
   has_one :profile, dependent: :destroy
+
   has_many :assigned_tasks, class_name: "Task", foreign_key: "assigner_id", dependent: :destroy
   has_many :executed_tasks, class_name: "Task", foreign_key: "executor_id", dependent: :destroy
 
+  has_many :conversations, foreign_key: "sender_id", dependent: :destroy
 
+  has_many :messages, dependent: :destroy
 
 =begin
   def tasks

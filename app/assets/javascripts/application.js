@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require chat
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require private_pub
