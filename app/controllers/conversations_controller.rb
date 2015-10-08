@@ -17,7 +17,7 @@ class ConversationsController < ApplicationController
     redirect_to conversation_path(@conversation)
   end
 
-
+=begin
   def show
     #show action in application controller as set_conversation
     @conversation = Conversation.find(params[:id])
@@ -27,7 +27,7 @@ class ConversationsController < ApplicationController
     #@user = @conversation.recipient_id
 
   end
-
+=end
   private
 
   def conversation_params

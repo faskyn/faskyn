@@ -60,22 +60,27 @@ class ApplicationController < ActionController::Base
 =end
   def set_conversation
     @user = User.find(params[:id])
-    #if Conversation.where("(sender_id = ? AND recipient_id = ?) OR (sender_id = ? AND recipient_id = ?)", current_user.id, @user.id, @user.id, current_user.id).present?
-      #@conversation = Conversation.involving(@user)
-      #@conversation = Conversation.where("(sender_id = ? AND recipient_id = ?) OR (sender_id = ? AND recipient_id = ?)", current_user.id, @user.id, @user.id, current_user.id).first
-    if Conversation.between(current_user.id, @user.id).present?
-      @conversation = Conversation.between(current_user.id, @user.id).first
-      #render json: { conversation_id: @conversation.id }
-      #redirect_to conversation_path(@conversation)
-      @reciever = interlocutor(@conversation)
-      #redirect_to conversation_path(@conversation)
-      @messages = @conversation.messages
-      @message = Message.new
-      #respond_to do |format|
-        #format.html #{ redirect_to action: :show  }
-        #format.json { render json: user_path(@conversation, @user) }
-      #end
-      #redirect_to conversation_path(@conversation)
+    if Task.between(current_user.id, @user.id).present?
+      #if Conversation.where("(sender_id = ? AND recipient_id = ?) OR (sender_id = ? AND recipient_id = ?)", current_user.id, @user.id, @user.id, current_user.id).present?
+        #@conversation = Conversation.involving(@user)
+        #@conversation = Conversation.where("(sender_id = ? AND recipient_id = ?) OR (sender_id = ? AND recipient_id = ?)", current_user.id, @user.id, @user.id, current_user.id).first
+      @tasks = Task.uncompleted.between(current_user.id, @user.id).paginate(page: params[:page], per_page: 12)
+      if Conversation.between(current_user.id, @user.id).present?
+        @conversation = Conversation.between(current_user.id, @user.id).first
+        #render json: { conversation_id: @conversation.id }
+        #redirect_to conversation_path(@conversation)
+        @reciever = interlocutor(@conversation)
+        #redirect_to conversation_path(@conversation)
+        @messages = @conversation.messages
+        @message = Message.new
+        #respond_to do |format|
+          #format.html #{ redirect_to action: :show  }
+          #format.json { render json: user_path(@conversation, @user) }
+        #end
+        #redirect_to conversation_path(@conversation)
+      end
+    else
+      redirect_to user_profile_path(@user)
     end
   end
 

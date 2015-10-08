@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="user-profile-show">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= @profile.first_name %> <%= @profile.last_name %></h3>
+      </div>
+      <div class="panel-body">
+        <% if @profile.avatar %>
+          <%= image_tag @user.profile.avatar.url(:base_thumb), class: "avatar" %>
+        <% end %>
+        <p><%= @profile.company %></p>
+        <p><%= @profile.job_title %></p>
+        <p><%= @profile.phone_number %></p>
+      </div>
+      <div class="panel-footer">
+        <p><%= @profile.description %></p>
+      </div>
+    </div>
+  </div>

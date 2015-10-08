@@ -8,6 +8,9 @@ class Task < ActiveRecord::Base
   scope :completed, -> { where.not(completed_at: nil) }
   scope :uncompleted, -> { where(completed_at: nil) }
   scope :alltasks, -> (u) { where('executor_id = ? OR assigner_id = ?', u.id, u.id) }
+  scope :between, -> (assigner_id, executor_id) do
+    where("(tasks.assigner_id = ? AND tasks.executor_id = ?) OR (tasks.assigner_id = ? AND tasks.executor_id = ?)", assigner_id, executor_id, executor_id, assigner_id)
+  end
 
   #self.per_page = 12
 

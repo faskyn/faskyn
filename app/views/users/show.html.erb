@@ -1,26 +1,34 @@
-<div class="container">
-  <div class="user-profile-show">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= @user.profile.first_name %> <%= @user.profile.last_name %></h3>
-      </div>
-      <div class="panel-body">
-        <% if @user.profile.avatar %>
-          <%= image_tag @user.profile.avatar.url(:base_thumb), class: "avatar" %>
-        <% end %>
-        <p><%= @user.profile.company %></p>
-        <p><%= @user.profile.job_title %></p>
-        <p><%= @user.profile.phone_number %></p>
-      </div>
-      <div class="panel-footer">
-        <p><%= @user.profile.description %></p>
+<div class="container-fluid" style="padding-right:0px;padding-left:0px">
+  <div class = "col-md-9" style="padding-left:20px;padding-right:20px">
+    <%= render 'tasks/between' %>
+  </div>
+  <div class = "col-md-3" style="background:#337ab7">
+    <div class="user-profile-show">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= @user.profile.first_name %> <%= @user.profile.last_name %></h3>
+        </div>
+        <div class="panel-body">
+          <% if @user.profile.avatar %>
+            <%= image_tag @user.profile.avatar.url(:base_thumb), class: "avatar" %>
+          <% end %>
+          <p><%= @user.profile.company %></p>
+          <p><%= @user.profile.job_title %></p>
+          <p><%= @user.profile.phone_number %></p>
+        </div>
+        <div class="panel-footer">
+          <p><%= @user.profile.description %></p>
+        </div>
       </div>
     </div>
+    <%if @conversation%>
+      <%= render 'conversations/show' %>
+    <% end %>
+    <br />
+    <br />
+    <br />
+    <br />
   </div>
-  <%= link_to "Send message", "#", class: "btn btn-success btn-xs start-conversation", "data-sid" => current_user.id, "data-rip" => @user.id %>
-  <%if @conversation%>
-  <%= render 'conversations/show' %>
-  <% end %>
 </div>
 
 

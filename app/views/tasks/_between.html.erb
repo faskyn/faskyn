@@ -1,0 +1,44 @@
+<div class= "task-container">
+  <div class="row task-header">
+  <h2>Common Tasks with <%= link_to user_profile_path(@user) do %><%= @user.profile.first_name %> <%= @user.profile.last_name %><% end %><%= link_to "New Task", new_user_task_path(current_user), class: "btn btn-primary" %></h2>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th class="col-md-7">Content</th>
+        <th class="col-md-3">Deadline</th>
+        <th class="col-md-1">Complete</th>
+        <th class="col-md-1">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tasks.each do |task| %>
+        <% if task.assigner_id == current_user.id %>
+          <tr style="background: #eaeaea">
+        <% else %>
+          <tr>
+        <% end %>
+          <td class="col-md-6">
+            <%= link_to user_task_path(current_user.id, task.id) do %>
+              <%= task.content %>
+            <% end %>
+          </td>
+          <td class="col-md-4">
+            <%= task.deadline %>
+          </td>
+          <td class="col-md-1">
+            <%= link_to complete_user_task_path(current_user.id, task.id), method: :patch do %>
+              <i class="fa fa-check"></i>
+            <% end %>
+          </td>
+          <td class="col-md-1">
+            <%= link_to user_task_path(current_user.id, task.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+              <i class="fa fa-trash"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @tasks %>
+</div>

@@ -7,7 +7,7 @@
 .chatbox {
     position: fixed;
     position: expression("absolute");
-    width: 280px;
+    /*width: 280px;*/
     display: none;
 }
 
@@ -36,7 +36,7 @@
 .chatboxcontent {
     font-family: arial, sans-serif;
     height: 280px;
-    width: 280px;
+    /*width: 280px;*/
     overflow-y: auto;
     padding: 7px;
     border-left: 1px solid #cccccc;
@@ -105,7 +105,7 @@
 .chatboxmessagecontent {
     background: white;
     padding: 10px;
-    border-radius: 2px;
+    border-radius: 15%;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
@@ -136,10 +136,11 @@
 }
 
 .chatboxtextarea {
-    width: 262px;
+    width: 100%;
     height: 44px;
     padding: 3px 0pt 3px 3px;
     border: 1px solid #eeeeee;
+    border-radius: 10%;
     margin: 1px;
     overflow: hidden;
     resize: none !important;
@@ -172,4 +173,8 @@
 
 .chatboxtitle {
     float: left;
+}
+
+.start-conversation {
+    border-radius: 15px;
 }
