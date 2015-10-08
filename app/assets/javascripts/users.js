@@ -6,8 +6,8 @@ var ready = function () {
      * send an ajax request to our rails app with the sender_id and
      * recipient_id
      */
-     /**
-    $('.start-conversation').click(function (e) {
+
+   /* $('.start-conversation').click(function (e) {
         e.preventDefault();
         
 
@@ -17,45 +17,42 @@ var ready = function () {
         $.post("/conversations", { sender_id: sender_id, recipient_id: recipient_id }, function (data) {
             chatBox.chatWith(data.conversation_id);
         });
-    });
-    */
+    });*/
 
-    $('.start-conversation').click(function () {
-        /**e.preventDefault();*/
+    //$('.start-conversation').load(function () {
+        //e.preventDefault();
 
-        var sender_id = $(this).data('sid');
-        var recipient_id = $(this).data('rip');
+      //  var sender_id = $(this).data('sid');
+        //var recipient_id = $(this).data('rip');
 
-        /**$.post("/conversations", { sender_id: sender_id, recipient_id: recipient_id }, function (data) {
+        /*$.post("/conversations", { sender_id: sender_id, recipient_id: recipient_id }, function (data) {
               chatBox.chatWith(data.conversation_id);
         });*/
-    });
+   // });
 
     /**
      * Used to minimize the chatbox
      */
-    /**
-    -------------------------------------------------------------------
-    $(document).on('click', '.toggleChatBox', function (e) {
+
+    /*$(document).on('click', '.toggleChatBox', function (e) {
         e.preventDefault();
 
         var id = $(this).data('cid');
         chatBox.toggleChatBoxGrowth(id);
-    });
-    */
+    });*/
     /**
      * Used to close the chatbox
      */
-    /** 
-    --------------------
+    /*
+
     $(document).on('click', '.closeChat', function (e) {
         e.preventDefault();
 
         var id = $(this).data('cid');
         chatBox.close(id);
     });
-    /*
-
+    
+*/
     /**
      * Listen on keypress' in our chat textarea and call the
      * chatInputKey in chat.js for inspection
@@ -72,12 +69,12 @@ var ready = function () {
      * conversation chatbox
      */
 
-    $('a.conversation').click(function (e) {
+    /*$('a.conversation').click(function (e) {
         e.preventDefault();
 
         var conversation_id = $(this).data('cid');
         chatBox.chatWith(conversation_id);
-    });
+    });*/
 
 
 }

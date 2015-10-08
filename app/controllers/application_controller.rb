@@ -65,9 +65,17 @@ class ApplicationController < ActionController::Base
       #@conversation = Conversation.where("(sender_id = ? AND recipient_id = ?) OR (sender_id = ? AND recipient_id = ?)", current_user.id, @user.id, @user.id, current_user.id).first
     if Conversation.between(current_user.id, @user.id).present?
       @conversation = Conversation.between(current_user.id, @user.id).first
+      #render json: { conversation_id: @conversation.id }
+      #redirect_to conversation_path(@conversation)
       @reciever = interlocutor(@conversation)
+      #redirect_to conversation_path(@conversation)
       @messages = @conversation.messages
       @message = Message.new
+      #respond_to do |format|
+        #format.html #{ redirect_to action: :show  }
+        #format.json { render json: user_path(@conversation, @user) }
+      #end
+      #redirect_to conversation_path(@conversation)
     end
   end
 

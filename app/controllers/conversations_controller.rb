@@ -1,6 +1,6 @@
 class ConversationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_conversation, only: [:show]
+  #before_action :set_conversation, only: [:show]
 
   #layout false
 
@@ -13,17 +13,19 @@ class ConversationsController < ApplicationController
     else
       @conversation = Conversation.create!(conversation_params)
     end
-
-    render json: { conversation_id: @conversation.id }
+    #render json: { conversation_id: @conversation.id }
+    redirect_to conversation_path(@conversation)
   end
 
 
   def show
     #show action in application controller as set_conversation
-    #@conversation = Conversation.find(params[:id])
-    #@reciever = interlocutor(@conversation)
-    #@messages = @conversation.messages
-    #@message = Message.new
+    @conversation = Conversation.find(params[:id])
+    @reciever = interlocutor(@conversation)
+    @messages = @conversation.messages
+    @message = Message.new
+    #@user = @conversation.recipient_id
+
   end
 
   private

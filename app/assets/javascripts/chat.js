@@ -32,13 +32,12 @@ var ready = function () {
          * 
          * @param conversation_id
          */
-         /**
-         ---------------------------------------------------------------------
+         
         close: function (conversation_id) {
             $('#chatbox_' + conversation_id).css('display', 'none');
             chatBox.restructure();
         },
-        */
+
         /**
          * Plays a notification sound when a new chat message arrives
          */

@@ -13,7 +13,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    #@user = User.find(params[:id])
+    #respond_to do |format|
+      #format.html #{ redirect_to action: :show  }
+      #format.json { render json: { conversation_id: @conversation.id } }
+    #end
   end
 
   
