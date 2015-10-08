@@ -1,11 +1,10 @@
-
 <%if has_profile? %>
-  <% if user.profile.avatar %>
-    <%= link_to user do %>
-      <%= image_tag current_user.profile.avatar.url(:thumb), class: 'avatar' %>
+  <div id="current-user-bar">
+    <% if current_user.profile.avatar %>
+      <%= link_to user_path(current_user) do %>
+        <%= image_tag current_user.profile.avatar.url(:base_thumb), class: 'avatar' %>
+      <% end %>
     <% end %>
-  <% end %>
-  <%= current_user.profile.first_name %> <%= current_user.profile.last_name %>
-  <br />
-  <%= current_user.profile.company %>
+    <%= current_user.profile.first_name %> <%= current_user.profile.last_name %>
+  </div>
 <% end %>

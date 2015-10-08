@@ -42,7 +42,7 @@ $orange: #ff6600;
   box-sizing: border-box;
   }
 
-
+/* footer */
 footer {
   vertical-align: middle;
   text-align: center;
@@ -90,24 +90,7 @@ footer {
   margin-bottom: 0px;
 }
 
-/* home_loggedin basic */
 
-
-
-/* sidebar left */
-
-
-/*#home_loggedin {
-  .container {
-    height: 100%;
-    overflow: hidden;
-    margin-left: 0px;
-  .row {
-    height: 100%;
-  }
-
-  }
-}*/
 
 .fixedheight {
   height: 100%;
@@ -141,6 +124,9 @@ footer {
   }
 }
 
+.container-form {
+  margin-top:15px;  
+}
 
 #sidebar {
   background: $garmin-blue;
