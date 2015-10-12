@@ -3,8 +3,8 @@
   <%= render 'layouts/error_messages', object: f.object %>
 
   <div class="field form-group">
-    <%= f.label :executor_id %>
-    <%= f.collection_select(:executor_id, User.all, :id, :email, class: "form-control") %>
+    <%= f.label :task_name_company %>
+    <%= f.text_field :task_name_company, class: "form-control" %>
   </div>
   <div class="field form-group">
     <%= f.label :content %>

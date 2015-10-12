@@ -1,4 +1,4 @@
+puma: rails s Puma
 privat_pub: rackup private_pub.ru -s puma -E production
 redis: redis-server
-puma: rails s Puma
 sidekiq: bundle exec sidekiq

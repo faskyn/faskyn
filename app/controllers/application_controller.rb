@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
 
   def other_user_profile_exists
     @task = Task.new(task_params)
-    unless @task.executor.profile
+    unless @task.executor && @task.executor.profile
       flash[:warning] = "Executor hasn't created a profile yet."
       redirect_to user_tasks_path(current_user)
     end

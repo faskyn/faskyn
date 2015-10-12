@@ -5,7 +5,9 @@ $dropbox-dark-grey: #47525d;
 $dropbox-light-grey: #7b8994;
 $orange: #ff6600;
 
-
+table-bordered {
+	border-radius: 10px;
+}
 
 .task-container {
 	table {

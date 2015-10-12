@@ -4,11 +4,11 @@
   </div>
   <div class = "col-md-3" style="background:#337ab7">
     <div class="user-profile-show">
-      <div class="panel panel-primary">
+      <div class="panel panel-primary" style="border-bottom-left-radius:10px;border-bottom-right-radius:10px">
         <div class="panel-heading">
           <h3 class="panel-title"><%= @user.profile.first_name %> <%= @user.profile.last_name %></h3>
         </div>
-        <div class="panel-body">
+        <div class="panel-body" style="border-top-left-radius:10px;border-top-right-radius:10px">
           <% if @user.profile.avatar %>
             <%= image_tag @user.profile.avatar.url(:base_thumb), class: "avatar" %>
           <% end %>
@@ -16,7 +16,7 @@
           <p><%= @user.profile.job_title %></p>
           <p><%= @user.profile.phone_number %></p>
         </div>
-        <div class="panel-footer">
+        <div class="panel-footer" style="border-bottom-left-radius:10px;border-bottom-right-radius:10px">
           <p><%= @user.profile.description %></p>
         </div>
       </div>

@@ -14,7 +14,7 @@
     </thead>
     <tbody>
       <% @assigned_tasks.each do |task| %>
-        <tr style="background: #eaeaea"">
+        <tr style="background: #eaeaea">
           <td class="col-md-3">
             <%= link_to user_path(id: task.executor.id) do %>
               <%= task.executor.profile.first_name %> <%= task.executor.profile.last_name%> / <%= task.executor.profile.company %>
