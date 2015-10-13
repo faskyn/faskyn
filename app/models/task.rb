@@ -18,14 +18,16 @@ class Task < ActiveRecord::Base
     !completed_at.blank?
   end
 
+  #code for new task executor search/select/autocomplete
   def task_name_company
     [executor.try(:profile).try(:first_name), executor.try(:profile).try(:last_name), executor.try(:profile).try(:company)].join(' ')
   end
 
   def task_name_company=(name)
-    self.executor = User.joins(:profile).where("first_name LIKE ? OR last_name LIKE ? OR company LIKE ?", name, name, name).first
+    self.executor = User.joins(:profile).where("first_name LIKE ? AND last_name LIKE ?", name.split(' ')[0].camelize, name.split(' ')[1].camelize).first
       #OR last_name = ? OR company = ?", split_task_name_company[0], split_task_name_company[1], split_task_name_company[2])
   end
+
 
 =begin
   def indextasks

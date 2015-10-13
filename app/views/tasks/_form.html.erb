@@ -4,7 +4,7 @@
 
   <div class="field form-group">
     <%= f.label :task_name_company %>
-    <%= f.text_field :task_name_company, class: "form-control" %>
+    <%= f.text_field :task_name_company, data: { autocomplete_source: user_tasknamecompanies_path }, class: "form-control task_name_company" %>
   </div>
   <div class="field form-group">
     <%= f.label :content %>

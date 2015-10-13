@@ -19,6 +19,8 @@ gem 'jquery-rails'
 gem 'jquery-turbolinks', '~> 2.1.0'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+#jquery-UI
+gem 'jquery-ui-rails', '~> 5.0.5'
 #database
 gem 'pg', '~> 0.18.3'
 #fay+private_pub for chatting
