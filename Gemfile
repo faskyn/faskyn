@@ -49,6 +49,10 @@ gem 'devise_invitable', '~> 1.5.2'
 gem 'carrierwave', '~> 0.10.0'
 gem 'fog', '~> 1.34.0'
 gem 'mini_magick', '~> 4.3.3'
+#refile for file uploading
+gem 'refile', '~> 0.6.1', require: "refile/rails"
+gem 'refile-mini_magick', '~> 0.2.0'
+gem 'refile-s3', '~> 0.2.0'
 #for email async
 gem 'sidekiq', '~> 3.5.0'
 #sinatra for sidekiq dashboard

@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
+//= require refile
 //= require chat
 //= require turbolinks
 //= require bootstrap-sprockets

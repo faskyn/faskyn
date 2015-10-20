@@ -94,4 +94,8 @@ class ApplicationController < ActionController::Base
     current_user == conversation.recipient ? conversation.sender : conversation.recipient
   end
 
+  def message_params
+    params.require(:message).permit(:body, :message_attachment, :message_attachment_id, :message_attachment_cache_id)
+  end
+
 end

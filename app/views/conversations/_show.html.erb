@@ -17,6 +17,13 @@
       <%= f.text_area :body, class: "chatboxtextarea", "data-cid" => @conversation.id %>
       <%= f.submit "send", class: "btn btn-primary btn-sm btn-submit"%>
   <% end %>
+  <%= form_for ([@conversation, @message]) do |form| %>
+    <%= form.attachment_field :message_attachment, direct: true, presigned: true %>
+    <%= form.submit "upload" %>
+  <% end %>
+  <% if @message.message_attachment_id? %>
+    <%= link_to "File", attachment_url([@conversation, @message], :message_attachment) %>
+  <% end %>
 </div>
 </div> <!--extra-->
 
