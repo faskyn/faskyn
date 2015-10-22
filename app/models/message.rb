@@ -1,5 +1,5 @@
 class Message < ActiveRecord::Base
-  attachment :message_attachment, extension: ["pdf", "doc", "xls"]
+  attachment :message_attachment, extension: ["pdf", "doc", "xls", "png", "img", "jpg"]
 
   belongs_to :conversation
   belongs_to :user

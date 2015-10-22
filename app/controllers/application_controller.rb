@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :if_profile_exists
   helper_method :if_no_profile_exists
   helper_method :other_user_profile_exists
+  helper_method :if_tasks_any
 
   before_action :set_search
 
@@ -39,45 +40,15 @@ class ApplicationController < ActionController::Base
     @users3 = @q.result(distinct: true).includes(:profile).paginate(page: params[:page], per_page: 3)
   end
 
-  #from show conversation for partial
-=begin
-  def set_conversation
-    @user = User.find(params[:id])
-    if Conversation.where("(sender_id = ? AND recipient_id = ?) OR (sender_id = ? AND recipient_id = ?)", current_user.id, @user.id, @user.id, current_user.id).present?
-      @conversation = Conversation.where("(sender_id = ? AND recipient_id = ?) OR (sender_id = ? AND recipient_id = ?)", current_user.id, @user.id, @user.id, current_user.id).first
-      #@conversation = Conversation.find(params[:id])
-      if current_user == @conversation.recipient
-        @reciever = @conversation.sender
-      else
-        @reciever = @conversation.recipient
-      end
-      #@reciever = interlocutor(@conversation)
-      @messages = @conversation.messages
-      @message = Message.new
-      #render json: { conversation_id: @conversation.id }
-    end
-  end
-=end
   def set_conversation
     @user = User.find(params[:id])
     if Task.between(current_user.id, @user.id).present?
-      #if Conversation.where("(sender_id = ? AND recipient_id = ?) OR (sender_id = ? AND recipient_id = ?)", current_user.id, @user.id, @user.id, current_user.id).present?
-        #@conversation = Conversation.involving(@user)
-        #@conversation = Conversation.where("(sender_id = ? AND recipient_id = ?) OR (sender_id = ? AND recipient_id = ?)", current_user.id, @user.id, @user.id, current_user.id).first
       @tasks = Task.uncompleted.between(current_user.id, @user.id).paginate(page: params[:page], per_page: 12)
       if Conversation.between(current_user.id, @user.id).present?
         @conversation = Conversation.between(current_user.id, @user.id).first
-        #render json: { conversation_id: @conversation.id }
-        #redirect_to conversation_path(@conversation)
         @reciever = interlocutor(@conversation)
-        #redirect_to conversation_path(@conversation)
         @messages = @conversation.messages
         @message = Message.new
-        #respond_to do |format|
-          #format.html #{ redirect_to action: :show  }
-          #format.json { render json: user_path(@conversation, @user) }
-        #end
-        #redirect_to conversation_path(@conversation)
       end
     else
       redirect_to user_profile_path(@user)
