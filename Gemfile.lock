@@ -42,12 +42,12 @@ GEM
     autoprefixer-rails (6.0.3)
       execjs
       json
-    aws-sdk (2.1.30)
-      aws-sdk-resources (= 2.1.30)
-    aws-sdk-core (2.1.30)
+    aws-sdk (2.1.31)
+      aws-sdk-resources (= 2.1.31)
+    aws-sdk-core (2.1.31)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.1.30)
-      aws-sdk-core (= 2.1.30)
+    aws-sdk-resources (2.1.31)
+      aws-sdk-core (= 2.1.31)
     bcrypt (3.1.10)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -426,7 +426,7 @@ DEPENDENCIES
   foreman (~> 0.78.0)
   jbuilder (~> 2.0)
   jquery-rails
-  jquery-turbolinks (~> 2.1.0)
+  jquery-turbolinks (~> 2.1)
   jquery-ui-rails (~> 5.0.5)
   launchy (~> 2.4.3)
   letter_opener (~> 1.4.1)

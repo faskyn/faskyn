@@ -1,0 +1,10 @@
+var ready = function () {
+	$('#updatetask_<%= @task.id %>').modal('hide');
+
+	$('#task_<%= @task.id %>').fadeOut(400, function(){
+		$(this).remove();
+		$(".newtaskinsert").prepend('<%= j render @task %>');
+	});
+};
+$(document).ready(ready);
+$(document).on('page:load', ready);

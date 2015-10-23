@@ -11,6 +11,9 @@ class TasksController < ApplicationController
     @assigned_tasks = current_user.assigned_tasks.uncompleted.order("created_at DESC")
     @executed_tasks = current_user.executed_tasks.uncompleted.order("created_at DESC")
     @tasks = current_user.tasks_uncompleted.paginate(page: params[:page], per_page: 12)
+    respond_to do |format|
+      format.js
+    end
   end
 
   def show
@@ -24,6 +27,8 @@ class TasksController < ApplicationController
 
   def outgoing_tasks
     @assigned_tasks = current_user.assigned_tasks.uncompleted.order("created_at DESC").paginate(page: params[:page], per_page: 12)
+    #for AJAX version
+    @task = Task.new
   end
 
   def incoming_tasks
@@ -38,30 +43,45 @@ class TasksController < ApplicationController
     #check for other_user_profile_exists before filter (@task = Task.new(task_params))
     if @task.save
       TaskcreatorWorker.perform_async(@task.id, @user.id, 5)
-      flash[:success] = "Task saved!"
       Conversation.create(sender_id: @task.assigner_id, recipient_id: @task.executor_id)
-      redirect_to user_tasks_path(current_user)
+      respond_to do |format|
+        format.html { redirect_to user_tasks_path(current_user), notice: "Task saved!"}
+        format.js
+      end
     else
-      render action: :new
+      respond_to do |format|
+        format.html { render action: :new }
+        format.js
+      end
     end
   end
 
   def complete
     @task = Task.find(params[:id])
     @task.update_attribute(:completed_at, Time.now)
-    redirect_to completed_tasks_user_tasks_path(current_user)
+    respond_to do |format|
+      format.html { redirect_to completed_tasks_user_tasks_path(current_user), notice: "Task completed!" }
+      format.js
+    end
   end
 
   def uncomplete
     @task = Task.find(params[:id])
     @task.update_attribute(:completed_at, nil)
-    redirect_to user_tasks_path(current_user)
+    respond_to do |format|
+      format.html { redirect_to user_tasks_path(current_user), notice: "Task uncompleted!" }
+      format.js
+    end
   end
 
   def completed_tasks
     @assigned_tasks = current_user.assigned_tasks.completed.order("completed_at DESC")
     @executed_tasks = current_user.executed_tasks.completed.order("completed_at DESC")
     @tasks = @user.tasks_completed.paginate(page: params[:page], per_page: 12)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def completed_incoming_tasks
@@ -78,11 +98,14 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
-    if @task.update_attributes(task_params)
-      flash[:success] = "Task updated!"
-      redirect_to user_tasks_path(current_user)
-    else
-      render action: :edit
+    respond_to do |format|
+      if @task.update_attributes(task_params)
+        format.html { redirect_to user_tasks_path(current_user), notice: "Task was successfully updated!"}
+        format.js
+      else
+        format.html { render action: :edit}
+        format.js
+      end
     end
   end
 
@@ -91,20 +114,16 @@ class TasksController < ApplicationController
 
   def destroy
     @task = Task.find(params[:id])
-    if current_user.id == @task.assigner.id
-      @task = current_user.assigned_tasks.find(params[:id])
-    else
-      @task = current_user.executed_tasks.find(params[:id])
-    end
     if @task.destroy
-      flash[:success] = "Task was deleted"
+      respond_to do |format|
+        format.html { redirect_to user_tasks_path(current_user), notice: "Task got deleted!"}
+        format.js
+      end
     else
-      flash[:error] = "Task could not be deleted"
-    end
-    if current_user == @task.assigner.id
-      redirect_to outgoing_tasks_user_tasks_path(current_user)
-    else
-      redirect_to incoming_tasks_user_tasks_path(current_user)
+      respond_to do |format|
+        format.html { redirect_to user_tasks_path(current_user), notice: "Task couldn't be deleted!"}
+        format.js
+      end
     end
   end
 

@@ -53,6 +53,12 @@ class ApplicationController < ActionController::Base
     else
       redirect_to user_profile_path(@user)
     end
+    respond_to do |format|
+      format.html
+      format.js {
+        render :template => "tasks/update.js.erb", :template => "tasks/destroy.js.erb", layout: false
+      }
+    end
   end
 
   private

@@ -1,6 +1,6 @@
 <div class= "container task-container">
   <div class="row task-header">
-    <h2>Outgoing Task List<%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-primary" %> <%= link_to "New Task", new_user_task_path(current_user), class: "btn btn-primary" %></h2>
+    <h2>Outgoing Task List<%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-primary" %> <%= link_to "New Task", new_user_task_path(current_user), type: "button", class: "btn btn-primary", :remote => true, 'data-toggle' => 'modal', 'data-target' => '#newtask' %></h2>
   </div>
   <table class="table table-bordered">
     <thead>
@@ -8,13 +8,47 @@
         <th class="col-md-3">Name /Company name</th>
         <th class="col-md-4">Content</th>
         <th class="col-md-3">Deadline</th>
-        <th class="col-md-1">Complete</th>
-        <th class="col-md-1">Delete</th>
+        <th class="col-md-2">Comp. / Edit / Del.</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="newtaskinsert">
       <%= render @assigned_tasks %>
     </tbody>
   </table>
-  <%= will_paginate @assigned_tasks %> 
+  <%= will_paginate @assigned_tasks %>
+
+  <!-- Modal for new task -->
+  <%= form_for([current_user, @task], remote: true) do |f| %>
+    <div class="modal fade" id="newtask" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">New Task</h4>
+          </div>
+          <div class="modal-body">
+            <%= render 'layouts/error_messages', object: f.object %>
+            <div class="field form-group">
+              <%= f.label :Name_or_Company %>
+              <%= f.text_field :task_name_company, data: {autocomplete_source: user_tasknamecompanies_path}, class: "form-control task_name_company" %>
+            </div>
+            <div class="field form-group">
+              <%= f.label :content %>
+              <%= f.text_area :content, class: "form-control contentarea" %>
+            </div>
+            <div class="field form-group">
+              <%= f.label :deadline %>
+              <%= f.date_select :deadline, class: "form-control task_deadline" %>
+            </div>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="newtaskclose">Close</button>
+            <%= f.submit "Create Task", class: 'btn btn-primary', "data-sid" => current_user.id, "data-rip" => :executor_id %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <!-- Modal End for new task -->
 </div>

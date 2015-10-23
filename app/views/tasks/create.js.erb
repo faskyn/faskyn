@@ -1,0 +1,17 @@
+var ready = function () {
+	$("#newtask").modal('hide');
+	$(".task_name_company").val('');
+	$(".contentarea").val('');
+	$(".task_deadline").val('');
+
+	$(".newtaskinsert").prepend('<%= j render @task %>');
+	$("#task_<%= @task.id %>").hide().fadeIn(1000);
+
+	//26= pagination(12)*every task has 2 tr(2)+ extra task that must be hidden(2)=12*2+2
+	var n = $('tr').length;
+	if (n > 26) {
+		$("tr").slice((-2*(n-26)/2)-1).fadeOut(500);
+	};
+};
+$(document).ready(ready);
+$(document).on('page:load', ready);

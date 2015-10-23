@@ -14,7 +14,7 @@
     <tbody>
       <% @tasks.each do |task| %>
         <% if task.assigner_id == current_user.id %>
-          <tr style="background: #eaeaea">
+          <tr style="background: #eaeaea" id="task_<%= task.id %>">
         <% else %>
           <tr>
         <% end %>
@@ -27,12 +27,12 @@
             <%= task.deadline %>
           </td>
           <td class="col-md-1">
-            <%= link_to complete_user_task_path(current_user.id, task.id), method: :patch do %>
+            <%= link_to complete_user_task_path(current_user.id, task.id), method: :patch, remote: true do %>
               <i class="fa fa-check"></i>
             <% end %>
           </td>
           <td class="col-md-1">
-            <%= link_to user_task_path(current_user.id, task.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+            <%= link_to user_task_path(current_user.id, task.id), method: :delete, remote: true, data: { confirm: "Are you sure?" } do %>
               <i class="fa fa-trash"></i>
             <% end %>
           </td>

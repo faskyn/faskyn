@@ -10,6 +10,10 @@ $orange: #ff6600;
   margin-top: 0.3em;
 }
 
+.ui-autocomplete {
+  z-index: 5000;
+}
+
 .user-desc {
   margin-top: 0px;
   h1 {
