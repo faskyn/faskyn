@@ -43,21 +43,21 @@ class ApplicationController < ActionController::Base
   def set_conversation
     @user = User.find(params[:id])
     if Task.between(current_user.id, @user.id).present?
-      @tasks = Task.uncompleted.between(current_user.id, @user.id).paginate(page: params[:page], per_page: 12)
+      @tasks = Task.uncompleted.between(current_user.id, @user.id).order("created_at DESC").paginate(page: params[:page], per_page: 12)
+      @task = Task.new
+      @task_between = Task.new
       if Conversation.between(current_user.id, @user.id).present?
         @conversation = Conversation.between(current_user.id, @user.id).first
         @reciever = interlocutor(@conversation)
         @messages = @conversation.messages
         @message = Message.new
+        respond_to do |format|
+          format.html
+          format.js { render :template => "tasks/update.js.erb", :template => "tasks/destroy.js.erb", layout: false }
+        end
       end
     else
       redirect_to user_profile_path(@user)
-    end
-    respond_to do |format|
-      format.html
-      format.js {
-        render :template => "tasks/update.js.erb", :template => "tasks/destroy.js.erb", layout: false
-      }
     end
   end
 

@@ -31,6 +31,40 @@
   </div>
 </div>
 
+ <!-- Modal for new task -->
+  <%= form_for([current_user, @task_between], remote: true) do |f| %>
+    <div class="modal fade" id="newtask" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">New Task</h4>
+          </div>
+          <div class="modal-body">
+            <%= render 'layouts/error_messages', object: f.object %>
+            <div class="field form-group">
+              <%= f.hidden_field :executor_id, :value => @user.id %>
+              <p><strong>Executor: <%= @user.profile.first_name %> <%= @user.profile.last_name %>, <%= @user.profile.company %></strong></p>
+            </div>
+            <div class="field form-group">
+              <%= f.label :content %>
+              <%= f.text_area :content, class: "form-control contentarea" %>
+            </div>
+            <div class="field form-group">
+              <%= f.label :deadline %>
+              <%= f.date_select :deadline, class: "form-control task_deadline" %>
+            </div>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="newtaskclose">Close</button>
+            <%= f.submit "Create Task", class: 'btn btn-primary', "data-sid" => current_user.id, "data-rip" => :executor_id %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <!-- Modal End for new task -->
 
 
 

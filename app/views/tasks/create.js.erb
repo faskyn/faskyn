@@ -4,7 +4,9 @@ var ready = function () {
 	$(".contentarea").val('');
 	$(".task_deadline").val('');
 
+	//different div class for different partials
 	$(".newtaskinsert").prepend('<%= j render @task %>');
+	$(".newtaskinsert2").prepend('<%= j render partial: "tasks/task_between", locals: { task: @task } %>');
 	$("#task_<%= @task.id %>").hide().fadeIn(1000);
 
 	//26= pagination(12)*every task has 2 tr(2)+ extra task that must be hidden(2)=12*2+2

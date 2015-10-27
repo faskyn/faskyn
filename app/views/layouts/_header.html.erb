@@ -19,7 +19,15 @@
           <% unless if_tasks_any? %>
             <li><p class="navbar-btn"><%= link_to "New Task", new_user_task_path(current_user), class: "btn btn-primary", style: "margin-right:10px;" %></p></li>
           <% end %>
-          <li><%= link_to "Tasks", root_path %></li>
+          <li class="dropdown">
+            <%= link_to root_path(current_user), class: "dropdown-toggle", 'data-toggle' => 'dropdown', 'role' => 'button', 'aria-haspopup' => 'true', 'aria-expanded' => 'false' do %>Tasks<span class="caret"></span><% end %>
+            <ul class = "dropdown-menu">
+              <li><%= link_to "All Tasks", user_tasks_path(current_user) %></li>
+              <li><%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user) %></li>
+              <li><%= link_to "Outgoing Tasks", outgoing_tasks_user_tasks_path(current_user) %></li>
+              <li><%= link_to "Completed Tasks", completed_tasks_user_tasks_path(current_user) %></li>
+            </ul>
+          </li>
         <% else %>
           <li><p class="navbar-btn"><%= link_to "Create Profile", new_user_profile_path(current_user), class: "btn btn-primary" %></p></li>
         <% end %>

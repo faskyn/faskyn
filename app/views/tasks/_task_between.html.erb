@@ -1,27 +1,17 @@
 <% if current_user.id == task.assigner.id %>
   <tr style="background: #eaeaea" id="task_<%= task.id %>">
-    <td class="col-md-3">
-      <%= link_to user_path(id: task.executor.id) do %>
-        <%= task.executor.profile.first_name %> <%= task.executor.profile.last_name%> / <%= task.executor.profile.company %>
-      <% end %>
-    </td>
 <% else %>
   <tr id="task_<%= task.id %>">
-    <td class = "col-md-3">
-      <%= link_to user_path(id: task.assigner.id) do %>
-        <%= task.assigner.profile.first_name %> <%= task.assigner.profile.last_name%> / <%= task.assigner.profile.company %>
-      <% end %>
-    </td>
 <% end %>
-    <td class="cold-md-4">
-      <%= link_to user_task_path(id: task.id) do %>
+    <td class="cold-md-6">
+      <%= link_to user_task_path(current_user, id: task.id) do %>
         <%= task.content %>
       <% end %>
     </td>
     <td class="col-md-3">
       <%= task.deadline %>
     </td>
-    <td class="col-md-2" style="padding:0px">
+    <td class="col-md-3" style="padding:0px">
     <% if current_user.id == task.assigner.id %>
       <table class="table table-bordered inside-table" style="background:#eaeaea">
     <% else %>
@@ -30,23 +20,23 @@
         <tr>
           <td class="col-md-4" style="border-top:0px;border-bottom:0px;border-left:0px">
             <% if task.completed_at == nil %>
-              <%= link_to complete_user_task_path(id: task.id), action: :complete, remote: true, method: :patch do %>
+              <%= link_to complete_user_task_path(current_user, id: task.id), action: :complete, remote: true, method: :patch do %>
                 <i class="fa fa-check"></i>
               <% end %>
             <% else %>
-              <%= link_to uncomplete_user_task_path(id: task.id), action: :uncomplete, remote: true, method: :patch do %>
+              <%= link_to uncomplete_user_task_path(current_user, id: task.id), action: :uncomplete, remote: true, method: :patch do %>
                 <i class="fa fa-check"></i>
               <% end %>
             <% end %>
           </td>
           <td class="col-md-4" style="border-top:0px;border-bottom:0px;">
-            <%= link_to edit_user_task_path(id: task.id), remote: true, type: "button" do %>
+            <%= link_to edit_user_task_path(current_user, id: task.id), remote: true, type: "button" do %>
               <i class="fa fa-pencil" data-toggle="modal" data-target="#updatetask_<%= task.id %>"></i>
             <% end %>
           </td>
           <td class="col-md-4" style="border-top:0px;border-bottom:0px;border-right:0px">
-            <%= link_to user_task_path(id: task.id), remote: true , type: "button" do %>
-              <i class="fa fa-trash" data-toggle="modal" data-target="#deletetask_<%= task.id %>"></i>
+            <%= link_to user_task_path(current_user, id: task.id), method: :delete, data: { confirm: "Are you sure?" }, remote: true do %>
+              <i class="fa fa-trash"></i>
             <% end %>
           </td>
         </tr>
@@ -55,7 +45,7 @@
   </tr>
 
 <!--Modal for updating task -->
-<%= form_for([@user, task], method: :patch, remote: true) do |f| %>
+<%= form_for([current_user, task], method: :patch, remote: true) do |f| %>
     <div class="modal fade" id="updatetask_<%= task.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -66,7 +56,7 @@
           <div class="modal-body">
             <%= render 'layouts/error_messages', object: f.object %>
             <div class="field form-group">
-              <% if current_user.id == task.assigner.id %>
+              <% if current_user.id == task.assigner_id %>
                 <p><strong>Executor: <%= task.executor.profile.first_name %> <%= task.executor.profile.last_name %>, <%= task.executor.profile.company %></strong></p>
               <% else %>
                 <p><strong>Assigner: <%= task.assigner.profile.first_name %> <%= task.assigner.profile.last_name %>, <%= task.assigner.profile.company %></strong></p>
@@ -89,28 +79,3 @@
       </div>
     </div>
   <% end %>
-
-<!--Modal for delete task -->
-
-<%= form_for([@user, task], method: :delete, remote: true) do |f| %>
-    <div class="modal fade" id="deletetask_<%= task.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Delete Task</h4>
-          </div>
-          <div class="modal-body">
-            <h4>Are you sure?</h4>
-            <p> </p>  
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" id="deletetaskclose">Close</button>
-              <%= f.submit "Delete Task", class: 'btn btn-danger' %>
-          </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
-
-

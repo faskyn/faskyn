@@ -1,6 +1,6 @@
 <div class= "container task-container">
   <div class="row task-header">
-    <h2>Incoming Task List<%= link_to "Outgoing Tasks", outgoing_tasks_user_tasks_path(current_user), class: "btn btn-primary" %> <%= link_to "New Task", new_user_task_path(current_user), class: "btn btn-primary" %></h2>
+    <h2>Incoming Task List<%= link_to "Outgoing Tasks", outgoing_tasks_user_tasks_path(current_user), class: "btn btn-primary" %></h2>
   </div>
   <table class="table table-bordered">
     <thead>
@@ -8,8 +8,7 @@
         <th class="col-md-3">Name /Company name</th>
         <th class="col-md-4">Content</th>
         <th class="col-md-3">Deadline</th>
-        <th class="col-md-1">Complete</th>
-        <th class="col-md-1">Delete</th>
+        <th class="col-md-2">Comp. / Edit / Del.</th>
       </tr>
     </thead>
     <tbody>

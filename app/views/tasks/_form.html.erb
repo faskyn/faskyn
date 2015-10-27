@@ -15,6 +15,6 @@
     <%= f.date_select :deadline, class: "form-control" %>
   </div>
   <div class="actions">
-    <%= f.submit "Create Task", class: 'btn btn-primary', "data-sid" => current_user.id, "data-rip" => :executor_id %>
+    <%= f.submit "Create/Update Task", class: 'btn btn-primary', "data-sid" => current_user.id, "data-rip" => :executor_id %>
   </div>
 <% end %>

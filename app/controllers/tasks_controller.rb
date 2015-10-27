@@ -2,7 +2,8 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :only_current_user
   before_action :if_no_profile_exists
-  before_action :other_user_profile_exists, only: [:create]
+  before_action :other_user_profile_exists, only: :create
+  before_action :set_assigner, only: :create
   #before_action :set_conversation, only: [:show]
 
   require 'will_paginate/array'
@@ -11,9 +12,12 @@ class TasksController < ApplicationController
     @assigned_tasks = current_user.assigned_tasks.uncompleted.order("created_at DESC")
     @executed_tasks = current_user.executed_tasks.uncompleted.order("created_at DESC")
     @tasks = current_user.tasks_uncompleted.paginate(page: params[:page], per_page: 12)
-    respond_to do |format|
-      format.js
-    end
+    #for AJAX version
+    @task = Task.new
+    #respond_to do |format|
+      #format.html
+      #format.js
+    #end
   end
 
   def show
@@ -29,6 +33,10 @@ class TasksController < ApplicationController
     @assigned_tasks = current_user.assigned_tasks.uncompleted.order("created_at DESC").paginate(page: params[:page], per_page: 12)
     #for AJAX version
     @task = Task.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def incoming_tasks
@@ -41,7 +49,7 @@ class TasksController < ApplicationController
 
   def create
     #check for other_user_profile_exists before filter (@task = Task.new(task_params))
-    if @task.save
+    if @task.save || @task_between.save
       TaskcreatorWorker.perform_async(@task.id, @user.id, 5)
       Conversation.create(sender_id: @task.assigner_id, recipient_id: @task.executor_id)
       respond_to do |format|
@@ -130,12 +138,16 @@ class TasksController < ApplicationController
   private
 
     def task_params
-      params.require(:task).permit(:executor_id, :name, :content, :deadline, :task_name_company).merge(assigner_id: current_user.id)
+      params.require(:task).permit(:executor_id, :name, :content, :deadline, :task_name_company, :assigner_id)
     end
 
     def only_current_user
       @user = User.find(params[:user_id])
       redirect_to user_tasks_path(current_user) unless @user == current_user
+    end
+
+    def set_assigner
+      @task.assigner_id = current_user.id
     end
 
 end

@@ -1,6 +1,6 @@
 <div class= "container task-container">
   <div class="row task-header">
-    <h2>Outgoing Task List<%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-primary" %> <%= link_to "New Task", new_user_task_path(current_user), type: "button", class: "btn btn-primary", :remote => true, 'data-toggle' => 'modal', 'data-target' => '#newtask' %></h2>
+    <h2>Outgoing Task List<%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-primary" %> <%= link_to "New Task", new_user_task_path(current_user), type: "button", class: "btn btn-primary", remote: true, 'data-toggle' => 'modal', 'data-target' => '#newtask' %></h2>
   </div>
   <table class="table table-bordered">
     <thead>
