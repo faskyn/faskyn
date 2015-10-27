@@ -28,7 +28,7 @@
       <table class="table table-bordered inside-table">
     <% end %>
         <tr>
-          <td class="col-md-4" style="border-top:0px;border-bottom:0px;border-left:0px">
+          <td class="col-md-4" style="border-top:0px;border-bottom:0px;border-left:0px;border-right:0px;">
             <% if task.completed_at == nil %>
               <%= link_to complete_user_task_path(id: task.id), action: :complete, remote: true, method: :patch do %>
                 <i class="fa fa-check"></i>
@@ -39,12 +39,12 @@
               <% end %>
             <% end %>
           </td>
-          <td class="col-md-4" style="border-top:0px;border-bottom:0px;">
+          <td class="col-md-4" style="border-top:0px;border-bottom:0px;border-left:0px;border-right:0px">
             <%= link_to edit_user_task_path(id: task.id), remote: true, type: "button" do %>
               <i class="fa fa-pencil" data-toggle="modal" data-target="#updatetask_<%= task.id %>"></i>
             <% end %>
           </td>
-          <td class="col-md-4" style="border-top:0px;border-bottom:0px;border-right:0px">
+          <td class="col-md-4" style="border-top:0px;border-bottom:0px;border-right:0px;border-left:0px">
             <%= link_to user_task_path(id: task.id), remote: true , type: "button" do %>
               <i class="fa fa-trash" data-toggle="modal" data-target="#deletetask_<%= task.id %>"></i>
             <% end %>
