@@ -2,13 +2,14 @@
   <div class = "col-md-9" style="padding-left:20px;padding-right:20px">
     <%= render 'tasks/between' %>
   </div>
-  <div class = "col-md-3" style="background:#337ab7">
+  <div class = "col-md-3 rightsidebar">
+    <br />
     <div class="user-profile-show">
-      <div class="panel panel-primary" style="border-bottom-left-radius:10px;border-bottom-right-radius:10px">
+      <div class="panel panel-primary" style="border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px">
         <div class="panel-heading">
           <h3 class="panel-title"><%= @user.profile.first_name %> <%= @user.profile.last_name %></h3>
         </div>
-        <div class="panel-body" style="border-top-left-radius:10px;border-top-right-radius:10px">
+        <div class="panel-body">
           <% if @user.profile.avatar %>
             <%= image_tag @user.profile.avatar.url(:base_thumb), class: "avatar" %>
           <% end %>
@@ -52,7 +53,7 @@
             </div>
             <div class="field form-group">
               <%= f.label :deadline %>
-              <%= f.date_select :deadline, class: "form-control task_deadline" %>
+              <%= f.datetime_select :deadline, ampm: true, :start_year => Date.current.year, :order => [:day, :month, :year], class: "form-control task_deadline" %>
             </div>
             
           </div>

@@ -17,6 +17,7 @@ $orange: #ff6600;
 		height: 600px;
 		background-image: image_url('jumbotron.png');
 		background-size: cover;
+		background-color: rgba(255,255,255,0.5);
 		background-repeat: no-repeat;
 		margin-top: 0px;
 		margin-bottom: 0px;
@@ -26,6 +27,9 @@ $orange: #ff6600;
 		  vertical-align: middle;
 		  position: relative;
 		  margin-top: 0px;
+		}
+		img {
+			opacity:0.5;
 		}
 	}
 }

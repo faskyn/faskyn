@@ -8,7 +8,11 @@
     <% end %>
     </p>
     <time datetime="<%= message.created_at %>" title="<%= message.created_at.strftime("%d %b  %Y at %I:%M%p" ) %>">
-      <%= message_interlocutor(message).profile.first_name %> • <%= message.created_at.strftime("%H:%M %p") %>
+      <% if message.created_at.today? %>
+        <%= message_interlocutor(message).profile.first_name %> • <%= message.created_at.strftime("%H:%M %p") %>
+      <% else %>
+        <%= message_interlocutor(message).profile.first_name %> • <%= message.created_at.strftime("%d %b %H:%M %p") %>
+      <% end %>
     </time>
   </div>
 </li> 

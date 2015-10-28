@@ -22,10 +22,11 @@ $orange: #ff6600;
 		tbody tr td {
 			vertical-align: middle;
 		}
-		th {
+		thead tr th {
 			text-align: center;
+			vertical-align: middle;
 		}
-		a {
+		tbody tr td a {
 			text-decoration: none;
 		}
 		.inside-table {

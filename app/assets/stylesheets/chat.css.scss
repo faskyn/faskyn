@@ -1,8 +1,4 @@
-/**
- * GMAIL Like chat css
- * CREDITS: http://css-tricks.com/replicating-google-hangouts-chat/
- *
- */
+$garmin-blue: #337ab7; /*#007cc3;*/
 
 .chatbox {
     position: fixed;
@@ -12,7 +8,7 @@
 }
 
 .chatboxhead {
-    background: #666;
+    background: $garmin-blue; //#666;
     color: white;
     padding: 0.5rem;
     overflow: hidden;
@@ -44,7 +40,7 @@
     border-left: 1px solid #cccccc;
     border-right: 1px solid #cccccc;
     border-bottom: 1px solid #eeeeee;
-    background: #e5e5e5;
+    background: #f5f5f5; //e5e5e5
     line-height: 1.3em;
     list-style: none;
 }

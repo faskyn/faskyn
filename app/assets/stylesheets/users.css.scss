@@ -4,6 +4,9 @@ $dropbox-dark-grey: #47525d;
 $dropbox-light-grey: #7b8994;
 $orange: #ff6600;
 
+.rightsidebar {
+  border-left: solid 1px $gray-medium-light;
+}
 
 .user-search {
   margin-right:15px;

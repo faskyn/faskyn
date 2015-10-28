@@ -5,13 +5,12 @@
   <br />
   <%= render 'users/current_user' %>
   <br />
-  <%= link_to "Completed tasks", completed_tasks_user_tasks_path(current_user) %>
   <br/>
   <br/>
   <div class="invite">  
     <%= simple_form_for(User.new, url: user_invitation_path, html: { class: 'form-inline' }) do |f| %>
       <%= f.input :email, placeholder: 'Invite via email', label: false %>
-      <%= f.button :submit, 'Invite User', class: 'btn btn-warning' %>
+      <%= f.button :submit, 'Invite User', class: 'btn btn-warning btn-xs' %>
     <% end %>
   </div>
   <br />

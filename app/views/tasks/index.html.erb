@@ -6,9 +6,9 @@
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th class="col-md-3">Name /Company name</th>
-        <th class="col-md-4">Content</th>
-        <th class="col-md-3">Deadline</th>
+        <th class="col-md-3">Name / Company</th>
+        <th class="col-md-5">Content</th>
+        <th class="col-md-2">Deadline</th>
         <th class="col-md-2">Comp. / Edit / Del.</th>
       </tr>
     </thead>
@@ -39,7 +39,7 @@
             </div>
             <div class="field form-group">
               <%= f.label :deadline %>
-              <%= f.date_select :deadline, class: "form-control task_deadline" %>
+              <%= f.datetime_select :deadline, ampm: true, :start_year => Date.current.year, :order => [:day, :month, :year], class: "form-control task_deadline" %>
             </div>
             
           </div>

@@ -13,13 +13,17 @@
       <% end %>
     </td>
 <% end %>
-    <td class="cold-md-4">
+    <td class="cold-md-5">
       <%= link_to user_task_path(id: task.id) do %>
         <%= task.content %>
       <% end %>
     </td>
-    <td class="col-md-3">
-      <%= task.deadline %>
+    <td class="col-md-2">
+      <% if task.completed? %>
+        <%= task.completed_at.strftime("%d %b %I:%M%p") %>
+      <% else %>
+        <%= task.deadline.strftime("%d %b %I:%M%p") %>
+      <% end %>
     </td>
     <td class="col-md-2" style="padding:0px">
     <% if current_user.id == task.assigner.id %>
@@ -78,7 +82,7 @@
             </div>
             <div class="field form-group">
               <%= f.label :deadline %>
-              <%= f.date_select :deadline, class: "form-control" %>
+              <%= f.datetime_select :deadline, ampm: true, :start_year => Date.current.year, :order => [:day, :month, :year], class: "form-control" %>
             </div>    
           </div>
           <div class="modal-footer">
