@@ -35,6 +35,8 @@ gem 'will_paginate', '~> 3.0.7'
 gem 'bootstrap-will_paginate', '~> 0.0.10'
 #simple form
 gem 'simple_form', '~> 3.1.1'
+#font awesome
+gem 'font-awesome-rails', '~> 4.4'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 #populating fake data

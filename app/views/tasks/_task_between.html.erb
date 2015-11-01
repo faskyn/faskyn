@@ -35,8 +35,8 @@
             <% end %>
           </td>
           <td class="col-md-4" style="border-top:0px;border-bottom:0px;border-right:0px;border-left:0px">
-            <%= link_to user_task_path(current_user, id: task.id), method: :delete, data: { confirm: "Are you sure?" }, remote: true do %>
-              <i class="fa fa-trash"></i>
+            <%= link_to user_task_path(current_user, id: task.id), type: "button", remote: true do %>
+              <i class="fa fa-trash" data-toggle="modal" data-target="#deletetask_<%= task.id %>"></i>
             <% end %>
           </td>
         </tr>
@@ -74,6 +74,29 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal" id="updatetaskclose">Close</button>
               <%= f.submit "Update Task", class: 'btn btn-primary', "data-sid" => current_user.id, "data-rip" => :executor_id %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <!--Modal for delete task -->
+
+<%= form_for([current_user, task], method: :delete, remote: true) do |f| %>
+    <div class="modal fade" id="deletetask_<%= task.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Delete Task</h4>
+          </div>
+          <div class="modal-body">
+            <h4>Are you sure?</h4>
+            <p> </p>  
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="deletetaskclose">Close</button>
+              <%= f.submit "Delete Task", class: 'btn btn-danger' %>
           </div>
         </div>
       </div>
