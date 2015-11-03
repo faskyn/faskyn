@@ -1,7 +1,9 @@
 class Task < ActiveRecord::Base
   belongs_to :assigner, class_name: "User"
   belongs_to :executor, class_name: "User"
+
   validates :assigner_id, presence: true
+  #validates :executor_id, presence: true
   validates :task_name_company, presence: { message: "must be an existing user" }
   validates :content, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
 

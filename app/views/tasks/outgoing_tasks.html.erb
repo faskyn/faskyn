@@ -1,6 +1,6 @@
 <div class= "container task-container">
   <div class="row task-header">
-    <h2>Outgoing Task List<%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-primary" %> <%= link_to "New Task", new_user_task_path(current_user), type: "button", class: "btn btn-primary", remote: true, 'data-toggle' => 'modal', 'data-target' => '#newtask' %></h2>
+    <h2>Outgoing Task List<%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-primary" %> <%= link_to "New Task", new_user_task_path(current_user), type: "button", class: "btn btn-primary", id: "newbutton", remote: true, 'data-toggle' => 'modal', 'data-target' => '#newtask' %></h2>
   </div>
   <table class="table table-bordered">
     <thead>
@@ -30,7 +30,7 @@
             <%= render 'layouts/error_messages', object: f.object %>
             <div class="field form-group">
               <%= f.label :Name_or_Company %>
-              <%= f.text_field :task_name_company, data: {autocomplete_source: user_tasknamecompanies_path}, class: "form-control task_name_company" %>
+              <%= f.text_field :task_name_company, data: {autocomplete_source: user_tasknamecompanies_path}, class: "form-control task_name_company", value: "" %>
             </div>
             <div class="field form-group">
               <%= f.label :content %>
@@ -44,7 +44,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal" id="newtaskclose">Close</button>
-            <%= f.submit "Create Task", class: 'btn btn-primary', "data-sid" => current_user.id, "data-rip" => :executor_id %>
+            <%= f.submit "Create Task", class: 'btn btn-primary submittask', "data-sid" => current_user.id, "data-rip" => :executor_id %>
           </div>
         </div>
       </div>

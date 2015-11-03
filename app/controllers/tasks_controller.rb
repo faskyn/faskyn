@@ -54,12 +54,14 @@ class TasksController < ApplicationController
       Conversation.create(sender_id: @task.assigner_id, recipient_id: @task.executor_id)
       respond_to do |format|
         format.html { redirect_to user_tasks_path(current_user), notice: "Task saved!"}
-        format.js
+        format.json { render action: 'show', status: :created, location: @person }
+        format.js #{ render action: 'show', status: :created, location: @person }
       end
     else
       respond_to do |format|
         format.html { render action: :new }
-        format.js
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+        format.js #{ render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end
