@@ -8,7 +8,7 @@ var ready = function() {
 
 	//unofocus the newtask button after modal closing
 	$('#newtask').on('shown.bs.modal', function (e) {
-    $('#newbutton').one('focus', function (e) {
+    $('.newbutton').one('focus', function (e) {
     	$(this).blur();
 		});
 	});
