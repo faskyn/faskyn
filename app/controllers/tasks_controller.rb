@@ -2,8 +2,8 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :only_current_user
   before_action :if_no_profile_exists
-  before_action :other_user_profile_exists, only: :create
-  before_action :set_assigner, only: :create
+  #before_action :other_user_profile_exists, only: :create
+  #before_action :set_assigner, only: :create
   #before_action :set_conversation, only: [:show]
 
   require 'will_paginate/array'
@@ -49,21 +49,28 @@ class TasksController < ApplicationController
 
   def create
     #check for other_user_profile_exists before filter (@task = Task.new(task_params))
-    if @task.save || @task_between.save
+    @task = Task.new(task_params)
+    #if @task.executor && @task.executor.profile
+    @task.assigner_id = current_user.id
+    if @task.save
       TaskcreatorWorker.perform_async(@task.id, @user.id, 5)
       Conversation.create(sender_id: @task.assigner_id, recipient_id: @task.executor_id)
       respond_to do |format|
         format.html { redirect_to user_tasks_path(current_user), notice: "Task saved!"}
-        format.json { render action: 'show', status: :created, location: @person }
+        #format.json { render action: 'show', status: :created, location: @person }
         format.js #{ render action: 'show', status: :created, location: @person }
       end
     else
       respond_to do |format|
         format.html { render action: :new }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+        #format.json { render json: @task.errors, status: :unprocessable_entity }
         format.js #{ render json: @task.errors, status: :unprocessable_entity }
       end
     end
+    #else  
+      #flash[:warning] = "Executor hasn't created a profile yet."
+      #redirect_to user_tasks_path(current_user)
+    #end
   end
 
   def complete

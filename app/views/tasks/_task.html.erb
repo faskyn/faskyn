@@ -57,7 +57,11 @@
                       <h4 class="modal-title" id="myModalLabel">Edit Task</h4>
                     </div>
                     <div class="modal-body">
-                      <%= render 'layouts/error_messages', object: f.object %>
+                      <div class="alert alert-danger" style="display:none">
+                        <ul class="errors" style="display:none">
+                          <%= render 'layouts/error_messages', object: f.object %>
+                        </ul>
+                      </div>
                       <div class="field form-group">
                         <% if current_user.id == task.assigner.id %>
                           <p><strong>Executor: <%= task.executor.profile.first_name %> <%= task.executor.profile.last_name %>, <%= task.executor.profile.company %></strong></p>

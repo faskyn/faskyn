@@ -3,9 +3,15 @@ class Task < ActiveRecord::Base
   belongs_to :executor, class_name: "User"
 
   validates :assigner_id, presence: true
-  #validates :executor_id, presence: true
-  validates :task_name_company, presence: { message: "must be an existing user" }
+  validates :executor, presence: { message: "must be valid"}
+  #validates :task_name_company, presence: { message: "must be an existing user" }
   validates :content, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
+
+  #validate do |task|
+    #if task.task_name_company.empty?
+      #task.errors[:base] << "Executor must be chosen"
+    #end
+  #end
 
   scope :completed, -> { where.not(completed_at: nil) }
   scope :uncompleted, -> { where(completed_at: nil) }
@@ -15,6 +21,7 @@ class Task < ActiveRecord::Base
   end
 
   #self.per_page = 12
+
 
   def completed?
     !completed_at.blank?
@@ -26,8 +33,12 @@ class Task < ActiveRecord::Base
   end
 
   def task_name_company=(name)
-    self.executor = User.joins(:profile).where("first_name LIKE ? AND last_name LIKE ?", name.split(' ')[0].camelize, name.split(' ')[1].camelize).first
-      #OR last_name = ? OR company = ?", split_task_name_company[0], split_task_name_company[1], split_task_name_company[2])
+    #newname = name.split(' ').join('_')
+    self.executor = User.joins(:profile).where("CONCAT_WS(' ', first_name, last_name, company) LIKE ?", "%#{name}%").first if name.present?
+    #self.executor_id = User.joins(:profile).where("LOWER(first_name) LIKE ? AND LOWER(last_name) LIKE ?", name.split(' ')[0].downcase, name.split(' ')[1].downcase).first.id if name.present?
+    #OR last_name = ? OR company = ?", split_task_name_company[0], split_task_name_company[1], split_task_name_company[2])
+  rescue ArgumentError
+    self.executor = nil
   end
 
 

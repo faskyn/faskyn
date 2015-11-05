@@ -28,7 +28,11 @@
             <h4 class="modal-title" id="myModalLabel">New Task</h4>
           </div>
           <div class="modal-body">
-            <%= render 'layouts/error_messages', object: f.object %>
+            <div class="alert alert-danger" style="display:none">
+              <ul class="errors" style="display:none">
+                <%= render 'layouts/error_messages', object: f.object %>
+              </ul>
+            </div>
             <div class="field form-group">
               <%= f.label :Name_or_Company %>
               <%= f.text_field :task_name_company, data: {autocomplete_source: user_tasknamecompanies_path}, class: "form-control task_name_company", value: "" %>

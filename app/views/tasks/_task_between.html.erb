@@ -43,7 +43,11 @@
                       <h4 class="modal-title" id="myModalLabel">Edit Task</h4>
                     </div>
                     <div class="modal-body" style="text-align:left">
-                      <%= render 'layouts/error_messages', object: f.object %>
+                      <div class="alert alert-danger" style="display:none">
+                        <ul class="errors" style="display:none">
+                          <%= render 'layouts/error_messages', object: f.object %>
+                        </ul>
+                      </div>
                       <div class="field form-group">
                         <% if current_user.id == task.assigner_id %>
                           <p><strong>Executor: <%= task.executor.profile.first_name %> <%= task.executor.profile.last_name %>, <%= task.executor.profile.company %></strong></p>
@@ -78,7 +82,7 @@
             <%= form_for([current_user, task], method: :delete, remote: true) do |f| %>
               <div class="modal fade" id="deletetask_<%= task.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
-                  <div class="modal-content">
+                  <div class="modal-content" style="text-align:left">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                       <h4 class="modal-title" id="myModalLabel">Delete Task</h4>

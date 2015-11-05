@@ -5,13 +5,18 @@ var ready = function() {
   	source: "/users/:user_id/tasknamecompanies"
 	});
 
-
-	//unofocus the newtask button after modal closing
+	//unfocus the newtask button after modal closing
 	$('#newtask').on('shown.bs.modal', function (e) {
     $('.newbutton').one('focus', function (e) {
     	$(this).blur();
 		});
 	});
+
+	//when modal closes error messages get hidden
+	$('#newtask').on('hidden.bs.modal', function (e) {
+		$('.alert-danger').hide();
+	});
+
 };
 
 $(document).ready(ready);

@@ -1,11 +1,25 @@
 var ready = function () {
-	$('#updatetask_<%= @task.id %>').modal('hide');
 
-	$('#task_<%= @task.id %>').fadeOut(400, function(){
-		$(this).remove();
-		$(".newtaskinsert").prepend('<%= j render @task %>');
-		$(".newtaskinsert2").prepend('<%= j render partial: "tasks/task_between", locals: { task: @task } %>');
-	});
+	$("ul.errors").html("");
+	<% if @task.errors.any? %>
+		//modal error messages get inserted via AJAX
+		$('.alert-danger').show();
+		$('ul.errors').show();
+		<% @task.errors.full_messages.each do |message| %>
+    		$("ul.errors").append($("<li />").html("<%= message.html_safe %>"));
+  		<% end %>
+	<% else %>
+		$('ul.errors').hide();
+		$('.alert-danger').hide();
+		$('#updatetask_<%= @task.id %>').modal('hide');
+
+		$('#task_<%= @task.id %>').fadeOut(400, function(){
+			$(this).remove();
+			$(".newtaskinsert").prepend('<%= j render @task %>');
+			$(".newtaskinsert2").prepend('<%= j render partial: "tasks/task_between", locals: { task: @task } %>');
+		});
+	<% end %>
+
 };
 $(document).ready(ready);
 $(document).on('page:load', ready);

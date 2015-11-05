@@ -42,7 +42,11 @@
             <h4 class="modal-title" id="myModalLabel">New Task</h4>
           </div>
           <div class="modal-body">
-            <%= render 'layouts/error_messages', object: f.object %>
+            <div class="alert alert-danger" style="display:none">
+              <ul class="errors" style="display:none">
+                <%= render 'layouts/error_messages', object: f.object %>
+              </ul>
+            </div>
             <div class="field form-group">
               <%= f.hidden_field :executor_id, :value => @user.id %>
               <p><strong>Executor: <%= @user.profile.first_name %> <%= @user.profile.last_name %>, <%= @user.profile.company %></strong></p>
