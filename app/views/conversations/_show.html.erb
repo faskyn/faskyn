@@ -1,27 +1,28 @@
 <div class="start-conversation" data-sid= "<% current_user.id %>" data-rip= "<% @user.id %>">
-<!--extra-->
-<div class="chatboxhead">
-  <div class="chatboxtitle">
-    <i class="fa fa-comments"></i>
-    <h1><%= @reciever.profile.first_name %> <%= @reciever.profile.last_name %></h1>
+  <div class="chatboxhead">
+    <div class="chatboxtitle">
+      <i class="fa fa-comments"></i>
+      <h1><%= @reciever.profile.first_name %> <%= @reciever.profile.last_name %></h1>
+    </div>
+    <br clear="all"/>
   </div>
-  <br clear="all"/>
+  <div class="chatboxcontent">
+    <% if @messages.any? %>
+        <%= render @messages %>
+    <% end %>
+  </div>
+  <div class="chatboxinput">
+    <%= form_for([@conversation, @message], :remote => true, :html => {id: "conversation_form_#{@conversation.id}"}) do |f| %>
+        <%= f.text_area :body, class: "chatboxtextarea", "data-cid" => @conversation.id %>
+    <% end %>
+    <%= form_for([@conversation, @message], html: {class: "refile_form"}, remote: true) do |form| %>
+        <span class="btn btn-success btn-sm btn-file">Choose file
+        <%= form.attachment_field :message_attachment, direct: true, presigned: true, class: "choosefile" %></span>
+        <%= form.submit "Send File", class: "btn btn-primary btn-sm btn-submit-refile", style:"display:none"%>
+    <% end %>
+    <span id="progresspercent"></span>
+  </div>
 </div>
-<div class="chatboxcontent">
-  <% if @messages.any? %>
-      <%= render @messages %>
-  <% end %>
-</div>
-<div class="chatboxinput">
-  <%= form_for([@conversation, @message], :remote => true, :html => {id: "conversation_form_#{@conversation.id}"}) do |f| %>
-      <%= f.text_area :body, class: "chatboxtextarea", "data-cid" => @conversation.id %>
-  <% end %>
-  <%= form_for ([@conversation, @message]) do |form| %>
-    <%= form.attachment_field :message_attachment, presigned: true %>
-    <%= form.submit "Upload", class: "btn btn-primary btn-sm btn-submit" %>
-  <% end %>
-</div>
-</div> <!--extra-->
 
 <%= subscribe_to conversation_path(@conversation) %>
 

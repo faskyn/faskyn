@@ -177,7 +177,7 @@ var ready = function () {
 
                 if (message != '') {
                     $('#conversation_form_' + conversation_id).submit();
-                    $(chatboxtextarea).val('');
+                    //$(chatboxtextarea).val('');
                     $(chatboxtextarea).focus();
                     $(chatboxtextarea).css('height', '44px');
                 }

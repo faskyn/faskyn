@@ -55,6 +55,7 @@ gem 'mini_magick', '~> 4.3.3'
 gem 'refile', '~> 0.6.1', require: "refile/rails"
 gem 'refile-mini_magick', '~> 0.2.0'
 gem 'refile-s3', '~> 0.2.0'
+gem 'remotipart', '~> 1.2', '>= 1.2.1'
 #for email async
 gem 'sidekiq', '~> 3.5.0'
 #sinatra for sidekiq dashboard

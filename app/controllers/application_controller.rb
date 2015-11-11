@@ -72,7 +72,7 @@ class ApplicationController < ActionController::Base
   end
 
   def message_params
-    params.require(:message).permit(:body, :message_attachment, :message_attachment_id, :message_attachment_cache_id)
+    params.require(:message).permit(:body, :message_attachment, :message_attachment_id, :message_attachment_cache_id, :remove_message_attachment)
   end
 
 end

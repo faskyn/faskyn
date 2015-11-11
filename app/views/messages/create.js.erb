@@ -9,10 +9,19 @@
 	chatbox.scrollTop(chatbox[0].scrollHeight);
 	$(".chatboxtextarea").val("");
 
+	//in chrome default $('.choosefile').val() is "", so can't be properly used as reference
+	// var filechosen = $('.choosefile').val();
+	// if (filechosen != "") {
+	// 	$(".refile_form").find("input[type=submit]").hide();
+	// 	$('.choosefile').val("");
+	// 	$('#progresspercent').hide();
+	// }
+
 	if(sender_id != reciever_id) {
 		chatBox.chatWith(id);
 		chatbox.children().last().removeClass("self").addClass("other");
 		chatbox.scrollTop(chatbox[0],scrollHeight);
 		chatBox.notify();
 	}
+
 <% end %>

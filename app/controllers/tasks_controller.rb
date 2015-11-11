@@ -63,7 +63,7 @@ class TasksController < ApplicationController
     else
       respond_to do |format|
         format.html { render action: :new }
-        #format.json { render json: @task.errors, status: :unprocessable_entity }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
         format.js #{ render json: @task.errors, status: :unprocessable_entity }
       end
     end

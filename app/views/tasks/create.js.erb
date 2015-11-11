@@ -7,8 +7,8 @@ var ready = function () {
 		$('.alert-danger').show();
 		$('ul.errors').show();
 		<% @task.errors.full_messages.each do |message| %>
-    	$("ul.errors").append($("<li />").html("<%= message.html_safe %>"));
-  	<% end %>
+    		$("ul.errors").append($("<li />").html("<%= message.html_safe %>"));
+  		<% end %>
 	<% else %>
 		//hiding modal on creation and setting values to zero for optional new modal
 		$('ul.errors').hide();
