@@ -1,34 +1,31 @@
-var ready = function () {
+//empty modal error list
+$("ul.errors").html("");
+<% if @task.errors.any? %>
+	//modal error messages get inserted via AJAX
+	$('.alert-danger').show();
+	$('ul.errors').show();
+	<% @task.errors.full_messages.each do |message| %>
+		$("ul.errors").append($("<li />").html("<%= message.html_safe %>"));
+		<% end %>
+<% else %>
+	//hiding modal on creation and setting values to zero for optional new modal
+	$('ul.errors').hide();
+	$('.alert-danger').hide();
+	$("#newtask").modal('hide');
+	$(".task_name_company").val('');
+	$(".contentarea").val('');
+	$(".task_deadline").val('');
 
-	//empty modal error list
-	$("ul.errors").html("");
-	<% if @task.errors.any? %>
-		//modal error messages get inserted via AJAX
-		$('.alert-danger').show();
-		$('ul.errors').show();
-		<% @task.errors.full_messages.each do |message| %>
-    		$("ul.errors").append($("<li />").html("<%= message.html_safe %>"));
-  		<% end %>
-	<% else %>
-		//hiding modal on creation and setting values to zero for optional new modal
-		$('ul.errors').hide();
-		$('.alert-danger').hide();
-		$("#newtask").modal('hide');
-		$(".task_name_company").val('');
-		$(".contentarea").val('');
-		$(".task_deadline").val('');
+	//different div class for different partials + table rows get inserted into view via AJAX
+	$(".newtaskinsert").prepend('<%= j render @task %>');
+	$(".newtaskinsert2").prepend('<%= j render partial: "tasks/task_between", locals: { task: @task } %>');
+	$("#task_<%= @task.id %>").hide().fadeIn(1000);
 
-		//different div class for different partials + table rows get inserted into view via AJAX
-		$(".newtaskinsert").prepend('<%= j render @task %>');
-		$(".newtaskinsert2").prepend('<%= j render partial: "tasks/task_between", locals: { task: @task } %>');
-		$("#task_<%= @task.id %>").hide().fadeIn(1000);
+	//26= pagination(12)*every task has 2 tr(2)+ extra task that must be hidden(2)=12*2+2
+	var n = $('tr').length;
+	if (n > 26) {
+		$("tr").slice((-2*(n-26)/2)-1).fadeOut(500);
+	};
+<% end %>
 
-		//26= pagination(12)*every task has 2 tr(2)+ extra task that must be hidden(2)=12*2+2
-		var n = $('tr').length;
-		if (n > 26) {
-			$("tr").slice((-2*(n-26)/2)-1).fadeOut(500);
-		};
-	<% end %>
-};
-$(document).ready(ready);
-$(document).on('page:load', ready);
+

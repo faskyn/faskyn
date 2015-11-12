@@ -8,8 +8,8 @@
     </div>
     <div class="col-md-4">
       <div class = "user-search" style="text-align:right">
-        <%= search_form_for @q, html: { class: "form-inline"} do |f| %>
-          <% f.search_field :profile_first_name_or_profile_last_name_cont, placeholder: "Search user..", class: 'form-control' %>
+        <%= search_form_for @q_users, html: { class: "form-inline"} do |f| %>
+          <% f.search_field :profile_full_name_or_profile_company_cont, placeholder: "Search user..", class: 'form-control' %>
         <% end %>
       </div>
     </div>

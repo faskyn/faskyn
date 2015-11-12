@@ -5,10 +5,12 @@
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th class="col-md-3">Name / Company</th>
-        <th class="col-md-5">Content</th>
-        <th class="col-md-2">Deadline</th>
+        <!-- Sorting implemented w/ ransack gem -->
+        <th class="col-md-3"><%= sort_link(@q_outgoing_tasks, 'Name / Company') %></th>
+        <th class="col-md-5"><%= sort_link(@q_outgoing_tasks, :content, 'Content') %></th>
+        <th class="col-md-2"><%= sort_link(@q_outgoing_tasks, :deadline, 'Deadline') %></th>
         <th class="col-md-2">Comp. / Edit / Del.</th>
+        <!-- End of ransack sorting-->
       </tr>
     </thead>
     <tbody class="newtaskinsert">
@@ -17,7 +19,7 @@
   </table>
   <%= will_paginate @assigned_tasks %>
 
-  <!-- Modal for new task -->
+  <!-- Bootstrap Modal for new task -->
   <%= form_for([current_user, @task], remote: true) do |f| %>
     <div class="modal fade" id="newtask" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
@@ -33,6 +35,7 @@
               </ul>
             </div>
             <div class="field form-group">
+              <!-- Autocompletion with jquery -->
               <%= f.label :Name_or_Company %>
               <%= f.text_field :task_name_company, data: {autocomplete_source: user_tasknamecompanies_path}, class: "form-control task_name_company", value: "" %>
             </div>
@@ -53,5 +56,5 @@
       </div>
     </div>
   <% end %>
-  <!-- Modal End for new task -->
+  <!-- Bootstrap Modal End for new task -->
 </div>

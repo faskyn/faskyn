@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   
   def index
     #it's in the appliaction controller!!:@q = User.ransack(params[:q])
-    @users = @q.result(distinct: true).includes(:profile).paginate(page: params[:page], per_page: 12)
+    @users = @q_users.result(distinct: true).includes(:profile).paginate(page: params[:page], per_page: 12)
     respond_to do |format|
       format.html
       format.js
@@ -13,12 +13,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    #@user = User.find(params[:id])
-    #respond_to do |format|
-      #format.html #{ redirect_to action: :show  }
-      #format.json { render json: { conversation_id: @conversation.id } }
-    #end
-  end
-
-  
+    #set in application controller
+  end 
 end

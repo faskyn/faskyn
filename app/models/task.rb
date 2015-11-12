@@ -4,14 +4,7 @@ class Task < ActiveRecord::Base
 
   validates :assigner_id, presence: true
   validates :executor, presence: { message: "must be valid"}
-  #validates :task_name_company, presence: { message: "must be an existing user" }
   validates :content, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
-
-  #validate do |task|
-    #if task.task_name_company.empty?
-      #task.errors[:base] << "Executor must be chosen"
-    #end
-  #end
 
   scope :completed, -> { where.not(completed_at: nil) }
   scope :uncompleted, -> { where(completed_at: nil) }
@@ -20,34 +13,20 @@ class Task < ActiveRecord::Base
     where("(tasks.assigner_id = ? AND tasks.executor_id = ?) OR (tasks.assigner_id = ? AND tasks.executor_id = ?)", assigner_id, executor_id, executor_id, assigner_id)
   end
 
-  #self.per_page = 12
-
+  #self.per_page = 12 for most of the searches
 
   def completed?
     !completed_at.blank?
   end
 
-  #code for new task executor search/select/autocomplete
+  #getter setter method code for new task executor search/select/autocomplete
   def task_name_company
     [executor.try(:profile).try(:first_name), executor.try(:profile).try(:last_name), executor.try(:profile).try(:company)].join(' ')
   end
 
   def task_name_company=(name)
-    #newname = name.split(' ').join('_')
     self.executor = User.joins(:profile).where("CONCAT_WS(' ', first_name, last_name, company) LIKE ?", "%#{name}%").first if name.present?
-    #self.executor_id = User.joins(:profile).where("LOWER(first_name) LIKE ? AND LOWER(last_name) LIKE ?", name.split(' ')[0].downcase, name.split(' ')[1].downcase).first.id if name.present?
-    #OR last_name = ? OR company = ?", split_task_name_company[0], split_task_name_company[1], split_task_name_company[2])
   rescue ArgumentError
     self.executor = nil
   end
-
-
-=begin
-  def indextasks
-    indextasks = []
-    indextasks << @assigned_tasks.uncompleted
-    indextasks << @expired_tasks.uncompleted
-    indextasks.sort_by { |h| h[:created_at] }.reverse!
-  end
-=end
 end

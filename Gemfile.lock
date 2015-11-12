@@ -415,6 +415,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  arel (~> 6.0, >= 6.0.3)
   better_errors (~> 2.1.1)
   bootstrap-sass (~> 3.3.5.1)
   bootstrap-will_paginate (~> 0.0.10)

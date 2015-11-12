@@ -43,9 +43,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'faker', '~> 1.5.0'
 #storing ENV credentials
 gem 'figaro', '~> 1.1.1'
-#qucik authentication
+#qucik authentication and invitation
 gem 'devise', '~> 3.5.2'
-#inviting users via email
 gem 'devise_invitable', '~> 1.5.2'
 #image and file uploading+AWS S3 storage
 gem 'carrierwave', '~> 0.10.0'
@@ -56,7 +55,7 @@ gem 'refile', '~> 0.6.1', require: "refile/rails"
 gem 'refile-mini_magick', '~> 0.2.0'
 gem 'refile-s3', '~> 0.2.0'
 gem 'remotipart', '~> 1.2', '>= 1.2.1'
-#for email async
+#bg worker
 gem 'sidekiq', '~> 3.5.0'
 #sinatra for sidekiq dashboard
 gem 'sinatra', '~> 1.4.6', :require => nil
@@ -64,8 +63,9 @@ gem 'sinatra', '~> 1.4.6', :require => nil
 gem 'redis', '~> 3.2.1'
 #newrelic preformance checking
 gem 'newrelic_rpm'
-#searching gem
+#searching gem + SQL query simplifier gem
 gem 'ransack', '~> 1.7.0'
+gem 'arel', '~> 6.0', '>= 6.0.3'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 #running servers easily

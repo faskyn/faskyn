@@ -2,7 +2,7 @@
   <tr style="background: #eaeaea" id="task_<%= task.id %>">
     <td class="col-md-3">
       <%= link_to user_path(id: task.executor.id) do %>
-        <%= task.executor.profile.first_name %> <%= task.executor.profile.last_name%> / <%= task.executor.profile.company %>
+        <%= task.executor.first_name %> <%= task.executor.profile.last_name%> / <%= task.executor.profile.company %>
       <% end %>
     </td>
 <% else %>

@@ -1,8 +1,4 @@
-var ready = function () {
-	$('#deletetask_<%= @task.id %>').modal('hide');
-	$("#task_<%= @task.id %>").fadeOut(400, function(){
-		$(this).remove();
-	});
-};
-$(document).ready(ready);
-$(document).on('page:load', ready);
+$('#deletetask_<%= @task.id %>').modal('hide');
+$("#task_<%= @task.id %>").fadeOut(400, function(){
+	$(this).remove();
+});

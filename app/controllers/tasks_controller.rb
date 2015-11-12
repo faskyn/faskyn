@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :only_current_user
   before_action :if_no_profile_exists
-  #before_action :other_user_profile_exists, only: :create
+  before_action :other_user_profile_exists, only: :create
   #before_action :set_assigner, only: :create
   #before_action :set_conversation, only: [:show]
 
@@ -14,10 +14,6 @@ class TasksController < ApplicationController
     @tasks = current_user.tasks_uncompleted.paginate(page: params[:page], per_page: 12)
     #for AJAX version
     @task = Task.new
-    #respond_to do |format|
-      #format.html
-      #format.js
-    #end
   end
 
   def show
@@ -30,7 +26,9 @@ class TasksController < ApplicationController
   end
 
   def outgoing_tasks
-    @assigned_tasks = current_user.assigned_tasks.uncompleted.order("created_at DESC").paginate(page: params[:page], per_page: 12)
+    @q_outgoing_tasks = current_user.assigned_tasks.uncompleted.ransack(params[:q])
+    #.includes(executor: :profile, assigner: :profile) for ransack
+    @assigned_tasks = @q_outgoing_tasks.result(distinct: true).includes(executor: :profile, assigner: :profile).paginate(page: params[:page], per_page: 12)
     #for AJAX version
     @task = Task.new
     respond_to do |format|
@@ -49,8 +47,6 @@ class TasksController < ApplicationController
 
   def create
     #check for other_user_profile_exists before filter (@task = Task.new(task_params))
-    @task = Task.new(task_params)
-    #if @task.executor && @task.executor.profile
     @task.assigner_id = current_user.id
     if @task.save
       TaskcreatorWorker.perform_async(@task.id, @user.id, 5)

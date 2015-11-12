@@ -36,8 +36,8 @@ class ApplicationController < ActionController::Base
   end
 
   def set_search
-    @q = User.ransack(params[:q])
-    @users3 = @q.result(distinct: true).includes(:profile).paginate(page: params[:page], per_page: 3)
+    @q_users = User.ransack(params[:q])
+    @users3 = @q_users.result(distinct: true).includes(:profile).paginate(page: params[:page], per_page: 3)
   end
 
   def set_conversation
