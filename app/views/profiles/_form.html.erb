@@ -1,8 +1,7 @@
-
 <%= form_for @profile, url: user_profile_path, html: { multipart: true } do |f| %>
   
   <%= render 'layouts/error_messages', object: f.object %>
-  <div class="col-md-4 col-md-offset-2">
+  <div class="col-md-6">
   
   <div class="form-group">
     <%= f.label :first_name %>
@@ -27,7 +26,7 @@
     <%= f.submit "Update profile", class: 'btn btn-primary' %>
   </div>
 </div>
-<div class="col-md-4">
+<div class="col-md-6">
   <div class="form-group">
     <%= f.label :job_title %>
     <%= f.text_field :job_title, class: 'form-control' %>

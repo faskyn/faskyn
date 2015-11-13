@@ -1,4 +1,4 @@
-<div class= "container task-container">
+<div class= "container-fluid task-container">
   <div class="row task-header">
     <h2>Completed Tasks<%= link_to "Outgoing Tasks", outgoing_tasks_user_tasks_path(current_user), class: "btn btn-primary" %> <%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-primary" %> <%= link_to "New Task", new_user_task_path(current_user), class: "btn btn-primary" %></h2>
   </div>

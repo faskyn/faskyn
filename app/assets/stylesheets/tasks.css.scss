@@ -5,10 +5,15 @@ $dropbox-dark-grey: #47525d;
 $dropbox-light-grey: #7b8994;
 $orange: #ff6600;
 
+.task-well {
+	margin-top:10px;
+}
+
 .task-container {
+	margin: 0px 40px 40px 40px;
+	padding-top: 40px;
 	h2 {
-		margin-right:15px;
-		margin-left: 15px;
+		margin:0 15px 15px 15px;
 		.btn {
 			float: right;
 			margin-left: 10px;
@@ -34,83 +39,6 @@ $orange: #ff6600;
 		}
 	}
 }
-
-/*#todo_items_wrapper {
-	.row {
-		width: 100%;
-		border-bottom: 1px solid $dropbox-dark-grey;
-		.assigner_executor {
-			width: 25%;
-			float: left;
-			text-align: left;
-			border-right: 1px solid $dropbox-dark-grey;
-			border-left: 1px solid $dropbox-dark-grey;
-			padding: 0.5em 1em;
-
-		}
-		.assigner {
-			width: 25%;
-			float: left;
-			text-align: left;
-			border-right: 1px solid $dropbox-dark-grey;
-			border-left: 1px solid $dropbox-dark-grey;
-			padding: 0.5em 1em;
-		}
-		.executor {
-			width: 25%;
-			float: left;
-			text-align: left;
-			border-right: 1px solid $dropbox-dark-grey;
-			border-left: 1px solid $dropbox-dark-grey;
-			padding: 0.5em 1em;
-		}
-		.name {
-			width: 10%;
-			float: left;
-			border-right: 1px solid $dropbox-dark-grey;
-			text-decoration: none;
-			text-align: center;
-			padding: 0.5em 0;
-		/
-		.content {
-			width: 40%;
-			float: left;
-			text-align: center;
-			border-right: 1px solid $dropbox-dark-grey;
-			padding: 0.5em 0;
-		}
-		.deadline, .completed-at {
-			width: 20%;
-			float: left;
-			text-align: center;
-			border-right: 1px solid $dropbox-dark-grey;
-			padding: 0.5em 0;
-		}
-		.complete, .uncomplete {
-			width: 8%;
-			float: left;
-			text-align: center;
-			border-right: 1px solid $dropbox-dark-grey;
-			padding: 0.5em 0;
-		}
-		.destroy {
-			width: 7%;
-			float: left;
-			text-align: center;
-			border-right: 1px solid $dropbox-dark-grey;
-			padding: 0.5em 0;
-		}
-		i {
-			color: $dropbox-dark-grey;
-			transition: all .4s ease-in-out;
-			&:hover {
-				color: $dropbox-light-grey;
-			}
-		}
-	}
-}*/
-
-
 
 .assigner-row {
 	background: $gray-medium-light;
