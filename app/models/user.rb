@@ -9,23 +9,16 @@ class User < ActiveRecord::Base
 
   has_many :assigned_tasks, class_name: "Task", foreign_key: "assigner_id", dependent: :destroy
   has_many :executed_tasks, class_name: "Task", foreign_key: "executor_id", dependent: :destroy
+  has_many :assigned_and_executed_tasks, -> (user) { where('executor_id = ? OR assigner_id = ?', user.id, user.id) }, class_name: 'Task', source: :task
 
   has_many :conversations, foreign_key: "sender_id", dependent: :destroy
 
   has_many :messages, dependent: :destroy
 
-=begin
-  def tasks
-    tasks = []
-    tasks << @assigned_tasks
-    tasks << @expired_tasks
-    tasks.sort_by { |h| h[:created_at] }.reverse!
-  end
-=end
   def tasks_uncompleted
-    tasks_uncompleted = assigned_tasks.uncompleted.order("created_at DESC")
-    tasks_uncompleted += executed_tasks.uncompleted.order("created_at DESC")
-    tasks_uncompleted.sort_by { |h| h[:created_at] }.reverse!
+    tasks_uncompleted = assigned_tasks.uncompleted.order("deadline DESC")
+    tasks_uncompleted += executed_tasks.uncompleted.order("deadline DESC")
+    tasks_uncompleted.sort_by { |h| h[:deadline] }.reverse!
   end
 
    def tasks_completed

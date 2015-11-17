@@ -108,6 +108,12 @@ $orange: #ff6600;
 /*search-bar */
 #users-bar {
   padding-left: 10px;
+  .search {
+    padding-right:60px;
+    .form-control {
+      width:100%;
+    }
+  }
   .users {
     list-style: none;
     padding-top: 10px;

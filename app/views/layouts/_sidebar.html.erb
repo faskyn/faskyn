@@ -5,10 +5,20 @@
   <br/>
   <br/>
   <div class="invite">  
-    <%= simple_form_for(User.new, url: user_invitation_path, html: { class: 'form-inline' }) do |f| %>
-      <%= f.input :email, placeholder: 'Invite via email', label: false %>
-      <%= f.button :submit, 'Invite User', class: 'btn btn-warning btn-xs' %>
+    
+    <%= form_for(User.new, url: user_invitation_path) do |f| %>
+      <div class="form-group">
+        <div class="input-group input-group">
+          <%= f.email_field :email, placeholder: 'Invite via email', label: false, class: 'form-control' %>
+          <span class="input-group-btn">
+            <%= content_tag :button, type: :submit, class: 'btn btn-success' do %>
+              <span class="glyphicon glyphicon-envelope"></span>
+            <%end%>
+          </span>
+        </div>
+      </div>
     <% end %>
+    
   </div>
   <br />
   <%= render 'users/user_search' %>

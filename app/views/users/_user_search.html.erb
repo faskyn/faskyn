@@ -16,7 +16,7 @@
             <% end %>
             <span class="user-fullname">
               <%= link_to user do %>
-                <%= user.profile.first_name %> <%= user.profile.last_name %>
+                <%= user.profile.first_name.upcase %> <%= user.profile.last_name.upcase %>
               <% end %>
             </span>
             <span class="company">

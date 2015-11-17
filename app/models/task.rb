@@ -2,6 +2,9 @@ class Task < ActiveRecord::Base
   belongs_to :assigner, class_name: "User"
   belongs_to :executor, class_name: "User"
 
+  has_one :assigner_profile, through: :assigner, source: :profile
+  has_one :executor_profile, through: :executor, source: :profile
+
   validates :assigner_id, presence: true
   validates :executor, presence: { message: "must be valid"}
   validates :content, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }

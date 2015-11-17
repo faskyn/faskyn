@@ -20,7 +20,7 @@
             <li><p class="navbar-btn"><%= link_to "New Task", new_user_task_path(current_user), class: "btn btn-primary", style: "margin-right:10px;" %></p></li>
           <% end %>
           <li class="dropdown">
-            <%= link_to root_path(current_user), class: "dropdown-toggle", 'data-toggle' => 'dropdown', 'role' => 'button', 'aria-haspopup' => 'true', 'aria-expanded' => 'false' do %>Tasks<span class="caret"></span><% end %>
+            <%= link_to root_path(current_user), class: "dropdown-toggle", 'data-toggle' => 'dropdown', 'role' => 'button', 'aria-haspopup' => 'true', 'aria-expanded' => 'false' do %>TASKS<span class="caret"></span><% end %>
             <ul class = "dropdown-menu">
               <li><%= link_to "All Tasks", user_tasks_path(current_user) %></li>
               <li><%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user) %></li>
@@ -31,9 +31,9 @@
         <% else %>
           <li><p class="navbar-btn"><%= link_to "Create Profile", new_user_profile_path(current_user), class: "btn btn-primary" %></p></li>
         <% end %>
-        <li><%= link_to "Users", users_path %></li>
+        <li><%= link_to "USERS", users_path %></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu<span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MENU<span class="caret"></span></a>
           <ul class = "dropdown-menu">
             <li><%= link_to "Account", edit_user_registration_path %></li>
             <%if has_profile? %>

@@ -22,7 +22,7 @@
 
 $body-bg:                                                   #ecf0f1;
 $font-family-sans-serif:                'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-$font-family-serif:                     'Droid', serif;
+$font-family-serif:                     'Georgia', serif;
 /*$navbar-height:                                        55px;
 $navbar-default-bg:                          white;
 $navbar-default-brand-color:      #c0392b;
@@ -36,15 +36,15 @@ $dropbox-dark-grey: #47525d;
 $dropbox-light-grey: #7b8994;
 $orange: #ff6600;
 
-body {
+body, p {
   font-family: $font-family-sans-serif;
 }
 
-body, h1, h2, h3 {
+h1, h2, h3, h4 {
   font-family: $font-family-sans-serif;
 }
 
-p, a {
+a {
   font-family: $font-family-sans-serif;
 }
 
@@ -248,7 +248,9 @@ first version of sidebar
   }
   .invite {
     padding-left: 10px;
+    padding-right: 20px;
   }
+  //user-search-bar in user.css.scss
 }
 
 #wrapper.toggled #sidebar-wrapper {

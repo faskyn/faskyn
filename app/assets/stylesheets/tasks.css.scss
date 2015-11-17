@@ -13,10 +13,25 @@ $orange: #ff6600;
 	margin: 0px 40px 40px 40px;
 	padding-top: 40px;
 	h2 {
+		height: 35px;
+		vertical-align: middle;
+		.rightfloat {
+			float: right;
+		}
 		margin:0 15px 15px 15px;
 		.btn {
-			float: right;
 			margin-left: 10px;
+			margin-right: 10px;
+			float: right;
+		}
+		#rightone {
+				margin-right: 0px;
+		}
+		.btn-group {
+			.btn {
+				margin-left: 0px;
+				margin-right: 0px;
+			}
 		}
 	}
 	table {

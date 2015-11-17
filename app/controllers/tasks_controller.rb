@@ -11,7 +11,12 @@ class TasksController < ApplicationController
   def index
     @assigned_tasks = current_user.assigned_tasks.uncompleted.order("created_at DESC")
     @executed_tasks = current_user.executed_tasks.uncompleted.order("created_at DESC")
-    @tasks = current_user.tasks_uncompleted.paginate(page: params[:page], per_page: 12)
+    #with no ransack
+    #@tasks = current_user.tasks_uncompleted.paginate(page: params[:page], per_page: 12)
+    #@tasks = current_user.assigned_and_executed_tasks.uncompleted.order("created_at DESC").paginate(page: params[:page], per_page: 12)
+    #with ransack
+    @q_tasks = Task.alltasks(current_user).uncompleted.ransack(params[:q])
+    @tasks = @q_tasks.result.includes(:executor_profile, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: 12)
     #for AJAX version
     @task = Task.new
   end
@@ -26,9 +31,11 @@ class TasksController < ApplicationController
   end
 
   def outgoing_tasks
+    #with no ransack (going back to this one when changing to jQuery search)
+      #@assigned_tasks = current_user.assigned_tasks.uncompleted.order("deadline DESC").paginate(page: params[:page], per_page: 12)
+    #ransack version for sorting
     @q_outgoing_tasks = current_user.assigned_tasks.uncompleted.ransack(params[:q])
-    #.includes(executor: :profile, assigner: :profile) for ransack
-    @assigned_tasks = @q_outgoing_tasks.result(distinct: true).includes(executor: :profile, assigner: :profile).paginate(page: params[:page], per_page: 12)
+    @assigned_tasks = @q_outgoing_tasks.result.includes(:executor_profile).order("deadline DESC").paginate(page: params[:page], per_page: 12)
     #for AJAX version
     @task = Task.new
     respond_to do |format|
@@ -38,7 +45,11 @@ class TasksController < ApplicationController
   end
 
   def incoming_tasks
-    @executed_tasks = current_user.executed_tasks.uncompleted.order("created_at DESC").paginate(page: params[:page], per_page: 12)
+    #with no ransack
+      #@executed_tasks = current_user.executed_tasks.uncompleted.order("created_at DESC").paginate(page: params[:page], per_page: 12)
+    #ransack version for sorting
+    @q_incoming_tasks = current_user.executed_tasks.uncompleted.ransack(params[:q])
+    @executed_tasks = @q_incoming_tasks.result.includes(:assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: 12)
   end
 
   def new
@@ -90,11 +101,12 @@ class TasksController < ApplicationController
   def completed_tasks
     @assigned_tasks = current_user.assigned_tasks.completed.order("completed_at DESC")
     @executed_tasks = current_user.executed_tasks.completed.order("completed_at DESC")
-    @tasks = @user.tasks_completed.paginate(page: params[:page], per_page: 12)
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    #with no ransack
+      #@tasks = @user.tasks_completed.paginate(page: params[:page], per_page: 12)
+    #with ransack
+    @q_completed_tasks = Task.alltasks(current_user).completed.ransack(params[:q])
+    #@q_completed_tasks = current_user.tasks_completed.ransack(params[:q])
+    @tasks = @q_completed_tasks.result.includes(:assigner_profile, :executor_profile).paginate(page: params[:page], per_page: 12)
   end
 
   def completed_incoming_tasks
@@ -143,7 +155,7 @@ class TasksController < ApplicationController
   private
 
     def task_params
-      params.require(:task).permit(:executor_id, :name, :content, :deadline, :task_name_company, :assigner_id)
+      params.require(:task).permit(:executor_id, :name, :content, :deadline, :task_name_company, :assigner_id, :executor_profile, :assigner_profile)
     end
 
     def only_current_user

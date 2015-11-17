@@ -1,13 +1,20 @@
 <div class= "container-fluid task-container">
   <div class="row task-header">
-    <h2>Completed Tasks<%= link_to "Outgoing Tasks", outgoing_tasks_user_tasks_path(current_user), class: "btn btn-primary" %> <%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-primary" %> <%= link_to "New Task", new_user_task_path(current_user), class: "btn btn-primary" %></h2>
+    <h2>Completed Tasks
+      <span class="rightfloat">
+        <div class="btn-group" role="group" aria-label="...">
+          <%= link_to "Outgoing Tasks", outgoing_tasks_user_tasks_path(current_user), class: "btn btn-default" %>
+          <%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-default" %>
+        </div>
+      </span>
+    </h2>  
   </div>
   <table class="table table-bordered">
     <thead>
       <tr>
         <th class="col-md-3">Name / Company</th>
-        <th class="col-md-4">Content</th>
-        <th class="col-md-3">Completed at</th>
+        <th class="col-md-4"><%= sort_link(@q_completed_tasks, :content, 'Content') %></th>
+        <th class="col-md-3"><%= sort_link(@q_completed_tasks, :completed_at, 'Completed at', default_order: :desc) %></th>
         <th class="col-md-2">Uncom. / Edit / Del</th>
       </tr>
     </thead>

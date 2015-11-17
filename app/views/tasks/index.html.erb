@@ -1,14 +1,24 @@
 <div class= "container-fluid task-container">
   <div class="row task-header">
-  <h2>Task List<%= link_to "Outgoing Tasks", outgoing_tasks_user_tasks_path(current_user), class: "btn btn-primary" %> <%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-primary" %> <%= link_to "New Task", new_user_task_path(current_user), type: "button", class: "btn btn-primary newbutton", :remote => true, 'data-toggle' => 'modal', 'data-target' => '#newtask' %></h2>
+  <h2>All Tasks
+    <span class="rightfloat">
+      <%= link_to "New Task", new_user_task_path(current_user), type: "button", class: "btn btn-primary newbutton", :remote => true, 'data-toggle' => 'modal', 'data-target' => '#newtask' %>
+      <div class="btn-group" role="group" aria-label="...">
+        <%= link_to "Outgoing Tasks", outgoing_tasks_user_tasks_path(current_user), class: "btn btn-default" %>
+        <%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-default" %> 
+      </div>
+    </span>
+  </h2>
   </div>
   <table class="table table-bordered">
     <thead>
       <tr>
+        <!-- Sorting implemented w/ ransack gem -->
         <th class="col-md-3">Name / Company</th>
         <th class="col-md-5">Content</th>
         <th class="col-md-2">Deadline</th>
         <th class="col-md-2">Comp. / Edit / Del.</th>
+        <!-- End of ransack sorting-->
       </tr>
     </thead>
     <tbody class="newtaskinsert">
