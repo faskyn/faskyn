@@ -14,20 +14,19 @@ $orange: #ff6600;
 	padding-top: 40px;
 	h2 {
 		height: 35px;
-		vertical-align: middle;
+		vertical-align: bottom;
 		.rightfloat {
 			float: right;
 		}
 		margin:0 15px 15px 15px;
 		.btn {
 			margin-left: 10px;
-			margin-right: 10px;
-			float: right;
 		}
 		#rightone {
 				margin-right: 0px;
 		}
 		.btn-group {
+			margin-left:10px;
 			.btn {
 				margin-left: 0px;
 				margin-right: 0px;
