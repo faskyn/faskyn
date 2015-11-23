@@ -1,5 +1,5 @@
 <% if current_user.id == task.assigner.id %>
-  <tr style="background: #eaeaea" id="task_<%= task.id %>">
+  <tr style="background: #F2F2F2" id="task_<%= task.id %>">
     <td class="col-md-3">
       <%= link_to user_path(id: task.executor.id) do %>
         <%= task.executor.first_name %> <%= task.executor.profile.last_name%> / <%= task.executor.profile.company %>
@@ -27,7 +27,7 @@
     </td>
     <td class="col-md-2" style="padding:0px">
     <% if current_user.id == task.assigner.id %>
-      <table class="table table-bordered inside-table" style="background:#eaeaea">
+      <table class="table table-bordered inside-table" style="background:#F2F2F2">
     <% else %>
       <table class="table table-bordered inside-table">
     <% end %>

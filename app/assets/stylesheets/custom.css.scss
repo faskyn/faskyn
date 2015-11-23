@@ -54,6 +54,21 @@ a {
   box-sizing: border-box;
   }*/
 
+.navbar-default {
+  background: $garmin-blue;
+  .navbar-right li {
+    a {
+    color: white;
+    }
+    .dropdown-menu a {
+      color: black;
+    }
+  }
+  .navbar-brand {
+    color:white;
+  }
+}
+
 /* footer */
 footer {
   vertical-align: middle;
@@ -136,7 +151,7 @@ footer {
 */
 
 .container-form {
-  padding-top:15px;  
+  padding-top:30px;  
 }
 
 /*sidebar+mainarea before bootstrap
@@ -237,14 +252,15 @@ first version of sidebar
   height: 100%;
   margin-left: -250px;
   overflow-y: auto;
-  background: $garmin-blue;
+  background: #f7f7f7;//background: $garmin-blue;
+  border-right: 1px $gray-medium-light solid;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
-  color:white;
+  color: #5E5E5E; //color:white;
   a {
-    color:white;
+    color: #5E5E5E; //color:white;
   }
   .invite {
     padding-left: 10px;

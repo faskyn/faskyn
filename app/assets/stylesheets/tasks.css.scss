@@ -13,10 +13,15 @@ $orange: #ff6600;
 	margin: 0px 40px 40px 40px;
 	padding-top: 40px;
 	h2 {
-		height: 35px;
+		height: 30px;
 		vertical-align: bottom;
 		.rightfloat {
 			float: right;
+			.btn-group {
+				a:last-child {
+				border-left:0px;
+				}
+			}
 		}
 		margin:0 15px 15px 15px;
 		.btn {
@@ -33,13 +38,27 @@ $orange: #ff6600;
 			}
 		}
 	}
+
 	table {
+		color: #5E5E5E; //changed
 		text-align: center;
 		margin-bottom: 0px;
 		border-radius: 10px;
 		vertical-align: middle;
+		a {
+			color: #5E5E5E;
+			&:hover {
+   			color: $garmin-blue;
+    	}
+		}
+		thead th {
+			border-bottom: 0px;
+		}
 		tbody tr td {
 			vertical-align: middle;
+			padding:5px;
+			//border-top: 0px;
+			//margin-top: 0px;
 		}
 		thead tr th {
 			text-align: center;

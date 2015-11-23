@@ -3,29 +3,7 @@
     <%= render 'tasks/between' %>
   </div>
   <div class = "col-md-3 rightsidebar">
-    <br />
-    <div class="user-profile-show-sidebar">
-      <div class="panel panel-primary" style="border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:10px">
-        <div class="panel-heading" style="border-top-left-radius:10px;border-top-right-radius:10px">
-          <h3 class="panel-title"><%= @user.profile.first_name %> <%= @user.profile.last_name %></h3>
-        </div>
-        <div class="panel-body" style="border-bottom-left-radius:10px;border-bottom-right-radius:10px">
-          <% if @user.profile.avatar %>
-            <%= image_tag @user.profile.avatar.url(:base_thumb), class: "avatar" %>
-          <% end %>
-          <p><%= @user.profile.company %></p>
-          <p><%= @user.profile.job_title %></p>
-          <p><%= @user.profile.phone_number %></p>
-        </div>
-      </div>
-    </div>
-    <%if @conversation%>
-      <%= render 'conversations/show' %>
-    <% end %>
-    <br />
-    <br />
-    <br />
-    <br />
+    <%= render 'layouts/rightsidebar' %>
   </div>
 </div>
 

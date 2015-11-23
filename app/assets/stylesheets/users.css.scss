@@ -6,6 +6,7 @@ $orange: #ff6600;
 
 .rightsidebar {
   border-left: solid 1px $gray-medium-light;
+  background: #f7f7f7;
 }
 
 .user-search {
@@ -24,12 +25,32 @@ $orange: #ff6600;
   }
 }
 
-.account-well {
-  margin-top:10px;
+.account-well h2 {
+  margin-top:0px;
+  margin-bottom:15px;
 }
 
 .profile-well {
-  margin-top:10px;
+  h2 {
+    margin-top: 0px;
+    margin-bottom: 15px;
+  }
+}
+
+.edit_user, .new_user {
+  .form-group .form-control {
+    height: 30px;
+  }
+}
+//user invitation email field has the same name like edit account email field (devise)
+.invite #user_email {
+  height: 34px;
+}
+
+.edit_profile, .new_profile {
+  .form-group .form-control {
+    height: 32px;
+  }
 }
 
 .user-profile-index {
@@ -74,6 +95,10 @@ $orange: #ff6600;
 
 .user-profile-show {
   padding: 20px;
+  .panel {
+    margin-left: 50px;
+    margin-right: 350px;
+  }
   .avatar{
     float: left;
     margin-right: 15px;
@@ -87,9 +112,12 @@ $orange: #ff6600;
   .avatar{
     float: left;
     margin-right: 15px;
-    /*width: 85px;
-    height: 85px;*/
+    width: 65px;
+    height: 65px;
     border-radius: 50%;
+  }
+  p {
+    margin-bottom:3px;
   }
 }
 /*side bar current user profile */
