@@ -25,7 +25,7 @@
       <%= render @tasks %>
     </tbody>
   </table>
-  <%= will_paginate @tasks %>
+  <%= will_paginate @tasks, style: 'color:#007cc3' %>
 
   <!-- Modal for new task -->
   <%= form_for([current_user, @task], remote: true) do |f| %>

@@ -1,20 +1,11 @@
-
-/* static pages footer */
-/*
-.footer-logo {
-  display: inline;
-  float: left;
-  decoration: none;
-}
-
-.navbar-brand {
-  display: inline;
-  vertical-align: middle;
-  float: left;
-}
-*/
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
+
+$gray-medium-light: #eaeaea;
+$garmin-blue: #007cc3;//#168eea;//#337ab7;
+$dropbox-dark-grey: #47525d;
+$dropbox-light-grey: #7b8994;
+$orange: #ff6600;
 
 
 /*app layout*/
@@ -29,12 +20,24 @@ $navbar-default-brand-color:      #c0392b;
 $brand-primary:                                    #c0392b;
 $jumbotron-bg:   */ 
 
+.panel-primary .panel-heading {
+  background: $garmin-blue;
+}
 
-$gray-medium-light: #eaeaea;
-$garmin-blue: #337ab7; /*#007cc3;*/
-$dropbox-dark-grey: #47525d;
-$dropbox-light-grey: #7b8994;
-$orange: #ff6600;
+.pagination ul {
+  .active a {
+    background: $garmin-blue;
+    border-color: $garmin-blue;
+  }
+  a {
+    color: $garmin-blue;
+  }
+}
+
+.btn-primary {
+  background: $garmin-blue;
+  border-color: $garmin-blue;
+}
 
 body, p {
   font-family: $font-family-sans-serif;
@@ -58,7 +61,10 @@ a {
   background: $garmin-blue;
   .navbar-right li {
     a {
-    color: white;
+      color: white;
+      &:hover {
+        color:white;
+      }
     }
     .dropdown-menu a {
       color: black;
@@ -66,6 +72,10 @@ a {
   }
   .navbar-brand {
     color:white;
+  }
+  .dropdown-toggle:active, .open .dropdown-toggle {
+    background:white !important;
+    color:$garmin-blue !important;
   }
 }
 
