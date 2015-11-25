@@ -3,6 +3,7 @@ class TasksController < ApplicationController
   before_action :only_current_user
   before_action :if_no_profile_exists
   before_action :other_user_profile_exists, only: :create
+  before_action :set_task, only: [:show, :edit, :update, :delete, :destroy, :complete, :uncomplete]
   #before_action :set_assigner, only: :create
   #before_action :set_conversation, only: [:show]
 
@@ -22,7 +23,6 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = Task.find(params[:id])
     if current_user.id == @task.assigner.id
       @assigned_task = current_user.assigned_tasks.find(params[:id])
     else
@@ -81,7 +81,6 @@ class TasksController < ApplicationController
   end
 
   def complete
-    @task = Task.find(params[:id])
     @task.update_attribute(:completed_at, Time.now)
     respond_to do |format|
       format.html { redirect_to completed_tasks_user_tasks_path(current_user), notice: "Task completed!" }
@@ -90,7 +89,6 @@ class TasksController < ApplicationController
   end
 
   def uncomplete
-    @task = Task.find(params[:id])
     @task.update_attribute(:completed_at, nil)
     respond_to do |format|
       format.html { redirect_to user_tasks_path(current_user), notice: "Task uncompleted!" }
@@ -118,11 +116,9 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
   end
 
   def update
-    @task = Task.find(params[:id])
     respond_to do |format|
       if @task.update_attributes(task_params)
         format.html { redirect_to user_tasks_path(current_user), notice: "Task was successfully updated!"}
@@ -138,7 +134,6 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task = Task.find(params[:id])
     if @task.destroy
       respond_to do |format|
         format.html { redirect_to user_tasks_path(current_user), notice: "Task got deleted!"}
@@ -156,6 +151,10 @@ class TasksController < ApplicationController
 
     def task_params
       params.require(:task).permit(:executor_id, :name, :content, :deadline, :task_name_company, :assigner_id, :executor_profile, :assigner_profile)
+    end
+
+    def set_task
+      @task = Task.find(params[:id])
     end
 
     def only_current_user

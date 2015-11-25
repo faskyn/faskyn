@@ -1,14 +1,13 @@
 <div class= "container-fluid task-container">
   <div class="row task-header">
-    <h2>Outgoing Tasks
-      <span class="rightfloat">
-        <%= link_to "New Task", new_user_task_path(current_user), type: "button", class: "btn btn-primary newbutton", remote: true, 'data-toggle' => 'modal', 'data-target' => '#newtask' %>
-        <div class="btn-group" role="group" aria-label="...">
-          <%= link_to "Completed Tasks", completed_tasks_user_tasks_path(current_user), class: "btn btn-default" %>
-          <%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-default newbutton" %>
-        </div>
-      </span>
-    </h2>
+    <h3>Outgoing tasks</h3>
+    <span class="rightfloat">
+      <%= link_to "NEW TASK", new_user_task_path(current_user), type: "button", class: "btn btn-primary newbutton", remote: true, 'data-toggle' => 'modal', 'data-target' => '#newtask' %>
+      <div class="btn-group" role="group" aria-label="...">
+        <%= link_to "Completed Tasks", completed_tasks_user_tasks_path(current_user), class: "btn btn-default" %>
+        <%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-default newbutton" %>
+      </div>
+    </span>
   </div>
   <table class="table table-bordered">
     <thead>

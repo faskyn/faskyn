@@ -9,9 +9,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="fixedheight <%= controller.controller_name %>">
-
   <%= render 'layouts/header' %>
-
   <% if user_signed_in? %>
     <div id="wrapper">
       <%= render 'layouts/sidebar' %>

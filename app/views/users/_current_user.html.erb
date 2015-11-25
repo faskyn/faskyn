@@ -2,7 +2,7 @@
   <div id="current-user-bar">
     <% if current_user.profile.avatar %>
       <%= link_to user_path(current_user) do %>
-        <%= image_tag current_user.profile.avatar.url(:base_thumb), class: 'avatar' %>
+        <%= image_tag current_user.profile.avatar.url(:base_thumb), class: 'avatar', alt: "#{current_user.profile.first_name}'s_avatar", title: "#{current_user.profile.first_name}'s avatar" %>
       <% end %>
     <% end %>
     <%= current_user.profile.first_name %> <%= current_user.profile.last_name %>

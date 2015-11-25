@@ -11,29 +11,35 @@ $orange: #ff6600;
 .task-container {
 	margin: 0px 40px 40px 40px;
 	padding-top: 40px;
-	h2 {
-		height: 30px;
-		vertical-align: bottom;
+	.task-header {
+		margin: 0 0 15px 0;
+		display:table;
+		width:100%;
+		h3 {
+			max-width:250px;
+			vertical-align:middle;
+			display:table-cell;
+		}
 		.rightfloat {
 			float: right;
+			display: inline;
 			.btn-group {
 				a:last-child {
 				border-left:0px;
 				}
 			}
-		}
-		margin:0 15px 15px 15px;
-		.btn {
-			margin-left: 10px;
-		}
-		#rightone {
-				margin-right: 0px;
-		}
-		.btn-group {
-			margin-left:10px;
 			.btn {
-				margin-left: 0px;
-				margin-right: 0px;
+				margin-left: 10px;
+			}
+			#rightone {
+					margin-right: 0px;
+			}
+			.btn-group {
+				margin-left:10px;
+				.btn {
+					margin-left: 0px;
+					margin-right: 0px;
+				}
 			}
 		}
 	}

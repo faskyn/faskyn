@@ -57,13 +57,14 @@ a {
   box-sizing: border-box;
   }*/
 
-.navbar-default {
+.signedinbar .navbar-default {
   background: $garmin-blue;
   .navbar-right li {
     a {
       color: white;
       &:hover {
-        color:white;
+        color:$garmin-blue;
+        background: white;
       }
     }
     .dropdown-menu a {

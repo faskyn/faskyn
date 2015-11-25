@@ -17,4 +17,9 @@
       </div>
     </div>
   </div>
+  <% if Task.between(current_user, @user).present? %>
+    Check out the common tasks <%= link_to "here", user_path(@user) %>.
+  <% else %>
+    Assign a new task to <%= @profile.first_name %> <%= link_to "here", user_tasks_path(current_user) %>.
+  <% end %>
 </div>

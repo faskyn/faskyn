@@ -1,4 +1,4 @@
-$garmin-blue: #337ab7; /*#007cc3;*/
+$garmin-blue: #007cc3;
 
 .chatbox {
     position: fixed;
@@ -21,8 +21,8 @@ $garmin-blue: #337ab7; /*#007cc3;*/
 
 .chatboxhead h1 {
     display: inline;
-    font-size: 17px;
-    font-weight: 700;
+    font-size: 16px;
+    font-weight: 300;
 }
 
 .chatboxblink {
@@ -39,7 +39,7 @@ $garmin-blue: #337ab7; /*#007cc3;*/
     padding: 7px;
     border-left: 1px solid #cccccc;
     border-right: 1px solid #cccccc;
-    border-bottom: 1px solid #eeeeee;
+    border-bottom: 1px solid #cccccc;//#eeeeee;
     background: white;//#F2F2F2;//#f5f5f5; //e5e5e5
     line-height: 1.3em;
     list-style: none;

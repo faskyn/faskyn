@@ -2,6 +2,6 @@
 
 <p><%= @task.assigner.profile.first_name %> <%= @task.assigner.profile.last_name %> just sent you a new task/favor.</p>
 
-<p>You can check it out <%= link_to "here", user_task_url(@task.executor_id, @task.id) %>.</p>
+<p>You can check it out <%= link_to "here", user_url(@task.assigner_id) %>.</p>
 
 <p>Cheers,<br />Faskyn Team</p>

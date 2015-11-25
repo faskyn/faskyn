@@ -2,15 +2,14 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_action :only_current_user, except: [:show]
   before_action :if_profile_exists, only: [:new, :create]
+  before_action :find_user_for_profile
+  before_action :set_profile, only: [:show, :edit, :update]
 
   def new
-    # form where a user can fill out his own profile
-    @user = User.find(params[:user_id]) #checking who is logged in
     @profile = Profile.new
   end
 
   def create
-    @user = User.find(params[:user_id])
     @profile = @user.build_profile(profile_params)
     if @profile.save
       flash[:success] = "Profile Updated!"
@@ -21,18 +20,12 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:user_id])
-    @profile = @user.profile
   end
 
   def edit
-    @user = User.find(params[:user_id])
-    @profile = @user.profile
   end
 
   def update
-    @user = User.find(params[:user_id])
-    @profile = @user.profile
     if @profile.update_attributes(profile_params)
       flash[:success] = "Profile Updated!"
       redirect_to user_path(params[:user_id])
@@ -47,16 +40,17 @@ class ProfilesController < ApplicationController
       params.require(:profile).permit(:first_name, :last_name, :avatar, :company, :job_title, :phone_number, :description)
     end
 
+    def find_user_for_profile
+      @user = User.find(params[:user_id])
+    end
+
+    def set_profile
+      @profile = @user.profile
+    end
+
     def only_current_user
       @user = User.find(params[:user_id])
       redirect_to user_path(current_user) unless @user == current_user
     end
-=begin
-    def if_profile_exists
-      if @user.profile(current_user)
-        redirect_to edit_user_profile_path(current_user)
-      end
-    end
-=end
 end
 

@@ -4,12 +4,10 @@
   <tr id="task_<%= task.id %>">
 <% end %>
     <td class="cold-md-7">
-      <%= link_to user_task_path(current_user, id: task.id) do %>
-        <%= task.content %>
-      <% end %>
+      <%= task.content %>
     </td>
     <td class="col-md-3">
-      <%= task.deadline.strftime("%d %b %I:%M%p") %>
+      <%= task.deadline.utc.getlocal.strftime("%d %b %I%p") %>
     </td>
     <td class="col-md-2" style="padding:0px">
     <% if current_user.id == task.assigner.id %>

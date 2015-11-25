@@ -1,3 +1,8 @@
+<% if user_signed_in? %>
+  <span class="signedinbar">
+<% else %>
+  <span>
+<% end %>
 <nav class="navbar navbar-static-top navbar-default" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -7,13 +12,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to image_tag("firstlogosmallgarminwhite.png", size: "40x40"), root_path, class: "navbar-brand", style: "margin-left:0px;padding-top:9px;padding-bottom:9px" %>
+      <% if user_signed_in? %>
+        <%= link_to image_tag("firstlogosmallgarminwhite.png", size: "40x40"), root_path, class: "navbar-brand", style: "margin-left:0px;padding-top:9px;padding-bottom:9px", alt: "faskyn_logo", title: "faskyn logo" %>
+      <% else %>
+        <%= link_to image_tag("firstlogosmallgarmin.png", size: "40x40"), root_path, class: "navbar-brand", style: "margin-left:0px;padding-top:9px;padding-bottom:9px", alt: "faskyn_logo", title: "faskyn logo" %>
+      <% end %>
       <%= link_to "faskyn", root_path, class: "navbar-brand", style: "padding-left:7px" %>
     </div>
 
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav navbar-right" style="margin-right:20px">
-
       <% if user_signed_in? %>
         <% if has_profile? %>
           <% unless if_tasks_any? %>
@@ -49,6 +57,7 @@
     </div>
   </div>
 </nav>
+</span>
 
 
 

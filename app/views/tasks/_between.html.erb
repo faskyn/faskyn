@@ -1,12 +1,10 @@
 <div class= "task-container">
   <div class="row task-header">
-    <h2>Tasks with
-      <%= link_to user_profile_path(@user) do %><%= @user.profile.first_name %> <%= @user.profile.last_name %><% end %>
-      <span class="rightfloat">
-        <%= link_to "Common Files", conversation_path(@conversation), class: "btn btn-primary", id: "rightone"%>
-        <%= link_to "New Task", new_user_task_path(current_user), type: "button", class: "btn btn-primary newbutton", remote: true, 'data-toggle' => 'modal', 'data-target' => '#newtask' %>
-      </span>
-    </h2>
+    <h3>Tasks with <%= @user.profile.first_name %></h3>
+    <span class="rightfloat">
+      <%= link_to "NEW TASK", new_user_task_path(current_user), type: "button", class: "btn btn-primary newbutton", remote: true, 'data-toggle' => 'modal', 'data-target' => '#newtask' %>
+      <%= link_to "Common Files", conversation_path(@conversation), class: "btn btn-default", id: "rightone"%>
+    </span>
   </div>
   <table class="table table-bordered">
     <thead>

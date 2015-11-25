@@ -14,15 +14,13 @@
     </td>
 <% end %>
     <td class="cold-md-5">
-      <%= link_to user_task_path(id: task.id) do %>
-        <%= task.content %>
-      <% end %>
+      <%= task.content %>
     </td>
     <td class="col-md-2">
       <% if task.completed? %>
-        <%= task.completed_at.strftime("%d %b %I:%M%p") %>
+        <%= task.completed_at.utc.getlocal.strftime("%d %b %I%p") %>
       <% else %>
-        <%= task.deadline.strftime("%d %b %I:%M%p") %>
+        <%= task.deadline.utc.getlocal.strftime("%d %b %I%p") %>
       <% end %>
     </td>
     <td class="col-md-2" style="padding:0px">

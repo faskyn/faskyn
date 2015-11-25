@@ -18,5 +18,5 @@
 //= require refile
 //= require bootstrap-sprockets
 //= require private_pub
-//= require turbolinks
 //= require_tree .
+

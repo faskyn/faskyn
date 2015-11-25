@@ -1,6 +1,5 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
-  #before_action :set_conversation only: [:create, :show]
   #protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format.js? }
 
   def create

@@ -1,8 +1,5 @@
 class ConversationsController < ApplicationController
   before_action :authenticate_user!
-  #before_action :set_conversation, only: [:show]
-
-  #layout false
 
   #conversation creation in conversation model/task controller
   def create
@@ -11,7 +8,6 @@ class ConversationsController < ApplicationController
     else
       @conversation = Conversation.create!(conversation_params)
     end
-    #render json: { conversation_id: @conversation.id }
     redirect_to conversation_path(@conversation)
   end
 

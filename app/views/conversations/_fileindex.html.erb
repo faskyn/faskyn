@@ -1,10 +1,9 @@
 <div class= "task-container">
   <div class="row task-header">
-    <h2>Shared Files with <%= link_to user_profile_path(@user) do %><%= @user.profile.first_name %> <%= @user.profile.last_name %><% end %>
-      <span class="rightfloat">
-        <%= link_to "Common Tasks", user_path(@user), class: "btn btn-primary"%>
-      </span>
-    </h2>
+    <h3>Shared files with <%= link_to user_profile_path(@user) do %><%= @user.profile.first_name %><% end %></h3>
+    <span class="rightfloat">
+      <%= link_to "Common Tasks", user_path(@user), class: "btn btn-default"%>
+    </span>
   </div>
   <table class="table table-bordered">
     <thead>

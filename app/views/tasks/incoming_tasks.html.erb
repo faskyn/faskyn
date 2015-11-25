@@ -1,13 +1,12 @@
 <div class= "container-fluid task-container">
   <div class="row task-header">
-    <h2>Incoming Tasks
-      <span class="rightfloat">
-        <div class="btn-group" role="group" aria-label="...">
-          <%= link_to "Completed tasks", completed_tasks_user_tasks_path(current_user), class: "btn btn-default" %>
-          <%= link_to "Outgoing Tasks", outgoing_tasks_user_tasks_path(current_user), class: "btn btn-default" %>
-        </div>
-      </span>
-    </h2>
+    <h3>Incoming tasks</h3>
+    <span class="rightfloat">
+      <div class="btn-group" role="group" aria-label="...">
+        <%= link_to "Completed tasks", completed_tasks_user_tasks_path(current_user), class: "btn btn-default" %>
+        <%= link_to "Outgoing Tasks", outgoing_tasks_user_tasks_path(current_user), class: "btn btn-default" %>
+      </div>
+    </span>
   </div>
   <table class="table table-bordered">
     <thead>
