@@ -10,7 +10,7 @@
 var chatboxFocus = new Array();
 var chatBoxes = new Array();
 
-//var ready = function () {
+var ready = function () {
 
     chatBox = {
 
@@ -26,6 +26,22 @@ var chatBoxes = new Array();
             chatBox.createChatBox(conversation_id);
             $("#chatbox_" + conversation_id + " .chatboxtextarea").focus();
         },
+
+        /**
+         * closes the chatbox by essentially hiding it from the page
+         * 
+         * @param conversation_id
+         */
+         
+        close: function (conversation_id) {
+            $('#chatbox_' + conversation_id).css('display', 'none');
+            chatBox.restructure();
+        },
+
+        /**
+         * Plays a notification sound when a new chat message arrives
+         */
+
 
         /**
          * Handles 'smart layouts' of the chatboxes. Like when new chatboxes are
@@ -178,6 +194,54 @@ var chatBoxes = new Array();
 
         },
 
+        /**
+         * Responsible for handling minimize and maximize of the chatbox
+         *
+         * @param conversation_id
+         */
+
+        toggleChatBoxGrowth: function (conversation_id) {
+            if ($('#chatbox_' + conversation_id + ' .chatboxcontent').css('display') == 'none') {
+
+                var minimizedChatBoxes = new Array();
+
+                if ($.cookie('chatbox_minimized')) {
+                    minimizedChatBoxes = $.cookie('chatbox_minimized').split(/\|/);
+                }
+
+                var newCookie = '';
+
+                for (i = 0; i < minimizedChatBoxes.length; i++) {
+                    if (minimizedChatBoxes[i] != conversation_id) {
+                        newCookie += conversation_id + '|';
+                    }
+                }
+
+                newCookie = newCookie.slice(0, -1)
+
+
+                $.cookie('chatbox_minimized', newCookie);
+                $('#chatbox_' + conversation_id + ' .chatboxcontent').css('display', 'block');
+                $('#chatbox_' + conversation_id + ' .chatboxinput').css('display', 'block');
+                $("#chatbox_" + conversation_id + " .chatboxcontent").scrollTop($("#chatbox_" + conversation_id + " .chatboxcontent")[0].scrollHeight);
+            } else {
+
+                var newCookie = conversation_id;
+
+                if ($.cookie('chatbox_minimized')) {
+                    newCookie += '|' + $.cookie('chatbox_minimized');
+                }
+
+
+                $.cookie('chatbox_minimized', newCookie);
+                $('#chatbox_' + conversation_id + ' .chatboxcontent').css('display', 'none');
+                $('#chatbox_' + conversation_id + ' .chatboxinput').css('display', 'none');
+            }
+
+        }
+
+
+
     }
 
 
@@ -234,14 +298,8 @@ var chatBoxes = new Array();
     };
 
 
-//}
+}
 
-//$(document).ready(ready);
-//$(document).on("page:load", ready);
+$(document).ready(ready);
+$(document).on("page:load", ready);
 
-$(document).on('keydown', '.chatboxtextarea', function (event) {
-    var id = $(this).data('cid');
-    chatBox.checkInputKey(event, $(this), id);
-});
-//$(document).ready(ready);
-//$(document).on("page:load", ready);
