@@ -61,6 +61,9 @@ GEM
     bootstrap-will_paginate (0.0.10)
       will_paginate
     builder (3.2.2)
+    bullet (4.14.10)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.9.0)
     byebug (8.2.0)
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
@@ -395,6 +398,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
+    uniform_notifier (1.9.0)
     warden (1.2.3)
       rack (>= 1.0)
     web-console (2.2.1)
@@ -415,6 +419,7 @@ DEPENDENCIES
   better_errors (~> 2.1.1)
   bootstrap-sass (~> 3.3.5.1)
   bootstrap-will_paginate (~> 0.0.10)
+  bullet (~> 4.14, >= 4.14.10)
   byebug
   carrierwave (~> 0.10.0)
   coffee-rails (~> 4.1.0)

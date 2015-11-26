@@ -1,7 +1,5 @@
 class Tasknamecompany < ActiveRecord::Base
 
-
-
 private
 
 def tasknamecompany_params

@@ -87,6 +87,8 @@ group :development do
   #letter opener for dev env
   gem 'letter_opener', '~> 1.4.1'
   gem 'launchy', '~> 2.4.3'
+  #database query optimazation
+  gem 'bullet', '~> 4.14', '>= 4.14.10'
 end
 
 group :development, :test do

@@ -22,6 +22,10 @@ class Task < ActiveRecord::Base
     !completed_at.blank?
   end
 
+  #def number_of_common_tasks(assigner_id, executor_id)
+    #between(assigner_id, executor_id).count
+  #end
+
   #getter setter method code for new task executor search/select/autocomplete
   def task_name_company
     [executor.try(:profile).try(:first_name), executor.try(:profile).try(:last_name), executor.try(:profile).try(:company)].join(' ')

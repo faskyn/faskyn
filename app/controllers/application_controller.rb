@@ -37,19 +37,19 @@ class ApplicationController < ActionController::Base
 
   def set_search
     @q_users = User.ransack(params[:q])
-    @users3 = @q_users.result(distinct: true).includes(:profile).paginate(page: params[:page], per_page: 3)
+    @users3 = @q_users.result(distinct: true).includes(:profile).limit(6)#paginate(page: params[:page], per_page: 6)
   end
 
   def set_conversation
     @user = User.find(params[:id])
     if Task.between(current_user.id, @user.id).present?
-      @tasks = Task.uncompleted.between(current_user.id, @user.id).order("created_at DESC").paginate(page: params[:page], per_page: 12)
+      @tasks = Task.uncompleted.between(current_user.id, @user.id).order("created_at DESC").includes(:assigner).paginate(page: params[:page], per_page: 12)
       @task = Task.new
       @task_between = Task.new
       if Conversation.between(current_user.id, @user.id).present?
         @conversation = Conversation.between(current_user.id, @user.id).first
         @reciever = interlocutor(@conversation)
-        @messages = @conversation.messages
+        @messages = @conversation.messages.includes(:user)
         @message = Message.new
         respond_to do |format|
           format.html
