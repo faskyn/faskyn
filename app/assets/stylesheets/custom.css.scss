@@ -24,13 +24,16 @@ $jumbotron-bg:   */
   background: $garmin-blue;
 }
 
-.pagination ul {
-  .active a {
-    background: $garmin-blue;
-    border-color: $garmin-blue;
-  }
-  a {
-    color: $garmin-blue;
+.pagination {
+  margin-top: 7px;
+  ul {
+    .active a {
+      background: $garmin-blue;
+      border-color: $garmin-blue;
+    }
+    a {
+      color: $garmin-blue;
+    }
   }
 }
 

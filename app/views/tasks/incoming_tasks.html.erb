@@ -12,10 +12,10 @@
     <thead>
       <tr>
         <!-- Sorting implemented w/ ransack gem -->
-        <th class="col-md-3"><%= sort_link(@q_incoming_tasks, :assigner_profile_first_name, 'Name / Company') %></th>
-        <th class="col-md-5"><%= sort_link(@q_incoming_tasks, :content, 'Content') %></th>
+        <th class="col-md-2"><%= sort_link(@q_incoming_tasks, :assigner_profile_first_name, 'Name / Company') %></th>
+        <th class="col-md-7"><%= sort_link(@q_incoming_tasks, :content, 'Content') %></th>
         <th class="col-md-2"><%= sort_link(@q_incoming_tasks, :deadline, 'Deadline') %></th>
-        <th class="col-md-2">Comp. / Edit / Del.</th>
+        <th class="col-md-1">C/E/D</th>
         <!-- End of ransack sorting-->
       </tr>
     </thead>

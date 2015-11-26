@@ -16,7 +16,9 @@ class Task < ActiveRecord::Base
     where("(tasks.assigner_id = ? AND tasks.executor_id = ?) OR (tasks.assigner_id = ? AND tasks.executor_id = ?)", assigner_id, executor_id, executor_id, assigner_id)
   end
 
-  #self.per_page = 12 for most of the searches
+  def self.pagination_per_page
+    8
+  end
 
   def completed?
     !completed_at.blank?

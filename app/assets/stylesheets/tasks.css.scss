@@ -61,13 +61,16 @@ $orange: #ff6600;
 		}
 		tbody tr td {
 			vertical-align: middle;
-			padding:5px;
-			//border-top: 0px;
+			padding:3px;
+			border-left: 0px;
+			border-right: 0px;
 			//margin-top: 0px;
 		}
 		thead tr th {
 			text-align: center;
 			vertical-align: middle;
+			border-left: 0px;
+			border-right: 0px;
 		}
 		tbody tr td a {
 			text-decoration: none;

@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :if_profile_exists
   helper_method :if_no_profile_exists
-  helper_method :other_user_profile_exists
+  #helper_method :other_user_profile_exists
   helper_method :if_tasks_any
 
   before_action :set_search
@@ -27,13 +27,13 @@ class ApplicationController < ActionController::Base
     current_user.profile.present?
   end
 
-  def other_user_profile_exists
-    @task = Task.new(task_params)
-    unless @task.executor && @task.executor.profile
-      flash[:warning] = "Executor hasn't created a profile yet."
-      redirect_to user_tasks_path(current_user)
-    end
-  end
+  # def other_user_profile_exists
+  #   @task = Task.new(task_params)
+  #   unless @task.executor && @task.executor.profile
+  #     flash[:warning] = "Executor hasn't created a profile yet."
+  #     redirect_to user_tasks_path(current_user)
+  #   end
+  # end
 
   def set_search
     @q_users = User.ransack(params[:q])

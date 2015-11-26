@@ -1,19 +1,29 @@
 <% if current_user.id == task.assigner.id %>
   <tr style="background: #F2F2F2" id="task_<%= task.id %>">
-    <td class="col-md-3">
+    <td class="col-md-2">
       <%= link_to user_path(id: task.executor.id) do %>
-        <%= task.executor.first_name %> <%= task.executor.profile.last_name%> / <%= task.executor.profile.company %>
+        <div class="table-user-name">
+          <%= task.executor.first_name %> <%= task.executor.profile.last_name%>
+        </div>
+        <div class="table-company-name">
+          <%= task.executor.profile.company %>
+        </div>
       <% end %>
     </td>
 <% else %>
   <tr id="task_<%= task.id %>">
-    <td class = "col-md-3">
+    <td class = "col-md-2">
       <%= link_to user_path(id: task.assigner.id) do %>
-        <%= task.assigner.profile.first_name %> <%= task.assigner.profile.last_name%> / <%= task.assigner.profile.company %>
+        <div class="table-user-name">
+          <%= task.assigner.profile.first_name %> <%= task.assigner.profile.last_name%>
+        </div>
+        <div class="table-company-name">
+          <%= task.assigner.profile.company %>
+        </div>
       <% end %>
     </td>
 <% end %>
-    <td class="cold-md-5">
+    <td class="cold-md-7">
       <%= task.content %>
     </td>
     <td class="col-md-2">
@@ -23,7 +33,7 @@
         <%= task.deadline.utc.getlocal.strftime("%d %b %I%p") %>
       <% end %>
     </td>
-    <td class="col-md-2" style="padding:0px">
+    <td class="col-md-1" style="padding:0px">
     <% if current_user.id == task.assigner.id %>
       <table class="table table-bordered inside-table" style="background:#F2F2F2">
     <% else %>
@@ -37,7 +47,7 @@
               <% end %>
             <% else %>
               <%= link_to uncomplete_user_task_path(id: task.id), action: :uncomplete, remote: true, method: :patch do %>
-                <i class="fa fa-check"></i>
+                <i class="fa fa-recycle"></i>
               <% end %>
             <% end %>
           </td>

@@ -13,10 +13,10 @@
     <thead>
       <tr>
         <!-- Sorting implemented w/ ransack gem -->
-        <th class="col-md-3">Name / Company</th>
-        <th class="col-md-5">Content</th>
+        <th class="col-md-2">Name / Company</th>
+        <th class="col-md-7">Content</th>
         <th class="col-md-2">Deadline</th>
-        <th class="col-md-2">Comp. / Edit / Del.</th>
+        <th class="col-md-1">C/E/D</th>
         <!-- End of ransack sorting-->
       </tr>
     </thead>
@@ -24,7 +24,7 @@
       <%= render @tasks %>
     </tbody>
   </table>
-  <%= will_paginate @tasks, style: 'color:#007cc3' %>
+  <%= will_paginate @tasks %>
 
   <!-- Modal for new task -->
   <%= form_for([current_user, @task], remote: true) do |f| %>
