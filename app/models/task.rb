@@ -16,6 +16,7 @@ class Task < ActiveRecord::Base
     where("(tasks.assigner_id = ? AND tasks.executor_id = ?) OR (tasks.assigner_id = ? AND tasks.executor_id = ?)", assigner_id, executor_id, executor_id, assigner_id)
   end
 
+  #number of tasks to appear on different task index pages
   def self.pagination_per_page
     8
   end
@@ -23,10 +24,6 @@ class Task < ActiveRecord::Base
   def completed?
     !completed_at.blank?
   end
-
-  #def number_of_common_tasks(assigner_id, executor_id)
-    #between(assigner_id, executor_id).count
-  #end
 
   #getter setter method code for new task executor search/select/autocomplete
   def task_name_company
@@ -38,4 +35,5 @@ class Task < ActiveRecord::Base
   rescue ArgumentError
     self.executor = nil
   end
+  #end of getter setter method for new task executor
 end
