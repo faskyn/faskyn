@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :if_profile_exists
   helper_method :if_no_profile_exists
   #helper_method :other_user_profile_exists
-  helper_method :if_tasks_any
+  helper_method :if_tasks_any?
 
   before_action :set_search
 
@@ -27,6 +27,10 @@ class ApplicationController < ActionController::Base
     current_user.profile.present?
   end
 
+  def if_tasks_any?
+    current_user.executed_tasks.any? || current_user.assigned_tasks.any?
+  end
+
   # def other_user_profile_exists
   #   @task = Task.new(task_params)
   #   unless @task.executor && @task.executor.profile
@@ -38,9 +42,12 @@ class ApplicationController < ActionController::Base
   def set_search
     @q_users = User.ransack(params[:q])
     #regardless the search it gives back the users the current_user hast the most tasks with
-    @users3 = current_user.ordered_relating_users.limit(6)
+    if user_signed_in? && if_tasks_any?
+        @users3 = current_user.ordered_relating_users.limit(6)
+    else
     #displaying users in the sidebar not needed at the moment as it will appear in the main area
-    #@users3 = @q_users.result(distinct: true).includes(:profile).limit(6)#paginate(page: params[:page], per_page: 6)
+      @users3 = @q_users.result(distinct: true).includes(:profile).limit(6)#paginate(page: params[:page], per_page: 6)
+    end
   end
 
   def set_conversation
