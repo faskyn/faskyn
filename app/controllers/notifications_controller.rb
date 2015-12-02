@@ -22,7 +22,7 @@ class NotificationsController < ApplicationController
   private
 
     def notification_params
-      params.require(:notification).permit(:user_id, :sender, :notification_type)
+      params.require(:notification).permit(:recipient_id, :sender_id, :notification_type)
     end
 
     def only_current_user

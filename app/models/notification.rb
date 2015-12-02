@@ -1,15 +1,15 @@
 class Notification < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :sender, class_name: "User", foreign_key: "sender_id"
+  belongs_to :recipient, class_name: "User", foreign_key: "recipient_id"
 
-  validates :user_id, presence: true
+  validates :sender_id, presence: true
+  validates :recipient_id, presence: true
   validates :notification_type, presence: true
-
-  #to call send_notification -> Notification.send_notification(other_user, "request", self.name)
   
-  def self.send_notification(receiver, type, sender_name)
+  def self.send_notification(receiver, type, sender)
     #creating new notification record and updating notification number
     #chat is separated from the rest --> other group for the rest(only task at the moment)
-    receiver.notifications.create(notification_type: type, sender: sender_name)
+    receiver.notifications.create(notification_type: type, sender: sender)
     #sending real-time notification count to other users via websocket
     if type == "chat"
       receiver.update_new_chat_notifications

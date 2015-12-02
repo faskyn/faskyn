@@ -1,12 +1,14 @@
-<div class ="notification-line">
-  <% if notification.notification_type == "chat" %>
-    <p class="subject"><strong><%= notification.sender %></strong> has sent you a message on chat.</p>
-  <% else %>
-    <p class="subject"><strong><%= notification.sender %></strong> has sent you a <%= notification.notification_type %>.</p>
-  <% end %>
-  <% if notification.created_at.today? %>
-    <p class="time">Sent at<%= notification.created_at.utc.getlocal.strftime("%H:%M %p") %></p>
-  <% else %>
-    <p class="time">Sent at <%= notification.created_at.utc.getlocal.strftime("%d %b %H:%M %p") %></p>
-  <% end %>
-</div>
+<%= link_to user_path(notification.sender) do %>
+  <div class ="notification-line">
+    <% if notification.notification_type == "chat" %>
+      <p class="subject"><strong><%= notification.sender.profile.first_name %> <%= notification.sender.profile.last_name %></strong> has sent you a message on chat.</p>
+    <% else %>
+      <p class="subject"><strong><%= notification.sender.profile.first_name %> <%= notification.sender.profile.last_name %></strong> has sent you a <%= notification.notification_type %>.</p>
+    <% end %>
+    <% if notification.created_at.today? %>
+      <p class="time">Sent at<%= notification.created_at.utc.getlocal.strftime("%H:%M %p") %></p>
+    <% else %>
+      <p class="time">Sent at <%= notification.created_at.utc.getlocal.strftime("%d %b %H:%M %p") %></p>
+    <% end %>
+  </div>
+<% end %>

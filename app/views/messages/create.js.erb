@@ -3,13 +3,13 @@
 	//var chatbox = $("#chatbox_" + id + " .chatboxcontent");
 	var chatbox = $(".chatboxcontent");
 	var sender_id = "<%= @message.user.id %>";
-	var reciever_id = $('meta[name=user-id]').attr("content");
+	var receiver_id = $('meta[name=user-id]').attr("content");
 
 	chatbox.append("<%= j render(partial: @message ) %>");
 	chatbox.scrollTop(chatbox[0].scrollHeight);
 	$(".chatboxtextarea").val("");
 
-	if(sender_id != reciever_id) {
+	if(sender_id != receiver_id) {
 		//chatBox.chatWith(id); --> caused page fall, but don't know why
 		chatbox.children().last().removeClass("self").addClass("other");
 		chatbox.scrollTop(chatbox[0].scrollHeight);

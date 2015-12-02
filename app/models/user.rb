@@ -13,9 +13,11 @@ class User < ActiveRecord::Base
 
   has_many :conversations, foreign_key: "sender_id", dependent: :destroy
 
+  has_many :notifications, foreign_key: "recipient_id", dependent: :destroy
+
   has_many :messages, dependent: :destroy
 
-  has_many :notifications, dependent: :destroy
+  
 
   #likely not needed, yet to take it out
   def tasks_uncompleted
@@ -65,9 +67,5 @@ class User < ActiveRecord::Base
 
   def reset_new_other_notifications
     update_attributes(new_other_notification: 0)
-  end
-
-  def full_name_for_notifications_from_message
-    "#{[self.profile.first_name, self.profile.last_name].join(' ')}"
   end
 end

@@ -11,7 +11,7 @@ class MessagesController < ApplicationController
     @path = conversation_path(@conversation)
     if @message.save
       #sender_full_name = full_name_for_notifications_from_message(@receiver)
-      Notification.send_notification(@receiver, "chat", @message.user.profile.first_name)
+      Notification.send_notification(@receiver, "chat", @message.user)
       #Pusher['private-'+ @conversation.sender_id.to_s].trigger('new_chat_notification', {:from => current_user.profile.first_name, :body => @message.body})
     end
   end

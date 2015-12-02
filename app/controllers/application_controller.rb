@@ -64,7 +64,7 @@ class ApplicationController < ActionController::Base
       @task_between = Task.new
       if Conversation.between(current_user.id, @user.id).present?
         @conversation = Conversation.between(current_user.id, @user.id).first
-        @reciever = interlocutor(@conversation)
+        #@receiver = interlocutor(@conversation)
         @messages = @conversation.messages.includes(:user)
         @message = Message.new
         respond_to do |format|
