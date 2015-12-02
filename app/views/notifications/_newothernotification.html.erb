@@ -1,0 +1,5 @@
+<% if current_user.new_other_notification? %>
+  <span id="other-notifications"><%= current_user.new_other_notification %></span>
+<% else %>
+  <span id="other-notifications" style="display:none"><%= current_user.new_other_notification %></span>
+<% end %>

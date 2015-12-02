@@ -1,0 +1,5 @@
+<% if current_user.new_chat_notification? %>
+  <span id="chat-notifications"><%= current_user.new_chat_notification %></span>
+<% else %>
+  <span id="chat-notifications" style="display:none"><%= current_user.new_chat_notification %></span>
+<% end %>

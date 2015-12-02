@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
 
   has_many :messages, dependent: :destroy
 
+  has_many :notifications, dependent: :destroy
+
   #likely not needed, yet to take it out
   def tasks_uncompleted
     tasks_uncompleted = assigned_tasks.uncompleted.order("deadline DESC")
@@ -22,7 +24,7 @@ class User < ActiveRecord::Base
     tasks_uncompleted.sort_by { |h| h[:deadline] }.reverse!
   end
 
-   def tasks_completed
+  def tasks_completed
     tasks_completed = assigned_tasks.completed.order("created_at DESC")
     tasks_completed += executed_tasks.completed.order("created_at DESC")
     tasks_completed.sort_by { |h| h[:completed_at] }.reverse!
@@ -47,4 +49,25 @@ class User < ActiveRecord::Base
       .order('COUNT(id) DESC')
   end
   #end of the code for number of common tasks with current_user
+
+  #counting notifications for user; reseting when gets to notifications index page
+  def update_new_chat_notifications
+    increment!(:new_chat_notification)
+  end
+
+  def reset_new_chat_notifications
+    update_attributes(new_chat_notification: 0)
+  end
+
+  def update_new_other_notifications
+    increment!(:new_other_notification)
+  end
+
+  def reset_new_other_notifications
+    update_attributes(new_other_notification: 0)
+  end
+
+  def full_name_for_notifications_from_message
+    "#{[self.profile.first_name, self.profile.last_name].join(' ')}"
+  end
 end

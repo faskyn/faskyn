@@ -16,6 +16,7 @@ class ProfilesController < ApplicationController
       redirect_to user_path(params[:user_id])
     else
       render action: :new
+      flash[:alert] = "Profile couldn't be updated."
     end
   end
 

@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   helper_method :if_no_profile_exists
   #helper_method :other_user_profile_exists
   helper_method :if_tasks_any?
+  #helper_method :only_current_user
 
   before_action :set_search
 
@@ -37,6 +38,11 @@ class ApplicationController < ActionController::Base
   #     flash[:warning] = "Executor hasn't created a profile yet."
   #     redirect_to user_tasks_path(current_user)
   #   end
+  # end
+
+  # def only_current_user
+  #   @user = User.find(params[:user_id])
+  #   redirect_to user_tasks_path(current_user) unless @user == current_user
   # end
 
   def set_search

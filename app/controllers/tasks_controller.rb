@@ -62,12 +62,15 @@ class TasksController < ApplicationController
     #check for other_user_profile_exists before filter (@task = Task.new(task_params))
     @task.assigner_id = current_user.id
     if @task.save
-      TaskcreatorWorker.perform_async(@task.id, @user.id, 5)
+      TaskcreatorWorker.perform_async(@task.id, @user.id, 5) #sidekiq email on task creation
       Conversation.create(sender_id: @task.assigner_id, recipient_id: @task.executor_id)
       respond_to do |format|
         format.html { redirect_to user_tasks_path(current_user), notice: "Task saved!"}
         format.js
       end
+      #sending in-app notification to executor; send_notification defined in notification.rb
+      assigner_full_name = @task.full_name_for_notification
+      Notification.send_notification(@task.executor, "task", assigner_full_name)
     else
       respond_to do |format|
         format.html { render action: :new }

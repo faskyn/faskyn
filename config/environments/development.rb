@@ -1,6 +1,13 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  #pusher for dev env (production is handled by heroku)
+  require 'pusher'
+
+  Pusher.app_id = '157688'
+  Pusher.key = '7cb6e2eb8727260e02ad'
+  Pusher.secret = 'c78cde58066e3e9118ac'
+
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.

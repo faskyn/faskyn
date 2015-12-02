@@ -36,4 +36,7 @@ class Task < ActiveRecord::Base
     self.executor = nil
   end
   #end of getter setter method for new task executor
+  def full_name_for_notification
+    "#{[self.assigner.profile.first_name, self.assigner.profile.last_name].join(' ')}"
+  end
 end

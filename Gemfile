@@ -25,7 +25,10 @@ gem 'jquery-ui-rails', '~> 5.0.5'
 gem 'pg', '~> 0.18.3'
 #fay+private_pub for chatting
 gem 'private_pub', '~> 1.0.3'
-#server
+#gem for real-time(notifications for now, chat implemented with private pub)
+gem 'pusher', '~> 0.15.1'
+gem 'pusher-client', '~> 0.6.2'
+#webserver (heroku recommends puma as default)
 gem 'puma', '~> 2.13.4'
 #bootstrap
 gem 'bootstrap-sass', '~> 3.3.5.1'

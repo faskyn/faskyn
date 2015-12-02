@@ -2,14 +2,22 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
 
+  get 'notifications/index'
+
   get 'static_pages/home'
   get 'static_pages/about', path: 'about'
   get 'static_pages/help', path: 'help'
   get 'static_pages/privacypolicy', path: 'privacypolicy'
 
+  post 'pusher/auth' #for pusher authentication
   resources :contacts
   devise_for :users
   resources :users do
+    resources :notifications, only: [:create, :index] do
+      collection do
+        get :other_notifications, :chat_notifications
+      end
+    end
     resource :profile
     resources :tasknamecompanies
     resources :tasks do
@@ -22,8 +30,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :conversations do
-    resources :messages
+  resources :conversations, only: [:index, :show, :create] do
+    resources :messages, only: [:index, :create]
   end
   
   root 'static_pages#home'

@@ -1,0 +1,37 @@
+$gray-medium-light: #eaeaea;
+$garmin-blue: #007cc3;//#168eea;//#337ab7;
+$dropbox-dark-grey: #47525d;
+$dropbox-light-grey: #7b8994;
+$orange: #ff6600;
+
+#other-notifications {
+  border-radius: 2px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .7);
+  background-color: #ff0000;
+}
+
+#chat-notifications {
+	border-radius: 2px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .7);
+  background-color: #ff0000;
+}
+
+.other-notifications-index {
+
+}
+
+.notification-line:first-child {
+	border-top: 1px $gray-medium-light solid;
+}
+
+.notification-line {
+	border-bottom: 1px $gray-medium-light solid;
+	.subject {
+		margin-top:3px;
+		margin-bottom:3px;
+	}
+	.time {
+		margin-top:0px;
+		margin-bottom:3px;
+	}
+}
