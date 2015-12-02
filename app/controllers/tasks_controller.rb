@@ -69,8 +69,8 @@ class TasksController < ApplicationController
         format.js
       end
       #sending in-app notification to executor; send_notification defined in notification.rb
-      assigner_full_name = @task.full_name_for_notification
-      Notification.send_notification(@task.executor, "task", assigner_full_name)
+      #assigner_full_name = @task.full_name_for_notification
+      Notification.send_notification(@task.executor, "task", @task.assigner.profile.first_name)
     else
       respond_to do |format|
         format.html { render action: :new }
