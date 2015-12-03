@@ -12,6 +12,7 @@ class NotificationsController < ApplicationController
   def other_notifications
     @other_notifications = current_user.notifications.where.not('notifications.notification_type = ?', 'chat').limit(8).order(created_at: :desc)
     current_user.reset_new_other_notifications
+    #@other_notifications.collect{|notification| notification}
   end
 
   def chat_notifications
@@ -22,7 +23,7 @@ class NotificationsController < ApplicationController
   private
 
     def notification_params
-      params.require(:notification).permit(:recipient_id, :sender_id, :notification_type)
+      params.require(:notification).permit(:recipient_id, :sender_id, :notification_type, :checked_at)
     end
 
     def only_current_user

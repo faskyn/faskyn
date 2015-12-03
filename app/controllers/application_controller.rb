@@ -67,6 +67,11 @@ class ApplicationController < ActionController::Base
         #@receiver = interlocutor(@conversation)
         @messages = @conversation.messages.includes(:user)
         @message = Message.new
+        if  Notification.between_chat_recipient(current_user, @user).unchecked.any?
+          Notification.between_chat_recipient(current_user, @user).last.check_chat_notifications
+          current_user.decrease_new_chat_notifications
+          current_user.decreased_chat_number_pusher
+        end
         respond_to do |format|
           format.html
           format.js { render :template => "tasks/update.js.erb", :template => "tasks/destroy.js.erb", layout: false }
@@ -91,4 +96,7 @@ class ApplicationController < ActionController::Base
     params.require(:message).permit(:body, :message_attachment, :message_attachment_id, :message_attachment_cache_id, :remove_message_attachment)
   end
 
+  def notification_params
+    params.require(:notification).permit(:recipient_id, :sender_id, :notification_type, :checked_at)
+  end
 end

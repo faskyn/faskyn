@@ -52,20 +52,33 @@ class User < ActiveRecord::Base
   end
   #end of the code for number of common tasks with current_user
 
-  #counting notifications for user; reseting when gets to notifications index page
-  def update_new_chat_notifications
+  #counting notifications for user
+  def increase_new_chat_notifications
     increment!(:new_chat_notification)
+  end
+
+  def decrease_new_chat_notifications
+    decrement!(:new_chat_notification) if self.new_chat_notification > 0
   end
 
   def reset_new_chat_notifications
     update_attributes(new_chat_notification: 0)
   end
 
-  def update_new_other_notifications
+  def increase_new_other_notifications
     increment!(:new_other_notification)
+  end
+
+  def decrease_new_other_notifications
+    decrement!(:new_other_notification) if self.new_other_notification > 0
   end
 
   def reset_new_other_notifications
     update_attributes(new_other_notification: 0)
+  end
+
+  def decreased_chat_number_pusher
+    number = self.new_chat_notification
+    Pusher['private-'+ self.id.to_s].trigger('new_chat_notification', {:number => number})
   end
 end

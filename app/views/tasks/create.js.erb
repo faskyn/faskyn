@@ -28,9 +28,12 @@ $("ul.errors").html("");
 	// };
 
 	var n = $('tr').length;
-	if (n > 18) {
+	if (25 > n > 18) {
 		$("tr").slice((-2*(n-18)/2)-1).fadeOut(500);
-	};
+	}
+	else if (n > 26) {
+	 	$("tr").slice((-2*(n-26)/2)-1).fadeOut(500);
+	 };
 <% end %>
 
 

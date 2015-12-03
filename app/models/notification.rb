@@ -5,6 +5,14 @@ class Notification < ActiveRecord::Base
   validates :sender_id, presence: true
   validates :recipient_id, presence: true
   validates :notification_type, presence: true
+
+  scope :not_chat, -> { where.not(checked_at: nil) }
+  scope :chat, -> { where(notification_type: "chat") }
+  scope :checked, -> { where.not(checked_at: nil) }
+  scope :unchecked, -> { where(checked_at: nil) }
+  scope :between_chat_recipient, -> (recipient_id, sender_id) do
+    where("notifications.recipient_id = ? AND notifications.sender_id = ? AND notifications.notification_type = ?", recipient_id, sender_id, "chat")
+  end
   
   def self.send_notification(receiver, type, sender)
     #creating new notification record and updating notification number
@@ -12,13 +20,27 @@ class Notification < ActiveRecord::Base
     receiver.notifications.create(notification_type: type, sender: sender)
     #sending real-time notification count to other users via websocket
     if type == "chat"
-      receiver.update_new_chat_notifications
+      receiver.increase_new_chat_notifications
       number = receiver.new_chat_notification
       Pusher['private-'+ receiver.id.to_s].trigger('new_chat_notification', {:number => number})
     else
-      receiver.update_new_other_notifications
+      receiver.increase_new_other_notifications
       number = receiver.new_other_notification
       Pusher['private-'+ receiver.id.to_s].trigger('new_other_notification', {:number => number})
     end      
+  end
+
+  #used when user gets to the showpage of the sender not when gets to the notfication page
+  def check_chat_notifications
+    if self.checked_at == nil
+      update_attributes(checked_at: Time.now)
+    end
+  end
+
+  #used when seen on the notifications page
+  def check_other_notifications
+    if self.checked_at == nil
+      update_attributes(checked_at: Time.now)
+    end
   end
 end

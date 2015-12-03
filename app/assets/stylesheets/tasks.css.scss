@@ -1,6 +1,6 @@
 $gray-medium-light: #eaeaea;
 $garmin-blue: #007cc3;
-$dropbox-dark-grey: #47525d;
+$dark-grey: #5E5E5E;
 $dropbox-light-grey: #7b8994;
 $orange: #ff6600;
 
@@ -45,13 +45,13 @@ $orange: #ff6600;
 	}
 
 	table {
-		color: #5E5E5E; //changed
+		color: $dark-grey;
 		text-align: center;
 		margin-bottom: 0px;
 		border-radius: 10px;
 		vertical-align: middle;
 		a {
-			color: #5E5E5E;
+			color: $dark-grey;
 			&:hover {
    			color: $garmin-blue;
     	}

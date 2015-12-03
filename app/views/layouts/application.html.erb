@@ -51,6 +51,9 @@
           if (msg == 1) {
             $('#other-notifications').fadeIn();
           };
+          if (msg == 0) {
+            $('#other-notifications').hide();
+          }
         }
 
         function dom_chat_notify(msg) {
@@ -60,6 +63,9 @@
           if (msg == 1) {
             $('#chat-notifications').fadeIn();
           };
+          if (msg == 0) {
+            $('#chat-notifications').hide();
+          }
         }
       });
     </script>

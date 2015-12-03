@@ -2,8 +2,8 @@
 @import 'bootstrap';
 
 $gray-medium-light: #eaeaea;
-$garmin-blue: #007cc3;//#168eea;//#337ab7;
-$dropbox-dark-grey: #47525d;
+$garmin-blue: #007cc3;
+$dark-grey: #5E5E5E;
 $dropbox-light-grey: #7b8994;
 $orange: #ff6600;
 
@@ -11,14 +11,9 @@ $orange: #ff6600;
 /*app layout*/
 @import url(http://fonts.googleapis.com/css?family=Lato:400,700);
 
-$body-bg:                                                   #ecf0f1;
-$font-family-sans-serif:                'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-$font-family-serif:                     'Georgia', serif;
-/*$navbar-height:                                        55px;
-$navbar-default-bg:                          white;
-$navbar-default-brand-color:      #c0392b;
-$brand-primary:                                    #c0392b;
-$jumbotron-bg:   */ 
+$body-bg:                 #ecf0f1;
+$font-family-sans-serif:  'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-family-serif:       'Georgia', serif;
 
 .panel-primary .panel-heading {
   background: $garmin-blue;
@@ -60,6 +55,18 @@ a {
   box-sizing: border-box;
   }*/
 
+.navbar-default {
+  background: white;
+  .navbar-header, .navbar-right li {
+    a {
+      color: $garmin-blue;
+      &:hover {
+        color: black;
+      }
+    }
+  }
+}
+
 .signedinbar .navbar-default {
   background: $garmin-blue;
   .navbar-right li {
@@ -88,6 +95,7 @@ footer {
   vertical-align: middle;
   text-align: center;
   padding-top: 5px;
+  background-color: $gray-medium-light;
   color: $gray-light;
   a {
     color: $gray;
@@ -168,82 +176,6 @@ footer {
   padding-top:30px;  
 }
 
-/*sidebar+mainarea before bootstrap
-#sidebar {
-  background: $garmin-blue;
-  text-decoration: none;
-  min-height: 100%;
-  height: 100%;
-  width: 250px;
-  max-width: 250px;
-  margin-right: 0px;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  overflow: hidden;
-  color:white;
-  a {
-    color:white;
-  }
-  .invite {
-    padding-left: 10px;
-  }
-}
-
-#main {
-  margin-left: 250px;
-  background: #fff;
-  height: 100%;
-  overflow: hidden;
-}
-
-#rightside {
-  background: $garmin-blue;
-  text-decoration: none;
-  min-height: 100%;
-  height: 100%;
-  width: 250px;
-  max-width: 250px;
-  margin-right: 0px;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  overflow: hidden;
-}
-
-.clearfix:after {
-  content: ".";
-  display: block;
-  height: 0;
-  visibility: hidden;
-  clear: both;
-}
-
-first version of sidebar
-#home_loggedin {
-  .container {
-    height:100%;
-    display: table;
-    .row {
-      height: 100%;
-      display: table-row;
-      .col-aside, {
-        display: table-cell;
-        float: none;
-        vertical-align: top;
-        background: $garmin-blue;
-        height: 100%;
-      }
-      .col-middle {
-        display: table-cell;
-        float: none;
-        vertical-align: top;
-        background: $orange;
-      }
-    }
-  }
-}*/
-
 #wrapper {
     padding-left: 0;
     padding-top: 0;
@@ -296,56 +228,6 @@ first version of sidebar
     position: absolute;
     margin-right: -250px;
 }
-
-/* Sidebar Styles 
-
-.sidebar-nav {
-    position: absolute;
-    top: 0;
-    width: 250px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.sidebar-nav li {
-    text-indent: 20px;
-    line-height: 40px;
-}
-
-.sidebar-nav li a {
-    display: block;
-    text-decoration: none;
-    color: #999999;
-}
-
-.sidebar-nav li a:hover {
-    text-decoration: none;
-    color: #fff;
-    background: rgba(255,255,255,0.2);
-}
-
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus {
-    text-decoration: none;
-}
-
-.sidebar-nav > .sidebar-brand {
-    height: 65px;
-    font-size: 18px;
-    line-height: 60px;
-}
-
-.sidebar-nav > .sidebar-brand a {
-    color: #999999;
-}
-
-.sidebar-nav > .sidebar-brand a:hover {
-    color: #fff;
-    background: none;
-}
-*/
-
 
 @media(min-width:768px) {
   #wrapper {

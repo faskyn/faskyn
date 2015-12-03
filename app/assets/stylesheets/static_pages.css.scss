@@ -1,9 +1,8 @@
 $gray-medium-light: #eaeaea;
 $garmin-blue: #007cc3;
-$dropbox-dark-grey: #47525d;
+$dark-grey: #5E5E5E;
 $dropbox-light-grey: #7b8994;
 $orange: #ff6600;
-
 
 #home_loggedout {
 	overflow: visible !important;
@@ -68,7 +67,7 @@ $orange: #ff6600;
 	width: 100%;
 	height: auto;
 	padding-top: 100%;
-	background: $garmin-blue; /*#2c2c2c;*/
+	background: $garmin-blue;
 }
 
 .glyphicon-stack-1x {
@@ -97,10 +96,6 @@ $orange: #ff6600;
 }
 
 .col-padding {
-	/*background-color: transparent;
-  background-image: linear-gradient(to bottom, rgba(30, 87, 153, 0.2) 0%, rgba(125, 185, 232, 0) 100%);
-  background-repeat: repeat;
-  border-radius:10px; */
   padding: 25px 25px 25px 25px;
 }
 
@@ -114,14 +109,6 @@ $orange: #ff6600;
 }
 
 /* about */
-
-/*#mission {
-	background-color: $garmin-blue;
-	color: white;
-	text-align: center;
-	padding-top: 30px;
-	padding-bottom: 30px;
-}*/
 
 #mission {
 	.jumbotron {
@@ -144,9 +131,6 @@ $orange: #ff6600;
 
 #about {
 	padding: 40px 0 50px 0;
-	/*color: white;
-	background: $garmin-blue;*/
-
 	.container {
 		max-width: 700px
 	}
@@ -158,8 +142,3 @@ $orange: #ff6600;
 		text-align: justify;
 	}
 }
-
-
-/*.details-col-style {
-	text-align: center;
-}*/
