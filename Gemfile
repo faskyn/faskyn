@@ -74,6 +74,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 #running servers easily
 gem 'foreman', '~> 0.78.0'
 gem 'net-ssh', '~> 3.0', '>= 3.0.1'
+#finding links
+gem 'rinku', '~> 1.7', '>= 1.7.3'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

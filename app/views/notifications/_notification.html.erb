@@ -1,4 +1,4 @@
-<% unless notification.sender.blank? %>
+<% if notification.sender.present? %>
   <% if notification.checked_at == nil %>
     <div class ="notification-line">
   <% else %>

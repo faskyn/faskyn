@@ -2,7 +2,7 @@
   <div class="chatboxmessagecontent">
     <p>
     <% if message.body? %>
-      <%= message.body %>
+      <%= find_links(message.body) %>
     <% else %>
       <%= link_to "#{message.message_attachment_filename}", attachment_url(message, :message_attachment),:target => "_blank" %>
     <% end %>

@@ -9,21 +9,23 @@
       </div>
     </span>
   </div>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <!-- Sorting implemented w/ ransack gem -->
-        <th class="col-md-2"><%= sort_link(@q_outgoing_tasks, :executor_profile_first_name, 'Name / Company') %></th>
-        <th class="col-md-7"><%= sort_link(@q_outgoing_tasks, :content, 'Content') %></th>
-        <th class="col-md-2"><%= sort_link(@q_outgoing_tasks, :deadline, 'Deadline') %></th>
-        <th class="col-md-1">C/E/D</th>
-        <!-- End of ransack sorting-->
-      </tr>
-    </thead>
-    <tbody class="newtaskinsert">
-      <%= render @assigned_tasks %>
-    </tbody>
-  </table>
+  <div class="panel panel-default">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <!-- Sorting implemented w/ ransack gem -->
+          <th class="col-md-2"><%= sort_link(@q_outgoing_tasks, :executor_profile_first_name, 'Name / Company') %></th>
+          <th class="col-md-7"><%= sort_link(@q_outgoing_tasks, :content, 'Content') %></th>
+          <th class="col-md-2"><%= sort_link(@q_outgoing_tasks, :deadline, 'Deadline') %></th>
+          <th class="col-md-1">C/E/D</th>
+          <!-- End of ransack sorting-->
+        </tr>
+      </thead>
+      <tbody class="newtaskinsert">
+        <%= render @assigned_tasks %>
+      </tbody>
+    </table>
+  </div>
   <%= will_paginate @assigned_tasks %>
 
   <!-- Bootstrap Modal for new task -->

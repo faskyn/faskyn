@@ -2,7 +2,9 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable, :validate_on_invite => true
+
+  validates :email, presence: true
 
   has_one :profile, dependent: :destroy
   delegate :first_name, to: :profile, allow_nil: true
@@ -45,10 +47,17 @@ class User < ActiveRecord::Base
     "((#{assigners_based_on_task_number.to_sql}) UNION ALL (#{executors_based_on_task_number.to_sql})) AS relations"
   end
 
+  # def ordered_relating_users
+  #   User.joins("RIGHT OUTER JOIN #{relations_sql_based_on_task_number} ON relations.user_id = users.id")
+  #     .group(:id)
+  #     .order('COUNT(id) DESC')
+  # end
   def ordered_relating_users
-    User.joins("RIGHT OUTER JOIN #{relations_sql_based_on_task_number} ON relations.user_id = users.id")
+    User.joins("FULL OUTER JOIN #{relations_sql_based_on_task_number} ON relations.user_id = users.id")
+      .where.not(id: id)
       .group(:id)
-      .order('COUNT(id) DESC')
+      .order('COUNT(relations.user_id) DESC')
+      .limit(8)
   end
   #end of the code for number of common tasks with current_user
 

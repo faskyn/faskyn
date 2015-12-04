@@ -48,7 +48,7 @@
         <% end %>
         <li><%= link_to "USERS", users_path %></li>
         <li class="dropdown">
-          <% if has_profile? && current_user.profile.avatar.url %>
+          <% if has_profile? && current_user.profile.avatar.present? %>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <%= image_tag current_user.profile.avatar.url(:base_thumb), class: 'avatar', alt: "#{current_user.profile.first_name}'s_avatar", title: "#{current_user.profile.first_name}'s avatar" %>
             <span class="caret"></span></a>

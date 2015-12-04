@@ -112,18 +112,19 @@ a {
     padding-top:15px;
     padding-bottom:15px;
   }
+  .navbar-right > li > a {
+    color: white;
+    &:hover {
+      color: $garmin-blue;
+      background: white;
+    }
+  }
+
   .navbar-right li {
     .avatar {
       width:30px;
       height:30px;
       border-radius: 10%;
-    }
-    a {
-      color: white;
-      &:hover {
-        color:$garmin-blue;
-        background: white;
-      }
     }
     .dropdown-menu a {
       color: black;

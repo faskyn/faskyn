@@ -9,19 +9,17 @@
       <% @users3.each do |user| %>
         <li>
           <% if user.profile %>
-            <% if user.profile.avatar %>
-              <%= link_to user do %>
+            <%= link_to user do %>
+              <% if user.profile.avatar %>
                 <%= image_tag user.profile.avatar.url(:base_thumb), class: 'avatar' %>
               <% end %>
+              <span class="user-fullname">
+                  <%= user.profile.first_name.upcase %> <%= user.profile.last_name.upcase %>
+              </span>
+              <span class="company">
+                <%= user.profile.company %>
+              </span>
             <% end %>
-            <span class="user-fullname">
-              <%= link_to user do %>
-                <%= user.profile.first_name.upcase %> <%= user.profile.last_name.upcase %>
-              <% end %>
-            </span>
-            <span class="company">
-              <%= user.profile.company %>
-            </span>
           <% end %>
         </li>
       <% end %>

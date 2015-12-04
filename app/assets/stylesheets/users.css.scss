@@ -107,8 +107,8 @@ $orange: #ff6600;
   .avatar{
     float: left;
     margin-right: 15px;
-    /*width: 85px;
-    height: 85px;*/
+    width: 85px;
+    height: 85px;
     border-radius: 50%;
   }
 }
@@ -120,7 +120,7 @@ $orange: #ff6600;
     text-decoration: none;
     color: $dark-grey;
     &:hover {
-      color: $garmin-blue
+      color: $garmin-blue;
     }
   }
 
@@ -184,6 +184,13 @@ $orange: #ff6600;
     .company {
       margin-top: 2px;
       display: block;
+    }
+    a {
+      text-decoration: none;
+      color: $dark-grey;
+      &:hover {
+        color: $garmin-blue;
+      }
     }
   }
 }
