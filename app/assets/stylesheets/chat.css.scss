@@ -1,4 +1,5 @@
 $garmin-blue: #007cc3;
+$garmin-light-blue: #d9edf7;
 $dark-grey: #5E5E5E;
 
 .chatbox {
@@ -82,6 +83,7 @@ $dark-grey: #5E5E5E;
 .self .chatboxmessagecontent {
     order: 1;
     border-bottom-right-radius: 0;
+    background: #F2F2F2//white;//#d9edf7;
 }
 
 .self .avatar {
@@ -102,7 +104,7 @@ $dark-grey: #5E5E5E;
 }
 
 .chatboxmessagecontent {
-    background: #F2F2F2;//white;
+    background: $garmin-light-blue;//#F2F2F2;//white;
     padding: 10px;
     border-radius: 15%;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);

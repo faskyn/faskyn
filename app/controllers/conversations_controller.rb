@@ -15,9 +15,9 @@ class ConversationsController < ApplicationController
     @conversation = Conversation.find(params[:id])
     @user = interlocutor(@conversation)
     @receiver = interlocutor(@conversation)
-    @messages = @conversation.messages
+    @messages = @conversation.messages.limit(10).order(created_at: :desc)
     @message = Message.new
-    @messages_with_file = @conversation.messages.with_file.order("created_at DESC").paginate(page: params[:page], per_page: 12)
+    @messages_with_file = @conversation.messages.with_file.order(created_at: :desc).paginate(page: params[:page], per_page: 12)
   end
 
   def index #listing chat notifications

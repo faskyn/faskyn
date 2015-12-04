@@ -1,5 +1,6 @@
 $gray-medium-light: #eaeaea;
 $garmin-blue: #007cc3;
+$garmin-light-blue: #d9edf7;
 $dark-grey: #5E5E5E;
 $dropbox-light-grey: #7b8994;
 $orange: #ff6600;
@@ -7,6 +8,10 @@ $orange: #ff6600;
 .rightsidebar {
   border-left: solid 1px $gray-medium-light;
   background: #f7f7f7;
+  overflow: hidden;
+  // padding-left:0;
+  // padding-right:0;
+  //position: fixed;
 }
 
 .user-search {
@@ -109,26 +114,13 @@ $orange: #ff6600;
 }
 
 .user-profile-show-sidebar {
+  margin-bottom:35px;
+  color: $dark-grey;
   a {
     text-decoration: none;
-  }
-  .panel {
-    border-top-left-radius:13px;
-    border-top-right-radius:13px;
-    border-bottom-left-radius:10px;
-    border-bottom-right-radius:10px;
-    border-color: transparent;//$garmin-blue #cccccc #cccccc #cccccc;
-    .panel-heading {
-      border-top-right-radius:10px;
-      border-top-left-radius:10px;
-      border-color: $garmin-blue;
-    }
-    .panel-body {
-      border-bottom-left-radius:10px;
-      border-bottom-right-radius:10px;
-      border-color: $garmin-blue #cccccc #cccccc #cccccc;
-      border-width: 1px;
-      border-style: solid;
+    color: $dark-grey;
+    &:hover {
+      color: $garmin-blue
     }
   }
 

@@ -15,6 +15,32 @@ $body-bg:                 #ecf0f1;
 $font-family-sans-serif:  'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $font-family-serif:       'Georgia', serif;
 
+.fixedheight {
+  padding-top:50px;
+}
+
+.fixedheight {
+  .confirmations, .invitations, .passwords, .registrations, .sessions {
+    padding-top:0px;
+  }
+}
+
+.loggedouthtml {
+  height: auto;
+  overflow: visible;
+}
+
+.loggedoutbody {
+  height: auto;
+  overflow: visible;
+}
+
+
+#home_loggedout {
+  overflow: visible;
+  height: auto;
+}
+
 .panel-primary .panel-heading {
   background: $garmin-blue;
 }
@@ -57,6 +83,9 @@ a {
 
 .navbar-default {
   background: white;
+  .navbar-right {
+    margin-right:5px;
+  }
   .navbar-header, .navbar-right li {
     a {
       color: $garmin-blue;
@@ -68,8 +97,27 @@ a {
 }
 
 .signedinbar .navbar-default {
+  .navbar-btn .btn-danger {
+    border-color: $garmin-blue;
+  }
+  .navbar-right {
+    margin-right:5px;
+  }
   background: $garmin-blue;
+  .navbar-right li:last-child a { //if profile pic in navbar
+    padding-top:10px;
+    padding-bottom:10px;
+  }
+    .navbar-right li:last-child #without-avatar { //if profile pic in navbar
+    padding-top:15px;
+    padding-bottom:15px;
+  }
   .navbar-right li {
+    .avatar {
+      width:30px;
+      height:30px;
+      border-radius: 10%;
+    }
     a {
       color: white;
       &:hover {
@@ -139,27 +187,6 @@ footer {
   margin-bottom: 0px;
 }
 
-.fixedheight {
-  height: 100%;
-  overflow: hidden;
-}
-
-.loggedouthtml {
-  height: auto;
-  overflow: visible;
-}
-
-.loggedoutbody {
-  height: auto;
-  overflow: visible;
-}
-
-
-#home_loggedout {
-  overflow: visible;
-  height: auto;
-}
-
 /*
 @media (min-width: 1200px) {
   #main {
@@ -197,7 +224,7 @@ footer {
   width: 0;
   height: 100%;
   margin-left: -250px;
-  overflow-y: auto;
+  overflow-y: hidden;
   background: #f7f7f7;//background: $garmin-blue;
   border-right: 1px $gray-medium-light solid;
   -webkit-transition: all 0.5s ease;

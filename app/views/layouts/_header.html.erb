@@ -1,9 +1,10 @@
 <% if user_signed_in? %>
   <span class="signedinbar">
+    <nav class="navbar navbar-fixed-top navbar-default" role="navigation">
 <% else %>
   <span>
+    <nav class="navbar navbar-static-top navbar-default" role="navigation">
 <% end %>
-<nav class="navbar navbar-static-top navbar-default" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -21,7 +22,7 @@
     </div>
 
     <div class="collapse navbar-collapse navbar-ex1-collapse">
-      <ul class="nav navbar-nav navbar-right" style="margin-right:20px">
+      <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
         <% if has_profile? %>
           <% unless if_tasks_any? %>
@@ -43,11 +44,19 @@
             </ul>
           </li>
         <% else %>
-          <li><p class="navbar-btn"><%= link_to "Create Profile", new_user_profile_path(current_user), class: "btn btn-primary" %></p></li>
+          <li><p class="navbar-btn"><%= link_to "CREATE PROFILE", new_user_profile_path(current_user), class: "btn btn-danger" %></p></li>
         <% end %>
         <li><%= link_to "USERS", users_path %></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i><span class="caret"></span></a>
+          <% if has_profile? && current_user.profile.avatar.url %>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <%= image_tag current_user.profile.avatar.url(:base_thumb), class: 'avatar', alt: "#{current_user.profile.first_name}'s_avatar", title: "#{current_user.profile.first_name}'s avatar" %>
+            <span class="caret"></span></a>
+          <% else %>
+            <a href="#" class="dropdown-toggle" id="without-avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-lg fa-user"></i>
+            <span class="caret"></span></a>
+          <% end %>
           <ul class = "dropdown-menu">
             <li><%= link_to "Account", edit_user_registration_path %></li>
             <%if has_profile? %>
