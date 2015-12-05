@@ -81,6 +81,8 @@ a {
   box-sizing: border-box;
   }*/
 
+//NAVBAR
+
 .navbar-default {
   background: white;
   .navbar-right {
@@ -137,9 +139,15 @@ a {
     background:white !important;
     color:$garmin-blue !important;
   }
+  @media (min-width: 979px) {
+    ul.nav li.dropdown:hover > ul.dropdown-menu {
+      display: block;
+    }
+  }
 }
 
-/* footer */
+//FOOTER
+
 footer {
   vertical-align: middle;
   text-align: center;

@@ -5,3 +5,7 @@ $(document).ready(function(){
 		})
 	}, 3500);
 });
+
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip()
+})

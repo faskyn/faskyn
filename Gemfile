@@ -43,7 +43,7 @@ gem 'font-awesome-rails', '~> 4.4'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 #populating fake data
-gem 'faker', '~> 1.5.0'
+gem 'faker', '~> 1.6', '>= 1.6.1'
 #storing ENV credentials
 gem 'figaro', '~> 1.1.1'
 #qucik authentication and invitation

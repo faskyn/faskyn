@@ -6,17 +6,19 @@
       <%= link_to "Common Files", conversation_path(@conversation), class: "btn btn-default", id: "rightone"%>
     </span>
   </div>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th class="col-md-7">Content</th>
-        <th class="col-md-3">Deadline</th>
-        <th class="col-md-2">Comp/Edit/Del</th>
-      </tr>
-    </thead>
-    <tbody class="newtaskinsert2">
-      <%= render partial: "tasks/task_between", collection: @tasks, as: :task %>
-    </tbody>
-  </table>
+  <div class="panel panel-default" style="margin:0px;">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th class="col-md-7">Content</th>
+          <th class="col-md-3">Deadline</th>
+          <th class="col-md-2">Comp/Edit/Del</th>
+        </tr>
+      </thead>
+      <tbody class="newtaskinsert2">
+        <%= render partial: "tasks/task_between", collection: @tasks, as: :task %>
+      </tbody>
+    </table>
+  </div>
   <%= will_paginate @tasks %>
 </div>
