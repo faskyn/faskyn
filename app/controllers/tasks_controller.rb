@@ -10,8 +10,6 @@ class TasksController < ApplicationController
   require 'will_paginate/array'
 
   def index
-    @assigned_tasks = current_user.assigned_tasks.uncompleted.order("created_at DESC")
-    @executed_tasks = current_user.executed_tasks.uncompleted.order("created_at DESC")
     #with no ransack
     #@tasks = current_user.tasks_uncompleted.paginate(page: params[:page], per_page: 12)
     #@tasks = current_user.assigned_and_executed_tasks.uncompleted.order("created_at DESC").paginate(page: params[:page], per_page: 12)
@@ -21,6 +19,10 @@ class TasksController < ApplicationController
     @tasks = @q_tasks.result.includes(:executor, :executor_profile, :assigner, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
     #for AJAX version
     @task = Task.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
@@ -36,7 +38,7 @@ class TasksController < ApplicationController
       #@assigned_tasks = current_user.assigned_tasks.uncompleted.order("deadline DESC").paginate(page: params[:page], per_page: 12)
     #ransack version for sorting
     @q_outgoing_tasks = current_user.assigned_tasks.uncompleted.ransack(params[:q])
-    @assigned_tasks = @q_outgoing_tasks.result.includes(:executor, :executor_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
+    @tasks = @q_outgoing_tasks.result.includes(:executor, :executor_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
     #for AJAX version
     @task = Task.new
     respond_to do |format|
@@ -50,7 +52,11 @@ class TasksController < ApplicationController
       #@executed_tasks = current_user.executed_tasks.uncompleted.order("created_at DESC").paginate(page: params[:page], per_page: 12)
     #ransack version for sorting
     @q_incoming_tasks = current_user.executed_tasks.uncompleted.ransack(params[:q])
-    @executed_tasks = @q_incoming_tasks.result.includes(:assigner, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
+    @tasks = @q_incoming_tasks.result.includes(:assigner, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new
@@ -65,7 +71,7 @@ class TasksController < ApplicationController
       TaskcreatorWorker.perform_async(@task.id, @user.id, 5) #sidekiq email on task creation
       Conversation.create(sender_id: @task.assigner_id, recipient_id: @task.executor_id)
       respond_to do |format|
-        format.html { redirect_to user_tasks_path(current_user), notice: "Task saved!"}
+        format.html { redirect_to user_tasks_path(current_user), notice: "Task saved!" }
         format.js
       end
       #sending in-app notification to executor; send_notification defined in notification.rb
@@ -77,10 +83,6 @@ class TasksController < ApplicationController
         format.js
       end
     end
-    #else  
-      #flash[:warning] = "Executor hasn't created a profile yet."
-      #redirect_to user_tasks_path(current_user)
-    #end
   end
 
   def complete
@@ -100,14 +102,16 @@ class TasksController < ApplicationController
   end
 
   def completed_tasks
-    @assigned_tasks = current_user.assigned_tasks.completed.order("completed_at DESC")
-    @executed_tasks = current_user.executed_tasks.completed.order("completed_at DESC")
     #with no ransack
       #@tasks = @user.tasks_completed.paginate(page: params[:page], per_page: 12)
     #with ransack
     @q_completed_tasks = Task.alltasks(current_user).completed.ransack(params[:q])
     #@q_completed_tasks = current_user.tasks_completed.ransack(params[:q])
     @tasks = @q_completed_tasks.result.includes(:assigner, :assigner_profile, :executor, :executor_profile).paginate(page: params[:page], per_page: Task.pagination_per_page)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def completed_incoming_tasks

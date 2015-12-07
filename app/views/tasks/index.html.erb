@@ -26,7 +26,12 @@
       </tbody>
     </table>
   </div>
-  <%= will_paginate @tasks %>
+  <div id="infinite-task-scrolling" style="text-align:center;display:none">
+    <%= will_paginate %>
+  </div>
+  <div class="no-more" style="display:none;padding-left:20px;">
+    <p>No more tasks.</p>
+  </div>
 
   <!-- Modal for new task -->
   <%= form_for([current_user, @task], remote: true) do |f| %>
@@ -53,7 +58,7 @@
             </div>
             <div class="field form-group">
               <%= f.label :deadline %>
-              <%= f.datetime_select :deadline, ampm: true, :start_year => Date.current.year, :order => [:day, :month, :year], class: "form-control task_deadline" %>
+              <%= f.datetime_select :deadline, ampm: true, :start_year => Date.current.year, :order => [:day, :month, :year], :discard_minute => true, class: "form-control task_deadline" %>
             </div>
             
           </div>

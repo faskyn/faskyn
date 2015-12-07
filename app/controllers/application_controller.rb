@@ -64,7 +64,6 @@ class ApplicationController < ActionController::Base
       @task_between = Task.new
       if Conversation.between(current_user.id, @user.id).present?
         @conversation = Conversation.between(current_user.id, @user.id).first
-        #@receiver = interlocutor(@conversation)
         @messages = @conversation.messages.includes(:user)
         @message = Message.new
         if  Notification.between_chat_recipient(current_user, @user).unchecked.any?
@@ -74,7 +73,7 @@ class ApplicationController < ActionController::Base
         end
         respond_to do |format|
           format.html
-          format.js { render :template => "tasks/update.js.erb", :template => "tasks/destroy.js.erb", layout: false }
+          format.js { render :template => "tasks/update.js.erb", :template => "tasks/destroy.js.erb", :template => "tasks/between.js.erb", layout: false }
         end
       end
     else
@@ -83,10 +82,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
-  #def conversation_params
-    #params.permit(:sender_id, :recipient_id)
-  #end
 
   def interlocutor(conversation)
     current_user == conversation.recipient ? conversation.sender : conversation.recipient

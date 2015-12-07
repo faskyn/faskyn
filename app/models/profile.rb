@@ -20,4 +20,8 @@ class Profile < ActiveRecord::Base
       parent.table[:last_name]
     )
   end
+
+  def full_name
+    [self.first_name.upcase, self.last_name.upcase].join(' ')
+  end
 end

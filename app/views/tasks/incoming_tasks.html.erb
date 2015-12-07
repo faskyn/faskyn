@@ -20,10 +20,15 @@
           <!-- End of ransack sorting-->
         </tr>
       </thead>
-      <tbody>
-        <%= render @executed_tasks %>
+      <tbody class="newtaskinsert">
+        <%= render @tasks %>
       </tbody>
     </table>
   </div>
-  <%= will_paginate @executed_tasks %> 
+  <div id="infinite-task-scrolling" style="text-align:center;display:none">
+    <%= will_paginate @tasks %>
+  </div>
+  <div class="no-more" style="display:none;padding-left:20px;">
+    <p>No more tasks.</p>
+  </div> 
 </div>

@@ -1,0 +1,8 @@
+$('.newtaskinsert2').append('<%= j render partial: "tasks/task_between", collection: @tasks, as: :task %>');
+<% if @tasks.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate @tasks %>');
+<% else %>
+  $(window).off('scroll');
+  $('.pagination').remove();
+  $('.no-more').delay(1000).fadeIn(1500);
+<% end %>

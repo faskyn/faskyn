@@ -18,7 +18,7 @@ class Task < ActiveRecord::Base
 
   #number of tasks to appear on different task index pages
   def self.pagination_per_page
-    8
+    12
   end
 
   def completed?

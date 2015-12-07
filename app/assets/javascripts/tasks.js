@@ -17,6 +17,20 @@ var ready = function() {
 		$('.alert-danger').hide();
 	});
 
+	//infinite scrolling for tasks
+	if ($('#infinite-task-scrolling').size() > 0) {
+    $(window).on('scroll', function() {
+      $('#infinite-task-scrolling').hide();
+      var more_tasks_url;
+      more_tasks_url = $('.pagination .next_page a').attr('href');
+      if (more_tasks_url && $(window).scrollTop() > $(document).height() - $(window).height() - 60) {
+        $('.pagination').html('<img src="/assets/ajax-loader.gif" alt="Loading..." title="Loading..." />');
+        $('#infinite-task-scrolling').show();
+        $.getScript(more_tasks_url);
+      }
+    });
+  };
+
 };
 
 $(document).ready(ready);

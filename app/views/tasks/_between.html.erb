@@ -20,5 +20,10 @@
       </tbody>
     </table>
   </div>
-  <%= will_paginate @tasks %>
+  <div id="infinite-task-scrolling" style="text-align:center;display:none">
+    <%= will_paginate @tasks %>
+  </div>
+  <div class="no-more" style="display:none;padding-left:20px;">
+    <p>No more tasks.</p>
+  </div>
 </div>
