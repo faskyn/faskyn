@@ -12,11 +12,9 @@ class ProfilesController < ApplicationController
   def create
     @profile = @user.build_profile(profile_params)
     if @profile.save
-      flash[:success] = "Profile Updated!"
-      redirect_to user_path(params[:user_id])
+      redirect_to user_path(@profile.user), notice: "Profile successfully created!"
     else
-      render action: :new
-      flash[:alert] = "Profile couldn't be updated."
+      render action: :new, alert: "Profile couldn't be created!"
     end
   end
 
@@ -28,10 +26,9 @@ class ProfilesController < ApplicationController
 
   def update
     if @profile.update_attributes(profile_params)
-      flash[:success] = "Profile Updated!"
-      redirect_to user_path(params[:user_id])
+      redirect_to user_path(@profile.user), notice: "Profle updated!"
     else
-      render action: :edit
+      render action: :edit, alert: "Profile couldn't be updated!"
     end
   end
 

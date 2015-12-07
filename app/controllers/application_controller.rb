@@ -67,9 +67,16 @@ class ApplicationController < ActionController::Base
         @messages = @conversation.messages.includes(:user)
         @message = Message.new
         if  Notification.between_chat_recipient(current_user, @user).unchecked.any?
-          Notification.between_chat_recipient(current_user, @user).last.check_chat_notifications
+          Notification.between_chat_recipient(current_user, @user).last.check_chat_notification
           current_user.decrease_new_chat_notifications
           current_user.decreased_chat_number_pusher
+        end
+        if Notification.between_other_recipient(current_user, @user).unchecked.any?
+          Notification.between_other_recipient(current_user, @user).find_each do |notification|
+            notification.check_other_notification
+            current_user.decrease_new_other_notifications
+            current_user.decreased_other_number_pusher
+          end
         end
         respond_to do |format|
           format.html

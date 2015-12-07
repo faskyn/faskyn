@@ -131,7 +131,7 @@ class TasksController < ApplicationController
         format.html { redirect_to user_tasks_path(current_user), notice: "Task was successfully updated!"}
         format.js
       else
-        format.html { render action: :edit}
+        format.html { render action: :edit, alert: "Task couldn't be updated!"}
         format.js
       end
     end

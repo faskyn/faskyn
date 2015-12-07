@@ -19,10 +19,8 @@ $font-family-serif:       'Georgia', serif;
   padding-top:50px;
 }
 
-.fixedheight {
-  .confirmations, .invitations, .passwords, .registrations, .sessions {
-    padding-top:0px;
-  }
+#confirmations-controller, #invitations-controller, #passwords-controller, #registrations-controller, #sessions-controller {
+  padding-top:0px;
 }
 
 .loggedouthtml {

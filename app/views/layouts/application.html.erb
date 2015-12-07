@@ -73,7 +73,7 @@
   <!-- end of script for pusher -->
 </head>
 <!-- <body class="fixedheight <%= controller.controller_name %>"> -->
-<body class="fixedheight <%= controller.controller_name %>">
+<body class="fixedheight" id="<%= controller.controller_name %>-controller">
   <%= render 'layouts/header' %>
   <% if user_signed_in? %>
     <div id="wrapper">

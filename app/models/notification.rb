@@ -13,6 +13,9 @@ class Notification < ActiveRecord::Base
   scope :between_chat_recipient, -> (recipient_id, sender_id) do
     where("notifications.recipient_id = ? AND notifications.sender_id = ? AND notifications.notification_type = ?", recipient_id, sender_id, "chat")
   end
+  scope :between_other_recipient, -> (recipient_id, sender_id) do
+    where("notifications.recipient_id = ? AND notifications.sender_id = ? AND notifications.notification_type != ?", recipient_id, sender_id, "chat")
+  end
   
   def self.send_notification(receiver, type, sender)
     #creating new notification record and updating notification number
@@ -31,14 +34,14 @@ class Notification < ActiveRecord::Base
   end
 
   #used when user gets to the showpage of the sender not when gets to the notfication page
-  def check_chat_notifications
+  def check_chat_notification
     if self.checked_at == nil
       update_attributes(checked_at: Time.now)
     end
   end
 
   #used when seen on the notifications page
-  def check_other_notifications
+  def check_other_notification
     if self.checked_at == nil
       update_attributes(checked_at: Time.now)
     end
