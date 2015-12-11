@@ -59,7 +59,7 @@
                       </div>
                       <div class="field form-group">
                         <%= f.label :deadline %>
-                        <%= f.datetime_select :deadline, ampm: true, :start_year => Date.current.year, :order => [:day, :month, :year], class: "form-control" %>
+                        <%= f.datetime_select :deadline, ampm: true, :start_year => Date.current.year, :order => [:day, :month, :year], :discard_minute => true, class: "form-control task_deadline" %>
                       </div>    
                     </div>
                     <div class="modal-footer">

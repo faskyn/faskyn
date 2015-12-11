@@ -22,6 +22,6 @@ class Profile < ActiveRecord::Base
   end
 
   def full_name
-    [self.first_name.upcase, self.last_name.upcase].join(' ')
+    [self.first_name.camelize, self.last_name.camelize].join(' ')
   end
 end

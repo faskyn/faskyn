@@ -19,8 +19,12 @@ $font-family-serif:       'Georgia', serif;
   padding-top:50px;
 }
 
-#confirmations-controller, #invitations-controller, #passwords-controller, #registrations-controller, #sessions-controller {
+.confirmations-controller, .invitations-controller, .passwords-controller, .registrations-controller, .sessions-controller {
   padding-top:0px;
+}
+
+.registrations-controller.edit-action {
+  padding-top: 50px;
 }
 
 .loggedouthtml {
@@ -60,6 +64,32 @@ $font-family-serif:       'Georgia', serif;
   background: $garmin-blue;
   border-color: $garmin-blue;
 }
+
+#btn-outline-primary {
+    color: $garmin-blue;
+    background-color: transparent;
+    box-shadow:none;
+    border: 2px solid $garmin-blue;
+  &:hover, &:focus, &:active {
+    color: white;
+    background-color: $garmin-blue;
+    transition: 0.25s;
+  }
+}
+
+#btn-outline-success {
+  color: #5cb85c;
+  background-color: transparent;
+  box-shadow: none;
+  border: 2px solid #5cb85c;
+  &:hover, &:focus, &:active {
+    color: white;
+    background-color: #5cb85c;
+    transition: 0.25s;
+  }
+}
+
+
 
 body, p {
   font-family: $font-family-sans-serif;

@@ -1,6 +1,6 @@
 class NotificationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :only_current_user, only: [:index, :other_notifications, :chat_notifications]
+  before_action :only_current_user, only: [:other_notifications, :chat_notifications]
 
   def other_notifications
     @other_notifications = current_user.notifications.where.not('notifications.notification_type = ?', 'chat').limit(8).order(created_at: :desc)

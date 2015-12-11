@@ -2,14 +2,14 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
 
-  get 'notifications/index'
-
+  root 'static_pages#home'
   get 'static_pages/home'
   get 'static_pages/about', path: 'about'
   get 'static_pages/help', path: 'help'
   get 'static_pages/privacypolicy', path: 'privacypolicy'
 
   post 'pusher/auth' #for pusher authentication
+  get '/auth/:provider/callback', to: 'profiles#profile_twitter' #twitter
   resources :contacts
   devise_for :users
   resources :users do
@@ -18,7 +18,11 @@ Rails.application.routes.draw do
         get :other_notifications, :chat_notifications
       end
     end
-    resource :profile
+    resource :profile do
+      member do
+        post :profile_twitter
+      end
+    end
     resources :tasknamecompanies
     resources :tasks do
       member do
@@ -33,8 +37,6 @@ Rails.application.routes.draw do
   resources :conversations, only: [:index, :show, :create] do
     resources :messages, only: [:index, :create]
   end
-  
-  root 'static_pages#home'
 
   mount Sidekiq::Web => '/sidekiq'
 

@@ -1,8 +1,8 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-  before_action :only_current_user, except: [:show]
+  before_action :only_current_user, except: [:show, :profile_twitter]
   before_action :if_profile_exists, only: [:new, :create]
-  before_action :find_user_for_profile
+  before_action :find_user_for_profile, except: :profile_twitter
   before_action :set_profile, only: [:show, :edit, :update]
 
   def new
@@ -19,6 +19,14 @@ class ProfilesController < ApplicationController
   end
 
   def show
+  end
+
+  def profile_twitter
+    #callback from twitter is redirected to here
+    # current_user.profile.update_attributes(
+    #   twitter_url: ,
+    #   twitter_pic: )
+    redirect_to edit_user_profile_path(current_user, auth_hash.uid), notice: "Twitter connected!"
   end
 
   def edit
@@ -49,6 +57,10 @@ class ProfilesController < ApplicationController
     def only_current_user
       @user = User.find(params[:user_id])
       redirect_to user_path(current_user) unless @user == current_user
+    end
+
+    def auth_hash
+      request.env['omniauth.auth']
     end
 end
 

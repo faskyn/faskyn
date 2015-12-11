@@ -5,6 +5,23 @@ $dark-grey: #5E5E5E;
 $dropbox-light-grey: #7b8994;
 $orange: #ff6600;
 
+.btn-social-reg {
+  color: white;
+  &.btn-linkedin {
+    background-color:#007BB6;
+  }
+  &.btn-twitter {
+    background-color:#55ACEE;
+  }
+  &.btn-angellist {
+    background-color:#333333;
+  }
+}
+
+.social-media {
+  text-align: center;
+}
+
 .rightsidebar {
   border-left: solid 1px $gray-medium-light;
   background: #f7f7f7;

@@ -1,8 +1,29 @@
+<% provide(:title, 'Edit profile') %>
 <div class="container-fluid container-form">
   <div class= "col-md-8 col-md-offset-2">
     <div class="well profile-well"> 
       <div class="row">
         <h2 class="text-center">Edit your profile</h2>
+      </div>
+      <div class="row social-media">
+        <p>Attach social media to your profile for better discovering</p>
+        <div class="col-md-4">
+          <%= link_to "/auth/twitter", class: "btn btn-social-reg btn-twitter" do %>
+            <i class="fa fa-twitter"> Twitter</i>
+          <% end %>
+        </div>
+        <div class="col-md-4">
+          <%= link_to "/auth/twitter", class: "btn btn-social-reg btn-linkedin" do %>
+            <i class="fa fa-linkedin"> LinkedIn</i>
+          <% end %>
+        </div>
+        <div class="col-md-4">
+          <%= link_to "/auth/twitter", class: "btn btn-social-reg btn-angellist" do %>
+            <i class="fa fa-angellist"> AngelList</i>
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
         <%= render 'form' %>
       </div>
     </div>

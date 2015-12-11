@@ -76,6 +76,8 @@ gem 'foreman', '~> 0.78.0'
 gem 'net-ssh', '~> 3.0', '>= 3.0.1'
 #finding links
 gem 'rinku', '~> 1.7', '>= 1.7.3'
+#social media integration
+gem 'omniauth-twitter', '~> 1.2', '>= 1.2.1'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
