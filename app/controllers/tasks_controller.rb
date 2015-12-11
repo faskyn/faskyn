@@ -164,13 +164,7 @@ class TasksController < ApplicationController
       @task = Task.find(params[:id])
     end
 
-    def only_current_user
-      @user = User.find(params[:user_id])
-      redirect_to user_tasks_path(current_user) unless @user == current_user
-    end
-
     def set_assigner
       @task.assigner_id = current_user.id
     end
-
 end

@@ -15,7 +15,7 @@ class ConversationsController < ApplicationController
     @conversation = Conversation.find(params[:id])
     @user = interlocutor(@conversation)
     @receiver = interlocutor(@conversation)
-    @messages = @conversation.messages.limit(10).order(created_at: :desc)
+    @messages = @conversation.messages.order(created_at: :desc)
     @message = Message.new
     @messages_with_file = @conversation.messages.with_file.order(created_at: :desc).paginate(page: params[:page], per_page: 12)
   end
@@ -33,10 +33,5 @@ class ConversationsController < ApplicationController
 
     def interlocutor(conversation)
       current_user == conversation.recipient ? conversation.sender : conversation.recipient
-    end
-
-    def only_current_user
-      @user = User.find(params[:user_id])
-      redirect_to user_tasks_path(current_user) unless @user == current_user
     end
 end

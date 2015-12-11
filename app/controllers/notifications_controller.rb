@@ -17,9 +17,4 @@ class NotificationsController < ApplicationController
     def notification_params
       params.require(:notification).permit(:recipient_id, :sender_id, :notification_type, :checked_at)
     end
-
-    def only_current_user
-      @user = User.find(params[:user_id])
-      redirect_to user_tasks_path(current_user) unless @user == current_user
-    end
 end

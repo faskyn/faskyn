@@ -15,11 +15,22 @@ $orange: #ff6600;
   }
   &.btn-angellist {
     background-color:#333333;
+    &:hover {
+      background-color: $dropbox-light-grey;
+    }
   }
 }
 
 .social-media {
+  margin-bottom: 20px;
   text-align: center;
+}
+
+.cta-social-media {
+  margin-bottom: 10px;
+  p {
+    text-align: left;
+  }
 }
 
 .rightsidebar {
