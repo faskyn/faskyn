@@ -3,7 +3,7 @@
 <head>
 
   <meta content='<%= user_signed_in? ? current_user.id : "" %>' name='user-id'/>
-  <% if current_user.new_chat_notification > 0 %>
+  <% if user_signed_in? && (current_user.new_chat_notification > 0) %>
     <title>(<%= current_user.new_chat_notification %>) <%= yield(:title) %></title>
   <% else %>
     <title><%= yield(:title) %></title>
