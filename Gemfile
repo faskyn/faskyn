@@ -40,6 +40,8 @@ gem 'bootstrap-will_paginate', '~> 0.0.10'
 gem 'simple_form', '~> 3.1.1'
 #font awesome
 gem 'font-awesome-rails', '~> 4.4'
+#bootstrap buttons for social media
+gem 'bootstrap-social-rails', '~> 4.8'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 #populating fake data
@@ -78,6 +80,8 @@ gem 'net-ssh', '~> 3.0', '>= 3.0.1'
 gem 'rinku', '~> 1.7', '>= 1.7.3'
 #social media integration
 gem 'omniauth-twitter', '~> 1.2', '>= 1.2.1'
+gem 'omniauth-linkedin', '~> 0.2.0'
+gem 'omniauth-angellist', '~> 1.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

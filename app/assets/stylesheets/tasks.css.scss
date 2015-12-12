@@ -9,8 +9,11 @@ $orange: #ff6600;
 	margin-top:10px;
 }
 
-.task-container {
+.container-fluid.task-container {
 	margin: 0px 40px 40px 40px;
+}
+
+.task-container {
 	padding-top: 40px;
 	.task-header {
 		margin: 0 0 15px 0;

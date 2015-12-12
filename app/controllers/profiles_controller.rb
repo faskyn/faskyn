@@ -19,17 +19,25 @@ class ProfilesController < ApplicationController
   end
 
   def show
+    @twitter = @profile.socials.where(provider: "twitter").first
+    @linkedin = @profile.socials.where(provider: "linkedin").first
+    @angellist = @profile.socials.where(provider: "angellist").first
   end
 
-  def profile_twitter
-    #callback from twitter is redirected to here
-    # current_user.profile.update_attributes(
-    #   twitter_url: ,
-    #   twitter_pic: )
-    redirect_to edit_user_profile_path(current_user, auth_hash.uid), notice: "Twitter connected!"
-  end
+  # def profile_socialmedia
+  #   if auth_hash.provider
+  #     redirect_to edit_user_profile_path(current_user, auth_hash.uid), notice: "Twitter connected!"
+  #   elsif provider == linkedin
+  #   elsif provider == angellist
+  #   else
+  #   end
+  #   redirect_to edit_user_profile_path(current_user)
+  # end
 
   def edit
+    @twitter = @profile.socials.where(provider: "twitter").first
+    @linkedin = @profile.socials.where(provider: "linkedin").first
+    @angellist = @profile.socials.where(provider: "angellist").first
   end
 
   def update
@@ -57,10 +65,6 @@ class ProfilesController < ApplicationController
     def only_current_user_profile_check
       @user = User.find(params[:user_id])
       redirect_to user_path(current_user) unless @user == current_user
-    end
-
-    def auth_hash
-      request.env['omniauth.auth']
     end
 end
 

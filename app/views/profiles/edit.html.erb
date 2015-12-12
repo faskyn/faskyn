@@ -12,18 +12,36 @@
       </div>
       <div class="row social-media">
         <div class="col-md-4">
-          <%= link_to "/auth/twitter", class: "btn btn-social-reg btn-twitter" do %>
-            <i class="fa fa-twitter"> Twitter</i>
+          <% if @twitter.blank? %>
+            <%= link_to "/auth/twitter", class: "btn btn-social-reg btn-twitter" do %>
+              <i class="fa fa-twitter"> Twitter</i>
+            <% end %>
+          <% else %>
+            <%= link_to "/auth/twitter", class: "btn btn-social-reg btn-twitter linked" do %>
+              <i class="fa fa-twitter"> Twitter (linked)</i>
+            <% end %>
           <% end %>
         </div>
         <div class="col-md-4">
-          <%= link_to "/auth/twitter", class: "btn btn-social-reg btn-linkedin" do %>
+        <% if @linkedin.blank? %>
+          <%= link_to "/auth/linkedin", class: "btn btn-social-reg btn-linkedin" do %>
             <i class="fa fa-linkedin"> LinkedIn</i>
           <% end %>
+        <% else %>
+          <%= link_to "/auth/linkedin", class: "btn btn-social-reg btn-linkedin linked" do %>
+            <i class="fa fa-linkedin"> LinkedIn (linked)</i>
+          <% end %>
+        <% end %>
         </div>
         <div class="col-md-4">
-          <%= link_to "/auth/twitter", class: "btn btn-social-reg btn-angellist" do %>
-            <i class="fa fa-angellist"> AngelList</i>
+          <% if @angellist.blank? %>
+            <%= link_to "/auth/angellist", class: "btn btn-social-reg btn-angellist" do %>
+              <i class="fa fa-angellist"> AngelList</i>
+            <% end %>
+          <% else %>
+            <%= link_to "/auth/angellist", class: "btn btn-social-reg btn-angellist linked" do %>
+              <i class="fa fa-angellist"> AngelList (linked)</i>
+            <% end %>
           <% end %>
         </div>
       </div>

@@ -18,6 +18,10 @@ var ready = function () {
         }
       });
     };
+
+    $(".btn-social-icon").mouseup(function(){
+      $(this).blur();
+    });
 }
 
 $(document).ready(ready);

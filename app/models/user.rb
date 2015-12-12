@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true
 
   has_one :profile, dependent: :destroy
+  has_many :socials, dependent: :destroy, through: :profile
   delegate :first_name, to: :profile, allow_nil: true
 
   has_many :assigned_tasks, class_name: "Task", foreign_key: "assigner_id", dependent: :destroy

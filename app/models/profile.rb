@@ -1,5 +1,6 @@
 class Profile < ActiveRecord::Base
   belongs_to :user
+  has_many :socials
 
   mount_uploader :avatar, AvatarUploader
 

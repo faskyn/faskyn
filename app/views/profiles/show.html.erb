@@ -12,6 +12,21 @@
         <p><%= @profile.company %></p>
         <p><%= @profile.job_title %></p>
         <p><%= @profile.phone_number %></p>
+        <% unless @twitter.blank? %>
+          <%= link_to @twitter.page_url, target: "_blank", class: "btn btn-social-icon btn-sm btn-twitter" do %>
+            <i class="fa fa-twitter"></i>
+          <% end %>
+        <% end %>
+        <% unless @linkedin.blank? %>
+          <%= link_to @linkedin.page_url, target: "_blank", class: "btn btn-social-icon btn-sm btn-linkedin" do %>
+            <i class="fa fa-linkedin"></i>
+          <% end %>
+        <% end %>
+        <% unless @angellist.blank? %>
+          <%= link_to @angellist.page_url, target: "_blank", class: "btn btn-social-icon btn-sm btn-angellist" do %>
+            <i class="fa fa-angellist"></i>
+          <% end %>
+        <% end %>
       </div>
       <div class="panel-footer">
         <p><%= @profile.description %></p>

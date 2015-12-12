@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   get 'static_pages/privacypolicy', path: 'privacypolicy'
 
   post 'pusher/auth' #for pusher authentication
-  get '/auth/:provider/callback', to: 'profiles#profile_twitter' #twitter
+  get '/auth/:provider/callback', to: 'socials#create' #twitter/linkedin/angellist
+  get '/auth/failure', to: redirect('/')
   resources :contacts
   devise_for :users
   resources :users do
@@ -19,9 +20,7 @@ Rails.application.routes.draw do
       end
     end
     resource :profile do
-      member do
-        post :profile_twitter
-      end
+      resources :socials, only: [:create, :update, :destroy]
     end
     resources :tasknamecompanies
     resources :tasks do

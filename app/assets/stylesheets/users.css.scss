@@ -1,3 +1,6 @@
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+
 $gray-medium-light: #eaeaea;
 $garmin-blue: #007cc3;
 $garmin-light-blue: #d9edf7;
@@ -9,14 +12,23 @@ $orange: #ff6600;
   color: white;
   &.btn-linkedin {
     background-color:#007BB6;
+    &.linked {
+      opacity: 0.5;
+    }
   }
   &.btn-twitter {
     background-color:#55ACEE;
+    &.linked {
+      opacity: 0.5;
+    }
   }
   &.btn-angellist {
     background-color:#333333;
     &:hover {
       background-color: $dropbox-light-grey;
+      &.linked {
+        opacity: 0.5
+      }
     }
   }
 }
