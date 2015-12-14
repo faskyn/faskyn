@@ -1,10 +1,10 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :twitter, Rails.application.secrets.twitter_api_key, Rails.application.secrets.twitter_api_secret, 
+  provider :twitter, ENV['TWITTER_API_KEY'], ENV['TWITTER_API_SECRET'], 
     { :authorize_params => {
       :use_authorize => 'true'
       }
     }
-  provider :linkedin, Rails.application.secrets.linkedin_api_key, Rails.application.secrets.linkedin_api_secret
+  provider :linkedin, ENV['LINKEDIN_API_KEY'], ENV['LINKEDIN_API_SECRET']
   provider :angellist, Rails.application.secrets.angellist_api_key, Rails.application.secrets.angellist_api_secret
 end
 
