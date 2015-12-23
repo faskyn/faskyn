@@ -12,7 +12,7 @@ var ready = function() {
 		});
 	});
 
-	//when modal closes error messages get hidden
+	//when new task modal closes error messages get hidden
 	$('#newtask').on('hidden.bs.modal', function (e) {
 		$('.alert-danger').hide();
 	});

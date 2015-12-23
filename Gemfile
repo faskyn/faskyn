@@ -36,6 +36,8 @@ gem 'bootstrap-sass', '~> 3.3.5.1'
 gem 'will_paginate', '~> 3.0.7'
 #pagination w/ bootstrap
 gem 'bootstrap-will_paginate', '~> 0.0.10'
+#datepicker UI
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17', '>= 4.17.37'
 #simple form
 gem 'simple_form', '~> 3.1.1'
 #font awesome
@@ -82,6 +84,10 @@ gem 'rinku', '~> 1.7', '>= 1.7.3'
 gem 'omniauth-twitter', '~> 1.2', '>= 1.2.1'
 gem 'omniauth-linkedin', '~> 0.2.0'
 gem 'omniauth-angellist', '~> 1.0'
+#calendar gem
+gem 'fullcalendar-rails', '~> 2.5'
+#framework for handling timeformats
+gem 'momentjs-rails', '~> 2.10', '>= 2.10.6'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

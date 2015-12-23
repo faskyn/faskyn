@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resources :contacts
   devise_for :users
   resources :users do
+    resources :eventnamecompanies
+    resources :events
     resources :notifications, only: [:create, :index] do
       collection do
         get :other_notifications, :chat_notifications

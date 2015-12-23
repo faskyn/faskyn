@@ -1,0 +1,92 @@
+<% provide(:title, "Events") %>
+<div class= "container-fluid task-container">
+  <div id="calendar">
+  </div>
+  <%= form_for([@user, @event], remote: true, id: "new-event-form") do |f| %>
+    <div id="fullcallmodal-new" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+            <h4 id="new-modaltitle" class="modal-title">New Event</h4>
+          </div>
+          <div id="modalBody" class="modal-body">
+            <div class="alert alert-danger" style="display:none">
+              <ul class="errors" style="display:none">
+                <%= render 'layouts/error_messages', object: f.object %>
+              </ul>
+            </div>
+            <div class="field form-group">
+              <%= f.label :title %>
+              <%= f.text_field :title, class: "form-control", id: "new-titlevalue" %>
+            </div>
+            <div class="field form-group">
+              <%= f.label :start_at %>
+              <%= f.text_field :start_at, class: "form-control", id: "new-startvalue" %>
+            </div>
+            <div class="field form-group">
+              <%= f.label :end_at %>
+              <%= f.text_field :end_at, class: "form-control", id: "new-endvalue" %>
+            </div>
+            <div class="field form-group">
+              <%= f.label :all_day %>
+              <%= f.check_box :all_day, { id: "new-alldayvalue" }, true, false %>
+            </div>
+            <div class="field form-group">
+              <%= f.label :recipient %>
+              <%= f.text_field :event_name_company, data: {autocomplete_source: user_eventnamecompanies_path}, class: "form-control event_name_company", id: "new-recipientvalue", value: "" %>
+            </div>
+            <div class="field form-group">
+              <%= f.label :description %>
+              <%= f.text_area :body, class: "form-control", id: "new-bodyvalue" %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= f.submit "Create Event", class: 'btn btn-primary', id: "event-form-create" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div id="fullcallmodal-edit" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+            <h4 id="edit-modaltitle" class="modal-title"></h4>
+        </div>
+        <div id="modalBody" class="modal-body">
+          <form id="event-form">
+            <div class="field form-group">
+              <span id="edit-uservalue">
+                <p><strong></strong></p>
+              </span>
+            </div>
+            <div class="field form-group">
+              <label for="edit-startvalue">Start at:</label>
+              <input type="text" id="edit-startvalue" class="form-control"/>
+            </div>
+            <div class="field form-group">
+              <label for="edit-endvalue">End at:</label>
+              <input type="text" id="edit-endvalue" class="form-control"/>
+            </div>
+            <div class="field form-group">
+              <label for="edit-alldayvalue">All day:</label>
+              <input type="checkbox" id="edit-alldayvalue" value="0"/>
+            </div>
+            <div class="field form-group">
+              <label for="edit-bodyvalue">Description:</label>
+              <input type="text" id="edit-bodyvalue" class="form-control"/>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button class="btn btn-danger" id="event-form-delete">Delete Event</button>
+            <button class="btn btn-primary" id="event-form-update">Update Event</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -13,12 +13,14 @@
  *= require jquery-ui
  *= require font-awesome
  *= require bootstrap-social
+ *= require fullcalendar
  *= require_self
  *= require_tree .
  */
 
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
+@import 'bootstrap-datetimepicker';
 @import 'bootstrap-social';
 
 

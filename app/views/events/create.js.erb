@@ -1,0 +1,14 @@
+$("ul.errors").html("");
+<% if @event.errors.any? %>
+	//modal error messages get inserted via AJAX
+	$('.alert-danger').show();
+	$('ul.errors').show();
+	<% @event.errors.full_messages.each do |message| %>
+		$("ul.errors").append($("<li />").html("<%= message.html_safe %>"));
+	<% end %>
+<% else %>
+	//hiding modal on creation and setting values to zero for optional new modal
+	$('ul.errors').hide();
+	$('.alert-danger').hide();
+	createEvent();
+<% end %>

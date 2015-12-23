@@ -17,5 +17,5 @@ class UsersController < ApplicationController
 
   def show
     #set in application controller
-  end 
+  end
 end
