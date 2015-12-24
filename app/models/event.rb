@@ -4,11 +4,9 @@ class Event < ActiveRecord::Base
 
   validates :sender, presence: true
   validates :title, presence: { message: "can't be blank" }
-  # before_validation(on: :create) do
-  #   self.start_at = DateTime.strptime(self.start_at, '%m/%d/%Y %I:%M %p').to_datetime.utc
-  #   self.end_at = DateTime.strptime(self.end_at, '%m/%d/%Y %I:%M %p').to_datetime.utc
-  # end
-  #validates :executor, presence: { message: "must be valid"}
+  validates :start_at, presence: { message: "can't be blank"}
+  validate :start_must_be_before_end_time
+  validates :recipient, presence: { message: "must be valid"}
   #validates :content, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
 
   scope :between_time, -> (start_time, end_time) do
@@ -50,4 +48,11 @@ class Event < ActiveRecord::Base
   rescue ArgumentError
     self.recipient = nil
   end
+
+  private
+
+    def start_must_be_before_end_time
+      return unless start_at and end_at
+      errors.add(:start_at, "must be before end at") unless start_at < end_at
+    end
 end

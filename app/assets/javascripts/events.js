@@ -21,6 +21,14 @@ var ready = function() {
       sideBySide: true,
       format: 'MM/DD/YYYY hh:mm A'
     });
+    $('#edit-startvalue').datetimepicker({
+    	sideBySide: true,
+    	format: 'MM/DD/YYYY hh:mm A'
+    });
+    $('#edit-endvalue').datetimepicker({
+      sideBySide: true,
+      format: 'MM/DD/YYYY hh:mm A'
+    });
   });
 
 	//when new event modal dissappears hiding the alerts
@@ -60,16 +68,18 @@ var ready = function() {
     	//var railsStart= "" + new Date(start).toUTCString();
     	$('#new-startvalue').val(bootstrapStart);
     	$('#new-endvalue').val(bootstrapEnd);
-    	$('#fullcallmodal-new').modal('show');
+    	$('#fullcalmodal-new').modal('show');
     	//createEvent function comes here called from create.js.erb!!!!!!!!!
       $('#calendar').fullCalendar('unselect');
     },
     //showing and updating calendar event with bootstrap modal
     eventClick:  function(event, jsEvent, view) {
+    	var bootstrapEditStart = moment(event.start).format('MM/DD/YYYY hh:mm A');
+    	var bootstrapEditEnd = moment(event.end).format('MM/DD/YYYY hh:mm A');
       $('#edit-modaltitle').html(event.title);
-      $('#edit-startvalue').val(event.start);
+      $('#edit-startvalue').val(bootstrapEditStart);
       if (event.end) {
-      	$('#edit-endvalue').val(event.end);
+      	$('#edit-endvalue').val(bootstrapEditEnd);
     	};
     	if (event.recipientId == currentUserId) {
     		$('#edit-uservalue').text("Sender: " + event.senderName);
@@ -80,9 +90,8 @@ var ready = function() {
     	if (event.body) {
     		$('#edit-bodyvalue').val(event.body);
     	};
-      $('#fullcallmodal-edit').modal('show');
+      $('#fullcalmodal-edit').modal('show');
     	$('#event-form-update').click(function() {
-	 			$('#fullcallmodal-edit').modal('hide');
 				var newEvent = {
 					id: event.id,
 					title: event.title,
@@ -96,12 +105,10 @@ var ready = function() {
 					body: ($('#edit-bodyvalue').val()),
 					//url: '/users/' + currentUserId + '/events/' + event.id
 				};
-				$('#calendar').fullCalendar('removeEvents', event.id);
-				$('#calendar').fullCalendar('renderEvent', newEvent, true);
 				updateEvent(newEvent);
 			});
 			$('#event-form-delete').click(function() {
-	 			$('#fullcallmodal-edit').modal('hide');
+	 			$('#fullcalmodal-edit').modal('hide');
 				$('#calendar').fullCalendar('removeEvents', event.id);
 				deleteEvent(event);
 			});
@@ -116,7 +123,7 @@ createEvent =  function() {
 	$('#calendar').fullCalendar('addEventSource', "/users/" + currentUserId + "/events");
 	$('#calendar').fullCalendar('rerenderEvents');
 	//emptying modal
-	$('#fullcallmodal-new').modal('hide');
+	$('#fullcalmodal-new').modal('hide');
 	$('#new-titlevalue').val('');
   $('#new-alldayvalue').val(false);
   $('#new-recipientvalue').val('');
@@ -139,6 +146,14 @@ updateEvent = function(the_event) {
     }
   });
 };
+
+updateView = function (the_event) {
+  $('#fullcalmodal-edit').modal('hide');
+  $('ul.errors').hide();
+  $('.alert-danger').hide();
+  $('#calendar').fullCalendar('removeEvents', the_event.id);
+  $('#calendar').fullCalendar('renderEvent', newEvent, true);
+}
 
 //delete events in db
 deleteEvent = function(the_event) {

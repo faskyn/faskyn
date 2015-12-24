@@ -3,7 +3,7 @@
   <div id="calendar">
   </div>
   <%= form_for([@user, @event], remote: true, id: "new-event-form") do |f| %>
-    <div id="fullcallmodal-new" class="modal fade">
+    <div id="fullcalmodal-new" class="modal fade">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -49,7 +49,7 @@
       </div>
     </div>
   <% end %>
-  <div id="fullcallmodal-edit" class="modal fade">
+  <div id="fullcalmodal-edit" class="modal fade">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -58,6 +58,9 @@
         </div>
         <div id="modalBody" class="modal-body">
           <form id="event-form">
+            <div class="alert alert-danger" style="display:none">
+              <ul class="errors" style="display:none"></ul>
+            </div>
             <div class="field form-group">
               <span id="edit-uservalue">
                 <p><strong></strong></p>
