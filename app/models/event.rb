@@ -5,20 +5,21 @@ class Event < ActiveRecord::Base
   validates :sender, presence: true
   validates :title, presence: { message: "can't be blank" }
   validates :start_at, presence: { message: "can't be blank"}
+  validate :start_date_cannot_be_in_the_past
   validate :start_must_be_before_end_time
   validates :recipient, presence: { message: "must be valid"}
   #validates :content, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
 
   scope :between_time, -> (start_time, end_time) do
-    where("? < start_at < ?", Event.format_date(start_time), Event.format_date(end_time))
+    where("? < start_at AND start_at < ?", Event.start_time, Event.end_time)
   end
   scope :allevents, -> (u) { where('sender_id = ? OR recipient_id = ?', u.id, u.id) }
   scope :between, -> (sender_id, recipient_id) do
     where("(events.sender_id = ? AND events.recipient_id = ?) OR (events.sender_id = ? AND events.recipient_id = ?)", sender_id, recipient_id, recipient_id, sender_id)
   end
 
-  def self.format_date(date_time)  
-   Time.at(date_time.to_i).to_formatted_s(:db)  
+  def self.format_date(date_time)
+    Time.at(date_time.to_i).to_formatted_s(:db)  
   end
 
   def as_json(options = {})
@@ -29,7 +30,7 @@ class Event < ActiveRecord::Base
         senderId: self.sender_id,
         senderName: self.sender.profile.full_name,
         title: self.title,
-        body: self.body || "",
+        description: self.description || "",
         start: start_at.rfc822,
         :end => end_at.rfc822,
         allDay: self.all_day,
@@ -50,6 +51,10 @@ class Event < ActiveRecord::Base
   end
 
   private
+
+    def start_date_cannot_be_in_the_past
+      errors.add(:start_at, "can't be in the past") if start_at < DateTime.now
+    end
 
     def start_must_be_before_end_time
       return unless start_at and end_at

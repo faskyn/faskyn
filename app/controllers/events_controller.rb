@@ -6,12 +6,13 @@ class EventsController < ApplicationController
   def index
     @user = current_user
     @event = Event.new
-    #.includes(:recipient, :recipient_profile, :sender, :sender_profile)
-    @events = Event.allevents(current_user)#.between_time(params['start'], params['end']) if (params['start'] && params['end'])
+    @events = Event.allevents(current_user)#.between_time(params[:start], params[:end]) if (params[:start] && params[:end])
     respond_to do |format|
       format.html
       format.json { render json: @events }
+      format.js
     end
+    kk
   end
 
   def show
@@ -60,13 +61,11 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update_attributes(event_params)
-        format.html { redirect_to user_event_path(current_user, @event), notice: 'Event was successfully updated.' }
+        #format.html { redirect_to user_event_path(current_user, @event) }
         format.json { head :no_content }
-        format.js
       else
-        format.html { render action: "edit" }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-        format.js
+        #format.html { render action: "edit" }
+        format.json { render json: { errormessages: @event.errors.full_messages }, status: :unprocessable_entity }
       end
     end
   end
@@ -86,7 +85,7 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:recipient_id, :sender_id, :title, :body, :start_at, :end_at, :all_day, :event_name_company)
+      params.require(:event).permit(:recipient_id, :sender_id, :title, :description, :start_at, :end_at, :all_day, :event_name_company, :start, :end)
     end
 
     def only_current_user_events_check

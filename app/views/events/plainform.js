@@ -153,3 +153,32 @@ deleteEvent = function(the_event) {
 
 $(document).ready(ready);
 $(document).on("page:load", ready);
+
+$('#event-form-update').click(function() {
+        var newEvent = {
+          id: event.id,
+          title: event.title,
+          recipientId: event.recipientId,
+          senderId: event.senderId,
+          senderName: event.senderName,
+          recipientName: event.recipientName,
+          start: new Date($('#edit-startvalue').val()),
+          end: new Date($('#edit-endvalue').val()),
+          allDay: ($('#edit-allday').val() == true),
+          body: ($('#edit-bodyvalue').val()),
+          //url: '/users/' + currentUserId + '/events/' + event.id
+        };
+        updateEvent(newEvent);
+      });
+      $('#event-form-delete').click(function() {
+        $('#fullcalmodal-edit').modal('hide');
+        $('#calendar').fullCalendar('removeEvents', event.id);
+        deleteEvent(event);
+      });
+      return false;
+
+            $.ajax({
+        url : "/users/" + currentUserId + "/events/",
+        type : "GET",
+        data : { form_id: JSON.stringify(event.id) }
+      });

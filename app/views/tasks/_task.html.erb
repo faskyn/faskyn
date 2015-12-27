@@ -30,7 +30,9 @@
       <% if task.completed? %>
         <%= task.completed_at.utc.getlocal.strftime("%d %b %I%p") %>
       <% else %>
-        <%= task.deadline.utc.getlocal.strftime("%d %b %I%p") %>
+        <% unless task.deadline == nil %>
+         <%= task.deadline.utc.getlocal.strftime("%d %b %I%p") %>
+        <% end %>
       <% end %>
     </td>
     <td class="col-md-1" style="padding:0px">
@@ -57,7 +59,7 @@
             <% end %>
             <!--Modal for updating task -->
             <%= form_for([@user, task], method: :patch, remote: true) do |f| %>
-              <div class="modal fade" id="updatetask_<%= task.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal fade updatetask" id="updatetask_<%= task.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content" style="text-align:left">
                     <div class="modal-header">

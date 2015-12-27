@@ -12,10 +12,22 @@ var ready = function() {
 		});
 	});
 
-	//when new task modal closes error messages get hidden
+	//when task modal closes error messages get hidden
 	$('#newtask').on('hidden.bs.modal', function (e) {
 		$('.alert-danger').hide();
 	});
+
+  $('.updatetask').on('hidden.bs.modal', function (e) {
+    $('.alert-danger').hide();
+  });
+
+
+  $(function () {
+    $('.datetimepicker').datetimepicker({
+      sideBySide: true,
+      format: 'MM/DD/YYYY hh:mm A'
+    });
+  });
 
 	//infinite scrolling for tasks
 	if ($('#infinite-task-scrolling').size() > 0) {

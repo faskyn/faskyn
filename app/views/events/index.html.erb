@@ -38,7 +38,7 @@
             </div>
             <div class="field form-group">
               <%= f.label :description %>
-              <%= f.text_area :body, class: "form-control", id: "new-bodyvalue" %>
+              <%= f.text_area :description, class: "form-control", id: "new-descriptionvalue" %>
             </div>
           </div>
           <div class="modal-footer">
@@ -49,7 +49,7 @@
       </div>
     </div>
   <% end %>
-  <div id="fullcalmodal-edit" class="modal fade">
+   <div id="fullcalmodal-edit" class="modal fade">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -62,8 +62,8 @@
               <ul class="errors" style="display:none"></ul>
             </div>
             <div class="field form-group">
-              <span id="edit-uservalue">
-                <p><strong></strong></p>
+              <span id="edit-uservalue" style="font-weight:bold">
+                <p></p>
               </span>
             </div>
             <div class="field form-group">
@@ -76,11 +76,11 @@
             </div>
             <div class="field form-group">
               <label for="edit-alldayvalue">All day:</label>
-              <input type="checkbox" id="edit-alldayvalue" value="0"/>
+              <input type="checkbox" id="edit-alldayvalue"/>
             </div>
             <div class="field form-group">
-              <label for="edit-bodyvalue">Description:</label>
-              <input type="text" id="edit-bodyvalue" class="form-control"/>
+              <label for="edit-descriptionvalue">Description:</label>
+              <input type="text" id="edit-descriptionvalue" class="form-control"/>
             </div>
           </form>
         </div>

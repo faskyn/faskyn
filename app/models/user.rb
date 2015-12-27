@@ -60,6 +60,7 @@ class User < ActiveRecord::Base
       .where.not(id: id)
       .group(:id)
       .order('COUNT(relations.user_id) DESC')
+      .includes(:profile)
       .limit(8)
   end
   #end of the code for number of common tasks with current_user
