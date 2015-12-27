@@ -10,6 +10,9 @@ class ApplicationController < ActionController::Base
 
   before_action :set_search
 
+  def google7df1f819c8dc9008
+  end
+
   def if_profile_exists
     if @user.profile(current_user)
       redirect_to edit_user_profile_path(current_user)

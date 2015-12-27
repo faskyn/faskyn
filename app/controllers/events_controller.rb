@@ -12,7 +12,6 @@ class EventsController < ApplicationController
       format.json { render json: @events }
       format.js
     end
-    kk
   end
 
   def show

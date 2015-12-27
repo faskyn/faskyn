@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'static_pages/about', path: 'about'
   get 'static_pages/help', path: 'help'
   get 'static_pages/privacypolicy', path: 'privacypolicy'
+  get 'application/google7df1f819c8dc9008', path: 'google7df1f819c8dc9008'
 
   post 'pusher/auth' #for pusher authentication
   get '/auth/:provider/callback', to: 'socials#create' #twitter/linkedin/angellist
