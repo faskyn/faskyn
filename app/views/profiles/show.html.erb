@@ -22,11 +22,6 @@
             <i class="fa fa-linkedin"></i>
           <% end %>
         <% end %>
-        <% unless @angellist.blank? %>
-          <%= link_to @angellist.page_url, target: "_blank", class: "btn btn-social-icon btn-sm btn-angellist" do %>
-            <i class="fa fa-angellist"></i>
-          <% end %>
-        <% end %>
       </div>
       <div class="panel-footer">
         <p><%= @profile.description %></p>

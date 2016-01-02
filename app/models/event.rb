@@ -50,6 +50,17 @@ class Event < ActiveRecord::Base
     self.recipient = nil
   end
 
+  # def get_busy_events
+    
+  #   # service = client.discovered_api('calendar', 'v3')
+  #   # result = client.execute(
+  #   #   api_method: service.freebusy.query,
+  #   #   body_object: { timeMin: start_at,
+  #   #                  timeMax: end_at,
+  #   #                  items: items},
+  #   #   headers: {'Content-Type' => 'application/json'})
+  # end
+
   private
 
     def start_date_cannot_be_in_the_past

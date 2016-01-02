@@ -1,15 +1,27 @@
 class EventsController < ApplicationController
+  include GoogleCalendarApi #lib/google_calendar_api.rb
   before_action :authenticate_user!
   before_action :only_current_user_events_check, only: [:index, :show]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   def index
     @user = current_user
+    @google = @user.socials.where(provider: "google_oauth2").first
+    unless @google.blank?
+      # @client = get_busy_events(@google)
+      # @result = open_gcal_connection(get_busy_events, @client, @google)
+      @results = get_busy_events(@google)
+    end
     @event = Event.new
     @events = Event.allevents(current_user)#.between_time(params[:start], params[:end]) if (params[:start] && params[:end])
     respond_to do |format|
       format.html
       format.json { render json: @events }
+      # if @google.blank?
+      #   format.json { render json: @events }
+      # else
+      #   format.json { render json: { events: @events, freebusy: @results }}
+      # end
       format.js
     end
   end

@@ -20,14 +20,13 @@ class ProfilesController < ApplicationController
   def show
     @twitter = @profile.socials.where(provider: "twitter").first
     @linkedin = @profile.socials.where(provider: "linkedin").first
-    @angellist = @profile.socials.where(provider: "angellist").first
   end
 
   def edit
     #users can only have one account from each platform
     @twitter = @profile.socials.where(provider: "twitter").first
     @linkedin = @profile.socials.where(provider: "linkedin").first
-    @angellist = @profile.socials.where(provider: "angellist").first
+    @google = @profile.socials.where(provider: "google_oauth2").first
   end
 
   def update

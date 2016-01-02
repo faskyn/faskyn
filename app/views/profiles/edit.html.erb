@@ -7,11 +7,29 @@
       </div>
       <div class="row cta-social-media">
         <div class="col-md-12">
-          <p><strong>Attach social media to your profile for better discovering</strong></p>
+          <p><strong>Connect your google account to sync your faskyn calendar with your google calendar:</strong></p>
+        </div>
+      </div>
+       <div class="row social-media">
+        <div class="col-md-12">
+          <% if @google.blank? %>
+            <%= link_to "/auth/google_oauth2", class: "btn btn-social-reg btn-google" do %>
+              <i class="fa fa-google"> Google calendar</i>
+            <% end %>
+          <% else %>
+            <%= link_to "/auth/google_oauth2", class: "btn btn-social-reg btn-google linked" do %>
+              <i class="fa fa-google"> Google calendar (linked)</i>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="row cta-social-media">
+        <div class="col-md-12">
+          <p><strong>Connect social media accounts to your profile for better discovering:</strong></p>
         </div>
       </div>
       <div class="row social-media">
-        <div class="col-md-4">
+        <div class="col-md-6">
           <% if @twitter.blank? %>
             <%= link_to "/auth/twitter", class: "btn btn-social-reg btn-twitter" do %>
               <i class="fa fa-twitter"> Twitter</i>
@@ -22,7 +40,7 @@
             <% end %>
           <% end %>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
         <% if @linkedin.blank? %>
           <%= link_to "/auth/linkedin", class: "btn btn-social-reg btn-linkedin" do %>
             <i class="fa fa-linkedin"> LinkedIn</i>
@@ -32,17 +50,6 @@
             <i class="fa fa-linkedin"> LinkedIn (linked)</i>
           <% end %>
         <% end %>
-        </div>
-        <div class="col-md-4">
-          <% if @angellist.blank? %>
-            <%= link_to "/auth/angellist", class: "btn btn-social-reg btn-angellist" do %>
-              <i class="fa fa-angellist"> AngelList</i>
-            <% end %>
-          <% else %>
-            <%= link_to "/auth/angellist", class: "btn btn-social-reg btn-angellist linked" do %>
-              <i class="fa fa-angellist"> AngelList (linked)</i>
-            <% end %>
-          <% end %>
         </div>
       </div>
       <div class="row">

@@ -1,5 +1,10 @@
 <% provide(:title, "Events") %>
 <div class= "container-fluid task-container">
+  <% if @google.blank? %>
+    <%= link_to "/auth/google_oauth2", class: "btn btn-social-reg btn-google" do %>
+      <i class="fa fa-google"> Google calendar</i>
+    <% end %>
+  <% end %>
   <div id="calendar">
   </div>
   <%= form_for([@user, @event], remote: true, id: "new-event-form") do |f| %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151226174705) do
+ActiveRecord::Schema.define(version: 20151229032650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,9 +106,12 @@ ActiveRecord::Schema.define(version: 20151226174705) do
     t.string   "location"
     t.string   "description"
     t.string   "phone"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "profile_id"
+    t.string   "email"
+    t.string   "refresh_token"
+    t.datetime "expires_at"
   end
 
   add_index "socials", ["profile_id"], name: "index_socials_on_profile_id", using: :btree

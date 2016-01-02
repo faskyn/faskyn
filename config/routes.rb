@@ -10,8 +10,7 @@ Rails.application.routes.draw do
   get 'application/google7df1f819c8dc9008', path: 'google7df1f819c8dc9008'
 
   post 'pusher/auth' #for pusher authentication
-  get '/auth/:provider/callback', to: 'socials#create' #twitter/linkedin/angellist
-  get '/auth/failure', to: redirect('/')
+  get '/auth/:provider/callback', to: 'socials#create' #twitter/linkedin/angellist/google
   resources :contacts
   devise_for :users
   resources :users do
