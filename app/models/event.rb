@@ -11,7 +11,7 @@ class Event < ActiveRecord::Base
   #validates :content, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
 
   scope :between_time, -> (start_time, end_time) do
-    where("? < start_at AND start_at < ?", Event.start_time, Event.end_time)
+    where("? < start_at AND start_at < ?", start_time, end_time)
   end
   scope :allevents, -> (u) { where('sender_id = ? OR recipient_id = ?', u.id, u.id) }
   scope :between, -> (sender_id, recipient_id) do

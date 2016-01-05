@@ -18,6 +18,7 @@
 //= require refile
 //= require bootstrap-sprockets
 //= require private_pub
+//= require local_time
 //= require moment
 //= require fullcalendar
 //= require bootstrap-datetimepicker

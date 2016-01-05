@@ -15,7 +15,11 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users do
     resources :eventnamecompanies
-    resources :events
+    resources :events do
+      collection do
+        get :other_events
+      end
+    end
     resources :notifications, only: [:create, :index] do
       collection do
         get :other_notifications, :chat_notifications
