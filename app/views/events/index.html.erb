@@ -2,6 +2,7 @@
 <div class= "container-fluid task-container">
   <% if @google.blank? %>
     <% if @user == current_user %>
+      <p>To use the calendar function, you have to authorize your google calendar first:</p>
       <%= link_to "/auth/google_oauth2", class: "btn btn-social-reg btn-google" do %>
         <i class="fa fa-google"> Google calendar</i>
       <% end %>
@@ -11,6 +12,12 @@
           <%= @user.profile.first_name %><% end %> to connect his/her calendar.</p>
     <% end %>
   <% else %>
+    <% if @user == current_user %>
+      <h4>Your calendar with all the events from your google calendar:</h4>
+    <% else %>
+      <h4><%= @user.profile.full_name %>'s calendar. Find a time when <%= @user.profile.first_name %> can chat with you.</h4>
+    <% end %>
+    <br />
     <div class = "calendar-container" >
       <div class="calendar-loading"></div>
         <div id="calendar" data-eventuserid="<%= request.parameters['user_id'] %>"></div>

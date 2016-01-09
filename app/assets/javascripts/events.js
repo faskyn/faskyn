@@ -8,22 +8,9 @@ var ready = function() {
     loading: function(isLoading, view) {
       if (isLoading) {
         $('.calendar-loading').show();
-    //     //$('.sp').show();
-    //     $(".calendar-spin").spin({
-    //       lines: 12, // The number of lines to draw
-    //       length: 7, // The length of each line
-    //       width: 9, // The line thickness
-    //       radius: 30, // The radius of the inner circle
-    //       color: '#ff0000', // #rgb or #rrggbb
-    //       speed: 1, // Rounds per second
-    //       trail: 60, // Afterglow percentage
-    //       shadow: false // Whether to render a shadow
-    //     });
       }
       else {
         $('.calendar-loading').hide();
-    //     //$('.sp').hide();
-    //     $(".calendar-spin").spin(false);
       };
     },
     timezone: 'local',
@@ -59,40 +46,6 @@ var ready = function() {
       if (event.description) {
         element.find('.fc-title').append('<div class="hr-line-solid-no-margin"></div><span style="font-size: 10px">'+event.description+'</span></div>');
       };
-    },
-    //setting color of incoming events
-    eventAfterRender: function (event, element, view) {
-      if (event.recipientId && event.recipientId === currentUserId) {
-        element.css('background-color', '#d9edf7');
-        element.css('border-color', '#bce8f1');
-        element.css('color', '#31708f');
-      };
-    },
-    //showing and updating or deleting calendar event with bootstrap modal
-    eventClick:  function(event, jsEvent, view) {
-      //setting the modal values via js
-    	var bootstrapEditStart = moment(event.start).format('MM/DD/YYYY hh:mm A');
-    	var bootstrapEditEnd = moment(event.end).format('MM/DD/YYYY hh:mm A');
-      $('#edit-modalid').val(event.id);
-      $('#edit-modaltitle').html(event.title);
-      $('#edit-startvalue').val(bootstrapEditStart);
-      if (event.end) {
-      	$('#edit-endvalue').val(bootstrapEditEnd);
-    	};
-    	if (event.recipientId == currentUserId) {
-    		$('#edit-uservalue').text("Sender: " + event.senderName);
-    	}
-    	else {
-    		$('#edit-uservalue').text("Recipient: " + event.recipientName);
-    	};
-    	if (event.description) {
-    		$('#edit-descriptionvalue').val(event.description);
-    	};
-      if (event.allDay == true) {
-        $('#edit-alldayvalue').prop('checked', true);
-      };
-      $('#fullcalmodal-edit').modal('show');
-			return false;
     }
   });
 };

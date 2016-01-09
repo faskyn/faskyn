@@ -33,45 +33,7 @@
   <div class="no-more" style="display:none;padding-left:20px;">
     <p>No more tasks.</p>
   </div>
-
-  <!-- Modal for new task -->
-  <%= form_for([current_user, @task], remote: true) do |f| %>
-    <div class="modal fade" id="newtask" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">New Task</h4>
-          </div>
-          <div class="modal-body">
-            <div class="alert alert-danger" style="display:none">
-              <ul class="errors" style="display:none">
-                <%= render 'layouts/error_messages', object: f.object %>
-              </ul>
-            </div>
-            <div class="field form-group">
-              <%= f.label :Name_or_Company %>
-              <%= f.text_field :task_name_company, data: {autocomplete_source: user_tasknamecompanies_path}, class: "form-control task_name_company", value: "" %>
-            </div>
-            <div class="field form-group">
-              <%= f.label :content %>
-              <%= f.text_area :content, class: "form-control contentarea" %>
-            </div>
-            <div class="field form-group">
-              <%= f.label :deadline %>
-              <%= f.datetime_select :deadline, ampm: true, :start_year => Date.current.year, :order => [:day, :month, :year], :discard_minute => true, class: "form-control task_deadline" %>
-            </div>
-            
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" id="newtaskclose">Close</button>
-            <%= f.submit "Create Task", class: 'btn btn-primary', "data-sid" => current_user.id, "data-rip" => :executor_id %>
-          </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
-  <!-- Modal End for new task -->
+  <%= render "new_task_modal" %>
 </div>
 
 

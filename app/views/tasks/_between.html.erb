@@ -4,7 +4,7 @@
     <span class="rightfloat">
       <%= link_to "NEW TASK", new_user_task_path(current_user), type: "button", class: "btn btn-primary newbutton", remote: true, 'data-toggle' => 'modal', 'data-target' => '#newtask' %>
       <%= link_to "Common Files", conversation_path(@conversation), class: "btn btn-default", id: "rightone"%>
-      <%= link_to "Calendar", other_events_user_events_path(@user), class: "btn btn-default" %>
+      <%= link_to "Calendar", user_events_path(@user), class: "btn btn-default" %>
     </span>
   </div>
   <div class="panel panel-default" style="margin:0px;">

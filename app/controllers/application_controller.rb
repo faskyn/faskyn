@@ -66,7 +66,7 @@ class ApplicationController < ActionController::Base
       @task_between = Task.new
       if Conversation.between(current_user.id, @user.id).present?
         @conversation = Conversation.between(current_user.id, @user.id).first
-        @messages = @conversation.messages.includes(:user)
+        @messages = @conversation.messages.includes(:user).order(created_at: :asc)
         @message = Message.new
         if  Notification.between_chat_recipient(current_user, @user).unchecked.any?
           Notification.between_chat_recipient(current_user, @user).last.check_chat_notification

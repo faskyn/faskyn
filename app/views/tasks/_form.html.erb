@@ -10,7 +10,7 @@
   </div>
   <div class="field form-group">
     <%= f.label :deadline %>
-    <%= f.datetime_select :deadline, ampm: true, :start_year => Date.current.year, :order => [:day, :month, :year], :discard_minute => true, class: "form-control task_deadline" %>
+    <%= f.text_field :deadline, id: "task-deadline", class: "form-control" %>
   </div>
   <div class="actions">
     <%= f.submit "Create Task", class: 'btn btn-primary', "data-sid" => current_user.id, "data-rip" => :executor_id %>

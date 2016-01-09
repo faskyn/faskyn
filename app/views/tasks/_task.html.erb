@@ -28,10 +28,10 @@
     </td>
     <td class="col-md-2">
       <% if task.completed? %>
-        <%= task.completed_at.utc.getlocal.strftime("%d %b %I%p") %>
+        <%= local_time(task.completed_at, "%d %b %I%p") %>
       <% else %>
         <% unless task.deadline == nil %>
-         <%= task.deadline.utc.getlocal.strftime("%d %b %I%p") %>
+         <%= local_time(task.deadline, "%d %b %I%p") %>
         <% end %>
       <% end %>
     </td>
@@ -81,16 +81,16 @@
                       </div>
                       <div class="field form-group">
                         <%= f.label :content %>
-                        <%= f.text_area :content, class: "form-control" %>
+                        <%= f.text_area :content, class: "form-control edit-content" %>
                       </div>
                       <div class="field form-group">
                         <%= f.label :deadline %>
-                        <%= f.datetime_select :deadline, ampm: true, :start_year => Date.current.year, :order => [:day, :month, :year], :discard_minute => true, class: "form-control task_deadline" %>
+                        <%= f.text_field :deadline, class: "form-control edit-task-deadline" %>
                       </div>    
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal" id="updatetaskclose">Close</button>
-                        <%= f.submit "Update Task", class: 'btn btn-primary', "data-sid" => current_user.id, "data-rip" => :executor_id %>
+                        <%= f.submit "Update Task", class: 'btn btn-primary edit-task-submit', "data-sid" => current_user.id, "data-rip" => :executor_id %>
                     </div>
                   </div>
                 </div>

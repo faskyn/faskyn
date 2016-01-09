@@ -11,9 +11,23 @@ $("ul.errors").html("");
 	$('.alert-danger').hide();
 	$('#updatetask_<%= @task.id %>').modal('hide');
 
+	//making updating (js part) work on partials that got prepended later
+	$task = $('<%= j render @task %>');
+	edit_task_time_for_user($task);
+	edit_task_datetimepicker($task);
+	edit_task_time_on_submit($task);
+	edit_task_hide_danger($task);
+
+	$taskbetween = $('<%= j render partial: "tasks/task_between", locals: { task: @task } %>');
+	edit_task_time_for_user($taskbetween);
+	edit_task_datetimepicker($taskbetween);
+	edit_task_time_on_submit($taskbetween);
+	edit_task_hide_danger($taskbetween);
+
 	$('#task_<%= @task.id %>').fadeOut(400, function(){
 		$(this).remove();
-		$(".newtaskinsert").prepend('<%= j render @task %>');
-		$(".newtaskinsert2").prepend('<%= j render partial: "tasks/task_between", locals: { task: @task } %>');
+		//$(".newtaskinsert").prepend('<%= j render @task %>');
+		$(".newtaskinsert").prepend($task);
+		$(".newtaskinsert2").prepend($taskbetween);
 	});
 <% end %>

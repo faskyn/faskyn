@@ -7,11 +7,11 @@
       <%= link_to "#{message.message_attachment_filename}", attachment_url(message, :message_attachment),:target => "_blank" %>
     <% end %>
     </p>
-    <time datetime="<%= message.created_at %>" title="<%= message.created_at.utc.getlocal.strftime("%d %b  %Y at %I:%M%p" ) %>">
+    <time class="timefield" datetime="<%= message.created_at %>" title="<%= message.created_at.utc.getlocal.strftime("%d %b  %Y at %I:%M%p" ) %>">
       <% if message.created_at.today? %>
-        <%= message_interlocutor(message).profile.first_name %> • <%= message.created_at.utc.getlocal.strftime("%H:%M %p") %>
+        <%= message_interlocutor(message).profile.first_name %> • <%= local_time(message.created_at, "%H:%M %p") %>
       <% else %>
-        <%= message_interlocutor(message).profile.first_name %> • <%= message.created_at.utc.getlocal.strftime("%d %b %H:%M %p") %>
+        <%= message_interlocutor(message).profile.first_name %> • <%= local_time(message.created_at, "%d %b %H:%M %p") %>
       <% end %>
     </time>
   </div>

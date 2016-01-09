@@ -16,7 +16,7 @@ class TasksController < ApplicationController
     #with ransack
     @q_tasks = Task.alltasks(current_user).uncompleted.ransack(params[:q])
     #eager loading --> @tasks = @q_tasks.result.includes(:executor_profile, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: 12)
-    @tasks = @q_tasks.result.includes(:executor, :executor_profile, :assigner, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
+    @tasks = @q_tasks.result.includes(:executor, :executor_profile, :assigner, :assigner_profile).order("created_at DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
     #for AJAX version
     @task = Task.new
     respond_to do |format|
@@ -65,8 +65,10 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+    #@task.deadline = DateTime.strptime(params[:task][:deadline], "%m/%d/%Y %I:%M %p")
     #check for other_user_profile_exists before filter (@task = Task.new(task_params))
     @task.assigner_id = current_user.id
+    #@task.deadline = 
     if @task.save
       TaskcreatorWorker.perform_async(@task.id, @user.id, 5) #sidekiq email on task creation
       Conversation.create(sender_id: @task.assigner_id, recipient_id: @task.executor_id)
@@ -126,6 +128,7 @@ class TasksController < ApplicationController
   end
 
   def update
+    #@task.deadline = DateTime.strptime(params[:task][:deadline], "%m/%d/%Y %I:%M %p")
     respond_to do |format|
       if @task.update_attributes(task_params)
         format.html { redirect_to user_tasks_path(current_user), notice: "Task was successfully updated!"}

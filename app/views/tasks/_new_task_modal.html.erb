@@ -1,15 +1,5 @@
-<% provide(:title, @user.profile.full_name) %>
-<div class="container-fluid" style="padding-right:0px;padding-left:0px">
-  <div class = "col-md-9" style="padding-left:20px;padding-right:20px">
-    <%= render 'tasks/between' %>
-  </div>
-  <div class = "col-md-3 rightsidebar">
-    <%= render 'layouts/rightsidebar' %>
-  </div>
-</div>
-
- <!-- Modal for new task -->
-  <%= form_for([current_user, @task_between], remote: true) do |f| %>
+<!-- Modal for new task -->
+  <%= form_for([current_user, @task], remote: true, class: "new-task-modal-form") do |f| %>
     <div class="modal fade" id="newtask" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -24,8 +14,8 @@
               </ul>
             </div>
             <div class="field form-group">
-              <%= f.hidden_field :executor_id, :value => @user.id %>
-              <p><strong>Executor: <%= @user.profile.first_name %> <%= @user.profile.last_name %>, <%= @user.profile.company %></strong></p>
+              <%= f.label :Name_or_Company %>
+              <%= f.text_field :task_name_company, data: {autocomplete_source: user_tasknamecompanies_path}, class: "form-control task_name_company", value: "" %>
             </div>
             <div class="field form-group">
               <%= f.label :content %>
@@ -34,7 +24,7 @@
             <div class="field form-group">
               <%= f.label :deadline %>
               <%= f.text_field :deadline, class: "form-control new-task-deadline" %>
-            </div>      
+            </div> 
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal" id="newtaskclose">Close</button>
@@ -44,8 +34,4 @@
       </div>
     </div>
   <% end %>
-  <!-- Modal End for new task -->
-
-
-
-
+<!-- Modal End for new task -->

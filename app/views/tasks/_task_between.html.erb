@@ -7,7 +7,7 @@
       <%= task.content %>
     </td>
     <td class="col-md-3">
-      <%= task.deadline.utc.getlocal.strftime("%d %b %I%p") %>
+      <%= local_time(task.deadline, "%d %b %I%p") %>
     </td>
     <td class="col-md-2" style="padding:0px">
     <% if current_user.id == task.assigner.id %>
@@ -59,7 +59,7 @@
                       </div>
                       <div class="field form-group">
                         <%= f.label :deadline %>
-                        <%= f.datetime_select :deadline, ampm: true, :start_year => Date.current.year, :order => [:day, :month, :year], :discard_minute => true, class: "form-control task_deadline" %>
+                        <%= f.text_field :deadline, id: "edit-task-deadline", class: "form-control" %>
                       </div>    
                     </div>
                     <div class="modal-footer">

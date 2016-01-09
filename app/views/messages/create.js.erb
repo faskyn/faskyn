@@ -7,10 +7,16 @@
 
 	chatbox.append("<%= j render(partial: @message ) %>");
 	chatbox.scrollTop(chatbox[0].scrollHeight);
+	
 	$(".chatboxtextarea").val("");
+	var lastMessage = chatbox.children().last();
+	var timeField = lastMessage.find('.timefield');
+	var createdAt = timeField.attr('datetime');
+	var momentCreatedAt = moment(createdAt).format('hh:mm A');
+	alert(momentCreatedAt);
+	timeField.val(momentCreatedAt);
 
 	if(sender_id != receiver_id) {
-		//chatBox.chatWith(id); --> caused page fall, but don't know why
 		chatbox.children().last().removeClass("self").addClass("other");
 		chatbox.scrollTop(chatbox[0].scrollHeight);
 	}
