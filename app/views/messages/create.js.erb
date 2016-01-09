@@ -13,7 +13,7 @@
 	var timeField = lastMessage.find('.timefield');
 	var createdAt = timeField.attr('datetime');
 	var momentCreatedAt = moment(createdAt).format('hh:mm A');
-	alert(momentCreatedAt);
+	//alert(momentCreatedAt);
 	timeField.val(momentCreatedAt);
 
 	if(sender_id != receiver_id) {
