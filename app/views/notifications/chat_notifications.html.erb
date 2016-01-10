@@ -1,9 +1,15 @@
 <% provide(:title, 'Chat notifications') %>
-<div class= "container-fluid task-container">
+<div class= "container-fluid notification-container">
   <div class="row task-header">
     <h3>Chat notifications</h3>
   </div>
   <div class="chat-notifications-index">
     <%= render @chat_notifications || "There are no chat notifications at the moment." %>
+  </div>
+  <div id="infinite-chatnotification-scrolling" style="text-align:center;display:none">
+    <%= will_paginate @chat_notifications %>
+  </div>
+  <div class="no-more" style="display:none;padding-left:20px;padding-top:15px">
+    <p>No more notifications.</p>
   </div>
 </div>

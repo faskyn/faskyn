@@ -21,7 +21,7 @@
         </tr>
       </thead>
       <tbody class="newtaskinsert">
-        <%= render @tasks %>
+        <%= render @tasks || "There are no completed tasks at the moment." %>
       </tbody>
     </table>
   </div>

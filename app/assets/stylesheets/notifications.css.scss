@@ -4,6 +4,11 @@ $dark-grey: #5E5E5E;
 $dropbox-light-grey: #7b8994;
 $orange: #ff6600;
 
+.container-fluid.notification-container {
+	margin: 0px 190px 40px 40px;
+	padding-top: 30px;
+}
+
 #other-notifications {
   border-radius: 2px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, .7);
@@ -36,17 +41,27 @@ $orange: #ff6600;
 .notification-line, .notification-line-checked {
 	border-bottom: 1px $gray-medium-light solid;			
 	.subject {
-		padding-top:2px;
+		padding-top:4px;
 		padding-bottom:3px;
 		margin-top: 0px;
 		margin-bottom: 0px;
 	}
 	.time {
 		padding-top:0px;
-		padding-bottom:2px;
+		padding-bottom:4px;
 		margin-top: 0px;
 		margin-bottom: 0px;
 	}
+	.avatar {
+    float: left;
+    margin-right: 15px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
 }
 
 .notification-line {

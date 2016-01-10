@@ -23,6 +23,7 @@ module GoogleCalendarApi
       :body => JSON.dump({ 
               :timeMin => start_time,
               :timeMax => end_time,
+              #:timeZone => timezone,
               :items => [{ :id => social_object.email }]}),
       :headers => {'Content-Type' => 'application/json'})
 
@@ -58,7 +59,7 @@ module GoogleCalendarApi
     return formatted_event_array
   end
 
-  def get_own_events(social_object, start_time, end_time)#start_time and end_time must be string
+  def get_own_events(social_object, start_time, end_time, timezone)#start_time and end_time must be string
     #own events get displayed when current user checks his/her own calendar aka events index page
     client = init_google_api_calendar_client(social_object)
     old_token = client.authorization.access_token
@@ -69,7 +70,8 @@ module GoogleCalendarApi
       :api_method => service.events.list,
       :parameters => { 'calendarId' => social_object.email,
                        'timeMin' => start_time,
-                       'timeMax' => end_time },
+                       'timeMax' => end_time,
+                       'timeZone' => timezone },
       :headers => {'Content-Type' => 'application/json'})
 
     #token refresh if needed
@@ -81,6 +83,7 @@ module GoogleCalendarApi
 
     #API response parsing
     result = JSON.parse(result_raw.body)['items']
+    #result_timezone = JSON.parse(result_raw.body)['timeZone']
 
     #changing response to fullcalendar format
     formatted_event_array = []
@@ -89,6 +92,7 @@ module GoogleCalendarApi
       if event['start']['dateTime'] && event['end']['dateTime']
         start_time = event['start']['dateTime'].to_datetime.rfc822
         end_time = event['end']['dateTime'].to_datetime.rfc822
+        #timezone = result_timezone
         all_day = false
         title = event['summary']
         formatted_event = {}
@@ -99,9 +103,10 @@ module GoogleCalendarApi
         formatted_event_array << formatted_event
       elsif event['start']['date'] && event['end']['date']
         all_day = true
-        end_time = event['start']['date'].to_datetime.rfc822
-        end_allday_date = 'haha' #event['end']['date']#.to_datetime.rfc822
+        start_time = event['start']['date'].to_datetime.rfc822
+        end_time = event['end']['date'].to_datetime.rfc822
         title = event['summary']
+        timezone = result_timezone
         formatted_event = {}
         formatted_event['title'] = title
         formatted_event['start'] = start_time

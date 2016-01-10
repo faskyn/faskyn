@@ -37,8 +37,8 @@
         <% else %>
           <li><p class="navbar-btn"><%= link_to "CREATE PROFILE", new_user_profile_path(current_user), class: "btn btn-danger" %></p></li>
         <% end %>
-        <li><%= link_to users_path do %>
-          <i class="fa fa-users" style="padding-right:4px"></i>USERS
+        <li><%= link_to users_path, 'data-toggle' => "tooltip", 'data-placement' => "bottom", 'data-delay' => '{"show":"250"}', 'title' => "Users" do %>
+          <i class="fa fa-users" style="padding-right:4px"></i>
         <% end %></li>
         <% if has_profile? %>
           <li class="dropdown">

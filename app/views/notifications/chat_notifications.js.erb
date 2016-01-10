@@ -1,0 +1,8 @@
+$('.chat-notifications-index').append('<%= j render @chat_notifications %>');
+<% if @chat_notifications.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate @chat_notifications %>');
+<% else %>
+  $(window).off('scroll');
+  $('.pagination').remove();
+  $('.no-more').delay(1000).fadeIn(1500);
+<% end %>

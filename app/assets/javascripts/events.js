@@ -14,6 +14,7 @@ var ready = function() {
       };
     },
     timezone: 'local',
+    timezoneParam: 'UTC',
     editable: false,
     allDayDefault: false,
     header: {

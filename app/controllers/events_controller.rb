@@ -17,8 +17,9 @@ class EventsController < ApplicationController
       if params['start'] && params['end']
         @start_time = params['start'].to_datetime.rfc3339
         @end_time = params['end'].to_datetime.rfc3339
+        @timezone = params['timezoneParam']
         if @user == @current_user
-          @results = get_own_events(@google, @start_time, @end_time)
+          @results = get_own_events(@google, @start_time, @end_time, @timezone)
         else
           @results = get_busy_events(@google, @start_time, @end_time)
         end

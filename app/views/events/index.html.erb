@@ -7,7 +7,7 @@
         <i class="fa fa-google"> Google calendar</i>
       <% end %>
     <% else %>
-        <p><%= @user.profile.first_name %> has not connected a calendar yet.</p> %>
+        <p><%= @user.profile.first_name %> has not connected a calendar yet.</p>
         <p>Tell <%= link_to user_path(@user) do %>
           <%= @user.profile.first_name %><% end %> to connect his/her calendar.</p>
     <% end %>

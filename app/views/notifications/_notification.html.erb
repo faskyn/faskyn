@@ -5,16 +5,24 @@
     <div class="notification-line-checked">
   <% end %>
     <%= link_to user_path(notification.sender) do %>
-      <% if notification.notification_type == "chat" %>
-        <p class="subject"><%= notification.sender.profile.first_name %> <%= notification.sender.profile.last_name %> has sent you a message on chat.</p>
-      <% else %>
-        <p class="subject"><%= notification.sender.profile.first_name %> <%= notification.sender.profile.last_name %> has sent you a <%= notification.notification_type %>.</p>
-      <% end %>
-      <% if notification.created_at.today? %>
-        <p class="time">Sent at<%= notification.created_at.utc.getlocal.strftime("%H:%M %p") %></p>
-      <% else %>
-        <p class="time">Sent at <%= notification.created_at.utc.getlocal.strftime("%d %b %H:%M %p") %></p>
-      <% end %>
+      <%= image_tag notification.sender.profile.avatar.url(:base_thumb), class: 'avatar' %>
+      <span>
+        <div class="subject">
+          <% if notification.notification_type == "chat" %>
+            <%= notification.sender.profile.first_name %> <%= notification.sender.profile.last_name %> has sent you a message on chat.
+          <% else %>
+            <%= notification.sender.profile.first_name %> <%= notification.sender.profile.last_name %> has sent you a <%= notification.notification_type %>.
+          <% end %>
+        </div>
+        <div class="time">
+          <% if notification.created_at.today? %>      
+              Sent at<%= local_time(notification.created_at, "%H:%M %p") %>
+          <% else %>
+              Sent at <%= local_time(notification.created_at, "%d %b %H:%M %p") %>
+          <% end %>
+        </div>
+      </span>
     <% end %>
   </div>
 <% end %>
+

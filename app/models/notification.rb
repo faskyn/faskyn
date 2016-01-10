@@ -16,6 +16,10 @@ class Notification < ActiveRecord::Base
   scope :between_other_recipient, -> (recipient_id, sender_id) do
     where("notifications.recipient_id = ? AND notifications.sender_id = ? AND notifications.notification_type != ?", recipient_id, sender_id, "chat")
   end
+
+  def self.pagination_per_page
+    8
+  end
   
   def self.send_notification(receiver, type, sender)
     #creating new notification record and updating notification number
