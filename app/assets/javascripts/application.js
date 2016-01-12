@@ -13,8 +13,8 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
+//= require turbolinks
 //= require jquery.remotipart
-//= require chat
 //= require refile
 //= require bootstrap-sprockets
 //= require private_pub

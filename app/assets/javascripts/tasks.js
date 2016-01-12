@@ -1,4 +1,4 @@
-var ready = function() {
+$(document).on("page:change", function() {
 
   //these functions get called in js.erb files AS WELL to make js work on AJAX appended task partials
   //here are invoked to work on document ready tasks
@@ -53,13 +53,13 @@ var ready = function() {
       var more_tasks_url;
       more_tasks_url = $('.pagination .next_page a').attr('href');
       if (more_tasks_url && $(window).scrollTop() > $(document).height() - $(window).height() - 60) {
-        $('.pagination').html('<img src="/assets/ajax-loader.gif" alt="Loading..." title="Loading..." />');
+        //$('.pagination').html('<img src="/assets/ajax-loader.gif" alt="Loading..." title="Loading..." />');
         $('#infinite-task-scrolling').show();
         $.getScript(more_tasks_url);
       }
     });
   };
-};
+});
 
 //changes edit task modal deadline datetime to be in localtime when modal pops up
 function edit_task_time_for_user($container) {
@@ -98,5 +98,5 @@ function edit_task_time_on_submit($container) {
   });
 }
 
-$(document).ready(ready);
-$(document).on("page:load", ready);
+// $(document).ready(ready);
+// $(document).on("page:load", ready);

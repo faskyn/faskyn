@@ -22,7 +22,8 @@ Rails.application.routes.draw do
     end
     resources :notifications, only: [:create, :index] do
       collection do
-        get :other_notifications, :chat_notifications
+        get :other_notifications, :chat_notifications#, path: 'users/:id/other_notifications'
+        #get :chat_notifications, path: 'users/:id/chat_notifications'
       end
     end
     resource :profile do
@@ -38,6 +39,8 @@ Rails.application.routes.draw do
       end
     end
   end
+  #get 'users/:id/chat_notifications', to: 'notifications#chat_notifications', as: :chat_notifications_user_notifications
+  #get 'users/:id/other_notifications', to: 'notifications#other_notifications', as: :other_notifications_user_notifications
 
   resources :conversations, only: [:index, :show, :create] do
     resources :messages, only: [:index, :create]
@@ -45,33 +48,8 @@ Rails.application.routes.draw do
 
   mount Sidekiq::Web => '/sidekiq'
 
-  
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
 
   # Example resource route with sub-resources:
   #   resources :products do

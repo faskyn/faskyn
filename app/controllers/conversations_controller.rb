@@ -15,7 +15,7 @@ class ConversationsController < ApplicationController
     @conversation = Conversation.find(params[:id])
     @user = interlocutor(@conversation)
     @receiver = interlocutor(@conversation)
-    @messages = @conversation.messages.order(created_at: :desc)
+    @messages = @conversation.messages.order(created_at: :asc)
     @message = Message.new
     @messages_with_file = @conversation.messages.with_file.order(created_at: :desc).paginate(page: params[:page], per_page: 12)
   end

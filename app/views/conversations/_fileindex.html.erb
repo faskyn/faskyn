@@ -5,30 +5,32 @@
       <%= link_to "Common Tasks", user_path(@user), class: "btn btn-default"%>
     </span>
   </div>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th class="col-md-9">File</th>
-        <th class="col-md-3">Sent at</th>
-      </tr>
-    </thead>
-    <tbody class>
-      <% @messages_with_file.each do |message| %>
-        <% if current_user.id == message.user_id %>
-          <tr style="background: #eaeaea">
-        <% else %>
-          <tr>
-        <% end %>
-            <td class="col-md-9">
-              <%= link_to "#{message.message_attachment_filename}", attachment_url(message, :message_attachment),:target => "_blank" %>
-            </td>
-            <td class="col-md-3">
-              <%= message.created_at.strftime("%d %b %I:%M%p") %>
-            </td>
-          </tr>
-      <%end %>
-    </tbody>
-  </table>
+  <div class="panel panel-default">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th class="col-md-9">File</th>
+          <th class="col-md-3">Sent at</th>
+        </tr>
+      </thead>
+      <tbody class>
+        <% @messages_with_file.each do |message| %>
+          <% if current_user.id == message.user_id %>
+            <tr style="background: #eaeaea">
+          <% else %>
+            <tr>
+          <% end %>
+              <td class="col-md-9">
+                <%= link_to "#{message.message_attachment_filename}", attachment_url(message, :message_attachment),:target => "_blank" %>
+              </td>
+              <td class="col-md-3">
+                <%= message.created_at.strftime("%d %b %I:%M%p") %>
+              </td>
+            </tr>
+        <%end %>
+      </tbody>
+    </table>
+  </div>
   <%= will_paginate @messages_with_file %>
 </div>
 

@@ -1,4 +1,4 @@
-var ready = function() {  
+$(document).on("page:change", function() {
 
   if ($('#infinite-othernotification-scrolling').size() > 0) {
     $(window).on('scroll', function() {
@@ -25,7 +25,7 @@ var ready = function() {
       }
     });
   };
-};
+});
 
-$(document).ready(ready);
-$(document).on("page:load", ready);
+// $(document).ready(ready);
+// $(document).on("page:load", ready);

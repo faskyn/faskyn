@@ -1,4 +1,5 @@
-var ready = function() {
+$(document).on("page:change", function() {
+//var ready = function() {
   //getting current user from body tag
 	currentUserId = $('#bodycurrentuser').data('currentuserid');
   eventUserId = $('#calendar').data('eventuserid');
@@ -49,7 +50,7 @@ var ready = function() {
       };
     }
   });
-};
+});
 
-$(document).ready(ready);
-$(document).on("page:load", ready);
+// $(document).ready(ready);
+// $(document).on("page:load", ready);
