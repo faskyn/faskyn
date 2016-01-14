@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151229032650) do
+ActiveRecord::Schema.define(version: 20160113183222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20151229032650) do
     t.string   "message_attachment_filename"
     t.integer  "message_attachment_size"
     t.string   "message_attachment_content_type"
+    t.text     "link"
   end
 
   add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree

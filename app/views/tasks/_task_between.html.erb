@@ -33,7 +33,7 @@
             <% end %>
             <!--Modal for updating task -->
             <%= form_for([current_user, task], method: :patch, remote: true) do |f| %>
-              <div class="modal fade" id="updatetask_<%= task.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal fade updatetask" id="updatetask_<%= task.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -59,7 +59,7 @@
                       </div>
                       <div class="field form-group">
                         <%= f.label :deadline %>
-                        <%= f.text_field :deadline, id: "edit-task-deadline", class: "form-control" %>
+                        <%= f.text_field :deadline, class: "form-control edit-task-deadline" %>
                       </div>    
                     </div>
                     <div class="modal-footer">

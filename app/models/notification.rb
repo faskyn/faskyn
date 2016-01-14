@@ -37,17 +37,38 @@ class Notification < ActiveRecord::Base
     end      
   end
 
-  #used when user gets to the showpage of the sender not when gets to the notfication page
+  #chat notification gets checked
   def check_chat_notification
     if self.checked_at == nil
-      update_attributes(checked_at: Time.now)
+      update_attributes(checked_at: Time.zone.now)
     end
   end
 
-  #used when seen on the notifications page
+  #other notification gets checked
   def check_other_notification
     if self.checked_at == nil
-      update_attributes(checked_at: Time.now)
+      update_attributes(checked_at: Time.zone.now)
     end
   end
+
+  #checking if needed to decrease chat notification number
+  def self.decreasing_chat_notification_number(current_user, user)
+    if self.between_chat_recipient(current_user, user).unchecked.any?
+      self.between_chat_recipient(current_user, user).last.check_chat_notification
+      current_user.decrease_new_chat_notifications
+      current_user.decreased_chat_number_pusher
+    end
+  end
+
+  #checking if needed to decrease other notification number
+  def self.decreasing_other_notification_number(current_user, user)
+    if self.between_other_recipient(current_user, user)
+      self.between_other_recipient(current_user, user).find_each do |notification|
+        notification.check_other_notification
+        current_user.decrease_new_other_notifications
+        current_user.decreased_other_number_pusher
+      end
+    end
+  end
+
 end

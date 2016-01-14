@@ -53,7 +53,7 @@ $(document).on("page:change", function() {
       var more_tasks_url;
       more_tasks_url = $('.pagination .next_page a').attr('href');
       if (more_tasks_url && $(window).scrollTop() > $(document).height() - $(window).height() - 60) {
-        //$('.pagination').html('<img src="/assets/ajax-loader.gif" alt="Loading..." title="Loading..." />');
+        $('.pagination').html('<img src="/assets/ajax-loader.gif" alt="Loading..." title="Loading..." />');
         $('#infinite-task-scrolling').show();
         $.getScript(more_tasks_url);
       }

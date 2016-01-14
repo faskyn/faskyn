@@ -4,10 +4,6 @@ class EventsController < ApplicationController
 
   before_action :authenticate_user!
 
-  def other_events
-    @user_id = request.parameters['user_id']
-  end
-
   def index
     @current_user = current_user
     @param_id = request.parameters['user_id']
@@ -46,15 +42,6 @@ class EventsController < ApplicationController
       rescue
         redirect_to root_path(@current_user), notice: "The user who you are looking for hasn't created a profile yet!"
       end
-    end
-  end
-
-  def show
-    @event = Event.find(params[:id])
-    respond_to do |format|
-      format.html
-      format.js
-      format.json { render json: @event }
     end
   end
 

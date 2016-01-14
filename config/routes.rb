@@ -15,17 +15,9 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users do
     resources :eventnamecompanies
-    resources :events do
-      collection do
-        get :other_events
-      end
-    end
-    resources :notifications, only: [:create, :index] do
-      collection do
-        get :other_notifications, :chat_notifications#, path: 'users/:id/other_notifications'
-        #get :chat_notifications, path: 'users/:id/chat_notifications'
-      end
-    end
+    resources :events, only: :index
+    #more custom notification routes down
+    resources :notifications, only: [:create, :index]
     resource :profile do
       resources :socials, only: [:create, :update, :destroy]
     end
@@ -39,8 +31,9 @@ Rails.application.routes.draw do
       end
     end
   end
-  #get 'users/:id/chat_notifications', to: 'notifications#chat_notifications', as: :chat_notifications_user_notifications
-  #get 'users/:id/other_notifications', to: 'notifications#other_notifications', as: :other_notifications_user_notifications
+  get 'users/:user_id/common_medias', to: 'common_medias#common_medias', as: :common_medias_user_common_medias
+  get 'users/:user_id/chat_notifications', to: 'notifications#chat_notifications', as: :chat_notifications_user_notifications
+  get 'users/:user_id/other_notifications', to: 'notifications#other_notifications', as: :other_notifications_user_notifications
 
   resources :conversations, only: [:index, :show, :create] do
     resources :messages, only: [:index, :create]
@@ -50,12 +43,6 @@ Rails.application.routes.draw do
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
 
   # Example resource route with more complex sub-resources:
   #   resources :products do

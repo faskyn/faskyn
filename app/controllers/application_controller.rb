@@ -62,24 +62,14 @@ class ApplicationController < ActionController::Base
     @user = User.find(params[:id])
     if Task.between(current_user.id, @user.id).present?
       @tasks = Task.uncompleted.between(current_user.id, @user.id).order("created_at DESC").includes(:assigner).paginate(page: params[:page], per_page: 12)
-      @task = Task.new
+      #@task = Task.new
       @task_between = Task.new
       if Conversation.between(current_user.id, @user.id).present?
         @conversation = Conversation.between(current_user.id, @user.id).first
-        @messages = @conversation.messages.includes(:user).order(created_at: :asc)
+        @messages = @conversation.messages.includes(:user).order(created_at: :desc).limit(50).reverse
         @message = Message.new
-        if  Notification.between_chat_recipient(current_user, @user).unchecked.any?
-          Notification.between_chat_recipient(current_user, @user).last.check_chat_notification
-          current_user.decrease_new_chat_notifications
-          current_user.decreased_chat_number_pusher
-        end
-        if Notification.between_other_recipient(current_user, @user).unchecked.any?
-          Notification.between_other_recipient(current_user, @user).find_each do |notification|
-            notification.check_other_notification
-            current_user.decrease_new_other_notifications
-            current_user.decreased_other_number_pusher
-          end
-        end
+        Notification.decreasing_chat_notification_number(current_user, @user)
+        Notification.decreasing_other_notification_number(current_user, @user)
         respond_to do |format|
           format.html
           format.js { render :template => "tasks/update.js.erb", :template => "tasks/destroy.js.erb", :template => "tasks/between.js.erb", layout: false }

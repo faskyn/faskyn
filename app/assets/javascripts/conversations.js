@@ -10,6 +10,8 @@ $(document).on("page:change", function() {
 
 //chat message sending
 $(document).on('keydown', '.chatboxtextarea', function (event) {
+  //var cab = document.getElementsByClassName('chatboxtextarea')[0]; 
+  //cab.addEventListener("click", checkInputKey, false);
   var id = $(this).data('cid');
   checkInputKey(event, $(this), id);
 });
