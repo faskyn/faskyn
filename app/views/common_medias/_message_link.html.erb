@@ -1,12 +1,14 @@
-<% if current_user.id == message_link['user_id'] %>
-  <tr style="background: #eaeaea">
-<% else %>
-  <tr>
-<% end %>
-  <td class="col-md-9">
-    <%= link_to message_link['link'], url_with_protocol(message_link['link']), :target => "_blank" %>
-  </td>
-  <td class="col-md-3">
-    <%= local_time(message_link['created_at'], "%d %b %I:%M%p") %>
-  </td>
-</tr>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th class="col-md-9">Links</th>
+      <th class="col-md-3">Sent at</th>
+    </tr>
+  </thead>
+  <tbody class="linkbody">
+    <%= render partial: "common_medias/message_link_body" %>
+  </tbody>
+</table>
+<div id="infinite-common-link-scrolling">
+  <%= will_paginate @message_links_pre, param_name: 'links', :params => {:controller => 'common_medias', :action => 'get_links', :scrolling => 'linkscroll'} %>
+</div>

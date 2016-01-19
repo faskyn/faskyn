@@ -4,7 +4,6 @@ class TasksController < ApplicationController
   before_action :if_no_profile_exists
   #before_action :other_user_profile_exists, only: :create
   before_action :set_task, only: [:show, :edit, :update, :delete, :destroy, :complete, :uncomplete]
-  #before_action :set_assigner, only: :create
   #before_action :set_conversation, only: [:show]
 
   require 'will_paginate/array'
@@ -12,12 +11,10 @@ class TasksController < ApplicationController
   def index
     #with no ransack
     #@tasks = current_user.tasks_uncompleted.paginate(page: params[:page], per_page: 12)
-    #@tasks = current_user.assigned_and_executed_tasks.uncompleted.order("created_at DESC").paginate(page: params[:page], per_page: 12)
     #with ransack
     @q_tasks = Task.alltasks(current_user).uncompleted.ransack(params[:q])
     #eager loading --> @tasks = @q_tasks.result.includes(:executor_profile, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: 12)
     @tasks = @q_tasks.result.includes(:executor, :executor_profile, :assigner, :assigner_profile).order("created_at DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
-    #for AJAX version
     @task = Task.new
     respond_to do |format|
       format.html
@@ -35,7 +32,7 @@ class TasksController < ApplicationController
 
   def outgoing_tasks
     #with no ransack (going back to this one when changing to jQuery search)
-      #@assigned_tasks = current_user.assigned_tasks.uncompleted.order("deadline DESC").paginate(page: params[:page], per_page: 12)
+    #@assigned_tasks = current_user.assigned_tasks.uncompleted.order("deadline DESC").paginate(page: params[:page], per_page: 12)
     #ransack version for sorting
     @q_outgoing_tasks = current_user.assigned_tasks.uncompleted.ransack(params[:q])
     @tasks = @q_outgoing_tasks.result.includes(:executor, :executor_profile).order("created_at DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
@@ -65,10 +62,8 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-    #@task.deadline = DateTime.strptime(params[:task][:deadline], "%m/%d/%Y %I:%M %p")
     #check for other_user_profile_exists before filter (@task = Task.new(task_params))
     @task.assigner_id = current_user.id
-    #@task.deadline = 
     if @task.save
       TaskcreatorWorker.perform_async(@task.id, @user.id, 5) #sidekiq email on task creation
       Conversation.create(sender_id: @task.assigner_id, recipient_id: @task.executor_id)
@@ -88,7 +83,7 @@ class TasksController < ApplicationController
   end
 
   def complete
-    @task.update_attribute(:completed_at, Time.now)
+    @task.update_attribute(:completed_at, Time.zone.now)
     respond_to do |format|
       format.html { redirect_to completed_tasks_user_tasks_path(current_user), notice: "Task completed!" }
       format.js
@@ -105,7 +100,7 @@ class TasksController < ApplicationController
 
   def completed_tasks
     #with no ransack
-      #@tasks = @user.tasks_completed.paginate(page: params[:page], per_page: 12)
+    #@tasks = @user.tasks_completed.paginate(page: params[:page], per_page: 12)
     #with ransack
     @q_completed_tasks = Task.alltasks(current_user).completed.ransack(params[:q])
     #@q_completed_tasks = current_user.tasks_completed.ransack(params[:q])
@@ -128,7 +123,6 @@ class TasksController < ApplicationController
   end
 
   def update
-    #@task.deadline = DateTime.strptime(params[:task][:deadline], "%m/%d/%Y %I:%M %p")
     respond_to do |format|
       if @task.update_attributes(task_params)
         format.html { redirect_to user_tasks_path(current_user), notice: "Task was successfully updated!"}
@@ -165,9 +159,5 @@ class TasksController < ApplicationController
 
     def set_task
       @task = Task.find(params[:id])
-    end
-
-    def set_assigner
-      @task.assigner_id = current_user.id
     end
 end

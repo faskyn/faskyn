@@ -1,0 +1,14 @@
+<% if params[:scrolling] == "filescroll" && params[:tab] == "file" %>
+	$('.filebody').append('<%= j render partial: "common_medias/message_file_body" %>');
+	<% if @common_files.next_page %>
+    $('#infinite-common-file-scrolling .pagination').replaceWith('<%= j will_paginate @common_files %>');
+  <% else %>
+    $(window).off('scroll');
+    $('#infinite-common-file-scrolling .pagination').remove();
+    $('.no-more').delay(1000).fadeIn(1500);
+  <% end %>
+<% else %>
+	var filebody = $('.tab-pane.active');
+	filebody.html('<%= j render partial: "common_medias/message_file" %>');
+  $('#infinite-common-file-scrolling').hide();
+<% end %>

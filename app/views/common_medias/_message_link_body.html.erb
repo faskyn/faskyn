@@ -1,0 +1,14 @@
+<% @common_links.each do |message_link| %>
+  <% if current_user.id == message_link['user_id'] %>
+    <tr style="background: #eaeaea">
+  <% else %>
+    <tr>
+  <% end %>
+    <td class="col-md-9">
+      <%= link_to message_link['link'], url_with_protocol(message_link['link']), :target => "_blank" %>
+    </td>
+    <td class="col-md-3">
+      <%= local_time(message_link['created_at'], "%d %b %I:%M%p") %>
+    </td>
+  </tr>
+<% end %>

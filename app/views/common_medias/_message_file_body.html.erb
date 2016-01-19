@@ -1,0 +1,14 @@
+<% @common_files.each do |message_file| %>
+  <% if current_user.id == message_file.user_id %>
+    <tr style="background: #eaeaea">
+  <% else %>
+    <tr>
+  <% end %>
+    <td class="col-md-9">
+      <%= link_to "#{message_file.message_attachment_filename}", attachment_url(message_file, :message_attachment),:target => "_blank" %>
+    </td>
+    <td class="col-md-3">
+      <%= local_time(message_file.created_at, "%d %b %I:%M%p") %>
+    </td>
+  </tr>
+<% end %>

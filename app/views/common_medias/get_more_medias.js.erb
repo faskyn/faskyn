@@ -1,0 +1,24 @@
+
+<% if params[:tab] == "file" %>
+
+	$('.tab-pane.active').append('<%= j render @common_files %>');
+	<% if @common_files && @common_files.next_page %>
+	  $('#infinite-common-file-scrolling .pagination').replaceWith('<%= j will_paginate @common_files %>');
+	<% else %>
+	  $(window).off('scroll');
+	  $('#infinite-common-file-scrolling .pagination').remove();
+	  $('.no-more').delay(1000).fadeIn(1500);
+	<% end %>
+
+<% elsif params[:tab] == "link" %>
+
+	$('.tab-pane.active').append('<%= j render @common_links %>');
+	<% if @message_links_pre && @message_links_pre.next_page %>
+	  $('#infinite-common-link-scrolling .pagination').replaceWith('<%= j will_paginate @message_links_pre %>');
+	<% else %>
+	  $(window).off('scroll');
+	  $('#infinite-common-link-scrolling .pagination').remove();
+	  $('.no-more').delay(1000).fadeIn(1500);
+	<% end %>
+
+<% end %>

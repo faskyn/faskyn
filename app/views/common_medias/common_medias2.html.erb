@@ -1,0 +1,56 @@
+<div class="container-fluid" style="padding-right:0px;padding-left:0px">
+  <div class = "col-md-9" style="padding-left:20px;padding-right:20px">
+    <div class= "container-fluid task-container">
+      <div class="row task-header">
+        <h3>Common medias with <%= link_to user_profile_path(@user) do %><%= @user.profile.first_name %><% end %></h3>
+        <span class="rightfloat">
+          <%= link_to "Common Tasks", user_path(@user), class: "btn btn-default"%>
+        </span>
+      </div>
+      <div>
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#filestab" aria-controls="home" role="tab" data-toggle="tab">Files</a></li>
+          <li role="presentation"><a href="#linkstab" aria-controls="messages" role="tab" data-toggle="tab">Links</a></li>
+          <li role="presentation"><a href="#calendartab" aria-controls="settings" role="tab" data-toggle="tab">Calendar</a></li>
+        </ul>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="filestab">
+            <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="col-md-9">Files</th>
+                <th class="col-md-3">Sent at</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%= render partial: "common_medias/message_file", collection: @message_files, as: :message_file %>
+            </tbody>
+            </table>
+            <div id="infinite-common-media-scrolling">
+              <%= will_paginate @message_files, param_name: 'file' %>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="linkstab">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th class="col-md-9">Links</th>
+                  <th class="col-md-3">Sent at</th>
+                </tr>
+              </thead>
+              <tbody>
+                <%= render partial: "common_medias/message_link", collection: @message_links_formatted, as: :message_link %>
+              </tbody>
+            </table>
+            <div id="infinite-common-link-scrolling">
+              <%= will_paginate @message_links_pre, param_name: 'link' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class = "col-md-3 rightsidebar">
+    <%= render 'layouts/rightsidebar' %>
+  </div>
+</div>

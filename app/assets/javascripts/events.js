@@ -18,6 +18,7 @@ $(document).on("page:change", function() {
     timezoneParam: 'UTC',
     editable: false,
     allDayDefault: false,
+    weekends: false,
     header: {
       left: 'prev,next today', 
       center: 'title', 

@@ -1,14 +1,12 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
-  #protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format.js? }
 
   def create
-    #creating chat message
     @conversation = Conversation.find(params[:conversation_id])
     @message = @conversation.messages.build(message_params)
     @message.user_id = current_user.id
     @receiver = interlocutor(@conversation)
-    @message.link = check_if_link(@message.body)
+    @message.link = check_if_link(@message.body) if @message.body?
     @message.save!
     @path = conversation_path(@conversation)
     #creating notification if all the prev chat notifications are checked

@@ -1,10 +1,12 @@
-<div class= "task-container">
+<div class= "container-fluid task-container">
   <div class="row task-header">
     <h3>Tasks with <%= @user.profile.first_name %></h3>
     <span class="rightfloat">
       <%= link_to "NEW TASK", new_user_task_path(current_user), type: "button", class: "btn btn-primary newbutton", remote: true, 'data-toggle' => 'modal', 'data-target' => '#newtask' %>
-      <%= link_to "Common Files", conversation_path(@conversation), class: "btn btn-default", id: "rightone"%>
-      <%= link_to "Calendar", user_events_path(@user), class: "btn btn-default" %>
+      <div class="btn-group" role="group">
+        <%= link_to "Common Medias", common_medias_user_common_medias_path(@user), class: "btn btn-default", id: "rightone"%>
+        <%= link_to "Calendar", user_events_path(@user), class: "btn btn-default" %>
+      </div>
     </span>
   </div>
   <div class="panel panel-default" style="margin:0px;">

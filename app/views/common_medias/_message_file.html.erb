@@ -1,12 +1,14 @@
-<% if current_user.id == message_file.user_id %>
-  <tr style="background: #eaeaea">
-<% else %>
-  <tr>
-<% end %>
-  <td class="col-md-9">
-    <%= link_to "#{message_file.message_attachment_filename}", attachment_url(message_file, :message_attachment),:target => "_blank" %>
-  </td>
-  <td class="col-md-3">
-    <%= local_time(message_file.created_at, "%d %b %I:%M%p") %>
-  </td>
-</tr>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th class="col-md-9">Files</th>
+      <th class="col-md-3">Sent at</th>
+    </tr>
+  </thead>
+  <tbody class="filebody">
+    <%= render partial: "common_medias/message_file_body" %>
+  </tbody>
+</table>
+<div id="infinite-common-file-scrolling">
+  <%= will_paginate @common_files, param_name: 'files', params: { scrolling: 'filescroll'} %>
+</div>

@@ -1,0 +1,14 @@
+<% if params[:scrolling] == "linkscroll" && params[:tab] == "link" %>
+	$('.linkbody').append('<%= j render partial: "common_medias/message_link_body" %>');
+	<% if @message_links_pre.next_page %>
+    $('#infinite-common-link-scrolling .pagination').replaceWith('<%= j will_paginate @message_links_pre %>');
+  <% else %>
+    $(window).off('scroll');
+    $('#infinite-common-link-scrolling .pagination').remove();
+    $('.no-more').delay(1000).fadeIn(1500);
+  <% end %>
+<% else %>
+	var linkbody= $('.tab-pane.active');
+	linkbody.html('<%= j render partial: "common_medias/message_link" %>');
+  $('#infinite-common-link-scrolling').hide();
+<% end %>

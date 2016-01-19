@@ -15,7 +15,15 @@
     <% if @user == current_user %>
       <h4>Your calendar with all the events from your google calendar:</h4>
     <% else %>
-      <h4><%= @user.profile.full_name %>'s calendar. Find a time when <%= @user.profile.first_name %> can chat with you.</h4>
+      <div class="row task-header">
+        <h4 class="event-h4">Find a time when <%= @user.profile.full_name %> can chat with you.</h4>
+        <span class="rightfloat">
+          <div class="btn-group" role="group">
+            <%= link_to "Common Tasks", user_path(@user), class: "btn btn-default", id: "rightone"%>
+            <%= link_to "Common Medias", common_medias_user_common_medias_path(@user), class: "btn btn-default" %>
+          </div>
+        </span>
+      </div>
     <% end %>
     <br />
     <div class = "calendar-container" >
