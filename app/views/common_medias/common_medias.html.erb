@@ -14,7 +14,7 @@
         <ul class="nav nav-tabs" role="tablist">
           <li role="presentation"><a href="#filestab" aria-controls="filestab" role="tab" data-toggle="tab" data-link = "<%= get_files_user_common_medias_path(@user)%>" data-activetab="file">Files</a></li>
           <li role="presentation"><a href="#linkstab" aria-controls="linkstab" role="tab" data-toggle="tab" data-link = "<%= get_links_user_common_medias_path(@user)%>" data-activetab="link">Links</a></li>
-          <li role="presentation"><a href="#calendarstab" aria-controls="calendarstab" role="tab" data-toggle="tab" data-link = "<%= common_medias_user_common_medias_path(@user)%>" data-activetab="calendar">Calendar</a></li>
+          <li role="presentation"><a href="#calendarstab" aria-controls="calendarstab" role="tab" data-toggle="tab" data-activetab="calendar">Calendar</a></li>
         </ul>
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane" id="filestab">
@@ -22,7 +22,8 @@
           <div role="tabpanel" class="tab-pane" id="linkstab">    
           </div>
           <div role="tabpanel" class="tab-pane" id="calendarstab">
-            ...
+            <br/>
+            Checkout <%= @user.profile.first_name %>'s calendar <%= link_to "here", user_events_path(@user) %>.
           </div>
         </div>
       </div>

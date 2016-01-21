@@ -9,6 +9,7 @@ class Task < ActiveRecord::Base
   validates :executor, presence: { message: "must be valid"}
   #validates :executor, exclusion: { in: "szaros", message: "%{value} doesn't exist" }
   validates :content, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
+  validates :deadline, presence: { messsage: "can not be blank" }
   validate :deadline_date_cannot_be_in_the_past
 
   scope :completed, -> { where.not(completed_at: nil) }
@@ -43,6 +44,6 @@ class Task < ActiveRecord::Base
 
     def deadline_date_cannot_be_in_the_past
       errors.add(:deadline, "can't be in the past") if
-        !deadline.blank? and deadline < DateTime.now
+        !deadline.blank? and deadline < Time.zone.now
     end
 end

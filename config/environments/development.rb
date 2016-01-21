@@ -5,8 +5,8 @@ Rails.application.configure do
   require 'pusher'
 
   Pusher.app_id = '157688'
-  Pusher.key = '7cb6e2eb8727260e02ad'
-  Pusher.secret = 'c78cde58066e3e9118ac'
+  Pusher.key = ENV['PUSHER_KEY']
+  Pusher.secret = ENV['PUSHER_SECRET']
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development

@@ -30,13 +30,10 @@ gem 'pusher', '~> 0.15.1'
 gem 'pusher-client', '~> 0.6.2'
 #webserver (heroku recommends puma as default)
 gem 'puma', '~> 2.13.4'
-#bootstrap
+#bootstrap and willpaginate
 gem 'bootstrap-sass', '~> 3.3.5.1'
-#pagination
 gem 'will_paginate', '~> 3.0.7'
-#pagination w/ bootstrap
 gem 'bootstrap-will_paginate', '~> 0.0.10'
-#datepicker UI
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17', '>= 4.17.37'
 #simple form
 gem 'simple_form', '~> 3.1.1'
