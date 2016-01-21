@@ -11,6 +11,6 @@ environment ENV['RACK_ENV'] || 'development'
 on_worker_boot do
   # Worker specific setup for Rails 4.1+
   # See: https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server#on-worker-boot
-  @sidekiq_pid ||= spawn('bundle exec sidekiq -c 2')
+  @sidekiq_pid ||= spawn('bundle exec sidekiq -c 5 -q default -q mailers')
   ActiveRecord::Base.establish_connection
 end

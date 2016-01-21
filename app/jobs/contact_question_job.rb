@@ -3,6 +3,6 @@ class ContactQuestionJob < ActiveJob::Base
 
   def perform(h)
     h = JSON.load(h)
-    ContactMailer.contact_email(h['name'],h['email'],h['comment']).deliver_now
+    ContactMailer.contact_email(h['name'],h['email'],h['comment']).deliver_later
   end
 end
