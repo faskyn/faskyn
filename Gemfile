@@ -67,6 +67,8 @@ gem 'sinatra', '~> 1.4.6', :require => nil
 gem 'redis', '~> 3.2.1'
 #newrelic preformance checking
 gem 'newrelic_rpm'
+#setting timeout
+gem 'rack-timeout', '~> 0.3.2'
 #searching gem + SQL query simplifier gem
 gem 'ransack', '~> 1.7.0'
 gem 'arel', '~> 6.0', '>= 6.0.3'
