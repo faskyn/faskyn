@@ -23,6 +23,7 @@ gem 'turbolinks'
 gem 'jquery-ui-rails', '~> 5.0.5'
 #database
 gem 'pg', '~> 0.18.3'
+gem 'rack-mini-profiler', '~> 0.9.8'
 #fay+private_pub for chatting
 gem 'private_pub', '~> 1.0.3'
 #gem for real-time(notifications for now, chat implemented with private pub)
@@ -65,7 +66,7 @@ gem 'remotipart', '~> 1.2', '>= 1.2.1'
 gem 'sidekiq', '~> 3.5.0'
 #sinatra for sidekiq dashboard
 gem 'sinatra', '~> 1.4.6', :require => nil
-#redis for sidekiq
+#redis
 gem 'redis', '~> 3.2.1'
 #newrelic preformance checking
 gem 'newrelic_rpm'

@@ -67,12 +67,12 @@ class TasksController < ApplicationController
     if @task.save
       TaskCreatorJob.perform_later(@task.id, @user.id) #sidekiq email on task creation
       Conversation.create(sender_id: @task.assigner_id, recipient_id: @task.executor_id)
+      Notification.send_notification(@task.executor, "task", @task.assigner)
       respond_to do |format|
         format.html { redirect_to user_tasks_path(current_user), notice: "Task saved!" }
         format.js
       end
-      #sending in-app notification to executor; send_notification defined in notification.rb
-      Notification.send_notification(@task.executor, "task", @task.assigner)
+      #sending in-app notification to executor; send_notification defined in notification.rb      
     else
       respond_to do |format|
         format.html { render action: :new }
