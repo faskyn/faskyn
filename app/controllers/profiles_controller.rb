@@ -1,7 +1,8 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-  before_action :if_profile_exists, only: [:new, :create]
   before_action :find_user_for_profile
+  before_action :if_profile_exists, only: [:new, :create]
+  before_action :if_no_profile_exists, only: :show
   before_action :set_profile, only: [:show, :edit, :update]
 
   def new

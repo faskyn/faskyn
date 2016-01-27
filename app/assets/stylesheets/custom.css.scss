@@ -3,8 +3,8 @@
 
 $gray-medium-light: #eaeaea;
 $garmin-blue: #007cc3;
-$dark-grey: #5E5E5E;
-$dropbox-light-grey: #7b8994;
+$dark-grey: #5E5E5E; //dark text grey
+$light-grey: #f7f7f7; //super light grey background
 $orange: #ff6600;
 
 
@@ -129,6 +129,7 @@ a {
 .signedinbar .navbar-default {
   .navbar-btn .btn-danger {
     border-color: $garmin-blue;
+    color: white;
   }
   .navbar-right {
     margin-right:5px;
@@ -180,14 +181,7 @@ footer {
   vertical-align: middle;
   text-align: center;
   padding-top: 5px;
-  background-color: $gray-medium-light;
-  color: $gray-light;
-  a {
-    color: $gray;
-    &:hover {
-      color: $gray-darker;
-    }
-  }
+  background-color: $light-grey;
 
   .footer-left {
     float: left;
@@ -262,7 +256,7 @@ footer {
   height: 100%;
   margin-left: -250px;
   overflow-y: hidden;
-  background: #f7f7f7;//background: $garmin-blue;
+  background: $light-grey;
   border-right: 1px $gray-medium-light solid;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;

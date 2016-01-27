@@ -1,33 +1,11 @@
-<!--<nav class= "navbar navbar-default navbar-bottom">
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-left">
-        <div class="footer-nav">
-          <%= link_to image_tag("firstlogosmall.png", size: "40x40"), root_path, class: "navbar-brand" %>
-        </div>
-        <%= link_to "faskyn | Fastest way to ask and get things done.", root_path %>
-      </div>
-      
-      <nav>
-        <ul>
-          <li><%= link_to "Contact", new_contact_path %></li>
-          <li><%= link_to "About", static_pages_about_path %></li>
-          <li><%= link_to "Help", static_pages_help_path %></li>
-          <li><%= link_to "Privacy Policy", static_pages_privacypolicy_path %></li>
-        </ul>
-      </nav>
-    </div>
-  </footer>
-</nav>-->
-
 <nav class= "navbar navbar-static-bottom navbar-default">
   <footer class="footer">
     <div class="container-fluid">
       <div class="navbar-header" style="min-width:450px;vertical-align:middle">
-      <%= link_to image_tag("firstlogosmall.png", size: "40x40"), root_path, class: "navbar-brand", style: "margin-left:0px;padding-top:9px;padding-bottom:9px" %>
-        <%= link_to "faskyn | Fastest way to ask and get things done.", root_path, class: "navbar-brand", style: "min-width:250px;vertical-align:middle;padding-left:0px" %>
+      <%= link_to image_tag("firstlogosmallgarmin.png", size: "40x40"), root_path, class: "navbar-brand", style: "margin-left:0px;padding-top:9px;padding-bottom:9px" %>
       </div>
       <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Home", static_pages_home_path %></li>
         <li><%= link_to "Contact", new_contact_path %></li>
         <li><%= link_to "About", static_pages_about_path %></li>
         <li><%= link_to "Privacy Policy", static_pages_privacypolicy_path %></li>

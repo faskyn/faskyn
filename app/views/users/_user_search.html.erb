@@ -7,8 +7,8 @@
   <div class = "users">
     <ol>
       <% @users3.each do |user| %>
-        <li>
-          <% if user.profile %>
+        <% if user.profile %>
+          <li>
             <%= link_to user do %>
               <% if user.profile.avatar %>
                 <%= image_tag user.profile.avatar.url(:base_thumb), class: 'avatar' %>
@@ -20,8 +20,8 @@
                 <%= truncate(user.profile.company, length:26) %>
               </span>
             <% end %>
-          <% end %>
-        </li>
+          </li>
+        <% end %>
       <% end %>
     </ol>
   </div>

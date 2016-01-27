@@ -1,8 +1,8 @@
 $gray-medium-light: #eaeaea;
 $garmin-blue: #007cc3;
 $garmin-light-blue: #d9edf7;
-$dark-grey: #5E5E5E;
-$dropbox-light-grey: #7b8994;
+$dark-grey: #5E5E5E; //text color
+$light-grey: #f7f7f7; //super light background color
 $orange: #ff6600;
 
 .btn-social-reg {
@@ -41,7 +41,7 @@ $orange: #ff6600;
 
 .rightsidebar {
   border-left: solid 1px $gray-medium-light;
-  background: #f7f7f7;
+  background: $light-grey;
   overflow: hidden;
   // padding-left:0;
   // padding-right:0;
@@ -69,11 +69,13 @@ $orange: #ff6600;
   margin-bottom:15px;
 }
 
-.profile-well {
-  h2 {
+.profile-well, .account-well {
+  h3 {
     margin-top: 0px;
     margin-bottom: 15px;
+    text-align: center;
   }
+  background-color: $light-grey;
 }
 
 .edit_user, .new_user {
@@ -112,7 +114,7 @@ $orange: #ff6600;
     margin-left: 60px;
   }
   .job_title {
-    color: $dropbox-light-grey;
+    color: $dark-grey;
     display: block;
     margin-left: 60px;
   }

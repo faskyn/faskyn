@@ -51,7 +51,8 @@ class ApplicationController < ActionController::Base
     @q_users = User.ransack(params[:q])
     #regardless the search it gives back the users the current_user hast the most tasks with
     if user_signed_in? #&& if_tasks_any?
-      @users3 = current_user.ordered_relating_users
+      #@users3 = current_user.ordered_relating_users
+      @users3 = @q_users.result(distinct: true).includes(:profile).limit(8)
     else
     # #displaying users in the sidebar not needed at the moment as it will appear in the main area
       @users3 = @q_users.result(distinct: true).includes(:profile).limit(8)#paginate(page: params[:page], per_page: 6)

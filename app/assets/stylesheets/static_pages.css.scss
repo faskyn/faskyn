@@ -21,6 +21,9 @@ $orange: #ff6600;
 		  vertical-align: middle;
 		  position: relative;
 		  margin-top: 0px;
+		  h1 {
+		  	font-size:42px;
+		  }
 		}
 		img {
 			opacity:0.5;
@@ -81,7 +84,7 @@ $orange: #ff6600;
 	text-align: center;
 }
 
-.glyphicon-phone-alt, .glyphicon-user, .glyphicon-ok {
+.glyphicon-phone-alt, .glyphicon-user, .glyphicon-usd {
 	color: white;
 	font-size: 2em;
 }

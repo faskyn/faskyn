@@ -10,9 +10,6 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # turbolinks for jquery
@@ -31,6 +28,9 @@ gem 'pusher', '~> 0.15.1'
 gem 'pusher-client', '~> 0.6.2'
 #webserver (heroku recommends puma as default)
 gem 'puma', '~> 2.13.4'
+#memcache with heroku and puma
+gem 'dalli', '~> 2.7', '>= 2.7.5'
+gem 'connection_pool', '~> 2.2'
 #bootstrap and willpaginate
 gem 'bootstrap-sass', '~> 3.3.5.1'
 gem 'will_paginate', '~> 3.0.7'
