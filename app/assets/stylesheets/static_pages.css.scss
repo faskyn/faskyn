@@ -132,12 +132,12 @@ $orange: #ff6600;
 	}
 }
 
-#about {
+#about, #privacy-policy {
 	padding: 40px 0 50px 0;
 	.container {
 		max-width: 700px
 	}
-	h1 {
+	h1, h2, h3 {
 		text-align: center;
 		padding-bottom: 15px;
 	}

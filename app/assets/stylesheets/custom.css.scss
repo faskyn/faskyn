@@ -177,17 +177,16 @@ a {
 
 //FOOTER
 
-footer {
+#footer {
   vertical-align: middle;
   text-align: center;
   padding-top: 5px;
   background-color: $light-grey;
 
-  .footer-left {
-    float: left;
-    min-width: 400px;
-    vertical-align: middle;
-  }
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 
   ul {
     float: right;
@@ -197,10 +196,6 @@ footer {
       margin-left: 15px;
     }
   }
-}
-
-.footer-nav {
-  vertical-align: middle;
 }
 
 /* navbar */

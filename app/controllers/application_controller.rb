@@ -72,7 +72,7 @@ class ApplicationController < ActionController::Base
         Notification.decreasing_other_notification_number(current_user, @user)
         respond_to do |format|
           format.html
-          format.js { render :template => "tasks/update.js.erb", :template => "tasks/destroy.js.erb", :template => "tasks/between.js.erb", layout: false }
+          format.js { render :template => "tasks/between.js.erb", layout: false }
         end
       end
     else

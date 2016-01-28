@@ -24,7 +24,7 @@ $("ul.errors").html("");
   edit_task_hide_danger($task);
 
   $taskbetween = $('<%= j render partial: "tasks/task_between", locals: { task: @task } %>');
-  edit_task_time_for_user($taskbetween); //
+  edit_task_time_for_user($taskbetween);
   edit_task_datetimepicker($taskbetween);
   edit_task_time_on_submit($taskbetween);
   edit_task_hide_danger($taskbetween);

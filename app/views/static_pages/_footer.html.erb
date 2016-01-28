@@ -1,17 +1,15 @@
-<nav class= "navbar navbar-static-bottom navbar-default">
-  <footer class="footer">
-    <div class="container-fluid">
-      <div class="navbar-header" style="min-width:450px;vertical-align:middle">
-      <%= link_to image_tag("firstlogosmallgarmin.png", size: "40x40"), root_path, class: "navbar-brand", style: "margin-left:0px;padding-top:9px;padding-bottom:9px" %>
-      </div>
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home", static_pages_home_path %></li>
-        <li><%= link_to "Contact", new_contact_path %></li>
-        <li><%= link_to "About", static_pages_about_path %></li>
-        <li><%= link_to "Privacy Policy", static_pages_privacypolicy_path %></li>
-      </ul>
+<footer class= "navbar navbar-static-bottom navbar-default" id="footer">
+  <div class="container-fluid">
+    <div class="navbar-header" style="min-width:450px;vertical-align:middle">
+    <%= link_to image_tag("firstlogosmallgarmin.png", size: "40x40"), root_path, class: "navbar-brand", style: "margin-left:0px;padding-top:9px;padding-bottom:9px" %>
     </div>
-  </footer>
-</nav>
+    <ul class="nav navbar-nav navbar-right">
+      <li><%= link_to "Home", static_pages_home_path %></li>
+      <li><%= link_to "Contact", new_contact_path %></li>
+      <li><%= link_to "About", static_pages_about_path %></li>
+      <li><%= link_to "Privacy Policy", static_pages_privacypolicy_path %></li>
+    </ul>
+  </div>
+</footer>
 
 
