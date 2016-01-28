@@ -17,7 +17,7 @@
     <% end %>
     <%= form_for([@conversation, @message], html: {class: "refile_form"}, remote: true) do |form| %>
         <span class="btn btn-success btn-sm btn-file">Choose file
-        <%= form.attachment_field :message_attachment, direct: true, presigned: true, class: "choosefile" %></span>
+        <%= form.attachment_field :message_attachment, presigned: true, class: "choosefile" %></span>
         <%= form.submit "Send File", class: "btn btn-primary btn-sm btn-submit-refile", style:"display:none"%>
     <% end %>
     <span id="progresspercent"></span>

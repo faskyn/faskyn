@@ -8,3 +8,4 @@ aws = {
 }
 Refile.cache = Refile::S3.new(max_size: 5.megabytes, prefix: "cache", **aws)
 Refile.store = Refile::S3.new(prefix: "store", **aws)
+Refile.cdn_host = ENV['CLOUDFRONT_URL']
