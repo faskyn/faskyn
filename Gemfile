@@ -63,7 +63,7 @@ gem 'refile-mini_magick', '~> 0.2.0'
 gem 'refile-s3', '~> 0.2.0'
 gem 'remotipart', '~> 1.2', '>= 1.2.1'
 #bg worker
-gem 'sidekiq', '~> 3.5.0'
+gem 'sidekiq', '~> 4.1'
 #sinatra for sidekiq dashboard
 gem 'sinatra', '~> 1.4.6', :require => nil
 #redis

@@ -1,7 +1,9 @@
-class TaskCreatorJob < ActiveJob::Base
-  queue_as :default
+# class TaskCreatorJob < ActiveJob::Base
+#   queue_as :default
 
-  def perform(task_id, user_id)
-    TaskMailer.task_created(Task.find(task_id), User.find(user_id)).deliver_later
-  end
-end
+#   def perform(task_id, user_id)
+#     task = Task.find(task_id)
+#     user = User.find(user_id)
+#     TaskMailer.task_created(task, user).deliver
+#   end
+# end

@@ -65,7 +65,8 @@ class TasksController < ApplicationController
     #check for other_user_profile_exists before filter (@task = Task.new(task_params))
     @task.assigner_id = current_user.id
     if @task.save
-      TaskCreatorJob.perform_later(@task.id, @user.id) #sidekiq email on task creation
+      #TaskCreatorJob.perform_later(@task.id, @user.id) #sidekiq email on task creation
+      TaskMailer.task_created(task, user).deliver_later
       Conversation.create(sender_id: @task.assigner_id, recipient_id: @task.executor_id)
       Notification.send_notification(@task.executor, "task", @task.assigner)
       respond_to do |format|
