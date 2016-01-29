@@ -12,8 +12,8 @@ class ContactsController < ApplicationController
                           'email' => params[:contact][:email],
                           'comment' => params[:contact][:comment] })
 
-      #ContactQuestionJob.perform_later(h) #sending mailer
-      ContactMailer.contact_email(h['name'],h['email'],h['comment']).deliver_later
+      ContactQuestionJob.perform_later(h) #sending mailer
+      #ContactMailer.contact_email(h['name'],h['email'],h['comment']).deliver_later
       flash[:success] = "Message sent."
       redirect_to new_contact_path
     else
