@@ -1,22 +1,5 @@
 <div id= "sidebar-wrapper">
   <br/>
   <br/>
-  <% if has_profile? %>
-    <div class="invite">  
-      <%= form_for(User.new, url: user_invitation_path) do |f| %>
-        <div class="form-group">
-          <div class="input-group input-group">
-            <%= f.email_field :email, placeholder: 'Invite via email', label: false, class: 'form-control' %>
-            <span class="input-group-btn">
-              <%= content_tag :button, type: :submit, class: 'btn btn-success' do %>
-                <span class="glyphicon glyphicon-envelope"></span>
-              <%end%>
-            </span>
-          </div>
-        </div>
-      <% end %> 
-    </div>
-  <% end %>
-  <br />
   <%= render 'users/user_search' %>
 </div>

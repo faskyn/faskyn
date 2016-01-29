@@ -4,15 +4,18 @@ class MessagesController < ApplicationController
   def create
     @conversation = Conversation.find(params[:conversation_id])
     @message = @conversation.messages.build(message_params)
-    @message.user_id = current_user.id
+    @message.user = current_user
     @receiver = interlocutor(@conversation)
     @message.link = check_if_link(@message.body) if @message.body?
     @message.save!
     @path = conversation_path(@conversation)
     #creating notification if all the prev chat notifications are checked
-    if @message.save && (Notification.between_chat_recipient(@receiver, @message.user).unchecked.count < 1)
-      Notification.send_notification(@receiver, "chat", @message.user)
-    end
+    if @message.save
+      Notification.decreasing_chat_notification_number(@message.user, @receiver)
+      if (Notification.between_chat_recipient(@receiver, @message.user).unchecked.count < 1)
+        Notification.send_notification(@receiver, "chat", @message.user)
+      end
+    end 
   end
 
   private
