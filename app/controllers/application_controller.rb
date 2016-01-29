@@ -64,16 +64,14 @@ class ApplicationController < ActionController::Base
     if Task.between(current_user.id, @user.id).present?
       @tasks = Task.uncompleted.between(current_user.id, @user.id).order("created_at DESC").includes(:assigner).paginate(page: params[:page], per_page: 14)
       @task_between = Task.new
-      if Conversation.between(current_user.id, @user.id).present?
-        @conversation = Conversation.between(current_user.id, @user.id).first
-        @messages = @conversation.messages.includes(:user).order(created_at: :desc).limit(50).reverse
-        @message = Message.new
-        Notification.decreasing_chat_notification_number(current_user, @user)
-        Notification.decreasing_other_notification_number(current_user, @user)
-        respond_to do |format|
-          format.html
-          format.js { render :template => "tasks/between.js.erb", layout: false }
-        end
+      @conversation = Conversation.create_or_find_conversation(current_user, @user)
+      @messages = @conversation.messages.includes(:user).order(created_at: :desc).limit(50).reverse
+      @message = Message.new
+      Notification.decreasing_chat_notification_number(current_user, @user)
+      Notification.decreasing_other_notification_number(current_user, @user)
+      respond_to do |format|
+        format.html
+        format.js { render :template => "tasks/between.js.erb", layout: false }
       end
     else
       redirect_to user_profile_path(@user)
