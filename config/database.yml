@@ -1,6 +1,7 @@
 development:
   adapter: postgresql
   encoding: unicode
+  host: localhost
   database: faskyn_development
   pool: 5
   username: Silo
@@ -9,6 +10,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
+  host: localhost
   database: faskyn_test
   pool: 5
   username: Silo
