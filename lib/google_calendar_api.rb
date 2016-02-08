@@ -23,7 +23,7 @@ module GoogleCalendarApi
       :body => JSON.dump({ 
               :timeMin => start_time,
               :timeMax => end_time,
-              #:timeZone => timezone,
+              :timeZone => timezone,
               :items => [{ :id => social_object.email }]}),
       :headers => {'Content-Type' => 'application/json'})
 
