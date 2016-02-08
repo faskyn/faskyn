@@ -11,7 +11,7 @@ module GoogleCalendarApi
     return client
   end
 
-  def get_busy_events(social_object, start_time, end_time)#start_time and end_time must be string
+  def get_busy_events(social_object, start_time, end_time, timezone)#start_time and end_time must be string
     #busy events get displayed when current user checks sby else's calendar aka events index page
     client = init_google_api_calendar_client(social_object)
     old_token = client.authorization.access_token
@@ -31,7 +31,7 @@ module GoogleCalendarApi
     new_token = client.authorization.access_token
     if old_token != new_token
       social_object.update_attribute(:token, new_token)
-      get_busy_events(social_object,start_time, end_time)
+      get_busy_events(social_object,start_time, end_time, timezone)
     end
 
     #API response parsing
@@ -78,7 +78,7 @@ module GoogleCalendarApi
     new_token = client.authorization.access_token
     if old_token != new_token
       social_object.update_attribute(:token, new_token)
-      get_own_events(social_object, start_time, end_time)
+      get_own_events(social_object, start_time, end_time, timezone)
     end
 
     #API response parsing

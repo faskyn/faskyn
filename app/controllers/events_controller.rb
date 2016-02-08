@@ -17,7 +17,7 @@ class EventsController < ApplicationController
         if @user == @current_user
           @results = get_own_events(@google, @start_time, @end_time, @timezone)
         else
-          @results = get_busy_events(@google, @start_time, @end_time)
+          @results = get_busy_events(@google, @start_time, @end_time, @timezone)
         end
       end
       #@results = get_own_events(@google, "2015-12-27T00:00:00+00:00", "2016-02-27T00:00:00+00:00")
