@@ -1,4 +1,37 @@
-<% publish_to @path do %>
+//first part is AJAX, only goes to sender
+var id = "<%= @conversation.id %>";
+var chatbox = $(".chatboxcontent");
+var sender_id = "<%= @message.user.id %>";
+var receiver_id = $('meta[name=user-id]').attr("content");
+
+//if (!(lastMessage).hasClass('.messagedisplayed')) {
+if (event.handled !== true) {
+
+	$message = $('<%= j render @message %>');
+	//$message.addClass('.messagedisplayed');
+	chatbox.append($message);
+	chatbox.scrollTop(chatbox[0].scrollHeight);
+	
+	$(".chatboxtextarea").val("");
+	$(".chatboxtextarea").focus();
+	$(".chatboxtextarea").css('height', '44px');
+	//var lastMessage = chatbox.children().last();
+	var timeField = ($message).find('.timefield');
+	var nameField = ($message).find('#chatname');
+	var createdAt = timeField.attr('datetime');
+	var momentCreatedAt = moment(createdAt).format('hh:mm A');
+	timeField.remove();
+	$( "<span class='newtime'>" + " • " + momentCreatedAt + "</span>" ).insertAfter(nameField);
+
+	if(sender_id != receiver_id) {
+		chatbox.children().last().removeClass("self").addClass("other");
+		chatbox.scrollTop(chatbox[0].scrollHeight);
+	}
+	event.handled = true;
+}
+
+//only broadcasted to receiver, sender is getting the message via AJAX
+<% broadcast_to_conversation(@conversation.id, @receiver_id) do %>
 	var id = "<%= @conversation.id %>";
 	var chatbox = $(".chatboxcontent");
 	var sender_id = "<%= @message.user.id %>";

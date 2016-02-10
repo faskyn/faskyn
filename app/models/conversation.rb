@@ -5,6 +5,9 @@ class Conversation < ActiveRecord::Base
 
   has_many :messages, dependent: :destroy
 
+  validates :sender, presence: true
+  validates :recipient, presence: true
+
   validates_uniqueness_of :sender_id, scope: "recipient_id"
 
   scope :involving, -> (user) do 
@@ -16,6 +19,9 @@ class Conversation < ActiveRecord::Base
   end
 
   def self.create_or_find_conversation(task_assigner_id, task_executor_id)
-    Conversation.where(:sender_id => task_assigner_id, :recipient_id => task_executor_id).first_or_create
+    Conversation.between(task_assigner_id, task_executor_id).first_or_create do |conversation|
+      conversation.sender_id = task_assigner_id
+      conversation.recipient_id = task_executor_id
+    end
   end
 end

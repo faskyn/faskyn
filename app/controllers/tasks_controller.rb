@@ -9,9 +9,7 @@ class TasksController < ApplicationController
   require 'will_paginate/array'
 
   def index
-    #with no ransack
     #@tasks = current_user.tasks_uncompleted.paginate(page: params[:page], per_page: 12)
-    #with ransack
     @q_tasks = Task.alltasks(current_user).uncompleted.ransack(params[:q])
     #eager loading --> @tasks = @q_tasks.result.includes(:executor_profile, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: 12)
     @tasks = @q_tasks.result.includes(:executor, :executor_profile, :assigner, :assigner_profile).order("created_at DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
@@ -45,9 +43,7 @@ class TasksController < ApplicationController
   end
 
   def incoming_tasks
-    #with no ransack
-      #@executed_tasks = current_user.executed_tasks.uncompleted.order("created_at DESC").paginate(page: params[:page], per_page: 12)
-    #ransack version for sorting
+    #@executed_tasks = current_user.executed_tasks.uncompleted.order("created_at DESC").paginate(page: params[:page], per_page: 12)
     @q_incoming_tasks = current_user.executed_tasks.uncompleted.ransack(params[:q])
     @tasks = @q_incoming_tasks.result.includes(:assigner, :assigner_profile).order("created_at DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
     respond_to do |format|

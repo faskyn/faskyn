@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  include ConversationsHelper
   before_action :authenticate_user!
 
   def create
@@ -6,9 +7,10 @@ class MessagesController < ApplicationController
     @message = @conversation.messages.build(message_params)
     @message.user = current_user
     @receiver = interlocutor(@conversation)
+    @receiver_id = @receiver.id
     @message.link = check_if_link(@message.body) if @message.body?
     @message.save!
-    @path = conversation_path(@conversation)
+    #@path = conversation_path(@conversation)
     #creating notification if all the prev chat notifications are checked
     if @message.save
       Notification.decreasing_chat_notification_number(@message.user, @receiver)

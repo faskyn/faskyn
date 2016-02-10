@@ -19,8 +19,13 @@
     <script type="text/javascript" charset="utf-8">
       $(function() {
         var pusher = new Pusher('<%= Pusher.key %>'); //Pusher.key
+        //notifications
         var other_notification_channel = pusher.subscribe('private-'+'<%= current_user.id %>');
         var chat_notification_channel = pusher.subscribe('private-'+'<%= current_user.id %>');
+        //chat messages
+        var conv_id = $(".start-conversation").data("convid");
+        var rec_id = $(".start-conversation").data("recid");
+        var chat_message_channel = pusher.subscribe('private-'+'conversation_' + '<%= current_user.id %>');
 
         // Some useful debug msgs
         pusher.connection.bind('connecting', function() {
@@ -38,6 +43,9 @@
         other_notification_channel.bind('subscription_error', function(status) {
           $('div#status').text('Pusher subscription_error');
         });
+        chat_message_channel.bind('subscription_error', function(status) {
+          $('div#status').text('Pusher subscription_error');
+        });
 
         //separated real-time notification for chat and the rest of the notificaitons
         other_notification_channel.bind('new_other_notification', function(data) {
@@ -48,7 +56,12 @@
         chat_notification_channel.bind('new_chat_notification', function(data) {
           msg = data.number;
           dom_chat_notify(msg);
-        })
+        });
+
+        chat_message_channel.bind('message-sent', function(data){
+          eval(data.message);
+        });
+
 
         function dom_other_notify(msg) {
           
