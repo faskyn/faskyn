@@ -17,7 +17,6 @@
 //= require jquery.remotipart
 //= require refile
 //= require bootstrap-sprockets
-//= require private_pub
 //= require local_time
 //= require moment
 //= require fullcalendar
