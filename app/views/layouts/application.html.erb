@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-  <meta content='<%= user_signed_in? ? current_user.id : "" %>' name='user-id'/>
   <meta name="google-site-verification" content="TZLsd4Rgf8Ze7yBr8z9chL6P2WyiBWF1b3f0uoukpmw"/>
   <% if user_signed_in? && (current_user.new_chat_notification > 0) %>
     <title>(<%= current_user.new_chat_notification %>) <%= yield(:title) %></title>

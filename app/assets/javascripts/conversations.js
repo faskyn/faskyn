@@ -42,3 +42,29 @@ function checkInputKey(event, chatboxtextarea, conversation_id) {
       $(chatboxtextarea).css('overflow', 'auto');
   }
 };
+
+function chatMessageSender (sender_id, message_rendered) {
+  var chatbox = $(".chatboxcontent");
+  var receiver_id = $('#bodycurrentuser').data('currentuserid');
+
+  if (event.handled !== true) {
+    chatbox.append(message_rendered);
+    chatbox.scrollTop(chatbox[0].scrollHeight);
+    
+    $(".chatboxtextarea").val("");
+    $(".chatboxtextarea").focus();
+    $(".chatboxtextarea").css('height', '44px');
+    var timeField = (message_rendered).find('.timefield');
+    var nameField = (message_rendered).find('#chatname');
+    var createdAt = timeField.attr('datetime');
+    var momentCreatedAt = moment(createdAt).format('hh:mm A');
+    timeField.remove();
+    $( "<span class='newtime'>" + " • " + momentCreatedAt + "</span>" ).insertAfter(nameField);
+
+    if(sender_id != receiver_id) {
+      chatbox.children().last().removeClass("self").addClass("other");
+      chatbox.scrollTop(chatbox[0].scrollHeight);
+    }
+    event.handled = true;
+  }
+};
