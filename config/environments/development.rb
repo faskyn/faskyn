@@ -4,7 +4,7 @@ Rails.application.configure do
   #pusher for dev env (production is handled by heroku)
   require 'pusher'
 
-  Pusher.app_id = '157688'
+  Pusher.app_id = ENV['PUSHER_APP_ID']
   Pusher.key = ENV['PUSHER_KEY']
   Pusher.secret = ENV['PUSHER_SECRET']
 
@@ -18,7 +18,8 @@ Rails.application.configure do
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
-  config.action_controller.perform_caching = false
+  config.action_controller.perform_caching = true
+  config.cache_store = :dalli_store, '127.0.0.1'
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true

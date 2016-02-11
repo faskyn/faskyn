@@ -42,7 +42,9 @@ Rails.application.routes.draw do
     resources :messages, only: [:index, :create]
   end
 
-  mount Sidekiq::Web => '/sidekiq'
+  authenticate :user, lambda { |u| u.email == "szilard.magyar@gmail.com" } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

@@ -35,25 +35,32 @@ module GoogleCalendarApi
     end
 
     #API response parsing
-    result = JSON.parse(result_raw.body)['calendars'][social_object.email]['busy']
+    #result = JSON.parse(result_raw.body)['calendars'][social_object.email]['busy']
+    result = JSON.parse(result_raw.body)
+
+    if result && result['calendars'] && result['calendars'][social_object.email] && result['calendars'][social_object.email]['busy']
+      parsed_body = result['calendars'][social_object.email]['busy']
+    end
     
     #changing response to fullcalendar format
     formatted_event_array = []
     
-    result.each do |event|
-      start_time = event['start'].to_datetime.rfc822
-      end_time = event['end'].to_datetime.rfc822
-      formatted_event = {}
-      formatted_event['title'] = 'busy'
-      formatted_event['start'] = start_time
-      formatted_event['end'] = end_time
-      #no allDay in freebusy response, so time difference must be checked
-      if event['start'].to_datetime + 1.day <= event['end'].to_datetime
-        formatted_event['allDay'] = true
-      else
-        formatted_event['allDay'] = false
+    if parsed_body
+      parsed_body.each do |event|
+        start_time = event['start'].to_datetime.rfc822
+        end_time = event['end'].to_datetime.rfc822
+        formatted_event = {}
+        formatted_event['title'] = 'busy'
+        formatted_event['start'] = start_time
+        formatted_event['end'] = end_time
+        #no allDay in freebusy response, so time difference must be checked
+        if event['start'].to_datetime + 1.day <= event['end'].to_datetime
+          formatted_event['allDay'] = true
+        else
+          formatted_event['allDay'] = false
+        end
+        formatted_event_array << formatted_event 
       end
-      formatted_event_array << formatted_event 
     end
 
     return formatted_event_array
@@ -82,37 +89,42 @@ module GoogleCalendarApi
     end
 
     #API response parsing
-    result = JSON.parse(result_raw.body)['items']
+    result = JSON.parse(result_raw.body)
     #result_timezone = JSON.parse(result_raw.body)['timeZone']
 
-    #changing response to fullcalendar format
+    if result && result['items']
+      parsed_body = result['items']
+    end
+
     formatted_event_array = []
 
-    result.each do |event|
-      if event['start']['dateTime'] && event['end']['dateTime']
-        start_time = event['start']['dateTime'].to_datetime.rfc822
-        end_time = event['end']['dateTime'].to_datetime.rfc822
-        #timezone = result_timezone
-        all_day = false
-        title = event['summary']
-        formatted_event = {}
-        formatted_event['title'] = title
-        formatted_event['start'] = start_time
-        formatted_event['end'] = end_time
-        formatted_event['allDay'] = all_day
-        formatted_event_array << formatted_event
-      elsif event['start']['date'] && event['end']['date']
-        all_day = true
-        start_time = event['start']['date'].to_datetime.rfc822
-        end_time = event['end']['date'].to_datetime.rfc822
-        title = event['summary']
-        timezone = result_timezone
-        formatted_event = {}
-        formatted_event['title'] = title
-        formatted_event['start'] = start_time
-        formatted_event['end'] = end_time
-        formatted_event['allDay'] = all_day
-        formatted_event_array << formatted_event
+    if parsed_body
+      parsed_body.each do |event|
+        if event['start']['dateTime'] && event['end']['dateTime']
+          start_time = event['start']['dateTime'].to_datetime.rfc822
+          end_time = event['end']['dateTime'].to_datetime.rfc822
+          #timezone = result_timezone
+          all_day = false
+          title = event['summary']
+          formatted_event = {}
+          formatted_event['title'] = title
+          formatted_event['start'] = start_time
+          formatted_event['end'] = end_time
+          formatted_event['allDay'] = all_day
+          formatted_event_array << formatted_event
+        elsif event['start']['date'] && event['end']['date']
+          all_day = true
+          start_time = event['start']['date'].to_datetime.rfc822
+          end_time = event['end']['date'].to_datetime.rfc822
+          title = event['summary']
+          timezone = result_timezone
+          formatted_event = {}
+          formatted_event['title'] = title
+          formatted_event['start'] = start_time
+          formatted_event['end'] = end_time
+          formatted_event['allDay'] = all_day
+          formatted_event_array << formatted_event
+        end
       end
     end
 
