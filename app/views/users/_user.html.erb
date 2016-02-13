@@ -1,23 +1,22 @@
-<% @users.each_slice(3) do |users_for_row| %>
-  <div class="row">
-    <% users_for_row.each do |user| %>
-      <div class="col-md-4">
-        <%= link_to user do %>
-          <div class="panel panel-info">
-            <div class="panel-heading">
-            </div>
-            <div class="panel-body">
-              <% if user.profile.avatar %>
-                <%= image_tag user.profile.avatar.url(:base_thumb), class: "avatar" %>
-              <% end %>
-              <h4><%= user.profile.first_name %> <%= user.profile.last_name %></h4>
-              <h5><%= user.profile.company %></h5>
-              <h5><%= user.profile.job_title %></h5>
-            </div>
-          </div>
-        <% end %>
+<tr>
+  <td class="col-md-6 name">
+    <%= link_to user do %>
+      <%= image_tag user.profile.avatar.url(:base_thumb), class: "avatar" %>
+      <div class="user-fullname">
+        <%= user.profile.full_name %>
       </div>
+      <span class="company">
+        <%= user.profile.job_title %> at <%= user.profile.company %>
+      </span>
     <% end %>
-  </div>
-<% end %>
+  </td>
+  <td class="col-md-4 description">
+    <%= user.profile.description %>
+  </td>
+  <td class="col-md-2 location">
+    <%= user.profile.location || "-" %>
+  </td>
+</tr>
+
+
 

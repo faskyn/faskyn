@@ -14,10 +14,6 @@ $(document).on("page:change", function() {
       }
     });
   };
-
-  // $(".btn-social-icon").mouseup(function(){
-  //   $(this).blur();
-  // });
 });
 
 // $(document).ready(ready);

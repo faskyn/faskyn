@@ -53,6 +53,28 @@ $orange: #ff6600;
 	padding-bottom: 40px;
 	border-bottom: 1px solid $gray-medium-light;
 	background: #fff;
+	.fa {
+		color: white;
+ 		background-color: $garmin-blue;
+ 		border-radius: 50%;
+ 		border: 1px solid $garmin-blue;
+ 		padding: 15px;
+ 	}
+	.fa-usd {
+		padding-left:20px;
+		padding-right:20px;
+	}
+}
+
+.sosial-links a{
+    display: block;
+    float: left;
+    width: 36px;
+    height: 36px;
+    border: 2px solid #909090;
+    border-radius: 20px;
+    margin-right: 7px; /*space between*/
+
 }
 
 .glyphicon-stack {
@@ -84,7 +106,7 @@ $orange: #ff6600;
 	text-align: center;
 }
 
-.glyphicon-phone-alt, .glyphicon-user, .glyphicon-usd {
+.glyphicon-phone-alt, .glyphicon-star, .glyphicon-user, .glyphicon-usd {
 	color: white;
 	font-size: 2em;
 }

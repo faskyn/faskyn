@@ -43,11 +43,71 @@ $orange: #ff6600;
   border-left: solid 1px $gray-medium-light;
   background: $light-grey;
   overflow: hidden;
-  // padding-left:0;
-  // padding-right:0;
-  //position: fixed;
 }
 
+.user-container {
+  padding-left:50px;
+  padding-right:50px;
+  padding-top:40px;
+  .title-row {
+    padding-bottom:20px;
+  }
+  table {
+    color: $dark-grey;
+    margin-bottom: 0px;
+    vertical-align: middle;
+    a {
+      color: $dark-grey;
+      &:hover {
+        color: $garmin-blue;
+      }
+    }
+    thead th {
+      border-bottom: 0px;
+    }
+    tbody tr .name {
+      vertical-align: middle;
+      padding-left:10px;
+      padding-top:3px;
+      padding-bottom:3px;
+      //border-left: 0px;
+      //border-right: 0px;
+      //margin-top: 0px;
+      .user-fullname {
+        margin-top: 4px;
+      }
+    }
+    tbody tr .location, tbody tr .description {
+      text-align: center;
+      vertical-align: middle;
+    }
+    thead tr th {
+      text-align: center;
+      vertical-align: middle;
+      //border-left: 0px;
+      //border-right: 0px;
+    }
+    tbody tr td a {
+      text-decoration: none;
+    }
+  }
+}
+
+//index page
+.user-profile-index {
+  .avatar {
+    float: left;
+    margin-right: 15px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+}
+
+//search bar
 .user-search {
   margin-right:15px;
   margin-top: 0.3em;
@@ -91,42 +151,6 @@ $orange: #ff6600;
 .edit_profile, .new_profile {
   .form-group .form-control {
     height: 32px;
-  }
-}
-
-.user-profile-index {
-  list-style: none;
-  padding: 0;
-  margin-top:10px;
-  li {
-    padding: 10px 0 10px 0;
-  }
-  a {
-    text-decoration: none;
-    color: black;
-  }
-  .user {
-    margin-top: 5em;
-    padding-top: 0;
-  }
-  .company {
-    display: block;
-    margin-left: 60px;
-  }
-  .job_title {
-    color: $dark-grey;
-    display: block;
-    margin-left: 60px;
-  }
-  .avatar {
-    float: left;
-    margin-right: 15px;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    vertical-align: middle;
-    margin-bottom: 15px;
-    margin-top: 10px;
   }
 }
 

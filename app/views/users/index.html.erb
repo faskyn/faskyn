@@ -1,5 +1,5 @@
 <% provide(:title, 'Users') %>
-<div class="container-fluid container-form">
+<div class="container-fluid user-container">
   <% unless has_profile? %>
     <div class="row">
       <div class="well onboard-well" style="margin-right:30px;margin-left:30px;text-align:center;">
@@ -7,7 +7,7 @@
       </div>
     </div>
   <% end %>
-  <div class="row">
+  <div class="row title-row">
     <div class="col-md-4 col-md-offset-4">
       <div class="user-desc" style="text-align:center">
         <h2>USERS</h2>
@@ -21,11 +21,22 @@
       </div>
     </div>
   </div>
-  <div class="user-profile-index" style="padding-right:20px;padding-left:20px;">
-    <%= render :partial => "user" %>
+  <div class="panel panel-default">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th class="col-md-6">Name</th>
+          <th class="col-md-4">Description</th>
+          <th class="col-md-2">Location</th>
+        </tr>
+      </thead>
+      <tbody class="user-profile-index">
+        <%= render @users %>
+      </tbody>
+    </table>
   </div>
   <div id="infinite-user-scrolling" style="text-align:center;display:none;">
-    <%= will_paginate :partial => "user" %>
+    <%= will_paginate @users %>
   </div>
   <div class="no-more" style="display:none;padding-left:20px;">
     <p>No more users.</p>

@@ -1,142 +1,105 @@
-  <div id="home_loggedout">
-    <div class= "jumbotron">
-      <div class= "container">
-        <% if notice %>
-          <div class="container-fluid flash-container">
-            <div class="alert alert-success">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <%= notice %>
-            </div>
-          </div>
-        <% end %>
-        <% if alert %>
-          <div class="container-fluid flash-container">
-            <div class="alert alert-danger">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <%= alert %>
-            </div>
-          </div>
-        <% end %>
-        <% if ( !notice && !alert ) && !flash.empty? %>
+<div id="home_loggedout">
+  <div class= "jumbotron">
+    <div class= "container">
+      <% if notice %>
         <div class="container-fluid flash-container">
-          <% flash.each do |key, value| %>
-            <div class= "alert alert-<%= key %>">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <%= value %>
-            </div>
-          <% end %>
+          <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <%= notice %>
+          </div>
         </div>
+      <% end %>
+      <% if alert %>
+        <div class="container-fluid flash-container">
+          <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <%= alert %>
+          </div>
+        </div>
+      <% end %>
+      <% if ( !notice && !alert ) && !flash.empty? %>
+      <div class="container-fluid flash-container">
+        <% flash.each do |key, value| %>
+          <div class= "alert alert-<%= key %>">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <%= value %>
+          </div>
         <% end %>
-        <div class= "hero-title">
-          <h1>Connect with new customers, investors and startups</h1>
-        </div>
-        <div class= "hero-description">
-          <h3>Marketplace for startups.</h3>
-        </div>
-        <div class = "hero-button">
-          <p><%= link_to "GET STARTED", new_user_registration_path , class: "btn btn-success btn-lg", style: "margin-right:20px"%><%= link_to "LOG IN", new_user_session_path, class: "btn btn-primary btn-lg" %></p>
-        </div>
+      </div>
+      <% end %>
+      <div class= "hero-title">
+        <h1>Find the startups building the future</h1>
+      </div>
+      <div class= "hero-description">
+        <h3>Discover and connect with startups by browsing their products</h3>
+      </div>
+      <div class = "hero-button">
+        <p><%= link_to "GET STARTED", new_user_registration_path , class: "btn btn-success btn-lg", style: "margin-right:20px"%><%= link_to "LOG IN", new_user_session_path, class: "btn btn-primary btn-lg" %></p>
       </div>
     </div>
   </div>
+</div>
+<div class = "details">
+  <div class= "container">
+    <div class = "row">
+      <div class = "col-md-4">
+        <div class="col-padding">
+          <i class="fa fa-rocket fa-2x"></i> 
+          <h4>STARTUPS</h4>
+          <p>Startups can explain what makes their product unique and why customers should use it</p>
+        </div>
+      </div>
+      <div class = "col-md-4">
+        <div class="col-padding">
+          <i class="fa fa-users fa-2x"></i>
+          <h4>CUSTOMERS</h4>
+          <p>Customers can post a request for a specific problem they want solution for and startups can send offers to solve it</p>
+        </div>
+      </div>
+      <div class = "col-md-4">
+        <div class="col-padding">
+          <i class="fa fa-usd fa-2x"></i>
+          <h4>INVESTORS</h4>
+          <p>Investors can share their investment criteria thus being connected by startups that fulfill specific requirements for location, stage or market</p>
+        </div>    
+      </div>
+    </div>
+  </div>
+</div>
 
-  <div class = "details">
-    <div class= "container">
-      <div class = "row">
-        <div class = "col-md-4">
-          <div class="col-padding">
-            <span class="glyphicon-stack">
-              <i class="glyphicon glyphicon-circle glyphicon-stack-2x"></i>
-              <i class="glyphicon glyphicon-phone-alt glyphicon-stack glyphicon-stack-1x"></i>
-            </span>
-            <h4>INTRODUCTION</h4>
-            <ul style="list-style-type:none;padding-left:0px;padding-top:10px;">
-              <li>Angels/VCs</li>
-              <li>Incubators/Accelerators</li>
-              <li>Customers</li>
-            </ul>
-          </div>
+<div class="examples">
+  <div class= "container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="col-padding">
+          <p>"The secret to success is to have a great product. This is the only thing all great companies have in common. A great product is the only way to grow long-term."</p>
+          <p>- Sam Altman, President Y Combinator</p>
         </div>
-        <div class = "col-md-4">
-          <div class="col-padding">
-            <span class="glyphicon-stack">
-              <i class="glyphicon glyphicon-circle glyphicon-stack-2x"></i>
-              <i class="glyphicon glyphicon-user glyphicon-stack glyphicon-stack-1x"></i>
-              </span>
-            <h4>ADVICE</h4>
-            <ul style="list-style-type:none;padding-left:0px;padding-top:10px;">
-              <li>Ask for help from successful startups</li>
-              <li>Help other entrepreneurs</li>
-              <li>Talk to industry fellows</li>
-            </ul>
-          </div>
+      </div>
+      <div class="col-md-4">
+        <div class="col-padding">
+          <p>“The product that wins is the one that bridges customers to the future, not the one that requires a giant leap.”</p>
+          <p>- Aaron Levie, CEO Box</p>
         </div>
-        <div class = "col-md-4">
-          <div class="col-padding">
-            <span class="glyphicon-stack">
-              <i class="glyphicon glyphicon-circle glyphicon-stack-2x"></i>
-              <i class="glyphicon glyphicon-usd glyphicon-stack glyphicon-stack-1x"></i>
-            </span>
-            <h4>REVENUE</h4>
-            <ul style="list-style-type:none;padding-left:0px;padding-top:10px;">
-              <li>Grow by revenue</li>
-              <li>Meet potential customers</li>
-              <li>Sell a demo kit</li>
-            </ul>
-          </div>    
+      </div>
+      <div class="col-md-4">
+        <div class="col-padding">
+          <p>"The three core elements of each startup are team, product and market. The only thing that matters is getting to product/market fit. Being in a good market with a product that can satisfy the market."</p>
+          <p>- Marc Andreessen, GP a16z</p>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="examples">
-    <div class= "container">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="col-padding">
-            <p>"These guys look good at distribution, but they may need some help with coding. Let's get in touch with them."</p>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="col-padding">
-            <p>"Hey Joe, we'd like to consult with you about sales. In exchange we can help you make your front-end better."</p>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="col-padding">
-            <p>"Hey Kate, sounds good. Let's meet next Wednesday."</p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="col-padding">
-            <p>"Our accountant hasn't sent over yet the latest copies."</p>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="col-padding">
-            <p>"Nancy, please send over the docs in 2 days."</p>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="col-padding">
-            <p>"Jack, it's done. Let me know if you need anything else."</p>
-          </div>
-        </div>
-      </div>
-    </div>
+</div>
+<div class="get-started">
+  <div class="container">
+    <h4>Get in touch with startups
+    <span><div class = "hero-button">
+      <%= link_to "GET STARTED", new_user_registration_path , class: "btn btn-success btn-lg" %>
+    </div></span>
+    </h4>
   </div>
-
-  <div class="get-started">
-    <div class="container">
-      <h4>Time to speed up and get things done.
-      <span><div class = "hero-button">
-        <%= link_to "GET STARTED", new_user_registration_path , class: "btn btn-success btn-lg" %>
-      </div></span>
-      </h4>
-    </div>
-  </div>
-  <%= render 'footer' %>
+</div>
+<%= render 'footer' %>
 
 
