@@ -11,7 +11,7 @@
     <% end %>
   </td>
   <td class="col-md-4 description">
-    <%= user.profile.description %>
+    <%= user.profile.description || "-" %>
   </td>
   <td class="col-md-2 location">
     <%= user.profile.location || "-" %>
