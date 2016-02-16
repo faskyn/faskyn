@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160213143503) do
+ActiveRecord::Schema.define(version: 20160215150628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "contacts", force: :cascade do |t|
     t.string   "name"
@@ -49,6 +50,20 @@ ActiveRecord::Schema.define(version: 20160213143503) do
   add_index "events", ["recipient_id"], name: "index_events_on_recipient_id", using: :btree
   add_index "events", ["sender_id"], name: "index_events_on_sender_id", using: :btree
 
+  create_table "industries", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "industry_products", force: :cascade do |t|
+    t.integer "product_id"
+    t.integer "industry_id"
+  end
+
+  add_index "industry_products", ["industry_id"], name: "index_industry_products_on_industry_id", using: :btree
+  add_index "industry_products", ["product_id"], name: "index_industry_products_on_product_id", using: :btree
+
   create_table "messages", force: :cascade do |t|
     t.text     "body"
     t.integer  "conversation_id"
@@ -77,6 +92,30 @@ ActiveRecord::Schema.define(version: 20160213143503) do
 
   add_index "notifications", ["recipient_id"], name: "index_notifications_on_recipient_id", using: :btree
   add_index "notifications", ["sender_id"], name: "index_notifications_on_sender_id", using: :btree
+
+  create_table "product_features", force: :cascade do |t|
+    t.integer  "product_id"
+    t.string   "feature"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "product_features", ["product_id"], name: "index_product_features_on_product_id", using: :btree
+
+  create_table "products", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "company"
+    t.string   "website"
+    t.string   "oneliner"
+    t.text     "description"
+    t.text     "usecase"
+    t.text     "competition"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "name"
+  end
+
+  add_index "products", ["user_id"], name: "index_products_on_user_id", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.integer  "user_id"

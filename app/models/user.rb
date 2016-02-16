@@ -22,6 +22,8 @@ class User < ActiveRecord::Base
 
   has_many :messages, dependent: :destroy
 
+  has_many :products
+
   
 
   #likely not needed, yet to take it out

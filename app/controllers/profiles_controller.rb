@@ -4,13 +4,14 @@ class ProfilesController < ApplicationController
   before_action :if_profile_exists, only: [:new, :create]
   before_action :if_no_profile_exists, only: :show
   before_action :set_profile, only: [:show, :edit, :update]
+  before_action :only_current_user_profile_change, only: [:edit, :update, :delete, :destroy]
 
   def new
     @profile = Profile.new
   end
 
   def create
-    @profile = @user.build_profile(profile_params)
+    @profile = current_user.build_profile(profile_params)
     if @profile.save
       redirect_to user_path(@profile.user), notice: "Profile successfully created!"
     else
@@ -52,9 +53,8 @@ class ProfilesController < ApplicationController
       @profile = @user.profile
     end
 
-    def only_current_user_profile_check
-      @user = User.find(params[:user_id])
-      redirect_to user_path(current_user), notice: "You can only check your own profile." unless @user == current_user
+    def only_current_user_profile_change
+      redirect_to user_path(current_user), notice: "You can only change your own profile." unless @profile.user_id == current_user.id
     end
 end
 

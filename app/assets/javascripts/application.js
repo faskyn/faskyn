@@ -17,6 +17,7 @@
 //= require jquery.remotipart
 //= require refile
 //= require bootstrap-sprockets
+//= require cocoon
 //= require local_time
 //= require moment
 //= require fullcalendar

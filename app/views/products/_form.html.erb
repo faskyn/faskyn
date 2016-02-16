@@ -1,0 +1,38 @@
+<%= form_for @product do |f| %>
+  <%= render 'layouts/error_messages', object: f.object %>
+  <div class="form-group">
+    <%= f.text_field :name, placeholder: "name", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.text_field :company, placeholder: "company", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.text_field :website, placeholder: "product site", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.text_field :oneliner, placeholder: "oneliner", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.collection_select :industry_ids, Industry.all, :id, :name, {}, { multiple: true } %>
+  </div>
+  <%= f.fields_for :product_features do |product_feature| %>
+    <div class="form-group">
+      <%= render 'product_feature_fields', f: product_feature %>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= link_to_add_association 'Add a new feature', f, :product_features %>
+  </div>
+  <div class="form-group">
+    <%= f.text_area :description, placeholder: "description", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.text_area :usecase, placeholder: "usecase", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.text_area :competition, placeholder: "competition", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

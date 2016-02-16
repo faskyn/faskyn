@@ -1,0 +1,24 @@
+$gray-medium-light: #eaeaea;
+$garmin-blue: #007cc3;
+$garmin-light-blue: #d9edf7;
+$dark-grey: #5E5E5E; //text color
+$light-grey: #f7f7f7; //super light background color
+$orange: #ff6600;
+
+.product-container {
+  padding-left:50px;
+  padding-right:50px;
+  padding-top:40px;
+  .title-row {
+    padding-bottom:20px;
+  }
+}
+
+.product-well {
+  h3 {
+    margin-top: 0px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  background-color: $light-grey;
+}

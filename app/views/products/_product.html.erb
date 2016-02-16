@@ -1,0 +1,17 @@
+<tr>
+  <td class="col-md-4 name">
+    <%= link_to product do %>
+      <div class="product-name">
+        <%= product.name %>
+      </div>
+    <% end %>
+  </td>
+  <td class="col-md-4 oneliner">
+    <%= product.oneliner %>
+  </td>
+  <td class="col-md-4 company">
+    <%= link_to product.website, target: "_blank" do %>
+        <%= product.company %>
+    <% end %> 
+  </td>
+</tr>

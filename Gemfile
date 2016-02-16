@@ -31,6 +31,7 @@ gem 'bootstrap-social-rails', '~> 4.8'
 gem 'simple_form', '~> 3.1.1'
 gem 'font-awesome-rails', '~> 4.4'
 gem 'fullcalendar-rails', '~> 2.5'
+gem 'cocoon', '~> 1.2', '>= 1.2.7'
 #making fonts work with CDN
 gem 'font_assets', '~> 0.1.12'
 #populating fake data

@@ -1,0 +1,43 @@
+<% provide(:title, @product.name) %>
+<div class= "container container-fluid">
+  <div>
+  Name: <%= link_to @product.website, target: "_blank" do %>
+    <%= @product.name %>
+  <% end %>
+  </div>
+  <div>
+    Company: <%= @product.company %>
+  </div>
+  <div>
+    Oneliner: <%= @product.oneliner %>
+  </div>
+  <div>
+  Username: <%= link_to user_path(@product.user) do %>
+    <%= @product.user.profile.full_name %>
+  <% end %>
+  </div>
+  <div>
+    Verticals: <%= @product.industries_all %>
+  </div>
+  <div>
+  <% @product.product_features.each do |product_feature| %>
+    <div>
+      Feature:
+      <%= product_feature.feature %>
+    </div>
+  <% end %>
+  </div>
+  <div>
+    Description:
+    <%= @product.description %>
+  </div>
+  <div>
+    Usecase:
+    <%= @product.usecase %>
+  </div>
+  <div>
+    Competition:
+    <%= @product.competition %>
+  </div>
+</div>
+
