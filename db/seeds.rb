@@ -10,7 +10,7 @@ require 'faker'
 include Faker
 
 if Rails.env.production?
-  Industry.create!([{name: "IoT"}, {name: "AI"}, {name: "FinTech"}])
+  Industry.create!([{name: "IoT"}, {name: "AI"}, {name: "FinTech"}, {name: "Automotive"}, {name: "Health & Welness"}, {name: "IT & Data Science"}, {name: "FinTech"}, {name: "Education"}, {name: "Retail"}])
 
 else
   User.create!(
@@ -33,10 +33,6 @@ else
     user.profile.save!
   end
 
-  #user.build_profile(first_name: "Peter", last_name: "Smith", job_title: "boss", company: "MU", description: "lorem epsum hullon")
-  #user.profile.create!(first_name: "Peter", last_name: "Smith", job_title: "boss", company: "MU", description: "lorem epsum hullon")
-  #user.build.profile(first_name: "Peter", last_name: "Smith", job_title: "boss", company: "MU", description: "lorem epsum hullon")
-
   30.times do
     random1 = rand(1..2)
     random2 = random1 == 1 ? 2 : 1
@@ -46,5 +42,16 @@ else
                        deadline: Faker::Time.between(DateTime.now + 1, DateTime.now + 10) )
   end
 
-  Industry.create!([{name: "IoT"}, {name: "AI"}, {name: "FinTech"}])
+  Industry.create!([{name: "IoT"}, {name: "AI"}, {name: "FinTech"}, {name: "Automotive"}, {name: "Health & Welness"}, {name: "IT & Data Science"}, {name: "FinTech"}, {name: "Education"}, {name: "Retail"}])
+
+  product_users = User.order(created_at: :DESC).take(10)
+  product_users.each do |user|
+    5.times do
+      user.products.build(industry_ids: [ Industry.all.order("RANDOM()").first.id, Industry.all.order("RANDOM()").first.id ] , oneliner: Faker::Lorem.sentence(8), name: Faker::Commerce.product_name, company: Faker::Company.name, website: Faker::Internet.url, description: Faker::Lorem.sentence(24),
+        product_features_attributes: [{feature: Faker::Lorem.sentence}, feature: Faker::Lorem.sentence}],
+        product_usecases_attributes: [{example: Faker::Lorem.sentence(2), detail: Faker::Lorem.sentence(12)}, {example: Faker::Lorem.sentence(2), detail: Faker::Lorem.sentence(12) } ],
+        product_competitions_attributes: [{competitor: Faker::Company.name, differentiator: Faker::Lorem.sentence(12)}, {competitor: Faker::Company.name, differentiator: Faker::Lorem.sentence(12)}])
+      user.product.save!
+    end
+  end
 end

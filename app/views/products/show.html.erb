@@ -1,43 +1,120 @@
 <% provide(:title, @product.name) %>
-<div class= "container container-fluid">
-  <div>
-  Name: <%= link_to @product.website, target: "_blank" do %>
-    <%= @product.name %>
-  <% end %>
-  </div>
-  <div>
-    Company: <%= @product.company %>
-  </div>
-  <div>
-    Oneliner: <%= @product.oneliner %>
-  </div>
-  <div>
-  Username: <%= link_to user_path(@product.user) do %>
-    <%= @product.user.profile.full_name %>
-  <% end %>
-  </div>
-  <div>
-    Verticals: <%= @product.industries_all %>
-  </div>
-  <div>
-  <% @product.product_features.each do |product_feature| %>
-    <div>
-      Feature:
-      <%= product_feature.feature %>
+<div class= "container-fluid product-container">
+  <div class= "col-md-8 col-md-offset-2">
+    <div class="row">
+      <div class="col-md-6">
+        <%= image_tag attachment_url(@product, :product_image, :fill, 60, 60, fallback: "garminwhitelogoborder.png") %>
+      </div>
+      <div class="col-md-6">
+        <h3><%= @product.name %></h3>
+      </div>
     </div>
-  <% end %>
-  </div>
-  <div>
-    Description:
-    <%= @product.description %>
-  </div>
-  <div>
-    Usecase:
-    <%= @product.usecase %>
-  </div>
-  <div>
-    Competition:
-    <%= @product.competition %>
-  </div>
+    <div class="well product-well">
+      <div class = "row">
+        <div class="col-md-6">
+          <div class="product-list">
+            <div class="list-name">Website:</div>
+            <div class="description"><%= link_to @product.website, target: "_blank" do %>
+               <%= @product.website %>
+            <% end %></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="product-list">
+            <div class="list-name">Verticals:</div>
+            <div class="description"><%= @product.industries_all %></div>
+          </div>
+        </div>
+      </div>
+
+      <div class = "row">
+        <div class="col-md-6">
+          <div class="product-list">
+            <div class="list-name">Company:</div>
+            <div class="description"><%= @product.company %></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="product-list">
+            <div class="list-name">Posted_by:</div>
+            <div class="description"><%= link_to user_path(@product.user) do %>
+              <%= @product.user.profile.full_name %>
+            <% end %> </div>
+          </div>
+        </div>
+      </div>
+      <div class = "row">
+        <div class="col-md-12">
+          <div class="product-list">
+            <div id="oneliner">
+              <div class="list-name">Oneliner:</div>
+              <div class="description"><%= @product.oneliner %></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="well product-well">
+      <div class = "row">
+        <div class="col-md-12">
+          <div class = "product-list">
+              <div class = "list-name">Description:</div>
+              <div class = "big-description"><%= @product.description %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="well product-well">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="product-list">
+            <div class= "list-name">Features:</div>
+            <ul>
+              <% @product.product_features.each do |product_feature| %>
+                <li><%= product_feature.feature %></li>
+              <% end %>
+            </ul>
+            <div class= "list-name">Usecases:</div>
+            <ul>
+              <% @product.product_usecases.each do |product_usecase| %>
+                <li><%= product_usecase.example %> : <%= product_usecase.detail %></li>
+              <% end %>
+            </ul>
+            <div class= "list-name">Competitions:</div>
+            <ul>
+              <% @product.product_competitions.each do |product_competitions| %>
+                <li><%= product_competitions.competitor %> : <%= product_competitions.differentiator %>
+              <% end %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= link_to "Edit Product", edit_product_path(@product), class: "btn btn-primary" %>
+    <button type="button" class="btn btn-danger" style="margin-left:10px;" data-toggle="modal" data-target="#deleteproduct_<%= @product.id %>">Delete Product</button>
+  </div> 
 </div>
+
+<%= form_for(@product, method: :delete) do |f| %>
+  <div class="modal fade" id="deleteproduct_<%= @product.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content" style="text-align:left">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Delete Product</h4>
+        </div>
+        <div class="modal-body">
+          <h4>Are you sure?</h4>
+          <p> </p>  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="deleteproductclose">Close</button>
+            <%= f.submit "Delete Product", class: 'btn btn-danger' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
 

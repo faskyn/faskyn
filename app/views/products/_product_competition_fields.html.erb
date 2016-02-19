@@ -1,0 +1,21 @@
+<div class="nested-fields">
+  <div class="field">
+    <div class= "row">
+      <div class="col-md-3">
+        <div class = "form-group">
+          <%= f.text_field :competitor, placeholder: "add a competitor", class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class = "form-group">
+          <%= f.text_area :differentiator, placeholder: "add a differentiation", class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class = "form-group">
+          <%= link_to_remove_association "remove competitor", f %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

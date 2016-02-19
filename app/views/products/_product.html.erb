@@ -1,17 +1,23 @@
-<tr>
-  <td class="col-md-4 name">
-    <%= link_to product do %>
-      <div class="product-name">
-        <%= product.name %>
-      </div>
+<tr class = "product-index-row">
+    <td class="col-md-3 name">
+      <%= link_to(product, html_options = {style:"display:block;"}) do %>
+      <span class="product-image">
+        <%= image_tag attachment_url(product, :product_image, :fill, 45, 45) %>
+      </span>
+      <span class="product-name">
+        <%= product.name %> 
+      </span>
+      <% end %>
+    </td>
+    <td class="col-md-6 oneliner">
+    <%= link_to(product, html_options = {style:"display:block;"}) do %>
+      <%= product.oneliner %>
+    </td>
     <% end %>
-  </td>
-  <td class="col-md-4 oneliner">
-    <%= product.oneliner %>
-  </td>
-  <td class="col-md-4 company">
-    <%= link_to product.website, target: "_blank" do %>
-        <%= product.company %>
-    <% end %> 
-  </td>
+    <td class="col-md-3 updated">
+    <%= link_to(product, html_options = {style:"display:block;"}) do %>
+      <%= local_time_ago(product.updated_at) %>
+    </td>
+  <% end %>
 </tr>
+

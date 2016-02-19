@@ -1,36 +1,106 @@
-<%= form_for @product do |f| %>
-  <%= render 'layouts/error_messages', object: f.object %>
-  <div class="form-group">
-    <%= f.text_field :name, placeholder: "name", class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.text_field :company, placeholder: "company", class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.text_field :website, placeholder: "product site", class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.text_field :oneliner, placeholder: "oneliner", class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.collection_select :industry_ids, Industry.all, :id, :name, {}, { multiple: true } %>
-  </div>
-  <%= f.fields_for :product_features do |product_feature| %>
-    <div class="form-group">
-      <%= render 'product_feature_fields', f: product_feature %>
+<%= form_for @product, html: {class: "product-refile-form"}, authenticity_token: true do |f| %>
+  <div class="well product-well">
+
+    <div class= "row">
+      <div class="col-md-12">
+        <%= render 'layouts/error_messages', object: f.object %>
+      </div>
     </div>
-  <% end %>
-  <div class="form-group">
-    <%= link_to_add_association 'Add a new feature', f, :product_features %>
+
+    <div class = "row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= f.text_field :name, placeholder: "name", class: "form-control" %>
+        </div>
+        <span class="btn btn-success btn-sm btn-product-image">Choose image
+          <%= f.attachment_field :product_image, presigned: true, direct: true, class: "choose-product-file" %>
+        </span>
+        <span id="product-progresspercent"></span>
+      </div>
+      <div class="col-md-4">
+        <div class = "form-group">
+          <span id="old-image"><%= image_tag attachment_url(@product, :product_image, :fill, 80, 80, fallback: "garminwhitelogoborder.png") %></span>
+          <span id="new-image"></span>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= f.collection_select :industry_ids, Industry.all.order(name: :asc), :id, :name, {}, { multiple: true } %>
+        </div>
+      </div>
+    </div>
+    
+    <div class = "row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.text_field :website, placeholder: "product site", class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.text_field :company, placeholder: "company", class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div class = "row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= f.text_field :oneliner, placeholder: "oneliner", class: "form-control" %>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <%= f.text_area :description, placeholder: "description", class: "form-control" %>
+
+  
+
+  <div class="well product-well">    
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= f.text_area :description, placeholder: "description", class: "form-control" %>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <%= f.text_area :usecase, placeholder: "usecase", class: "form-control" %>
+
+  <div class="well product-well">
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.fields_for :product_features do |product_feature| %>
+          <%= render 'product_feature_fields', f: product_feature %>
+        <% end %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= link_to_add_association 'Add a new feature', f, :product_features %>
+    </div>
   </div>
-  <div class="form-group">
-    <%= f.text_area :competition, placeholder: "competition", class: "form-control" %>
+
+  <div class="well product-well">
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.fields_for :product_usecases do |product_usecase| %>
+          <%= render 'product_usecase_fields', f: product_usecase %>
+        <% end %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= link_to_add_association 'Add a new usecase', f, :product_usecases %>
+    </div>
+  </div>
+
+  <div class="well product-well">
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.fields_for :product_competitions do |product_competition| %>
+          <%= render 'product_competition_fields', f: product_competition %>
+        <% end %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= link_to_add_association 'Add a new competition', f, :product_competitions %>
+    </div>
   </div>
   <div class="form-group">
     <%= f.submit class: "btn btn-primary" %>

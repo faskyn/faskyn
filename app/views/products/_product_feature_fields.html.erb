@@ -1,6 +1,14 @@
 <div class="nested-fields">
   <div class="field">
-    <%= f.text_field :feature, placeholder: "add a feature", class: "form-control" %>
-    <%= link_to_remove_association "remove feature", f %>
+    <div class= "row">
+      <div class="col-md-9">
+        <div class = "form-group">
+          <%= f.text_field :feature, placeholder: "add a feature", class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <%= link_to_remove_association "remove feature", f %>
+      </div>
+    </div>
   </div>
 </div>

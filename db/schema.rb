@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160215150628) do
+ActiveRecord::Schema.define(version: 20160218084357) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,16 @@ ActiveRecord::Schema.define(version: 20160215150628) do
   add_index "notifications", ["recipient_id"], name: "index_notifications_on_recipient_id", using: :btree
   add_index "notifications", ["sender_id"], name: "index_notifications_on_sender_id", using: :btree
 
+  create_table "product_competitions", force: :cascade do |t|
+    t.integer  "product_id"
+    t.string   "competitor"
+    t.text     "differentiator"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "product_competitions", ["product_id"], name: "index_product_competitions_on_product_id", using: :btree
+
   create_table "product_features", force: :cascade do |t|
     t.integer  "product_id"
     t.string   "feature"
@@ -102,17 +112,28 @@ ActiveRecord::Schema.define(version: 20160215150628) do
 
   add_index "product_features", ["product_id"], name: "index_product_features_on_product_id", using: :btree
 
+  create_table "product_usecases", force: :cascade do |t|
+    t.integer  "product_id"
+    t.string   "example"
+    t.text     "detail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "product_usecases", ["product_id"], name: "index_product_usecases_on_product_id", using: :btree
+
   create_table "products", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "company"
     t.string   "website"
     t.string   "oneliner"
     t.text     "description"
-    t.text     "usecase"
-    t.text     "competition"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.string   "name"
+    t.string   "product_image_id"
+    t.string   "product_image_filename"
+    t.integer  "product_image_size"
   end
 
   add_index "products", ["user_id"], name: "index_products_on_user_id", using: :btree

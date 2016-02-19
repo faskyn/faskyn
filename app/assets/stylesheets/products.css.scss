@@ -9,8 +9,29 @@ $orange: #ff6600;
   padding-left:50px;
   padding-right:50px;
   padding-top:40px;
+  padding-bottom:40px;
   .title-row {
     padding-bottom:20px;
+  }
+}
+
+.product-profile-index {
+  .product-index-row {
+    &:hover {
+      background-color: $gray-medium-light;
+      cursor: pointer;
+    }
+  }
+	.oneliner, .company, .updated {
+		text-align: center;
+    vertical-align: middle;
+	}
+  .name {
+    text-align: left;
+    vertical-align: middle;
+  }
+  a {
+    text-decoration: none;
   }
 }
 
@@ -21,4 +42,48 @@ $orange: #ff6600;
     text-align: center;
   }
   background-color: $light-grey;
+  .product-list {
+  	.description {
+  		padding-top:2px;
+  		padding-bottom: 12px;
+  		padding-left: 10px;
+  	}
+  	.big-description {
+  		padding-left: 17px;
+  		padding-top: 7px;
+  	}
+  	.list-name {
+  		font-weight: bold;
+  		padding-top: 10px;
+  		&:first-child {
+  			padding-top: 0px;
+  		}
+  	}
+  	#oneliner {
+  		.description {
+  			padding-bottom: 0px;
+  		}
+  	}
+  }
+}
+
+.btn-product-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-product-image input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
 }
