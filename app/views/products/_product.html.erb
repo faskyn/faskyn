@@ -2,7 +2,11 @@
     <td class="col-md-3 name">
       <%= link_to(product, html_options = {style:"display:block;"}) do %>
       <span class="product-image">
-        <%= image_tag attachment_url(product, :product_image, :fill, 45, 45) %>
+        <% if product.product_image_id %>
+          <%= image_tag attachment_url(product, :product_image, :fill, 45, 45) %>
+        <% else %>
+          <%= image_tag("garminwhitelogoborder.png", size: "45x45") %>
+        <% end %>
       </span>
       <span class="product-name">
         <%= product.name %> 

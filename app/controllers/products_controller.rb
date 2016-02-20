@@ -4,7 +4,8 @@ class ProductsController < ApplicationController
   before_action :only_current_user_product_change, only: [:edit, :update, :delete, :destroy]
 
   def index
-    @products = Product.order(created_at: :desc).paginate(page: params[:products], per_page: Product.pagination_per_page)
+    @q_products = Product.ransack(params[:q])
+    @products = @q_products.result(distinct: true).order(created_at: :desc).paginate(page: params[:products], per_page: Product.pagination_per_page)
     respond_to do |format|
       format.html
       format.js

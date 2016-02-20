@@ -9,11 +9,17 @@
   <% end %>
   <div class="row title-row">
     <div class="col-md-4 col-md-offset-4">
-      <div class="user-desc" style="text-align:center">
+      <div class="product-desc" style="text-align:center">
         <h2>PRODUCTS</h2>
       </div>
     </div>
-    <!-- search here -->
+    <div class="col-md-4">
+      <div class = "product-search" style="text-align:right">
+        <%= search_form_for @q_products, html: { class: "form-inline"} do |f| %>
+          <% f.search_field :name_cont, placeholder: "Search product..", class: 'form-control' %>
+        <% end %>
+      </div>
+    </div>
   </div>
   <div class="panel panel-default">
     <table class="table">

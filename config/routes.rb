@@ -32,13 +32,16 @@ Rails.application.routes.draw do
     end
   end
   resources :products
+
   get 'users/:user_id/common_medias', to: 'common_medias#common_medias', as: :common_medias_user_common_medias
   get 'users/:user_id/common_medias/get_files', to: 'common_medias#get_files', as: :get_files_user_common_medias
   get 'users/:user_id/common_medias/get_links', to: 'common_medias#get_links', as: :get_links_user_common_medias
   get 'users/:user_id/common_medias/get_calendars', to: 'common_medias#get_calendars', as: :get_calendars_user_common_medias
+
   get 'users/:user_id/chat_notifications', to: 'notifications#chat_notifications', as: :chat_notifications_user_notifications
   get 'users/:user_id/other_notifications', to: 'notifications#other_notifications', as: :other_notifications_user_notifications
-  get 'users/:user_id/products/:id', to: 'products#own_products', as: :own_products_user_products
+
+  get 'users/:user_id/products', to: 'products#own_products', as: :products_user_products
 
   resources :conversations, only: :create do
     resources :messages, only: :create

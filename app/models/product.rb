@@ -61,8 +61,6 @@ class Product < ActiveRecord::Base
     def product_industries_limit
       if self.industries.count > 5
         self.errors.add :base, "You can't choose more than 5 industries."
-      elsif self.industries.count < 1
-        self.errors.add :base, "You have to choose at least one industry."
       end
     end
 
