@@ -18,7 +18,7 @@ class Notification < ActiveRecord::Base
   end
 
   def self.pagination_per_page
-    8
+    12
   end
   
   def self.send_notification(receiver, type, sender)

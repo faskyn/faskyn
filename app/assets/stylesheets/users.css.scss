@@ -70,9 +70,6 @@ $orange: #ff6600;
       padding-left:10px;
       padding-top:3px;
       padding-bottom:3px;
-      //border-left: 0px;
-      //border-right: 0px;
-      //margin-top: 0px;
       .user-fullname {
         margin-top: 4px;
       }
@@ -84,8 +81,6 @@ $orange: #ff6600;
     thead tr th {
       text-align: center;
       vertical-align: middle;
-      //border-left: 0px;
-      //border-right: 0px;
     }
     tbody tr td a {
       text-decoration: none;
@@ -104,6 +99,16 @@ $orange: #ff6600;
     vertical-align: middle;
     margin-bottom: 5px;
     margin-top: 5px;
+  }
+  .user-index-row {
+    &:hover {
+      background-color: $gray-medium-light;
+      cursor: pointer;
+    }
+  }
+  a {
+    text-decoration: none;
+    color: $dark-grey;
   }
 }
 
@@ -252,5 +257,16 @@ $orange: #ff6600;
         color: $garmin-blue;
       }
     }
+  }
+}
+
+//COMMON MEDIAS
+
+.common-medias-container {
+  padding-right:0px;
+  padding-left:0px;
+  .common-medias-col {
+    padding-left:20px;
+    padding-right:20px;
   }
 }

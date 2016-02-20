@@ -30,8 +30,8 @@ $("ul.errors").html("");
   edit_task_hide_danger($taskbetween);
 
 	//different div class for different partials + table rows get inserted into view via AJAX
-	$(".newtaskinsert").prepend($task);
-	$(".newtaskinsert2").prepend($taskbetween);
+	$(".new-task-insert").prepend($task);
+	$(".new-task-insert-2").prepend($taskbetween);
 	$("#task_<%= @task.id %>").hide().fadeIn(1000);
 
 	//pagination(x)*every task has 2 tr + extra task that must be hidden(2)=x*2+2

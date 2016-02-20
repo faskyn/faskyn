@@ -40,8 +40,8 @@ Rails.application.routes.draw do
   get 'users/:user_id/other_notifications', to: 'notifications#other_notifications', as: :other_notifications_user_notifications
   get 'users/:user_id/products/:id', to: 'products#own_products', as: :own_products_user_products
 
-  resources :conversations, only: [:index, :show, :create] do
-    resources :messages, only: [:index, :create]
+  resources :conversations, only: :create do
+    resources :messages, only: :create
   end
 
   authenticate :user, lambda { |u| u.email == "szilard.magyar@gmail.com" } do

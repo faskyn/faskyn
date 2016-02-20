@@ -26,8 +26,7 @@ $("ul.errors").html("");
 
 	$('#task_<%= @task.id %>').fadeOut(400, function(){
 		$(this).remove();
-		//$(".newtaskinsert").prepend('<%= j render @task %>');
-		$(".newtaskinsert").prepend($task);
-		$(".newtaskinsert2").prepend($taskbetween);
+		$(".new-task-insert").prepend($task);
+		$(".new-task-insert-2").prepend($taskbetween);
 	});
 <% end %>

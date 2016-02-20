@@ -213,18 +213,6 @@ a {
   margin-bottom: 0px;
 }
 
-/*
-@media (min-width: 1200px) {
-  #main {
-    overflow: hidden;
-    height: 100%;
-    .container {
-      width: 970px;
-    }
-  }
-}
-*/
-
 .container-form {
   padding-top:30px;  
 }
@@ -311,3 +299,31 @@ a {
       margin-right: 0;
   }
 }
+
+//ONBOARD (USER CREATION)
+
+.onboard-well {
+  margin-right: 30px;
+  margin-left: 30px;
+  text-align: center;
+}
+
+//PAGINATION
+
+.no-more {
+  display:none;
+  padding-left:20px;
+}
+
+.no-more-notifications {
+  padding-top:15px;
+  display:none;
+  padding-left:20px;
+}
+
+.infinite-product-scrolling, .infinite-task-scrolling, .infinite-user-scrolling, #infinite-chatnotification-scrolling, #infinite-othernotification-scrolling {
+   text-align: center;
+   display: none;
+}
+
+

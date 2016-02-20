@@ -1,6 +1,6 @@
-<tr>
+<tr class="user-index-row">
   <td class="col-md-6 name">
-    <%= link_to user do %>
+    <%= link_to(user, html_options = {style:"display:block;"}) do %>
       <%= image_tag user.profile.avatar.url(:base_thumb), class: "avatar" %>
       <div class="user-fullname">
         <%= user.profile.full_name %>
@@ -11,10 +11,14 @@
     <% end %>
   </td>
   <td class="col-md-4 description">
-    <%= user.profile.description || "-" %>
+    <%= link_to(user, html_options = {style:"display:block;"}) do %>
+      <%= user.profile.description || "-" %>
+    <% end %>
   </td>
   <td class="col-md-2 location">
-    <%= user.profile.location || "-" %>
+    <%= link_to(user, html_options = {style:"display:block;"}) do %>
+      <%= user.profile.location || "-" %>
+    <% end %>
   </td>
 </tr>
 

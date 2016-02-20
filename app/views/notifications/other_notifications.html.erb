@@ -6,10 +6,10 @@
   <div class = "other-notifications-index">
     <%= render @other_notifications || "There are no chat notifications at the moment." %>
   </div>
-  <div id="infinite-othernotification-scrolling" style="text-align:center;display:none">
+  <div id="infinite-othernotification-scrolling">
     <%= will_paginate @other_notifications %>
   </div>
-  <div class="no-more" style="display:none;padding-left:20px;padding-top:15px;">
+  <div class="no-more-notifications">
     <p>No more notifications.</p>
   </div>
 </div>

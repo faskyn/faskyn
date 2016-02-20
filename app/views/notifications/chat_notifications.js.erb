@@ -4,5 +4,5 @@ $('.chat-notifications-index').append('<%= j render @chat_notifications %>');
 <% else %>
   $(window).off('scroll');
   $('.pagination').remove();
-  $('.no-more').delay(1000).fadeIn(1500);
+  $('.no-more-notifications').delay(1000).fadeIn(1500);
 <% end %>

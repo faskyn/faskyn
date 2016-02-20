@@ -2,7 +2,7 @@
 <div class="container-fluid user-container">
   <% unless has_profile? %>
     <div class="row">
-      <div class="well onboard-well" style="margin-right:30px;margin-left:30px;text-align:center;">
+      <div class="well onboard-well">
         <h4>HEY THERE! You can start with discovering the users and in the meantime you can create your profile:</h4>   <%= link_to "CREATE PROFILE", new_user_profile_path(current_user), class: "btn btn-danger" %>
       </div>
     </div>
@@ -22,7 +22,7 @@
     </div>
   </div>
   <div class="panel panel-default">
-    <table class="table table-bordered">
+    <table class="table">
       <thead>
         <tr>
           <th class="col-md-6">Name</th>
@@ -35,10 +35,10 @@
       </tbody>
     </table>
   </div>
-  <div id="infinite-user-scrolling" style="text-align:center;display:none;">
+  <div id="infinite-user-scrolling">
     <%= will_paginate @users %>
   </div>
-  <div class="no-more" style="display:none;padding-left:20px;">
+  <div class="no-more">
     <p>No more users.</p>
   </div>
 </div>

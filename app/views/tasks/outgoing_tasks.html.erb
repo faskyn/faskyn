@@ -22,15 +22,15 @@
           <!-- End of ransack sorting-->
         </tr>
       </thead>
-      <tbody class="newtaskinsert">
+      <tbody class="new-task-insert">
         <%= render @tasks || "There are no outgoing tasks at the moment." %>
       </tbody>
     </table>
   </div>
-  <div id="infinite-task-scrolling" style="text-align:center;display:none">
+  <div id="infinite-task-scrolling">
     <%= will_paginate @tasks %>
   </div>
-  <div class="no-more" style="display:none;padding-left:20px;">
+  <div class="no-more">
     <p>No more tasks.</p>
   </div>
   <%= render "new_task_modal" %>

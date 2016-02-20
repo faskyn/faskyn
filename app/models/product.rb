@@ -32,6 +32,10 @@ class Product < ActiveRecord::Base
   before_validation :format_website
   validate :website_validator
 
+  def self.pagination_per_page
+    12
+  end
+
   def industries_all
     industry_array = []
     self.industries.each do |industry|

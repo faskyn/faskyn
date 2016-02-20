@@ -3,11 +3,7 @@ class StaticPagesController < ApplicationController
 
   def home
     if user_signed_in? 
-      if has_profile_controller?
-        redirect_to user_tasks_path(current_user)
-      else
-        redirect_to users_path
-      end
+      redirect_to products_path
     else
       expires_in 24.hours, :public => true
     end

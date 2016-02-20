@@ -20,10 +20,15 @@
           <th class="col-md-1">UC/E/D</th>
         </tr>
       </thead>
-      <tbody class="newtaskinsert">
+      <tbody class="new-task-insert">
         <%= render @tasks || "There are no completed tasks at the moment." %>
       </tbody>
     </table>
   </div>
-  <%= will_paginate @tasks %>
+  <div id="infinite-task-scrolling">
+    <%= will_paginate @tasks %>
+  </div>
+  <div class="no-more">
+    <p>No more tasks.</p>
+  </div> 
 </div>
