@@ -94,8 +94,12 @@
         </div>
       </div>
     </div>
-    <%= link_to "Edit Product", edit_product_path(@product), class: "btn btn-primary" %>
-    <button type="button" class="btn btn-danger" style="margin-left:10px;" data-toggle="modal" data-target="#deleteproduct_<%= @product.id %>">Delete Product</button>
+    <% if policy(@product).edit? %>
+      <%= link_to "Edit Product", edit_product_path(@product), class: "btn btn-primary" %>
+    <% end %>
+    <% if policy(@product).delete? %>
+      <button type="button" class="btn btn-danger" style="margin-left:10px;" data-toggle="modal" data-target="#deleteproduct_<%= @product.id %>">Delete Product</button>
+    <% end %>
   </div> 
 </div>
 

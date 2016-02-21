@@ -51,11 +51,4 @@ class EventsController < ApplicationController
       params.require(:event).permit(:recipient_id, :sender_id, :title, :description, :start_at, :end_at, :all_day, :event_name_company, :start, :end)
       params.permit('start', 'end', :start, :end)
     end
-
-    def only_current_user_events_check
-      @user = User.find(params[:user_id])
-      unless @user == current_user
-        redirect_to user_events_path(current_user), notice: "You can only check your own event page."
-      end
-    end
 end

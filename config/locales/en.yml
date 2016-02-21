@@ -20,4 +20,32 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  pundit:
+    default: "You can't perform this action!"
+    product_policy:
+      index?: "You can't view the product feed!"
+      own_products?: "You can't view this product feed!"
+      show?: "You have to create a profile first!"
+      new?: "You have create a profile first!"
+      create?: "You have to create a profile first!"
+      edit?: "You can't edit this product!"
+      update?: "You can't update this product!"
+      delete?: "You can't delete this product!"
+      destroy?: "You can't delete this product!"
+    profile_policy:
+      show?: "You have to be logged in to view this profile!"
+      edit?: "You can't edit this profile!"
+      update?: "You can't update this profile!"
+      new?: "You have to be logged in to create a profile!"
+      create?: "You have to be logged in to create a profile!"
+    task_policy:
+      show?: "You can't view this task!"
+      edit?: "You can't edit this task!"
+      update?: "You can't update this task!"
+      delete?: "You can't delete this task!"
+      destroy?: "You can't delete this task!"
+    user_policy:
+      show_tasks?: "You can't view this task feeed!"
+      new_task?: "You can't create a task there!"
+      show_notifications?: "You can't view this notification feed!"
+

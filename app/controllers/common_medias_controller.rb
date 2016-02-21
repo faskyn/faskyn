@@ -2,7 +2,7 @@ class CommonMediasController < ApplicationController
   
   require "will_paginate/array"
 
-  before_action :authenticate_user!, only: :index
+  before_action :authenticate_user!
   before_action :set_users_and_conversation
 
   def common_medias

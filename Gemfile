@@ -37,8 +37,9 @@ gem 'font_assets', '~> 0.1.12'
 gem 'faker', '~> 1.6', '>= 1.6.1'
 #storing ENV credentials
 gem 'figaro', '~> 1.1.1'
-#qucik authentication and invitation
+#qucik authentication and authorization
 gem 'devise', '~> 3.5.2'
+gem 'pundit', '~> 1.1'
 #image and file uploading+AWS S3 storage
 gem 'carrierwave', '~> 0.10.0'
 gem 'fog', '~> 1.34.0'

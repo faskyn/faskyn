@@ -1,7 +1,7 @@
 <% provide(:title, @profile.full_name) %>
 <div class="container-fluid container-form">
   <div class="user-profile-show">
-    <div class="panel panel-primary">
+    <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title"><%= @profile.first_name %> <%= @profile.last_name %></h3>
       </div>
@@ -27,14 +27,15 @@
         <p><%= @profile.description %></p>
       </div>
     </div>
-  </div>
-  <% if @user.id != current_user.id %>
-    <% if Task.between(current_user, @user).present? %>
-      Check out the common tasks <%= link_to "here", user_path(@user) %>.
+
+    <% if policy(@profile).edit? %>
+      <%= link_to "Edit Profile", edit_user_profile_path(current_user), class: "btn btn-primary" %>
     <% else %>
-      Assign a new task to <%= @profile.first_name %> <%= link_to "here", user_tasks_path(current_user) %>.
+      <% if Task.between(current_user, @user).present? %>
+        Check out the common tasks <%= link_to "here", user_path(@user) %>.
+      <% else %>
+        Assign a new task to <%= @profile.first_name %> <%= link_to "here", user_tasks_path(current_user) %>.
+      <% end %>
     <% end %>
-  <% else %>
-    You can edit your profile <%= link_to "here", edit_user_profile_path(current_user) %>
-  <% end %>
+  </div>
 </div>

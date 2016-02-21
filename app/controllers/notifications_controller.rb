@@ -1,6 +1,6 @@
 class NotificationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :only_current_user, only: [:other_notifications, :chat_notifications]
+  before_action :set_and_authorize_user_notifications
 
   require 'will_paginate/array'
 
@@ -23,6 +23,11 @@ class NotificationsController < ApplicationController
   end
 
   private
+
+    def set_and_authorize_user_notifications
+      @user = User.find(params[:user_id])
+      authorize @user, :show_notifications?
+    end
 
     def notification_params
       params.require(:notification).permit(:recipient_id, :sender_id, :notification_type, :checked_at)

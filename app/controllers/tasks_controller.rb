@@ -1,15 +1,12 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
-  before_action :only_current_user
-  before_action :if_no_profile_exists
-  #before_action :other_user_profile_exists, only: :create
-  before_action :set_task, only: [:show, :edit, :update, :delete, :destroy, :complete, :uncomplete]
-  #before_action :set_conversation, only: [:show]
+  before_action :set_and_authorize_user_tasks, only: [:index, :outgoing_tasks, :incoming_tasks, :completed_tasks, :completed_incoming_tasks, :completed_outgoing_tasks]
+  before_action :set_user, only: [:new, :show, :edit, :update, :delete, :destroy, :complete, :uncomplete]
+  before_action :set_and_authorize_task, only: [:show, :edit, :update, :delete, :destroy, :complete, :uncomplete]
 
   require 'will_paginate/array'
 
   def index
-    #@tasks = current_user.tasks_uncompleted.paginate(page: params[:page], per_page: 12)
     @q_tasks = Task.alltasks(current_user).uncompleted.ransack(params[:q])
     #eager loading --> @tasks = @q_tasks.result.includes(:executor_profile, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: 12)
     @tasks = @q_tasks.result.includes(:executor, :executor_profile, :assigner, :assigner_profile).order("created_at DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
@@ -21,20 +18,11 @@ class TasksController < ApplicationController
   end
 
   def show
-    if current_user.id == @task.assigner.id
-      @assigned_task = current_user.assigned_tasks.find(params[:id])
-    else
-      @executed_task = current_user.executed_tasks.find(params[:id])
-    end 
   end
 
   def outgoing_tasks
-    #with no ransack (going back to this one when changing to jQuery search)
-    #@assigned_tasks = current_user.assigned_tasks.uncompleted.order("deadline DESC").paginate(page: params[:page], per_page: 12)
-    #ransack version for sorting
     @q_outgoing_tasks = current_user.assigned_tasks.uncompleted.ransack(params[:q])
     @tasks = @q_outgoing_tasks.result.includes(:executor, :executor_profile).order("created_at DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
-    #for AJAX version
     @task = Task.new
     respond_to do |format|
       format.html
@@ -53,12 +41,13 @@ class TasksController < ApplicationController
   end
 
   def new
+    @user = User.find(params[:user_id])
+    authorize @user, :new_task?
     @task = Task.new
   end
 
   def create
     @task = Task.new(task_params)
-    #check for other_user_profile_exists before filter (@task = Task.new(task_params))
     @task.assigner_id = current_user.id
     if @task.save
       TaskCreatorJob.perform_later(@task.id, @user.id)
@@ -67,8 +56,7 @@ class TasksController < ApplicationController
       respond_to do |format|
         format.html { redirect_to user_tasks_path(current_user), notice: "Task saved!" }
         format.js
-      end
-      #sending in-app notification to executor; send_notification defined in notification.rb      
+      end     
     else
       respond_to do |format|
         format.html { render action: :new }
@@ -95,9 +83,6 @@ class TasksController < ApplicationController
   end
 
   def completed_tasks
-    #with no ransack
-    #@tasks = @user.tasks_completed.paginate(page: params[:page], per_page: 12)
-    #with ransack
     @q_completed_tasks = Task.alltasks(current_user).completed.ransack(params[:q])
     #@q_completed_tasks = current_user.tasks_completed.ransack(params[:q])
     @tasks = @q_completed_tasks.result.includes(:assigner, :assigner_profile, :executor, :executor_profile).paginate(page: params[:page], per_page: Task.pagination_per_page)
@@ -153,7 +138,17 @@ class TasksController < ApplicationController
       params.require(:task).permit(:executor_id, :name, :content, :deadline, :task_name_company, :assigner_id, :executor_profile, :assigner_profile)
     end
 
-    def set_task
+    def set_and_authorize_user_tasks
+      @user = User.find(params[:user_id])
+      authorize @user, :show_tasks?
+    end
+
+    def set_user
+      @user = User.find(params[:user_id])
+    end
+
+    def set_and_authorize_task
       @task = Task.find(params[:id])
+      authorize @task
     end
 end

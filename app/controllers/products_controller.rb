@@ -1,11 +1,11 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_product, only: [:show, :edit, :update, :delete, :destroy]
-  before_action :only_current_user_product_change, only: [:edit, :update, :delete, :destroy]
+  before_action :set_and_authorize_product, only: [:show, :edit, :update, :delete, :destroy]
 
   def index
     @q_products = Product.ransack(params[:q])
     @products = @q_products.result(distinct: true).order(created_at: :desc).paginate(page: params[:products], per_page: Product.pagination_per_page)
+    authorize @products
     respond_to do |format|
       format.html
       format.js
@@ -13,7 +13,12 @@ class ProductsController < ApplicationController
   end
 
   def own_products
-    @products = current_user.products.order(created_at: :desc).paginate(page: params[:products], per_page: 8)
+    @products = current_user.products.order(updated_at: :desc)
+    authorize @products
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
@@ -21,6 +26,7 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    authorize @product
     @product.industry_products.build
     @product.product_features.build
     @product.product_usecases.build
@@ -29,6 +35,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = current_user.products.new(product_params)
+    authorize @product
     if @product.save
       respond_to do |format|
         format.html { redirect_to @product, notice: "Product saved!" }
@@ -85,11 +92,8 @@ class ProductsController < ApplicationController
         product_competitions_attributes: [:id, :competitor, :differentiator, :_destroy])
     end
 
-    def set_product
+    def set_and_authorize_product
       @product = Product.find(params[:id])
-    end
-
-    def only_current_user_product_change
-      redirect_to products_path, notice: "You can only change your own product." unless @product.user_id == current_user.id
+      authorize @product
     end
 end

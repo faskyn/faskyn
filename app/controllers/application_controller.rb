@@ -1,9 +1,12 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
+  
   protect_from_forgery with: :exception
+  include Pundit
 
-  helper_method :if_profile_exists
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   helper_method :if_no_profile_exists
   helper_method :if_tasks_any?
   helper_method :only_current_user
@@ -13,12 +16,6 @@ class ApplicationController < ActionController::Base
   def google7df1f819c8dc9008
   end
 
-  def if_profile_exists
-    if @user.profile(current_user)
-      redirect_to edit_user_profile_path(current_user)
-    end
-  end
-
   def if_no_profile_exists
     unless @user.profile(current_user)
       flash[:warning] = "Please create a profile first!"
@@ -26,31 +23,20 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def has_profile_controller?
-    current_user.profile.present?
-  end
-
   def if_tasks_any?
     current_user.executed_tasks.any? || current_user.assigned_tasks.any?
   end
 
-  # def other_user_profile_exists
-  #   @task = Task.new(task_params)
-  #   unless @task.executor && @task.executor.profile
-  #     flash[:warning] = "Executor hasn't created a profile yet."
-  #     redirect_to user_tasks_path(current_user)
-  #   end
-  # end
-
   def only_current_user
     @user = User.find(params[:user_id])
-    redirect_to user_tasks_path(current_user) unless @user == current_user
+    #flash[:danger] = "You can't do this action!"
+    #redirect_to user_tasks_path(current_user) unless @user == current_user
   end
 
   def set_search
     @q_users = User.ransack(params[:q])
     #regardless the search it gives back the users the current_user hast the most tasks with
-    if user_signed_in? #&& if_tasks_any?
+    if user_signed_in?
       #@users3 = current_user.ordered_relating_users
       @users3 = @q_users.result(distinct: true).includes(:profile).limit(8)
     else
@@ -90,5 +76,11 @@ class ApplicationController < ActionController::Base
 
   def notification_params
     params.require(:notification).permit(:recipient_id, :sender_id, :notification_type, :checked_at)
+  end
+
+  def user_not_authorized(exception)
+    policy_name = exception.policy.class.to_s.underscore
+    flash[:danger] = t "#{policy_name}.#{exception.query}", scope: "pundit", default: :default
+    redirect_to(request.referrer || root_path)
   end
 end

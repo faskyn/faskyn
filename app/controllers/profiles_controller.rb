@@ -1,17 +1,17 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_user_for_profile
-  before_action :if_profile_exists, only: [:new, :create]
+  before_action :set_user
   before_action :if_no_profile_exists, only: :show
-  before_action :set_profile, only: [:show, :edit, :update]
-  before_action :only_current_user_profile_change, only: [:edit, :update, :delete, :destroy]
+  before_action :set_and_authorize_profile, only: [:show, :edit, :update]
 
   def new
     @profile = Profile.new
+    authorize @profile
   end
 
   def create
     @profile = current_user.build_profile(profile_params)
+    authorize @profile
     if @profile.save
       redirect_to user_path(@profile.user), notice: "Profile successfully created!"
     else
@@ -45,16 +45,13 @@ class ProfilesController < ApplicationController
       params.require(:profile).permit(:first_name, :last_name, :avatar, :company, :job_title, :phone_number, :description)
     end
 
-    def find_user_for_profile
+    def set_user
       @user = User.find(params[:user_id])
     end
 
-    def set_profile
+    def set_and_authorize_profile
       @profile = @user.profile
-    end
-
-    def only_current_user_profile_change
-      redirect_to user_path(current_user), notice: "You can only change your own profile." unless @profile.user_id == current_user.id
+      authorize @profile
     end
 end
 

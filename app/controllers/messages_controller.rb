@@ -10,8 +10,6 @@ class MessagesController < ApplicationController
     @receiver_id = @receiver.id
     @message.link = check_if_link(@message.body) if @message.body?
     @message.save!
-    #@path = conversation_path(@conversation)
-    #creating notification if all the prev chat notifications are checked
     if @message.save
       Notification.decreasing_chat_notification_number(@message.user, @receiver)
       if (Notification.between_chat_recipient(@receiver, @message.user).unchecked.count < 1)
