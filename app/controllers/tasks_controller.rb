@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_and_authorize_user_tasks, only: [:index, :outgoing_tasks, :incoming_tasks, :completed_tasks, :completed_incoming_tasks, :completed_outgoing_tasks]
-  before_action :set_user, only: [:new, :show, :edit, :update, :delete, :destroy, :complete, :uncomplete]
+  before_action :set_user, only: [:new, :create, :show, :edit, :update, :delete, :destroy, :complete, :uncomplete]
   before_action :set_and_authorize_task, only: [:show, :edit, :update, :delete, :destroy, :complete, :uncomplete]
 
   require 'will_paginate/array'
@@ -41,7 +41,6 @@ class TasksController < ApplicationController
   end
 
   def new
-    @user = User.find(params[:user_id])
     authorize @user, :new_task?
     @task = Task.new
   end
