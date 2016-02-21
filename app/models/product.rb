@@ -51,7 +51,7 @@ class Product < ActiveRecord::Base
     end
 
     def website_validator
-      errors[:website] << I18n.t("activerecord.errors.messages.invalid") unless website_valid?
+      self.errors.add :website, "format is invalid!" unless website_valid?
     end
 
     def website_valid?
@@ -61,24 +61,32 @@ class Product < ActiveRecord::Base
     def product_industries_limit
       if self.industries.count > 5
         self.errors.add :base, "You can't choose more than 5 industries."
+      elsif self.industries.blank?
+        self.errors.add :base, "You have to choose at least 1 industry."
       end
     end
 
     def product_features_limit
       if self.product_features.reject(&:marked_for_destruction?).count > 10
-        self.errors.add :base, "You can't have more than 10 features."
+        self.errors.add :base, "You can't have more than 10 features!"
+      # elsif self.product_features.reject(&:marked_for_destruction?).count < 1
+      #   self.errors.add :base, "You must have at least 1 product feature!"
       end
     end
 
     def product_competitions_limit
       if self.product_competitions.reject(&:marked_for_destruction?).count > 10
         self.errors.add :base, "You can't have more than 10 competitions."
+      # elsif self.product_competitions.reject(&:marked_for_destruction?).count < 1
+      #   self.errors.add :base, "You must have at least 1 product feature!"
       end
     end
 
     def product_usecases_limit
       if self.product_usecases.reject(&:marked_for_destruction?).count > 10
         self.errors.add :base, "You can't have more than 10 usecases."
+      # elsif self.product_usecases.reject(&:marked_for_destruction?).count < 1
+      #   self.errors.add :base, "You must have at least 1 product feature!"
       end
     end
 end
