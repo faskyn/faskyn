@@ -1,10 +1,10 @@
 class ProductPolicy < ApplicationPolicy
   def index?
-    true
+    user.present?
   end
 
   def own_products?
-    user.present? && user == product.user
+    user.present?
   end
 
   def show?

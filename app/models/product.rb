@@ -13,7 +13,7 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :product_competitions, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :product_usecases, reject_if: :all_blank, allow_destroy: true
 
-  validates :name, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
+  validates :name, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }, uniqueness: { message: "already exists" }
   validates :company, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
   validates :website, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
   validates :oneliner, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }

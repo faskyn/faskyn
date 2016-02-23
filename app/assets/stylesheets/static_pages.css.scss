@@ -64,17 +64,19 @@ $orange: #ff6600;
 		padding-left:20px;
 		padding-right:20px;
 	}
-}
-
-.sosial-links a{
-    display: block;
-    float: left;
-    width: 36px;
-    height: 36px;
-    border: 2px solid #909090;
-    border-radius: 20px;
-    margin-right: 7px; /*space between*/
-
+	.static-pages-well {
+		.row {
+			display: table;
+			.sign {
+				vertical-align:middle;
+				display:table-cell;
+				float:none;
+			}
+			.description {
+				width:100%;
+			}
+		}
+	}
 }
 
 .glyphicon-stack {

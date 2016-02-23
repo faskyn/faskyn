@@ -6,6 +6,7 @@ $light-grey: #f7f7f7; //super light background color
 $orange: #ff6600;
 
 .product-container {
+  background: $light-grey;
   padding-left:50px;
   padding-right:50px;
   padding-top:40px;
@@ -57,7 +58,7 @@ $orange: #ff6600;
     margin-bottom: 15px;
     text-align: center;
   }
-  background-color: $light-grey;
+  background-color: white;//$light-grey;
   .product-list {
   	.description {
   		padding-top:2px;

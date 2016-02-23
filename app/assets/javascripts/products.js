@@ -52,6 +52,8 @@ $(document).on("upload:success", ".product-refile-form", function(e) {
     if (!$(this).find("input.uploading").length) {
       $(this).find("input[type=submit]").removeAttr("disabled");
       //$('#product-progresspercent').hide();
+
+      //CURRENT VERSION OF REFILE DOES NOT SUPPORT THE FOLLOWING
       // var new_image_input = $('.btn-product-image input:first-child').val();
       // var product_data = JSON.parse(new_image_input.replace(/'/g, '"'));
       // var product_image_id =  product_data.id;

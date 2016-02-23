@@ -35,6 +35,7 @@ $font-family-serif:       'Georgia', serif;
 .loggedoutbody {
   height: auto;
   overflow: visible;
+  background: white;
 }
 
 
@@ -89,7 +90,13 @@ $font-family-serif:       'Georgia', serif;
   }
 }
 
+body {
+  background: $light-grey;
+}
 
+body.static_pages-controller {
+  background: white;
+}
 
 body, p {
   font-family: $font-family-sans-serif;
@@ -214,7 +221,8 @@ a {
 }
 
 .container-form {
-  padding-top:30px;  
+  padding-top:30px;
+  background: $light-grey;  
 }
 
 #wrapper {
@@ -239,7 +247,7 @@ a {
   height: 100%;
   margin-left: -250px;
   overflow-y: hidden;
-  background: $light-grey;
+  background: white;//$light-grey;
   border-right: 1px $gray-medium-light solid;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
@@ -326,4 +334,9 @@ a {
    display: none;
 }
 
+//ERROR PAGES
+
+.flash-container {
+  background: $light-grey; 
+}
 

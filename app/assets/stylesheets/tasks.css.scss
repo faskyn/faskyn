@@ -4,17 +4,15 @@ $garmin-light-blue: #d9edf7;
 $dark-grey: #5E5E5E;
 $dropbox-light-grey: #7b8994;
 $orange: #ff6600;
+$light-grey: #f7f7f7;
 
 .task-well {
 	margin-top:10px;
 }
 
-.container-fluid.task-container {
-	margin: 0px 40px 40px 40px;
-}
-
-.task-container {
-	padding-top: 40px;
+.between-task-container {
+	background: $light-grey;
+	padding: 40px 60px 40px 60px;
 	.task-header {
 		margin: 0 0 15px 0;
 		display:table;
@@ -52,7 +50,83 @@ $orange: #ff6600;
 			}
 		}
 	}
+	table {
+		color: $dark-grey;
+		text-align: center;
+		margin-bottom: 0px;
+		border-radius: 10px;
+		vertical-align: middle;
+		a {
+			color: $dark-grey;
+			&:hover {
+   			color: $garmin-blue;
+    	}
+		}
+		thead th {
+			border-bottom: 0px;
+		}
+		tbody tr td {
+			vertical-align: middle;
+			padding:3px;
+			border-left: 0px;
+			border-right: 0px;
+			//margin-top: 0px;
+		}
+		thead tr th {
+			text-align: center;
+			vertical-align: middle;
+			border-left: 0px;
+			border-right: 0px;
+		}
+		tbody tr td a {
+			text-decoration: none;
+		}
+		.inside-table {
+			border: 0px;
+		}
+	}
+}
 
+.task-container {
+	background: $light-grey;
+	padding: 40px 70px 40px 70px;
+	.task-header {
+		margin: 0 0 15px 0;
+		display:table;
+		width:100%;
+		h3 {
+			max-width:250px;
+			vertical-align:middle;
+			display:table-cell;
+		}
+		.event-h4 {
+			max-width:300px;
+			vertical-align:middle;
+			display:table-cell;
+		}
+		.rightfloat {
+			float: right;
+			display: inline;
+			.btn-group {
+				a:last-child {
+				border-left:0px;
+				}
+			}
+			.btn {
+				margin-left: 10px;
+			}
+			#rightone {
+					margin-right: 0px;
+			}
+			.btn-group {
+				margin-left:10px;
+				.btn {
+					margin-left: 0px;
+					margin-right: 0px;
+				}
+			}
+		}
+	}
 	table {
 		color: $dark-grey;
 		text-align: center;

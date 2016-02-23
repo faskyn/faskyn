@@ -12,16 +12,17 @@ $orange: #ff6600;
 #other-notifications {
   border-radius: 2px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, .7);
-  background-color: #ff0000;
+  background-color: red;
 }
 
 #chat-notifications {
 	border-radius: 2px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, .7);
-  background-color: #ff0000;
+  background-color: red;
 }
 
 .other-notifications-index, .chat-notifications-index {
+	background-color:white;
 	a {
 		text-decoration: none;
 		color: $dark-grey;
@@ -39,6 +40,7 @@ $orange: #ff6600;
 }
 
 .notification-line, .notification-line-checked {
+	padding-left: 10px;
 	border-bottom: 1px $gray-medium-light solid;			
 	.subject {
 		padding-top:4px;
@@ -62,9 +64,13 @@ $orange: #ff6600;
     margin-bottom: 5px;
     margin-top: 5px;
   }
+  &:hover {
+    background-color: $gray-medium-light;
+    cursor: pointer;
+  }
 }
 
 .notification-line {
-	background-color: $gray-medium-light;
+	background-color: white;//$gray-medium-light;
 	font-weight: bold;
 }

@@ -28,7 +28,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal" id="newtaskclose">Close</button>
-            <%= f.submit "Create Task", class: 'btn btn-primary new-task-submit', "data-sid" => current_user.id, "data-rip" => :executor_id %>
+            <%= f.button "Create task", class: 'btn btn-primary new-task-submit', "data-sid" => current_user.id, "data-rip" => :executor_id, data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
           </div>
         </div>
       </div>

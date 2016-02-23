@@ -1,6 +1,10 @@
+$gray-medium-light: #eaeaea;
 $garmin-blue: #007cc3;
 $garmin-light-blue: #d9edf7;
 $dark-grey: #5E5E5E;
+$dropbox-light-grey: #7b8994;
+$orange: #ff6600;
+$light-grey: #f7f7f7;
 
 .chatbox {
     position: fixed;
@@ -42,7 +46,7 @@ $dark-grey: #5E5E5E;
     border-left: 1px solid #cccccc;
     border-right: 1px solid #cccccc;
     border-bottom: 1px solid #cccccc;//#eeeeee;
-    background: white;//#F2F2F2;//#f5f5f5; //e5e5e5
+    background: $light-grey;//white;//#F2F2F2;//#f5f5f5; //e5e5e5
     line-height: 1.3em;
     list-style: none;
 }
@@ -83,7 +87,7 @@ $dark-grey: #5E5E5E;
 .self .chatboxmessagecontent {
     order: 1;
     border-bottom-right-radius: 0;
-    background: #F2F2F2;//white;//#d9edf7;
+    background: white;//#d9edf7;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
@@ -141,7 +145,7 @@ $dark-grey: #5E5E5E;
 
 .chatboxinput {
     padding: 5px;
-    background-color: #ffffff;
+    background: $light-grey;
     border-left: 1px solid #cccccc;
     border-right: 1px solid #cccccc;
     border-bottom: 1px solid #cccccc;

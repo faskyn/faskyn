@@ -13,7 +13,10 @@ class ProductsController < ApplicationController
   end
 
   def own_products
-    @products = current_user.products.order(updated_at: :desc)
+    @user = User.find(params[:user_id])
+    authorize @user, :show_own_products?
+    @q_products = current_user.products.ransack(params[:q])
+    @products = @q_products.result(distinct: true).order(updated_at: :desc).paginate(page: params[:products], per_page: Product.pagination_per_page)
     authorize @products
     respond_to do |format|
       format.html

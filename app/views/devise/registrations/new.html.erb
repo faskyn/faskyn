@@ -27,7 +27,7 @@
           </div>
 
           <div class="actions">
-            <%= f.submit "CREATE YOUR ACCOUNT", class: 'btn btn-success' %>
+            <%= f.button "CREATE YOUR ACCOUNT", class: 'btn btn-success btn-block', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> CREATING YOUR ACCOUNT..."} %>
           </div>
         <% end %>
         <br />

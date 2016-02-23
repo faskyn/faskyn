@@ -2,7 +2,7 @@
   <div class= "jumbotron">
     <div class= "container">
       <% if notice %>
-        <div class="container-fluid flash-container">
+        <div class="container-fluid static-flash-container">
           <div class="alert alert-success">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <%= notice %>
@@ -10,7 +10,7 @@
         </div>
       <% end %>
       <% if alert %>
-        <div class="container-fluid flash-container">
+        <div class="container-fluid static-flash-container">
           <div class="alert alert-danger">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <%= alert %>
@@ -18,7 +18,7 @@
         </div>
       <% end %>
       <% if ( !notice && !alert ) && !flash.empty? %>
-      <div class="container-fluid flash-container">
+      <div class="container-fluid static-flash-container">
         <% flash.each do |key, value| %>
           <div class= "alert alert-<%= key %>">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -67,6 +67,69 @@
   </div>
 </div>
 
+<!-- <div class = "details">
+  <div class= "container">
+    <div class= "row">
+      <div class= "col-md-6">
+        <div class = "well static-pages-well">
+          <div class = "row">
+            <div class = "col-md-2 sign">
+              <i class="fa fa-rocket fa-2x"></i>
+            </div>
+            <div class ="col-md-10 description">
+              <h4>STARTUPS</h4>
+              <p>Startups can explain what makes their product unique and why customers should use it.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class = "col-md-6">
+        <div class = "well static-pages-well">
+          <div class = "row">
+            <div class = "col-md-2 sign">
+              <i class="fa fa-users fa-2x"></i>
+            </div>
+            <div class ="col-md-10 description">
+              <h4>CUSTOMERS</h4>
+              <p>Customers can post a request for a specific problem they want solution for and startups can send offers to solve it.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class= "row">
+      <div class= "col-md-6">
+        <div class = "well static-pages-well">
+          <div class = "row">
+            <div class = "col-md-2 sign">
+              <i class="fa fa-usd fa-2x"></i>
+            </div>
+            <div class ="col-md-10 description">
+              <h4>INVESTORS</h4>
+              <p>Investors can share their investment criteria thus being connected by startups that suit location, stage or market.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class = "col-md-6">
+        <div class = "well static-pages-well">
+          <div class = "row">
+            <div class = "col-md-2 sign">
+              <i class="fa fa-industry fa-2x"></i>
+            </div>
+            <div class ="col-md-10 description">
+              <h4>CORPORATES</h4>
+              <p>Corporates can find the right startups to invest or buy from in different verticals and markets.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
 <div class="examples">
   <div class= "container">
     <div class="row">
@@ -93,7 +156,7 @@
 </div>
 <div class="get-started">
   <div class="container">
-    <h4>Get in touch with startups
+    <h4>Get in touch with the right startups
     <span><div class = "hero-button">
       <%= link_to "GET STARTED", new_user_registration_path , class: "btn btn-success btn-lg" %>
     </div></span>

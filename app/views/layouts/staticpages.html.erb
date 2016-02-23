@@ -8,7 +8,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body style="margin-bottom:90px;">
+<body class="<%= controller.controller_name %>-controller <%= controller.action_name%>-action" style="margin-bottom:90px;">
 
   <%= render 'layouts/header' %>
   <%= yield %>

@@ -27,6 +27,13 @@ $(document).on("page:change", function() {
     $('#newtask').submit();
   });
 
+  $('.new-html-task-submit').on('click', function (e) {
+    e.preventDefault();
+    var localMoment = moment($('.new-task-deadline').val());
+    $('.new-task-deadline').val(localMoment.toISOString());
+    $('.new-html-task-form').submit();
+  });
+
 	//when task modal closes error messages get hidden
 	$('#newtask').on('hidden.bs.modal', function (e) {
 		$('.alert-danger').hide();

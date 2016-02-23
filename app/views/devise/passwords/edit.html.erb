@@ -22,7 +22,7 @@
           </div>
 
           <div class="actions">
-            <%= f.submit "Change my password", class: 'btn btn-primary' %>
+            <%= f.button "CHANGE PASSWORD", class: 'btn btn-primary', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> CHANGING PASSWORD..."} %>
           </div>
         <% end %>
         <br />

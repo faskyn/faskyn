@@ -9,7 +9,11 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show_notifications?
-    user.present? && user.id = record.id
+    user.present? && user.id == record.id
+  end
+
+  def show_own_products?
+    user.present? && user.id == record.id
   end
 
 end

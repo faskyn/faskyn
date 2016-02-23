@@ -1,29 +1,43 @@
 <% if current_user.id == task.assigner.id %>
-  <tr style="background: #F2F2F2" id="task_<%= task.id %>">
-    <td class="col-md-2">
-      <%= link_to user_path(id: task.executor.id) do %>
-        <div class="table-user-name">
-          <%= task.executor.first_name %> <%= task.executor.profile.last_name%>
+  <tr id="task_<%= task.id %>">
+    <td class = "col-md-3">
+      <div class="row" style="display: table;width: 100%;">
+        <div class = "col-md-3" style="vertical-align:middle;display:table-cell;float:none;">
+            <i class="fa fa-sign-out" style="color:#007cc3;"></i>
         </div>
-        <div class="table-company-name">
-          <%= task.executor.profile.company %>
+        <div class = "col-md-9" style="padding-left:0px;width:100%;float:left;text-align:left">
+          <%= link_to user_path(id: task.executor.id) do %>
+            <div class="table-user-name">
+              <%= task.executor.profile.full_name %>
+            </div>
+            <div class="table-company-name">
+              <%= task.executor.profile.company %>
+            </div>
+          <% end %>
         </div>
-      <% end %>
+      </div>
     </td>
 <% else %>
   <tr id="task_<%= task.id %>">
-    <td class = "col-md-2">
-      <%= link_to user_path(id: task.assigner.id) do %>
-        <div class="table-user-name">
-          <%= task.assigner.profile.first_name %> <%= task.assigner.profile.last_name%>
+    <td class = "col-md-3">
+      <div class="row" style="display: table;width: 100%;">
+        <div class = "col-md-3" style="vertical-align:middle;display:table-cell;float:none;">
+            <i class="fa fa-sign-in"></i>
         </div>
-        <div class="table-company-name">
-          <%= task.assigner.profile.company %>
+        <div class = "col-md-9" style="padding-left:0px;width:100%;float:left;text-align:left">
+          <%= link_to user_path(id: task.assigner.id) do %>
+            <div class="table-user-name">
+              <%= task.assigner.profile.full_name %>
+            </div>
+            <div class="table-company-name">
+              <%= task.assigner.profile.company %>
+            </div>
+          <% end %>
         </div>
-      <% end %>
+      </div>
     </td>
 <% end %>
-    <td class="cold-md-7">
+    <td class="cold-md-6">
       <%= task.content %>
     </td>
     <td class="col-md-2">
@@ -37,7 +51,7 @@
     </td>
     <td class="col-md-1" style="padding:0px">
     <% if current_user.id == task.assigner.id %>
-      <table class="table table-bordered inside-table" style="background:#F2F2F2">
+      <table class="table table-bordered inside-table">
     <% else %>
       <table class="table table-bordered inside-table">
     <% end %>
@@ -90,7 +104,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal" id="updatetaskclose">Close</button>
-                        <%= f.submit "Update Task", class: 'btn btn-primary edit-task-submit', "data-sid" => current_user.id, "data-rip" => :executor_id %>
+                        <%= f.button "Update task", class: 'btn btn-primary edit-task-submit', "data-sid" => current_user.id, "data-rip" => :executor_id, data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
                     </div>
                   </div>
                 </div>
