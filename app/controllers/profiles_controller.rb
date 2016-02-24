@@ -13,7 +13,7 @@ class ProfilesController < ApplicationController
     @profile = current_user.build_profile(profile_params)
     authorize @profile
     if @profile.save
-      redirect_to user_path(@profile.user), notice: "Profile successfully created!"
+      redirect_to user_profile_path(@profile.user), notice: "Profile successfully created!"
     else
       render action: :new, alert: "Profile couldn't be created!"
     end
@@ -34,7 +34,7 @@ class ProfilesController < ApplicationController
 
   def update
     if @profile.update_attributes(profile_params)
-      redirect_to user_path(@profile.user), notice: "Profle updated!"
+      redirect_to user_profile_path(@profile.user), notice: "Profle updated!"
     else
       render action: :edit, alert: "Profile couldn't be updated!"
     end

@@ -23,3 +23,5 @@
 //= require fullcalendar
 //= require bootstrap-datetimepicker
 //= require_tree .
+
+Turbolinks.enableProgressBar();

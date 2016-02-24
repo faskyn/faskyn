@@ -23,6 +23,11 @@
 @import 'bootstrap-datetimepicker';
 @import 'bootstrap-social';
 
+html.turbolinks-progress-bar::before {
+  background-color: white !important;
+  height: 2px !important;
+}
+
 
 
 
