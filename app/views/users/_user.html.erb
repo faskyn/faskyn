@@ -1,24 +1,18 @@
-<tr class="user-index-row">
+<tr class="user-index-row" data-link="<%= user_path(user) %>">
   <td class="col-md-6 name">
-    <%= link_to(user, html_options = {style:"display:block;"}) do %>
-      <%= image_tag user.profile.avatar.url(:base_thumb), class: "avatar" %>
-      <div class="user-fullname">
-        <%= user.profile.full_name %>
-      </div>
-      <span class="company">
-        <%= user.profile.job_title %> at <%= user.profile.company %>
-      </span>
-    <% end %>
+    <%= image_tag user.profile.avatar.url(:base_thumb), class: "avatar" %>
+    <div class="user-fullname">
+      <%= user.profile.full_name %>
+    </div>
+    <span class="company">
+      <%= user.profile.job_title %> at <%= user.profile.company %>
+    </span>
   </td>
   <td class="col-md-4 description">
-    <%= link_to(user, html_options = {style:"display:block;"}) do %>
-      <%= user.profile.description || "-" %>
-    <% end %>
+    <%= user.profile.description || "-" %>
   </td>
   <td class="col-md-2 location">
-    <%= link_to(user, html_options = {style:"display:block;"}) do %>
-      <%= user.profile.location || "-" %>
-    <% end %>
+    <%= user.profile.location || "-" %>
   </td>
 </tr>
 

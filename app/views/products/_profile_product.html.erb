@@ -1,0 +1,64 @@
+<div class="panel panel-default product-panel">
+    <div class="panel-heading">
+    <%= link_to(product, html_options = {style:"display:block;"}) do %>
+      <div class="product-list">
+        <% if product.product_image_id %>
+            <%= image_tag attachment_url(product, :product_image, :fill, 50, 50) %>
+        <% else %>
+          <%= image_tag("garminwhitelogoborder.png", size: "50x50") %>
+        <% end %>
+        <h4><%= product.name.upcase %></h4>
+      </div>
+      <% end %>
+    </div>
+  
+
+  <div class="panel-body">
+
+    <div class = "row">
+      <div class="col-md-6">
+        <div class="product-list">
+          <div class="list-name">Company:</div>
+          <div class="description"><%= product.company %></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="product-list">
+          <div class="list-name">Verticals:</div>
+          <div class="description"><%= product.industries_all %></div>
+        </div>
+      </div>
+    </div>
+
+    <div class = "row">
+      <div class = "col-md-6">
+        <div class="product-list">
+          <div class="list-name">Website:</div>
+          <div class="description"><%= link_to product.website, target: "_blank" do %>
+            <%= product.website %>
+          <% end %></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="product-list">
+          <div class="list-name">Posted_by:</div>
+          <div class="description"><%= link_to user_path(product.user) do %>
+            <%= product.user.profile.full_name %>
+          <% end %> </div>
+        </div>
+      </div>
+    </div>
+
+    <div class= "row">
+      <div class="col-md-12">
+        <div class="product-list">
+          <div id="oneliner">
+            <div class="list-name">Oneliner:</div>
+            <div class="description"><%= product.oneliner %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

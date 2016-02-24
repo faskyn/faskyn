@@ -1,27 +1,21 @@
-<tr class = "product-index-row">
+<tr class = "product-index-row" data-link="<%= product_path(product) %>">
   <td class="col-md-3 name">
-    <%= link_to(product, html_options = {style:"display:block;"}) do %>
-      <span class="product-image">
-        <% if product.product_image_id %>
-          <%= image_tag attachment_url(product, :product_image, :fill, 45, 45) %>
-        <% else %>
-          <%= image_tag("garminwhitelogoborder.png", size: "45x45") %>
-        <% end %>
-      </span>
-      <span class="product-name">
-        <%= product.name %> 
-      </span>
+    <span class="product-image">
+      <% if product.product_image_id %>
+        <%= image_tag attachment_url(product, :product_image, :fill, 45, 45) %>
+      <% else %>
+        <%= image_tag("garminwhitelogoborder.png", size: "45x45") %>
       <% end %>
-    </td>
-    <td class="col-md-6 oneliner">
-    <%= link_to(product, html_options = {style:"display:block;"}) do %>
-      <%= product.oneliner %>
-    </td>
-    <% end %>
-    <td class="col-md-3 updated">
-    <%= link_to(product, html_options = {style:"display:block;"}) do %>
-      <%= local_time_ago(product.updated_at) %>
-    </td>
-  <% end %>
+    </span>
+    <span class="product-name">
+      <%= product.name %> 
+    </span>
+  </td>
+  <td class="col-md-6 oneliner">
+    <%= product.oneliner %>
+  </td>
+  <td class="col-md-3 updated">
+    <%= local_time_ago(product.updated_at) %>
+  </td>
 </tr>
 

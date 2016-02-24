@@ -1,0 +1,10 @@
+<div class="container-fluid product-profile-container">
+  <div class="title-row">
+    <% if policy(@profile).edit? %>
+      <h3>Products posted by you</h3>
+    <% else %>
+      <h3>Products posted by <%=@profile.first_name %></h3>
+    <% end %>
+  </div>
+  <%= render partial: "products/profile_product", collection: @profile_products, as: :product %>
+</div>

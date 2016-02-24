@@ -6,7 +6,7 @@ class ProfilesController < ApplicationController
 
   def new
     @profile = Profile.new
-    authorize @profile
+    authorize @user
   end
 
   def create
@@ -22,6 +22,7 @@ class ProfilesController < ApplicationController
   def show
     @twitter = @profile.socials.where(provider: "twitter").first
     @linkedin = @profile.socials.where(provider: "linkedin").first
+    @profile_products = @user.products.order(updated_at: :desc)
   end
 
   def edit
@@ -42,7 +43,7 @@ class ProfilesController < ApplicationController
   private
 
     def profile_params
-      params.require(:profile).permit(:first_name, :last_name, :avatar, :company, :job_title, :phone_number, :description)
+      params.require(:profile).permit(:first_name, :last_name, :avatar, :company, :job_title, :location, :phone_number, :description)
     end
 
     def set_user

@@ -140,7 +140,7 @@ $orange: #ff6600;
     margin-bottom: 15px;
     text-align: center;
   }
-  background-color: white;//$light-grey;
+  background-color: white;
 }
 
 .edit_user, .new_user {
@@ -159,21 +159,46 @@ $orange: #ff6600;
   }
 }
 
-.container-show {
-  padding-top: 15px;
-}
-
-.user-profile-show {
-  padding: 20px 20px 20px 70px;
-  .panel {
-    margin-right: 350px;
-  }
-  .avatar{
-    float: left;
-    margin-right: 15px;
-    width: 85px;
-    height: 85px;
-    border-radius: 50%;
+.profile-container {
+  background: $light-grey;
+  padding: 40px 70px 0px 70px;
+  .profile-show-well {
+    background-color: white;
+    h3 {
+      margin-top: 0px;
+      margin-bottom: 15px;
+    }
+    .avatar{
+      float: left;
+      margin-right: 15px;
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+    .product-list {
+      .description {
+        padding-top:2px;
+        padding-bottom: 12px;
+        padding-left: 10px;
+      }
+      .big-description {
+        padding-left: 17px;
+        padding-top: 7px;
+      }
+      .list-name {
+        font-weight: bold;
+        padding-top: 10px;
+        &:first-child {
+          padding-top: 0px;
+        }
+      }
+      #oneliner {
+        .description {
+          padding-bottom: 0px;
+        }
+      }
+    }
   }
 }
 
@@ -199,6 +224,7 @@ $orange: #ff6600;
     margin-bottom:3px;
   }
 }
+
 /*side bar current user profile */
 #current-user-bar {
   padding-left:10px;

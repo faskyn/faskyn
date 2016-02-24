@@ -16,9 +16,41 @@ $orange: #ff6600;
   }
 }
 
+.product-profile-container {
+  background: $light-grey;
+  padding: 20px 70px 30px 70px;
+  .title-row {
+    padding-bottom:15px;
+    width:100%;
+  }
+  .product-panel {
+    .panel-heading {
+      background: white;
+      padding:0;
+      a {
+        text-decoration: none;
+      }
+      .product-list {
+        padding:10px;
+      }
+      &:hover {
+        background-color: $gray-medium-light;
+      }
+    }
+  }
+}
+
 .product-show-name {
   margin-bottom:15px;
   h3 {
+    display: inline;
+    vertical-align: middle;
+    padding-left:5px;
+  }
+}
+
+.product-panel {
+  h4 {
     display: inline;
     vertical-align: middle;
     padding-left:5px;
@@ -52,7 +84,7 @@ $orange: #ff6600;
   }
 }
 
-.product-well {
+.product-well, .product-panel {
   h3 {
     margin-top: 0px;
     margin-bottom: 15px;
