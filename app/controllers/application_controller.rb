@@ -48,7 +48,7 @@ class ApplicationController < ActionController::Base
   def set_conversation
     @user = User.find(params[:id])
     if Task.between(current_user.id, @user.id).present?
-      @tasks = Task.uncompleted.between(current_user.id, @user.id).order("created_at DESC").includes(:assigner).paginate(page: params[:page], per_page: 14)
+      @tasks = Task.uncompleted.between(current_user.id, @user.id).order("created_at DESC").includes(:assigner, :assigner_profile, :executor, :executor_profile).paginate(page: params[:page], per_page: 14)
       @task_between = Task.new
       @conversation = Conversation.create_or_find_conversation(current_user, @user)
       @messages = @conversation.messages.includes(:user).order(created_at: :desc).limit(50).reverse

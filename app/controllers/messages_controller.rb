@@ -1,5 +1,4 @@
 class MessagesController < ApplicationController
-  include ConversationsHelper
   before_action :authenticate_user!
 
   def create
@@ -7,7 +6,6 @@ class MessagesController < ApplicationController
     @message = @conversation.messages.build(message_params)
     @message.user = current_user
     @receiver = interlocutor(@conversation)
-    @receiver_id = @receiver.id
     @message.link = check_if_link(@message.body) if @message.body?
     @message.save!
     if @message.save

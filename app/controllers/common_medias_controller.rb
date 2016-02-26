@@ -33,7 +33,7 @@ class CommonMediasController < ApplicationController
       @param_id = request.parameters['user_id']
       @user = User.find(@param_id)
       if Conversation.between(current_user.id, @user.id).present?
-        @conversation ||= Conversation.between(current_user.id, @user.id).first
+        @conversation = Conversation.between(current_user.id, @user.id).first
       else
         begin
           redirect_to :back, notice: "You have to create a common task first with #{@user.profile.full_name}!"

@@ -5,9 +5,7 @@
     <div class = "row">
 
       <div class="col-md-2">
-        <% if @profile.avatar %>
-          <%= image_tag @user.profile.avatar.url(:base_thumb), class: "avatar" %>
-        <% end %>
+        <%= image_tag @user.profile.avatar.url(:base_thumb), class: "avatar" %>
       </div>
 
       <div class="col-md-8" style="padding-left:0px;">
