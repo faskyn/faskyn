@@ -10,9 +10,7 @@
         <% if user.profile %>
           <li>
             <%= link_to user do %>
-              <% if user.profile.avatar %>
-                <%= image_tag user.profile.avatar.url(:base_thumb), class: 'avatar' %>
-              <% end %>
+              <%= image_tag user.profile.avatar.url(:base_thumb), class: 'avatar' %>
               <span class="user-fullname">
                 <%= truncate(user.profile.full_name, length: 20) %>
               </span>

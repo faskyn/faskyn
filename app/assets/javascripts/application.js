@@ -14,6 +14,7 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require turbolinks
+//= require best_in_place
 //= require jquery.remotipart
 //= require refile
 //= require bootstrap-sprockets

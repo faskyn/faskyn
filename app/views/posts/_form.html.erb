@@ -1,0 +1,15 @@
+<div class="well post-create-well">
+  <%= form_for @post, remote: true, method: :post, class: "post-create-form" do |f| %>
+    <div class="alert alert-danger" style="display:none">
+      <ul class="errors" style="display:none">
+        <%= render 'layouts/error_messages', object: f.object %>
+      </ul>
+    </div>
+    <div class="form-group">
+      <%= f.text_area :body, placeholder: "Share something useful..", class: "form-control post-create-body" %>
+    </div>
+    <div class="form-group">
+      <%= f.submit "Share", class: "btn btn-primary btn-create-post" %>
+    </div>
+  <% end %>
+</div>

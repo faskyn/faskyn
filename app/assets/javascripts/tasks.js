@@ -39,10 +39,6 @@ $(document).on("page:change", function() {
 		$('.alert-danger').hide();
 	});
 
-  // $('.updatetask').on('hidden.bs.modal', function (e) {
-  //   $('.alert-danger').hide();
-  // });
-
   //datetimepicker js code for new task
   $(function () {
     $('.new-task-deadline').datetimepicker({

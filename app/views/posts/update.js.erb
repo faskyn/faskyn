@@ -1,0 +1,20 @@
+$("ul.errors").html("");
+<% if @post.errors.any? %>
+	//modal error messages get inserted via AJAX
+	$('.alert-danger').show();
+	$('ul.errors').show();
+	<% @post.errors.full_messages.each do |message| %>
+		$("ul.errors").append($("<li />").html("<%= message.html_safe %>"));
+		<% end %>
+<% else %>
+	$('ul.errors').hide();
+	$('.alert-danger').hide();
+	$('#updatepost_<%= @post.id %>').modal('hide');
+	
+	$post = $('<%= j render @post %>');
+	edit_post_hide_danger($post);
+	$('#post_<%= @post.id %>').remove();
+	$(".new-post-insert").prepend($post);
+	$("html, body").animate({ scrollTop: 0 }, "slow");
+	//window.scrollTo(0,0);	
+<% end %>

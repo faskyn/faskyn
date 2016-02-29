@@ -1,0 +1,7 @@
+<div class="post-comment-input" style="margin-top:30px;">
+  <%= form_for([post, @post_comment], remote: true, :html => {id: "post-comment-form-#{post.id}"}) do |f| %>
+    <div class="form-group">
+      <%= f.text_field :body, class: "form-control post-comment-text-area-#{post.id}", "data-pid" => post.id %>
+    </div>
+  <% end %>
+</div>

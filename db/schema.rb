@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218084357) do
+ActiveRecord::Schema.define(version: 20160229110802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,26 @@ ActiveRecord::Schema.define(version: 20160218084357) do
 
   add_index "notifications", ["recipient_id"], name: "index_notifications_on_recipient_id", using: :btree
   add_index "notifications", ["sender_id"], name: "index_notifications_on_sender_id", using: :btree
+
+  create_table "post_comments", force: :cascade do |t|
+    t.integer  "post_id"
+    t.string   "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+  end
+
+  add_index "post_comments", ["post_id"], name: "index_post_comments_on_post_id", using: :btree
+  add_index "post_comments", ["user_id"], name: "index_post_comments_on_user_id", using: :btree
+
+  create_table "posts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "product_competitions", force: :cascade do |t|
     t.integer  "product_id"

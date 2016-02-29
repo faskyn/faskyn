@@ -24,6 +24,9 @@ class User < ActiveRecord::Base
 
   has_many :products, dependent: :nullify
 
+  has_many :posts
+  has_many :post_comments, through: :posts
+
   
 
   #likely not needed, yet to take it out
@@ -52,11 +55,6 @@ class User < ActiveRecord::Base
     "((#{assigners_based_on_task_number.to_sql}) UNION ALL (#{executors_based_on_task_number.to_sql})) AS relations"
   end
 
-  # def ordered_relating_users
-  #   User.joins("RIGHT OUTER JOIN #{relations_sql_based_on_task_number} ON relations.user_id = users.id")
-  #     .group(:id)
-  #     .order('COUNT(id) DESC')
-  # end
   def ordered_relating_users
     User.joins("FULL OUTER JOIN #{relations_sql_based_on_task_number} ON relations.user_id = users.id")
       .where.not(id: id)

@@ -1,0 +1,2 @@
+$(".post-comment-text-area-<%= @post_comment.post_id%>").val('');
+$(".post-comment-insert-<%= @post_comment.post_id %>").prepend('<%= j render @post_comment %>');

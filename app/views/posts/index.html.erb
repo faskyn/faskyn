@@ -1,0 +1,29 @@
+<% provide(:title, 'Post feed') %>
+<div class="container-fluid post-container">
+  <% unless has_profile? %>
+    <div class="row">
+      <div class="well onboard-well">
+        <h4>HEY THERE! You can start with discovering the users and in the meantime you can create your profile:</h4>   <%= link_to "CREATE PROFILE", new_user_profile_path(current_user), class: "btn btn-danger" %>
+      </div>
+    </div>
+  <% end %>
+  <div class="row title-row">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="product-desc" style="text-align:center">
+        <h2>POSTS</h2>
+      </div>
+    </div>
+  </div>
+  <div class="post-create">
+    <%= render 'form' %>
+  </div>
+  <div class="post-index new-post-insert">
+    <%= render @posts %>
+  </div>
+  <div id="infinite-post-scrolling">
+    <%= will_paginate @posts, param_name: 'posts' %>
+  </div>
+  <div class="no-more">
+    <p>No more posts.</p>
+  </div>
+</div>

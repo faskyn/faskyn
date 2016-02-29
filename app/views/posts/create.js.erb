@@ -1,0 +1,14 @@
+$("ul.errors").html("");
+<% if @post.errors.any? %>
+	$('.alert-danger').show();
+	$('ul.errors').show();
+	<% @post.errors.full_messages.each do |message| %>
+		$("ul.errors").append($("<li />").html("<%= message.html_safe %>"));
+	<% end %>
+<% else %>
+	$('ul.errors').hide();
+	$('.alert-danger').hide();
+	$('.post-index').prepend('<%= j render @post %>');
+	$('.post-create-body').val('');
+	$('.btn-create-post').prop('disabled',true);
+<% end %>

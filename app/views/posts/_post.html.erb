@@ -1,0 +1,97 @@
+<div class="well post-well" id="post_<%= post.id %>">
+  <div class="row">
+    <div class="col-md-2">
+      <%= image_tag post.user.profile.avatar.url(:base_thumb), class: 'avatar' %>
+    </div>
+    <div class="col-md-8">
+      <div class="post-text">
+        <div class="post-info">
+          <%= post.user.profile.full_name %> <%= local_time_ago(post.updated_at) %>
+        </div>
+        <div class="post-body">
+          <%= find_links(post.body) %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2" style="text-align:right;">
+      <% if policy(post).edit? && policy(post).delete? %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-angle-down"></i>
+          </a>
+          <ul class = "dropdown-menu">
+            <li>
+              <%= link_to edit_post_path(post), remote: true, type: "button" do %>
+                <span data-toggle="modal" data-target="#updatepost_<%= post.id %>">Edit</span>
+              <% end %>
+            </li>   
+            <li>
+              <%= link_to post_path(post), remote: true , type: "button" do %>
+                <span data-toggle="modal" data-target="#deletepost_<%= post.id %>">Delete</span>
+              <% end %>
+            </li>
+          </ul>
+        </li>
+      <% end %>
+    </div>
+  </div>
+  <div class = "row">
+    <div class="col-md-12 post-comment-form">
+      <%= render partial: 'posts/post_comments/post_comment_form', locals: { post: post } %>
+    </div>
+  </div>
+  <div class = "row">
+    <div class="col-md-12 post-comment-insert-<%= post.id%>">
+      <%= render partial: 'posts/post_comments/post_comment', collection: post.post_comments.order(updated_at: :desc), as: :post_comment, locals: {post: post} %>
+    </div>
+  </div>
+</div>
+
+
+  <%= form_for(post, method: :patch, remote: true) do |f| %>
+    <div class="modal fade updatepost" id="updatepost_<%= post.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" style="text-align:left">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Edit Task</h4>
+          </div>
+          <div class="modal-body">
+            <div class="alert alert-danger" style="display:none">
+              <ul class="errors" style="display:none">
+                <%= render 'layouts/error_messages', object: f.object %>
+              </ul>
+            </div>
+            <div class="field form-group">
+              <%= f.text_area :body, class: "form-control edit-post-body" %>
+            </div>   
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="updatepostclose">Close</button>
+              <%= f.button "Update post", class: 'btn btn-primary edit-post-submit', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <%= form_for(post, method: :delete, remote: true) do |f| %>
+    <div class="modal fade" id="deletepost_<%= post.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" style="text-align:left">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Delete Post</h4>
+          </div>
+          <div class="modal-body">
+            <h4>Are you sure?</h4>
+            <p> </p>  
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="deletepostclose">Close</button>
+              <%= f.submit "Delete Post", class: 'btn btn-danger' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>

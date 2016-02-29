@@ -31,7 +31,20 @@ Rails.application.routes.draw do
       end
     end
   end
+
   resources :products
+
+  resources :conversations, only: :create do
+    resources :messages, only: :create
+  end
+
+  resources :posts do
+    resources :post_comments, module: :posts
+  end
+
+  resources :post_comments do 
+    resources :post_repiles, module: :comments
+  end
 
   get 'users/:user_id/common_medias', to: 'common_medias#common_medias', as: :common_medias_user_common_medias
   get 'users/:user_id/common_medias/get_files', to: 'common_medias#get_files', as: :get_files_user_common_medias
@@ -42,10 +55,6 @@ Rails.application.routes.draw do
   get 'users/:user_id/other_notifications', to: 'notifications#other_notifications', as: :other_notifications_user_notifications
 
   get 'users/:user_id/products', to: 'products#own_products', as: :products_user_products
-
-  resources :conversations, only: :create do
-    resources :messages, only: :create
-  end
 
   authenticate :user, lambda { |u| u.email == "szilard.magyar@gmail.com" } do
     mount Sidekiq::Web => '/sidekiq'

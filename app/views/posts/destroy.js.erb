@@ -1,0 +1,4 @@
+$('#deletepost_<%= @post.id %>').modal('hide');
+$("#post_<%= @post.id %>").fadeOut(400, function(){
+	$(this).remove();
+});

@@ -10,13 +10,11 @@ $(document).on("page:change", function() {
 
 //chat message sending
 $(document).on('keydown', '.chatboxtextarea', function (event) {
-  //var cab = document.getElementsByClassName('chatboxtextarea')[0]; 
-  //cab.addEventListener("click", checkInputKey, false);
   var id = $(this).data('cid');
-  checkInputKey(event, $(this), id);
+  checkMessageInputKey(event, $(this), id);
 });
 
-function checkInputKey(event, chatboxtextarea, conversation_id) {
+function checkMessageInputKey(event, chatboxtextarea, conversation_id) {
   if (event.keyCode == 13 && event.shiftKey == 0) {
 
     event.preventDefault();
