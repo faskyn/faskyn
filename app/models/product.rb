@@ -68,25 +68,25 @@ class Product < ActiveRecord::Base
 
     def product_features_limit
       if self.product_features.reject(&:marked_for_destruction?).count > 10
-        self.errors.add :base, "You can't have more than 10 features!"
-      # elsif self.product_features.reject(&:marked_for_destruction?).count < 1
-      #   self.errors.add :base, "You must have at least 1 product feature!"
+        self.errors.add :base, "You can't have more than 10 features."
+      elsif self.product_features.reject(&:marked_for_destruction?).count < 1
+        self.errors.add :base, "You must have at least 1 product feature."
       end
     end
 
     def product_competitions_limit
       if self.product_competitions.reject(&:marked_for_destruction?).count > 10
         self.errors.add :base, "You can't have more than 10 competitions."
-      # elsif self.product_competitions.reject(&:marked_for_destruction?).count < 1
-      #   self.errors.add :base, "You must have at least 1 product feature!"
+      elsif self.product_competitions.reject(&:marked_for_destruction?).count < 1
+        self.errors.add :base, "You must name at least 1 competition."
       end
     end
 
     def product_usecases_limit
       if self.product_usecases.reject(&:marked_for_destruction?).count > 10
         self.errors.add :base, "You can't have more than 10 usecases."
-      # elsif self.product_usecases.reject(&:marked_for_destruction?).count < 1
-      #   self.errors.add :base, "You must have at least 1 product feature!"
+      elsif self.product_usecases.reject(&:marked_for_destruction?).count < 1
+        self.errors.add :base, "You must describe at least 1 usecase."
       end
     end
 end
