@@ -9,4 +9,13 @@ class Post < ActiveRecord::Base
   def pagination_per_page
     12
   end
+
+  def send_post_creation_email_notification(writer)
+    users = User.all - [writer]
+    users.each do |reader|
+      if reader.profile.present?
+        PostCreatorJob.perform_later(self, writer, reader)
+      end
+    end
+  end
 end

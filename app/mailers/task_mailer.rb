@@ -1,12 +1,13 @@
 class TaskMailer < ActionMailer::Base
 
-  def task_created(task, user)
+  def task_created(task, executor, assigner)
     @task = task
-    @current_user = user
+    @executor = executor
+    @assigner = assigner
 
     mail(from: 'faskyn@gmail.com',
-         to: "#{task.executor.email}",
-         subject: "[Faskyn] New task/favor from #{task.assigner.profile.first_name} #{task.assigner.profile.last_name}"
+         to: "#{executor.email}",
+         subject: "[Faskyn] New task/favor from #{assigner.profile.full_name}"
          )
   end
 end

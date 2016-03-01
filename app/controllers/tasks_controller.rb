@@ -49,7 +49,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.assigner_id = current_user.id
     if @task.save
-      TaskCreatorJob.perform_later(@task.id, @user.id)
+      TaskCreatorJob.perform_later(@task, @task.executor, @task.assigner)
       Conversation.create(sender_id: @task.assigner_id, recipient_id: @task.executor_id)
       Notification.send_notification(@task.executor, "task", @task.assigner)
       respond_to do |format|
