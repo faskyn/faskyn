@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   has_many :post_comments, dependent: :destroy
   #has_many :post_replies, through: :post_comments, dependent: :destroy
 
-  validates :body, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
+  validates :body, presence: { message: "can not be blank" }, length: { maximum: 500, message: "can't be longer than 500 characters" }
 
   def pagination_per_page
     12

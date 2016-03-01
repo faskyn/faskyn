@@ -24,9 +24,27 @@ class Posts::PostCommentsController < ApplicationController
     end
   end
 
+  def delete
+  end
+
+  def destroy
+    @post_comment = PostComment.find(params[:id])
+    if @post_comment.destroy
+      respond_to do |format|
+        format.html { redirect_to posts_path, notice: "Comment got deleted!"}
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to posts_path, notice: "Comment couldn't be deleted!"}
+        format.js
+      end
+    end
+  end
+
   private
 
     def post_comment_params
-      params.require(:post_comment).permit(:body, :user_id, :user_profile)
+      params.require(:post_comment).permit(:body, :user, :user_profile)
     end
 end

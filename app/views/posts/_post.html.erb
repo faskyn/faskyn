@@ -1,20 +1,20 @@
 <div class="well post-well" id="post_<%= post.id %>">
   <div class="row">
     <div class="col-md-2">
-      <%= image_tag post.user.profile.avatar.url(:base_thumb), class: 'avatar' %>
+      <%= image_tag post.user.profile.avatar.url(:base_thumb), class: 'post-avatar' %>
     </div>
     <div class="col-md-8">
-      <div class="post-text">
-        <div class="post-info">
-          <%= post.user.profile.full_name %> <%= local_time_ago(post.updated_at) %>
-        </div>
-        <div class="post-body">
-          <%= find_links(post.body) %>
-        </div>
+      <div class="post-info">
+        <span class="post-user-name"><%= post.user.profile.full_name %></span>
+        <span class="post-updated"><%= local_time_ago(post.updated_at) %></span>
+      </div>
+      <div class="post-body">
+        <%= find_links(post.body) %>
       </div>
     </div>
     <div class="col-md-2" style="text-align:right;">
       <% if policy(post).edit? && policy(post).delete? %>
+       
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-angle-down"></i>
@@ -32,21 +32,27 @@
             </li>
           </ul>
         </li>
+        
       <% end %>
     </div>
   </div>
-  <div class = "row">
-    <div class="col-md-12 post-comment-form">
-      <%= render partial: 'posts/post_comments/post_comment_form', locals: { post: post } %>
+  <div class = "row comment-top-row">
+    <div class="col-md-12">
+      <div class="col-md-12 post-comment-form">
+        <%= render partial: 'posts/post_comments/post_comment_form', locals: { post: post } %>
+      </div>
     </div>
   </div>
   <div class = "row">
-    <div class="col-md-12 post-comment-insert-<%= post.id%>">
-      <%= render partial: 'posts/post_comments/post_comment', collection: post.post_comments.order(updated_at: :desc), as: :post_comment, locals: {post: post} %>
+    <div class="col-md-12">
+      <div class="col-md-12 post-comment-insert-<%= post.id%>">
+        <%= render partial: 'posts/post_comments/post_comment', collection: post.post_comments.ordered.included, as: :post_comment, locals: {post: post} %>
+      </div>
     </div>
   </div>
 </div>
 
+<% if policy(post).edit? %>
 
   <%= form_for(post, method: :patch, remote: true) do |f| %>
     <div class="modal fade updatepost" id="updatepost_<%= post.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -75,6 +81,10 @@
     </div>
   <% end %>
 
+<% end %>
+
+<% if policy(post).delete? %>
+
   <%= form_for(post, method: :delete, remote: true) do |f| %>
     <div class="modal fade" id="deletepost_<%= post.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
@@ -95,3 +105,5 @@
       </div>
     </div>
   <% end %>
+
+<% end %>

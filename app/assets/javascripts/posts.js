@@ -1,6 +1,6 @@
 $(document).on("page:change", function() {
 
-  /* Activating Best In Place */
+  // Activating Best In Place
   jQuery(".best_in_place").best_in_place();
 
 	//disabling post form when text field is empty
@@ -12,13 +12,13 @@ $(document).on("page:change", function() {
       $('#infinite-post-scrolling').hide();
       var more_posts_url;
       more_posts_url = $('#infinite-post-scrolling .pagination .next_page a').attr('href');
-      if (more_posts_url && $(window).scrollTop() > $(document).height() - $(window).height() - 60) {
+      if (more_posts_url && ($(window).scrollTop() > $(document).height() - $(window).height() - 60)) {
         $('.pagination').html('<img src="/assets/ajax-loader.gif" alt="Loading..." title="Loading..." />');
         $('#infinite-post-scrolling').show();
         $.getScript(more_posts_url);
       }
     });
-  };    
+  };   
 });
 
 $(document).on('keyup', '.post-create-body', function() {
@@ -49,7 +49,5 @@ function checkPostCommentInputKey(event, commenttextarea, post_id) {
 function edit_post_hide_danger($container) {
   $container.find('.updatepost').on('hidden.bs.modal', function (e) {
     $('.alert-danger').hide();
-    //$('#page-content-wrapper').prop('scrollHeight');
-    //$('.post-container').scrollTop(0);
   });
 };

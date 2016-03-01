@@ -5,8 +5,8 @@ module ApplicationHelper
     current_user.profile
   end
 
-  def find_links(message_body)
-     found_link = Rinku.auto_link(message_body, mode=:all, 'target="_blank"', skip_tags=nil).html_safe
+  def find_links(text)
+    found_link = Rinku.auto_link(text, mode=:all, 'target="_blank"', skip_tags=nil).html_safe
   end
 
   def url_with_protocol(url)

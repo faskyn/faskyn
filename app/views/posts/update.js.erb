@@ -10,11 +10,9 @@ $("ul.errors").html("");
 	$('ul.errors').hide();
 	$('.alert-danger').hide();
 	$('#updatepost_<%= @post.id %>').modal('hide');
-	
 	$post = $('<%= j render @post %>');
 	edit_post_hide_danger($post);
 	$('#post_<%= @post.id %>').remove();
 	$(".new-post-insert").prepend($post);
 	$("html, body").animate({ scrollTop: 0 }, "slow");
-	//window.scrollTo(0,0);	
 <% end %>
