@@ -10,9 +10,10 @@
     <div class = "row">
       <div class="col-md-4">
         <div class="form-group">
-          <%= f.text_field :name, placeholder: "name", class: "form-control" %>
+          <%= f.text_field :name, placeholder: " product name", class: "form-control" %>
+          <div class="explanation name-explanation">Choose a name for your product. e.g. Faskyn for Entreprise</div>
         </div>
-        <span class="btn btn-success btn-sm btn-product-image">Choose image
+        <span class="btn btn-success btn-sm btn-product-image">Upload image
           <%= f.attachment_field :product_image, presigned: true, direct: true, class: "choose-product-file" %>
         </span>
         <span id="product-progresspercent"></span>
@@ -25,20 +26,22 @@
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <%= f.collection_select :industry_ids, Industry.all.order(name: :asc), :id, :name, {}, { multiple: true } %>
+          <%= f.collection_select :industry_ids, Industry.all.order(name: :asc), :id, :name, {}, { multiple: true, class: "form-control" } %>
         </div>
       </div>
     </div>
     
-    <div class = "row">
+    <div class = "row" style="margin-top:15px;">
       <div class="col-md-6">
         <div class="form-group">
           <%= f.text_field :website, placeholder: "product site", class: "form-control" %>
+          <div class="explanation website-explanation">URL to the website where you explain more about this product.</div>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
           <%= f.text_field :company, placeholder: "company", class: "form-control" %>
+          <div class="explanation company-explanation">Name of the company this product belongs to.</div>
         </div>
       </div>
     </div>
@@ -47,6 +50,7 @@
       <div class="col-md-12">
         <div class="form-group">
           <%= f.text_field :oneliner, placeholder: "oneliner", class: "form-control" %>
+          <div class="explanation oneliner-explanation">Short, max 140-character-long description of the product. Something cachy that helps people quickly understand and remember it.</div>
         </div>
       </div>
     </div>
@@ -59,47 +63,51 @@
       <div class="col-md-12">
         <div class="form-group">
           <%= f.text_area :description, placeholder: "description", class: "form-control" %>
+          <div class="explanation description-explanation">Max 500-character-long descripiton of the product. Something for the people who got interested after the oneliner.</div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="well product-well">
+  <div class="well product-well feature-well">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12 feature-fields">
         <%= f.fields_for :product_features do |product_feature| %>
           <%= render 'product_feature_fields', f: product_feature %>
         <% end %>
       </div>
     </div>
     <div class="form-group">
-      <%= link_to_add_association 'Add a new feature', f, :product_features %>
+      <div class="explanation product-feature-explanation">Add some general characteristics or features of your product in a few bullet points, what your customers will get out of it.</div>
+      <div class="adding-extra"><%= link_to_add_association 'Add new feature', f, :product_features %></div>
     </div>
   </div>
 
-  <div class="well product-well">
+  <div class="well product-well usecase-well">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12 usecase-fields">
         <%= f.fields_for :product_usecases do |product_usecase| %>
           <%= render 'product_usecase_fields', f: product_usecase %>
         <% end %>
       </div>
     </div>
     <div class="form-group">
-      <%= link_to_add_association 'Add a new usecase', f, :product_usecases %>
+      <div class="explanation usecase-explanation">Who is this good for? E.g. banks, telcos, etc. <strong>Why</strong> would they care about it? <strong>How</strong> would they use it?</div>
+      <div class="adding-extra"><%= link_to_add_association 'Add new usecase', f, :product_usecases %></div>
     </div>
   </div>
 
-  <div class="well product-well">
+  <div class="well product-well competition-well">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12 competition-fields">
         <%= f.fields_for :product_competitions do |product_competition| %>
           <%= render 'product_competition_fields', f: product_competition %>
         <% end %>
       </div>
     </div>
     <div class="form-group">
-      <%= link_to_add_association 'Add a new competition', f, :product_competitions %>
+      <div class="explanation competition-explanation">Who has a similar product? How is your product different than theirs? This helps you explain the uniqueness of your solution to the people who would immediately wave it down as a copycat or me-too product. Even though it is not.</div>
+      <div class="adding-extra"><%= link_to_add_association 'Add new competition', f, :product_competitions %></div>
     </div>
   </div>
   <div class="form-group">

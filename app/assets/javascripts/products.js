@@ -27,6 +27,11 @@ $(document).on("page:change", function() {
     });
   };
 
+  //cocoon gem inserting behavior
+  $(".feature-well a.add_fields").data("association-insertion-method", 'prepend').data("association-insertion-node", '.feature-fields');
+  $(".usecase-well a.add_fields").data("association-insertion-method", 'prepend').data("association-insertion-node", '.usecase-fields');
+  $(".competition-well a.add_fields").data("association-insertion-method", 'prepend').data("association-insertion-node", '.competition-fields');
+
 });
 
 $(document).on("upload:start", ".product-refile-form", function(e) {

@@ -2,14 +2,18 @@
   <div class= "jumbotron">
     <div class= "container">
       <%= render "layouts/flash_messages" %>
-      <div class= "hero-title">
-        <h1>Find the startups building the future</h1>
-      </div>
-      <div class= "hero-description">
-        <h3>Discover and connect with startups by browsing their products</h3>
-      </div>
-      <div class = "hero-button">
-        <p><%= link_to "GET STARTED", new_user_registration_path , class: "btn btn-success btn-lg", style: "margin-right:20px"%><%= link_to "LOG IN", new_user_session_path, class: "btn btn-primary btn-lg" %></p>
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <div class= "hero-title">
+            <h1>Grow Your Startup With Our Community</h1>
+          </div>
+          <div class= "hero-description">
+            <h3>Join our community of startup founders, entrepreneurs and members who’ve helped build great companies.</h3>
+          </div>
+          <div class = "hero-button">
+            <p><%= link_to "GET STARTED", new_user_registration_path , class: "btn btn-success btn-lg", style: "margin-right:20px"%><%= link_to "LOG IN", new_user_session_path, class: "btn btn-primary btn-lg" %></p>
+          </div>
+        </div>
       </div>
     </div>
   </div>

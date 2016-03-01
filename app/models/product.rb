@@ -17,7 +17,7 @@ class Product < ActiveRecord::Base
   validates :company, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
   validates :website, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
   validates :oneliner, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
-  validates :description, presence: { message: "can not be blank" }
+  validates :description, presence: { message: "can not be blank" }, length: {maximum: 500, message: "can't be longer than 500 characters"}
 
   validates_associated :industry_products
   validates_associated :product_features
