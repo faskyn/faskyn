@@ -2,7 +2,11 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
 
+  authenticated :user do
+    root 'posts#index', as: :authenticated_root
+  end
   root 'static_pages#home'
+  
   get 'static_pages/home'
   get 'static_pages/about', path: 'about'
   get 'static_pages/help', path: 'help'
