@@ -1,7 +1,7 @@
 <p>Hi <%= @reader.profile.first_name %>,</p>
 
-<p><%= @writer.profile.full_name %> just posted something useful.</p>
+<p>I just posted something on faskyn.</p>
 
 <p>You can check it out <%= link_to "here", posts_url %>.</p>
 
-<p>Cheers,<br />Faskyn Team</p>
+<p>Cheers,<br /><%= @writer.profile.full_name %></p>

@@ -5,7 +5,7 @@ class PostMailer < ActionMailer::Base
     @writer = writer
     @reader = reader
 
-    mail(from: '#{writer.email}',
+    mail(from: "#{writer.email}",
          to: "#{reader.email}",
          subject: "[Faskyn] New post from #{writer.profile.full_name}"
          )
