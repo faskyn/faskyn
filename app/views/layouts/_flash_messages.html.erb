@@ -5,8 +5,8 @@
     <div class="container-fluid flash-container">
   <% end %>
     <% flash.each do |type, message| %>
-      <div class= "alert <%= bootstrap_alert_class_for(type) %>" style="margin-top:25px">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <div class= "alert flash-alert <%= bootstrap_alert_class_for(type) %>">
+        <button type="button" class="close" data-dismiss="alert">&times;</button> 
         <%= message %>
       </div>
     <% end %>

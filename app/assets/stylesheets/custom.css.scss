@@ -340,3 +340,15 @@ a {
   background: $light-grey; 
 }
 
+.alert.flash-alert {
+  overflow: hidden;
+  z-index: 9999;
+  width:300px;
+  text-align: center;
+  position: absolute;
+  padding-top:6px;
+  padding-bottom:6px;
+  top: 0;
+  left: calc(50% - (300px/2));
+  //right:0;
+}
