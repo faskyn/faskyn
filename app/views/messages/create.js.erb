@@ -5,10 +5,12 @@ chatMessageSender(sender_id, message_rendered);
 
 //important to send server rendered js, since having bunch of logic in _message partial
 //pusher websocket for receiver
+
 <% broadcast_to_conversation(@receiver_id) do %>
 	var sender_id = JSON.parse('<%= @message.user_id.to_json %>');
 	var message_rendered = $('<%= j render @message %>');
 	chatMessageSender(sender_id, message_rendered);
 <% end %>
+
 
 

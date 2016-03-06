@@ -75,6 +75,14 @@ class ApplicationController < ActionController::Base
     current_user == conversation.recipient ? conversation.sender : conversation.recipient
   end
 
+  def message_params
+    params.require(:message).permit(:body, :message_attachment, :message_attachment_id, :message_attachment_cache_id, :remove_message_attachment)
+  end
+
+  def notification_params
+    params.require(:notification).permit(:recipient_id, :sender_id, :notifiable_type, :checked_at)
+  end
+
   def user_not_authorized(exception)
     policy_name = exception.policy.class.to_s.underscore
     flash[:danger] = t "#{policy_name}.#{exception.query}", scope: "pundit", default: :default
