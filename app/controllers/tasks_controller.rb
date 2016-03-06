@@ -49,9 +49,9 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.assigner_id = current_user.id
     if @task.save
+      Notification.create(recipient_id: @task.executor_id, sender_id: current_user.id, notifiable: @task, action: "assigned")
       TaskCreatorJob.perform_later(@task, @task.executor, @task.assigner)
-      Conversation.create(sender_id: @task.assigner_id, recipient_id: @task.executor_id)
-      Notification.send_notification(@task.executor, "task", @task.assigner)
+      Conversation.create_or_find_conversation(@task.assigner, @task.executor)
       respond_to do |format|
         format.html { redirect_to user_tasks_path(current_user), notice: "Task saved!" }
         format.js

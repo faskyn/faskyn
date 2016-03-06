@@ -11,7 +11,8 @@ class MessagesController < ApplicationController
     if @message.save
       Notification.decreasing_chat_notification_number(@message.user, @receiver)
       if (Notification.between_chat_recipient(@receiver, @message.user).unchecked.count < 1)
-        Notification.send_notification(@receiver, "chat", @message.user)
+        #Notification.send_notification(@receiver, "chat", @message.user)
+        Notification.create(recipient_id: @receiver.id, sender_id: current_user.id, notifiable: @message, action: "sent")
       end
     end 
   end

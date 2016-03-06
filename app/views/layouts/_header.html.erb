@@ -5,89 +5,101 @@
   <span>
     <nav class="navbar navbar-static-top navbar-default" role="navigation">
 <% end %>
-  <div class="container-fluid">
-    <div class="navbar-header">
-       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <% if user_signed_in? %>
-        <%= link_to image_tag("firstlogosmallgarminwhite.png", size: "40x40"), root_path, class: "navbar-brand", style: "margin-left:0px;padding-top:9px;padding-bottom:9px", alt: "faskyn_logo", title: "faskyn logo" %>
-      <% else %>
-        <%= link_to image_tag("firstlogosmallgarmin.png", size: "40x40"), root_path, class: "navbar-brand", style: "margin-left:0px;padding-top:9px;padding-bottom:9px", alt: "faskyn_logo", title: "faskyn logo" %>
-      <% end %>
-      <%= link_to "faskyn", root_path, class: "navbar-brand", style: "padding-left:7px" %>
-    </div>
+    <div class="container-fluid">
+      <div class="navbar-header">
+         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <% if user_signed_in? %>
+          <%= link_to image_tag("firstlogosmallgarminwhite.png", size: "40x40"), root_path, class: "navbar-brand", style: "margin-left:0px;padding-top:9px;padding-bottom:9px", alt: "faskyn_logo", title: "faskyn logo" %>
+        <% else %>
+          <%= link_to image_tag("firstlogosmallgarmin.png", size: "40x40"), root_path, class: "navbar-brand", style: "margin-left:0px;padding-top:9px;padding-bottom:9px", alt: "faskyn_logo", title: "faskyn logo" %>
+        <% end %>
+        <%= link_to "faskyn", root_path, class: "navbar-brand", style: "padding-left:7px" %>
+      </div>
 
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-      <ul class="nav navbar-nav navbar-right">
-      <% if user_signed_in? %>
-        <% if has_profile? %>
-          <% unless if_tasks_any? %>
-            <li><p class="navbar-btn"><%= link_to "New Task", new_user_task_path(current_user), class: "btn btn-primary", style: "margin-right:10px;" %></p></li>
-          <% end %>
-          <li><%= link_to chat_notifications_user_notifications_path(current_user), 'data-toggle' => "tooltip", 'data-placement' => "bottom", 'data-delay' => '{"show":"250"}', 'title' => "Chat" do %>
-            <span id="notify"><i class="fa fa-comments"></i><%= render 'notifications/newchatnotification' %></span>
-          <% end %></li>
-          <li><%= link_to other_notifications_user_notifications_path(current_user), 'data-toggle' => "tooltip", 'data-placement' => "bottom", 'data-delay' => '{"show":"250"}', 'title' => "Notifications" do %>
-           <span id="notify"><i class="fa fa-bell"></i><%= render 'notifications/newothernotification' %></span>
-          <% end %></li>
-        <% else %>
-          <li><p class="navbar-btn"><%= link_to "CREATE PROFILE", new_user_profile_path(current_user), class: "btn btn-danger" %></p></li>
-        <% end %>
-        <li><%= link_to users_path, 'data-toggle' => "tooltip", 'data-placement' => "bottom", 'data-delay' => '{"show":"250"}', 'title' => "Users" do %>
-          <i class="fa fa-users" style="padding-right:4px"></i>
-        <% end %></li>
-        <% if has_profile? %>
-          <li class="dropdown">
-            <%= link_to root_path(current_user), class: "dropdown-toggle", 'data-toggle' => 'dropdown', 'role' => 'button', 'aria-haspopup' => 'true', 'aria-expanded' => 'false' do %><i class="fa fa-tasks" style="padding-right:4px"></i>TASKS<% end %>
-            <ul class = "dropdown-menu">
-              <li><%= link_to "All Tasks", user_tasks_path(current_user) %></li>
-              <li><%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user) %></li>
-              <li><%= link_to "Outgoing Tasks", outgoing_tasks_user_tasks_path(current_user) %></li>
-              <li><%= link_to "Completed Tasks", completed_tasks_user_tasks_path(current_user) %></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <%= link_to products_path, class: "dropdown-toggle", 'data-toggle' => 'dropdown', 'role' => 'button', 'aria-haspopup' => 'true', 'aria-expanded' => 'false' do %><i class="fa fa-dot-circle-o" style="padding-right:4px"></i>PRODUCTS<% end %>
-            <ul class = "dropdown-menu">
-              <li><%= link_to "All Products", products_path %></li>
-              <li><%= link_to "My Products", products_user_products_path(current_user) %></li>
-              <li><%= link_to "New Product", new_product_path %></li>
-            </ul>
-          </li>
-        <% else %>
-          <li><%= link_to products_path do %>
-            <i class="fa fa-dot-circle-o" style="padding-right:4px"></i>PRODUCTS
-          <% end %></li>
-        <% end %>
-        <li class="dropdown">
-          <% if has_profile? && current_user.profile.avatar.present? %>
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <%= image_tag current_user.profile.avatar.url(:base_thumb), class: 'avatar', alt: "#{current_user.profile.first_name}'s_avatar", title: "#{current_user.profile.first_name}'s avatar" %>
-            </a>
-          <% else %>
-            <a href="#" class="dropdown-toggle" id="without-avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-lg fa-user"></i>
-            </a>
-          <% end %>
-          <ul class = "dropdown-menu">
-            <li><%= link_to "Account", edit_user_registration_path %></li>
-            <%if has_profile? %>
-              <li><%= link_to "Profile", edit_user_profile_path(current_user) %></li>
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <li>
+            <%= link_to users_path, 'data-toggle' => "tooltip", 'data-placement' => "bottom", 'data-delay' => '{"show":"250"}', 'title' => "Users" do %>
+              <i class="fa fa-users" style="padding-right:4px"></i>
             <% end %>
-            <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
-          </ul>
-        </li>    
-      <% else %>
-        <li><p class="navbar-btn"><%= link_to "LOG IN", new_user_session_path, class: "btn btn-primary", id: "btn-outline-primary" %></p></li>
-      <% end %>
-      </ul>
+          </li>
+          <% if has_profile? %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" id="chat-notification-dropdown-list" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
+                <span id="notify"><i class="fa fa-comments"></i><%= render 'notifications/newchatnotification' %></span>
+              </a>
+              <ul class = "dropdown-menu scrollable-bootstrap-menu chat-notifications-json-data">
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" id="other-notification-dropdown-list" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
+                <span id="notify"><i class="fa fa-bell"></i><%= render 'notifications/newothernotification' %></span>
+              </a>
+              <ul class = "dropdown-menu scrollable-bootstrap-menu other-notifications-json-data">
+              </ul>
+            </li>
+          <% end %>
+          <% if has_profile? %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" id="action-dropdown-list" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-lg fa-bars"></i>
+              </a>
+              <ul class = "dropdown-menu scrollable-bootstrap-menu test2">
+                <li>
+                  <ul class="test">
+                    <li><%= link_to "Add Product", new_product_path %></li>
+                    <li><%= link_to "All Products", products_path %></li>
+                    <li><%= link_to "My Products", products_user_products_path(current_user) %></li>
+                    
+                    <li><%= link_to "All Tasks", user_tasks_path(current_user) %></li>
+                    <li><%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user) %></li>
+                    <li><%= link_to "Outgoing Tasks", outgoing_tasks_user_tasks_path(current_user) %></li>
+                  </ul>
+                </li>
+
+                <li role="separator" class="divider"></li>
+
+                <li><%= link_to "Completed Tasks", completed_tasks_user_tasks_path(current_user) %></li>
+              </ul>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to products_path do %>
+                <i class="fa fa-dot-circle-o" style="padding-right:4px"></i>PRODUCTS
+              <% end %>
+            </li>
+          <% end %>
+          <li class="dropdown">
+            <% if has_profile? && current_user.profile.avatar.present? %>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <%= image_tag current_user.profile.avatar.url(:base_thumb), class: 'avatar', alt: "#{current_user.profile.first_name}'s_avatar", title: "#{current_user.profile.first_name}'s avatar" %>
+              </a>
+            <% else %>
+              <a href="#" class="dropdown-toggle" id="without-avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-lg fa-user"></i>
+              </a>
+            <% end %>
+            <ul class = "dropdown-menu">
+              <li><%= link_to "Account", edit_user_registration_path %></li>
+              <%if has_profile? %>
+                <li><%= link_to "Profile", edit_user_profile_path(current_user) %></li>
+              <% end %>
+              <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+            </ul>
+          </li>    
+        <% else %>
+          <li><p class="navbar-btn"><%= link_to "LOG IN", new_user_session_path, class: "btn btn-primary", id: "btn-outline-primary" %></p></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 </span>
 
 

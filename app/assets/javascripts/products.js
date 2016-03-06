@@ -20,7 +20,7 @@ $(document).on("page:change", function() {
       var more_products_url;
       more_products_url = $('#infinite-product-scrolling .pagination .next_page a').attr('href');
       if (more_products_url && $(window).scrollTop() > $(document).height() - $(window).height() - 60) {
-        $('.pagination').html('<img src="/assets/ajax-loader.gif" alt="Loading..." title="Loading..." />');
+        $('.pagination').html("<i class='fa fa-circle-o-notch fa-2x fa-spin'></i>");
         $('#infinite-product-scrolling').show();
         $.getScript(more_products_url);
       }

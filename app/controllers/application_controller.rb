@@ -46,6 +46,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_conversation
+    #NOT NEEDED AT THE MOMENT SINCE GOING TO THIS PAGE WILL TRIGGER TO CHECK ALL THE COMMON NOTS
+    # if params[:update_check_at]
+    #   @notification = Notification.find(params[:task_notification_id])
+    #   @notification.update_attributes(checked_at: Time.zone.now)
+    # end
     @user = User.find(params[:id])
     if Task.between(current_user.id, @user.id).present?
       @tasks = Task.uncompleted.between(current_user.id, @user.id).order("created_at DESC").includes(:assigner, :assigner_profile, :executor, :executor_profile).paginate(page: params[:page], per_page: 14)
@@ -54,7 +59,7 @@ class ApplicationController < ActionController::Base
       @messages = @conversation.messages.includes(:user).order(created_at: :desc).limit(50).reverse
       @message = Message.new
       Notification.decreasing_chat_notification_number(current_user, @user)
-      Notification.decreasing_other_notification_number(current_user, @user)
+      Notification.decreasing_task_notification_number(current_user, @user)
       respond_to do |format|
         format.html
         format.js { render :template => "tasks/between.js.erb", layout: false }
@@ -68,14 +73,6 @@ class ApplicationController < ActionController::Base
 
   def interlocutor(conversation)
     current_user == conversation.recipient ? conversation.sender : conversation.recipient
-  end
-
-  def message_params
-    params.require(:message).permit(:body, :message_attachment, :message_attachment_id, :message_attachment_cache_id, :remove_message_attachment)
-  end
-
-  def notification_params
-    params.require(:notification).permit(:recipient_id, :sender_id, :notification_type, :checked_at)
   end
 
   def user_not_authorized(exception)

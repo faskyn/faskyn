@@ -11,7 +11,7 @@ $(document).on('scroll', function() {
     var more_common_links_url;
     more_common_links_url = $('#infinite-common-link-scrolling .pagination .next_page a').attr('href');
     if (more_common_links_url && $(window).scrollTop() > $(document).height() - $(window).height() - 60) {
-      $('.pagination').html('<img src="/assets/ajax-loader.gif" alt="Loading..." title="Loading..." />');
+      $('.pagination').html("<i class='fa fa-circle-o-notch fa-2x fa-spin'></i>");
       $('#infinite-common-link-scrolling').show();
 			$.ajax({
 				type: "GET",
@@ -30,7 +30,7 @@ $(document).on('scroll', function() {
     var more_common_files_url;
     more_common_files_url = $('#infinite-common-file-scrolling .pagination .next_page a').attr('href');
     if (more_common_files_url && $(window).scrollTop() > $(document).height() - $(window).height() - 60) {
-      $('.pagination').html('<img src="/assets/ajax-loader.gif" alt="Loading..." title="Loading..." />');
+      $('.pagination').html("<i class='fa fa-circle-o-notch fa-2x fa-spin'></i>");
       $('#infinite-common-file-scrolling').show();
       //$.getScript(more_common_files_url);
       $.ajax({

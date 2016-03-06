@@ -1,0 +1,21 @@
+<span>
+  <nav class="navbar navbar-static-top navbar-default" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <%= link_to image_tag("firstlogosmallgarmin.png", size: "40x40"), root_path, class: "navbar-brand", style: "margin-left:0px;padding-top:9px;padding-bottom:9px", alt: "faskyn_logo", title: "faskyn logo" %>
+        <%= link_to "faskyn", root_path, class: "navbar-brand", style: "padding-left:7px" %>
+      </div>
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><p class="navbar-btn"><%= link_to "LOG IN", new_user_session_path, class: "btn btn-primary", id: "btn-outline-primary" %></p></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</span>

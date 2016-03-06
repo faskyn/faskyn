@@ -164,6 +164,24 @@ a {
       height:30px;
       border-radius: 10%;
     }
+    .avatar-notification {
+      width:30px;
+      height:30px;
+      border-radius: 50%;
+    }
+    .scrollable-bootstrap-menu {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      list-style: none;
+      ul {
+        height: auto;
+        max-height: 40px;
+        overflow-x: hidden;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        list-style: none;
+      }
+    }
     .dropdown-menu a {
       color: black;
     }
@@ -175,11 +193,11 @@ a {
     background:white !important;
     color:$garmin-blue !important;
   }
-  @media (min-width: 979px) {
-    ul.nav li.dropdown:hover > ul.dropdown-menu {
-      display: block;
-    }
-  }
+  // @media (min-width: 979px) {
+  //   ul.nav li.dropdown:hover > ul.dropdown-menu {
+  //     display: block;
+  //   }
+  // }
 }
 
 //FOOTER
@@ -329,7 +347,7 @@ a {
   padding-left:20px;
 }
 
-.infinite-product-scrolling, .infinite-task-scrolling, .infinite-user-scrolling, #infinite-chatnotification-scrolling, #infinite-othernotification-scrolling, #infinite-post-scrolling {
+#infinite-product-scrolling, #infinite-task-scrolling, #infinite-user-scrolling, #infinite-chatnotification-scrolling, #infinite-othernotification-scrolling, #infinite-post-scrolling {
    text-align: center;
    display: none;
 }

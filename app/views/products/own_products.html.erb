@@ -1,12 +1,5 @@
 <% provide(:title, 'My products') %>
 <div class="container-fluid product-container">
-  <% unless has_profile? %>
-    <div class="row">
-      <div class="well onboard-well">
-        <h4>HEY THERE! You can start with discovering the users and in the meantime you can create your profile:</h4>   <%= link_to "CREATE PROFILE", new_user_profile_path(current_user), class: "btn btn-danger" %>
-      </div>
-    </div>
-  <% end %>
   <div class="row title-row">
     <div class="col-md-4 col-md-offset-4">
       <div class="product-desc" style="text-align:center">

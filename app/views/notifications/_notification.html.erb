@@ -1,27 +1,46 @@
 <% if notification.sender.present? %>
   <% if notification.checked_at == nil %>
-    <div class ="notification-line">
+    <div class ="notification-line notification-line-unchecked" data-nid="notification.id">
   <% else %>
-    <div class="notification-line-checked">
+    <div class="notification-line notification-line-checked" data-nid="notification.id">
   <% end %>
-    <%= link_to user_path(notification.sender) do %>
-      <%= image_tag notification.sender.profile.avatar.url(:base_thumb), class: 'avatar' %>
-      <span>
-        <div class="subject">
-          <% if notification.notification_type == "chat" %>
-            <%= notification.sender.profile.first_name %> <%= notification.sender.profile.last_name %> has sent you a message on chat.
-          <% else %>
-            <%= notification.sender.profile.first_name %> <%= notification.sender.profile.last_name %> has sent you a <%= notification.notification_type %>.
-          <% end %>
-        </div>
-        <div class="time">
-          <% if notification.created_at.today? %>      
-              Sent at<%= local_time(notification.created_at, "%H:%M %p") %>
-          <% else %>
-              Sent at <%= local_time(notification.created_at, "%d %b %H:%M %p") %>
-          <% end %>
-        </div>
-      </span>
+    <% if notification.notifiable_type == "Post" %>
+      <%= link_to posts_path(anchor: "post_#{notification.notifiable_id}", check_and_decrease: true, post_id: notification.notifiable_id) do %>
+        <!-- (anchor: "post_#{notification.notifiable_id}") -->
+        <%= image_tag notification.sender.profile.avatar.url(:base_thumb), class: 'avatar' %>
+        <span>
+          <div class="subject">
+            <%= notification.sender.profile.full_name %> has <%= notification.action %> on a <%= notification.notifiable_type.underscore %> you are following.
+          </div>
+          <div class="time">
+            <% if notification.created_at.today? %>      
+                Sent at<%= local_time(notification.created_at, "%H:%M %p") %>
+            <% else %>
+                Sent at <%= local_time(notification.created_at, "%d %b %H:%M %p") %>
+            <% end %>
+          </div>
+        </span>
+      <% end %>
+    <% else %>
+      <%= link_to user_path(notification.sender) do %>
+        <%= image_tag notification.sender.profile.avatar.url(:base_thumb), class: 'avatar' %>
+        <span>
+          <div class="subject">
+            <% if notification.notifiable_type == "Message" %>
+              <%= notification.sender.profile.full_name %> has sent you a <%= notification.notifiable_type.underscore %> on chat.
+            <% elsif notification.notifiable_type == "Task" %>
+              <%= notification.sender.profile.full_name %> has <%= notification.action %> you a <%= notification.notifiable_type.underscore %>.
+            <% end %>
+          </div>
+          <div class="time">
+            <% if notification.created_at.today? %>      
+                Sent at<%= local_time(notification.created_at, "%H:%M %p") %>
+            <% else %>
+                Sent at <%= local_time(notification.created_at, "%d %b %H:%M %p") %>
+            <% end %>
+          </div>
+        </span>
+      <% end %>
     <% end %>
   </div>
 <% end %>

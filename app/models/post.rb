@@ -2,6 +2,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_one :user_profile, through: :user, source: :profile
   has_many :post_comments, dependent: :destroy
+  has_many :users, through: :post_comments #for post_comment notifications
   #has_many :post_replies, through: :post_comments, dependent: :destroy
 
   validates :body, presence: { message: "can not be blank" }, length: { maximum: 500, message: "can't be longer than 500 characters" }

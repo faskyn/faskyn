@@ -7,9 +7,14 @@ class Posts::PostCommentsController < ApplicationController
     authorize @post_comment
     @post_comment.user = current_user
     @post_comment.save!
-    respond_to do |format|
-      format.html { redirect_to posts_path, notice: "Comment saved!" }
-      format.js
+    if @post_comment.save
+      (@post.users.uniq - [current_user, @post.user] + post_owner_check(@post, @post_comment)).each do |post_commenter|
+        Notification.create(recipient_id: post_commenter.id, sender_id: current_user.id, notifiable: @post_comment.post, action: "commented")
+      end
+      respond_to do |format|
+        format.html { redirect_to posts_path, notice: "Comment saved!" }
+        format.js
+      end
     end
   end
 
@@ -43,6 +48,10 @@ class Posts::PostCommentsController < ApplicationController
   end
 
   private
+
+    def post_owner_check(post, post_comment)
+      post_comment.user == post.user ? [] : [post.user]
+    end
 
     def post_comment_params
       params.require(:post_comment).permit(:body, :user, :user_profile)

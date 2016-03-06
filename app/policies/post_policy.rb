@@ -1,6 +1,6 @@
 class PostPolicy < ApplicationPolicy
   def index?
-    user.present? && user.profile.present?
+    user.present?
   end
 
   def show?

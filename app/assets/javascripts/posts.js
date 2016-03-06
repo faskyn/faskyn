@@ -13,7 +13,7 @@ $(document).on("page:change", function() {
       var more_posts_url;
       more_posts_url = $('#infinite-post-scrolling .pagination .next_page a').attr('href');
       if (more_posts_url && ($(window).scrollTop() > $(document).height() - $(window).height() - 60)) {
-        $('.pagination').html('<img src="/assets/ajax-loader.gif" alt="Loading..." title="Loading..." />');
+        $('.pagination').html("<i class='fa fa-circle-o-notch fa-2x fa-spin'></i>");
         $('#infinite-post-scrolling').show();
         $.getScript(more_posts_url);
       }

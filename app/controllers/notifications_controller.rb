@@ -5,7 +5,7 @@ class NotificationsController < ApplicationController
   require 'will_paginate/array'
 
   def other_notifications
-    @other_notifications = current_user.notifications.where.not('notifications.notification_type = ?', 'chat').order(created_at: :desc).paginate(page: params[:page], per_page: Notification.pagination_per_page)
+    @other_notifications = current_user.notifications.not_chat.order(created_at: :desc).includes(:sender_profile).paginate(page: params[:page], per_page: Notification.pagination_per_page)
     current_user.reset_new_other_notifications
     respond_to do |format|
       format.html
@@ -14,12 +14,22 @@ class NotificationsController < ApplicationController
   end
 
   def chat_notifications
-    @chat_notifications = current_user.notifications.where('notifications.notification_type = ?', 'chat').order(created_at: :desc).paginate(page: params[:page], per_page: Notification.pagination_per_page)
+    @chat_notifications = current_user.notifications.chat.order(created_at: :desc).includes(:sender_profile).paginate(page: params[:page], per_page: Notification.pagination_per_page)
     current_user.reset_new_chat_notifications
     respond_to do |format|
       format.html
       format.js
     end
+  end
+
+  def chat_notifications_dropdown
+    @chat_notifications = current_user.notifications.chat.unchecked.order(created_at: :desc).limit(10)
+    respond_to :json
+  end
+
+  def other_notifications_dropdown
+    @other_notifications = current_user.notifications.not_chat.unchecked.order(created_at: :desc).limit(10)
+    respond_to :json
   end
 
   private
@@ -30,6 +40,6 @@ class NotificationsController < ApplicationController
     end
 
     def notification_params
-      params.require(:notification).permit(:recipient_id, :sender_id, :notification_type, :checked_at)
+      params.require(:notification).permit(:recipient_id, :sender_id, :notifiable_id, :notifiable_type, :notification_type, :checked_at, :sender_profile, :recipient_profile)
     end
 end

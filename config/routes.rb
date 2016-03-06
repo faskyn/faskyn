@@ -57,6 +57,8 @@ Rails.application.routes.draw do
 
   get 'users/:user_id/chat_notifications', to: 'notifications#chat_notifications', as: :chat_notifications_user_notifications
   get 'users/:user_id/other_notifications', to: 'notifications#other_notifications', as: :other_notifications_user_notifications
+  get 'users/:user_id/chat_notifications_dropdown', to: 'notifications#chat_notifications_dropdown', as: :chat_notifications_dropdown_user_notifications
+  get 'users/:user_id/other_notifications_dropdown', to: 'notifications#other_notifications_dropdown', as: :other_notifications_dropdown_user_notifications
 
   get 'users/:user_id/products', to: 'products#own_products', as: :products_user_products
 
