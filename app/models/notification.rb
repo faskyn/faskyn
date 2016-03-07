@@ -58,7 +58,7 @@ class Notification < ActiveRecord::Base
 
   def checking_and_decreasing_notification(current_user)
     self.check_notification
-    if self.notifiable_type = "Message"
+    if self.notifiable_type == "Message"
       current_user.decrease_new_chat_notifications
       current_user.decreased_chat_number_pusher
     else

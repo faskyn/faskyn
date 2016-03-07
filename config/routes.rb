@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     root 'posts#index', as: :authenticated_root
   end
   root 'static_pages#home'
+
+  get 'foo/bar'
   
   get 'static_pages/home'
   get 'static_pages/about', path: 'about'
