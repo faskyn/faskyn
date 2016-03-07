@@ -5,8 +5,7 @@
     <div class="notification-line notification-line-checked" data-nid="notification.id">
   <% end %>
     <% if notification.notifiable_type == "Post" %>
-      <%= link_to posts_path(anchor: "post_#{notification.notifiable_id}", check_and_decrease: true, post_id: notification.notifiable_id) do %>
-        <!-- (anchor: "post_#{notification.notifiable_id}") -->
+      <%= link_to dropdown_checking_decreasing_user_notifications_path(current_user,anchor_param: "post_#{notification.notifiable_id}", post_id: notification.notifiable_id) do %>
         <%= image_tag notification.sender.profile.avatar.url(:base_thumb), class: 'avatar' %>
         <span>
           <div class="subject">

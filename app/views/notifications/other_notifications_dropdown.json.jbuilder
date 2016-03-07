@@ -16,6 +16,6 @@ json.array! @other_notifications do |notification|
     json.what do
       json.did "#{notification.action} on a #{notification.notifiable_type.underscore}"
     end
-    json.url posts_path(anchor: "post_#{notification.notifiable_id}", check_and_decrease: true, post_id: notification.notifiable_id)
+    json.url dropdown_checking_decreasing_user_notifications_path(current_user, anchor_param: "post_#{notification.notifiable_id}", post_id: notification.notifiable_id)
   end
 end

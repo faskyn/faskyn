@@ -32,10 +32,10 @@ class NotificationsController < ApplicationController
     respond_to :json
   end
 
-  # def dropdown_checking
-  #   current_user.decreasing_post_notification_number(params[:post_id])
-  #   redirect_to posts_path()
-  # end
+  def dropdown_checking_decreasing
+    current_user.decreasing_post_notification_number(params[:post_id])
+    redirect_to posts_path(anchor: params[:anchor_param])
+  end
 
   private
 

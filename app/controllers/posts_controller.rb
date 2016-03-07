@@ -3,9 +3,9 @@ class PostsController < ApplicationController
   before_action :set_and_authorize_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:check_and_decrease]
-      current_user.decreasing_post_notification_number(params[:post_id])
-    end
+    # if params[:check_and_decrease]
+    #   current_user.decreasing_post_notification_number(params[:post_id])
+    # end
     @q_posts = Post.ransack(params[:q])
     @posts = @q_posts.result(distinct: true).order(updated_at: :desc).includes(:user, :user_profile).paginate(page: params[:page], per_page: 12)
     authorize @posts
