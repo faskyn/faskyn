@@ -243,6 +243,7 @@ GEM
       os (~> 0.9)
       signet (~> 0.7)
     hashie (3.4.3)
+    hirb (0.7.3)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     httpclient (2.7.1)
@@ -489,6 +490,7 @@ DEPENDENCIES
   foreman (~> 0.78.0)
   fullcalendar-rails (~> 2.5)
   google-api-client (~> 0.8.6)
+  hirb (~> 0.7.3)
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks (~> 2.1)

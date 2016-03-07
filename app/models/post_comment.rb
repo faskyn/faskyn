@@ -6,7 +6,8 @@ class PostComment < ActiveRecord::Base
 
   #after_create :send_post_comment_notification
 
-  validates :body, presence: true
+  validates :body, presence: true, length: { maximum: 500 }
+
   scope :ordered, -> { order(updated_at: :desc) }
   scope :included, -> { includes(:user, :user_profile) }
 

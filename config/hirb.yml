@@ -1,0 +1,23 @@
+:output:
+  User:
+    :options:
+      :fields:
+       - id
+       - email
+       - confirmed_at
+       - sign_in_count
+       - last_sign_in_at
+       - created_at
+       - updated_at
+  Profile:
+    :options:
+      :fields:
+      - id
+      - user_id
+      - first_name
+      - last_name
+      - company
+      - job_title
+      - location
+      - avatar
+

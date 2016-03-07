@@ -87,6 +87,7 @@ group :development do
   gem 'launchy', '~> 2.4.3'
   #database query optimazation
   gem 'bullet', '~> 4.14', '>= 4.14.10'
+  gem 'hirb', '~> 0.7.3'
 end
 
 group :development, :test do
