@@ -65,6 +65,37 @@ class User < ActiveRecord::Base
   end
   #end of the code for number of common tasks with current_user
 
+  #check and decrease chat notification that happens between 2 given users (max 1)
+  def decreasing_chat_notification_number(user)
+    notification = self.notifications.between_chat_recipient(user).unchecked.first
+    self.checking_and_decreasing_notification(notification) if notification.present?
+  end
+
+  #check and decrease task notifications that happens between 2 given users
+  def decreasing_task_notification_number(user)
+    self.notifications.task.between_other_recipient(user).unchecked.each do |notification|
+      self.checking_and_decreasing_notification(notification)
+    end
+  end
+
+  #check and decrease the post notification that belongs to a given post
+  def decreasing_post_notification_number(post_id)
+    self.notifications.this_post_comments(post_id).unchecked.each do |notification|
+      self.checking_and_decreasing_notification(notification)
+    end
+  end
+
+  def checking_and_decreasing_notification(notification)
+    notification.check_notification
+    if notification.notifiable_type == "Message"
+      self.decrease_new_chat_notifications
+      self.decreased_chat_number_pusher
+    else
+      self.decrease_new_other_notifications
+      self.decreased_other_number_pusher
+    end
+  end
+
   #counting notifications for user
   def increase_new_chat_notifications
     increment!(:new_chat_notification)

@@ -32,6 +32,11 @@ class NotificationsController < ApplicationController
     respond_to :json
   end
 
+  # def dropdown_checking
+  #   current_user.decreasing_post_notification_number(params[:post_id])
+  #   redirect_to posts_path()
+  # end
+
   private
 
     def set_and_authorize_user_notifications

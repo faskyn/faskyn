@@ -10,8 +10,8 @@ class MessagesController < ApplicationController
     @message.link = check_if_link(@message.body) if @message.body?
     @message.save!
     if @message.save
-      Notification.decreasing_chat_notification_number(@message.user, @receiver)
-      if (Notification.between_chat_recipient(@receiver, @message.user).unchecked.count < 1)
+      current_user.decreasing_chat_notification_number(@receiver)
+      if (@receiver.notifications.between_chat_recipient(current_user).unchecked.count < 1)
         #Notification.send_notification(@receiver, "chat", @message.user)
         Notification.create(recipient_id: @receiver.id, sender_id: current_user.id, notifiable: @message, action: "sent")
       end

@@ -4,9 +4,7 @@ class PostsController < ApplicationController
 
   def index
     if params[:check_and_decrease]
-      #@notification = Notification.find(params[:post_notification_id])
-      #@notification.decreasing_post_notification_number(current_user)
-      Notification.decreasing_post_notification_number(current_user, params[:post_id])
+      current_user.decreasing_post_notification_number(params[:post_id])
     end
     @q_posts = Post.ransack(params[:q])
     @posts = @q_posts.result(distinct: true).order(updated_at: :desc).includes(:user, :user_profile).paginate(page: params[:page], per_page: 12)
