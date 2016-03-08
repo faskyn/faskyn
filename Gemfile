@@ -13,6 +13,7 @@ gem 'jquery-ui-rails', '~> 5.0.5'
 gem 'jbuilder', '~> 2.0'
 #basic app configuration gems
 gem 'pg', '~> 0.18.3'
+gem 'rack-rewrite', '~> 1.5', '>= 1.5.1'
 gem 'rack-mini-profiler', '~> 0.9.8'
 gem 'puma', '~> 2.13.4'
 #gem for real-time(notifications for now, chat implemented with private pub)

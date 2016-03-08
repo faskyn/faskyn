@@ -1,6 +1,12 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  #rack redirection from herokuapp to faskyn
+  config.middleware.insert_before(Rack::Runtime, Rack::Rewrite) do
+    r301 %r{.*}, "https://faskyn.com$&", 
+    :if => Proc.new { |rack_env| rack_env['SERVER_NAME'] != 'faskyn.com' }
+  end
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
