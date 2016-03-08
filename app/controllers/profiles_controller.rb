@@ -6,7 +6,7 @@ class ProfilesController < ApplicationController
 
   def new
     @profile = Profile.new
-    authorize @user
+    authorize @profile
   end
 
   def create
