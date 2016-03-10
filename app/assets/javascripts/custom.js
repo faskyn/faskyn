@@ -10,10 +10,18 @@ $(document).on("page:change", function() {
 
 var alert = $('.alert.flash-alert');
   if (alert.length > 0) {
-    alert.show().animate({height: alert.outerHeight()}, 200);
-    window.setTimeout(function() {
-      alert.slideUp();
-    }, 3000);
+    if ($('#bodycurrentuser').data('currentuserid')) {
+      alert.show().animate({height: alert.outerHeight()}, 200);
+      window.setTimeout(function() {
+        alert.slideUp();
+      }, 3500);
+    }
+    else {
+      alert.show().animate({height: alert.outerHeight()}, 200);
+      window.setTimeout(function() {
+        alert.slideUp();
+      }, 10000);
+    }
   }
 });
 

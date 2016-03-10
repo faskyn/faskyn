@@ -2,7 +2,7 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
   before_action :if_no_profile_exists, only: :show
-  before_action :set_and_authorize_profile, only: [:show, :edit, :update]
+  before_action :set_and_authorize_profile, only: [:show, :edit, :update, :add_socials]
 
   def new
     @profile = Profile.new
@@ -13,10 +13,15 @@ class ProfilesController < ApplicationController
     @profile = current_user.build_profile(profile_params)
     authorize @profile
     if @profile.save
-      redirect_to user_profile_path(@profile.user), notice: "Profile successfully created!"
+      redirect_to add_socials_user_profile_path(@profile.user), notice: "Profile successfully created!"
     else
       render action: :new, alert: "Profile couldn't be created!"
     end
+  end
+
+  def add_socials
+    @twitter = @profile.socials.where(provider: "twitter").first
+    @linkedin = @profile.socials.where(provider: "linkedin").first
   end
 
   def show

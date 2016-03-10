@@ -25,6 +25,9 @@ Rails.application.routes.draw do
     #more custom notification routes down
     resources :notifications, only: [:create, :index]
     resource :profile do
+      member do
+        get :add_socials
+      end
       resources :socials, only: [:create, :update, :destroy]
     end
     resources :tasknamecompanies

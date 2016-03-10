@@ -1,0 +1,47 @@
+<% provide(:title, 'Add socials') %>
+  <div class="container-fluid profile-container" style="padding-left:300px;padding-right:300px;">
+    <div class="well profile-show-well">
+       <div class="row">
+        <div class="col-md-12" style="text-align:center">
+          <h3><strong>Connect your social media</strong></h3>
+          <p>For your best possible experience.</p>
+        </div>
+      </div>
+      <div class = "row" style="padding-bottom:25px;">
+        <div class="col-md-12">
+          <% if @twitter.blank? %>
+            <%= link_to "/auth/twitter", class: "btn btn-social-reg btn-twitter btn-block" do %>
+              <i class="fa fa-twitter"> Twitter</i>
+            <% end %>
+          <% else %>
+            <%= link_to "/auth/twitter", class: "btn btn-social-reg btn-twitter linked btn-block" do %>
+              <i class="fa fa-twitter"> Twitter (linked)</i>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="row" style="padding-bottom:25px;">
+        <div class="col-md-12">
+          <% if @linkedin.blank? %>
+            <%= link_to "/auth/linkedin", class: "btn btn-social-reg btn-linkedin btn-block" do %>
+              <i class="fa fa-linkedin"> LinkedIn</i>
+            <% end %>
+          <% else %>
+            <%= link_to "/auth/linkedin", class: "btn btn-social-reg btn-linkedin linked btn-block" do %>
+              <i class="fa fa-linkedin"> LinkedIn (linked)</i>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <% if @linkedin.blank? || @twitter.blank? %>
+            <%= link_to "Skip", user_profile_path(current_user) %>
+          <% else %>
+            <%= link_to "NEXT PAGE", user_profile_path(current_user), class: "btn btn-success btn-block" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

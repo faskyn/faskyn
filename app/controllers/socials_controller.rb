@@ -15,7 +15,7 @@ class SocialsController < ApplicationController
     rescue
       flash[:warning] = "There was an error while trying to authenticate you!"
     end
-    redirect_to edit_user_profile_path(current_user)
+    redirect_to :back
   end
 
   def update

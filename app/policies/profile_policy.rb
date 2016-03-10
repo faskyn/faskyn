@@ -20,6 +20,10 @@ class ProfilePolicy < ApplicationPolicy
     user.present? && user == profile.user
   end
 
+  def add_socials?
+    user.present? && user == profile.user
+  end
+
   private
 
     def profile
