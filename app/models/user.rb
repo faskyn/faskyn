@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   validates :email, presence: true
+  validates :new_chat_notification, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :new_other_notification, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   has_one :profile, dependent: :destroy
   has_many :socials, dependent: :destroy, through: :profile

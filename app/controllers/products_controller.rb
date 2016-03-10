@@ -88,8 +88,7 @@ class ProductsController < ApplicationController
 
     def product_params
       params.require(:product).permit(:product_image, :product_image_url, :product_image_id, :product_image_cache_id, :remove_product_image, :product_image_size, :product_image_name,
-        :name, :company, :website, :oneliner, :description,
-        industry_ids: [], industries_attributes: [:id, :name, :_destroy],
+        :name, :company, :website, :oneliner, :description, industry_ids: [],
         product_features_attributes: [:id, :feature, :_destroy],
         product_usecases_attributes: [:id, :example, :detail, :_destroy],
         product_competitions_attributes: [:id, :competitor, :differentiator, :_destroy])

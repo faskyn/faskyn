@@ -8,10 +8,12 @@ class Notification < ActiveRecord::Base
 
   after_create :send_pusher_notification
 
-  validates :sender_id, presence: true
-  validates :recipient_id, presence: true
+  validates :sender, presence: true
+  validates :recipient, presence: true
+
   validates :notifiable_type, presence: true
   validates :notifiable_id, presence: true
+  validates :action, presence: true
 
   scope :not_chat, -> { where.not(notifiable_type: "Message") }
   scope :chat, -> { where(notifiable_type: "Message") }

@@ -7,7 +7,7 @@ class Task < ActiveRecord::Base
 
   validates :assigner, presence: true
   validates :executor, presence: { message: "must be valid"}
-  #validates :executor, exclusion: { in: "szaros", message: "%{value} doesn't exist" }
+
   validates :content, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
   validates :deadline, presence: { messsage: "can not be blank" }
   validate :deadline_date_cannot_be_in_the_past

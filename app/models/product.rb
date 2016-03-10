@@ -2,7 +2,7 @@ class Product < ActiveRecord::Base
   attachment :product_image, extension: ["png", "jpg", "jpeg"]
 
   belongs_to :user
-  has_many :industry_products, dependent: :destroy
+  has_many :industry_products, dependent: :destroy, inverse_of: :product
   has_many :industries, through: :industry_products
   has_many :product_features, dependent: :destroy
   has_many :product_competitions, dependent: :destroy
@@ -12,6 +12,8 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :product_features, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :product_competitions, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :product_usecases, reject_if: :all_blank, allow_destroy: true
+
+  validates :user, presence: true
 
   validates :name, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }, uniqueness: { message: "already exists" }
   validates :company, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
@@ -59,9 +61,9 @@ class Product < ActiveRecord::Base
     end
 
     def product_industries_limit
-      if self.industries.count > 5
+      if self.industries.reject(&:marked_for_destruction?).count > 5
         self.errors.add :base, "You can't choose more than 5 industries."
-      elsif self.industries.blank?
+      elsif self.industries.reject(&:marked_for_destruction?).blank?
         self.errors.add :base, "You have to choose at least 1 industry."
       end
     end

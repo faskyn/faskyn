@@ -4,6 +4,8 @@ class PostComment < ActiveRecord::Base
   has_one :user_profile, through: :user, source: :profile
   has_many :comment_replies
 
+  validates :user, presence: true
+
   validates :body, presence: true, length: { maximum: 500 }
 
   scope :ordered, -> { order(updated_at: :desc) }

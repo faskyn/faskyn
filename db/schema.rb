@@ -11,23 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160306203901) do
+ActiveRecord::Schema.define(version: 20160310171725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
 
   create_table "contacts", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
-    t.text     "comment"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string   "name",       null: false
+    t.string   "email",      null: false
+    t.text     "comment",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "conversations", force: :cascade do |t|
-    t.integer  "sender_id"
-    t.integer  "recipient_id"
+    t.integer  "sender_id",    null: false
+    t.integer  "recipient_id", null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
@@ -51,14 +51,14 @@ ActiveRecord::Schema.define(version: 20160306203901) do
   add_index "events", ["sender_id"], name: "index_events_on_sender_id", using: :btree
 
   create_table "industries", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "industry_products", force: :cascade do |t|
-    t.integer "product_id"
-    t.integer "industry_id"
+    t.integer "product_id",  null: false
+    t.integer "industry_id", null: false
   end
 
   add_index "industry_products", ["industry_id"], name: "index_industry_products_on_industry_id", using: :btree
@@ -66,8 +66,8 @@ ActiveRecord::Schema.define(version: 20160306203901) do
 
   create_table "messages", force: :cascade do |t|
     t.text     "body"
-    t.integer  "conversation_id"
-    t.integer  "user_id"
+    t.integer  "conversation_id",                 null: false
+    t.integer  "user_id",                         null: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.string   "message_attachment"
@@ -82,33 +82,33 @@ ActiveRecord::Schema.define(version: 20160306203901) do
   add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
 
   create_table "notifications", force: :cascade do |t|
-    t.integer  "recipient_id"
+    t.integer  "recipient_id",    null: false
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.integer  "sender_id"
+    t.integer  "sender_id",       null: false
     t.datetime "checked_at"
-    t.integer  "notifiable_id"
-    t.string   "notifiable_type"
-    t.string   "action"
+    t.integer  "notifiable_id",   null: false
+    t.string   "notifiable_type", null: false
+    t.string   "action",          null: false
   end
 
   add_index "notifications", ["recipient_id"], name: "index_notifications_on_recipient_id", using: :btree
   add_index "notifications", ["sender_id"], name: "index_notifications_on_sender_id", using: :btree
 
   create_table "post_comments", force: :cascade do |t|
-    t.integer  "post_id"
-    t.string   "body"
+    t.integer  "post_id",    null: false
+    t.string   "body",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "user_id"
+    t.integer  "user_id",    null: false
   end
 
   add_index "post_comments", ["post_id"], name: "index_post_comments_on_post_id", using: :btree
   add_index "post_comments", ["user_id"], name: "index_post_comments_on_user_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
-    t.integer  "user_id"
-    t.text     "body"
+    t.integer  "user_id",    null: false
+    t.text     "body",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -116,9 +116,9 @@ ActiveRecord::Schema.define(version: 20160306203901) do
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "product_competitions", force: :cascade do |t|
-    t.integer  "product_id"
-    t.string   "competitor"
-    t.text     "differentiator"
+    t.integer  "product_id",     null: false
+    t.string   "competitor",     null: false
+    t.text     "differentiator", null: false
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
@@ -126,8 +126,8 @@ ActiveRecord::Schema.define(version: 20160306203901) do
   add_index "product_competitions", ["product_id"], name: "index_product_competitions_on_product_id", using: :btree
 
   create_table "product_features", force: :cascade do |t|
-    t.integer  "product_id"
-    t.string   "feature"
+    t.integer  "product_id", null: false
+    t.string   "feature",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -135,9 +135,9 @@ ActiveRecord::Schema.define(version: 20160306203901) do
   add_index "product_features", ["product_id"], name: "index_product_features_on_product_id", using: :btree
 
   create_table "product_usecases", force: :cascade do |t|
-    t.integer  "product_id"
-    t.string   "example"
-    t.text     "detail"
+    t.integer  "product_id", null: false
+    t.string   "example",    null: false
+    t.text     "detail",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -145,27 +145,28 @@ ActiveRecord::Schema.define(version: 20160306203901) do
   add_index "product_usecases", ["product_id"], name: "index_product_usecases_on_product_id", using: :btree
 
   create_table "products", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "company"
-    t.string   "website"
-    t.string   "oneliner"
-    t.text     "description"
+    t.integer  "user_id",                null: false
+    t.string   "company",                null: false
+    t.string   "website",                null: false
+    t.string   "oneliner",               null: false
+    t.text     "description",            null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
-    t.string   "name"
+    t.string   "name",                   null: false
     t.string   "product_image_id"
     t.string   "product_image_filename"
     t.integer  "product_image_size"
   end
 
+  add_index "products", ["name"], name: "index_products_on_name", unique: true, using: :btree
   add_index "products", ["user_id"], name: "index_products_on_user_id", using: :btree
 
   create_table "profiles", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "company"
-    t.string   "job_title"
+    t.integer  "user_id",      null: false
+    t.string   "first_name",   null: false
+    t.string   "last_name",    null: false
+    t.string   "company",      null: false
+    t.string   "job_title",    null: false
     t.string   "phone_number"
     t.text     "description"
     t.datetime "created_at"
@@ -174,7 +175,7 @@ ActiveRecord::Schema.define(version: 20160306203901) do
     t.string   "location"
   end
 
-  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", unique: true, using: :btree
 
   create_table "socials", force: :cascade do |t|
     t.string   "provider"
@@ -206,11 +207,11 @@ ActiveRecord::Schema.define(version: 20160306203901) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.integer  "assigner_id"
-    t.integer  "executor_id"
+    t.integer  "assigner_id",  null: false
+    t.integer  "executor_id",  null: false
     t.string   "name"
-    t.text     "content"
-    t.datetime "deadline"
+    t.text     "content",      null: false
+    t.datetime "deadline",     null: false
     t.datetime "completed_at"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -246,4 +247,22 @@ ActiveRecord::Schema.define(version: 20160306203901) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
+  add_foreign_key "conversations", "users", column: "recipient_id"
+  add_foreign_key "conversations", "users", column: "sender_id"
+  add_foreign_key "industry_products", "industries"
+  add_foreign_key "industry_products", "products"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
+  add_foreign_key "notifications", "users", column: "recipient_id"
+  add_foreign_key "notifications", "users", column: "sender_id"
+  add_foreign_key "post_comments", "posts"
+  add_foreign_key "post_comments", "users"
+  add_foreign_key "posts", "users"
+  add_foreign_key "product_competitions", "products"
+  add_foreign_key "product_features", "products"
+  add_foreign_key "product_usecases", "products"
+  add_foreign_key "products", "users"
+  add_foreign_key "profiles", "users"
+  add_foreign_key "tasks", "users", column: "assigner_id"
+  add_foreign_key "tasks", "users", column: "executor_id"
 end

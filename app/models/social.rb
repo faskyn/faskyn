@@ -1,6 +1,8 @@
 class Social < ActiveRecord::Base
   belongs_to :profile
 
+  validates :profile, presence: true
+
   def self.find_or_create_from_auth_hash(auth_hash)
     #checking if the connected account exists (one use can have one acc/provider at the moment)
     #for google api the goal is the connect the user's calendar to the google calendar not to update the profile
