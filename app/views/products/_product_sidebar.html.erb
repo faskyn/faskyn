@@ -1,8 +1,8 @@
-<div id = "users-bar">
+<div id = "sidebar">
   <div class="list-name">
     <h4>Latest products</h4>
   </div>
-  <div class = "users">
+  <div class = "list-elements">
     <ol>
       <% @products_sidebar.each do |product| %>
         <%= link_to product do %>
@@ -14,10 +14,10 @@
               <%= image_tag("garminwhitelogoborder.png", size: "40x40") %>
             <% end %>
             </span>
-            <span class="user-fullname">
+            <span class="element-name">
               <%= truncate(product.name, length: 25) %>
             </span>
-            <span class="company">
+            <span class="second-element-name">
               <%= truncate(product.oneliner, length:25) %>
             </span>
           </li>

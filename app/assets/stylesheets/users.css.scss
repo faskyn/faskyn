@@ -238,57 +238,6 @@ $orange: #ff6600;
   }
 }
 
-/*search-bar */
-#users-bar {
-  background: white;
-  border: 1px $gray-medium-light solid;
-  margin-left: 15px;
-  .list-name {
-    padding-top:15px;
-    padding-left:15px;
-    h4 {
-      margin:0px;
-    }
-  }
-  .users {
-    list-style: none;
-    padding-top: 10px;
-    ol {
-      padding-left: 0px;
-    }
-    li {
-      padding-left: 15px;
-      margin: 5px 0 5px 0;
-      clear: left;
-      list-style: none;
-      height: 40px;
-      vertical-align: middle;
-      &:hover {
-        background-color: $gray-medium-light;
-     }
-    }
-    .avatar {
-      float: left;
-      margin-right: 8px;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      vertical-align: middle;
-    }
-    .user-fullname {
-      margin-top: 4px;
-    }
-    .company {
-      margin-top: 2px;
-      display: block;
-    }
-    a {
-      text-decoration: none;
-      color: $dark-grey;
-    }
-  }
-}
-
 //COMMON MEDIAS
 
 .common-medias-container {
