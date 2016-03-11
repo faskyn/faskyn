@@ -1,0 +1,28 @@
+<div id = "users-bar">
+  <div class="list-name">
+    <h4>Latest products</h4>
+  </div>
+  <div class = "users">
+    <ol>
+      <% @products_sidebar.each do |product| %>
+        <%= link_to product do %>
+          <li>
+            <span class="product-sidebar-picture">
+            <% if product.product_image_id %>
+              <%= image_tag attachment_url(product, :product_image, :fill, 40, 40) %>
+            <% else %>
+              <%= image_tag("garminwhitelogoborder.png", size: "40x40") %>
+            <% end %>
+            </span>
+            <span class="user-fullname">
+              <%= truncate(product.name, length: 28) %>
+            </span>
+            <span class="company">
+              <%= truncate(product.oneliner, length:28) %>
+            </span>
+          </li>
+        <% end %>   
+      <% end %>
+    </ol>
+  </div>
+</div>

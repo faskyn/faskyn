@@ -11,7 +11,8 @@ class ApplicationController < ActionController::Base
   helper_method :if_tasks_any?
   helper_method :only_current_user
 
-  before_action :set_search
+  before_action :set_sidebar_users
+  before_action :set_sidebar_products
 
   def google7df1f819c8dc9008
   end
@@ -33,16 +34,12 @@ class ApplicationController < ActionController::Base
     #redirect_to user_tasks_path(current_user) unless @user == current_user
   end
 
-  def set_search
-    @q_users = User.ransack(params[:q])
-    #regardless the search it gives back the users the current_user hast the most tasks with
-    if user_signed_in?
-      #@users3 = current_user.ordered_relating_users
-      @users3 = @q_users.result(distinct: true).includes(:profile).limit(8)
-    else
-    # #displaying users in the sidebar not needed at the moment as it will appear in the main area
-      @users3 = @q_users.result(distinct: true).includes(:profile).limit(8)#paginate(page: params[:page], per_page: 6)
-    end
+  def set_sidebar_users
+    @profiles_sidebar = Profile.order(created_at: :desc).limit(4) if user_signed_in?
+  end
+
+  def set_sidebar_products
+    @products_sidebar = Product.order(updated_at: :desc).limit(4) if user_signed_in?
   end
 
   def set_conversation

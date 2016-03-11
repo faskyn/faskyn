@@ -1,0 +1,22 @@
+<div id = "users-bar" style="background:white;">
+  <div class="list-name">
+    <h4>Latest users</h4>
+  </div>
+  <div class = "users">
+    <ol>
+      <% @profiles_sidebar.each do |profile| %>
+        <%= link_to user_path(profile.user) do %>
+          <li class="user-bar-row">
+            <%= image_tag profile.avatar.url(:base_thumb), class: 'avatar' %>
+            <span class="user-fullname">
+              <%= truncate(profile.full_name, length: 28) %>
+            </span>
+            <span class="company">
+              <%= truncate(profile.company, length:28) %>
+            </span>
+          </li>
+        <% end %>
+      <% end %>
+    </ol>
+  </div>
+</div>

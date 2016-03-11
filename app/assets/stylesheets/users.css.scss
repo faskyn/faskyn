@@ -240,11 +240,14 @@ $orange: #ff6600;
 
 /*search-bar */
 #users-bar {
-  padding-left: 10px;
-  .search {
-    padding-right:60px;
-    .form-control {
-      width:100%;
+  background: white;
+  border: 1px $gray-medium-light solid;
+  margin-left: 15px;
+  .list-name {
+    padding-top:15px;
+    padding-left:15px;
+    h4 {
+      margin:0px;
     }
   }
   .users {
@@ -254,11 +257,15 @@ $orange: #ff6600;
       padding-left: 0px;
     }
     li {
+      padding-left: 15px;
       margin: 5px 0 5px 0;
       clear: left;
       list-style: none;
       height: 40px;
       vertical-align: middle;
+      &:hover {
+        background-color: $gray-medium-light;
+     }
     }
     .avatar {
       float: left;
@@ -278,9 +285,6 @@ $orange: #ff6600;
     a {
       text-decoration: none;
       color: $dark-grey;
-      &:hover {
-        color: $garmin-blue;
-      }
     }
   }
 }
