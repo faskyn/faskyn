@@ -9,10 +9,10 @@
           <li class="user-bar-row">
             <%= image_tag profile.avatar.url(:base_thumb), class: 'avatar' %>
             <span class="user-fullname">
-              <%= truncate(profile.full_name, length: 26) %>
+              <%= truncate(profile.full_name, length: 25) %>
             </span>
             <span class="company">
-              <%= truncate(profile.company, length:26) %>
+              <%= truncate(profile.company, length:25) %>
             </span>
           </li>
         <% end %>
