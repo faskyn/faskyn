@@ -29,9 +29,6 @@ class Posts::PostCommentsController < ApplicationController
     end
   end
 
-  def delete
-  end
-
   def destroy
     @post_comment = PostComment.find(params[:id])
     if @post_comment.destroy

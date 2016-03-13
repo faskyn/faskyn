@@ -59,5 +59,12 @@ class ProfilesController < ApplicationController
       @profile = @user.profile
       authorize @profile
     end
+
+    def if_no_profile_exists
+      unless @user.profile(current_user)
+        flash[:warning] = "Please create a profile first!"
+        redirect_to new_user_profile_path(current_user)
+      end
+    end
 end
 

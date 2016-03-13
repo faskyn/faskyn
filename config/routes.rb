@@ -17,20 +17,19 @@ Rails.application.routes.draw do
 
   post 'pusher/auth' #for pusher authentication
   get '/auth/:provider/callback', to: 'socials#create' #twitter/linkedin/angellist/google
-  resources :contacts
+  resources :contacts, only: :create
   devise_for :users
-  resources :users do
-    resources :eventnamecompanies
+  resources :users, only: [:index, :show] do
+    resources :eventnamecompanies, only: :index
     resources :events, only: :index
     #more custom notification routes down
-    resources :notifications, only: [:create, :index]
-    resource :profile do
+    resource :profile, except: :destroy do 
       member do
         get :add_socials
       end
       resources :socials, only: [:create, :update, :destroy]
     end
-    resources :tasknamecompanies
+    resources :tasknamecompanies, only: :index
     resources :tasks do
       member do
         patch :complete, :uncomplete
@@ -48,12 +47,12 @@ Rails.application.routes.draw do
   end
 
   resources :posts do
-    resources :post_comments, module: :posts
+    resources :post_comments, except: [:index, :new, :edit], module: :posts
   end
 
-  resources :post_comments do 
-    resources :post_repiles, module: :comments
-  end
+  #resources :post_comments do 
+    #resources :post_repiles, module: :comments
+  #end
 
   get 'users/:user_id/common_medias', to: 'common_medias#common_medias', as: :common_medias_user_common_medias
   get 'users/:user_id/common_medias/get_files', to: 'common_medias#get_files', as: :get_files_user_common_medias

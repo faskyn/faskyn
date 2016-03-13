@@ -8,30 +8,12 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   helper_method :if_no_profile_exists
-  helper_method :if_tasks_any?
-  helper_method :only_current_user
+  helper_method :google7df1f819c8dc9008
 
   before_action :set_sidebar_users
   before_action :set_sidebar_products
 
   def google7df1f819c8dc9008
-  end
-
-  def if_no_profile_exists
-    unless @user.profile(current_user)
-      flash[:warning] = "Please create a profile first!"
-      redirect_to new_user_profile_path(current_user)
-    end
-  end
-
-  def if_tasks_any?
-    current_user.executed_tasks.any? || current_user.assigned_tasks.any?
-  end
-
-  def only_current_user
-    @user = User.find(params[:user_id])
-    #flash[:danger] = "You can't do this action!"
-    #redirect_to user_tasks_path(current_user) unless @user == current_user
   end
 
   def set_sidebar_users
@@ -42,38 +24,7 @@ class ApplicationController < ActionController::Base
     @products_sidebar = Product.order(updated_at: :desc).limit(4) if user_signed_in?
   end
 
-  def set_conversation
-    @user = User.find(params[:id])
-    if Task.between(current_user.id, @user.id).present?
-      @tasks = Task.uncompleted.between(current_user.id, @user.id).order("created_at DESC").includes(:assigner, :assigner_profile, :executor, :executor_profile).paginate(page: params[:page], per_page: 14)
-      @task_between = Task.new
-      @conversation = Conversation.between(current_user.id, @user.id).first
-      @messages = @conversation.messages.includes(:user).order(created_at: :desc).limit(50).reverse
-      @message = Message.new
-      current_user.decreasing_chat_notification_number(@user)
-      current_user.decreasing_task_notification_number(@user)
-      respond_to do |format|
-        format.html
-        format.js { render :template => "tasks/between.js.erb", layout: false }
-      end
-    else
-      redirect_to user_profile_path(@user)
-    end
-  end
-
   private
-
-  def interlocutor(conversation)
-    current_user == conversation.recipient ? conversation.sender : conversation.recipient
-  end
-
-  def message_params
-    params.require(:message).permit(:body, :message_attachment, :message_attachment_id, :message_attachment_cache_id, :remove_message_attachment)
-  end
-
-  def notification_params
-    params.require(:notification).permit(:recipient_id, :sender_id, :notifiable_type, :checked_at)
-  end
 
   def user_not_authorized(exception)
     policy_name = exception.policy.class.to_s.underscore
