@@ -46,7 +46,7 @@
   <div class = "row">
     <div class="col-md-12">
       <div class="col-md-12 post-comment-insert-<%= post.id%>">
-        <%= render partial: 'posts/post_comments/post_comment', collection: post.post_comments.ordered.included, as: :post_comment, locals: {post: post} %>
+        <%= render partial: 'posts/post_comments/post_comment', collection: post.post_comments.includes(:user).ordered.included, as: :post_comment, locals: {post: post} %>
       </div>
     </div>
   </div>

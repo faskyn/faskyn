@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_sidebar_users
-    @profiles_sidebar = Profile.order(created_at: :desc).limit(4) if user_signed_in?
+    @profiles_sidebar = Profile.order(created_at: :desc).includes(:user).limit(4) if user_signed_in?
   end
 
   def set_sidebar_products

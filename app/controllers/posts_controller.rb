@@ -7,7 +7,7 @@ class PostsController < ApplicationController
     #   current_user.decreasing_post_notification_number(params[:post_id])
     # end
     @q_posts = Post.ransack(params[:q])
-    @posts = @q_posts.result(distinct: true).order(updated_at: :desc).includes(:user, :user_profile).paginate(page: params[:page], per_page: 12)
+    @posts = @q_posts.result(distinct: true).order(updated_at: :desc).includes(:user).paginate(page: params[:page], per_page: 12)
     authorize @posts
     @post = Post.new
     @post_comment = PostComment.new
@@ -78,7 +78,7 @@ class PostsController < ApplicationController
   private
 
     def post_params
-      params.require(:post).permit(:body, :user_id, :user_profile)
+      params.require(:post).permit(:body, :user_id)
     end
 
     def set_and_authorize_post

@@ -45,6 +45,6 @@ class NotificationsController < ApplicationController
     end
 
     def notification_params
-      params.require(:notification).permit(:recipient_id, :sender_id, :notifiable_id, :notifiable_type, :notification_type, :checked_at, :sender_profile, :recipient_profile)
+      params.require(:notification).permit(:recipient_id, :sender_id, :notifiable_id, :notifiable_type, :notification_type, :checked_at, :recipient_profile, :sender_profile)
     end
 end

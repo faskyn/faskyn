@@ -1,5 +1,5 @@
 if defined? Bullet
-  Bullet.enable = true
-  Bullet.alert = true
-  Bullet.rails_logger = true
+  Bullet.enable = false
+  Bullet.alert = false
+  Bullet.rails_logger = false
 end

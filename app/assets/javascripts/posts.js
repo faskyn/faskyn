@@ -1,7 +1,7 @@
 $(document).on("page:change", function() {
 
   // Activating Best In Place
-  jQuery(".best_in_place").best_in_place();
+  $(".best_in_place").best_in_place();
 
 	//disabling post form when text field is empty
   $('.btn-create-post').prop('disabled',true);
