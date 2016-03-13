@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     if Task.between(current_user.id, @user.id).present?
-      @tasks = Task.uncompleted.between(current_user.id, @user.id).order("created_at DESC").includes(:assigner, :assigner_profile, :executor, :executor_profile).paginate(page: params[:page], per_page: 14)
+      @tasks = Task.uncompleted.between(current_user.id, @user.id).order("created_at DESC").includes(:assigner, :executor).paginate(page: params[:page], per_page: 14)
       @task_between = Task.new
       @conversation = Conversation.between(current_user.id, @user.id).first
       @messages = @conversation.messages.includes(:user).order(created_at: :desc).limit(50).reverse

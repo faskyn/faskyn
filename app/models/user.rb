@@ -28,45 +28,7 @@ class User < ActiveRecord::Base
 
   has_many :posts
   has_many :post_comments, through: :posts
-
   
-
-  #likely not needed, yet to take it out
-  def tasks_uncompleted
-    tasks_uncompleted = assigned_tasks.uncompleted.order("deadline DESC")
-    tasks_uncompleted += executed_tasks.uncompleted.order("deadline DESC")
-    tasks_uncompleted.sort_by { |h| h[:deadline] }.reverse!
-  end
-
-  def tasks_completed
-    tasks_completed = assigned_tasks.completed.order("created_at DESC")
-    tasks_completed += executed_tasks.completed.order("created_at DESC")
-    tasks_completed.sort_by { |h| h[:completed_at] }.reverse!
-  end
-
-  #code for listing user based on the number of common tasks with current_user
-  def assigners_based_on_task_number
-    Task.where(executor_id: id).select('assigner_id AS user_id')
-  end
-
-  def executors_based_on_task_number
-    Task.where(assigner_id: id).select('executor_id AS user_id')
-  end
-
-  def relations_sql_based_on_task_number
-    "((#{assigners_based_on_task_number.to_sql}) UNION ALL (#{executors_based_on_task_number.to_sql})) AS relations"
-  end
-
-  def ordered_relating_users
-    User.joins("FULL OUTER JOIN #{relations_sql_based_on_task_number} ON relations.user_id = users.id")
-      .where.not(id: id)
-      .group(:id)
-      .order('COUNT(relations.user_id) DESC')
-      .includes(:profile)
-      .limit(8)
-  end
-  #end of the code for number of common tasks with current_user
-
   #check and decrease chat notification that happens between 2 given users (max 1)
   def decreasing_chat_notification_number(user)
     notification = self.notifications.between_chat_recipient(user).unchecked.first
