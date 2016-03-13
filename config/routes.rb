@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   post 'pusher/auth' #for pusher authentication
   get '/auth/:provider/callback', to: 'socials#create' #twitter/linkedin/angellist/google
-  resources :contacts, only: :create
+  resources :contacts, only: [:new, :create]
   devise_for :users
   resources :users, only: [:index, :show] do
     resources :eventnamecompanies, only: :index
