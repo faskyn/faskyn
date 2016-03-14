@@ -1,34 +1,38 @@
 <div class="post-comment" id="postcomment-<%= post_comment.id %>">
-  <div class="well well-sm post-comment-well">
-    <div class="row">
-      <div class="col-md-2">
-        <%= image_tag post_comment.user.profile.avatar.url(:base_thumb), class: 'post-comment-avatar' %>
+  <!-- <div class="well well-sm post-comment-well"> -->
+    <div class="row post-comment-well" style="padding-top:5px;">
+      <div class="col-md-10">
+        <div class="col-md-2">
+          <%= image_tag post_comment.user.profile.avatar.url(:base_thumb), class: 'post-comment-avatar' %>
+        </div>
+        <div class="cold-md-10">
+          <div class="post-comment-info">
+            <span class="post-comment-fullname"><%= post_comment.user.profile.full_name %></span>
+            <span class="post-comment-updated"><%= local_time_ago(post_comment.updated_at) %></span>
+          </div>
+          <div class="post-comment-body">
+            <% if policy(post_comment).edit? && policy(post_comment).delete? %>
+              <%= best_in_place post_comment, :body, :as => :input, url: post_post_comment_path(post_comment.post, post_comment), activator: "#activate-comment-edit-#{post_comment.id}" %>
+              <span class="post-comment-editing-deleting">
+                <span class="post-comment-edit-fa">
+                  <i class="fa fa-pencil" id="activate-comment-edit-<%=post_comment.id %>"></i>
+                </span>
+                <span class="post-comment-delete-fa">
+                  <%= link_to post_post_comment_path(post_comment.post, post_comment), remote: true , type: "button" do %>
+                    <i class="fa fa-trash" data-toggle="modal" data-target="#deletepostcomment_<%= post_comment.id %>"></i>
+                  <% end %>
+                </span>
+              </span>
+            <% else %>
+              <%= find_links(post_comment.body) %>
+            <% end %>
+          </div>
+        </div>
       </div>
-      <div class="cold-md-9">
-        <div class="post-comment-info">
-          <span class="post-comment-fullname"><%= post_comment.user.profile.full_name %></span>
-          <span class="post-comment-updated"><%= local_time_ago(post_comment.updated_at) %></span>
-        </div>
-        <div class="post-comment-body">
-          <% if policy(post_comment).edit? && policy(post_comment).delete? %>
-            <%= best_in_place post_comment, :body, :as => :input, url: post_post_comment_path(post_comment.post, post_comment), activator: "#activate-comment-edit-#{post_comment.id}" %>
-            <span class="post-comment-editing-deleting">
-              <span class="post-comment-edit-fa">
-                <i class="fa fa-pencil" id="activate-comment-edit-<%=post_comment.id %>"></i>
-              </span>
-              <span class="post-comment-delete-fa">
-                <%= link_to post_post_comment_path(post_comment.post, post_comment), remote: true , type: "button" do %>
-                  <i class="fa fa-trash" data-toggle="modal" data-target="#deletepostcomment_<%= post_comment.id %>"></i>
-                <% end %>
-              </span>
-            </span>
-          <% else %>
-            <%= find_links(post_comment.body) %>
-          <% end %>
-        </div>
+      <div class="col-md-2">
       </div>
     </div>
-  </div>
+  <!-- </div> -->
 </div>
 
 <% if policy(post_comment).delete? %>

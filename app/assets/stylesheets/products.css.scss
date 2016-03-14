@@ -1,16 +1,11 @@
-$gray-medium-light: #eaeaea;
+$grey-medium-light: #eaeaea;
 $garmin-blue: #007cc3;
-$garmin-light-blue: #d9edf7;
 $dark-grey: #5E5E5E; //text color
 $light-grey: #f7f7f7; //super light background color
-$orange: #ff6600;
 
 .product-container {
   background: $light-grey;
-  padding-left:50px;
-  padding-right:50px;
-  padding-top:40px;
-  padding-bottom:40px;
+  padding: 40px 100px 40px 100px;
   .title-row {
     padding-bottom:20px;
   }
@@ -34,7 +29,7 @@ $orange: #ff6600;
         padding:10px;
       }
       &:hover {
-        background-color: $gray-medium-light;
+        background-color: $grey-medium-light;
       }
     }
   }
@@ -67,7 +62,7 @@ $orange: #ff6600;
 .product-profile-index {
   .product-index-row {
     &:hover {
-      background-color: $gray-medium-light;
+      background-color: $grey-medium-light;
       cursor: pointer;
     }
   }
@@ -117,6 +112,7 @@ $orange: #ff6600;
   .explanation {
     font-size: 12px;
     color: $dark-grey;
+    padding-left: 3px;
   }
   .adding-extra {
     padding-top:10px;

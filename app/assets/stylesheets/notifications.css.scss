@@ -1,8 +1,6 @@
-$gray-medium-light: #eaeaea;
+$grey-medium-light: #eaeaea;
 $garmin-blue: #007cc3;//#168eea;//#337ab7;
 $dark-grey: #5E5E5E;
-$dropbox-light-grey: #7b8994;
-$orange: #ff6600;
 
 .container-fluid.notification-container {
 	margin: 0px 190px 40px 40px;
@@ -31,21 +29,21 @@ $orange: #ff6600;
   	}
 	}
 	a:first-child {
-		border-top: 1px $gray-medium-light solid;
+		border-top: 1px $grey-medium-light solid;
 	}			
 }
 
 // .notification-line:first-child, .notification-line-checked:first-child {
-// 	border-top: 1px $gray-medium-light solid;
+// 	border-top: 1px $grey-medium-light solid;
 // }
 
 .notification-line:first-child {
-	border-top: 1px $gray-medium-light solid;
+	border-top: 1px $grey-medium-light solid;
 }
 
 .notification-line {
 	padding-left: 10px;
-	border-bottom: 1px $gray-medium-light solid;			
+	border-bottom: 1px $grey-medium-light solid;			
 	.subject {
 		padding-top:4px;
 		padding-bottom:3px;
@@ -69,12 +67,12 @@ $orange: #ff6600;
     margin-top: 5px;
   }
   &:hover {
-    background-color: $gray-medium-light;
+    background-color: $grey-medium-light;
     cursor: pointer;
   }
 }
 
 .notification-line-unchecked {
-	background-color: white;//$gray-medium-light;
+	background-color: white;//$grey-medium-light;
 	font-weight: bold;
 }

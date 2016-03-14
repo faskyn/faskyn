@@ -6,7 +6,11 @@ json.array! @other_notifications do |notification|
   json.sender_name notification.sender.profile.full_name
 	json.action notification.action
   json.notifiable notification.notifiable_type
-  json.profile_image_url notification.sender.profile.avatar_url
+  if notification.sender.profile.avatar_url == "defaultgarmin200x200.png"
+    json.profile_image_url "assets/base_thumb_defaultgarmin200x200.png"
+  else
+    json.profile_image_url notification.sender.profile.avatar_url
+  end
   if notification.notifiable_type == "Task"
     json.what do
        json.did "#{notification.action} you a #{notification.notifiable_type.underscore}"

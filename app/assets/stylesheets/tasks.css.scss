@@ -1,9 +1,6 @@
-$gray-medium-light: #eaeaea;
+$grey-medium-light: #eaeaea;
 $garmin-blue: #007cc3;
-$garmin-light-blue: #d9edf7;
 $dark-grey: #5E5E5E;
-$dropbox-light-grey: #7b8994;
-$orange: #ff6600;
 $light-grey: #f7f7f7;
 
 .task-well {
@@ -89,7 +86,7 @@ $light-grey: #f7f7f7;
 
 .task-container {
 	background: $light-grey;
-	padding: 40px 70px 40px 70px;
+	padding: 40px 100px 40px 100px;
 	.task-header {
 		margin: 0 0 15px 0;
 		display:table;
@@ -162,12 +159,4 @@ $light-grey: #f7f7f7;
 			border: 0px;
 		}
 	}
-}
-
-.assigner-row {
-	background: $gray-medium-light;
-}
-
-.executor-row {
-	background: $dropbox-light-grey;
 }

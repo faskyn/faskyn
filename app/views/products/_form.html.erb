@@ -11,7 +11,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <%= f.text_field :name, placeholder: "product name", class: "form-control" %>
-          <div class="explanation name-explanation">Choose a name for your product. e.g. Faskyn for Entreprise</div>
+          <div class="explanation name-explanation">Choose a name for your product e.g. Faskyn for Entreprise</div>
         </div>
         <span class="btn btn-success btn-sm btn-product-image">Upload image
           <%= f.attachment_field :product_image, presigned: true, direct: true, class: "choose-product-file" %>
@@ -27,6 +27,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <%= f.collection_select :industry_ids, Industry.all.order(name: :asc), :id, :name, {}, { multiple: true, class: "form-control" } %>
+          <div class="explanation industry-explanation">Choose one or more industries.</div>
         </div>
       </div>
     </div>

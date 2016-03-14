@@ -1,9 +1,8 @@
-$gray-medium-light: #eaeaea;
+$grey-medium-light: #eaeaea;
 $garmin-blue: #007cc3;
-$garmin-light-blue: #d9edf7;
-$dark-grey: #5E5E5E; //text color
-$light-grey: #f7f7f7; //super light background color
-$orange: #ff6600;
+$dark-grey: #5E5E5E;
+$light-grey: #f7f7f7;
+$comment-grey: #f9f9f9;
 
 .post-container {
   background: $light-grey;
@@ -20,8 +19,10 @@ $orange: #ff6600;
 	background: white;
 }
 
-.post-well {
-	background: white;
+.post-panel {
+  .panel-heading {
+	  background: white;
+  }
 	list-style: none;
   .post-info {
     .post-user-name {
@@ -32,12 +33,8 @@ $orange: #ff6600;
       padding-left: 10px;
     }
   }
-  .comment-top-row {
-    margin-top:10px;
-    border-top: 1px $gray-medium-light solid;
-  }
   .post-comment-well {
-    background: white;
+    //background: white;
     margin-bottom:5px;
     .post-comment-info {
       font-size:12px;

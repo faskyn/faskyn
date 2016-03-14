@@ -1,8 +1,6 @@
-$gray-medium-light: #eaeaea;
+$grey-medium-light: #eaeaea;
 $garmin-blue: #007cc3;
 $dark-grey: #5E5E5E;
-$dropbox-light-grey: #7b8994;
-$orange: #ff6600;
 
 #home_loggedout {
 	overflow: visible !important;
@@ -51,7 +49,7 @@ $orange: #ff6600;
 	text-align: center;
 	margin-top: 40px;
 	padding-bottom: 40px;
-	border-bottom: 1px solid $gray-medium-light;
+	border-bottom: 1px solid $grey-medium-light;
 	background: #fff;
 	.fa {
 		color: white;
@@ -116,7 +114,7 @@ $orange: #ff6600;
 .examples {
 	padding-top: 40px;
 	padding-bottom: 40px;
-	border-bottom: 1px solid $gray-medium-light;
+	border-bottom: 1px solid $grey-medium-light;
 	text-align: center;
 	background: $garmin-blue;
 	color: white;

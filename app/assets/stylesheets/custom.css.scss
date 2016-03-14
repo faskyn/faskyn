@@ -1,17 +1,9 @@
-@import 'bootstrap-sprockets';
-@import 'bootstrap';
-
-$gray-medium-light: #eaeaea;
+$grey-medium-light: #eaeaea; //for borders and hovers
 $garmin-blue: #007cc3;
-$dark-grey: #5E5E5E; //dark text grey
-$light-grey: #f7f7f7; //super light grey background
-$orange: #ff6600;
+$dark-grey: #5E5E5E; //dark grey for text
+$light-grey: #f7f7f7; //super light for background
+$comment-grey: #f9f9f9; //darker than white but brighter than bg
 
-
-/*app layout*/
-@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
-
-$body-bg:                 #ecf0f1;
 $font-family-sans-serif:  'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $font-family-serif:       'Georgia', serif;
 
@@ -241,19 +233,19 @@ a {
 }
 
 #wrapper.toggled {
-    padding-left: 250px;
+    padding-left: 265px;
 }
 
 #sidebar-wrapper {
   z-index: 1000;
   position: fixed;
-  left: 250px;
+  left: 265px;
   width: 0;
-  height: 100%;
-  margin-left: -250px;
+  height: 150%;
+  margin-left: -265px;
   overflow-y: hidden;
   background: $light-grey;//white;//$light-grey;
-  //border-right: 1px $gray-medium-light solid;
+  //border-right: 1px $grey-medium-light solid;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
@@ -270,7 +262,7 @@ a {
 }
 
 #wrapper.toggled #sidebar-wrapper {
-    width: 250px;
+    width: 265px;
 }
 
 #page-content-wrapper {
@@ -280,12 +272,12 @@ a {
 
 #wrapper.toggled #page-content-wrapper {
     position: absolute;
-    margin-right: -250px;
+    margin-right: -265px;
 }
 
 @media(min-width:768px) {
   #wrapper {
-      padding-left: 250px;
+      padding-left: 265px;
       width: 100%;
   }
 
@@ -294,7 +286,7 @@ a {
   }
 
   #sidebar-wrapper {
-      width: 250px;
+      width: 265px;
   }
 
   #wrapper.toggled #sidebar-wrapper {
@@ -359,10 +351,11 @@ a {
 }
 
 /*SIDEBARS */
-#sidebar {
+#sidebar-user, #sidebar-product {
+  margin-top: 15px;
   background: white;
-  border: 1px $gray-medium-light solid;
-  margin-left: 15px;
+  border: 1px $grey-medium-light solid;
+  margin-left: 30px;
   .list-name {
     padding-top:15px;
     padding-left:15px;
@@ -375,6 +368,14 @@ a {
     padding-top: 10px;
     ol {
       padding-left: 0px;
+      margin-bottom:0px;
+    }
+    .hover {
+      padding-top:1px;
+      padding-bottom:1px;
+      &:hover {
+        background-color: $grey-medium-light;
+      }
     }
     li {
       padding-left: 15px;
@@ -383,9 +384,7 @@ a {
       list-style: none;
       height: 40px;
       vertical-align: middle;
-      &:hover {
-        background-color: $gray-medium-light;
-     }
+      
     }
     .avatar {
       float: left;
@@ -400,7 +399,7 @@ a {
       font-weight: bold;
     }
     .second-element-name {
-      margin-top: 2px;
+      //margin-top: 1px;
       display: block;
     }
     a {
