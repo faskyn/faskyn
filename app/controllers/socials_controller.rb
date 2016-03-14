@@ -15,7 +15,7 @@ class SocialsController < ApplicationController
     rescue
       flash[:warning] = "There was an error while trying to authenticate you!"
     end
-    redirect_to :back
+    redirect_to request.env['omniauth.origin'] || edit_user_profile_path(current_user)
   end
 
   def update
