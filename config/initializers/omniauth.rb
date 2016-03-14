@@ -1,4 +1,4 @@
-OmniAuth.config.full_host = Rails.env.production? ? 'https://appfaskyn.herokuapp.com' : 'http://localhost:3000'
+OmniAuth.config.full_host = Rails.env.production? ? 'https://faskyn.com' : 'http://localhost:3000'
 #certification_google = Rails.env.production? ? { ca_file: '/usr/lib/ssl/certs/ca-certificates.crt'} : { :verify => !Rails.env.development? }
 
 Rails.application.config.middleware.use OmniAuth::Builder do

@@ -93,5 +93,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   #setting production email
-  config.action_mailer.default_url_options = { host: 'appfaskyn.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'https://faskyn.com' }
 end
