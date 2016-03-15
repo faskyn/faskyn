@@ -1,119 +1,115 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta name="google-site-verification" content="TZLsd4Rgf8Ze7yBr8z9chL6P2WyiBWF1b3f0uoukpmw"/>
-  <% if user_signed_in? && (current_user.new_chat_notification > 0) %>
-    <title>(<%= current_user.new_chat_notification %>) <%= yield(:title) %></title>
-  <% else %>
-    <title><%= yield(:title) %></title>
-  <% end %>
-  <%= favicon_link_tag 'favicon.ico' %>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-  <!-- script tag for real-time notification -->
-  <script src="//js.pusher.com/3.0/pusher.min.js"></script>
+  <head>
+    <meta name="google-site-verification" content="TZLsd4Rgf8Ze7yBr8z9chL6P2WyiBWF1b3f0uoukpmw"/>
+    <% if user_signed_in? && (current_user.new_chat_notification > 0) %>
+      <title>(<%= current_user.new_chat_notification %>) <%= yield(:title) %></title>
+    <% else %>
+      <title><%= yield(:title) %></title>
+    <% end %>
+    <%= favicon_link_tag 'favicon.ico' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <!-- script tag for real-time notification -->
+    <script src="//js.pusher.com/3.0/pusher.min.js"></script>
+    <% if user_signed_in? %>
+      <script type="text/javascript" charset="utf-8">
+        $(function() {
+          var pusher = new Pusher('<%= Pusher.key %>'); //Pusher.key
+          //notifications
+          var other_notification_channel = pusher.subscribe('private-'+'<%= current_user.id %>');
+          var chat_notification_channel = pusher.subscribe('private-'+'<%= current_user.id %>');
+          //chat messages
+          var conv_id = $(".start-conversation").data("convid");
+          var rec_id = $(".start-conversation").data("recid");
+          var chat_message_channel = pusher.subscribe('private-'+'conversation_' + '<%= current_user.id %>');
+
+          // Some useful debug msgs
+          pusher.connection.bind('connecting', function() {
+            $('div#status').text('Connecting to Pusher...');
+          });
+          pusher.connection.bind('connected', function() {
+            $('div#status').text('Connected to Pusher!');
+          });
+          pusher.connection.bind('failed', function() {
+            $('div#status').text('Connection to Pusher failed :(');
+          });
+          chat_notification_channel.bind('subscription_error', function(status) {
+            $('div#status').text('Pusher subscription_error');
+          });
+          other_notification_channel.bind('subscription_error', function(status) {
+            $('div#status').text('Pusher subscription_error');
+          });
+          chat_message_channel.bind('subscription_error', function(status) {
+            $('div#status').text('Pusher subscription_error');
+          });
+
+          //separated real-time notification for chat and the rest of the notificaitons
+          other_notification_channel.bind('new_other_notification', function(data) {
+            msg = data.number;
+            dom_other_notify(msg);
+          });
+
+          chat_notification_channel.bind('new_chat_notification', function(data) {
+            msg = data.number;
+            dom_chat_notify(msg);
+          });
+
+          chat_message_channel.bind('message-sent', function(data){
+            eval(data.message);
+          });
+
+
+          function dom_other_notify(msg) {
+            
+            //first message div should be fading in, rest should be just updated by number
+            $('#other-notifications').text(msg); //will be a string
+            if (msg == 1) {
+              $('#other-notifications').fadeIn();
+            };
+            if (msg == 0) {
+              $('#other-notifications').hide();
+            }
+          }
+
+          function dom_chat_notify(msg) {
+            
+            var title = document.title;
+            //var number = msg;
+            if (msg > 0) {
+              var newTitle = '(' + msg + ') ' + title;
+            }
+            else {
+              var newTitle = title;
+            }
+            document.title = newTitle;
+            
+            //first message div should be fading in, rest should be just updated by number
+            $('#chat-notifications').text(msg); //will be a string
+            if (msg == 1) {
+              $('#chat-notifications').fadeIn();
+            };
+            if (msg == 0) {
+              $('#chat-notifications').hide();
+            }
+          }
+        });
+      </script>
+    <% end %>
+    <!-- end of script for pusher -->
+  </head>
   <% if user_signed_in? %>
-    <script type="text/javascript" charset="utf-8">
-      $(function() {
-        var pusher = new Pusher('<%= Pusher.key %>'); //Pusher.key
-        //notifications
-        var other_notification_channel = pusher.subscribe('private-'+'<%= current_user.id %>');
-        var chat_notification_channel = pusher.subscribe('private-'+'<%= current_user.id %>');
-        //chat messages
-        var conv_id = $(".start-conversation").data("convid");
-        var rec_id = $(".start-conversation").data("recid");
-        var chat_message_channel = pusher.subscribe('private-'+'conversation_' + '<%= current_user.id %>');
-
-        // Some useful debug msgs
-        pusher.connection.bind('connecting', function() {
-          $('div#status').text('Connecting to Pusher...');
-        });
-        pusher.connection.bind('connected', function() {
-          $('div#status').text('Connected to Pusher!');
-        });
-        pusher.connection.bind('failed', function() {
-          $('div#status').text('Connection to Pusher failed :(');
-        });
-        chat_notification_channel.bind('subscription_error', function(status) {
-          $('div#status').text('Pusher subscription_error');
-        });
-        other_notification_channel.bind('subscription_error', function(status) {
-          $('div#status').text('Pusher subscription_error');
-        });
-        chat_message_channel.bind('subscription_error', function(status) {
-          $('div#status').text('Pusher subscription_error');
-        });
-
-        //separated real-time notification for chat and the rest of the notificaitons
-        other_notification_channel.bind('new_other_notification', function(data) {
-          msg = data.number;
-          dom_other_notify(msg);
-        });
-
-        chat_notification_channel.bind('new_chat_notification', function(data) {
-          msg = data.number;
-          dom_chat_notify(msg);
-        });
-
-        chat_message_channel.bind('message-sent', function(data){
-          eval(data.message);
-        });
-
-
-        function dom_other_notify(msg) {
-          
-          //first message div should be fading in, rest should be just updated by number
-          $('#other-notifications').text(msg); //will be a string
-          if (msg == 1) {
-            $('#other-notifications').fadeIn();
-          };
-          if (msg == 0) {
-            $('#other-notifications').hide();
-          }
-        }
-
-        function dom_chat_notify(msg) {
-          
-          var title = document.title;
-          //var number = msg;
-          if (msg > 0) {
-            var newTitle = '(' + msg + ') ' + title;
-          }
-          else {
-            var newTitle = title;
-          }
-          document.title = newTitle;
-          
-          //first message div should be fading in, rest should be just updated by number
-          $('#chat-notifications').text(msg); //will be a string
-          if (msg == 1) {
-            $('#chat-notifications').fadeIn();
-          };
-          if (msg == 0) {
-            $('#chat-notifications').hide();
-          }
-        }
-      });
-    </script>
-  <% end %>
-  <!-- end of script for pusher -->
-</head>
-<!-- <body class="fixedheight <%= controller.controller_name %>"> -->
-<% if user_signed_in? %>
-  <body class="fixedheight <%= controller.controller_name %>-controller <%= controller.action_name%>-action" id="bodycurrentuser" data-currentuserid="<%= current_user.id %>">
-<% else %>
-  <body class="fixedheight <%= controller.controller_name %>-controller <%= controller.action_name%>-action">
-<% end %>
-  <%= render 'layouts/header' %>
-  <% if user_signed_in? %>
+    <body class="fixedheight <%= controller.controller_name %>-controller <%= controller.action_name%>-action" id="bodycurrentuser" data-currentuserid="<%= current_user.id %>">
+    <%= render 'layouts/header' %>
     <div id="wrapper">
       <%= render 'layouts/sidebar' %>
       <%= render 'layouts/main' %>
     </div>
   <% else %>
+    <body class="fixedheight <%= controller.controller_name %>-controller <%= controller.action_name%>-action">
+    <%= render 'layouts/header' %>
     <%= yield %>
   <% end %>
-
-</body>
+  </body>
 </html>
