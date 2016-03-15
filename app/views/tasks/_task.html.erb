@@ -8,10 +8,10 @@
         <div class = "col-md-9" style="padding-left:0px;width:100%;float:left;text-align:left">
           <%= link_to user_path(id: task.executor.id) do %>
             <div class="table-user-name">
-              <%= task.executor.profile.full_name %>
+              <%= task.executor.full_name %>
             </div>
             <div class="table-company-name">
-              <%= task.executor.profile.company %>
+              <%= task.executor.company %>
             </div>
           <% end %>
         </div>
@@ -27,10 +27,10 @@
         <div class = "col-md-9" style="padding-left:0px;width:100%;float:left;text-align:left">
           <%= link_to user_path(id: task.assigner.id) do %>
             <div class="table-user-name">
-              <%= task.assigner.profile.full_name %>
+              <%= task.assigner.full_name %>
             </div>
             <div class="table-company-name">
-              <%= task.assigner.profile.company %>
+              <%= task.assigner.company %>
             </div>
           <% end %>
         </div>
@@ -88,9 +88,9 @@
                       </div>
                       <div class="field form-group">
                         <% if current_user.id == task.assigner.id %>
-                          <p><strong>Executor: <%= task.executor.profile.first_name %> <%= task.executor.profile.last_name %>, <%= task.executor.profile.company %></strong></p>
+                          <p><strong>Executor: <%= task.executor.full_name %>, <%= task.executor.company %></strong></p>
                         <% else %>
-                          <p><strong>Assigner: <%= task.assigner.profile.first_name %> <%= task.assigner.profile.last_name %>, <%= task.assigner.profile.company %></strong></p>
+                          <p><strong>Assigner: <%= task.assigner.full_name %>, <%= task.assigner.company %></strong></p>
                         <% end %>
                       </div>
                       <div class="field form-group">

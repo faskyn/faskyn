@@ -19,7 +19,6 @@ class Notification < ActiveRecord::Base
   scope :chat, -> { where(notifiable_type: "Message") }
   scope :task, -> { where(notifiable_type: "Task") }
   scope :post, -> { where(notifiable_type: "Post") }
-  scope :checked, -> { where.not(checked_at: nil) }
   scope :unchecked, -> { where(checked_at: nil) }
 
   scope :this_post_comments, -> (post_id) do

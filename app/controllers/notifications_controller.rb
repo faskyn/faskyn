@@ -43,8 +43,4 @@ class NotificationsController < ApplicationController
       @user = User.find(params[:user_id])
       authorize @user, :show_notifications?
     end
-
-    def notification_params
-      params.require(:notification).permit(:recipient_id, :sender_id, :notifiable_id, :notifiable_type, :notification_type, :checked_at, :recipient_profile, :sender_profile)
-    end
 end

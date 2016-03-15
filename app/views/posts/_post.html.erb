@@ -2,12 +2,12 @@
   <div class="panel-heading">
     <div class="row">
       <div class="col-md-2">
-        <%= image_tag post.user.profile.avatar.url(:base_thumb), class: 'post-avatar' %>
+        <%= image_tag post.user.avatar.url(:base_thumb), class: 'post-avatar' %>
       </div>
 
       <div class="col-md-8">
         <div class="post-info">
-          <span class="post-user-name"><%= post.user.profile.full_name %></span>
+          <span class="post-user-name"><%= post.user.full_name %></span>
           <span class="post-updated"><%= local_time_ago(post.updated_at) %></span>
         </div>
         <div class="post-body">

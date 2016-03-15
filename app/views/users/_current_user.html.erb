@@ -1,8 +1,0 @@
-<%if has_profile? %>
-  <div id="current-user-bar">
-    <%= link_to user_path(current_user) do %>
-      <%= image_tag current_user.profile.avatar.url(:base_thumb), class: 'avatar', alt: "#{current_user.profile.first_name}'s_avatar", title: "#{current_user.profile.first_name}'s avatar" %>
-    <% end %>
-    <%= current_user.profile.full_name %>
-  </div>
-<% end %>

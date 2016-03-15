@@ -13,12 +13,6 @@ module ApplicationHelper
     /^http/i.match(url) ? url : "http://#{url}"
   end
 
-  def date_to_string(date)
-    if date.nil?
-      ""
-    end
-  end
-
   def bootstrap_alert_class_for(flash_type)
     {
       :success => 'alert-success',

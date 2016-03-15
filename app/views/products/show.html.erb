@@ -40,7 +40,7 @@
           <div class="product-list">
             <div class="list-name">Posted_by:</div>
             <div class="description"><%= link_to user_path(@product.user) do %>
-              <%= @product.user.profile.full_name %>
+              <%= @product.user.full_name %>
             <% end %> </div>
           </div>
         </div>

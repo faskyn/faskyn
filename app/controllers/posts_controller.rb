@@ -30,7 +30,7 @@ class PostsController < ApplicationController
     authorize @post
     @post_comment = PostComment.new
     if @post.save
-      @post.send_post_creation_email_notification(@post.user)
+      #@post.send_post_creation_email_notification(@post.user)
       respond_to do |format|
         format.html { redirect_to @post, notice: "Post saved!" }
         format.js

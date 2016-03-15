@@ -27,7 +27,6 @@ Rails.application.routes.draw do
       member do
         get :add_socials
       end
-      resources :socials, only: [:create, :update, :destroy]
     end
     resources :tasknamecompanies, only: :index
     resources :tasks do
@@ -40,14 +39,16 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :socials, only: [:create, :update, :destroy]
+
   resources :products
 
-  resources :conversations, only: :create do
+  resources :conversations, only: [] do
     resources :messages, only: :create
   end
 
   resources :posts do
-    resources :post_comments, except: [:index, :new, :edit], module: :posts
+    resources :post_comments, only: [:create, :update, :destroy], module: :posts
   end
 
   #resources :post_comments do 

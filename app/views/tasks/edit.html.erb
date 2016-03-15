@@ -9,9 +9,9 @@
           <%= render 'layouts/error_messages', object: f.object %>
           <div class="field form-group">
             <% if current_user.id == @task.assigner.id %>
-              <p><strong>Executor: <%= @task.executor.profile.first_name %> <%= @task.executor.profile.last_name %>, <%= @task.executor.profile.company %></strong></p>
+              <p><strong>Executor: <%= @task.executor.first_name %> <%= @task.executor.last_name %>, <%= @task.executor.company %></strong></p>
             <% else %>
-              <p><strong>Assigner: <%= @task.assigner.profile.first_name %> <%= @task.assigner.profile.last_name %>, <%= @task.assigner.profile.company %></strong></p>
+              <p><strong>Assigner: <%= @task.assigner.first_name %> <%= @task.assigner.last_name %>, <%= @task.assigner.company %></strong></p>
             <% end %>
           </div>
           <div class="field form-group">

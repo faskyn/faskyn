@@ -5,7 +5,7 @@
     <div class = "row">
 
       <div class="col-md-2">
-        <%= image_tag @user.profile.avatar.url(:base_thumb), class: "avatar" %>
+        <%= image_tag @profile.avatar.url(:base_thumb), class: "avatar" %>
       </div>
 
       <div class="col-md-8" style="padding-left:0px;">
@@ -60,7 +60,7 @@
       <div class="col-md-4">
         <div class="product-list">
           <div class="list-name">Email:</div>
-          <div class="description"><%= @profile.user.email %></div>
+          <div class="description"><%= @user.email %></div>
         </div>
       </div>
 

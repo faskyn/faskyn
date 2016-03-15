@@ -10,8 +10,4 @@ class Message < ActiveRecord::Base
 
   scope :with_file, -> { where.not(message_attachment_filename: nil) }
   scope :with_link, -> { where.not(link: :nil) }
-
-  def link_array_to_string
-    self.link
-  end
 end

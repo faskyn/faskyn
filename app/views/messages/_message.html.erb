@@ -8,7 +8,7 @@
     <% end %>
     </p>
     <span id="chatname">
-      <%= message_interlocutor(message).profile.first_name %>
+      <%= message_interlocutor(message).first_name %>
     </span>
     <time class="timefield" datetime="<%= message.created_at %>" title="<%= message.created_at.utc.strftime("%d %b  %Y at %I:%M%p" ) %>">
       <% if local_time(message.created_at) > (Time.zone.now - 24.hours) %>

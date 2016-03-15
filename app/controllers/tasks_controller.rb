@@ -58,7 +58,7 @@ class TasksController < ApplicationController
       end     
     else
       respond_to do |format|
-        format.html { render action: :new }
+        format.html { render action: :new, alert: "Task couldn't be saved!" }
         format.json { render json: @task.errors, status: :unprocessable_entity }
         format.js
       end

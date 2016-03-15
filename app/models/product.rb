@@ -41,7 +41,7 @@ class Product < ActiveRecord::Base
   def industries_all
     industry_array = []
     self.industries.each do |industry|
-      industry_array << industry.name 
+      industry_array << industry.name
     end
     industry_array.join(", ")
   end

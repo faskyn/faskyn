@@ -6,10 +6,10 @@
   <% end %>
     <% if notification.notifiable_type == "Post" %>
       <%= link_to dropdown_checking_decreasing_user_notifications_path(current_user,anchor_param: "post_#{notification.notifiable_id}", post_id: notification.notifiable_id) do %>
-        <%= image_tag notification.sender.profile.avatar.url(:base_thumb), class: 'avatar' %>
+        <%= image_tag notification.sender.avatar.url(:base_thumb), class: 'avatar' %>
         <span>
           <div class="subject">
-            <%= notification.sender.profile.full_name %> has <%= notification.action %> on a <%= notification.notifiable_type.underscore %> you are following.
+            <%= notification.sender.full_name %> has <%= notification.action %> on a <%= notification.notifiable_type.underscore %> you are following.
           </div>
           <div class="time">
             <% if notification.created_at.today? %>      
@@ -22,13 +22,13 @@
       <% end %>
     <% else %>
       <%= link_to user_path(notification.sender) do %>
-        <%= image_tag notification.sender.profile.avatar.url(:base_thumb), class: 'avatar' %>
+        <%= image_tag notification.sender.avatar.url(:base_thumb), class: 'avatar' %>
         <span>
           <div class="subject">
             <% if notification.notifiable_type == "Message" %>
-              <%= notification.sender.profile.full_name %> has sent you a <%= notification.notifiable_type.underscore %> on chat.
+              <%= notification.sender.full_name %> has sent you a <%= notification.notifiable_type.underscore %> on chat.
             <% elsif notification.notifiable_type == "Task" %>
-              <%= notification.sender.profile.full_name %> has <%= notification.action %> you a <%= notification.notifiable_type.underscore %>.
+              <%= notification.sender.full_name %> has <%= notification.action %> you a <%= notification.notifiable_type.underscore %>.
             <% end %>
           </div>
           <div class="time">

@@ -2,7 +2,7 @@
   <div class = "col-md-9 common-medias-col">
     <div class= "container-fluid task-container">
       <div class="row task-header">
-        <h3>Common medias with <%= link_to user_profile_path(@user) do %><%= @user.profile.first_name %><% end %></h3>
+        <h3>Medias with <%= link_to user_profile_path(@user) do %><%= @user.first_name %><% end %></h3>
         <span class="rightfloat">
           <div class="btn-group" role="group">
             <%= link_to "Common Tasks", user_path(@user), class: "btn btn-default" %>
@@ -23,7 +23,7 @@
           </div>
           <div role="tabpanel" class="tab-pane" id="calendarstab">
             <br/>
-            Checkout <%= @user.profile.first_name %>'s calendar <%= link_to "here", user_events_path(@user) %>.
+            Checkout <%= @user.first_name %>'s calendar <%= link_to "here", user_events_path(@user) %>.
           </div>
         </div>
       </div>

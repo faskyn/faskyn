@@ -10,8 +10,6 @@ class User < ActiveRecord::Base
 
   has_one :profile, dependent: :destroy
   has_many :socials, dependent: :destroy, through: :profile
-  delegate :first_name, to: :profile, allow_nil: true
-
   has_many :assigned_tasks, class_name: "Task", foreign_key: "assigner_id", dependent: :destroy
   has_many :executed_tasks, class_name: "Task", foreign_key: "executor_id", dependent: :destroy
   has_many :assigned_and_executed_tasks, -> (user) { where('executor_id = ? OR assigner_id = ?', user.id, user.id) }, class_name: 'Task', source: :task
@@ -28,6 +26,8 @@ class User < ActiveRecord::Base
 
   has_many :posts
   has_many :post_comments, through: :posts
+
+  delegate :first_name, :last_name, :full_name, :company, :job_title, :phone_number, :description, :location, :avatar, to: :profile, allow_nil: true
   
   #check and decrease chat notification that happens between 2 given users (max 1)
   def decreasing_chat_notification_number(user)

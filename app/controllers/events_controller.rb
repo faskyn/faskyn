@@ -32,9 +32,9 @@ class EventsController < ApplicationController
       end
     elsif @user.profile.present?
       begin
-        redirect_to :back, notice: "You and #{@user.profile.full_name} have no common tasks yet!"
+        redirect_to :back, notice: "You and #{@user.full_name} have no common tasks yet!"
       rescue
-        redirect_to root_path(@current_user), notice: "You and #{@user.profile.full_name} have no common tasks yet!"
+        redirect_to root_path(@current_user), notice: "You and #{@user.full_name} have no common tasks yet!"
       end
     else
       begin

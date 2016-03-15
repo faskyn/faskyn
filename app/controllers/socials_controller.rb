@@ -26,10 +26,6 @@ class SocialsController < ApplicationController
 
   private
 
-    def social_params
-      params.require(:social).permit(:provider, :uid, :token, :secret, :first_name, :last_name, :page_url, :picture_url, :location, :description, :phone, :email, :refresh_token, :expires_at)
-    end
-
     def auth_hash
       request.env['omniauth.auth']
     end

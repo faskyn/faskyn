@@ -26,9 +26,9 @@ class Event < ActiveRecord::Base
     unless self.start_at.nil? || self.end_at.nil?
       { id: self.id,
         recipientId: self.recipient_id,
-        recipientName: self.recipient.profile.full_name,
+        recipientName: self.recipient.full_name,
         senderId: self.sender_id,
-        senderName: self.sender.profile.full_name,
+        senderName: self.sender.full_name,
         title: self.title,
         description: self.description || "",
         start: start_at.rfc822,
