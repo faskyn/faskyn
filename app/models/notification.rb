@@ -45,11 +45,11 @@ class Notification < ActiveRecord::Base
     if self.notifiable_type == "Message"
       self.recipient.increase_new_chat_notifications
       number = self.recipient.new_chat_notification
-      Pusher['private-'+ self.recipient_id.to_s].trigger('new_chat_notification', {:number => number})
+      Pusher['private-'+ self.recipient_id.to_s].trigger('new_chat_notification', { number: number })
     else
       self.recipient.increase_new_other_notifications
       number = self.recipient.new_other_notification
-      Pusher['private-'+ self.recipient_id.to_s].trigger('new_other_notification', {:number => number})
+      Pusher['private-'+ self.recipient_id.to_s].trigger('new_other_notification', { number: number })
     end      
   end
 

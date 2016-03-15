@@ -26,7 +26,7 @@ class UsersController < ApplicationController
       current_user.decreasing_task_notification_number(@user)
       respond_to do |format|
         format.html
-        format.js { render :template => "tasks/between.js.erb", layout: false }
+        format.js { render template: "tasks/between.js.erb", layout: false }
       end
     else
       redirect_to user_profile_path(@user)

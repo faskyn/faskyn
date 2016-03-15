@@ -91,7 +91,6 @@ group :development do
   #database query optimazation
   gem 'bullet', '~> 4.14', '>= 4.14.10'
   gem 'hirb', '~> 0.7.3'
-  gem 'rails_best_practices', '~> 1.16'
 end
 
 group :development, :test do

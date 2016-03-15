@@ -38,7 +38,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   #process :resize_to_fit => [200, 200]
 
   version :base_thumb do
-    process :resize_to_fit => [85, 85]
+    process resize_to_fit: [85, 85]
   end
 
   #version :medium_thumb, :from_version => :base_thumb do

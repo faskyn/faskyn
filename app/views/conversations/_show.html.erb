@@ -12,10 +12,10 @@
     <% end %>
   </div>
   <div class="chatboxinput">
-    <%= form_for([@conversation, @message], :remote => true, :html => {id: "conversation_form_#{@conversation.id}"}) do |f| %>
+    <%= form_for([@conversation, @message], remote: true, html: { id: "conversation_form_#{@conversation.id}" }) do |f| %>
         <%= f.text_area :body, class: "chatboxtextarea", "data-cid" => @conversation.id %>
     <% end %>
-    <%= form_for([@conversation, @message], html: {class: "message-refile-form"}, remote: true) do |form| %>
+    <%= form_for([@conversation, @message], html: { class: "message-refile-form" }, remote: true) do |form| %>
         <span class="btn btn-success btn-sm btn-message-file">Choose file
         <%= form.attachment_field :message_attachment, presigned: true, direct: true, class: "choose-message-file" %></span>
         <%= form.submit "Send File", class: "btn btn-primary btn-sm btn-submit-refile", style:"display:none"%>

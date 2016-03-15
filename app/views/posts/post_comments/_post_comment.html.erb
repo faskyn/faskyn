@@ -11,7 +11,7 @@
         </div>
         <div class="post-comment-body">
           <% if policy(post_comment).edit? && policy(post_comment).delete? %>
-            <%= best_in_place post_comment, :body, :as => :input, url: post_post_comment_path(post_comment.post, post_comment), activator: "#activate-comment-edit-#{post_comment.id}" %>
+            <%= best_in_place post_comment, :body, as: :input, url: post_post_comment_path(post_comment.post, post_comment), activator: "#activate-comment-edit-#{post_comment.id}" %>
             <span class="post-comment-editing-deleting">
               <span class="post-comment-edit-fa">
                 <i class="fa fa-pencil" id="activate-comment-edit-<%=post_comment.id %>"></i>
