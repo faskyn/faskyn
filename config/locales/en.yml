@@ -26,7 +26,7 @@ en:
       index?: "You can't view the product feed!"
       own_products?: "You can't view this product feed!"
       show?: "You have to create a profile first!"
-      new?: "You have create a profile first!"
+      new?: "You have to create a profile first!"
       create?: "You have to create a profile first!"
       edit?: "You can't edit this product!"
       update?: "You can't update this product!"

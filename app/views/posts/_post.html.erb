@@ -2,12 +2,16 @@
   <div class="panel-heading">
     <div class="row">
       <div class="col-md-2">
-        <%= image_tag post.user.avatar.url(:base_thumb), class: 'post-avatar' %>
+        <%= link_to user_path(post.user) do %>
+          <%= image_tag post.user.avatar.url(:base_thumb), class: 'post-avatar' %>
+        <% end %>
       </div>
 
       <div class="col-md-8">
         <div class="post-info">
-          <span class="post-user-name"><%= post.user.full_name %></span>
+          <%= link_to user_path(post.user) do %>
+            <span class="post-user-name"><%= post.user.full_name %></span>
+          <% end %>
           <span class="post-updated"><%= local_time_ago(post.updated_at) %></span>
         </div>
         <div class="post-body">

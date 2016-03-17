@@ -3,7 +3,7 @@
   <% unless has_profile? %>
     <div class="row">
       <div class="well onboard-well">
-        <h4>HEY THERE! You can start with discovering the posts, products as well as users and in the meantime you can create your profile:</h4>   <%= link_to "CREATE PROFILE", new_user_profile_path(current_user), class: "btn btn-danger" %>
+        <h4>HEY THERE! You can start with discovering the posts, products as well as users and in the meantime don't forget to create your profile:</h4>   <%= link_to "CREATE PROFILE", new_user_profile_path(current_user), class: "btn btn-danger" %>
       </div>
     </div>
   <% end %>
@@ -14,9 +14,11 @@
       </div>
     </div>
   </div>
-  <div class="post-create">
-    <%= render 'form' %>
-  </div>
+  <% if policy(@post).create? %>
+    <div class="post-create">
+      <%= render 'form' %>
+    </div>
+  <% end %>
   <div class="post-index new-post-insert">
     <%= render @posts %>
   </div>

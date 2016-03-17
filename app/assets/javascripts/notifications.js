@@ -32,8 +32,9 @@ $(document).on('click', '#other-notification-dropdown-list', function(){
   var current_user_id = $('#bodycurrentuser').data('currentuserid');
   $.ajax({
     type: "GET",
-    url: "/users/" + current_user_id + "/other_notifications_dropdown",
+    url: $(this).attr('href'),
     dataType: "json",
+    timeout: 5000,
     success: function(data){
       var empty = "<li><a href='#'>No new notifications.</a></li>";
       var viewallURL= "/users/" + current_user_id + "/other_notifications";
@@ -49,6 +50,10 @@ $(document).on('click', '#other-notification-dropdown-list', function(){
         $('.other-notifications-json-data').html(empty);
         $('.other-notifications-json-data').append(viewall);
       }
+    },
+    error: function(){
+      $('.other-notifications-json-data').html("<li>Couldn't load new notifications.</li>");
+      $('.other-notifications-json-data').append(viewall);
     }
   });
 });
@@ -58,8 +63,9 @@ $(document).on('click', '#chat-notification-dropdown-list', function(){
   var current_user_id = $('#bodycurrentuser').data('currentuserid');
   $.ajax({
     type: "GET",
-    url: "/users/" + current_user_id + "/chat_notifications_dropdown",
+    url: $(this).attr('href'),
     dataType: "json",
+    timeout: 5000,
     success: function(data){
       var empty = "<li><a href='#'>No new chat messages.</a></li>";
       var viewallURL= "/users/" + current_user_id + "/chat_notifications";
@@ -75,6 +81,10 @@ $(document).on('click', '#chat-notification-dropdown-list', function(){
         $('.chat-notifications-json-data').html(empty);
         $('.chat-notifications-json-data').append(viewall);
       }
+    },
+    error: function(){
+      $('.chat-notifications-json-data').html("<li>Couldn't load new notifications.</li>");
+      $('.chat-notifications-json-data').append(viewall);
     }
   });
 });

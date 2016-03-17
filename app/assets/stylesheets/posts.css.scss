@@ -25,6 +25,9 @@ $comment-grey: #f9f9f9;
   }
 	list-style: none;
   .post-info {
+    a {
+      color: $dark-grey;
+    }
     .post-user-name {
       font-weight: bold;
     }
