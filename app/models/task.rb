@@ -24,6 +24,15 @@ class Task < ActiveRecord::Base
     12
   end
 
+  #getter setter for displaying time in form
+  def deadline_string
+    deadline.to_datetime.iso8601
+  end
+
+  def deadline_string=(deadline_str)
+    self.deadline = deadline_str
+  end
+
   def completed?
     !completed_at.blank?
   end

@@ -134,7 +134,7 @@ class TasksController < ApplicationController
   private
 
     def task_params
-      params.require(:task).permit(:executor_id, :name, :content, :deadline, :task_name_company, :assigner_id, :executor_profile, :assigner_profile)
+      params.require(:task).permit(:executor_id, :name, :content, :deadline, :task_name_company, :assigner_id, :executor_profile, :assigner_profile, :deadline_string)
     end
 
     def set_and_authorize_user_tasks

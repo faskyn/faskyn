@@ -1,12 +1,5 @@
 $(document).on("page:change", function() {
 
-  //these functions get called in js.erb files AS WELL to make js work on AJAX appended task partials
-  //here are invoked to work on document ready tasks
-  edit_task_time_for_user($(document.body));
-  edit_task_datetimepicker($(document.body));
-  edit_task_time_on_submit($(document.body));
-  edit_task_hide_danger($(document.body));
-
 	//choosing user on task creation; needed only for new task
 	$('.task_name_company').autocomplete({
   	source: "/users/:user_id/tasknamecompanies"
@@ -49,6 +42,12 @@ $(document).on("page:change", function() {
     });
   });
 
+  //setting time and datetimepicker when opening edit task modal
+  var task_edit_page = $('.edit-task-well');
+  if (task_edit_page.length > 0) {
+    edit_task_html_form();
+  };
+
 	//infinite scrolling for tasks based on pagination gem
 	if ($('#infinite-task-scrolling').size() > 0) {
     $(window).on('scroll', function() {
@@ -64,42 +63,52 @@ $(document).on("page:change", function() {
   };
 });
 
-//changes edit task modal deadline datetime to be in localtime when modal pops up
-function edit_task_time_for_user($container) {
-  $container.find('.updatetask').on('shown.bs.modal', function (e) {
-    var deadlineField = $(this).find($('.edit-task-deadline'));
-    var deadlineValue = deadlineField.attr('value');
-    var momentDeadline = moment(deadlineValue).format('MM/DD/YYYY hh:mm A');
-    deadlineField.val(momentDeadline);
-  });
-}
-
-function edit_task_hide_danger($container) {
-  $container.find('.updatetask').on('hidden.bs.modal', function (e) {
-    $('.alert-danger').hide();
-  });
-}
-
-//makes datetimepicker available for editing task modal
-function edit_task_datetimepicker($container) {
-  $container.find('.edit-task-deadline').datetimepicker({
+//setting time and datetimepicker when opening edit task modal
+$(document).on('shown.bs.modal', '.updatetask', function (e) {
+  var taskId = $(this).find('.edit-task-submit').data('taskid');
+  var deadlineField =  $(".task_form_" + taskId).closest('.updatetask').find($('.edit-task-deadline'));
+  var deadlineValue = deadlineField.attr('value');
+  var momentDeadline = moment(deadlineValue).format('MM/DD/YYYY hh:mm A');
+  deadlineField.val(momentDeadline);
+  $(".task_form_" + taskId).closest('.updatetask').find($('.edit-task-deadline')).datetimepicker({
     sideBySide: true,
     format: 'MM/DD/YYYY hh:mm A',
     stepping: 15,
     widgetPositioning: { vertical: 'bottom' }
   });
-}
+});
 
-//changes edit task modal deadline datetime to ruby format in UTC
-function edit_task_time_on_submit($container) {
-  $container.find('.edit-task-submit').on('click', function (e){
-    e.preventDefault();
-    var deadlineField = $(this).closest('form').find($('.edit-task-deadline'));
-    var localMoment = moment(deadlineField.val());
-    deadlineField.val(localMoment.toISOString());
-    $(this).submit();
+$(document).on('hidden.bs.modal', '.updatetask', function (e) {
+  $('.alert-danger').hide();
+});
+
+//setting time to RoR format when updating task
+$(document).on('click', '.edit-task-submit', function (e){
+  e.preventDefault();
+  var taskId = $(this).data('taskid');
+  var deadlineField = $(".task_form_" + taskId).closest('.updatetask').find($('.edit-task-deadline'));
+  var localMoment = moment(deadlineField.val());
+  var railsDate = localMoment.toISOString();
+  deadlineField.val(railsDate);
+  $(".task_form_" + taskId).submit();
+});
+
+$(document).on('click', '.edit-task-submit-html', function (e) {
+  e.preventDefault;
+  var localMoment = moment($('.task-deadline').val());
+  var railsDate = localMoment.toISOString();
+  $('.task-deadline').val(railsDate);
+  $('.task-deadline').closest('form').submit();
+});
+
+function edit_task_html_form() {
+  var deadlineValue = $('.task-deadline').attr('value');
+  var momentDeadline = moment(deadlineValue).format('MM/DD/YYYY hh:mm A');
+  $('.task-deadline').val(momentDeadline);
+  $('.task-deadline').datetimepicker({
+    sideBySide: true,
+    format: 'MM/DD/YYYY hh:mm A',
+    stepping: 15,
+    widgetPositioning: { vertical: 'bottom' }
   });
-}
-
-// $(document).ready(ready);
-// $(document).on("page:load", ready);
+};
