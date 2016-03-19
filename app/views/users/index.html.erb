@@ -8,13 +8,11 @@
     </div>
   <% end %>
   <div class="row title-row">
-    <div class="col-md-4 col-md-offset-4">
-      <div class="user-desc" style="text-align:center">
-        <h2>USERS</h2>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class = "user-search" style="text-align:right">
+    <div class="col-md-6 title-col">
+      <h3><i class="fa fa-users" style="padding-right:10px;"></i>Users</h3>
+    </div><!-- SPACE WOULD BREAK INLINE BLOCK
+    --><div class="col-md-6 title-col">
+      <div class = "user-search">
         <%= search_form_for @q_users, html: { class: "form-inline"} do |f| %>
           <% f.search_field :profile_full_name_or_profile_company_cont, placeholder: "Search user..", class: 'form-control' %>
         <% end %>

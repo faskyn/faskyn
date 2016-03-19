@@ -1,4 +1,12 @@
 <div id= "sidebar-wrapper">
+  <div id= "sidebar-button">
+    <%= link_to user_tasks_path(current_user), type:"button", class: "btn btn-primary btn-block" do %>
+      <i class="fa fa-plus" style="padding-right:5px;"></i>NEW TASK
+    <% end %>
+    <%= link_to new_product_path, type:"button", class: "btn btn-primary btn-block" do %>
+      <i class="fa fa-plus" style="padding-right:5px;"></i>ADD PRODUCT
+    <% end %>
+  </div>
   <%= render 'users/user_sidebar' %>
   <%= render 'products/product_sidebar' %>
 </div>

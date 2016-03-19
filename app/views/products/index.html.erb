@@ -8,23 +8,13 @@
     </div>
   <% end %>
   <div class="row title-row">
-    <div class="col-md-4">
-      <%= link_to new_product_path do %>
-        <div style="vertical-align:middle;margin-top:2px;">
-          <span class="fa-stack fa-lg" data-toggle="tooltip", data-placement="bottom", data-delay= '{"show":"250"}', title="Add new product">
-            <i class="fa fa-circle fa-stack-2x" style="text-shadow: 1px 1px 1px;"></i>
-            <i class="fa fa-plus fa-stack-1x" style="color:white;"></i>
-          </span>
-        </div>
-      <% end %>
-    </div>
-    <div class="col-md-4">
-      <div class="product-desc" style="text-align:center">
-        <h2>PRODUCTS</h2>
+    <div class="col-md-6 title-col">
+      <div class="product-desc">
+        <h3><i class="fa fa-cubes" style="padding-right:10px;"></i>Products</h3>
       </div>
-    </div>
-    <div class="col-md-4">
-      <div class = "product-search" style="text-align:right">
+    </div><!-- SPACE WOULD BREAK INLINE BLOCK
+    --><div class="col-md-6 title-col">
+      <div class="product-search" style="text-align:right">
         <%= search_form_for @q_products, html: { class: "form-inline"} do |f| %>
           <% f.search_field :name_cont, placeholder: "Search product..", class: 'form-control' %>
         <% end %>

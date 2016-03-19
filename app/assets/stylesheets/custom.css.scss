@@ -352,6 +352,22 @@ a {
 }
 
 /*SIDEBARS */
+#sidebar-button {
+  margin-top: 15px;
+  background: white;
+  margin-left: 30px;
+  .btn {
+    background: white;
+    color: $garmin-blue;
+    border: 1px $grey-medium-light solid;
+    &:hover {
+      background: $garmin-blue;
+      color: white;
+      border: 1px $garmin-blue solid;
+    }
+  }
+}
+
 #sidebar-user, #sidebar-product {
   margin-top: 15px;
   background: white;

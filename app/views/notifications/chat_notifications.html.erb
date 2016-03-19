@@ -1,6 +1,10 @@
 <% provide(:title, 'Chat notifications') %>
 <div class= "container-fluid notification-container">
-  <h3>Chat notifications</h3>
+  <div class="row title-row">
+    <div class="col-md-12 title-col">
+      <h3>Chat Notifications</h3>
+    </div>
+  </div>
   <div class="chat-notifications-index">
     <%= render @chat_notifications || "There are no chat notifications at the moment." %>
   </div>

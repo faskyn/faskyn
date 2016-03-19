@@ -1,10 +1,10 @@
 <% provide(:title, 'Incoming tasks') %>
 <div class= "container-fluid task-container">
   <div class="row task-header">
-    <h3>Incoming tasks</h3>
+    <h3>Incoming Tasks</h3>
     <span class="rightfloat">
       <div class="btn-group" role="group" aria-label="...">
-        <%= link_to "Completed tasks", completed_tasks_user_tasks_path(current_user), class: "btn btn-default", style: "margin-right:0px;border-right:0px;" %>
+        <%= link_to "Completed Tasks", completed_tasks_user_tasks_path(current_user), class: "btn btn-default", style: "margin-right:0px;border-right:0px;" %>
         <%= link_to "Outgoing Tasks", outgoing_tasks_user_tasks_path(current_user), class: "btn btn-default" %>
         <%= link_to "All Tasks", user_tasks_path(current_user), class: "btn btn-default" %>
       </div>

@@ -1,13 +1,13 @@
 <tr class = "product-index-row" data-link="<%= product_path(product) %>">
   <td class="col-md-3 name">
-    <span class="product-image">
+    <span class="product-image" style="height:100%;float:left;padding-right:5px;">
       <% if product.product_image_id %>
         <%= image_tag attachment_url(product, :product_image, :fill, 45, 45) %>
       <% else %>
         <%= image_tag("garminwhitelogoborder.png", size: "45x45") %>
       <% end %>
     </span>
-    <span class="product-name">
+    <span class="product-name" style="vertical-align:middle;height:100%;">
       <%= product.name %> 
     </span>
   </td>

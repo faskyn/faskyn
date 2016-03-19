@@ -7,13 +7,6 @@
       </div>
     </div>
   <% end %>
-  <div class="row title-row">
-    <div class="col-md-4 col-md-offset-4">
-      <div class="product-desc" style="text-align:center">
-        <h2>POSTS</h2>
-      </div>
-    </div>
-  </div>
   <% if policy(@post).create? %>
     <div class="post-create">
       <%= render 'form' %>

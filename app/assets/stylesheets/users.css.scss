@@ -46,9 +46,21 @@ $light-grey: #f7f7f7; //super light background color
 .user-container {
   padding-left:100px;
   padding-right:100px;
-  padding-top:40px;
+  padding-top:30px;
   .title-row {
-    padding-bottom:20px;
+    padding-bottom: 15px;
+    .title-col {
+       display: inline-block;
+       vertical-align: middle;
+       float:none;
+       color: $dark-grey;
+       h3 {
+         display:inline;
+       }
+       .user-search {
+         text-align:right;
+       }
+    }
   }
   table {
     color: $dark-grey;
@@ -113,8 +125,6 @@ $light-grey: #f7f7f7; //super light background color
 
 //search bar
 .user-search {
-  //margin-right:15px;
-  margin-top: 0.3em;
 }
 
 .ui-autocomplete {

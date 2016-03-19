@@ -1,7 +1,7 @@
 <% provide(:title, 'Tasks') %>
 <div class= "container-fluid task-container">
   <div class="row task-header">
-    <h3>ALL TASKS</h3>
+    <h3>All Tasks</h3>
     <span class="rightfloat">
       <%= link_to "NEW TASK", new_user_task_path(current_user), type: "button", class: "btn btn-primary newbutton", remote: true, 'data-toggle' => 'modal', 'data-target' => '#newtask' %>
       <div class="btn-group" role="group" aria-label="...">

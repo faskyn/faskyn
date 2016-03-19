@@ -9,12 +9,13 @@ $light-grey: #f7f7f7;
 
 .between-task-container {
 	background: $light-grey;
-	padding: 40px 60px 40px 60px;
+	padding: 30px 60px 40px 60px;
 	.task-header {
 		margin: 0 0 15px 0;
 		display:table;
 		width:100%;
 		h3 {
+			color: $dark-grey;
 			max-width:250px;
 			vertical-align:middle;
 			display:table-cell;
@@ -95,6 +96,7 @@ $light-grey: #f7f7f7;
 			max-width:250px;
 			vertical-align:middle;
 			display:table-cell;
+			color: $dark-grey;
 		}
 		.event-h4 {
 			max-width:300px;

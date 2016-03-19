@@ -5,9 +5,21 @@ $light-grey: #f7f7f7; //super light background color
 
 .product-container {
   background: $light-grey;
-  padding: 40px 100px 40px 100px;
+  padding: 30px 100px 40px 100px;
   .title-row {
-    padding-bottom:20px;
+    padding-bottom: 15px;
+    .title-col {
+      display: inline-block;
+      vertical-align: middle;
+      float:none;
+      color: $dark-grey;
+      h3 {
+        display:inline;
+      }
+      .product-search {
+        text-align:right;
+      }
+    }
   }
 }
 
