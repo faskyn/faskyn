@@ -47,13 +47,11 @@ class CommonMediasController < ApplicationController
     def formatting_links(message_links)
       formatted_message_links = []
       message_links.each do |message|
-        puts message[:link]
         message[:link].each do |link|
           array = {}
           array['link'] = link[0]
           array['created_at'] = message[:created_at]
           array['user_id'] = message[:user_id]
-          puts array
           formatted_message_links << array
         end
       end
