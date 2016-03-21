@@ -110,5 +110,6 @@ end
 group :production do
   gem 'rails_12factor', '~> 0.0.3'
   gem 'rack-timeout', '~> 0.3.2'
+  gem 'puma_worker_killer', '~> 0.0.5'
 end
 
