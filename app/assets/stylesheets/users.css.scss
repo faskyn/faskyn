@@ -44,8 +44,8 @@ $light-grey: #f7f7f7; //super light background color
 }
 
 .user-container {
-  padding-left:100px;
-  padding-right:100px;
+  padding-left:70px;
+  padding-right:70px;
   padding-top:30px;
   .title-row {
     padding-bottom: 15px;
@@ -101,17 +101,18 @@ $light-grey: #f7f7f7; //super light background color
 
 //index page
 .user-profile-index {
-  .avatar {
-    float: left;
-    margin-right: 15px;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    vertical-align: middle;
-    margin-bottom: 5px;
-    margin-top: 5px;
-  }
-  .user-index-row {
+  text-align: center;
+  .user-index-well  {
+    background:white;
+    margin-bottom:10px;
+    .avatar {
+      border-radius: 50%;
+      width: 65px;
+      height: 65px;
+      vertical-align: middle;
+      margin-bottom: 5px;
+      margin-top: 5px;
+    }
     &:hover {
       background-color: $grey-medium-light;
       cursor: pointer;

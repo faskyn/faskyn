@@ -8,10 +8,10 @@
     </div>
   <% end %>
   <div class="row title-row">
-    <div class="col-md-6 title-col">
+    <div class="col-md-6 title-col" style="padding-left:5px;">
       <h3><i class="fa fa-users" style="padding-right:10px;"></i>Users</h3>
     </div><!-- SPACE WOULD BREAK INLINE BLOCK
-    --><div class="col-md-6 title-col">
+    --><div class="col-md-6 title-col" style="padding-right:5px;">
       <div class = "user-search">
         <%= search_form_for @q_users, html: { class: "form-inline"} do |f| %>
           <% f.search_field :profile_full_name_or_profile_company_cont, placeholder: "Search user..", class: 'form-control' %>
@@ -19,22 +19,11 @@
       </div>
     </div>
   </div>
-  <div class="panel panel-default">
-    <table class="table">
-      <thead>
-        <tr>
-          <th class="col-md-6">Name</th>
-          <th class="col-md-4">Description</th>
-          <th class="col-md-2">City</th>
-        </tr>
-      </thead>
-      <tbody class="user-profile-index">
-        <%= render @users %>
-      </tbody>
-    </table>
+  <div class="user-profile-index">
+    <%= render :partial => "user" %>
   </div>
   <div id="infinite-user-scrolling">
-    <%= will_paginate @users %>
+    <%= will_paginate :partial => "user" %>
   </div>
   <div class="no-more">
     <p>No more users.</p>

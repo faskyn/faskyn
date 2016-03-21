@@ -1,1 +1,1 @@
-PumaWorkerKiller.enable_rolling_restart
+PumaWorkerKiller.enable_rolling_restart if Rails.env.production?

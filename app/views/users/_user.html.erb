@@ -1,20 +1,18 @@
-<tr class="user-index-row" data-link="<%= user_path(user) %>">
-  <td class="col-md-6 name">
-    <%= image_tag user.avatar.url(:base_thumb), class: "avatar" %>
-    <div class="user-fullname">
-      <%= user.full_name %>
-    </div>
-    <span class="company">
-      <%= user.job_title %> at <%= user.company %>
-    </span>
-  </td>
-  <td class="col-md-4 description">
-    <%= user.description || "-" %>
-  </td>
-  <td class="col-md-2 location">
-    <%= user.location || "-" %>
-  </td>
-</tr>
-
+<% @users.each_slice(4) do |users_for_row| %>
+  <div class="row">
+    <% users_for_row.each do |user| %>
+      <div class="col-md-3" style="padding-left:5px;padding-right:5px;">
+        <%= link_to user do %>
+          <div class="well user-index-well">
+              <div><%= image_tag user.profile.avatar.url(:base_thumb), class: "avatar" %></div>
+              <h4 style="color:black"><%= user.full_name %></h4>
+              <h5><%= user.company %></h5>
+              <h5><%= user.job_title %></h5>
+            </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
 
 

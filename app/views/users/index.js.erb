@@ -1,6 +1,6 @@
-$('.user-profile-index').append('<%= j render @users %>');
+$('.user-profile-index').append('<%= j render partial: "users/user" %>');
 <% if @users.next_page %>
-  $('.pagination').replaceWith('<%= j will_paginate @users %>');
+  $('.pagination').replaceWith('<%= j will_paginate partial: "users/user" %>');
 <% else %>
   $(window).off('scroll');
   $('.pagination').remove();
