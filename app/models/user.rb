@@ -87,11 +87,11 @@ class User < ActiveRecord::Base
 
   def decreased_chat_number_pusher
     number = self.new_chat_notification
-    Pusher['private-'+ self.id.to_s].trigger('new_chat_notification', { number: number })
+    Pusher['private-'+ self.id.to_s].trigger_async('new_chat_notification', { number: number })
   end
 
   def decreased_other_number_pusher
     number = self.new_other_notification
-    Pusher['private-'+ self.id.to_s].trigger('new_other_notification', { number: number })
+    Pusher['private-'+ self.id.to_s].trigger_async('new_other_notification', { number: number })
   end
 end

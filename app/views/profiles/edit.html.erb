@@ -29,22 +29,22 @@
       <div class="row social-media">
         <div class="col-md-6">
           <% if @twitter.blank? %>
-            <%= link_to "/auth/twitter", class: "btn btn-social-reg btn-twitter" do %>
+            <%= link_to "/auth/twitter", class: "btn btn-social-reg btn-twitter", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Connecting..."} do %>
               <i class="fa fa-twitter"> Twitter</i>
             <% end %>
           <% else %>
-            <%= link_to "/auth/twitter", class: "btn btn-social-reg btn-twitter linked" do %>
+            <%= link_to "/auth/twitter", class: "btn btn-social-reg btn-twitter linked", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Connecting..."} do %>
               <i class="fa fa-twitter"> Twitter (linked)</i>
             <% end %>
           <% end %>
         </div>
         <div class="col-md-6">
         <% if @linkedin.blank? %>
-          <%= link_to "/auth/linkedin", class: "btn btn-social-reg btn-linkedin" do %>
+          <%= link_to "/auth/linkedin", class: "btn btn-social-reg btn-linkedin", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Connecting..."} do %>
             <i class="fa fa-linkedin"> LinkedIn</i>
           <% end %>
         <% else %>
-          <%= link_to "/auth/linkedin", class: "btn btn-social-reg btn-linkedin linked" do %>
+          <%= link_to "/auth/linkedin", class: "btn btn-social-reg btn-linkedin linked", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Connecting..."} do %>
             <i class="fa fa-linkedin"> LinkedIn (linked)</i>
           <% end %>
         <% end %>

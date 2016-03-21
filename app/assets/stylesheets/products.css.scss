@@ -75,16 +75,18 @@ $light-grey: #f7f7f7; //super light background color
   .product-index-row {
     &:hover {
       background-color: $grey-medium-light;
-      cursor: pointer;
     }
   }
-	.oneliner, .company, .updated {
+	.image, .oneliner, .company, .updated {
 		text-align: center;
     vertical-align: middle;
 	}
+  .link-name, .link-oneliner, .link-updated {
+    padding: 10px 5px 10px 5px;
+  }
   .name {
-    text-align: left;
-    vertical-align: middle;
+    // text-align: left;
+    // vertical-align: middle;
   }
   a {
     text-decoration: none;
