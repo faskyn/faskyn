@@ -9,9 +9,7 @@ class Posts::PostCommentRepliesController < ApplicationController
     @post_comment_reply.user = current_user
     @post_comment_reply.save!
     if @post_comment_reply.save
-      (([@post_comment.post.user] + [@post_comment.user] + @post_comment.users).uniq - [current_user]).each do |post_replier|
-        Notification.create(recipient_id: post_replier.id, sender_id: current_user.id, notifiable: @post_comment.post, action: "commented")
-      end
+      @post_comment.send_post_comment_reply_creation_notification(@post_comment_reply)
       respond_to do |format|
         format.html { redirect_to posts_path, notice: "Comment reply saved!" }
         format.js
@@ -49,10 +47,6 @@ class Posts::PostCommentRepliesController < ApplicationController
   end
 
   private
-
-    # def post_owner_check(post_comment, post_comment_reply)
-    #   post_comment_reply.user == post_comment.post.user ? [] : [post.user]
-    # end
 
     def post_comment_reply_params
       params.require(:post_comment_reply).permit(:body, :user)

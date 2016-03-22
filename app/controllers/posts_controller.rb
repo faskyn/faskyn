@@ -3,9 +3,6 @@ class PostsController < ApplicationController
   before_action :set_and_authorize_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    # if params[:check_and_decrease]
-    #   current_user.decreasing_post_notification_number(params[:post_id])
-    # end
     @q_posts = Post.ransack(params[:q])
     @posts = @q_posts.result(distinct: true).order(updated_at: :desc).includes(:user).paginate(page: params[:page], per_page: 12)
     authorize @posts
@@ -30,6 +27,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.new(post_params)
     authorize @post
     @post_comment = PostComment.new
+    @post_comment_reply = PostCommentReply.new
     if @post.save
       #@post.send_post_creation_email_notification(@post.user)
       respond_to do |format|
@@ -49,6 +47,7 @@ class PostsController < ApplicationController
 
   def update
     @post_comment = PostComment.new
+    @post_comment_reply = PostCommentReply.new
     if @post.update_attributes(post_params)
       respond_to do |format|
         format.html { redirect_to @post, notice: "Post was successfully updated!"}

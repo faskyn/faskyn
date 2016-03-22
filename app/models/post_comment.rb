@@ -11,10 +11,10 @@ class PostComment < ActiveRecord::Base
   scope :ordered, -> { order(updated_at: :desc) }
   scope :included, -> { includes(:user, :user_profile) }
 
-  def send_post_comment_reply_creation_notification(current_user)
-    post_repliers = ([user] + [post.user] + users).uniq - [ current_user ]
+  def send_post_comment_reply_creation_notification(reply)
+    post_repliers = ([user] + [post.user] + users).uniq - [ reply.user ]
     post_repliers.each do |replier|
-      Notification.create(recipient_id: replier.id, sender_id: current_user.id, notifiable: self.post, action: "commented")
+      Notification.create(recipient_id: replier.id, sender_id: reply.user_id, notifiable: self.post, action: "commented")
     end
   end
 end

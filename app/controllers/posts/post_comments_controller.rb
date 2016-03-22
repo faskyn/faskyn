@@ -8,10 +8,7 @@ class Posts::PostCommentsController < ApplicationController
     @post_comment.user = current_user
     @post_comment.save!
     if @post_comment.save
-      # ((@post.users + [@post.user]).uniq - [current_user]).each do |post_commenter|
-      #   Notification.create(recipient_id: post_commenter.id, sender_id: current_user.id, notifiable: @post_comment.post, action: "commented")
-      # end
-      @post_comment.send_post_comment_reply_creation_notification(current_user)
+      @post.send_post_comment_creation_notification(@post_comment)
       @post_comment_reply = PostCommentReply.new
       respond_to do |format|
         format.html { redirect_to posts_path, notice: "Comment saved!" }

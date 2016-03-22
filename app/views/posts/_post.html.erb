@@ -42,7 +42,7 @@
 
   </div>
   <div class="panel-body" style="padding-top:0px;background:#f9f9f9;">
-    <div class = "row comment-top-row">
+    <div class = "row comment-top-row" style="padding-bottom:10px;">
       <div class="col-md-12 post-comment-form">
         <div class="row">
           <div class="col-md-12">
@@ -53,6 +53,15 @@
         </div>
       </div>
     </div>
+    <% if post.post_comments.size > 3 %>
+      <div class="row open-all-post-comments-row" style="padding-bottom:10px;c">
+        <div class="col-md-12">
+          <div class="col-md-12">
+            <a class="open-all-post-comments" data-pid="<%= post.id %>">Show all</a>
+          </div>
+        </div>
+      </div>
+    <% end %>
     <div class = "row">
       <div class="col-md-12 post-comment-insert-<%= post.id%>">
         <%= render partial: 'posts/post_comments/post_comment', collection: post.post_comments.ordered.included, as: :post_comment, locals: {post: post} %>

@@ -18,8 +18,14 @@ $(document).on("page:change", function() {
         $.getScript(more_posts_url);
       }
     });
-  };   
+  };
+
+  if (window.location.hash.length > 0) {
+    showPostAnchorComments();
+  };
 });
+
+//////////////////////////////////////////////////////////
 
 $(document).on('keyup', '.post-create-body', function() {
 	if($(this).val().length !=0){
@@ -33,6 +39,13 @@ $(document).on('keyup', '.post-create-body', function() {
 $(document).on('keydown', '.post-comment-text-area', function (event) {
   var post_id = $(this).data('pid');
   checkPostCommentInputKey(event, $(this), post_id);
+});
+
+$(document).on('click', '.open-all-post-comments', function (event) {
+  var post_id = $(this).data('pid');
+  var all_replies = $('#post_' + post_id).find('.post-comment-replies:has(.post-comment-reply)');
+  all_replies.show();
+  $(this).closest('.open-all-post-comments-row').hide();
 });
 
 $(document).on('click', '.open-post-comment-reply', function (event) {
@@ -51,8 +64,15 @@ function checkPostCommentInputKey(event, commenttextarea, post_id) {
   }
 };
 
-function edit_post_hide_danger($container) {
+function editPostHideDanger($container) {
   $container.find('.updatepost').on('hidden.bs.modal', function (e) {
     $('.alert-danger').hide();
   });
+};
+
+function showPostAnchorComments() {
+  var post_id = window.location.hash.substr(1);
+  var all_replies = $('#' + post_id).find('.post-comment-replies:has(.post-comment-reply)');
+  all_replies.show();
+  $('#' + post_id).find('.open-all-post-comments-row').hide();
 };
