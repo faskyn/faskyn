@@ -22,6 +22,9 @@ $comment-grey: #f9f9f9;
 .post-panel {
   .panel-heading {
 	  background: white;
+    a {
+      color: $dark-grey;
+    }
   }
 	list-style: none;
   .post-info {
@@ -50,7 +53,7 @@ $comment-grey: #f9f9f9;
       }
     }
     .post-comment-body {
-      font-size:12px;
+      font-size: 12px;
       .post-comment-editing-deleting {
         display: none;
         .post-comment-edit-fa, .post-comment-delete-fa {
@@ -58,14 +61,53 @@ $comment-grey: #f9f9f9;
           cursor: pointer;
         }
       }
+      &:hover .post-comment-editing-deleting  {
+        display: inline;
+        color: $dark-grey;
+      }
     }
     a {
       decoration: none;
       color: $dark-grey;
     }
-    &:hover .post-comment-editing-deleting  {
-      display: inline;
-      color: $dark-grey;
+  }
+  .open-post-comment-reply {
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .post-comment-replies {
+    display:none;
+    .post-comment-reply-box {
+      padding-top:5px;
+      margin-bottom:5px;
+      .post-comment-reply-info {
+        font-size: 12px;
+        .post-comment-reply-fullname{
+          font-weight: bold;
+        }
+        .post-comment-reply-updated {
+          color: $dark-grey;
+          padding-left: 8px;
+        }
+      }
+      .post-comment-reply-body {
+        font-size: 12px;
+        .post-comment-reply-editing-deleting {
+          display: none;
+          .post-comment-reply-edit-fa, .post-comment-reply-delete-fa {
+            padding-left: 5px;
+            cursor: pointer;
+          }
+        }
+        &:hover .post-comment-reply-editing-deleting  {
+          display: inline;
+          color: $dark-grey;
+        }
+      }
+      a {
+        decoration: none;
+        color: $dark-grey;
+      }
     }
   }
 }
@@ -79,5 +121,11 @@ $comment-grey: #f9f9f9;
 .post-comment-avatar {
   width: 40px;
   height: 40px;
+  border-radius: 10%;
+}
+
+.post-comment-reply-avatar {
+  width: 35px;
+  height: 35px;
   border-radius: 10%;
 }

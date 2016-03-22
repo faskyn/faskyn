@@ -7,6 +7,7 @@ class Message < ActiveRecord::Base
 
   validates :conversation, presence: true
   validates :user, presence: true
+  validates :body, length: { maximum: 5000, message: "can't be longer than 5000 characters" }
 
   scope :with_file, -> { where.not(message_attachment_filename: nil) }
   scope :with_link, -> { where.not(link: :nil) }

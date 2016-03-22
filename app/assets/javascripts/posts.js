@@ -35,6 +35,11 @@ $(document).on('keydown', '.post-comment-text-area', function (event) {
   checkPostCommentInputKey(event, $(this), post_id);
 });
 
+$(document).on('click', '.open-post-comment-reply', function (event) {
+  var post_comment_id = $(this).data('pcid');
+  $('#post-comment-replies-' + post_comment_id).toggle();
+});
+
 function checkPostCommentInputKey(event, commenttextarea, post_id) {
   if (event.keyCode == 13 && event.shiftKey == 0) {
     event.preventDefault();

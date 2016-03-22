@@ -1,0 +1,9 @@
+$('#deletepostcommentreply_<%= @post_comment_reply.id %>').modal('hide');
+$("#postcommentreply-<%= @post_comment_reply.id %>").fadeOut(400, function(){
+	$(this).remove();
+});
+<% if @post_comment.post_comment_replies.size == 0 %>
+	$("#post-comment-number-<%= @post_comment.id %>").html("Reply");
+<% else %>
+	$("#post-comment-number-<%= @post_comment.id %>").html("<%= pluralize(@post_comment.post_comment_replies.size, 'Reply') %>");
+<% end %>

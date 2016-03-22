@@ -28,14 +28,10 @@
             </a>
             <ul class = "dropdown-menu dropdown-menu-right">
               <li>
-                <%= link_to edit_post_path(post), remote: true, type: "button" do %>
-                  <span data-toggle="modal" data-target="#updatepost_<%= post.id %>">Edit</span>
-                <% end %>
+                <%= link_to "Edit Post", edit_post_path(post), remote: true, type: "button", 'data-toggle' => "modal", 'data-target' => "#updatepost_#{post.id}" %>
               </li>   
               <li>
-                <%= link_to post_path(post), remote: true , type: "button" do %>
-                  <span data-toggle="modal" data-target="#deletepost_<%= post.id %>">Delete</span>
-                <% end %>
+                <a href="#" data-toggle="modal" role="button" data-target="#deletepost_<%= post.id %>">Delete Post</a>
               </li>
             </ul>
           </li>
@@ -47,23 +43,19 @@
   </div>
   <div class="panel-body" style="padding-top:0px;background:#f9f9f9;">
     <div class = "row comment-top-row">
-      <div class="col-md-12">
-        <div class="col-md-12 post-comment-form">
-          <div class="row">
+      <div class="col-md-12 post-comment-form">
+        <div class="row">
+          <div class="col-md-12">
             <div class="col-md-12">
-              <div class="col-md-12">
-            <%= render partial: 'posts/post_comments/post_comment_form', locals: { post: post } %>
-              </div>
+              <%= render partial: 'posts/post_comments/post_comment_form', locals: { post: post } %>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class = "row">
-      <div class="col-md-12">
-        <div class="col-md-12 post-comment-insert-<%= post.id%>">
-          <%= render partial: 'posts/post_comments/post_comment', collection: post.post_comments.includes(:user).ordered.included, as: :post_comment, locals: {post: post} %>
-        </div>
+      <div class="col-md-12 post-comment-insert-<%= post.id%>">
+        <%= render partial: 'posts/post_comments/post_comment', collection: post.post_comments.ordered.included, as: :post_comment, locals: {post: post} %>
       </div>
     </div>
   </div>

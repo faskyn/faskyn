@@ -13,6 +13,13 @@ class Post < ActiveRecord::Base
     12
   end
 
+  def send_post_comment_creation_notification(current_user)
+    post_commenters = ([user] + users).uniq - [ current_user ]
+    post_commenters.each do | commenter |
+      Notification.create(recipient_id: commenter.id, sender_id: current_user.id, notifiable: self, action: "commented")
+    end
+  end
+
   # def send_post_creation_email_notification(writer)
   #   users = User.all - [writer]
   #   users.each do |reader|

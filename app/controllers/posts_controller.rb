@@ -11,6 +11,7 @@ class PostsController < ApplicationController
     authorize @posts
     @post = Post.new
     @post_comment = PostComment.new
+    @post_comment_reply = PostCommentReply.new
     respond_to do |format|
       format.html
       format.js

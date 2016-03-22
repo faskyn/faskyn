@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
 
   has_many :posts
   has_many :post_comments, through: :posts
+  has_many :post_comment_replies, through: :post_comments
 
   delegate :first_name, :last_name, :full_name, :company, :job_title, :phone_number, :description, :location, :avatar, to: :profile, allow_nil: true
   

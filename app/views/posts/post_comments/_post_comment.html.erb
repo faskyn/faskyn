@@ -14,6 +14,7 @@
           <span class="post-comment-updated"><%= local_time_ago(post_comment.updated_at) %></span>
         </div>
         <div class="post-comment-body">
+
           <% if policy(post_comment).edit? && policy(post_comment).delete? %>
             <%= find_links(best_in_place post_comment, :body, as: :input, url: post_post_comment_path(post_comment.post, post_comment), activator: "#activate-comment-edit-#{post_comment.id}")%>
             <span class="post-comment-editing-deleting">
@@ -21,19 +22,46 @@
                 <i class="fa fa-pencil" id="activate-comment-edit-<%=post_comment.id %>"></i>
               </span>
               <span class="post-comment-delete-fa">
-                <%= link_to post_post_comment_path(post_comment.post, post_comment), remote: true , type: "button" do %>
-                  <i class="fa fa-trash" data-toggle="modal" data-target="#deletepostcomment_<%= post_comment.id %>"></i>
-                <% end %>
+                <a href="#" data-toggle="modal" role="button" data-target="#deletepostcomment_<%= post_comment.id %>"><i class="fa fa-trash"></i></a>
               </span>
             </span>
           <% else %>
             <%= find_links(h post_comment.body) %>
           <% end %>
+
         </div>
+        <a class="open-post-comment-reply" data-pcid="<%= post_comment.id %>">
+          <span><i class="fa fa-reply"></i></span>
+          <span id="post-comment-number-<%= post_comment.id %>">
+            <% if post_comment.post_comment_replies.size == 0 %>
+              Reply
+            <% else %>
+              <%= pluralize(post_comment.post_comment_replies.size, "Reply") %> 
+            <% end %>
+          </span>
+        </a>
       </div>
     </div>
     <div class="col-md-2">
     </div>
+  </div>
+  <div id="post-comment-replies-<%= post_comment.id%>" class="post-comment-replies">
+      <div class = "row reply-row">
+        <div class="col-md-12">
+          <div class="col-md-10 col-md-offset-2 post-comment-reply-insert-<%= post_comment.id%>">
+            <%= render partial: 'posts/post_comment_replies/post_comment_reply', collection: post_comment.post_comment_replies.ordered.included, as: :post_comment_reply, locals: { post_comment: post_comment } %>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="row reply-form-row">
+          <div class="col-md-12">
+            <div class="col-md-10 col-md-offset-2 comment-reply-form">
+            <%= render partial: 'posts/post_comment_replies/post_comment_reply_form', locals: { post_comment: post_comment } %>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
 </div>
 

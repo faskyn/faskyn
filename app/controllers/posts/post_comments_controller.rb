@@ -8,9 +8,11 @@ class Posts::PostCommentsController < ApplicationController
     @post_comment.user = current_user
     @post_comment.save!
     if @post_comment.save
-      (@post.users.uniq - [current_user, @post.user] + post_owner_check(@post, @post_comment)).each do |post_commenter|
-        Notification.create(recipient_id: post_commenter.id, sender_id: current_user.id, notifiable: @post_comment.post, action: "commented")
-      end
+      # ((@post.users + [@post.user]).uniq - [current_user]).each do |post_commenter|
+      #   Notification.create(recipient_id: post_commenter.id, sender_id: current_user.id, notifiable: @post_comment.post, action: "commented")
+      # end
+      @post_comment.send_post_comment_reply_creation_notification(current_user)
+      @post_comment_reply = PostCommentReply.new
       respond_to do |format|
         format.html { redirect_to posts_path, notice: "Comment saved!" }
         format.js
@@ -20,7 +22,8 @@ class Posts::PostCommentsController < ApplicationController
 
   def update
     @post_comment = PostComment.find(params[:id])
-      respond_to do |format|
+    authorize @post_comment
+    respond_to do |format|
       if @post_comment.update_attributes(post_comment_params)
         format.json { respond_with_bip(@post_comment) }
       else
@@ -31,6 +34,7 @@ class Posts::PostCommentsController < ApplicationController
 
   def destroy
     @post_comment = PostComment.find(params[:id])
+    authorize @post_comment
     if @post_comment.destroy
       respond_to do |format|
         format.html { redirect_to posts_path, notice: "Comment got deleted!"}
@@ -44,11 +48,12 @@ class Posts::PostCommentsController < ApplicationController
     end
   end
 
-  private
+  def show
+    @post_comment = PostComment.find(params[:id])
+    authorize @post_comment
+  end
 
-    def post_owner_check(post, post_comment)
-      post_comment.user == post.user ? [] : [post.user]
-    end
+  private
 
     def post_comment_params
       params.require(:post_comment).permit(:body, :user)

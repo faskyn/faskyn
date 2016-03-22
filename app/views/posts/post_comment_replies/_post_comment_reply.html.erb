@@ -1,0 +1,63 @@
+<div class="post-comment-reply" id="postcommentreply-<%= post_comment_reply.id %>">
+  <div class="row post-comment-reply-box">
+    <div class="col-md-10">
+      <div class="col-md-2">
+        <%= link_to user_path(post_comment_reply.user) do %>
+          <%= image_tag post_comment_reply.user.avatar.url(:base_thumb), class: 'post-comment-reply-avatar' %>
+        <% end %>
+      </div>
+      <div class="col-md-10">
+        <div class="post-comment-reply-info">
+          <%= link_to user_path(post_comment_reply.user) do %>
+            <span class="post-comment-reply-fullname"><%= post_comment_reply.user.full_name %></span>
+          <% end %>
+          <span class="post-comment-reply-updated"><%= local_time_ago(post_comment_reply.updated_at) %></span>
+        </div>
+        <div class="post-comment-reply-body">
+          <% if policy(post_comment_reply).edit? && policy(post_comment_reply).delete? %>
+
+            <%= find_links(best_in_place post_comment_reply, :body, as: :input, url: post_comment_post_comment_reply_path(post_comment_reply.post_comment, post_comment_reply), activator: "#activate-comment-reply-edit-#{post_comment_reply.id}")%>
+            <span class="post-comment-reply-editing-deleting">
+              <span class="post-comment-reply-edit-fa">
+                <i class="fa fa-pencil" id="activate-comment-reply-edit-<%=post_comment_reply.id %>"></i>
+              </span>
+              <span class="post-comment-reply-delete-fa">
+                <a href="#" data-toggle="modal" role="button" data-target="#deletepostcommentreply_<%= post_comment_reply.id %>"><i class="fa fa-trash"></i></a>
+              </span>
+            </span>
+
+          <% else %>
+
+            <%= find_links(h post_comment_reply.body) %>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if policy(post_comment_reply).delete? %>
+
+  <%= form_for([post_comment_reply.post_comment, post_comment_reply], method: :delete, remote: true) do |f| %>
+    <div class="modal fade" id="deletepostcommentreply_<%= post_comment_reply.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" style="text-align:left">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Delete Reply</h4>
+          </div>
+          <div class="modal-body">
+            <h4>Are you sure?</h4>
+            <p> </p>  
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="deletepostcommentreplyclose">Close</button>
+              <%= f.submit "Delete Comment", class: 'btn btn-danger' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+<% end %>

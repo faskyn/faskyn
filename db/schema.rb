@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160315093456) do
+ActiveRecord::Schema.define(version: 20160322124830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,17 @@ ActiveRecord::Schema.define(version: 20160315093456) do
   add_index "notifications", ["recipient_id"], name: "index_notifications_on_recipient_id", using: :btree
   add_index "notifications", ["sender_id"], name: "index_notifications_on_sender_id", using: :btree
 
+  create_table "post_comment_replies", force: :cascade do |t|
+    t.integer  "user_id",         null: false
+    t.integer  "post_comment_id", null: false
+    t.string   "body",            null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "post_comment_replies", ["post_comment_id"], name: "index_post_comment_replies_on_post_comment_id", using: :btree
+  add_index "post_comment_replies", ["user_id"], name: "index_post_comment_replies_on_user_id", using: :btree
+
   create_table "post_comments", force: :cascade do |t|
     t.integer  "post_id",    null: false
     t.string   "body",       null: false
@@ -105,6 +116,17 @@ ActiveRecord::Schema.define(version: 20160315093456) do
 
   add_index "post_comments", ["post_id"], name: "index_post_comments_on_post_id", using: :btree
   add_index "post_comments", ["user_id"], name: "index_post_comments_on_user_id", using: :btree
+
+  create_table "post_replies", force: :cascade do |t|
+    t.integer  "post_id"
+    t.integer  "post_comment_id"
+    t.string   "body"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "post_replies", ["post_comment_id"], name: "index_post_replies_on_post_comment_id", using: :btree
+  add_index "post_replies", ["post_id"], name: "index_post_replies_on_post_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -256,6 +278,8 @@ ActiveRecord::Schema.define(version: 20160315093456) do
   add_foreign_key "messages", "users"
   add_foreign_key "notifications", "users", column: "recipient_id"
   add_foreign_key "notifications", "users", column: "sender_id"
+  add_foreign_key "post_comment_replies", "post_comments"
+  add_foreign_key "post_comment_replies", "users"
   add_foreign_key "post_comments", "posts"
   add_foreign_key "post_comments", "users"
   add_foreign_key "posts", "users"

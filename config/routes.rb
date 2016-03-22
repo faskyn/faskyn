@@ -48,12 +48,12 @@ Rails.application.routes.draw do
   end
 
   resources :posts do
-    resources :post_comments, only: [:create, :update, :destroy], module: :posts
+    resources :post_comments, only: [:create, :update, :destroy, :show], module: :posts
   end
 
-  #resources :post_comments do 
-    #resources :post_repiles, module: :comments
-  #end
+  resources :post_comments, only: [] do 
+    resources :post_comment_replies, only: [:create, :update, :destroy, :show], module: :posts
+  end
 
   get 'users/:user_id/common_medias', to: 'common_medias#common_medias', as: :common_medias_user_common_medias
   get 'users/:user_id/common_medias/get_files', to: 'common_medias#get_files', as: :get_files_user_common_medias
