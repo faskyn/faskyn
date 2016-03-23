@@ -6,10 +6,10 @@ json.array! @other_notifications do |notification|
   json.sender_name notification.sender.profile.full_name
 	json.action notification.action
   json.notifiable notification.notifiable_type
-  if notification.sender.profile.avatar_url == "defaultgarmin200x200.png"
-    json.profile_image_url "assets/base_thumb_defaultgarmin200x200.png"
+  if notification.sender.profile.avatar_url == "default.png"
+    json.profile_image_url "assets/small_thumb_default.png"
   else
-    json.profile_image_url notification.sender.profile.avatar_url
+    json.profile_image_url notification.sender.profile.avatar.url(:small_thumb)
   end
   if notification.notifiable_type == "Task"
     json.what do

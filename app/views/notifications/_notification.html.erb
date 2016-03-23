@@ -6,7 +6,7 @@
   <% end %>
     <% if notification.notifiable_type == "Post" %>
       <%= link_to dropdown_checking_decreasing_user_notifications_path(current_user,anchor_param: "post_#{notification.notifiable_id}", post_id: notification.notifiable_id) do %>
-        <%= image_tag notification.sender.avatar.url(:base_thumb), class: 'avatar' %>
+        <%= image_tag notification.sender.avatar.url(:small_thumb), class: 'notification-index-avatar' %>
         <span>
           <div class="subject">
             <%= notification.sender.full_name %> has <%= notification.action %> on a <%= notification.notifiable_type.underscore %> you are following.
@@ -22,7 +22,7 @@
       <% end %>
     <% else %>
       <%= link_to user_path(notification.sender) do %>
-        <%= image_tag notification.sender.avatar.url(:base_thumb), class: 'avatar' %>
+        <%= image_tag notification.sender.avatar.url(:small_thumb), class: 'notification-index-avatar' %>
         <span>
           <div class="subject">
             <% if notification.notifiable_type == "Message" %>

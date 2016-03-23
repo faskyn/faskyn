@@ -151,7 +151,7 @@ a {
   }
 
   .navbar-right li {
-    .avatar {
+    .navbar-avatar {
       width:30px;
       height:30px;
       border-radius: 10%;
@@ -402,12 +402,12 @@ a {
       vertical-align: middle;
       
     }
-    .avatar {
+    .left-sidebar-avatar {
       float: left;
       margin-right: 8px;
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
+      // width: 40px;
+      // height: 40px;
       vertical-align: middle;
     }
     .element-name {

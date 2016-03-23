@@ -6,7 +6,11 @@ json.array! @chat_notifications do |notification|
   json.sender_name notification.sender.profile.full_name
 	json.action notification.action
   json.notifiable notification.notifiable_type
-  json.profile_image_url notification.sender.profile.avatar_url
+  if notification.sender.profile.avatar_url == "default.png"
+    json.profile_image_url "assets/small_thumb_default.png"
+  else
+    json.profile_image_url notification.sender.profile.avatar.url(:small_thumb)
+  end
   json.what do
      json.did "#{notification.action} you a #{notification.notifiable_type.underscore}"
   end

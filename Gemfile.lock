@@ -480,7 +480,7 @@ DEPENDENCIES
   bootstrap-will_paginate (~> 0.0.10)
   bootstrap3-datetimepicker-rails (~> 4.17, >= 4.17.37)
   bullet (~> 4.14, >= 4.14.10)
-  byebug
+  byebug (~> 8.2, >= 8.2.2)
   carrierwave (~> 0.10.0)
   cocoon (~> 1.2, >= 1.2.7)
   coffee-rails (~> 4.1.0)

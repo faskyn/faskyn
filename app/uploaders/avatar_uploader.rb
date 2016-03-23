@@ -35,19 +35,15 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  #process :resize_to_fit => [200, 200]
+  process :resize_to_fit => [400, 400]
 
   version :base_thumb do
-    process resize_to_fit: [85, 85]
+    process resize_to_fill: [85, 85]
   end
 
-  #version :medium_thumb, :from_version => :base_thumb do
-  #  process :resize_to_fill => [60, 60]
-  #end
-
-  #version :small_thumb, :from_version => :base_thumb do
-  #  process :resize_to_fill => [40, 40]
-  #end
+  version :small_thumb, :from_version => :base_thumb do
+   process :resize_to_fill => [40, 40]
+  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
@@ -62,7 +58,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # end
 
   def default_url
-    [version_name, "defaultgarmin200x200.png"].compact.join('_')
+    [version_name, "default.png"].compact.join('_')
   end
 
 end

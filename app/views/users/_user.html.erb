@@ -4,7 +4,7 @@
       <div class="col-md-3" style="padding-left:5px;padding-right:5px;">
         <%= link_to user do %>
           <div class="well user-index-well">
-              <div><%= image_tag user.profile.avatar.url(:base_thumb), class: "avatar" %></div>
+              <div><%= image_tag user.profile.avatar.url(:base_thumb), class: "profile-index-avatar" %></div>
               <h4 style="color:black"><%= user.full_name %></h4>
               <h5><%= user.company %></h5>
               <h5><%= user.job_title %></h5>

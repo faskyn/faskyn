@@ -105,7 +105,7 @@ $light-grey: #f7f7f7; //super light background color
   .user-index-well  {
     background:white;
     margin-bottom:10px;
-    .avatar {
+    .profile-index-avatar {
       border-radius: 50%;
       width: 65px;
       height: 65px;
@@ -178,11 +178,11 @@ $light-grey: #f7f7f7; //super light background color
       margin-top: 0px;
       margin-bottom: 15px;
     }
-    .avatar{
+    .profile-show-avatar{
       float: left;
       margin-right: 15px;
-      width: 85px;
-      height: 85px;
+      //width: 85px;
+      //height: 85px;
       border-radius: 50%;
       margin-bottom: 10px;
     }
@@ -223,7 +223,7 @@ $light-grey: #f7f7f7; //super light background color
     }
   }
 
-  .avatar{
+  .right-sidebar-avatar{
     float: left;
     margin-right: 15px;
     width: 65px;
@@ -232,19 +232,6 @@ $light-grey: #f7f7f7; //super light background color
   }
   p {
     margin-bottom:3px;
-  }
-}
-
-/*side bar current user profile */
-#current-user-bar {
-  padding-left:10px;
-  font-size: 16px;
-  font-weight: bold;
-  .avatar {
-    width:50px;
-    height:50px;
-    border-radius: 10%;
-    margin-right:10px;
   }
 }
 

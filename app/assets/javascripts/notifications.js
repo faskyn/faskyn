@@ -52,7 +52,7 @@ $(document).on('click', '#other-notification-dropdown-list', function(){
       }
     },
     error: function(){
-      $('.other-notifications-json-data').html("<li>Couldn't load new notifications.</li>");
+      $('.other-notifications-json-data').html("<li><a href='#'>Couldn't load new notifications.</a></li>");
       $('.other-notifications-json-data').append(viewall);
     }
   });
@@ -83,7 +83,7 @@ $(document).on('click', '#chat-notification-dropdown-list', function(){
       }
     },
     error: function(){
-      $('.chat-notifications-json-data').html("<li>Couldn't load new notifications.</li>");
+      $('.chat-notifications-json-data').html("<li><a href='#'>Couldn't load new notifications.</a></li>");
       $('.chat-notifications-json-data').append(viewall);
     }
   });

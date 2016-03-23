@@ -10,7 +10,7 @@
         <%= link_to user_path(profile.user) do %>
           <div class="hover">
             <li>
-              <%= image_tag profile.avatar.url(:base_thumb), class: 'avatar' %>
+              <%= image_tag profile.avatar.url(:small_thumb), class: 'left-sidebar-avatar' %>
               <span class="element-name">
                 <%= truncate(profile.full_name, length: 25) %>
               </span>

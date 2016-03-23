@@ -1,7 +1,7 @@
 <br />
 <div class="user-profile-show-sidebar">
   <%= link_to user_profile_path(@user) do %>
-    <%= image_tag @user.avatar.url(:base_thumb), class: 'avatar', alt: "#{@user.first_name}'s_avatar", title: "#{@user.first_name}'s avatar" %>
+    <%= image_tag @user.avatar.url(:base_thumb), class: 'right-sidebar-avatar', alt: "#{@user.first_name}'s_avatar", title: "#{@user.first_name}'s avatar" %>
   <div class="user-fullname">
     <%= @user.full_name.upcase %>
   </div>
