@@ -7,7 +7,11 @@ json.array! @other_notifications do |notification|
 	json.action notification.action
   json.notifiable notification.notifiable_type
   if notification.sender.profile.avatar_url == "default.png"
-    json.profile_image_url "assets/small_thumb_default.png"
+    if Rails.env.development?
+      json.profile_image_url "assets/small_thumb_default.png"
+    elsif Rails.env.production?
+      json.profile_image_url "//s3.amazonaws.com/faskyn2/static/small_thumb_default.png"
+    end
   else
     json.profile_image_url notification.sender.profile.avatar.url(:small_thumb)
   end
