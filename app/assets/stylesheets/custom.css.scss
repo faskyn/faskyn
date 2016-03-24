@@ -147,6 +147,9 @@ a {
     &:hover {
       color: $garmin-blue;
       background: white;
+      #other-notifications, #chat-notifications {
+        color: white;
+      }
     }
   }
 
@@ -171,6 +174,9 @@ a {
   .dropdown-toggle:active, .open .dropdown-toggle {
     background:white !important;
     color:$garmin-blue !important;
+    #other-notifications, #chat-notifications {
+      color: white;
+    }
   }
   // @media (min-width: 979px) {
   //   ul.nav li.dropdown:hover > ul.dropdown-menu {

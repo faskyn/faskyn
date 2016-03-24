@@ -18,14 +18,8 @@ $dark-grey: #5E5E5E;
 	}
 }
 
-#other-notifications {
+#other-notifications, #chat-notifications {
   border-radius: 2px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, .7);
-  background-color: red;
-}
-
-#chat-notifications {
-	border-radius: 2px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, .7);
   background-color: red;
 }

@@ -30,7 +30,6 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17', '>= 4.17.37'
 gem 'bootstrap-social-rails', '~> 4.8'
 gem 'simple_form', '~> 3.1.1'
 gem 'font-awesome-rails', '~> 4.4'
-gem 'fullcalendar-rails', '~> 2.5'
 gem 'cocoon', '~> 1.2', '>= 1.2.7'
 gem 'best_in_place', '~> 3.1'
 #making fonts work with CDN
@@ -68,7 +67,7 @@ gem 'foreman', '~> 0.78.0'
 gem 'net-ssh', '~> 3.0', '>= 3.0.1'
 #finding links
 gem 'rinku', '~> 1.7', '>= 1.7.3'
-#social media and calendar integration
+#social media integration
 gem 'omniauth-twitter', '~> 1.2', '>= 1.2.1'
 gem 'omniauth-linkedin', '~> 0.2.0'
 gem 'google-api-client', '~> 0.8.6', require: 'google/api_client'

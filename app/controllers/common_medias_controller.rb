@@ -23,10 +23,6 @@ class CommonMediasController < ApplicationController
     respond_to :js
   end
 
-  def get_calendars #loading calendars data with js on common_medias page
-    respond_to :js
-  end
-
   private
 
     def set_users_and_conversation

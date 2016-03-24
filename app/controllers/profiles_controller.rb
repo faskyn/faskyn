@@ -34,7 +34,6 @@ class ProfilesController < ApplicationController
     #users can only have one account from each platform
     @twitter = @profile.socials.where(provider: "twitter").first
     @linkedin = @profile.socials.where(provider: "linkedin").first
-    @google = @profile.socials.where(provider: "google_oauth2").first
   end
 
   def update

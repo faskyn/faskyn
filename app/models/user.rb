@@ -18,8 +18,6 @@ class User < ActiveRecord::Base
 
   has_many :notifications, foreign_key: "recipient_id", dependent: :destroy
 
-  has_many :events, foreign_key: "recipient_id", dependent: :destroy
-
   has_many :messages, dependent: :destroy
 
   has_many :products, dependent: :nullify
