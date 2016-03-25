@@ -14,11 +14,15 @@ gem 'jbuilder', '~> 2.0'
 #basic app configuration gems
 gem 'pg', '~> 0.18.3'
 gem 'rack-rewrite', '~> 1.5', '>= 1.5.1'
+gem 'rack-attack', '~> 4.4', '>= 4.4.1'
+gem 'rack-protection', '~> 1.5', '>= 1.5.3'
 gem 'rack-mini-profiler', '~> 0.9.8'
 gem 'puma', '~> 2.13.4'
 #gem for real-time(notifications for now, chat implemented with private pub)
 gem 'pusher', '~> 0.15.1'
 gem 'pusher-client', '~> 0.6.2'
+#error notification
+gem 'airbrake', '~> 5.2', '>= 5.2.2'
 #memcache with heroku and puma
 gem 'dalli', '~> 2.7', '>= 2.7.5'
 gem 'connection_pool', '~> 2.2'

@@ -1,14 +1,13 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_and_authorize_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_new_comment_and_reply, only: [:index, :create, :update]
 
   def index
     @q_posts = Post.ransack(params[:q])
     @posts = @q_posts.result(distinct: true).order(updated_at: :desc).includes(:user).paginate(page: params[:page], per_page: 12)
     authorize @posts
     @post = Post.new
-    @post_comment = PostComment.new
-    @post_comment_reply = PostCommentReply.new
     respond_to do |format|
       format.html
       format.js
@@ -26,8 +25,6 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     authorize @post
-    @post_comment = PostComment.new
-    @post_comment_reply = PostCommentReply.new
     if @post.save
       #@post.send_post_creation_email_notification(@post.user)
       respond_to do |format|
@@ -46,8 +43,6 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post_comment = PostComment.new
-    @post_comment_reply = PostCommentReply.new
     if @post.update_attributes(post_params)
       respond_to do |format|
         format.html { redirect_to @post, notice: "Post was successfully updated!"}
@@ -84,6 +79,11 @@ class PostsController < ApplicationController
     def set_and_authorize_post
       @post = Post.find(params[:id])
       authorize @post
+    end
+
+    def set_new_comment_and_reply
+      @post_comment = PostComment.new
+      @post_comment_reply = PostCommentReply.new
     end
 
 end

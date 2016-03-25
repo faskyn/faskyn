@@ -1,0 +1,29 @@
+logins_ip:
+  limit: 5
+  period: 30
+  path: /users/sign_in
+
+post_creation:
+  limit: 3
+  period: 600
+  path: /posts
+
+post_comment_creation:
+  limit: 5
+  period: 45
+  path: /post_comments
+
+post_comment_reply_creation:
+  limit: 5
+  period: 45
+  path: /post_comment_replies
+
+messages_creation:
+  limit: 20
+  period: 10
+  path: /messages
+
+default:
+  limit: 10
+  period: 10
+  method: POST

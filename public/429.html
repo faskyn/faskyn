@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>The page you were looking for doesn't exist (404)</title>
+  <title>Too many requests (429)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
   body {
@@ -19,13 +19,13 @@
 </head>
 
 <body>
-  <!-- This file lives in public/404.html -->
+  <!-- This file lives in public/500.html -->
   <div class="content">
-    <img src="//s3.amazonaws.com/faskyn2/static/errorlogo.png">
+    <img src="//s3.amazonaws.com/faskyn2/static/thirdlogo.png">
 
-    <h1>The page you were looking for doesn't exist.</h1>
-    
-    <h4>You may have mistyped the address or the page may have moved.</h4>
+    <h1>Sorry, you have exceeded the maximum allowed requests per minute for this action</h1>
+
+    <h4>Please wait a bit and try again or <a href="/">return to your home page</a></h4>
 
   </div>
 </body>
