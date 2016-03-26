@@ -7,6 +7,8 @@ Rails.application.configure do
     :if => Proc.new { |rack_env| rack_env['SERVER_NAME'] != 'faskyn.com' }
   end
 
+  config.middleware.use Rack::Protection
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 

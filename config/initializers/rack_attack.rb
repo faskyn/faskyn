@@ -1,10 +1,10 @@
 class Rack::Attack
 
   Rack::Attack.throttled_response = lambda do |env|
-    [429, {}, [ActionView::Base.new.render(file: 'public/429.html')]]
+    [429, {'Content_Type' => 'application/html'}, [ActionView::Base.new.render(file: 'public/429.html', content_type: 'application/html')]]
   end
 
-  #sending notification to airbrake
+  #sending notification to airbrake (also set on airbrake site)
   if Rails.env.production?
     ActiveSupport::Notifications.subscribe('rack.attack') do |name, start, finish, request_id, req|
       Airbrake.notify Exception.new(message: "#{req.ip} has been rate limited for url #{req.url}", data: [name, start, finish, request_id, req])
