@@ -1,4 +1,3 @@
-// var ready = function () {
 $(document).on("page:change", function() {
 
   //infinite scrolling on user index page
@@ -15,9 +14,6 @@ $(document).on("page:change", function() {
     });
   };
 });
-
-// $(document).ready(ready);
-// $(document).on("page:load", ready);
 
 $(document).on('mouseup', '.btn-social-icon', function() {
   $(this).blur();

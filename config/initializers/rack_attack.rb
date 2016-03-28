@@ -1,7 +1,7 @@
 class Rack::Attack
 
   Rack::Attack.throttled_response = lambda do |env|
-    [429, {'Content_Type' => 'application/html'}, [ActionView::Base.new.render(file: 'public/429.html', content_type: 'application/html')]]
+    [429, {}, [ActionView::Base.new.render(file: 'public/429.html', content_type: 'text/html')]]
   end
 
   #sending notification to airbrake (also set on airbrake site)

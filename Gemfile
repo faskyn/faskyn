@@ -17,6 +17,8 @@ gem 'rack-rewrite', '~> 1.5', '>= 1.5.1'
 gem 'rack-attack', '~> 4.4', '>= 4.4.1'
 gem 'rack-protection', '~> 1.5', '>= 1.5.3'
 gem 'rack-mini-profiler', '~> 0.9.8'
+gem 'stackprof', '~> 0.2.8'
+gem 'flamegraph', '~> 0.1.0'
 gem 'puma', '~> 2.13.4'
 #gem for real-time(notifications for now, chat implemented with private pub)
 gem 'pusher', '~> 0.15.1'
@@ -100,14 +102,18 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', '~> 8.2', '>= 8.2.2'
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  #gem 'web-console', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   #testing frameworks
-  #gem 'rspec', '~> 3.4'
-  #gem 'factory_girl', '~> 4.5'
-  #gem 'capybara', '~> 2.6', '>= 2.6.2'
-  #gem 'jasmine', '~> 2.4'
+  gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
+  gem 'factory_girl_rails', '~> 4.6'
+end
+
+group :test do
+  gem 'capybara', '~> 2.6', '>= 2.6.2'
+  gem 'guard-rspec', '~> 4.6', '>= 4.6.4'
+  gem 'jasmine', '~> 2.4'
 end
 
 group :production do
