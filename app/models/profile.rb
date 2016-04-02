@@ -1,5 +1,6 @@
 class Profile < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, touch: true
+  #belongs_to :task, touch: true
   has_many :socials
 
   mount_uploader :avatar, AvatarUploader

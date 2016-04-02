@@ -1,127 +1,131 @@
-<div class="panel panel-default post-panel" id="post_<%= post.id %>">
-  <div class="panel-heading">
-    <div class="row">
-      <div class="col-md-2">
-        <%= link_to user_path(post.user) do %>
-          <%= image_tag post.user.avatar.url(:base_thumb), class: 'post-avatar' %>
-        <% end %>
-      </div>
+<% cache ['post', post, post.user.profile ] do %>
 
-      <div class="col-md-8">
-        <div class="post-info">
+  <div class="panel panel-default post-panel" id="post_<%= post.id %>">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-md-2">
           <%= link_to user_path(post.user) do %>
-            <span class="post-user-name"><%= post.user.full_name %></span>
+            <%= image_tag post.user.avatar.url(:base_thumb), class: 'post-avatar' %>
           <% end %>
-          <span class="post-updated"><%= local_time_ago(post.updated_at) %></span>
         </div>
-        <div class="post-body">
-          <%= find_links(h post.body) %>
+
+        <div class="col-md-8">
+          <div class="post-info">
+            <%= link_to user_path(post.user) do %>
+              <span class="post-user-name"><%= post.user.full_name %></span>
+            <% end %>
+            <span class="post-updated"><%= local_time_ago(post.updated_at) %></span>
+          </div>
+          <div class="post-body">
+            <%= find_links(h post.body) %>
+          </div>
+        </div>
+
+        <div class="col-md-2" style="text-align:right;">
+          <% if policy(post).edit? && policy(post).delete? %>
+           
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-angle-down"></i>
+              </a>
+              <ul class = "dropdown-menu dropdown-menu-right">
+                <li>
+                  <%= link_to "Edit Post", edit_post_path(post), remote: true, type: "button", 'data-toggle' => "modal", 'data-target' => "#updatepost_#{post.id}" %>
+                </li>   
+                <li>
+                  <a href="#" data-toggle="modal" role="button" data-target="#deletepost_<%= post.id %>">Delete Post</a>
+                </li>
+              </ul>
+            </li>
+            
+          <% end %>
         </div>
       </div>
 
-      <div class="col-md-2" style="text-align:right;">
-        <% if policy(post).edit? && policy(post).delete? %>
-         
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-angle-down"></i>
-            </a>
-            <ul class = "dropdown-menu dropdown-menu-right">
-              <li>
-                <%= link_to "Edit Post", edit_post_path(post), remote: true, type: "button", 'data-toggle' => "modal", 'data-target' => "#updatepost_#{post.id}" %>
-              </li>   
-              <li>
-                <a href="#" data-toggle="modal" role="button" data-target="#deletepost_<%= post.id %>">Delete Post</a>
-              </li>
-            </ul>
-          </li>
-          
-        <% end %>
-      </div>
     </div>
-
-  </div>
-  <div class="panel-body" style="padding-top:0px;background:#f9f9f9;">
-    <div class = "row comment-top-row" style="padding-bottom:10px;">
-      <div class="col-md-12 post-comment-form">
-        <div class="row">
-          <div class="col-md-12">
+    <div class="panel-body" style="padding-top:0px;background:#f9f9f9;">
+      <div class = "row comment-top-row" style="padding-bottom:10px;">
+        <div class="col-md-12 post-comment-form">
+          <div class="row">
             <div class="col-md-12">
-              <%= render partial: 'posts/post_comments/post_comment_form', locals: { post: post } %>
+              <div class="col-md-12">
+                <%= render partial: 'posts/post_comments/post_comment_form', locals: { post: post } %>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <% if post.post_comments.size > 3 %>
-      <div class="row open-all-post-comments-row" style="padding-bottom:10px;c">
-        <div class="col-md-12">
+      <% if post.post_comments.size > 3 %>
+        <div class="row open-all-post-comments-row" style="padding-bottom:10px;c">
           <div class="col-md-12">
-            <a class="open-all-post-comments" data-pid="<%= post.id %>">Show all</a>
+            <div class="col-md-12">
+              <a class="open-all-post-comments" data-pid="<%= post.id %>">Show all</a>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <div class = "row">
+        <div class="col-md-12 post-comment-insert-<%= post.id%>">
+          <%= render partial: 'posts/post_comments/post_comment', collection: post.post_comments.ordered.included, as: :post_comment, locals: {post: post} %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% if policy(post).edit? %>
+
+    <%= form_for(post, method: :patch, remote: true) do |f| %>
+      <div class="modal fade updatepost" id="updatepost_<%= post.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content" style="text-align:left">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Edit Task</h4>
+            </div>
+            <div class="modal-body">
+              <div class="alert alert-danger" style="display:none">
+                <ul class="errors" style="display:none">
+                  <%= render 'layouts/error_messages', object: f.object %>
+                </ul>
+              </div>
+              <div class="field form-group">
+                <%= f.text_area :body, class: "form-control edit-post-body" %>
+              </div>   
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" id="updatepostclose">Close</button>
+                <%= f.button "Update post", class: 'btn btn-primary edit-post-submit', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
+            </div>
           </div>
         </div>
       </div>
     <% end %>
-    <div class = "row">
-      <div class="col-md-12 post-comment-insert-<%= post.id%>">
-        <%= render partial: 'posts/post_comments/post_comment', collection: post.post_comments.ordered.included, as: :post_comment, locals: {post: post} %>
-      </div>
-    </div>
-  </div>
-</div>
 
-<% if policy(post).edit? %>
-
-  <%= form_for(post, method: :patch, remote: true) do |f| %>
-    <div class="modal fade updatepost" id="updatepost_<%= post.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content" style="text-align:left">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Edit Task</h4>
-          </div>
-          <div class="modal-body">
-            <div class="alert alert-danger" style="display:none">
-              <ul class="errors" style="display:none">
-                <%= render 'layouts/error_messages', object: f.object %>
-              </ul>
-            </div>
-            <div class="field form-group">
-              <%= f.text_area :body, class: "form-control edit-post-body" %>
-            </div>   
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" id="updatepostclose">Close</button>
-              <%= f.button "Update post", class: 'btn btn-primary edit-post-submit', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
-          </div>
-        </div>
-      </div>
-    </div>
   <% end %>
 
-<% end %>
+  <% if policy(post).delete? %>
 
-<% if policy(post).delete? %>
-
-  <%= form_for(post, method: :delete, remote: true) do |f| %>
-    <div class="modal fade" id="deletepost_<%= post.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content" style="text-align:left">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Delete Post</h4>
-          </div>
-          <div class="modal-body">
-            <h4>Are you sure?</h4>
-            <p> </p>  
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" id="deletepostclose">Close</button>
-              <%= f.submit "Delete Post", class: 'btn btn-danger' %>
+    <%= form_for(post, method: :delete, remote: true) do |f| %>
+      <div class="modal fade" id="deletepost_<%= post.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content" style="text-align:left">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Delete Post</h4>
+            </div>
+            <div class="modal-body">
+              <h4>Are you sure?</h4>
+              <p> </p>  
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" id="deletepostclose">Close</button>
+                <%= f.submit "Delete Post", class: 'btn btn-danger' %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    <% end %>
+
   <% end %>
 
 <% end %>

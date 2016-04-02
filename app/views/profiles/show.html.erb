@@ -1,89 +1,92 @@
 <% provide(:title, @profile.full_name) %>
-<div class="container-fluid profile-container">
 
-  <div class="well profile-show-well">
-    <div class = "row">
+<% cache [@profile, @profile.user.email] do %>
+  <div class="container-fluid profile-container">
 
-      <div class="col-md-2">
-        <%= image_tag @profile.avatar.url(:base_thumb), class: "profile-show-avatar" %>
-      </div>
+    <div class="well profile-show-well">
+      <div class = "row">
 
-      <div class="col-md-8" style="padding-left:0px;">
-        <h3><%= @profile.full_name %></h3>
-        <% unless @twitter.blank? %>
-          <%= link_to @twitter.page_url, target: "_blank", class: "btn btn-social-icon btn-sm btn-twitter" do %>
-            <i class="fa fa-twitter"></i>
+        <div class="col-md-2">
+          <%= image_tag @profile.avatar.url(:base_thumb), class: "profile-show-avatar" %>
+        </div>
+
+        <div class="col-md-8" style="padding-left:0px;">
+          <h3><%= @profile.full_name %></h3>
+          <% unless @twitter.blank? %>
+            <%= link_to @twitter.page_url, target: "_blank", class: "btn btn-social-icon btn-sm btn-twitter" do %>
+              <i class="fa fa-twitter"></i>
+            <% end %>
           <% end %>
-        <% end %>
-        <% unless @linkedin.blank? %>
-          <%= link_to @linkedin.page_url, target: "_blank", class: "btn btn-social-icon btn-sm btn-linkedin" do %>
-            <i class="fa fa-linkedin"></i>
+          <% unless @linkedin.blank? %>
+            <%= link_to @linkedin.page_url, target: "_blank", class: "btn btn-social-icon btn-sm btn-linkedin" do %>
+              <i class="fa fa-linkedin"></i>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
+
+        <div class="col-md-2" style="text-align:right;">
+          <% if policy(@profile).edit? %>
+            <%= link_to "Edit Profile", edit_user_profile_path(current_user), class: "btn btn-primary" %>
+          <% end %>
+        </div>
       </div>
 
-      <div class="col-md-2" style="text-align:right;">
-        <% if policy(@profile).edit? %>
-          <%= link_to "Edit Profile", edit_user_profile_path(current_user), class: "btn btn-primary" %>
-        <% end %>
+      <div class="row">
+
+        <div class="col-md-4">
+          <div class="product-list">
+            <div class="list-name">Company:</div>
+            <div class="description"><%= @profile.company %></div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="product-list">
+            <div class="list-name">Title:</div>
+            <div class="description"><%= @profile.job_title %></div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="product-list">
+            <div class="list-name">City:</div>
+            <div class="description"><%= @profile.location %></div>
+          </div>
+        </div>
+      </div>
+
+      <p></p>
+
+      <div class="row">
+
+        <div class="col-md-4">
+          <div class="product-list">
+            <div class="list-name">Email:</div>
+            <div class="description"><%= @user.email %></div>
+          </div>
+        </div>
+
+        <div class="col-md-8">
+          <div class="product-list">
+            <div class="list-name">Description:</div>
+            <div class="description"><%= @profile.description %></div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="row">
-
-      <div class="col-md-4">
-        <div class="product-list">
-          <div class="list-name">Company:</div>
-          <div class="description"><%= @profile.company %></div>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="product-list">
-          <div class="list-name">Title:</div>
-          <div class="description"><%= @profile.job_title %></div>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="product-list">
-          <div class="list-name">City:</div>
-          <div class="description"><%= @profile.location %></div>
-        </div>
-      </div>
-    </div>
-
-    <p></p>
-
-    <div class="row">
-
-      <div class="col-md-4">
-        <div class="product-list">
-          <div class="list-name">Email:</div>
-          <div class="description"><%= @user.email %></div>
-        </div>
-      </div>
-
-      <div class="col-md-8">
-        <div class="product-list">
-          <div class="list-name">Description:</div>
-          <div class="description"><%= @profile.description %></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <% unless policy(@profile).edit? %>
-    <% if Task.between(current_user, @user).present? %>
-      Check out the common tasks <%= link_to "here", user_path(@user) %>.
-    <% else %>
-      Assign a new task to <%= @profile.first_name %> <%= link_to "here", user_tasks_path(current_user) %>.
+    <% unless policy(@profile).edit? %>
+      <% if Task.between(current_user, @user).present? %>
+        Check out the common tasks <%= link_to "here", user_path(@user) %>.
+      <% else %>
+        Assign a new task to <%= @profile.first_name %> <%= link_to "here", user_tasks_path(current_user) %>.
+      <% end %>
     <% end %>
-  <% end %>
 
-</div>
-
-<% if @user.products.any? %>
-  <%= render 'products/profile_products' %>
+  </div>
 <% end %>
+
+  <% if @user.products.any? %>
+    <%= render 'products/profile_products' %>
+  <% end %>
 

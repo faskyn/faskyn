@@ -1,7 +1,28 @@
 class Rack::Attack
 
   Rack::Attack.throttled_response = lambda do |env|
-    [429, {}, [ActionView::Base.new.render(file: 'public/429.html', content_type: 'text/html')]]
+    retry_after = (env['rack.attack.match_data'] || {})[10]
+    # if env['rack.attack.content_type'] == 'text/html'
+    #[429, {'Retry-After' => retry_after.to_s}, [ActionView::Base.new.render(file: 'public/429.html', content_type: 'text/html')]]
+    # elsif env['rack.attack.content_type'] == 'application/javascript'
+    #   [429, {'Retry-After' => retry_after.to_s}, window.location.href = '/429.html']
+    # end
+    #puts env
+    [429, {'Retry-After' => retry_after.to_s}, [ActionView::Base.new.render(file: 'public/429.html', content_type: 'text/html')]]
+    # if env["HTTP_X_REQUESTED_WITH"] && env["HTTP_X_REQUESTED_WITH"] == "XMLHttpRequest"
+    #   [429, {'Retry-After' => retry_after.to_s}, [window.location.href = '/429.html', content_type: 'application/javascript']]
+    # else
+    #   [429, {'Retry-After' => retry_after.to_s}, [ActionView::Base.new.render(file: 'public/429.html', content_type: 'text/html')]]
+    # end
+    # body = [
+    #   env['rack.attack.matched'],
+    #   env['rack.attack.match_type'],
+    #   env['rack.attack.match_data'],
+    #   env['rack.attack.match_discriminator']
+    #   #Rack::Attack.instrument(req)
+    # ].inspect
+    # puts body
+    # [ 503, {}, [body]]
   end
 
   #sending notification to airbrake (also set on airbrake site)
@@ -11,10 +32,9 @@ class Rack::Attack
     end
   end
 
-  #whitelisting localhost
-  Rack::Attack.whitelist('allow from localhost') do |req|
-    '127.0.0.1' == req.ip || '::1' == req.ip
-  end
+  # Rack::Attack.whitelist('allow from localhost') do |req|
+  #   '127.0.0.1' == req.ip || '::1' == req.ip
+  # end
 
   #basic action limit (this should be the least strict)
   Rack::Attack.throttle('req_ip', :limit => 40, period: 10.seconds) do |req|

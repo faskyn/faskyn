@@ -19,12 +19,14 @@
           <th class="col-md-2"><%= sort_link(@q_outgoing_tasks, :executor_profile_first_name, 'Name / Company') %></th>
           <th class="col-md-7"><%= sort_link(@q_outgoing_tasks, :content, 'Content') %></th>
           <th class="col-md-2"><%= sort_link(@q_outgoing_tasks, :deadline, 'Deadline') %></th>
-          <th class="col-md-1">C/E/D</th>
+          <th class="col-md-1"></th>
           <!-- End of ransack sorting-->
         </tr>
       </thead>
       <tbody class="new-task-insert">
-        <%= render @tasks || "There are no outgoing tasks at the moment." %>
+        <% cache ['outgoing-tasks', @tasks.map(&:id), @tasks.map(&:updated_at).max, @tasks.map{|task| task.assigner.profile.updated_at}.max, @tasks.map{|task| task.executor.profile.updated_at}.max] do %>
+          <%= render @tasks || "There are no outgoing tasks at the moment." %>
+        <% end %>
       </tbody>
     </table>
   </div>

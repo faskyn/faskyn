@@ -6,7 +6,9 @@
     </div>
   </div>
   <div class = "other-notifications-index">
-    <%= render @other_notifications || "There are no notifications at the moment." %>
+    <% cache ['other-notifications-index', @other_notifications.map(&:id), @other_notifications.map(&:updated_at).max, @other_notifications.map{|noti| noti.sender.profile.updated_at}.max] do %>
+      <%= render @other_notifications || "There are no notifications at the moment." %>
+    <% end %>
   </div>
   <div id="infinite-othernotification-scrolling">
     <%= will_paginate @other_notifications %>

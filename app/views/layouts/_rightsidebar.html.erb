@@ -1,18 +1,20 @@
 <br />
-<div class="user-profile-show-sidebar">
-  <%= link_to user_profile_path(@user) do %>
-    <%= image_tag @user.avatar.url(:base_thumb), class: 'right-sidebar-avatar', alt: "#{@user.first_name}'s_avatar", title: "#{@user.first_name}'s avatar" %>
-  <div class="user-fullname">
-    <%= @user.full_name.upcase %>
+<% cache ['right-sidebar', @user.profile] do %>
+  <div class="user-profile-show-sidebar">
+    <%= link_to user_profile_path(@user) do %>
+      <%= image_tag @user.avatar.url(:base_thumb), class: 'right-sidebar-avatar', alt: "#{@user.first_name}'s_avatar", title: "#{@user.first_name}'s avatar" %>
+    <div class="user-fullname">
+      <%= @user.full_name.upcase %>
+    </div>
+    <span class="company">
+      <div><%= @user.company %></div>
+      <div><%= @user.job_title %></div>
+    </span>
+    <% end %>
   </div>
-  <span class="company">
-    <div><%= @user.company %></div>
-    <div><%= @user.job_title %></div>
-  </span>
-  <% end %>
-</div>
+<% end %>
 <div>
-<%if @conversation%>
+<% if @conversation %>
   <%= render 'conversations/show' %>
 <% end %>
 </div>

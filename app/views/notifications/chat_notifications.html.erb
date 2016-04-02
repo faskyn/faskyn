@@ -6,7 +6,9 @@
     </div>
   </div>
   <div class="chat-notifications-index">
-    <%= render @chat_notifications || "There are no chat notifications at the moment." %>
+    <% cache ['chat-notifications-index', @chat_notifications.map(&:id), @chat_notifications.map(&:updated_at).max, @chat_notifications.map{|noti| noti.sender.profile.updated_at}.max] do %>
+      <%= render @chat_notifications || "There are no chat notifications at the moment." %>
+    <% end %>
   </div>
   <div id="infinite-chatnotification-scrolling">
     <%= will_paginate @chat_notifications %>

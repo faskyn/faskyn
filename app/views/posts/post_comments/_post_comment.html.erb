@@ -1,91 +1,95 @@
-<div class="post-comment" id="postcomment-<%= post_comment.id %>">
-  <div class="row post-comment-box">
-    <div class="col-md-10">
-      <div class="col-md-2">
-        <%= link_to user_path(post_comment.user) do %>
-          <%= image_tag post_comment.user.avatar.url(:small_thumb), class: 'post-comment-avatar' %>
-        <% end %>
-      </div>
-      <div class="cold-md-10">
-        <div class="post-comment-info">
+<% cache ['post-comment', post_comment, post_comment.user.profile] do %>
+
+  <div class="post-comment" id="postcomment-<%= post_comment.id %>">
+    <div class="row post-comment-box">
+      <div class="col-md-10">
+        <div class="col-md-2">
           <%= link_to user_path(post_comment.user) do %>
-            <span class="post-comment-fullname"><%= post_comment.user.full_name %></span>
+            <%= image_tag post_comment.user.avatar.url(:small_thumb), class: 'post-comment-avatar' %>
           <% end %>
-          <span class="post-comment-updated"><%= local_time_ago(post_comment.updated_at) %></span>
         </div>
-        <div class="post-comment-body">
-
-          <% if policy(post_comment).edit? && policy(post_comment).delete? %>
-            <%= find_links(best_in_place post_comment, :body, as: :input, url: post_post_comment_path(post_comment.post, post_comment), activator: "#activate-comment-edit-#{post_comment.id}")%>
-            <span class="post-comment-editing-deleting">
-              <span class="post-comment-edit-fa">
-                <i class="fa fa-pencil" id="activate-comment-edit-<%=post_comment.id %>"></i>
-              </span>
-              <span class="post-comment-delete-fa">
-                <a href="#" data-toggle="modal" role="button" data-target="#deletepostcomment_<%= post_comment.id %>"><i class="fa fa-trash"></i></a>
-              </span>
-            </span>
-          <% else %>
-            <%= find_links(h post_comment.body) %>
-          <% end %>
-
-        </div>
-        <a class="open-post-comment-reply" data-pcid="<%= post_comment.id %>">
-          <span><i class="fa fa-reply"></i></span>
-          <span id="post-comment-number-<%= post_comment.id %>">
-            <% if post_comment.post_comment_replies.size == 0 %>
-              Reply
-            <% else %>
-              <%= pluralize(post_comment.post_comment_replies.size, "Reply") %> 
+        <div class="cold-md-10">
+          <div class="post-comment-info">
+            <%= link_to user_path(post_comment.user) do %>
+              <span class="post-comment-fullname"><%= post_comment.user.full_name %></span>
             <% end %>
-          </span>
-        </a>
+            <span class="post-comment-updated"><%= local_time_ago(post_comment.updated_at) %></span>
+          </div>
+          <div class="post-comment-body">
+
+            <% if policy(post_comment).edit? && policy(post_comment).delete? %>
+              <%= find_links(best_in_place post_comment, :body, as: :input, url: post_post_comment_path(post_comment.post, post_comment), activator: "#activate-comment-edit-#{post_comment.id}")%>
+              <span class="post-comment-editing-deleting">
+                <span class="post-comment-edit-fa">
+                  <i class="fa fa-pencil" id="activate-comment-edit-<%=post_comment.id %>"></i>
+                </span>
+                <span class="post-comment-delete-fa">
+                  <a href="#" data-toggle="modal" role="button" data-target="#deletepostcomment_<%= post_comment.id %>"><i class="fa fa-trash"></i></a>
+                </span>
+              </span>
+            <% else %>
+              <%= find_links(h post_comment.body) %>
+            <% end %>
+
+          </div>
+          <a class="open-post-comment-reply" data-pcid="<%= post_comment.id %>">
+            <span><i class="fa fa-reply"></i></span>
+            <span id="post-comment-number-<%= post_comment.id %>">
+              <% if post_comment.post_comment_replies.size == 0 %>
+                Reply
+              <% else %>
+                <%= pluralize(post_comment.post_comment_replies.size, "Reply") %> 
+              <% end %>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-2">
       </div>
     </div>
-    <div class="col-md-2">
-    </div>
-  </div>
-  <div id="post-comment-replies-<%= post_comment.id%>" class="post-comment-replies">
-      <div class = "row reply-row">
-        <div class="col-md-12">
-          <div class="col-md-10 col-md-offset-2 post-comment-reply-insert-<%= post_comment.id%>">
-            <%= render partial: 'posts/post_comment_replies/post_comment_reply', collection: post_comment.post_comment_replies.ordered.included, as: :post_comment_reply, locals: { post_comment: post_comment } %>
+    <div id="post-comment-replies-<%= post_comment.id%>" class="post-comment-replies">
+        <div class = "row reply-row">
+          <div class="col-md-12">
+            <div class="col-md-10 col-md-offset-2 post-comment-reply-insert-<%= post_comment.id%>">
+              <%= render partial: 'posts/post_comment_replies/post_comment_reply', collection: post_comment.post_comment_replies.ordered.included, as: :post_comment_reply, locals: { post_comment: post_comment } %>
+            </div>
           </div>
         </div>
-      </div>
-      <div>
-        <div class="row reply-form-row">
-          <div class="col-md-12">
-            <div class="col-md-10 col-md-offset-2 comment-reply-form">
-            <%= render partial: 'posts/post_comment_replies/post_comment_reply_form', locals: { post_comment: post_comment } %>
+        <div>
+          <div class="row reply-form-row">
+            <div class="col-md-12">
+              <div class="col-md-10 col-md-offset-2 comment-reply-form">
+              <%= render partial: 'posts/post_comment_replies/post_comment_reply_form', locals: { post_comment: post_comment } %>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <% if policy(post_comment).delete? %>
+
+    <%= form_for([post_comment.post, post_comment], method: :delete, remote: true) do |f| %>
+      <div class="modal fade" id="deletepostcomment_<%= post_comment.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content" style="text-align:left">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Delete Comment</h4>
+            </div>
+            <div class="modal-body">
+              <h4>Are you sure?</h4>
+              <p> </p>  
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" id="deletepostcommentclose">Close</button>
+                <%= f.submit "Delete Comment", class: 'btn btn-danger' %>
             </div>
           </div>
         </div>
       </div>
-  </div>
-</div>
+    <% end %>
 
-<% if policy(post_comment).delete? %>
-
-  <%= form_for([post_comment.post, post_comment], method: :delete, remote: true) do |f| %>
-    <div class="modal fade" id="deletepostcomment_<%= post_comment.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content" style="text-align:left">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Delete Comment</h4>
-          </div>
-          <div class="modal-body">
-            <h4>Are you sure?</h4>
-            <p> </p>  
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" id="deletepostcommentclose">Close</button>
-              <%= f.submit "Delete Comment", class: 'btn btn-danger' %>
-          </div>
-        </div>
-      </div>
-    </div>
   <% end %>
 
 <% end %>

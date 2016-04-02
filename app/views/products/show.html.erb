@@ -1,126 +1,130 @@
 <% provide(:title, @product.name) %>
-<div class= "container-fluid product-container">
-  <div class= "col-md-8 col-md-offset-2">
-    <div class="row product-show-name">
-      <div class="col-md-12">
-        <% if @product.product_image_id %>
-          <%= image_tag attachment_url(@product, :product_image, :fill, 60, 60) %>
-        <% else %>
-          <%= image_tag("garminwhitelogoborder.png", size: "60x60") %>
-        <% end %>
-        <h3><%= @product.name.upcase %></h3>
-      </div>
-    </div>
-    <div class="well product-well">
-      <div class = "row">
-        <div class="col-md-6">
-          <div class="product-list">
-            <div class="list-name">Website:</div>
-            <div class="description"><%= link_to @product.website, target: "_blank" do %>
-               <%= @product.website %>
-            <% end %></div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="product-list">
-            <div class="list-name">Verticals:</div>
-            <div class="description"><%= @product.industries_all %></div>
-          </div>
-        </div>
-      </div>
+<% cache [@product, @product.user.profile] do %>
 
-      <div class = "row">
-        <div class="col-md-6">
-          <div class="product-list">
-            <div class="list-name">Company:</div>
-            <div class="description"><%= @product.company %></div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="product-list">
-            <div class="list-name">Posted_by:</div>
-            <div class="description"><%= link_to user_path(@product.user) do %>
-              <%= @product.user.full_name %>
-            <% end %> </div>
-          </div>
+  <div class= "container-fluid product-container">
+    <div class= "col-md-8 col-md-offset-2">
+      <div class="row product-show-name">
+        <div class="col-md-12">
+          <% if @product.product_image_id %>
+            <%= image_tag attachment_url(@product, :product_image, :fill, 60, 60) %>
+          <% else %>
+            <%= image_tag("garminwhitelogoborder.png", size: "60x60") %>
+          <% end %>
+          <h3><%= @product.name.upcase %></h3>
         </div>
       </div>
-      <div class = "row">
-        <div class="col-md-12">
-          <div class="product-list">
-            <div id="oneliner">
-              <div class="list-name">Oneliner:</div>
-              <div class="description"><%= @product.oneliner %></div>
+      <div class="well product-well">
+        <div class = "row">
+          <div class="col-md-6">
+            <div class="product-list">
+              <div class="list-name">Website:</div>
+              <div class="description"><%= link_to @product.website, target: "_blank" do %>
+                 <%= @product.website %>
+              <% end %></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="product-list">
+              <div class="list-name">Verticals:</div>
+              <div class="description"><%= @product.industries_all %></div>
+            </div>
+          </div>
+        </div>
+
+        <div class = "row">
+          <div class="col-md-6">
+            <div class="product-list">
+              <div class="list-name">Company:</div>
+              <div class="description"><%= @product.company %></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="product-list">
+              <div class="list-name">Posted_by:</div>
+              <div class="description"><%= link_to user_path(@product.user) do %>
+                <%= @product.user.full_name %>
+              <% end %> </div>
+            </div>
+          </div>
+        </div>
+        <div class = "row">
+          <div class="col-md-12">
+            <div class="product-list">
+              <div id="oneliner">
+                <div class="list-name">Oneliner:</div>
+                <div class="description"><%= @product.oneliner %></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="well product-well">
-      <div class = "row">
-        <div class="col-md-12">
-          <div class = "product-list">
-              <div class = "list-name">Description:</div>
-              <div class = "big-description"><%= @product.description %></div>
+      <div class="well product-well">
+        <div class = "row">
+          <div class="col-md-12">
+            <div class = "product-list">
+                <div class = "list-name">Description:</div>
+                <div class = "big-description"><%= @product.description %></div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="well product-well">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="product-list">
-            <div class= "list-name">Features:</div>
-            <ul>
-              <% @product.product_features.each do |product_feature| %>
-                <li><%= product_feature.feature %></li>
-              <% end %>
-            </ul>
-            <div class= "list-name">Usecases:</div>
-            <ul>
-              <% @product.product_usecases.each do |product_usecase| %>
-                <li><%= product_usecase.example %> : <%= product_usecase.detail %></li>
-              <% end %>
-            </ul>
-            <div class= "list-name">Competitions:</div>
-            <ul>
-              <% @product.product_competitions.each do |product_competitions| %>
-                <li><%= product_competitions.competitor %> : <%= product_competitions.differentiator %>
-              <% end %></li>
-            </ul>
+      <div class="well product-well">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="product-list">
+              <div class= "list-name">Features:</div>
+              <ul>
+                <% @product.product_features.each do |product_feature| %>
+                  <li><%= product_feature.feature %></li>
+                <% end %>
+              </ul>
+              <div class= "list-name">Usecases:</div>
+              <ul>
+                <% @product.product_usecases.each do |product_usecase| %>
+                  <li><%= product_usecase.example %> : <%= product_usecase.detail %></li>
+                <% end %>
+              </ul>
+              <div class= "list-name">Competitions:</div>
+              <ul>
+                <% @product.product_competitions.each do |product_competitions| %>
+                  <li><%= product_competitions.competitor %> : <%= product_competitions.differentiator %>
+                <% end %></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <% if policy(@product).edit? %>
-      <%= link_to "Edit Product", edit_product_path(@product), class: "btn btn-primary" %>
-    <% end %>
-    <% if policy(@product).delete? %>
-      <button type="button" class="btn btn-danger" style="margin-left:10px;" data-toggle="modal" data-target="#deleteproduct_<%= @product.id %>">Delete Product</button>
-    <% end %>
-  </div> 
-</div>
-
-<%= form_for(@product, method: :delete) do |f| %>
-  <div class="modal fade" id="deleteproduct_<%= @product.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content" style="text-align:left">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Delete Product</h4>
-        </div>
-        <div class="modal-body">
-          <h4>Are you sure?</h4>
-          <p> </p>  
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" id="deleteproductclose">Close</button>
-            <%= f.submit "Delete Product", class: 'btn btn-danger' %>
-        </div>
-      </div>
-    </div>
+      <% if policy(@product).edit? %>
+        <%= link_to "Edit Product", edit_product_path(@product), class: "btn btn-primary" %>
+      <% end %>
+      <% if policy(@product).delete? %>
+        <button type="button" class="btn btn-danger" style="margin-left:10px;" data-toggle="modal" data-target="#deleteproduct_<%= @product.id %>">Delete Product</button>
+      <% end %>
+    </div> 
   </div>
+
+  <%= form_for(@product, method: :delete) do |f| %>
+    <div class="modal fade" id="deleteproduct_<%= @product.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" style="text-align:left">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Delete Product</h4>
+          </div>
+          <div class="modal-body">
+            <h4>Are you sure?</h4>
+            <p> </p>  
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="deleteproductclose">Close</button>
+              <%= f.submit "Delete Product", class: 'btn btn-danger' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
 <% end %>
 

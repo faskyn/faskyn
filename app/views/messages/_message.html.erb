@@ -1,21 +1,23 @@
-<li class="<%= self_or_other(message) %>">
-  <div class="chatboxmessagecontent">
-    <p>
-    <% if message.body? %>
-      <%= find_links(h message.body) %>
-    <% else %>
-      <%= link_to "#{message.message_attachment_filename}", attachment_url(message, :message_attachment), target: "_blank" %>
-    <% end %>
-    </p>
-    <span id="chatname">
-      <%= message_interlocutor(message).first_name %>
-    </span>
-    <time class="timefield" datetime="<%= message.created_at %>" title="<%= message.created_at.utc.strftime("%d %b  %Y at %I:%M%p" ) %>">
-      <% if local_time(message.created_at) > (Time.zone.now - 24.hours) %>
-         • <%= local_time(message.created_at, "%I:%M %p") %>
+<% cache ['messages-index-single', message, message.conversation.sender.profile, message.conversation.recipient.profile] do %>
+  <li class="<%= self_or_other(message) %>">
+    <div class="chatboxmessagecontent">
+      <p>
+      <% if message.body? %>
+        <%= find_links(h message.body) %>
       <% else %>
-         • <%= local_time(message.created_at, "%d %b %I:%M %p") %>
+        <%= link_to "#{message.message_attachment_filename}", attachment_url(message, :message_attachment), target: "_blank" %>
       <% end %>
-    </time>
-  </div>
-</li> 
+      </p>
+      <span id="chatname">
+        <%= message_interlocutor(message).first_name %>
+      </span>
+      <time class="timefield" datetime="<%= message.created_at %>" title="<%= message.created_at.utc.strftime("%d %b  %Y at %I:%M%p" ) %>">
+        <% if local_time(message.created_at) > (Time.zone.now - 24.hours) %>
+           • <%= local_time(message.created_at, "%I:%M %p") %>
+        <% else %>
+           • <%= local_time(message.created_at, "%d %b %I:%M %p") %>
+        <% end %>
+      </time>
+    </div>
+  </li> 
+<% end %>

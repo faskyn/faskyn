@@ -6,26 +6,30 @@
   </div>
   <div class = "list-elements">
     <ol>
-      <% @products_sidebar.each do |product| %>
-        <%= link_to product do %>
-          <div class="hover">
-            <li>
-              <span class="product-sidebar-picture">
-              <% if product.product_image_id %>
-                <%= image_tag attachment_url(product, :product_image, :fill, 40, 40) %>
-              <% else %>
-                <%= image_tag("garminwhitelogoborder.png", size: "40x40") %>
-              <% end %>
-              </span>
-              <span class="element-name">
-                <%= truncate(product.name, length: 25) %>
-              </span>
-              <span class="second-element-name">
-                <%= truncate(product.oneliner, length:25) %>
-              </span>
-            </li>
-          </div>
-        <% end %>   
+      <% cache ['sidebar-products-index', @products_sidebar.first] do %>
+        <% @products_sidebar.each do |product| %>
+          <% cache ['sidebar-products-single', product] do %>
+            <%= link_to product do %>
+              <div class="hover">
+                <li>
+                  <span class="product-sidebar-picture">
+                  <% if product.product_image_id %>
+                    <%= image_tag attachment_url(product, :product_image, :fill, 40, 40) %>
+                  <% else %>
+                    <%= image_tag("garminwhitelogoborder.png", size: "40x40") %>
+                  <% end %>
+                  </span>
+                  <span class="element-name">
+                    <%= truncate(product.name, length: 25) %>
+                  </span>
+                  <span class="second-element-name">
+                    <%= truncate(product.oneliner, length:25) %>
+                  </span>
+                </li>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %> 
       <% end %>
     </ol>
   </div>

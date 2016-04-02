@@ -1,6 +1,6 @@
 class PostCommentReply < ActiveRecord::Base
   belongs_to :user
-  belongs_to :post_comment
+  belongs_to :post_comment, touch: true
 
   has_one :user_profile, through: :user, source: :profile
 

@@ -1,27 +1,29 @@
-<tr class = "product-index-row">
-  <td class="col-md-1 image">
-    <%= link_to product_path(product) do %>
-      <% if product.product_image_id %>
-        <%= image_tag attachment_url(product, :product_image, :fill, 45, 45) %>
-      <% else %>
-        <%= image_tag("garminwhitelogoborder.png", size: "45x45") %>
+<% cache ['products-index-single', product] do %>
+  <tr class = "product-index-row">
+    <td class="col-md-1 image">
+      <%= link_to product_path(product) do %>
+        <% if product.product_image_id %>
+          <%= image_tag attachment_url(product, :product_image, :fill, 45, 45) %>
+        <% else %>
+          <%= image_tag("garminwhitelogoborder.png", size: "45x45") %>
+        <% end %>
       <% end %>
-    <% end %>
-  </td>
-  <td class="col-md-3 name">
-    <%= link_to product_path(product) do %>
-        <div class="link-name"><%= product.name %></div>
-    <% end %>
-  </td>
-  <td class="col-md-6 oneliner">
-    <%= link_to product_path(product) do %>
-      <div class="link-oneliner"><%= product.oneliner %></div>
-    <% end %>
-  </td>
-  <td class="col-md-2 updated">
-    <%= link_to product_path(product) do %>
-      <div class="link-updated"><%= local_time_ago(product.updated_at) %></div>
-    <% end %>
-  </td>
-</tr>
+    </td>
+    <td class="col-md-3 name">
+      <%= link_to product_path(product) do %>
+          <div class="link-name"><%= product.name %></div>
+      <% end %>
+    </td>
+    <td class="col-md-6 oneliner">
+      <%= link_to product_path(product) do %>
+        <div class="link-oneliner"><%= product.oneliner %></div>
+      <% end %>
+    </td>
+    <td class="col-md-2 updated">
+      <%= link_to product_path(product) do %>
+        <div class="link-updated"><%= local_time_ago(product.updated_at) %></div>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
 

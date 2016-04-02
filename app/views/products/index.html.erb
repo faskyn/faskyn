@@ -24,7 +24,9 @@
   <div class="panel panel-default">
     <table class="table">
       <tbody class="product-profile-index new-product-insert">
-        <%= render @products %>
+        <% cache(['products-index', @products.map(&:id), @products.map(&:updated_at).max]) do %>
+          <%= render @products %>
+        <% end %>
       </tbody>
     </table>
   </div>

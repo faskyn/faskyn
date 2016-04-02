@@ -18,11 +18,13 @@
           <th class="col-md-2">Name / Company</th>
           <th class="col-md-7"><%= sort_link(@q_completed_tasks, :content, 'Content') %></th>
           <th class="col-md-2"><%= sort_link(@q_completed_tasks, :completed_at, 'Completed at', default_order: :desc) %></th>
-          <th class="col-md-1">UC/E/D</th>
+          <th class="col-md-1"></th>
         </tr>
       </thead>
       <tbody class="new-task-insert">
-        <%= render @tasks || "There are no completed tasks at the moment." %>
+        <% cache ['completed-tasks', @tasks.map(&:id), @tasks.map(&:updated_at).max, @tasks.map{|task| task.assigner.profile.updated_at}.max, @tasks.map{|task| task.executor.profile.updated_at}.max] do %>
+          <%= render @tasks || "There are no completed tasks at the moment." %>
+        <% end %>
       </tbody>
     </table>
   </div>

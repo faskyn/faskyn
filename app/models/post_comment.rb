@@ -1,5 +1,5 @@
 class PostComment < ActiveRecord::Base
-  belongs_to :post
+  belongs_to :post, touch: true
   belongs_to :user
   has_one :user_profile, through: :user, source: :profile
   has_many :post_comment_replies, dependent: :destroy

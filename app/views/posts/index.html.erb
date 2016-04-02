@@ -13,7 +13,9 @@
     </div>
   <% end %>
   <div class="post-index new-post-insert">
-    <%= render @posts %>
+    <% cache ["posts-index", @posts.map(&:id), @posts.map(&:updated_at).max, @posts.map {|post| post.user.profile.updated_at}.max] do %>
+      <%= render @posts %>
+    <% end %>
   </div>
   <div id="infinite-post-scrolling">
     <%= will_paginate @posts %>

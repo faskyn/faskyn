@@ -7,8 +7,8 @@
     <br clear="all"/>
   </div>
   <div class="chatboxcontent">
-    <% if @messages.any? %>
-        <%= render @messages %>
+    <% cache ['messages-index', @messages.map(&:id), @messages.map(&:updated_at).max, @messages.map{|message| message.conversation.sender.profile.updated_at}.max, @messages.map{|message| message.conversation.recipient.profile.updated_at}.max] do %>
+      <%= render @messages %>
     <% end %>
   </div>
   <div class="chatboxinput">

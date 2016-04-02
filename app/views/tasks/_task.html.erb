@@ -1,42 +1,44 @@
-<% if current_user.id == task.assigner.id %>
-  <tr id="task_<%= task.id %>">
-    <td class = "col-md-3">
-      <div class="row" style="display: table;width: 100%;">
-        <div class = "col-md-3" style="vertical-align:middle;display:table-cell;float:none;">
-            <i class="fa fa-sign-out" style="color:#007cc3;"></i>
+<% cache(['index-single-task', task, task.assigner_profile, task.executor_profile]) do %>
+  <% if current_user.id == task.assigner.id %>
+    <tr id="task_<%= task.id %>">
+      <td class = "col-md-3">
+        <div class="row" style="display: table;width: 100%;">
+          <div class = "col-md-3" style="vertical-align:middle;display:table-cell;float:none;">
+              <i class="fa fa-sign-out" style="color:#007cc3;"></i>
+          </div>
+          <div class = "col-md-9" style="padding-left:0px;width:100%;float:left;text-align:left">
+            <%= link_to user_path(id: task.executor.id) do %>
+              <div class="table-user-name">
+                <%= task.executor.full_name %>
+              </div>
+              <div class="table-company-name">
+                <%= task.executor.company %>
+              </div>
+            <% end %>
+          </div>
         </div>
-        <div class = "col-md-9" style="padding-left:0px;width:100%;float:left;text-align:left">
-          <%= link_to user_path(id: task.executor.id) do %>
-            <div class="table-user-name">
-              <%= task.executor.full_name %>
-            </div>
-            <div class="table-company-name">
-              <%= task.executor.company %>
-            </div>
-          <% end %>
+      </td>
+  <% else %>
+    <tr id="task_<%= task.id %>">
+      <td class = "col-md-3">
+        <div class="row" style="display: table;width: 100%;">
+          <div class = "col-md-3" style="vertical-align:middle;display:table-cell;float:none;">
+              <i class="fa fa-sign-in"></i>
+          </div>
+          <div class = "col-md-9" style="padding-left:0px;width:100%;float:left;text-align:left">
+            <%= link_to user_path(id: task.assigner.id) do %>
+              <div class="table-user-name">
+                <%= task.assigner.full_name %>
+              </div>
+              <div class="table-company-name">
+                <%= task.assigner.company %>
+              </div>
+            <% end %>
+          </div>
         </div>
-      </div>
-    </td>
-<% else %>
-  <tr id="task_<%= task.id %>">
-    <td class = "col-md-3">
-      <div class="row" style="display: table;width: 100%;">
-        <div class = "col-md-3" style="vertical-align:middle;display:table-cell;float:none;">
-            <i class="fa fa-sign-in"></i>
-        </div>
-        <div class = "col-md-9" style="padding-left:0px;width:100%;float:left;text-align:left">
-          <%= link_to user_path(id: task.assigner.id) do %>
-            <div class="table-user-name">
-              <%= task.assigner.full_name %>
-            </div>
-            <div class="table-company-name">
-              <%= task.assigner.company %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </td>
-<% end %>
+      </td>
+  <% end %>
+
     <td class="cold-md-6">
       <%= task.content %>
     </td>
@@ -144,7 +146,7 @@
     </td>  
   </tr>
 
-
+<% end %>
 
 
 

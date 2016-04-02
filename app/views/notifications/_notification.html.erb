@@ -1,4 +1,4 @@
-<% if notification.sender.present? %>
+<% cache ['notifications-index-single', notification, notification.sender] do %>
   <% if notification.checked_at == nil %>
     <div class ="notification-line notification-line-unchecked" data-nid="notification.id">
   <% else %>
