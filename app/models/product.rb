@@ -1,5 +1,5 @@
 class Product < ActiveRecord::Base
-  attachment :product_image, extension: ["png", "jpg", "jpeg"]
+  mount_uploader :product_image, ProductImageUploader
 
   belongs_to :user
   has_many :industry_products, dependent: :destroy, inverse_of: :product

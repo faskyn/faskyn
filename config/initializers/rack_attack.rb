@@ -32,9 +32,9 @@ class Rack::Attack
     end
   end
 
-  # Rack::Attack.whitelist('allow from localhost') do |req|
-  #   '127.0.0.1' == req.ip || '::1' == req.ip
-  # end
+  Rack::Attack.whitelist('allow from localhost') do |req|
+    '127.0.0.1' == req.ip || '::1' == req.ip
+  end
 
   #basic action limit (this should be the least strict)
   Rack::Attack.throttle('req_ip', :limit => 40, period: 10.seconds) do |req|

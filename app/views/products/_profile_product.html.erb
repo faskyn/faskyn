@@ -2,15 +2,11 @@
 
   <div class="panel panel-default product-panel">
       <div class="panel-heading">
-      <%= link_to(product, html_options = {style:"display:block;"}) do %>
-        <div class="product-list">
-          <% if product.product_image_id %>
-              <%= image_tag attachment_url(product, :product_image, :fill, 50, 50) %>
-          <% else %>
-            <%= image_tag("garminwhitelogoborder.png", size: "50x50") %>
-          <% end %>
-          <h4><%= product.name.upcase %></h4>
-        </div>
+        <%= link_to(product, html_options = {style:"display:block;"}) do %>
+          <div class="product-list">
+            <%= image_tag(product.product_image_url(:base_thumb)) %>
+            <h4><%= product.name.upcase %></h4>
+          </div>
         <% end %>
       </div>
     
