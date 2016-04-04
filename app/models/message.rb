@@ -1,6 +1,6 @@
 class Message < ActiveRecord::Base
   serialize :link
-  attachment :message_attachment, extension: ["pdf", "doc", "docx", "xls", "xlsx", "html", "png", "img", "jpg"]
+  attachment :message_attachment, store: 'message_files_backend', extension: ["pdf", "doc", "docx", "xls", "xlsx", "html", "png", "img", "jpg"]
 
   belongs_to :conversation
   belongs_to :user
