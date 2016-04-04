@@ -17,7 +17,7 @@
             <span class="post-updated"><%= local_time_ago(post.updated_at) %></span>
           </div>
           <div class="post-body">
-            <%= find_links(h post.body) %>
+            <%= simple_format(find_links(h post.body)) %>
           </div>
         </div>
 
