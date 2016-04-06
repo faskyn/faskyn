@@ -15,6 +15,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    respond_to :js
   end
 
   def new
@@ -40,6 +41,7 @@ class PostsController < ApplicationController
   end
 
   def edit
+    respond_to :js
   end
 
   def update
@@ -73,7 +75,7 @@ class PostsController < ApplicationController
   private
 
     def post_params
-      params.require(:post).permit(:body, :user_id)
+      params.require(:post).permit(:body, :user_id, :post_image, :post_image_cache)
     end
 
     def set_and_authorize_post

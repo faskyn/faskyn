@@ -1,0 +1,25 @@
+<%= form_for @post, method: :patch, remote: true, :html => { :multipart => true } do |f| %>
+  <div class="modal-body">
+    <div class="alert alert-danger" style="display:none">
+      <ul class="errors" style="display:none">
+        <%= render 'layouts/error_messages', object: f.object %>
+      </ul>
+    </div>
+    <div id="old-post-image" style="text-align:center; margin-bottom:10px"><%= image_tag(@post.post_image.url) if @post.post_image? %></div>
+    <img id="img-prev-update" style="margin-bottom:10px;" width=600 height=400 src="#" class="img-thumbnail hidden"/>
+    <div class="remove-post-preview-update hidden" style="margin-bottom:10px;">
+      <a href="#">Remove Image</a>
+    </div>
+    <div class="field form-group">
+      <%= f.text_area :body, class: "form-control edit-post-body" %>
+    </div>   
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" id="updatepostclose">Close</button>
+    <span class="btn btn-success btn-message-file" data-originalimage="">Upload Image
+      <%= f.file_field :post_image, id: "avatar-upload-update", class: "choose-message-file" %>
+    </span>
+    <%= f.hidden_field :post_image_cache %>
+    <%= f.button "Update post", class: 'btn btn-primary edit-post-submit', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
+  </div>
+<% end %>

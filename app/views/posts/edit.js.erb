@@ -1,0 +1,5 @@
+var thisEditPostModal = $('#updatepost_<%= @post.id %>').find($('.post-edit-form-insert'));
+thisEditPostModal.html('<%= j render partial: "posts/edit_form" %>');
+// var originalPicVal = thisEditPostModal.find('#avatar-upload-update').val();
+// alert(originalPicVal);
+// $('.btn-message-file').data['originalimage'].val(originalPicVal);

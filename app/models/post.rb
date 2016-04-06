@@ -1,4 +1,6 @@
 class Post < ActiveRecord::Base
+  mount_uploader :post_image, PostImageUploader
+
   belongs_to :user
   has_one :user_profile, through: :user, source: :profile
   has_many :post_comments, dependent: :destroy

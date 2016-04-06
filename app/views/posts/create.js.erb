@@ -10,5 +10,7 @@ $("ul.errors").html("");
 	$('.alert-danger').hide();
 	$('.post-index').prepend('<%= j render @post %>');
 	$('.post-create-body').val('');
+	$('#img-prev').attr('src', "#");
+	$('#img-prev').addClass('hidden');
 	$('.btn-create-post').prop('disabled',true);
 <% end %>

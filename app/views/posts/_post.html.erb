@@ -19,6 +19,13 @@
           <div class="post-body">
             <%= simple_format(find_links(h post.body)) %>
           </div>
+          <div class="post-image" data-postlink="<%= post_path(post) %>">
+            <% if post.post_image? %>
+              <button data-toggle="modal" data-target="#post-image-modal">
+                <%= image_tag post.post_image.url(:base_thumb) %>
+              </button>
+            <% end %>
+          </div>
         </div>
 
         <div class="col-md-2" style="text-align:right;">
@@ -30,7 +37,7 @@
               </a>
               <ul class = "dropdown-menu dropdown-menu-right">
                 <li>
-                  <%= link_to "Edit Post", edit_post_path(post), remote: true, type: "button", 'data-toggle' => "modal", 'data-target' => "#updatepost_#{post.id}" %>
+                  <%= link_to "Edit Post", edit_post_path(post), remote: true, type: "button", 'data-toggle' => "modal", 'data-target' => "#updatepost_#{post.id}", 'data-posteditlink' => "#{edit_post_path(post)}", class: 'open-edit-post-modal' %>
                 </li>   
                 <li>
                   <a href="#" data-toggle="modal" role="button" data-target="#deletepost_<%= post.id %>">Delete Post</a>
@@ -74,32 +81,21 @@
 
   <% if policy(post).edit? %>
 
-    <%= form_for(post, method: :patch, remote: true) do |f| %>
+    
       <div class="modal fade updatepost" id="updatepost_<%= post.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content" style="text-align:left">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Edit Task</h4>
+              <h4 class="modal-title" id="edit-post-modal-h4">Edit Post</h4>
             </div>
-            <div class="modal-body">
-              <div class="alert alert-danger" style="display:none">
-                <ul class="errors" style="display:none">
-                  <%= render 'layouts/error_messages', object: f.object %>
-                </ul>
-              </div>
-              <div class="field form-group">
-                <%= f.text_area :body, class: "form-control edit-post-body" %>
-              </div>   
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal" id="updatepostclose">Close</button>
-                <%= f.button "Update post", class: 'btn btn-primary edit-post-submit', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
+            <div class="post-edit-form-insert">
+              <!-- FORM GETS RENDERED HERE VIA JS -->
             </div>
           </div>
         </div>
       </div>
-    <% end %>
+   
 
   <% end %>
 
