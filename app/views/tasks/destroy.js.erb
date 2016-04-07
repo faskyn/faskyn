@@ -1,4 +1,4 @@
-$('#deletetask_<%= @task.id %>').modal('hide');
+$('#delete-task-modal').modal('hide');
 $("#task_<%= @task.id %>").fadeOut(400, function(){
 	$(this).remove();
 });

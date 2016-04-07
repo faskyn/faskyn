@@ -24,4 +24,8 @@
 # Ignore uploaded test images.
 /public/uploads
 
+# Ignore secret file
 /config/secrets.yml
+
+# Ignore development redis dump
+/dump.rdb

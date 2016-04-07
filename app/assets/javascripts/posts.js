@@ -143,7 +143,7 @@ $(document).on('click', '.open-edit-post-modal', function (event) {
 //deleting post via modal
 $(document).on('click', '.open-delete-post-modal', function (event) {
   var postDeleteLink = $(this).data("postdeletelink");
-  $('#delete-post-link-insert').attr("data-postdestroylink", postDeleteLink);
+  $('#delete-post-link-insert').data("postdestroylink", postDeleteLink);
 });
 $(document).on('click', '#delete-post-link-insert', function (event) {
   var href = $(this).data("postdestroylink");

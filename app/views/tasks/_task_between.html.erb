@@ -30,83 +30,13 @@
           <% end %>
           </li>
           <li>
-            <%= link_to "Edit Task", edit_user_task_path(current_user, id: task.id), remote: true, type: "button", 'data-toggle' => "modal", 'data-target' => "#updatetask_#{task.id}" %>
+            <%= link_to "Edit Task", edit_user_task_path(current_user, id: task.id), remote: true, type: "button", 'data-toggle' => "modal", 'data-target' => "#update-task-modal", 'data-taskeditlink' => "#{edit_user_task_path(current_user, id: task.id)}", class: 'open-edit-task-modal' %>
           </li>
           <li>
-            <%= link_to "Delete Task", user_task_path(current_user, id: task.id), remote: true , type: "button", 'data-toggle' => "modal", 'data-target' => "#deletetask_#{task.id}" %>
-
+            <a href="#" data-toggle="modal" role="button" data-target="#delete-task-modal" class="open-delete-task-modal" data-taskdeletelink="<%= user_task_path(current_user, task) %>">Delete Task</a>
           </li>
         </ul>
       </div>
-
-      <!--Modal for updating task -->
-            
-      <div class="modal fade updatetask" id="updatetask_<%= task.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <%= form_for([current_user, task], method: :patch, remote: true, html: { class: "task_form_#{task.id}"}) do |f| %>
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Edit Task</h4>
-              </div>
-              <div class="modal-body" style="text-align:left">
-                <div class="alert alert-danger" style="display:none">
-                  <ul class="errors" style="display:none">
-                    <%= render 'layouts/error_messages', object: f.object %>
-                  </ul>
-                </div>
-                <div class="field form-group">
-                  <% if current_user.id == task.assigner_id %>
-                    <p><strong>Executor: <%= task.executor.full_name %>, <%= task.executor.company %></strong></p>
-                  <% else %>
-                    <p><strong>Assigner: <%= task.assigner.full_name %>, <%= task.assigner.company %></strong></p>
-                  <% end %>
-                </div>
-                <div class="field form-group">
-                  <%= f.label :content %>
-                  <%= f.text_area :content, class: "form-control" %>
-                </div>
-                <div class="field form-group">
-                  <%= f.label :deadline %>
-                  <%= f.text_field :deadline_string, class: "form-control edit-task-deadline" %>
-                </div>    
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" id="updatetaskclose">Close</button>
-                  <%= f.button "Update Task", class: 'btn btn-primary edit-task-submit', data: {taskid: "#{task.id}", sid: current_user.id, disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
-        
-      <!--Modal end for updating task -->
-
-      <!--Modal for delete task -->
-    
-      <div class="modal fade" id="deletetask_<%= task.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content" style="text-align:left">
-            <%= form_for([current_user, task], method: :delete, remote: true) do |f| %>
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Delete Task</h4>
-              </div>
-              <div class="modal-body">
-                <h4>Are you sure?</h4>
-                <p> </p>  
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" id="deletetaskclose">Close</button>
-                  <%= f.submit "Delete Task", class: 'btn btn-danger' %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    
-    <!--Modal end for delete task -->
-
     </td>
   </tr>
 <% end %>

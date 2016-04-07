@@ -36,3 +36,43 @@
     <p>No more tasks.</p>
   </div> 
 </div>
+
+<!-- EDIT TASK MODAL -->
+
+  <div class="modal fade updatetask" id="update-task-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content" style="text-align:left">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Edit Task</h4>
+        </div>
+        <div class="task-edit-form-insert">
+          <!-- UPDATE FORM GETTING RENDERED HERE -->
+        </div> 
+      </div>
+    </div>
+  </div>
+
+<!-- END OF EDIT TASK MODAL -->
+
+<!-- DELETE POST MODAL -->
+
+<div class="modal fade" id="delete-task-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="text-align:left">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Delete Task</h4>
+      </div>
+      <div class="modal-body">
+        <h4>Are you sure?</h4>
+        <p> </p>  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="deletetaskclose">Close</button>
+        <a href="#" id="delete-task-link" type="button" class="btn btn-danger" data-taskdestroylink >Delete Task</a>
+          <!-- DESTROY LINK GETS INSERTED HERE -->      
+      </div>
+    </div>
+  </div>
+</div>

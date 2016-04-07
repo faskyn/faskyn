@@ -64,13 +64,12 @@ $(document).on("page:change", function() {
 });
 
 //setting time and datetimepicker when opening edit task modal
-$(document).on('shown.bs.modal', '.updatetask', function (e) {
-  var taskId = $(this).find('.edit-task-submit').data('taskid');
-  var deadlineField =  $(".task_form_" + taskId).closest('.updatetask').find($('.edit-task-deadline'));
+$(document).on('shown.bs.modal', '#update-task-modal', function (e) {
+  var deadlineField =  $('.edit-task-deadline');
   var deadlineValue = deadlineField.attr('value');
   var momentDeadline = moment(deadlineValue).format('MM/DD/YYYY hh:mm A');
   deadlineField.val(momentDeadline);
-  $(".task_form_" + taskId).closest('.updatetask').find($('.edit-task-deadline')).datetimepicker({
+  deadlineField.datetimepicker({
     sideBySide: true,
     format: 'MM/DD/YYYY hh:mm A',
     stepping: 15,
@@ -85,13 +84,14 @@ $(document).on('hidden.bs.modal', '.updatetask', function (e) {
 //setting time to RoR format when updating task
 $(document).on('click', '.edit-task-submit', function (e){
   e.preventDefault();
-  var taskId = $(this).data('taskid');
-  var deadlineField = $(".task_form_" + taskId).closest('.updatetask').find($('.edit-task-deadline'));
+  var deadlineField = $('.edit-task-deadline');
   var localMoment = moment(deadlineField.val());
   var railsDate = localMoment.toISOString();
   deadlineField.val(railsDate);
-  $(".task_form_" + taskId).submit();
+  $(".task-update-form").submit();
 });
+
+//HTML VERSION
 
 $(document).on('click', '.edit-task-submit-html', function (e) {
   e.preventDefault;
@@ -112,3 +112,29 @@ function edit_task_html_form() {
     widgetPositioning: { vertical: 'bottom' }
   });
 };
+
+//editing task via modal
+$(document).on('click', '.open-edit-task-modal', function (event) {
+  $('#task-edit-form-insert').html("<div style='text-align:center'><i class='fa fa-circle-o-notch fa-2x fa-spin' style='color:#5E5E5E'></i></div>");
+  var href = $(this).data("taskeditlink");
+  $.ajax({
+    type: "GET",
+    url: href,
+    dataType: "script"
+  });
+});
+
+//deleting task via modal
+$(document).on('click', '.open-delete-task-modal', function (event) {
+  var taskDeleteLink = $(this).data("taskdeletelink");
+  $('#delete-task-link').data("taskdestroylink", taskDeleteLink);
+});
+
+$(document).on('click', '#delete-task-link', function (event) {
+  var href = $(this).data("taskdestroylink");
+  $.ajax({
+    type: "DELETE",
+    url: href,
+    dataType: "script"
+  });
+});

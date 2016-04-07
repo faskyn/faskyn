@@ -9,7 +9,7 @@ $("ul.errors").html("");
 <% else %>
 	$('ul.errors').hide();
 	$('.alert-danger').hide();
-	$('#updatetask_<%= @task.id %>').modal('hide');
+	$('#update-task-modal').modal('hide');
 
 	//making updating (js part) work on partials that got prepended later
 	$task = $('<%= j render @task %>');
@@ -17,6 +17,7 @@ $("ul.errors").html("");
 
 	$('#task_<%= @task.id %>').fadeOut(400, function(){
 		$(this).remove();
+		//first is current_user tasks index, second is user + current user common tasks index
 		$(".new-task-insert").prepend($task);
 		$(".new-task-insert-2").prepend($taskbetween);
 	});

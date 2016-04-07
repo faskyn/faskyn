@@ -1,8 +1,8 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_and_authorize_user_tasks, only: [:index, :outgoing_tasks, :incoming_tasks, :completed_tasks, :completed_incoming_tasks, :completed_outgoing_tasks]
-  before_action :set_user, only: [:new, :create, :show, :edit, :update, :delete, :destroy, :complete, :uncomplete]
-  before_action :set_and_authorize_task, only: [:show, :edit, :update, :delete, :destroy, :complete, :uncomplete]
+  before_action :set_user, only: [:create, :edit, :update, :delete, :destroy, :complete, :uncomplete]
+  before_action :set_and_authorize_task, only: [:edit, :update, :delete, :destroy, :complete, :uncomplete]
   before_action :set_new_task, only: [:index, :outgoing_tasks, :new]
 
   require 'will_paginate/array'
@@ -10,19 +10,16 @@ class TasksController < ApplicationController
   def index
     @q_tasks = Task.alltasks(current_user).uncompleted.ransack(params[:q])
     #eager loading --> @tasks = @q_tasks.result.includes(:executor_profile, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: 12)
-    @tasks = @q_tasks.result.includes(:executor, :executor_profile, :assigner, :assigner_profile).order("created_at DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
+    @tasks = @q_tasks.result.includes(:executor, :executor_profile, :assigner, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
     respond_to do |format|
       format.html
       format.js
     end
   end
 
-  def show
-  end
-
   def outgoing_tasks
     @q_outgoing_tasks = current_user.assigned_tasks.uncompleted.ransack(params[:q])
-    @tasks = @q_outgoing_tasks.result.includes(:executor, :executor_profile).order("created_at DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
+    @tasks = @q_outgoing_tasks.result.includes(:executor, :executor_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
     respond_to do |format|
       format.html
       format.js
@@ -30,17 +27,12 @@ class TasksController < ApplicationController
   end
 
   def incoming_tasks
-    #@executed_tasks = current_user.executed_tasks.uncompleted.order("created_at DESC").paginate(page: params[:page], per_page: 12)
     @q_incoming_tasks = current_user.executed_tasks.uncompleted.ransack(params[:q])
-    @tasks = @q_incoming_tasks.result.includes(:assigner, :assigner_profile).order("created_at DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
+    @tasks = @q_incoming_tasks.result.includes(:assigner, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
     respond_to do |format|
       format.html
       format.js
     end
-  end
-
-  def new
-    authorize @user, :new_task?
   end
 
   def create
@@ -51,12 +43,10 @@ class TasksController < ApplicationController
       TaskCreatorJob.perform_later(@task, @task.executor, @task.assigner)
       Conversation.create_or_find_conversation(@task.assigner_id, @task.executor_id)
       respond_to do |format|
-        format.html { redirect_to user_tasks_path(current_user), notice: "Task saved!" }
         format.js
       end     
     else
       respond_to do |format|
-        format.html { render action: :new, alert: "Task couldn't be saved!" }
         format.json { render json: @task.errors, status: :unprocessable_entity }
         format.js
       end
@@ -98,6 +88,7 @@ class TasksController < ApplicationController
   end
 
   def edit
+    respond_to :js
   end
 
   def update
