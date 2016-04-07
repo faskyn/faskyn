@@ -9,7 +9,7 @@ $("ul.errors").html("");
 <% else %>
 	$('ul.errors').hide();
 	$('.alert-danger').hide();
-	$('#updatepost_<%= @post.id %>').modal('hide');
+	$('#update-post-modal').modal('hide');
 	$post = $('<%= j render @post %>');
 	editPostHideDanger($post);
 	$('#post_<%= @post.id %>').remove();

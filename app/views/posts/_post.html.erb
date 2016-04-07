@@ -37,10 +37,10 @@
               </a>
               <ul class = "dropdown-menu dropdown-menu-right">
                 <li>
-                  <%= link_to "Edit Post", edit_post_path(post), remote: true, type: "button", 'data-toggle' => "modal", 'data-target' => "#updatepost_#{post.id}", 'data-posteditlink' => "#{edit_post_path(post)}", class: 'open-edit-post-modal' %>
+                  <%= link_to "Edit Post", edit_post_path(post), remote: true, type: "button", 'data-toggle' => "modal", 'data-target' => "#update-post-modal", 'data-posteditlink' => "#{edit_post_path(post)}", class: 'open-edit-post-modal' %>
                 </li>   
                 <li>
-                  <a href="#" data-toggle="modal" role="button" data-target="#deletepost_<%= post.id %>">Delete Post</a>
+                  <a href="#" data-toggle="modal" role="button" data-target="#delete-post-modal" class="open-delete-post-modal" data-postdeletelink="<%=post_path(post) %>">Delete Post</a>
                 </li>
               </ul>
             </li>
@@ -77,51 +77,6 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <% if policy(post).edit? %>
-
-    
-      <div class="modal fade updatepost" id="updatepost_<%= post.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content" style="text-align:left">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="edit-post-modal-h4">Edit Post</h4>
-            </div>
-            <div class="post-edit-form-insert">
-              <!-- FORM GETS RENDERED HERE VIA JS -->
-            </div>
-          </div>
-        </div>
-      </div>
-   
-
-  <% end %>
-
-  <% if policy(post).delete? %>
-
-    <%= form_for(post, method: :delete, remote: true) do |f| %>
-      <div class="modal fade" id="deletepost_<%= post.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content" style="text-align:left">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Delete Post</h4>
-            </div>
-            <div class="modal-body">
-              <h4>Are you sure?</h4>
-              <p> </p>  
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal" id="deletepostclose">Close</button>
-                <%= f.submit "Delete Post", class: 'btn btn-danger' %>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
-
-  <% end %>
+  </div>      
 
 <% end %>

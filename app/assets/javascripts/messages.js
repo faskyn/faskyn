@@ -19,11 +19,10 @@ $(document).on("upload:progress", ".message-refile-form", function(e) {
     $('#message-progresspercent').text(percentComplete + "% uploaded " + filename );
 });
 
-//when upload is reday user gets allowed to submit the message
+//when upload is ready user gets allowed to submit the message
 $(document).on("upload:success", ".message-refile-form", function(e) {
     if (!$(this).find("input.uploading").length) {
       $(this).find("input[type=submit]").removeAttr("disabled");
-      //$(".removecheck").show();
     };
 });
 
