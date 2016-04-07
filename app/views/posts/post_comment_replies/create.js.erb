@@ -1,4 +1,4 @@
-$(".post-comment-reply-text-area-<%= @post_comment_reply.post_comment_id%>").val('');
+$("#post-comment-reply-text-area-<%= @post_comment_reply.post_comment_id%>").val('');
 $(".post-comment-reply-insert-<%= @post_comment_reply.post_comment_id %>").append('<%= j render @post_comment_reply %>');
 $(".best_in_place").best_in_place();
 $("#post-comment-number-<%= @post_comment.id %>").html("<%= pluralize(@post_comment.post_comment_replies.size, 'Reply') %>");
