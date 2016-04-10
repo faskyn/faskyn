@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_and_authorize_user_tasks, only: [:index, :outgoing_tasks, :incoming_tasks, :completed_tasks, :completed_incoming_tasks, :completed_outgoing_tasks]
-  before_action :set_user, only: [:create, :edit, :update, :delete, :destroy, :complete, :uncomplete]
+  before_action :set_user, only: [:create, :edit, :update, :delete, :destroy, :uncomplete]
   before_action :set_and_authorize_task, only: [:edit, :update, :delete, :destroy, :complete, :uncomplete]
   before_action :set_new_task, only: [:index, :outgoing_tasks, :new]
 

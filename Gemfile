@@ -92,7 +92,7 @@ group :development do
   gem 'better_errors', '~> 2.1.1'
   gem 'quiet_assets', '~> 1.1.0'
   gem 'letter_opener', '~> 1.4.1'
-  gem 'launchy', '~> 2.4.3'
+  
   #database query optimazation
   gem 'bullet', '~> 4.14', '>= 4.14.10'
   gem 'hirb', '~> 0.7.3'
@@ -107,13 +107,17 @@ group :development, :test do
   gem 'spring'
   #testing frameworks
   gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
-  gem 'factory_girl_rails', '~> 4.6'
+  gem 'guard-rspec', '~> 4.6', '>= 4.6.4', require: false
+  gem 'spring-commands-rspec', '~> 1.0', '>= 1.0.4'
+  gem 'poltergeist', '~> 1.9'
 end
 
 group :test do
-  gem 'capybara', '~> 2.6', '>= 2.6.2'
-  gem 'guard-rspec', '~> 4.6', '>= 4.6.4'
+  gem 'factory_girl_rails', '~> 4.6'
+  gem 'capybara', '~> 2.6', '>= 2.6.2'  
   gem 'jasmine', '~> 2.4'
+  gem 'database_cleaner', '~> 1.5', '>= 1.5.1'
+  gem 'launchy', '~> 2.4.3'
 end
 
 group :production do
