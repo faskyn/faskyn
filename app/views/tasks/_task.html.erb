@@ -44,12 +44,10 @@
       <%= task.content %>
     </td>
     <td class="col-md-2">
-      <% if task.completed? %>
+      <% if task.completed_at %>
         <%= local_time(task.completed_at, "%d %b %I%p") %>
       <% else %>
-        <% unless task.deadline == nil %>
-         <%= local_time(task.deadline, "%d %b %I%p") %>
-        <% end %>
+        <%= local_time(task.deadline, "%d %b %I%p") %>
       <% end %>
     </td>
 

@@ -15,11 +15,11 @@ class Product < ActiveRecord::Base
 
   validates :user, presence: true
 
-  validates :name, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }, uniqueness: { message: "already exists" }
-  validates :company, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
-  validates :website, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
-  validates :oneliner, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
-  validates :description, presence: { message: "can not be blank" }, length: {maximum: 500, message: "can't be longer than 500 characters"}
+  validates :name, presence: { message: "can't be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }, uniqueness: { message: "already exists" }
+  validates :company, presence: { message: "can't be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
+  validates :website, presence: { message: "can't be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
+  validates :oneliner, presence: { message: "can't be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
+  validates :description, presence: { message: "can't be blank" }, length: {maximum: 500, message: "can't be longer than 500 characters"}
 
   validates_associated :industry_products
   validates_associated :product_features
@@ -49,16 +49,29 @@ class Product < ActiveRecord::Base
   private
 
     def format_website
-      self.website = "http://#{self.website}" unless self.website[/^https?/]
+      unless website.nil? || self.website[/^https?/]
+       self.website = "http://#{self.website}"
+      end
     end
 
     def website_validator
-      self.errors.add :website, "format is invalid!" unless website_valid?
+      unless website.nil?
+        self.errors.add :website, "format is invalid!" unless website_valid?
+      end
     end
 
     def website_valid?
       !!website.match(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-=\?]*)*\/?$/)
     end
+
+    # def website_valid?
+    #   url = URI.parse(website) rescue false
+    #   url.kind_of?(URI::HTTP) || url.kind_of?(URI::HTTPS)
+    # end
+
+    # def website_validator
+    #   self.errors.add :website, "format is invalid!" unless website_valid?  
+    # end
 
     def product_industries_limit
       if self.industries.reject(&:marked_for_destruction?).count > 5

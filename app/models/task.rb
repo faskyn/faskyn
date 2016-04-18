@@ -8,8 +8,8 @@ class Task < ActiveRecord::Base
   validates :assigner, presence: true
   validates :executor, presence: { message: "must be valid"}
 
-  validates :content, presence: { message: "can not be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
-  validates :deadline, presence: { messsage: "can not be blank" }
+  validates :content, presence: { message: "can't be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
+  validates :deadline, presence: { messsage: "can't be blank" }
   validate :deadline_date_cannot_be_in_the_past
 
   scope :completed, -> { where.not(completed_at: nil) }
@@ -33,10 +33,6 @@ class Task < ActiveRecord::Base
     self.deadline = deadline_str
   end
 
-  def completed?
-    !completed_at.blank?
-  end
-
   #getter setter method code for new task executor search/select/autocomplete
   def task_name_company
     [executor.try(:profile).try(:first_name), executor.try(:profile).try(:last_name), executor.try(:profile).try(:company)].join(' ')
@@ -53,6 +49,6 @@ class Task < ActiveRecord::Base
 
     def deadline_date_cannot_be_in_the_past
       errors.add(:deadline, "can't be in the past") if
-        !deadline.blank? and deadline < Time.zone.now
+        deadline.present? && deadline < Time.zone.now
     end
 end

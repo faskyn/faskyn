@@ -6,7 +6,7 @@ class Notification < ActiveRecord::Base
   has_one :sender_profile, through: :sender, source: :profile
   has_one :recipient_profile, through: :recipient, source: :profile
 
-  after_create :send_pusher_notification
+  after_create :increasing_notification
 
   validates :sender, presence: true
   validates :recipient, presence: true
@@ -38,21 +38,24 @@ class Notification < ActiveRecord::Base
   end
   
   def check_notification #chat notification gets checked
-    update_attribute(:checked_at, Time.zone.now) if self.checked_at.nil?
+    update_attribute(:checked_at, Time.zone.now) if checked_at.nil?
   end
 
-  def send_pusher_notification
-    if self.notifiable_type == "Message"
-      self.recipient.increase_new_chat_notifications
-      number = self.recipient.new_chat_notification
-      Pusher['private-'+ self.recipient_id.to_s].trigger_async('new_chat_notification', { number: number })
+  def increasing_notification
+    if notifiable_type == "Message"
+      recipient.increase_new_chat_notifications
+      increased_chat_number_pusher
     else
-      self.recipient.increase_new_other_notifications
-      number = self.recipient.new_other_notification
-      Pusher['private-'+ self.recipient_id.to_s].trigger_async('new_other_notification', { number: number })
+      recipient.increase_new_other_notifications
+      increased_other_number_pusher
     end      
   end
 
-  private
+  def increased_chat_number_pusher(number = recipient.new_chat_notification)
+    Pusher.trigger_async('private-'+ recipient_id.to_s, 'new_chat_notification', { number: number })
+  end
 
+  def increased_other_number_pusher(number = recipient.new_other_notification)
+    Pusher.trigger_async('private-'+ recipient_id.to_s, 'new_other_notification', { number: number })  
+  end
 end

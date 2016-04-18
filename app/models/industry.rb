@@ -4,5 +4,5 @@ class Industry < ActiveRecord::Base
 
   accepts_nested_attributes_for :industry_products
 
-  validates :name, presence: { messsage: "can not be blank" }
+  validates :name, presence: true
 end

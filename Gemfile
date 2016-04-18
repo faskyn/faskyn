@@ -114,7 +114,9 @@ end
 
 group :test do
   gem 'factory_girl_rails', '~> 4.6'
-  gem 'capybara', '~> 2.6', '>= 2.6.2'  
+  gem 'capybara', '~> 2.6', '>= 2.6.2'
+  gem 'shoulda-matchers', '~> 3.1', '>= 3.1.1'
+  gem 'shoulda-callback-matchers', '~> 1.1', '>= 1.1.3'
   gem 'jasmine', '~> 2.4'
   gem 'database_cleaner', '~> 1.5', '>= 1.5.1'
   gem 'launchy', '~> 2.4.3'

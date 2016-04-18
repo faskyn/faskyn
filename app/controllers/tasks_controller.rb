@@ -72,7 +72,7 @@ class TasksController < ApplicationController
   def completed_tasks
     @q_completed_tasks = Task.alltasks(current_user).completed.ransack(params[:q])
     #@q_completed_tasks = current_user.tasks_completed.ransack(params[:q])
-    @tasks = @q_completed_tasks.result.includes(:assigner, :assigner_profile, :executor, :executor_profile).paginate(page: params[:page], per_page: Task.pagination_per_page)
+    @tasks = @q_completed_tasks.result.includes(:assigner, :assigner_profile, :executor, :executor_profile).order(completed_at: :desc).paginate(page: params[:page], per_page: Task.pagination_per_page)
     respond_to do |format|
       format.html
       format.js

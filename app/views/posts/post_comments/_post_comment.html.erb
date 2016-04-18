@@ -51,7 +51,7 @@
         <div class = "row reply-row">
           <div class="col-md-12">
             <div class="col-md-10 col-md-offset-2 post-comment-reply-insert-<%= post_comment.id%>">
-              <%= render partial: 'posts/post_comment_replies/post_comment_reply', collection: post_comment.post_comment_replies.ordered.included, as: :post_comment_reply, locals: { post_comment: post_comment } %>
+              <%= render partial: 'posts/post_comment_replies/post_comment_reply', collection: post_comment.post_comment_replies.ordered.includes(:user, :user_profile), as: :post_comment_reply, locals: { post_comment: post_comment } %>
             </div>
           </div>
         </div>

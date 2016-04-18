@@ -5,11 +5,11 @@ class PostComment < ActiveRecord::Base
   has_many :post_comment_replies, dependent: :destroy
   has_many :users, through: :post_comment_replies
 
+  validates :post, presence: true
   validates :user, presence: true
   validates :body, presence: true, length: { maximum: 500 }
 
   scope :ordered, -> { order(updated_at: :desc) }
-  scope :included, -> { includes(:user, :user_profile) }
 
   def send_post_comment_reply_creation_notification(reply)
     post_repliers = ([user] + [post.user] + users).uniq - [ reply.user ]
