@@ -4,15 +4,15 @@ RSpec.describe Product, type: :model do
 
   describe "nested attribute validation" do
 
-    # let(:product) { FactoryGirl.create(:product) }
-    # let(:product_feature) { FactoryGirl.create(:product_feature, product: product ) }
-    # let(:product_competition) { FactoryGirl.create(:product_competition, product: product) }
+    let(:product) { FactoryGirl.create(:product) }
+    let(:product_feature) { FactoryGirl.create(:product_feature, product: product ) }
+    let(:product_competition) { FactoryGirl.create(:product_competition, product: product) }
 
-    # let(:product_with_attrs) { create(:product) do |product| 
-    #                              product.product_features.create(attributes_for(:product_feature))
-    #                              product.product_competitions.create(attributes_for(:product_competition))
-    #                              product.product_usecases.create(attributes_for(:product_usecase))
-    #                            end}
+    let(:product_with_attrs) { create(:product) do |product| 
+                                 product.product_features.create(attributes_for(:product_feature))
+                                 product.product_competitions.create(attributes_for(:product_competition))
+                                 product.product_usecases.create(attributes_for(:product_usecase))
+                               end}
 
     let(:user) { create(:user) }
     let(:test_product) {create(:product, :product_with_nested_attrs)}
@@ -20,17 +20,27 @@ RSpec.describe Product, type: :model do
     let!(:industry) { create(:industry, name: "AI") }
     let(:product_feature) { create(:product_feature)}
 
-    it "has a valid factory" do
-    #   expect(create(:product, :product_with_nested_attrs)).to be_valid
-      attrs = attributes_for(:product).merge({
+    # it "has a valid factory" do
+    # #   expect(create(:product, :product_with_nested_attrs)).to be_valid
+    #   attrs = attributes_for(:product).merge({
+    #     user_id: user.id,
+    #     product_features_attributes: attributes_for(:product_feature),
+    #     product_usecases_attributes: attributes_for(:product_usecase),
+    #     product_competitions_attributes: attributes_for(:product_competition)
+    #     #product_industry: [attributes_for(industry)]
+    #   })
+    #     #attrs = attributes_for(:product, product_features: build(:product_feature)
+    #   expect(Product.new(attrs)).to be_valid
+    # end
+
+    it "has another valid factory" do
+      product = build(:product).merge({
         user_id: user.id,
-        product_features_attributes: attributes_for(:product_feature),
-        product_usecases_attributes: attributes_for(:product_usecase),
-        product_competitions_attributes: attributes_for(:product_competition)
-        #product_industry: [attributes_for(industry)]
-      })
-        #attrs = attributes_for(:product, product_features: build(:product_feature)
-      expect(Product.new(attrs)).to be_valid
+        product_features: attributes_for(:product_feature, product: product),
+        product_competitions: attributes_for(:product_competition, product: product),
+        product_usecases: attributes_for(:product_usecase, product: product)
+        })
+      expect(product).to be_valid
     end
 
     # it "has a valid factory 2" do

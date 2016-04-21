@@ -1,3 +1,4 @@
+#controller for checking thread safety
 class FooController < ApplicationController
   def bar
     sleep 1

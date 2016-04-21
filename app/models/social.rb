@@ -3,6 +3,10 @@ class Social < ActiveRecord::Base
 
   validates :profile, presence: true
 
+  validates :uid, presence: true
+  validates :token, presence: true
+  validates :provider, presence: true
+
   def self.find_or_create_from_auth_hash(auth_hash)
     #checking if the connected account exists (one use can have one acc/provider at the moment)
     social_acc = where(provider: auth_hash.provider).first_or_create

@@ -3,7 +3,7 @@ FactoryGirl.define do
     #email { Faker::Internet.email }
     sequence(:email) { |n| "example#{n}@gmail.com" }
     #sequence(:email) { Faker::Internet.email }
-
+    confirmed_at { Faker::Time.between(DateTime.now - 1, DateTime.now - 2) }
     password 'example0000'
     password_confirmation 'example0000'
     new_chat_notification { Faker::Number.between(0, 10) }
@@ -22,6 +22,16 @@ FactoryGirl.define do
     # image.image  fixture_file_upload( Rails.root + 'spec/fixtures/images/example.jpg', "image/jpg")
     # image.caption           "Some random caption"
     user
+  end
+
+  factory :social do
+    uid { Faker::Number.number(8) }
+    token { Faker::Number.number(10) }
+    first_name { "John" }
+    last_name { "Doe" }
+    provider { "twitter"}
+    page_url { "https://twitter.com/jdoe" }
+    profile
   end
 
   factory :notification do

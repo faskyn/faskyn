@@ -8,9 +8,10 @@ class TasksController < ApplicationController
   require 'will_paginate/array'
 
   def index
-    @q_tasks = Task.alltasks(current_user).uncompleted.ransack(params[:q])
+    #@q_tasks = Task.alltasks(current_user).uncompleted.ransack(params[:q])
     #eager loading --> @tasks = @q_tasks.result.includes(:executor_profile, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: 12)
-    @tasks = @q_tasks.result.includes(:executor, :executor_profile, :assigner, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
+    #@tasks = @q_tasks.result.includes(:executor, :executor_profile, :assigner, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
+    @tasks = Task.alltasks(current_user).uncompleted.includes(:executor, :executor_profile, :assigner, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
     respond_to do |format|
       format.html
       format.js

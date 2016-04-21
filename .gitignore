@@ -29,3 +29,6 @@
 
 # Ignore development redis dump
 /dump.rdb
+
+# Ignore byebug history
+/.byebug_history

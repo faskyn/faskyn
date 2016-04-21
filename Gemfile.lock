@@ -614,6 +614,7 @@ DEPENDENCIES
   omniauth-twitter (~> 1.2, >= 1.2.1)
   pg (~> 0.18.3)
   poltergeist (~> 1.9)
+  pry (~> 0.10.3)
   puma (~> 2.13.4)
   puma_worker_killer (~> 0.0.5)
   pundit (~> 1.1)
