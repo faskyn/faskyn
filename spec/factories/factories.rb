@@ -104,10 +104,15 @@ FactoryGirl.define do
     #product
   end
 
+
+  factory :industry, class: Industry do
+    name "AI"
+  end
+
   factory :industry_product, class: IndustryProduct do
-    product
+    #product
     industry
-  end 
+  end
 
   factory :product, class: Product do
     name { Faker::Commerce.product_name }
@@ -122,18 +127,83 @@ FactoryGirl.define do
     #   end
     # end
     trait :product_with_nested_attrs do
-      after(:create) do |product|
+      before(:create) do |product|
         # product.product_usecase = create(:product_usecase)
         # product.product_competititon = create(:product_competititon)
         # product.product_feature = create(:product_feature)
-        create(:product_competititon, product: product)
-        create(:product_usecase, product: product)
-        create(:product_feature, product: product)
+        product.product_competitions << build(:product_competition, product: product)
+        product.product_usecases << build(:product_usecase, product: product)
+        product.product_features << build(:product_feature, product: product)
+        #product.industry_products << build(:industry_product, product: product)
+        product.industries << build(:industry)
       end
     end
-  end
 
-  factory :industry do
-    name { Faker::Commerce.department(1, true) }
+    # trait :with_children do
+    #   ignore do
+    #     product_competition { build :product_competition }
+    #     product_usecase { build :product_usecase }
+    #     product_feature { build :product_feature }
+    #     industry_product { build :industry_product }
+    #     industry { build :industry }
+    #   end
+
+    #   after(:build) do |product, evaluator|
+    #     if evaluator.product_competitions.present?
+    #       product.product_competitions = evaluator.product_competitions
+    #     else
+    #       product.product_competitions << evaluator.product_competition
+    #     end
+
+    #     if evaluator.product_usecases.present?
+    #       product.product_usecases = evaluator.product_usecases
+    #     else
+    #       product.product_usecases << evaluator.product_usecase
+    #     end
+
+    #     if evaluator.product_features.present?
+    #       product.product_features = evaluator.product_features
+    #     else
+    #       product.product_features << evaluator.product_feature
+    #     end
+
+    #     if evaluator.industry_products.present?
+    #       product.industry_products = evaluator.industry_products
+    #     else
+    #       product.industry_products << evaluator.industry_product
+    #     end
+
+    #     if evaluator.industries.present?
+    #       product.industries = evaluator.industries
+    #     else
+    #       product.industries << evaluator.industry
+    #     end
+    #   end
+    # end
+
+    # trait :with_product_all do
+    #   ignore do
+    #     product_competititon { build :product_competititon , product: product}
+    #     product_usecase { build :product_usecase, product: product }
+    #     product_feature { build :product_feature, product: product }
+    #   end
+
+    #   after(:build) do |product, evaluator|
+    #    # If you have to skip validation, add the following line.
+    #     product.class.skip_callback(:save, :after, :product_competitions_limit)
+    #     product.product_competitions = evaluator.product_competitions
+
+    #     product.class.skip_callback(:save, :after, :product_features_limit)
+    #     product.product_features = evaluator.product_features
+
+    #     product.class.skip_callback(:save, :after, :product_usecases_limit)
+    #     product.product_usecases = evaluator.product_usecases
+
+    #     product.class.skip_callback(:save, :after, :product_indutries_limit)
+    #     product.industries = evaluator.industries
+    #   end
+    # end
+
+
   end
 end

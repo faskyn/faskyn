@@ -20,8 +20,14 @@ $(document).on("page:change", function() {
     });
   };
 
+  //in case of anchor automatically open the replies
   if (window.location.hash.length > 0) {
     showPostAnchorComments();
+  };
+
+  //showing edit/delete dropdowns to author
+  if ($('.post-container').length > 0) {
+    collectionPostEditDropdown();  
   };
 });
 
@@ -44,7 +50,7 @@ $(document).on('change', '#avatar-upload-update', function() {
 });
 
 //removing preview from create action
-$(document).on('click', '.remove-post-preview', function(){
+$(document).on('click', '.remove-post-preview', function() {
   $('#img-prev').attr('src', '#');
   $('#img-prev').addClass('hidden');
   $('.remove-post-preview').addClass('hidden');
@@ -52,7 +58,7 @@ $(document).on('click', '.remove-post-preview', function(){
 });
 
 //removing preview from update action
-$(document).on('click', '.remove-post-preview-update', function(){
+$(document).on('click', '.remove-post-preview-update', function() {
   $('#img-prev-update').attr('src', '#');
   $('#img-prev-update').addClass('hidden');
   $('.remove-post-preview-update').addClass('hidden');
@@ -63,6 +69,24 @@ $(document).on('click', '.remove-post-preview-update', function(){
 });
 
 //POST, COMMENT AND REPLY VALIDATION/CREATION
+
+//showing edit/delete buttons on hover for comments
+$(document).on('mouseenter', '.post-comment-body', function() {
+  if ($(this).closest('.post-comment').data('commentauthorid') == $('#bodycurrentuser').data('currentuserid')) {
+    $(this).find('.post-comment-editing-deleting').removeClass('hidden');
+  };
+}).on('mouseleave', '.post-comment-body', function() {
+  $(this).find('.post-comment-editing-deleting').addClass('hidden');
+});
+
+//showing edit/delete buttons on hover for replies
+$(document).on('mouseenter', '.post-comment-reply-body', function() {
+  if ($(this).closest('.post-comment-reply').data('replyauthorid') == $('#bodycurrentuser').data('currentuserid')) {
+    $(this).find('.post-comment-reply-editing-deleting').removeClass('hidden');
+  };
+}).on('mouseleave', '.post-comment-reply-body', function() {
+  $(this).find('.post-comment-reply-editing-deleting').addClass('hidden');
+});
 
 //enabling post creation when text area is not empty (shared via button)
 $(document).on('keyup', '.post-create-body', function() {
@@ -156,6 +180,7 @@ $(document).on('click', '#delete-post-link-insert', function (event) {
 
 //FUNCTIONS
 
+//image preview for new post
 function readPostURL(input) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();
@@ -166,6 +191,7 @@ function readPostURL(input) {
   }
 };
 
+//image preview for edited post
 function readUpdatePostURL(input) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();
@@ -177,17 +203,35 @@ function readUpdatePostURL(input) {
   }
 };
 
+//hiding post errors on closing edit post modal
 function editPostHideDanger($container) {
   $container.find('.updatepost').on('hidden.bs.modal', function (e) {
     $('.alert-danger').hide();
   });
 };
 
+//on clicking notification that takes to the post the comments/replies get shown
 function showPostAnchorComments() {
   var post_id = window.location.hash.substr(1);
   var all_replies = $('#' + post_id).find('.post-comment-replies:has(.post-comment-reply)');
   all_replies.show();
   $('#' + post_id).find('.open-all-post-comments-row').hide();
+};
+
+//showing edit/delete dropdown on a certain post to author (important for caching)
+function showPostEditDropdown($container) {
+  if ($container.find('.edit-post-dropdown-button').data('postauthorid') == $('#bodycurrentuser').data('currentuserid')) {
+    $container.find('.edit-post-dropdown-button').removeClass('hidden');
+  };
+};
+
+//iterating thru the posts and showing edit/delete dropdown to author (important for caching)
+function collectionPostEditDropdown() {
+  $('.edit-post-dropdown-button').each(function(index) {
+    if ($(this).data('postauthorid') == $('#bodycurrentuser').data('currentuserid')) {
+      $(this).removeClass('hidden');
+    };
+  });
 };
 
 

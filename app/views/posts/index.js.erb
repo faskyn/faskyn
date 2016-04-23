@@ -1,4 +1,6 @@
-$('.new-post-insert').append('<%= j render @posts %>');
+$posts = '<%= j render @posts %>'
+$('.new-post-insert').append($posts);
+collectionPostEditDropdown();
 <% if @posts.next_page %>
   $('.pagination').replaceWith('<%= j will_paginate @posts %>');
 <% else %>

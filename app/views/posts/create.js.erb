@@ -9,6 +9,7 @@ $("ul.errors").html("");
 	$('ul.errors').hide();
 	$('.alert-danger').hide();
 	$('.post-index').prepend('<%= j render @post %>');
+	collectionPostEditDropdown();
 	$('.post-create-body').val('');
 	$('#img-prev').attr('src', "#");
 	$('#img-prev').addClass('hidden');

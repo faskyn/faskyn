@@ -29,23 +29,21 @@
         </div>
 
         <div class="col-md-2" style="text-align:right;">
-          <% if policy(post).edit? && policy(post).delete? %>
-           
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-angle-down"></i>
-              </a>
-              <ul class = "dropdown-menu dropdown-menu-right">
-                <li>
-                  <%= link_to "Edit Post", edit_post_path(post), remote: true, type: "button", 'data-toggle' => "modal", 'data-target' => "#update-post-modal", 'data-posteditlink' => "#{edit_post_path(post)}", class: 'open-edit-post-modal' %>
-                </li>   
-                <li>
-                  <a href="#" data-toggle="modal" role="button" data-target="#delete-post-modal" class="open-delete-post-modal" data-postdeletelink="<%=post_path(post) %>">Delete Post</a>
-                </li>
-              </ul>
-            </li>
+     
+          <li class="dropdown edit-post-dropdown-button hidden" data-postauthorid ="<%= post.user_id%>">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-angle-down"></i>
+            </a>
+            <ul class = "dropdown-menu dropdown-menu-right">
+              <li>
+                <%= link_to "Edit Post", edit_post_path(post), remote: true, type: "button", 'data-toggle' => "modal", 'data-target' => "#update-post-modal", 'data-posteditlink' => "#{edit_post_path(post)}", class: 'open-edit-post-modal' %>
+              </li>   
+              <li>
+                <a href="#" data-toggle="modal" role="button" data-target="#delete-post-modal" class="open-delete-post-modal" data-postdeletelink="<%=post_path(post) %>">Delete Post</a>
+              </li>
+            </ul>
+          </li>
             
-          <% end %>
         </div>
       </div>
 

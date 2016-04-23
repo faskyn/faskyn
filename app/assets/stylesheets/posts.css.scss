@@ -55,16 +55,17 @@ $comment-grey: #f9f9f9;
     .post-comment-body {
       font-size: 12px;
       .post-comment-editing-deleting {
-        display: none;
+        //display: none;
         .post-comment-edit-fa, .post-comment-delete-fa {
           padding-left: 5px;
           cursor: pointer;
+          color: $dark-grey;
         }
       }
-      &:hover .post-comment-editing-deleting  {
-        display: inline;
-        color: $dark-grey;
-      }
+      // &:hover .post-comment-editing-deleting  {
+      //   display: inline;
+      //   color: $dark-grey;
+      // }
     }
     a {
       decoration: none;
@@ -97,16 +98,15 @@ $comment-grey: #f9f9f9;
       .post-comment-reply-body {
         font-size: 12px;
         .post-comment-reply-editing-deleting {
-          display: none;
           .post-comment-reply-edit-fa, .post-comment-reply-delete-fa {
             padding-left: 5px;
             cursor: pointer;
+            color: $dark-grey;
           }
         }
-        &:hover .post-comment-reply-editing-deleting  {
-          display: inline;
-          color: $dark-grey;
-        }
+        // &:hover .post-comment-reply-editing-deleting  {
+        //   color: $dark-grey;
+        // }
       }
       a {
         decoration: none;

@@ -15,4 +15,5 @@ $("ul.errors").html("");
 	$('#post_<%= @post.id %>').remove();
 	$(".new-post-insert").prepend($post);
 	$("html, body").animate({ scrollTop: 0 }, "slow");
+	showPostEditDropdown($post);
 <% end %>

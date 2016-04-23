@@ -1,9 +1,10 @@
 require "rails_helper"
 
 RSpec.describe ProductUsecase, type: :model do
+  let(:product) { create(:product, :product_with_nested_attrs) }
 
   it "has a valid factory" do
-    expect(build(:product_usecase)).to be_valid
+    expect(build(:product_usecase, product: product)).to be_valid
   end
   
   it "is invalid without example" do

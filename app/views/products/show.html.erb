@@ -1,8 +1,9 @@
 <% provide(:title, @product.name) %>
-<% cache [@product, @product.user.profile] do %>
+<div class= "container-fluid product-container">
+  <div class= "col-md-8 col-md-offset-2">
 
-  <div class= "container-fluid product-container">
-    <div class= "col-md-8 col-md-offset-2">
+    <% cache [@product, @product.user.profile] do %>
+
       <div class="row product-show-name">
         <div class="col-md-12">
           <%= image_tag(@product.product_image_url(:base_thumb), style:"margin-left:10px;") %>
@@ -92,14 +93,17 @@
           </div>
         </div>
       </div>
-      <% if policy(@product).edit? %>
-        <%= link_to "Edit Product", edit_product_path(@product), class: "btn btn-primary" %>
-      <% end %>
-      <% if policy(@product).delete? %>
-        <button type="button" class="btn btn-danger" style="margin-left:10px;" data-toggle="modal" data-target="#deleteproduct_<%= @product.id %>">Delete Product</button>
-      <% end %>
-    </div> 
-  </div>
+
+    <% end %>
+
+    <% if policy(@product).edit? %>
+      <%= link_to "Edit Product", edit_product_path(@product), class: "btn btn-primary" %>
+    <% end %>
+    <% if policy(@product).delete? %>
+      <button type="button" class="btn btn-danger" style="margin-left:10px;" data-toggle="modal" data-target="#deleteproduct_<%= @product.id %>">Delete Product</button>
+    <% end %>
+  </div> 
+</div>
 
   <%= form_for(@product, method: :delete) do |f| %>
     <div class="modal fade" id="deleteproduct_<%= @product.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -121,6 +125,4 @@
       </div>
     </div>
   <% end %>
-
-<% end %>
 

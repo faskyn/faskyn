@@ -1,7 +1,9 @@
 <% provide(:title, @profile.full_name) %>
 
-<% cache [@profile, @profile.user.email] do %>
-  <div class="container-fluid profile-container">
+
+<div class="container-fluid profile-container" data-profileuserid = '<%= @profile.user_id %>'>
+
+  <% cache [@profile, @profile.user.email] do %>
 
     <div class="well profile-show-well">
       <div class = "row">
@@ -25,9 +27,7 @@
         </div>
 
         <div class="col-md-2" style="text-align:right;">
-          <% if policy(@profile).edit? %>
-            <%= link_to "Edit Profile", edit_user_profile_path(current_user), class: "btn btn-primary" %>
-          <% end %>
+          <%= link_to "Edit Profile", edit_user_profile_path(current_user), class: "btn btn-primary hidden", id: "edit-profile-button" %>
         </div>
       </div>
 
@@ -75,16 +75,18 @@
       </div>
     </div>
 
-    <% unless policy(@profile).edit? %>
-      <% if Task.between(current_user, @user).present? %>
-        Check out the common tasks <%= link_to "here", user_path(@user) %>.
-      <% else %>
-        Assign a new task to <%= @profile.first_name %> <%= link_to "here", user_tasks_path(current_user) %>.
-      <% end %>
-    <% end %>
+  <% end %>
 
-  </div>
-<% end %>
+  <% unless policy(@profile).edit? %>
+    <% if Task.between(current_user, @user).present? %>
+      Check out the common tasks <%= link_to "here", user_path(@user) %>.
+    <% else %>
+      Assign a new task to <%= @profile.first_name %> <%= link_to "here", user_tasks_path(current_user) %>.
+    <% end %>
+  <% end %>
+
+</div>
+
 
   <% if @user.products.any? %>
     <%= render 'products/profile_products' %>

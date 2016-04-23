@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
   def index
     @q_posts = Post.ransack(params[:q])
-    @posts = @q_posts.result(distinct: true).order(updated_at: :desc).includes(:user).paginate(page: params[:page], per_page: 12)
+    @posts = @q_posts.result(distinct: true).order(updated_at: :desc).includes(:user).paginate(page: params[:page], per_page: 4)
     authorize @posts
     @post = Post.new
     respond_to do |format|

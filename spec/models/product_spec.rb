@@ -4,21 +4,24 @@ RSpec.describe Product, type: :model do
 
   describe "nested attribute validation" do
 
-    let(:product) { FactoryGirl.create(:product) }
-    let(:product_feature) { FactoryGirl.create(:product_feature, product: product ) }
-    let(:product_competition) { FactoryGirl.create(:product_competition, product: product) }
+    #let(:product) { create(:product) }
+    #let(:product_feature) { FactoryGirl.create(:product_feature, product: product ) }
+    #let(:product_competition) { FactoryGirl.create(:product_competition, product: product) }
 
-    let(:product_with_attrs) { create(:product) do |product| 
-                                 product.product_features.create(attributes_for(:product_feature))
-                                 product.product_competitions.create(attributes_for(:product_competition))
-                                 product.product_usecases.create(attributes_for(:product_usecase))
-                               end}
+    #let(:product_with_attrs) { create(:product) do |product| 
+                               #   product.product_features.create(attributes_for(:product_feature))
+                               #   product.product_competitions.create(attributes_for(:product_competition))
+                               #   product.product_usecases.create(attributes_for(:product_usecase))
+                               # end }
 
-    let(:user) { create(:user) }
-    let(:test_product) {create(:product, :product_with_nested_attrs)}
-    let(:test_product2) {create(:product) { |product| product.product_features.create(attributes_for(:product))}}
-    let!(:industry) { create(:industry, name: "AI") }
-    let(:product_feature) { create(:product_feature)}
+    #let(:user) { create(:user) }
+    let(:product) { create(:product, :product_with_nested_attrs) }
+    let(:product_without_nested_attrs) { create(:product) }
+    #let(:new_product) { create(:product, :with_children) }
+    #let(:new_product_2) { create(:product, :with_product_all) }
+    #let(:test_product2) {create(:product) { |product| product.product_features.create(attributes_for(:product))}}
+    #let!(:industry) { create(:industry, name: "AI") }
+    #let(:product_feature) { create(:product_feature)}
 
     # it "has a valid factory" do
     # #   expect(create(:product, :product_with_nested_attrs)).to be_valid
@@ -26,33 +29,48 @@ RSpec.describe Product, type: :model do
     #     user_id: user.id,
     #     product_features_attributes: attributes_for(:product_feature),
     #     product_usecases_attributes: attributes_for(:product_usecase),
-    #     product_competitions_attributes: attributes_for(:product_competition)
-    #     #product_industry: [attributes_for(industry)]
+    #     product_competitions_attributes: attributes_for(:product_competition),
+    #     product_industry: attributes_for(:industry)
     #   })
     #     #attrs = attributes_for(:product, product_features: build(:product_feature)
     #   expect(Product.new(attrs)).to be_valid
     # end
 
-    it "has another valid factory" do
-      product = build(:product).merge({
-        user_id: user.id,
-        product_features: attributes_for(:product_feature, product: product),
-        product_competitions: attributes_for(:product_competition, product: product),
-        product_usecases: attributes_for(:product_usecase, product: product)
-        })
-      expect(product).to be_valid
-    end
+    # it "has a valid factory 2" do
+    #   product = build(:product).merge({
+    #     user_id: user.id,
+    #     product_features: attributes_for(:product_feature, product: product),
+    #     product_competitions: attributes_for(:product_competition, product: product),
+    #     product_usecases: attributes_for(:product_usecase, product: product)
+    #     })
+    #   expect(product).to be_valid
+    # end
 
     # it "has a valid factory 2" do
     #   expect(create(:product) { |product| product.product_features.create(attributes_for(:product))}).to be_valid
     # end
 
-    # it "has a valid factory 3" do
-    #   expect(test_product).to be_valid
-    # end
+    it "has a valid factory 3" do
+      expect(product).to be_valid
+    end
 
     # it "has a valid factory 4" do
-    #   expect(test_product2).to be_valid
+    #   expect(product_with_attrs).to be_valid
+    # end
+
+    # it "has a valid factory 5" do
+    #   expect(new_product).to be_valid
+    # end
+
+    # it "has a valid factory 6" do
+    #   expect(new_product_2).to be_valid
+    # end
+
+    # it "has a valid factory 7" do
+    #   p = build(:product, :with_children)
+    #   puts "haha"
+    #   puts p.product_competitions
+    #   expect(p).to be_valid
     # end
 
     it "is not a valid factroy without nested attrs" do
@@ -90,6 +108,12 @@ RSpec.describe Product, type: :model do
     it { is_expected.to validate_presence_of(:description).with_message(/can't be blank/) }
     it { is_expected.to validate_presence_of(:oneliner).with_message(/can't be blank/) }
 
+    # it "validates there is at least one competition/usecase/feature/industry" do
+    #   expect{ build(:product) }.to raise_error { |error|
+    #     expect(error).to be_a(StandardError)
+    #   }
+    # end
+
     it { is_expected.to accept_nested_attributes_for(:product_competitions) }
     it { is_expected.to accept_nested_attributes_for(:product_features) }
     it { is_expected.to accept_nested_attributes_for(:product_usecases) }
@@ -105,24 +129,16 @@ RSpec.describe Product, type: :model do
 
   end
 
-  # describe "instance methods" do
+  describe "instance methods" do
 
-  #   let(:industry) { create(:industry, name: "AI") }
-  #   let(:industry2) { create(:industry, name: "Automotive") }
-  #   let(:product) { create(:product) }
+    let(:product) { create(:product, :product_with_nested_attrs) }
+    let(:industry) { create(:industry, name: "Automotive") }
+    before do
+      product.industries << industry
+    end
 
-  #   # def industries_all
-  #   #   industry_array = []
-  #   #   self.industries.each do |industry|
-  #   #     industry_array << industry.name
-  #   #   end
-  #   #   industry_array.join(", ")
-  #   # end
-
-  #   it "industries all" do
-  #     expect(product.industries_all).to eq("AI, Automotive")
-  #   end
-  # end
-
-  #http://stackoverflow.com/questions/13538148/failed-to-create-nested-attribute-in-factory-girl
+    it "industries all" do
+      expect(product.industries_all).to eq("AI, Automotive")
+    end
+  end
 end
