@@ -4,9 +4,9 @@ class Product < ActiveRecord::Base
   belongs_to :user
   has_many :industry_products, dependent: :destroy, inverse_of: :product
   has_many :industries, through: :industry_products
-  has_many :product_features, dependent: :destroy
-  has_many :product_competitions, dependent: :destroy
-  has_many :product_usecases, dependent: :destroy
+  has_many :product_features, dependent: :destroy, inverse_of: :product
+  has_many :product_competitions, dependent: :destroy,inverse_of: :product
+  has_many :product_usecases, dependent: :destroy, inverse_of: :product
 
   accepts_nested_attributes_for :industry_products, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :product_features, reject_if: :all_blank, allow_destroy: true

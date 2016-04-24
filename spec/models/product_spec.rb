@@ -3,80 +3,16 @@ require "rails_helper"
 RSpec.describe Product, type: :model do
 
   describe "nested attribute validation" do
-
-    #let(:product) { create(:product) }
-    #let(:product_feature) { FactoryGirl.create(:product_feature, product: product ) }
-    #let(:product_competition) { FactoryGirl.create(:product_competition, product: product) }
-
-    #let(:product_with_attrs) { create(:product) do |product| 
-                               #   product.product_features.create(attributes_for(:product_feature))
-                               #   product.product_competitions.create(attributes_for(:product_competition))
-                               #   product.product_usecases.create(attributes_for(:product_usecase))
-                               # end }
-
-    #let(:user) { create(:user) }
     let(:product) { create(:product, :product_with_nested_attrs) }
     let(:product_without_nested_attrs) { create(:product) }
-    #let(:new_product) { create(:product, :with_children) }
-    #let(:new_product_2) { create(:product, :with_product_all) }
-    #let(:test_product2) {create(:product) { |product| product.product_features.create(attributes_for(:product))}}
-    #let!(:industry) { create(:industry, name: "AI") }
-    #let(:product_feature) { create(:product_feature)}
-
-    # it "has a valid factory" do
-    # #   expect(create(:product, :product_with_nested_attrs)).to be_valid
-    #   attrs = attributes_for(:product).merge({
-    #     user_id: user.id,
-    #     product_features_attributes: attributes_for(:product_feature),
-    #     product_usecases_attributes: attributes_for(:product_usecase),
-    #     product_competitions_attributes: attributes_for(:product_competition),
-    #     product_industry: attributes_for(:industry)
-    #   })
-    #     #attrs = attributes_for(:product, product_features: build(:product_feature)
-    #   expect(Product.new(attrs)).to be_valid
-    # end
-
-    # it "has a valid factory 2" do
-    #   product = build(:product).merge({
-    #     user_id: user.id,
-    #     product_features: attributes_for(:product_feature, product: product),
-    #     product_competitions: attributes_for(:product_competition, product: product),
-    #     product_usecases: attributes_for(:product_usecase, product: product)
-    #     })
-    #   expect(product).to be_valid
-    # end
-
-    # it "has a valid factory 2" do
-    #   expect(create(:product) { |product| product.product_features.create(attributes_for(:product))}).to be_valid
-    # end
 
     it "has a valid factory 3" do
       expect(product).to be_valid
     end
 
-    # it "has a valid factory 4" do
-    #   expect(product_with_attrs).to be_valid
-    # end
-
-    # it "has a valid factory 5" do
-    #   expect(new_product).to be_valid
-    # end
-
-    # it "has a valid factory 6" do
-    #   expect(new_product_2).to be_valid
-    # end
-
-    # it "has a valid factory 7" do
-    #   p = build(:product, :with_children)
-    #   puts "haha"
-    #   puts p.product_competitions
-    #   expect(p).to be_valid
-    # end
-
     it "is not a valid factroy without nested attrs" do
       expect(build(:product)).not_to be_valid
     end
-
   end
 
   describe "model validations" do
@@ -126,11 +62,9 @@ RSpec.describe Product, type: :model do
     it { is_expected.to have_many(:industries).through(:industry_products) }
 
     it { is_expected.to belong_to(:user) }
-
   end
 
   describe "instance methods" do
-
     let(:product) { create(:product, :product_with_nested_attrs) }
     let(:industry) { create(:industry, name: "Automotive") }
     before do
@@ -139,6 +73,19 @@ RSpec.describe Product, type: :model do
 
     it "industries all" do
       expect(product.industries_all).to eq("AI, Automotive")
+    end
+
+    context "formats website" do
+
+      it "is valid when addreess without http" do
+        product.website = "faskyn.com"
+        expect(product).to be_valid
+      end
+
+      it "is invalid when wrong format" do
+        product.website = "faskyn"
+        expect(product).not_to be_valid
+      end
     end
   end
 end

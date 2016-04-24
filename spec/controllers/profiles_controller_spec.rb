@@ -1,4 +1,5 @@
 require "rails_helper"
+#require "pry"
 
 describe ProfilesController do
 
@@ -30,7 +31,7 @@ describe ProfilesController do
     end
 
     context "GET show" do
-      before(:each) do
+      before do
         get :show, user_id: @user.id
       end
 
@@ -45,7 +46,7 @@ describe ProfilesController do
     end
 
     context "GET edit" do
-      before(:each) do
+      before do
         get :edit, user_id: @user.id
       end
 
@@ -58,5 +59,40 @@ describe ProfilesController do
       it { is_expected.to respond_with 200 }
       it { is_expected.to render_template :edit }
     end
+
+    context "GET new" do
+      before do
+        get :new, user_id: @user.id
+      end
+
+      it "assigns profile" do
+        expect(assigns(:profile)).to be_a_new(Profile)
+      end
+
+      it { is_expected.to respond_with 200 }
+      it { is_expected.to render_template :new }
+    end
   end
+
+  describe "POST create" do
+    before(:each) do
+      login_user
+    end
+    context "with valid attributes" do
+
+      it "saves the new profile in the db" do
+        @user.profile.destroy
+        expect{ post :create, user_id: @user.id, profile: FactoryGirl.attributes_for(:profile, user: @user) }.to change(Profile, :count).by(1)
+      end
+
+      before do
+        post :create, user_id: @user.id, profile: attributes_for(:profile, user: @user)
+      end
+
+      it { is_expected.to redirect_to add_socials_user_profile_path(@user) }
+    end
+
+    context "with invalid attributes" do
+    end
+  end  
 end

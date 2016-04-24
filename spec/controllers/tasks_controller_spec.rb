@@ -41,13 +41,13 @@ describe TasksController do
       let!(:profile_2) { create(:profile, user: user) }
       let!(:other_task) { create(:task) }
 
+      it "should have a current_user" do
+        expect(subject.current_user).to_not eq(nil)
+      end
+
       context "GET index" do
         before(:each) do
           get :index, user_id: @user.id
-        end
-
-        it "should have a current_user" do
-          expect(subject.current_user).to_not eq(nil)
         end
         
         it "assigns user's tasks" do

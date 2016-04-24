@@ -41,7 +41,7 @@ class ProductsController < ApplicationController
     authorize @product
     if @product.save
       respond_to do |format|
-        format.html { redirect_to @product, notice: "Product saved!" }
+        format.html { redirect_to @product, notice: "Product got created!" }
         format.js
       end
     else
@@ -87,7 +87,7 @@ class ProductsController < ApplicationController
   private
 
     def product_params
-      params.require(:product).permit(:product_image, :remove_product_image,
+      params.require(:product).permit(:product_image, :remove_product_image, :product_image_cache,
         :name, :company, :website, :oneliner, :description, industry_ids: [],
         product_features_attributes: [:id, :feature, :_destroy],
         product_usecases_attributes: [:id, :example, :detail, :_destroy],

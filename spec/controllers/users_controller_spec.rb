@@ -21,15 +21,17 @@ describe UsersController do
   end
 
   describe "when user is logged in" do
+    before(:each) do
+      login_user
+    end
 
     describe "GET index" do
-      before(:each) do
-        login_user
-        get :index
-      end
       let!(:user_2) { create(:user) }
       let!(:profile) { create(:profile, user: @user) }
       let!(:profile_2) { create(:profile, user: user_2) }
+      before(:each) do
+        get :index
+      end
 
       it "should have a current_user" do
         expect(subject.current_user).to_not eq(nil)
@@ -45,9 +47,6 @@ describe UsersController do
     end
 
     describe "GET show" do
-      before(:each) do
-        login_user
-      end
       let!(:user_2) { create(:user) }
       let!(:user_3) { create(:user) }
       let!(:profile) { create(:profile, user: @user) }
