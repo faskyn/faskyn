@@ -6,14 +6,11 @@ class Posts::PostCommentsController < ApplicationController
     @post_comment = @post.post_comments.build(post_comment_params)
     authorize @post_comment
     @post_comment.user = current_user
-    @post_comment.save!
+    #@post_comment.save!
     if @post_comment.save
       @post.send_post_comment_creation_notification(@post_comment)
       @post_comment_reply = PostCommentReply.new
-      respond_to do |format|
-        format.html { redirect_to posts_path, notice: "Comment saved!" }
-        format.js
-      end
+      respond_to :js
     end
   end
 
@@ -43,11 +40,6 @@ class Posts::PostCommentsController < ApplicationController
         format.js
       end
     end
-  end
-
-  def show
-    @post_comment = PostComment.find(params[:id])
-    authorize @post_comment
   end
 
   private

@@ -169,6 +169,7 @@ $(document).on('click', '.open-delete-post-modal', function (event) {
   var postDeleteLink = $(this).data("postdeletelink");
   $('#delete-post-link-insert').data("postdestroylink", postDeleteLink);
 });
+
 $(document).on('click', '#delete-post-link-insert', function (event) {
   var href = $(this).data("postdestroylink");
   $.ajax({

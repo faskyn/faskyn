@@ -3,38 +3,50 @@ require "rails_helper"
 RSpec.describe Product, type: :model do
 
   describe "nested attribute validation" do
+    let!(:user) { create(:user) }
+    let!(:industry) { create(:industry) }
     let(:product) { create(:product, :product_with_nested_attrs) }
-    let(:product_without_nested_attrs) { create(:product) }
+    let(:product_without_nested_attrs) { build(:product) }
 
-    it "has a valid factory 3" do
+    it "has a valid factory" do
+      expect(product).to be_valid
+    end
+
+    it "has one more valid factory" do
+      attrs = attributes_for(:product, user_id: user.id, industry_ids: [ industry.id ]).merge(
+        product_features_attributes: [attributes_for(:product_feature)],
+        product_competitions_attributes: [attributes_for(:product_competition)],
+        product_usecases_attributes: [attributes_for(:product_usecase)]
+        )
+      expect(Product.new(attrs)).to be_valid
       expect(product).to be_valid
     end
 
     it "is not a valid factroy without nested attrs" do
-      expect(build(:product)).not_to be_valid
+      expect(product_without_nested_attrs).not_to be_valid
     end
   end
 
   describe "model validations" do
 
     it "is invalid without name" do
-      expect(build(:product, name: nil)).not_to be_valid
+      expect(build_stubbed(:product, name: nil)).not_to be_valid
     end
 
     it "is invalid without company" do
-      expect(build(:product, company: nil)).not_to be_valid
+      expect(build_stubbed(:product, company: nil)).not_to be_valid
     end
 
     it "is invalid without website" do
-      expect(build(:product, website: nil)).not_to be_valid
+      expect(build_stubbed(:product, website: nil)).not_to be_valid
     end
 
     it "is invalid without description" do
-      expect(build(:product, description: nil)).not_to be_valid
+      expect(build_stubbed(:product, description: nil)).not_to be_valid
     end
 
     it "is invalid without oneliner" do
-      expect(build(:product, oneliner: nil)).not_to be_valid
+      expect(build_stubbed(:product, oneliner: nil)).not_to be_valid
     end
   
     it { is_expected.to callback(:format_website).before(:validation) }
@@ -43,12 +55,6 @@ RSpec.describe Product, type: :model do
     it { is_expected.to validate_presence_of(:website).with_message(/can't be blank/) }
     it { is_expected.to validate_presence_of(:description).with_message(/can't be blank/) }
     it { is_expected.to validate_presence_of(:oneliner).with_message(/can't be blank/) }
-
-    # it "validates there is at least one competition/usecase/feature/industry" do
-    #   expect{ build(:product) }.to raise_error { |error|
-    #     expect(error).to be_a(StandardError)
-    #   }
-    # end
 
     it { is_expected.to accept_nested_attributes_for(:product_competitions) }
     it { is_expected.to accept_nested_attributes_for(:product_features) }

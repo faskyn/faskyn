@@ -5,19 +5,19 @@ RSpec.describe PostComment, type: :model do
   describe "model validations" do
     
     it "is has a valid factory" do
-      expect(build(:post_comment)).to be_valid
+      expect(build_stubbed(:post_comment)).to be_valid
     end
 
     it "is invalid without body" do
-      expect(build(:post_comment, body: nil)).not_to be_valid
+      expect(build_stubbed(:post_comment, body: nil)).not_to be_valid
     end
 
     it "is invalid without post" do
-      expect(build(:post_comment, post: nil)).not_to be_valid
+      expect(build_stubbed(:post_comment, post: nil)).not_to be_valid
     end
 
     it "is invalid without post" do
-      expect(build(:post_comment, user: nil)).not_to be_valid
+      expect(build_stubbed(:post_comment, user: nil)).not_to be_valid
     end
 
     it { is_expected.to validate_presence_of(:post) }

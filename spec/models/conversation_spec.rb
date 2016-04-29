@@ -8,15 +8,15 @@ RSpec.describe Conversation, type: :model do
     subject { build(:conversation, sender: sender, recipient: recipient) }
 
     it "has a valid factory" do
-      expect(build(:conversation)).to be_valid
+      expect(build_stubbed(:conversation)).to be_valid
     end
 
     it "is not valid without sender" do
-      expect(build(:conversation, sender: nil)).not_to be_valid
+      expect(build_stubbed(:conversation, sender: nil)).not_to be_valid
     end
 
     it "is not valid without recipient" do
-      expect(build(:conversation, recipient: nil)).not_to be_valid
+      expect(build_stubbed(:conversation, recipient: nil)).not_to be_valid
     end
 
     it { is_expected.to validate_presence_of(:recipient) }

@@ -92,6 +92,7 @@ group :development do
   gem 'better_errors', '~> 2.1.1'
   gem 'quiet_assets', '~> 1.1.0'
   gem 'letter_opener', '~> 1.4.1'
+  gem 'web-console', '~> 2.0'
   
   #database query optimazation
   gem 'bullet', '~> 4.14', '>= 4.14.10'

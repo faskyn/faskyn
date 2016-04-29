@@ -38,7 +38,7 @@ class ProfilesController < ApplicationController
 
   def update
     if @profile.update_attributes(profile_params)
-      redirect_to user_profile_path(@profile.user), notice: "Profle updated!"
+      redirect_to user_profile_path(@profile.user), notice: "Profile updated!"
     else
       render action: :edit, alert: "Profile couldn't be updated!"
     end

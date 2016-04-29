@@ -15,5 +15,5 @@ ActionMailer::Base.smtp_settings = {
   :enable_starttls_auto => true
 }
 
-#ActionMailer::Base.delivery_method = :smtp
-#ActionMailer::Base.default charset: "utf-8"
+ActionMailer::Base.delivery_method = :smtp
+ActionMailer::Base.default charset: "utf-8"

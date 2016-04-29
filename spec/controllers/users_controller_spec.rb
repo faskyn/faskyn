@@ -64,11 +64,12 @@ describe UsersController do
           get :show, id: user_2
         end
 
-        it "assigns user" do
+        it "assigns all insctance vars" do
           expect(assigns(:user)).to eq(user_2)
           expect(assigns(:conversation)).to eq(conversation)
           expect(assigns(:tasks)).to eq([task])
           expect(assigns(:messages)).to eq([message])
+          expect(assigns(:message)).to be_a_new(Message)
         end
 
         it { is_expected.to respond_with 200 }

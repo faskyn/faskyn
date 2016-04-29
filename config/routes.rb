@@ -27,7 +27,7 @@ Rails.application.routes.draw do
       end
     end
     resources :tasknamecompanies, only: :index
-    resources :tasks do
+    resources :tasks, except: [:new, :show] do
       member do
         patch :complete, :uncomplete
       end
@@ -46,11 +46,11 @@ Rails.application.routes.draw do
   end
 
   resources :posts do
-    resources :post_comments, only: [:create, :update, :destroy, :show], module: :posts
+    resources :post_comments, only: [:create, :update, :destroy], module: :posts
   end
 
   resources :post_comments, only: [] do 
-    resources :post_comment_replies, only: [:create, :update, :destroy, :show], module: :posts
+    resources :post_comment_replies, only: [:create, :update, :destroy], module: :posts
   end
 
   get 'users/:user_id/common_medias', to: 'common_medias#common_medias', as: :common_medias_user_common_medias

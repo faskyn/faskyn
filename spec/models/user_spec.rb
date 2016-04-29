@@ -5,23 +5,23 @@ RSpec.describe User, type: :model do
   describe "model validations" do
 
     it "has a valid factory" do
-      expect(build(:user)).to be_valid
+      expect(build_stubbed(:user)).to be_valid
     end
   
     it "is invalid without email" do
-      expect(build(:user, email: nil)).not_to be_valid
+      expect(build_stubbed(:user, email: nil)).not_to be_valid
     end 
 
     it "is invalid without password" do
-      expect(build(:user, password: nil)).not_to be_valid
+      expect(build_stubbed(:user, password: nil)).not_to be_valid
     end
 
     it "is invalid without chat_notification_number" do
-      expect(build(:user, new_chat_notification: nil)).not_to be_valid
+      expect(build_stubbed(:user, new_chat_notification: nil)).not_to be_valid
     end
 
     it "is invalid without other_notification_number" do
-      expect(build(:user, new_other_notification: nil)).not_to be_valid
+      expect(build_stubbed(:user, new_other_notification: nil)).not_to be_valid
     end
 
     it { is_expected.to validate_presence_of(:email) }

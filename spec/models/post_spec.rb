@@ -5,15 +5,15 @@ RSpec.describe Post, type: :model do
   describe "model validations" do
 
     it "is has a valid factory" do
-      expect(build(:post)).to be_valid
+      expect(build_stubbed(:post)).to be_valid
     end
 
     it "is valid without product image" do
-      expect(build(:post, post_image: nil)).to be_valid
+      expect(build_stubbed(:post, post_image: nil)).to be_valid
     end
 
     it "is invalid without body" do
-      expect(build(:post, body: nil)).not_to be_valid
+      expect(build_stubbed(:post, body: nil)).not_to be_valid
     end
 
     it { is_expected.to validate_presence_of(:body).with_message(/can't be blank/) }

@@ -11,6 +11,7 @@ class Task < ActiveRecord::Base
   validates :content, presence: { message: "can't be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
   validates :deadline, presence: { messsage: "can't be blank" }
   validate :deadline_date_cannot_be_in_the_past
+  validate :completed_at_date_cannot_be_in_the_future
 
   scope :completed, -> { where.not(completed_at: nil) }
   scope :uncompleted, -> { where(completed_at: nil) }
@@ -50,5 +51,10 @@ class Task < ActiveRecord::Base
     def deadline_date_cannot_be_in_the_past
       errors.add(:deadline, "can't be in the past") if
         deadline.present? && deadline < Time.zone.now
+    end
+
+    def completed_at_date_cannot_be_in_the_future
+      errors.add(:completed_at, "can't be in the future") if
+        completed_at.present? && completed_at > Time.zone.now
     end
 end

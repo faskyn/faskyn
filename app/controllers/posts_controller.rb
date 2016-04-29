@@ -29,12 +29,10 @@ class PostsController < ApplicationController
     if @post.save
       #@post.send_post_creation_email_notification(@post.user)
       respond_to do |format|
-        format.html { redirect_to @post, notice: "Post saved!" }
         format.js
       end
     else
       respond_to do |format|
-        format.html { render action: :new, alert: "Post couldn't be created!" }
         format.js
       end
     end

@@ -4,15 +4,15 @@ RSpec.describe ProductUsecase, type: :model do
   let(:product) { create(:product, :product_with_nested_attrs) }
 
   it "has a valid factory" do
-    expect(build(:product_usecase, product: product)).to be_valid
+    expect(build_stubbed(:product_usecase, product: product)).to be_valid
   end
   
   it "is invalid without example" do
-    expect(build(:product_usecase, example: nil)).not_to be_valid
+    expect(build_stubbed(:product_usecase, example: nil)).not_to be_valid
   end
 
   it "is invalid without detail" do
-    expect(build(:product_usecase, detail: nil)).not_to be_valid
+    expect(build_stubbed(:product_usecase, detail: nil)).not_to be_valid
   end
 
   it { is_expected.to validate_presence_of(:example).with_message(/can't be blank/) }

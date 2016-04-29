@@ -4,15 +4,15 @@ RSpec.describe ProductCompetition, type: :model do
   let(:product) { create(:product, :product_with_nested_attrs) }
 
   it "has a valid factory" do
-    expect(build(:product_competition, product: product)).to be_valid
+    expect(build_stubbed(:product_competition, product: product)).to be_valid
   end
   
   it "is invalid without competitor" do
-    expect(build(:product_competition, competitor: nil)).not_to be_valid
+    expect(build_stubbed(:product_competition, competitor: nil)).not_to be_valid
   end
 
   it "is invalid without differentiator" do
-    expect(build(:product_competition, differentiator: nil)).not_to be_valid
+    expect(build_stubbed(:product_competition, differentiator: nil)).not_to be_valid
   end
 
   it { is_expected.to validate_presence_of(:competitor).with_message(/can't be blank/) }

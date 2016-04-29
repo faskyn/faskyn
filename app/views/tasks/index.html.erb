@@ -3,7 +3,7 @@
   <div class="row task-header">
     <h3>All Tasks</h3>
     <span class="rightfloat">
-      <%= link_to "NEW TASK", new_user_task_path(current_user), type: "button", class: "btn btn-primary newbutton", remote: true, 'data-toggle' => 'modal', 'data-target' => '#newtask' %>
+      <a href="#" type="button" class="btn btn-primary newbutton" data-toggle="modal" data-target="#newtask">NEW TASK</a>
       <div class="btn-group" role="group" aria-label="...">
         <%= link_to "Completed Tasks", completed_tasks_user_tasks_path(current_user), class: "btn btn-default", style: "margin-right:0px;border-right:0px;" %>
         <%= link_to "Outgoing Tasks", outgoing_tasks_user_tasks_path(current_user), class: "btn btn-default" %>

@@ -34,6 +34,15 @@ FactoryGirl.define do
     profile
   end
 
+  # factory :auth_hash do
+  #   uid { Faker::Number.number(8) }
+  #   token { Faker::Number.number(10) }
+  #   first_name { "John" }
+  #   last_name { "Doe" }
+  #   provider { "twitter"}
+  #   page_url { "https://twitter.com/jdoe" }
+  # end
+
   factory :notification do
     notifiable_id { Faker::Number.between(1, 10) }
     notifiable_type { Faker::Lorem.word }
@@ -66,6 +75,10 @@ FactoryGirl.define do
     factory :message_with_attachment do
       message_attachment_id { Faker::Number.between(1, 10) }
       message_attachment_filename "file.pdf"
+    end
+
+    factory :message_with_link do
+      link { Faker::Internet.url }
     end
   end
 
@@ -115,7 +128,8 @@ FactoryGirl.define do
   end
 
   factory :product, class: Product do
-    name { Faker::Commerce.product_name }
+    #name { Faker::Commerce.product_name }
+    sequence(:name) { |n| "ABC_#{n}" }
     company { Faker::Company.name }
     website { 'https://example.com' }
     oneliner { Faker::Lorem.sentence }
@@ -129,21 +143,11 @@ FactoryGirl.define do
         product.industries << build(:industry)
       end
     end
-    trait :product_for_create_action do
-      before(:create) do |product|
-        product.product_competitions << attributes_for(:product_competition, product: product)
-        product.product_usecases << attributes_for(:product_usecase, product: product)
-        product.product_features << attriubtes_for(:product_feature, product: product)
-        product.industries << attributes_for(:industry)
-      end
-    end
-    trait :product_2_for_create_action do
-      after(:build) do |product|
-        product.product_competitions << build(:product_competition, product: product)
-        product.product_usecases << build(:product_usecase, product: product)
-        product.product_features << build(:product_feature, product: product)
-        product.industries << build(:industry)
-      end
-    end
+  end
+
+  factory :contact, class: Contact do
+    name { "John Doe" }
+    email { Faker::Internet.email }
+    comment { Faker::Lorem.paragraph }
   end
 end

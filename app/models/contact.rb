@@ -1,9 +1,9 @@
 class Contact < ActiveRecord::Base
-  validates :name, presence: true,
-                   length: { maximum: 50 }
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i                  
-  validates :email, presence: true,
-                    length: { maximum: 255 },
-                    format: { with: VALID_EMAIL_REGEX }
-  validates :comment, presence: true
+  validates :name, presence: { message: "can't be blank"},
+                   length: { maximum: 50, message: "can't be longer than 50 characters" }                 
+  validates :email, presence: { message: "can't be blank"},
+                    length: { maximum: 255, message: "can't be longer than 255 characters" },
+                    format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: "must be valid"  }
+  validates :comment, presence: { message: "can't be blank"}, 
+                      length: { maximum: 500, message: "can't be longer than 500 characters"}
 end

@@ -1,4 +1,5 @@
 require "rails_helper"
+# require "pry"
 
 describe TasksController do
 
@@ -27,12 +28,11 @@ describe TasksController do
   end
 
   describe "when user is logged in" do
+    before(:each) do
+      login_user
+    end
   
     describe "collections" do
-
-      before(:each) do
-        login_user
-      end
       let!(:user) { create(:user) }
       let!(:assigned_task) { create(:task, assigner: @user, executor: user, deadline: DateTime.now + 2) }
       let!(:executed_task) { create(:task, executor: @user, assigner: user, deadline: DateTime.now + 3) }
@@ -52,6 +52,10 @@ describe TasksController do
         
         it "assigns user's tasks" do
           expect(assigns(:tasks)).to eq([executed_task, assigned_task])
+        end
+
+        it "assigns new task" do
+          expect(assigns(:task)).to be_a_new(Task)
         end
 
         it "doesn't assign other user's tasks" do
@@ -88,6 +92,10 @@ describe TasksController do
           expect(assigns(:tasks)).to eq([assigned_task])
         end
 
+        it "assigns new task" do
+          expect(assigns(:task)).to be_a_new(Task)
+        end
+
         it "doesn't assign user's incoming tasks" do
           expect(assigns(:tasks)).to_not include([executed_task])
         end
@@ -112,11 +120,90 @@ describe TasksController do
         it { is_expected.to respond_with 200 }
         it { is_expected.to render_template :completed_tasks }
       end
+
+      context "GET edit" do
+        before(:each) do
+          xhr :get, :edit, user_id: @user.id, id: assigned_task.id
+        end
+
+        it "assigns user's task" do
+          expect(assigns(:task)).to eq(assigned_task)
+        end
+
+        it { is_expected.to respond_with 200 }
+      end
     end
 
-    describe "GET edit"
-    describe "POST create"
-    describe "PUT update"
-    describe "DELETE destroy"
+    describe "POST create" do
+      let!(:user) { create(:user) }
+      
+      context "with valid attributes" do
+        subject(:create_action) { xhr :post, :create, user_id: @user.id, task: attributes_for(:task, assigner_id: @user.id, executor_id: user.id) }
+
+        it "saves the new task in the db" do
+          expect{ create_action }.to change{ Task.count }.by(1)
+        end
+
+        it "responds with success" do
+          create_action
+          expect(response).to have_http_status(200)
+        end
+      end
+
+      context "with invalid attributes" do
+        subject(:create_action) { xhr :post, :create, user_id: @user.id, task: attributes_for(:task, assigner_id: @user.id, executor_id: user.id, content: "") }
+
+        it "doesn't save the new product in the db" do
+          expect{ create_action }.to_not change{ Task.count }
+        end
+      end
+    end
+
+    describe "PUT update" do
+      let!(:task) { create(:task, assigner: @user, deadline: DateTime.now + 2, content: "original content") }
+      
+      context "with valid attributes" do
+
+        it "assigns the task" do
+          xhr :patch, :update, user_id: @user.id, id: task.id, task: attributes_for(:task)
+          expect(assigns(:task)).to eq(task)
+        end
+
+        it "changes the attributes" do
+          xhr :patch, :update, user_id: @user.id, id: task.id, task: attributes_for(:task, deadline: DateTime.now + 2 , content: "new content")
+          task.reload
+          expect(task.deadline).to be_within(1.day).of(DateTime.now + 2)
+          expect(task.content).to eq("new content")
+        end
+
+        it "responds with success" do
+          xhr :patch, :update, user_id: @user.id, id: task.id, task: attributes_for(:task)
+          expect(response).to have_http_status(200)
+        end
+      end
+
+      context "with invalid attributes" do
+
+        it "doesn't change the attributes" do
+          xhr :patch, :update, user_id: @user.id, id: task.id, task: attributes_for(:task, deadline: DateTime.now - 2, content: "new content")
+          task.reload
+          expect(task.deadline).to be_within(1.day).of(DateTime.now + 2)
+          expect(task.content).not_to eq("new content")
+        end
+      end
+    end
+
+    describe "DELETE destroy" do
+      let!(:task) { create(:task, assigner: @user, deadline: DateTime.now + 2, content: "original content") }
+
+      it "destroys the product" do
+        expect{ xhr :delete, :destroy, user_id: @user.id, id: task.id }.to change{ Task.count }.by(-1)
+      end
+
+      it "responds with success" do
+        xhr :delete, :destroy, user_id: @user.id, id: task.id
+        expect(response).to have_http_status(200)
+      end
+    end
   end 
 end

@@ -39,8 +39,7 @@ describe NotificationsController do
       end
 
       it "doesn't assign user's outgoing and other notifications" do
-        expect(assigns(:chat_notifications)).to_not include(outgoing_chat_notification)
-        expect(assigns(:chat_notifications)).to_not include(other_notification)
+        expect(assigns(:chat_notifications)).to_not include(outgoing_chat_notification, other_notification)
       end
 
       it { is_expected.to respond_with 200 }
@@ -57,12 +56,45 @@ describe NotificationsController do
       end
 
       it "doesn't assign user's outgoing and other notifications" do
-        expect(assigns(:other_notifications)).to_not include(outgoing_other_notification)
-        expect(assigns(:other_notifications)).to_not include(chat_notification)
+        expect(assigns(:other_notifications)).to_not include(outgoing_other_notification, chat_notification)
       end
 
       it { is_expected.to respond_with 200 }
       it { is_expected.to render_template :other_notifications }
+    end
+
+    context "GET chat_notifications_dropdown" do
+      let!(:not_checked_chat_notification) { create(:notification, sender: user, recipient: @user, notifiable_type: "Message", checked_at: nil) }
+      before(:each) do
+        get :chat_notifications_dropdown, user_id: @user.id, format: :json
+      end
+
+      it "assigns user's chat notifications" do
+        expect(assigns(:chat_notifications)).to eq([not_checked_chat_notification])
+      end
+
+      it "doesn't assign user's other and checked notifications" do
+        expect(assigns(:chat_notifications)).to_not include(chat_notification, other_notification)
+      end
+
+      it { is_expected.to respond_with 200 }
+    end
+
+    context "GET other_notifications_dropdown" do
+      let!(:not_checked_other_notification) { create(:notification, sender: user, recipient: @user, notifiable_type: "Task", checked_at: nil) }
+      before(:each) do
+        get :other_notifications_dropdown, user_id: @user.id, format: :json
+      end
+
+      it "assigns user's chat notifications" do
+        expect(assigns(:other_notifications)).to eq([not_checked_other_notification])
+      end
+
+      it "doesn't assign user's other and checked notifications" do
+        expect(assigns(:other_notifications)).to_not include(other_notification, chat_notification)
+      end
+
+      it { is_expected.to respond_with 200 }
     end
   end
 end

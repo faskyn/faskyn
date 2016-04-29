@@ -5,11 +5,11 @@ RSpec.describe Industry, type: :model do
   describe "model validation" do
 
     it "has a valid factory" do
-      expect(build(:industry)).to be_valid
+      expect(build_stubbed(:industry)).to be_valid
     end
 
     it "is invalid without name" do
-      expect(build(:industry, name: nil)).not_to be_valid
+      expect(build_stubbed(:industry, name: nil)).not_to be_valid
     end
 
     it { is_expected.to validate_presence_of(:name) }

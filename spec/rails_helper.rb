@@ -63,6 +63,7 @@ RSpec.configure do |config|
 
   #devise
   config.include Devise::TestHelpers, :type => :controller
+  #config.include Devise::TestHelpers, type: :routing
   config.include ControllerMacros, :type => :controller
 
   #config.include Features, :type => :feature

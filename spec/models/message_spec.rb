@@ -5,23 +5,23 @@ RSpec.describe Message, type: :model do
   describe "model validation" do
 
     it "has a valid factory" do
-      expect(build(:message)).to be_valid
+      expect(build_stubbed(:message)).to be_valid
     end
 
     it "has a valid factory for body" do
-      expect(build(:message_with_body)).to be_valid
+      expect(build_stubbed(:message_with_body)).to be_valid
     end
 
     it "has a valid factory for attachment" do
-      expect(build(:message_with_attachment)).to be_valid
+      expect(build_stubbed(:message_with_attachment)).to be_valid
     end
 
     it "is not valid without user" do
-      expect(build(:message, user: nil)).not_to be_valid
+      expect(build_stubbed(:message, user: nil)).not_to be_valid
     end
 
     it "is not valid without conversation" do
-      expect(build(:message, conversation: nil )).not_to be_valid
+      expect(build_stubbed(:message, conversation: nil )).not_to be_valid
     end
 
     it { is_expected.to validate_presence_of(:user) }

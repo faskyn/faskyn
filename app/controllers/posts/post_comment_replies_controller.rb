@@ -7,17 +7,10 @@ class Posts::PostCommentRepliesController < ApplicationController
     @post_comment_reply = @post_comment.post_comment_replies.build(post_comment_reply_params)
     authorize @post_comment_reply
     @post_comment_reply.user = current_user
-    @post_comment_reply.save!
+    #@post_comment_reply.save!
     if @post_comment_reply.save
       @post_comment.send_post_comment_reply_creation_notification(@post_comment_reply)
-      respond_to do |format|
-        format.html { redirect_to posts_path, notice: "Comment reply saved!" }
-        format.js
-      end
-    else
-      respond_to do |format|
-        format.html
-      end
+      respond_to :js
     end
   end
 

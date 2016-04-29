@@ -5,31 +5,31 @@ RSpec.describe Notification, type: :model do
   describe "model validation" do
 
     it "has a valid factory" do
-      expect(build(:notification)).to be_valid
+      expect(build_stubbed(:notification)).to be_valid
     end
 
     it "is vaild without checked_at" do
-      expect(build(:notification, checked_at: nil)).to be_valid
+      expect(build_stubbed(:notification, checked_at: nil)).to be_valid
     end
 
     it "is invalid without sender" do
-      expect(build(:notification, sender_id: nil)).not_to be_valid
+      expect(build_stubbed(:notification, sender_id: nil)).not_to be_valid
     end
 
     it "is invalid without recipient" do
-      expect(build(:notification, recipient_id: nil)).not_to be_valid
+      expect(build_stubbed(:notification, recipient_id: nil)).not_to be_valid
     end
 
     it "is invalid without notifiable_type" do
-      expect(build(:notification, notifiable_type: nil)).not_to be_valid
+      expect(build_stubbed(:notification, notifiable_type: nil)).not_to be_valid
     end
 
     it "is invalid without notifiable_id" do
-      expect(build(:notification, notifiable_id: nil)).not_to be_valid
+      expect(build_stubbed(:notification, notifiable_id: nil)).not_to be_valid
     end
 
     it "is invalid without action" do
-      expect(build(:notification, action: nil)).not_to be_valid
+      expect(build_stubbed(:notification, action: nil)).not_to be_valid
     end
 
     it { is_expected.to validate_presence_of(:sender) }

@@ -20,7 +20,7 @@ describe ProductsController do
       expect(subject.current_user).to_not eq(nil)
     end
 
-    context "GET index" do
+    describe "GET index" do
       let!(:profile) { create(:profile, user: @user) }
       let!(:product) { create(:product, :product_with_nested_attrs, user: @user) }
       before(:each) do
@@ -28,7 +28,6 @@ describe ProductsController do
       end
         
       it "assigns products" do
-        get :index
         expect(assigns(:products)).to eq([product])
       end
 
@@ -36,7 +35,7 @@ describe ProductsController do
       it { is_expected.to render_template :index }
     end
 
-    context "GET own_products" do
+    describe "GET own_products" do
       let!(:profile) { create(:profile, user: @user) }
       let!(:user) { create(:user) }
       let!(:profile_other) { create(:profile, user: user) }
@@ -56,7 +55,7 @@ describe ProductsController do
       it { is_expected.to render_template :own_products }
     end
 
-    context "GET show" do
+    describe "GET show" do
       let!(:profile) { create(:profile, user: @user) }
       let!(:product) { create(:product, :product_with_nested_attrs, user: @user) }
       before(:each) do
@@ -75,7 +74,7 @@ describe ProductsController do
       it { is_expected.to render_template :show }
     end
 
-    context "GET new" do
+    describe "GET new" do
       let!(:profile) { create(:profile, user: @user) }
       before(:each) do
         get :new
@@ -89,7 +88,7 @@ describe ProductsController do
       it { is_expected.to render_template :new }
     end
 
-    context "GET edit" do
+    describe "GET edit" do
       let!(:profile) { create(:profile, user: @user) }
       let!(:product) { create(:product, :product_with_nested_attrs, user: @user) }
       before(:each) do
@@ -104,22 +103,110 @@ describe ProductsController do
       it { is_expected.to render_template :edit }
     end
 
-    # context "POST create" do
-    #   context "with valid attributes" do
-    #     let!(:profile) { create(:profile, user: @user) }
-    #     # let!(:product) { build(:product, :product_with_nested_attrs, user: @user) }
+    describe "POST create" do
 
-    #     it "saves the new product in the db" do
-    #       product_attrs = attributes_for(:product, :product_for_create_action, user: @user)
-    #       expect{ post :create, product: product_attrs }.to change{ Product.count }.by(1)
-    #     end
+      context "with valid attributes" do
+        let!(:profile) { create(:profile, user: @user) }
+        let!(:industry) { create(:industry) }
+        let!(:attrs) { attributes_for(:product, user_id: @user.id, industry_ids: [ industry.id ]).merge(
+            product_features_attributes: [attributes_for(:product_feature)],
+            product_competitions_attributes: [attributes_for(:product_competition)],
+            product_usecases_attributes: [attributes_for(:product_usecase)]
+          ) }
+        subject(:create_action) { post :create, product: attrs }
+        # let!(:product) { build(:product, :product_with_nested_attrs, user: @user) }
 
-    #     it { is_expected.to redirect_to product_path(Product.last) }
-    #     it { is_expected.to set_flash(:notice).to('Product got created!') }
-    #   end
+        it "saves the new product in the db" do
+          expect{ create_action }.to change{ Product.count }.by(1)
+        end
 
-    #   context "with invalid attributes" do
-    #   end
-    # end
+        it "redirects to product page and shows the flash" do
+          create_action
+          expect(response).to redirect_to product_path(Product.last)
+          expect(controller).to set_flash[:notice].to("Product got created!")
+        end
+      end
+
+      context "with invalid attributes" do
+        let!(:profile) { create(:profile, user: @user) }
+        let!(:industry) { create(:industry) }
+        let!(:attrs) { attributes_for(:product, user_id: @user.id, name: nil, industry_ids: [ industry.id ]).merge(
+            product_features_attributes: [attributes_for(:product_feature)],
+            product_competitions_attributes: [attributes_for(:product_competition)],
+            product_usecases_attributes: [attributes_for(:product_usecase)]
+          ) }
+        subject(:create_action) { post :create, product: attrs }
+
+        it "doesn't save the new product in the db" do
+          expect{ create_action }.to_not change{ Product.count }
+        end
+
+        it "renders new action" do
+          expect(create_action).to render_template :new
+        end
+      end
+    end
+
+    describe "PATCH update" do
+      let!(:profile) { create(:profile, user: @user) }
+      let!(:industry) { create(:industry) }
+      # let!(:product) { create(:product, user_id: @user.id, industry_ids: [ industry.id ]).merge(
+      #     product_features_attributes: [attributes_for(:product_feature)],
+      #     product_competitions_attributes: [attributes_for(:product_competition)],
+      #     product_usecases_attributes: [attributes_for(:product_usecase)]
+      #   ) }
+      let!(:product) { create(:product, :product_with_nested_attrs, user_id: @user.id, name: "Test Product", description: "Original Description") }
+
+      context "with valid attributes" do
+
+        it "assigns the profile" do
+          patch :update, id: product.id, product: attributes_for(:product)
+          expect(assigns(:product)).to eq(product)
+        end
+
+        it "changes the attributes" do
+          patch :update, id: product.id, product: attributes_for(:product, name: "Test Product", description: "Test Product Description")
+          product.reload
+          expect(product.name).to eq("Test Product")
+          expect(product.description).to eq("Test Product Description")
+        end
+
+        it "redirects to product page and shows the flash" do
+          patch :update, id: product.id, product: attributes_for(:product)
+          expect(response).to redirect_to product_path(product)
+          expect(controller).to set_flash[:notice].to("Product was successfully updated!")
+        end
+      end
+
+      context "with invalid attributes" do
+        subject(:invalid_update_action) { patch :update, id: product.id, product: attributes_for(:product, name: nil, description: "Test Product Description") }
+
+        it "doesn't change the attributes" do
+          invalid_update_action
+          product.reload
+          expect(product.name).to eq("Test Product")
+          expect(profile.last_name).not_to eq("Test Product Description")
+        end
+
+        it "renders the edit template" do
+          expect(invalid_update_action).to render_template :edit
+        end
+      end
+    end
+
+    describe "DELETE destroy" do
+      let!(:product) { create(:product, :product_with_nested_attrs, user_id: @user.id) }
+      subject(:destroy_action) { delete :destroy, id: product.id }
+
+      it "destroys the product" do
+        expect{ destroy_action }.to change{ Product.count }.by(-1)
+      end
+
+      it "redirects to products index page" do
+        destroy_action
+        expect(response).to redirect_to products_path
+        expect(controller).to set_flash[:notice].to("Product got deleted!")
+      end
+    end
   end
 end

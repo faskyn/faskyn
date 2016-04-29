@@ -25,7 +25,11 @@ RSpec.describe Task, type: :model do
     end
 
     it "is invalid with deadline in the past" do
-      expect(build_stubbed(:task, deadline:  Faker::Time.between(DateTime.now - 1, DateTime.now - 2))).not_to be_valid
+      expect(build_stubbed(:task, deadline: Faker::Time.between(DateTime.now - 1, DateTime.now - 2))).not_to be_valid
+    end
+
+    it "is invalid with a completed_at in the future" do
+      expect(build_stubbed(:task, completed_at: Faker::Time.between(DateTime.now + 1, DateTime.now + 2))).not_to be_valid
     end
 
     it { is_expected.to validate_presence_of(:assigner) }
