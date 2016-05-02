@@ -1,9 +1,5 @@
 class TaskPolicy < ApplicationPolicy
 
-  def show?
-    user.present? && (user.id == task.assigner_id || user.id == task.executor_id)
-  end
-
   def create?
     user.present?
   end
@@ -13,10 +9,6 @@ class TaskPolicy < ApplicationPolicy
   end
 
   def update?
-    user.present? && (user.id == task.assigner_id || user.id == task.executor_id)
-  end
-
-  def delete?
     user.present? && (user.id == task.assigner_id || user.id == task.executor_id)
   end
 

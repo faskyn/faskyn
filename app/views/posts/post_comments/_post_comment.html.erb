@@ -63,7 +63,7 @@
     </div>
   </div>
 
-  <% if policy(post_comment).delete? %>
+  <% if policy(post_comment).destroy? %>
 
     <%= form_for([post_comment.post, post_comment], method: :delete, remote: true) do |f| %>
       <div class="modal fade" id="deletepostcomment_<%= post_comment.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

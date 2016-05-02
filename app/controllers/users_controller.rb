@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     #it's in the appliaction controller!!:@q = User.ransack(params[:q])
     #@users = @q_users.result(distinct: true).includes(:profile).paginate(page: params[:page], per_page: 15)
     @users = User.joins(:profile).preload(:profile).order(created_at: :desc).paginate(page: params[:page], per_page: 16)
+    authorize @users
     #@profiles = Profile.order(created_at: :desc).paginate(page: params[:page], per_page: 16)
     respond_to do |format|
       format.html
@@ -17,6 +18,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    authorize @user
     if Task.between(current_user.id, @user.id).present?
       @tasks = Task.uncompleted.between(current_user.id, @user.id).order("created_at DESC").includes(:assigner, :executor).paginate(page: params[:page], per_page: 14)
       @task_between = Task.new

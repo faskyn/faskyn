@@ -53,6 +53,8 @@ guard :rspec, cmd: "spring rspec" do
     ]
   end
 
+  watch(rails.policies) { |m| rspec.spec.("policies/#{m[1]}_policy") }
+
   # Rails config changes
   watch(rails.spec_helper)     { rspec.spec_dir }
   watch(rails.routes)          { "#{rspec.spec_dir}/routing" }

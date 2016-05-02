@@ -3,10 +3,6 @@ class ProductPolicy < ApplicationPolicy
     user.present?
   end
 
-  def own_products?
-    user.present?
-  end
-
   def show?
     user.present? && user.profile.present?
   end
@@ -24,10 +20,6 @@ class ProductPolicy < ApplicationPolicy
   end
 
   def update?
-    user.present? && user == product.user
-  end
-
-  def delete?
     user.present? && user == product.user
   end
 

@@ -1,18 +1,22 @@
 class UserPolicy < ApplicationPolicy
 
-  def show_tasks?
+  def show?
+    user.present?
+  end
+
+  def index?
+    user.present?
+  end
+
+  def index_tasks?
     user.present? && user.id == record.id
   end
 
-  def new_task?
+  def index_notifications?
     user.present? && user.id == record.id
   end
 
-  def show_notifications?
-    user.present? && user.id == record.id
-  end
-
-  def show_own_products?
+  def index_own_products?
     user.present? && user.id == record.id
   end
 

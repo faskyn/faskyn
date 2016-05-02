@@ -1,3 +1,4 @@
+
 # Files in the config/locales directory are used for internationalization
 # and are automatically loaded by Rails. If you want to use locales other
 # than English, add the necessary files in this directory.
@@ -23,14 +24,12 @@ en:
   pundit:
     default: "You can't perform this action!"
     product_policy:
-      index?: "You can't view the product feed!"
-      own_products?: "You can't view this product feed!"
+      index?: "You can't view the product list!"
       show?: "You have to create a profile first!"
       new?: "You have to create a profile first!"
       create?: "You have to create a profile first!"
       edit?: "You can't edit this product!"
       update?: "You can't update this product!"
-      delete?: "You can't delete this product!"
       destroy?: "You can't delete this product!"
     profile_policy:
       show?: "You have to be logged in to view this profile!"
@@ -39,13 +38,11 @@ en:
       new?: "You have to be logged in to create a profile!"
       create?: "You have to be logged in to create a profile!"
     task_policy:
-      show?: "You can't view this task!"
       edit?: "You can't edit this task!"
       update?: "You can't update this task!"
-      delete?: "You can't delete this task!"
       destroy?: "You can't delete this task!"
     user_policy:
-      show_tasks?: "You can't view this task feeed!"
-      new_task?: "You can't create a task there!"
-      show_notifications?: "You can't view this notification feed!"
+      index_tasks?: "You can't view this task list!"
+      index_notifications?: "You can't view this notification feed!"
+      index_own_products?: "You can't view this product list!"
 

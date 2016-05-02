@@ -41,6 +41,6 @@ class NotificationsController < ApplicationController
 
     def set_and_authorize_user_notifications
       @user = User.find(params[:user_id])
-      authorize @user, :show_notifications?
+      authorize @user, :index_notifications?
     end
 end

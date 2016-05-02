@@ -99,7 +99,7 @@
     <% if policy(@product).edit? %>
       <%= link_to "Edit Product", edit_product_path(@product), class: "btn btn-primary" %>
     <% end %>
-    <% if policy(@product).delete? %>
+    <% if policy(@product).destroy? %>
       <button type="button" class="btn btn-danger" style="margin-left:10px;" data-toggle="modal" data-target="#deleteproduct_<%= @product.id %>">Delete Product</button>
     <% end %>
   </div> 

@@ -23,10 +23,6 @@ class PostPolicy < ApplicationPolicy
     user.present? && user == post.user
   end
 
-  def delete?
-    user.present? && user == post.user
-  end
-
   def destroy?
     user.present? && user == post.user
   end
