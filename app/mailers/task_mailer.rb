@@ -7,7 +7,7 @@ class TaskMailer < ActionMailer::Base
 
     mail(from: 'faskyn@gmail.com',
          to: "#{executor.email}",
-         subject: "[Faskyn] New task/favor from #{assigner.profile.full_name}"
+         subject: "[Faskyn] New task from #{assigner.profile.full_name}"
          )
   end
 end

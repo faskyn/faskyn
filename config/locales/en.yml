@@ -21,6 +21,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            password_confirmation:
+              confirmation: "doesn't match password"
   pundit:
     default: "You can't perform this action!"
     product_policy:

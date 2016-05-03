@@ -14,14 +14,20 @@ describe Posts::PostCommentsController do
     end
 
     describe "POST create" do
+      let(:user) { create(:user) }
       let!(:profile) { create(:profile, user: @user) }
-      let!(:post_instance) { create(:post, user: @user) } 
+      let(:post_instance) { create(:post, user: @user) }
+      let!(:other_comment) { create(:post_comment, user: user, post: post_instance) } 
 
       context "with valid attributes" do
         subject(:create_action) { xhr :post, :create, post_id: post_instance.id, post_comment: attributes_for(:post_comment, post_id: post_instance.id, user: @user) }
 
         it "saves the new task in the db" do
           expect{ create_action }.to change{ PostComment.count }.by(1)
+        end
+
+        it "sends notification" do
+          expect{ create_action }.to change{ Notification.count }.by(1)
         end
 
         it "assigns instance variables" do
@@ -45,6 +51,10 @@ describe Posts::PostCommentsController do
 
         it "doesn't save the new product in the db" do
           expect{ create_action }.to_not change{ PostComment.count }
+        end
+
+        it "doesn't send notification" do
+          expect{ create_action }.to_not change{ Notification.count }
         end
       end
     end

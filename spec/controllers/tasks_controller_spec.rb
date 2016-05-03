@@ -144,6 +144,16 @@ describe TasksController do
           expect{ create_action }.to change{ Task.count }.by(1)
         end
 
+        it "sends notification" do
+          expect{ create_action }.to change{ Notification.count }.by(1)
+        end
+
+        it 'triggers task email active job' do
+          expect{ create_action }.to change{ ActiveJob::Base.queue_adapter.enqueued_jobs.count }.by(1)
+          #expect(TaskCreatorJob).to receive(:perform_later).once
+          #create_action
+        end
+
         it "responds with success" do
           create_action
           expect(response).to have_http_status(200)
@@ -155,6 +165,10 @@ describe TasksController do
 
         it "doesn't save the new product in the db" do
           expect{ create_action }.to_not change{ Task.count }
+        end
+
+        it "doesn't send notification" do
+          expect{ create_action }.to_not change{ Notification.count }
         end
       end
     end

@@ -6,7 +6,6 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
-require 'support/factory_girl'
 require 'devise'
 require "pundit/rspec"
 require 'capybara/rails'
@@ -67,11 +66,14 @@ RSpec.configure do |config|
   #config.include Devise::TestHelpers, type: :routing
   config.include ControllerMacros, :type => :controller
 
-  #config.include Features, :type => :feature
+  config.include Features, :type => :feature
 
   config.include Warden::Test::Helpers
   config.before :suite do
     Warden.test_mode!
+  end
+  config.after :each do
+    Warden.test_reset!
   end
 
   #database cleaner

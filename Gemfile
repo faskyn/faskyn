@@ -121,6 +121,7 @@ group :test do
   gem 'shoulda-callback-matchers', '~> 1.1', '>= 1.1.3'
   gem 'jasmine', '~> 2.4'
   gem 'database_cleaner', '~> 1.5', '>= 1.5.1'
+  #gem 'email_spec', '~> 2.0'
   gem 'launchy', '~> 2.4.3'
 end
 

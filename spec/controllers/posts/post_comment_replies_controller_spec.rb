@@ -16,15 +16,21 @@ describe Posts::PostCommentRepliesController do
     end
 
     describe "POST create" do
+      let(:user) { create(:user) }
       let!(:profile) { create(:profile, user: @user) }
-      let!(:post_instance) { create(:post, user: @user) }
-      let!(:post_comment) { create(:post_comment, post: post_instance, user: @user) }
+      let(:post_instance) { create(:post, user: @user) }
+      let(:post_comment) { create(:post_comment, post: post_instance, user: @user) }
+      let!(:other_reply) { create(:post_comment_reply, post_comment: post_comment, user: user) }
 
       context "with valid attributes" do
         subject(:create_action) { xhr :post, :create, post_comment_id: post_comment.id, post_comment_reply: attributes_for(:post_comment_reply, post_comment: post_comment, user: @user) }
 
         it "saves the new task in the db" do
           expect{ create_action }.to change{ PostCommentReply.count }.by(1)
+        end
+
+        it "sends notification" do
+          expect{ create_action }.to change{ Notification.count }.by(1)
         end
       end
 
@@ -33,6 +39,10 @@ describe Posts::PostCommentRepliesController do
 
         it "doesn't save the new product in the db" do
           expect{ create_action }.to_not change{ PostCommentReply.count }
+        end
+
+        it "doesn't send notification" do
+          expect { create_action }.to_not change{ Notification.count }
         end
       end
     end
