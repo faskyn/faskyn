@@ -1,5 +1,5 @@
 class ProductCompetition < ActiveRecord::Base
-  belongs_to :product
+  belongs_to :product, touch: true
 
   validates :competitor, presence: { message: "can't be blank" }, length: { maximum: 80, message: "can't be longer than 80 characters" }
   validates :differentiator, presence: { message: "can't be blank" }

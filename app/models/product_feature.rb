@@ -1,5 +1,5 @@
 class ProductFeature < ActiveRecord::Base
-  belongs_to :product
+  belongs_to :product, touch: true
 
   validates :feature, presence: { message: "can't be blank" }
 

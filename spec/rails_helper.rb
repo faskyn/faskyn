@@ -10,6 +10,8 @@ require 'devise'
 require "pundit/rspec"
 require 'capybara/rails'
 require 'capybara/poltergeist'
+require 'best_in_place'
+require 'best_in_place/test_helpers'
 Capybara.javascript_driver = :poltergeist
 
 
@@ -60,6 +62,9 @@ RSpec.configure do |config|
 
   #shoulda callback matcher
   config.include(Shoulda::Callback::Matchers::ActiveModel)
+
+  #best in place helpers
+  config.include BestInPlace::TestHelpers, :type => :feature
 
   #devise
   config.include Devise::TestHelpers, :type => :controller

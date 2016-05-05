@@ -20,6 +20,6 @@ RSpec.describe ProductCompetition, type: :model do
   it { is_expected.to validate_length_of(:competitor).is_at_most(80).with_message(/can't be longer than 80 characters/) }
   it { is_expected.to validate_presence_of(:product) }
   
-  it { is_expected.to belong_to(:product) }
+  it { is_expected.to belong_to(:product).touch }
 
 end

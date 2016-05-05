@@ -68,8 +68,8 @@ $(document).on('click', '#chat-notification-dropdown-list', function(){
     timeout: 5000,
     success: function(data){
       var empty = "<li><a href='#'>No new chat messages.</a></li>";
-      var viewallURL= "/users/" + current_user_id + "/chat_notifications";
-      var viewall="<li role='separator' class='divider'></li><li style='text-align:center'><a style='font-weight:bold' href='" + viewallURL + "'>View all notifications</a></li>";
+      var viewallURL = "/users/" + current_user_id + "/chat_notifications";
+      var viewall = "<li role='separator' class='divider'></li><li style='text-align:center'><a style='font-weight:bold' href='" + viewallURL + "'>View all notifications</a></li>";
       var items = $.map(data, function(notification){
         return "<li><a href='" + notification.url + "'><span><img class='avatar-notification' src='" + notification.profile_image_url + "'</span><span style='padding-left:10px'>" + notification.sender_name + " " + notification.what.did + ".</span></a></li>";
       });

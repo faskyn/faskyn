@@ -14,6 +14,6 @@ RSpec.describe ProductFeature, type: :model do
   it { is_expected.to validate_presence_of(:feature).with_message(/can't be blank/) }
   it { is_expected.to validate_presence_of(:product) }
   
-  it { is_expected.to belong_to(:product) }
+  it { is_expected.to belong_to(:product).touch }
 
 end
