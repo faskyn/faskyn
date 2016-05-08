@@ -5,7 +5,8 @@ $("ul.errors").html("");
 	$('ul.errors').show();
 	<% @task.errors.full_messages.each do |message| %>
 		$("ul.errors").append($("<li />").html("<%= message.html_safe %>"));
-		<% end %>
+	<% end %>
+	editTaskTimeSetting();
 <% else %>
 	$('ul.errors').hide();
 	$('.alert-danger').hide();
@@ -18,7 +19,7 @@ $("ul.errors").html("");
 	$('#task_<%= @task.id %>').fadeOut(400, function(){
 		$(this).remove();
 		//first is current_user tasks index, second is user + current user common tasks index
-		$(".new-task-insert").prepend($task);
-		$(".new-task-insert-2").prepend($taskbetween);
+		$('[data-behavior="task-insert"]').prepend($task);
+		$('[data-behavior="task-insert-between"]').prepend($taskbetween);
 	});
 <% end %>

@@ -30,10 +30,10 @@
           <% end %>
           </li>
           <li>
-            <%= link_to "Edit Task", edit_user_task_path(current_user, id: task.id), remote: true, type: "button", 'data-toggle' => "modal", 'data-target' => "#update-task-modal", 'data-taskeditlink' => "#{edit_user_task_path(current_user, id: task.id)}", class: 'open-edit-task-modal' %>
+            <%= link_to "Edit Task", edit_user_task_path(current_user, id: task.id), remote: true, type: "button", 'data-toggle' => "modal", 'data-target' => "#update-task-modal", 'data-task-edit-link' => "#{edit_user_task_path(current_user, id: task.id)}", data: { behavior: "open-edit-task-modal" } %>
           </li>
           <li>
-            <a href="#" data-toggle="modal" role="button" data-target="#delete-task-modal" class="open-delete-task-modal" data-taskdeletelink="<%= user_task_path(current_user, task) %>">Delete Task</a>
+            <a href="#" data-toggle="modal" role="button" data-target="#delete-task-modal" data-behavior="open-delete-task-modal" data-task-delete-link="<%= user_task_path(current_user, task) %>">Delete Task</a>
           </li>
         </ul>
       </div>

@@ -102,7 +102,7 @@
     <!-- end of script for pusher -->
   </head>
   <% if user_signed_in? %>
-    <body class="fixedheight <%= controller.controller_name %>-controller <%= controller.action_name%>-action" id="bodycurrentuser" data-currentuserid="<%= current_user.id %>">
+    <body class="fixedheight <%= controller.controller_name %>-controller <%= controller.action_name%>-action" id="body-current-user" data-currentuserid="<%= current_user.id %>">
     <%= render 'layouts/header' %>
     <div id="wrapper">
       <%= render 'layouts/sidebar' %>

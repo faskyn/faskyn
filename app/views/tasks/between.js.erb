@@ -1,4 +1,4 @@
-$('.new-task-insert-2').append('<%= j render partial: "tasks/task_between", collection: @tasks, as: :task %>');
+$('[data-behavior="task-insert-between"]').append('<%= j render partial: "tasks/task_between", collection: @tasks, as: :task %>');
 <% if @tasks.next_page %>
   $('.pagination').replaceWith('<%= j will_paginate @tasks %>');
 <% else %>

@@ -1,52 +1,39 @@
 $(document).on("page:change", function() {
 
 	//choosing user on task creation; needed only for new task
-	$('.task_name_company').autocomplete({
+	$('[data-behavior="new-task-executor"]').autocomplete({
   	source: "/users/:user_id/tasknamecompanies"
 	});
 
-	//unfocus the newtask button after modal open
-	$('#newtask').on('shown.bs.modal', function (e) {
+	//unfocus the new task button after modal open
+	$('#new-task').on('shown.bs.modal', function (e) {
     $('.newbutton').one('focus', function (e) {
     	$(this).blur();
 		});
 	});
 
   //on submitting changing datetime to UTC for backend
-  $('.new-task-submit').on('click', function (e){
+  $('[data-behavior="new-task-submit"]').on('click', function (e){
     e.preventDefault();
-    var localMoment = moment($('.new-task-deadline').val());
-    $('.new-task-deadline').val(localMoment.toISOString());
-    $('#newtask').submit();
-  });
-
-  $('.new-html-task-submit').on('click', function (e) {
-    e.preventDefault();
-    var localMoment = moment($('.new-task-deadline').val());
-    $('.new-task-deadline').val(localMoment.toISOString());
-    $('.new-html-task-form').submit();
+    var localMoment = moment($('[data-behavior="new-task-deadline"]').val());
+    $('[data-behavior="new-task-deadline"]').val(localMoment.toISOString());
+    $('[data-behavior="new-task-modal-form"]').submit();
   });
 
 	//when task modal closes error messages get hidden
-	$('#newtask').on('hidden.bs.modal', function (e) {
+	$('#new-task').on('hidden.bs.modal', function (e) {
 		$('.alert-danger').hide();
 	});
 
   //datetimepicker js code for new task
   $(function () {
-    $('.new-task-deadline').datetimepicker({
+    $('[data-behavior="new-task-deadline"]').datetimepicker({
       sideBySide: true,
       format: 'MM/DD/YYYY hh:mm A',
       stepping: 15,
       widgetPositioning: { vertical: 'bottom' }
     });
   });
-
-  //setting time and datetimepicker when opening edit task modal
-  var task_edit_page = $('.edit-task-well');
-  if (task_edit_page.length > 0) {
-    edit_task_html_form();
-  };
 
 	//infinite scrolling for tasks based on pagination gem
 	if ($('#infinite-task-scrolling').size() > 0) {
@@ -65,7 +52,52 @@ $(document).on("page:change", function() {
 
 //setting time and datetimepicker when opening edit task modal
 $(document).on('shown.bs.modal', '#update-task-modal', function (e) {
-  var deadlineField =  $('.edit-task-deadline');
+  editTaskTimeSetting();
+});
+
+$(document).on('hidden.bs.modal', '#update-task-modal', function (e) {
+  $('.alert-danger').hide();
+});
+
+//setting time to RoR format when updating task
+$(document).on('click', '[data-behavior="edit-task-submit"]', function (e){
+  e.preventDefault();
+  var deadlineField = $('[data-behavior="edit-task-deadline"]');
+  var localMoment = moment(deadlineField.val());
+  var railsDate = localMoment.toISOString();
+  deadlineField.val(railsDate);
+  $('[data-behavior="task-update-form"]').submit();
+});
+
+
+//editing task via modal
+$(document).on('click', '[data-behavior="open-edit-task-modal"]', function (event) {
+  $('[data-behavior="edit-task-form-insert"]').html("<div style='text-align:center'><i class='fa fa-circle-o-notch fa-2x fa-spin' style='color:#5E5E5E'></i></div>");
+  var href = $(this).data("task-edit-link");
+  $.ajax({
+    type: "GET",
+    url: href,
+    dataType: "script"
+  });
+});
+
+//deleting task via modal
+$(document).on('click', '[data-behavior="open-delete-task-modal"]', function (event) {
+  var taskDeleteLink = $(this).data("task-delete-link");
+  $('[data-behavior="delete-task-submit"]').data("task-destroy-link", taskDeleteLink);
+});
+
+$(document).on('click', '[data-behavior="delete-task-submit"]', function (event) {
+  var href = $(this).data("task-destroy-link");
+  $.ajax({
+    type: "DELETE",
+    url: href,
+    dataType: "script"
+  });
+});
+
+function editTaskTimeSetting() {
+  var deadlineField =  $('[data-behavior="edit-task-deadline"]');
   var deadlineValue = deadlineField.attr('value');
   var momentDeadline = moment(deadlineValue).format('MM/DD/YYYY hh:mm A');
   deadlineField.val(momentDeadline);
@@ -75,66 +107,4 @@ $(document).on('shown.bs.modal', '#update-task-modal', function (e) {
     stepping: 15,
     widgetPositioning: { vertical: 'bottom' }
   });
-});
-
-$(document).on('hidden.bs.modal', '.updatetask', function (e) {
-  $('.alert-danger').hide();
-});
-
-//setting time to RoR format when updating task
-$(document).on('click', '.edit-task-submit', function (e){
-  e.preventDefault();
-  var deadlineField = $('.edit-task-deadline');
-  var localMoment = moment(deadlineField.val());
-  var railsDate = localMoment.toISOString();
-  deadlineField.val(railsDate);
-  $(".task-update-form").submit();
-});
-
-//HTML VERSION
-
-$(document).on('click', '.edit-task-submit-html', function (e) {
-  e.preventDefault;
-  var localMoment = moment($('.task-deadline').val());
-  var railsDate = localMoment.toISOString();
-  $('.task-deadline').val(railsDate);
-  $('.task-deadline').closest('form').submit();
-});
-
-function edit_task_html_form() {
-  var deadlineValue = $('.task-deadline').attr('value');
-  var momentDeadline = moment(deadlineValue).format('MM/DD/YYYY hh:mm A');
-  $('.task-deadline').val(momentDeadline);
-  $('.task-deadline').datetimepicker({
-    sideBySide: true,
-    format: 'MM/DD/YYYY hh:mm A',
-    stepping: 15,
-    widgetPositioning: { vertical: 'bottom' }
-  });
 };
-
-//editing task via modal
-$(document).on('click', '.open-edit-task-modal', function (event) {
-  $('#task-edit-form-insert').html("<div style='text-align:center'><i class='fa fa-circle-o-notch fa-2x fa-spin' style='color:#5E5E5E'></i></div>");
-  var href = $(this).data("taskeditlink");
-  $.ajax({
-    type: "GET",
-    url: href,
-    dataType: "script"
-  });
-});
-
-//deleting task via modal
-$(document).on('click', '.open-delete-task-modal', function (event) {
-  var taskDeleteLink = $(this).data("taskdeletelink");
-  $('#delete-task-link').data("taskdestroylink", taskDeleteLink);
-});
-
-$(document).on('click', '#delete-task-link', function (event) {
-  var href = $(this).data("taskdestroylink");
-  $.ajax({
-    type: "DELETE",
-    url: href,
-    dataType: "script"
-  });
-});

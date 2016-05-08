@@ -72,7 +72,7 @@ $(document).on('click', '.remove-post-preview-update', function() {
 
 //showing edit/delete buttons on hover for comments
 $(document).on('mouseenter', '.post-comment-body', function() {
-  if ($(this).closest('.post-comment').data('commentauthorid') == $('#bodycurrentuser').data('currentuserid')) {
+  if ($(this).closest('.post-comment').data('commentauthorid') == $('#body-current-user').data('currentuserid')) {
     $(this).find('.post-comment-editing-deleting').removeClass('hidden');
   };
 }).on('mouseleave', '.post-comment-body', function() {
@@ -81,7 +81,7 @@ $(document).on('mouseenter', '.post-comment-body', function() {
 
 //showing edit/delete buttons on hover for replies
 $(document).on('mouseenter', '.post-comment-reply-body', function() {
-  if ($(this).closest('.post-comment-reply').data('replyauthorid') == $('#bodycurrentuser').data('currentuserid')) {
+  if ($(this).closest('.post-comment-reply').data('replyauthorid') == $('#body-current-user').data('currentuserid')) {
     $(this).find('.post-comment-reply-editing-deleting').removeClass('hidden');
   };
 }).on('mouseleave', '.post-comment-reply-body', function() {
@@ -221,7 +221,7 @@ function showPostAnchorComments() {
 
 //showing edit/delete dropdown on a certain post to author (important for caching)
 function showPostEditDropdown($container) {
-  if ($container.find('.edit-post-dropdown-button').data('postauthorid') == $('#bodycurrentuser').data('currentuserid')) {
+  if ($container.find('.edit-post-dropdown-button').data('postauthorid') == $('#body-current-user').data('currentuserid')) {
     $container.find('.edit-post-dropdown-button').removeClass('hidden');
   };
 };
@@ -229,7 +229,7 @@ function showPostEditDropdown($container) {
 //iterating thru the posts and showing edit/delete dropdown to author (important for caching)
 function collectionPostEditDropdown() {
   $('.edit-post-dropdown-button').each(function(index) {
-    if ($(this).data('postauthorid') == $('#bodycurrentuser').data('currentuserid')) {
+    if ($(this).data('postauthorid') == $('#body-current-user').data('currentuserid')) {
       $(this).removeClass('hidden');
     };
   });

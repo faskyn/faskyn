@@ -8,10 +8,10 @@
         <%= link_to "#{message.message_attachment_filename}", attachment_url(message, :message_attachment), target: "_blank" %>
       <% end %>
       </p>
-      <span id="chatname">
+      <span class="chat-name" data-behavior="chat-name">
         <%= message_interlocutor(message).first_name %>
       </span>
-      <time class="timefield" datetime="<%= message.created_at %>" title="<%= message.created_at.utc.strftime("%d %b  %Y at %I:%M%p" ) %>">
+      <time class="chat-time" data-behavior="chat-time" data-datetime="<%= message.created_at %>" title="<%= message.created_at.utc.strftime("%d %b  %Y at %I:%M%p" ) %>">
         <% if local_time(message.created_at) > (Time.zone.now - 24.hours) %>
            • <%= local_time(message.created_at, "%I:%M %p") %>
         <% else %>

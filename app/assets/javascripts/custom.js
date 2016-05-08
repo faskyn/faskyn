@@ -10,7 +10,7 @@ $(document).on("page:change", function() {
 
 var alert = $('.alert.flash-alert');
   if (alert.length > 0) {
-    if ($('#bodycurrentuser').data('currentuserid')) {
+    if ($('#body-current-user').data('currentuserid')) {
       alert.show().animate({height: alert.outerHeight()}, 200);
       window.setTimeout(function() {
         alert.slideUp();

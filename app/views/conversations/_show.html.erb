@@ -6,21 +6,21 @@
     </div>
     <br clear="all"/>
   </div>
-  <div class="chatboxcontent">
+  <div class="chatbox-content" data-behavior="message-insert">
     <% cache ['messages-index', @messages.map(&:id), @messages.map(&:updated_at).max, @messages.map{|message| message.conversation.sender.profile.updated_at}.max, @messages.map{|message| message.conversation.recipient.profile.updated_at}.max] do %>
       <%= render @messages %>
     <% end %>
   </div>
   <div class="chatboxinput">
-    <%= form_for([@conversation, @message], remote: true, html: { id: "conversation_form_#{@conversation.id}" }) do |f| %>
-        <%= f.text_area :body, class: "chatboxtextarea", "data-cid" => @conversation.id %>
+    <%= form_for([@conversation, @message], remote: true, data: { behavior: "new-message-body-form"}) do |f| %>
+        <%= f.text_area :body, class: "chatbox-text-area", data: { cid: "#{@conversation.id}", behavior: "new-message-body" } %>
     <% end %>
-    <%= form_for([@conversation, @message], html: { class: "message-refile-form" }, remote: true) do |form| %>
+    <%= form_for([@conversation, @message], remote: true, data: { behavior: "message-upload-form" }) do |form| %>
         <span class="btn btn-success btn-sm btn-message-file">Choose file
-        <%= form.attachment_field :message_attachment, presigned: true, direct: true, class: "choose-message-file" %></span>
-        <%= form.submit "Send File", class: "btn btn-primary btn-sm btn-submit-refile", style:"display:none"%>
+        <%= form.attachment_field :message_attachment, presigned: true, direct: true, data: { behavior: "new-message-file" } %></span>
+        <%= form.submit "Send File", class: "btn btn-primary btn-sm", style:"display:none", data: { behavior: "message-upload-submit" } %>
     <% end %>
-    <span id="message-progresspercent"></span>
+    <span data-behavior="message-upload-progress"></span>
   </div>
 </div>
 

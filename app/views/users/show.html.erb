@@ -9,8 +9,8 @@
 </div>
 
  <!-- Modal for new task -->
-  <%= form_for([current_user, @task_between], remote: true) do |f| %>
-    <div class="modal fade" id="newtask" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <%= form_for([current_user, @task_between], remote: true, data: { behavior: "new-task-modal-form" }) do |f| %>
+    <div class="modal fade" id="new-task" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -29,16 +29,16 @@
             </div>
             <div class="field form-group">
               <%= f.label :content %>
-              <%= f.text_area :content, class: "form-control contentarea" %>
+              <%= f.text_area :content, class: "form-control", data: { behavior: "new-task-content" } %>
             </div>
             <div class="field form-group">
               <%= f.label :deadline %>
-              <%= f.text_field :deadline, class: "form-control new-task-deadline" %>
+              <%= f.text_field :deadline, class: "form-control", data: { behavior: "new-task-deadline" } %>
             </div>      
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" id="newtaskclose">Close</button>
-            <%= f.button "Create Task", class: 'btn btn-primary new-task-submit', "data-sid" => current_user.id, "data-rip" => :executor_id, data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="new-task-close">Close</button>
+            <%= f.button "Create Task", class: "btn btn-primary", data: { behavior: "new-task-submit", disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
           </div>
         </div>
       </div>

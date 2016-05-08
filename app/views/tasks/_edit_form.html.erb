@@ -1,5 +1,5 @@
 <div class="modal-body">
-  <%= form_for([current_user, @task], method: :patch, remote: true, html: { class: "task-update-form"}) do |f| %>
+  <%= form_for([current_user, @task], method: :patch, remote: true, data: { behavior: "task-update-form"}) do |f| %>
   <div class="alert alert-danger" style="display:none">
     <ul class="errors" style="display:none">
       <%= render 'layouts/error_messages', object: f.object %>
@@ -14,15 +14,15 @@
   </div>
   <div class="field form-group">
     <%= f.label :content %>
-    <%= f.text_area :content, class: "form-control edit-content" %>
+    <%= f.text_area :content, class: "form-control" %>
   </div>
   <div class="field form-group">
     <%= f.label :deadline %>
-    <%= f.text_field :deadline_string, class: "form-control edit-task-deadline" %>
+    <%= f.text_field :deadline_string, class: "form-control", data: { behavior: "edit-task-deadline" } %>
   </div>    
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-default" data-dismiss="modal" id="updatetaskclose">Close</button>
-  <%= f.button "Update task", class: 'btn btn-primary edit-task-submit', data: {taskid: "#{@task.id}", sid: current_user.id, disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
+  <button type="button" class="btn btn-default" data-dismiss="modal" id="update-task-close">Close</button>
+  <%= f.button "Update task", class: 'btn btn-primary', data: { behavior: "edit-task-submit", disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..." } %>
   <% end %>
 </div>

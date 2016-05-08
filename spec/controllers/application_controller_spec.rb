@@ -18,11 +18,11 @@ describe ApplicationController do
     end
 
     context "set_sidebar_products" do
-      let!(:product) { create(:product, :product_with_nested_attrs, user: @user, updated_at: DateTime.now - 2) }
-      let!(:product_older) { create(:product, :product_with_nested_attrs, user: @user, updated_at: DateTime.now - 4) }
+      let!(:product) { create(:product, :product_with_nested_attrs, user: @user, created_at: DateTime.now - 6, updated_at: DateTime.now - 2) }
+      let!(:product_older) { create(:product, :product_with_nested_attrs, user: @user, created_at: DateTime.now - 6, updated_at: DateTime.now - 4) }
 
       it "assigns sidebar profiles" do
-        expect(subject.set_sidebar_products).to eq([product, product_older])
+        expect(subject.set_sidebar_products).to include(product, product_older)
       end
     end
   end

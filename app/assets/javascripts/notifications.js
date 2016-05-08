@@ -29,7 +29,7 @@ $(document).on("page:change", function() {
 
 $(document).on('click', '#other-notification-dropdown-list', function(){
   $('.other-notifications-json-data').html("<li style='text-align:center'><a href='#' style='color:#5E5E5E'><i class='fa fa-circle-o-notch fa-2x fa-spin'></i></a></li>");
-  var current_user_id = $('#bodycurrentuser').data('currentuserid');
+  var current_user_id = $('#body-current-user').data('currentuserid');
   $.ajax({
     type: "GET",
     url: $(this).attr('href'),
@@ -60,7 +60,7 @@ $(document).on('click', '#other-notification-dropdown-list', function(){
 
 $(document).on('click', '#chat-notification-dropdown-list', function(){
   $('.chat-notifications-json-data').html("<li style='text-align:center'><a href='#' style='color:#5E5E5E'><i class='fa fa-circle-o-notch fa-2x fa-spin'></i></a></li>");
-  var current_user_id = $('#bodycurrentuser').data('currentuserid');
+  var current_user_id = $('#body-current-user').data('currentuserid');
   $.ajax({
     type: "GET",
     url: $(this).attr('href'),

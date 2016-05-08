@@ -11,14 +11,14 @@ $("ul.errors").html("");
 	//hiding modal on creation and setting values to zero for optional new modal
 	$('ul.errors').hide();
 	$('.alert-danger').hide();
-	$("#newtask").modal('hide');
-	$(".task_name_company").val('');
-	$(".contentarea").val('');
-	$(".new-task-deadline").val('');
+	$("#new-task").modal('hide');
+	$('[data-behavior="new-task-executor"]').val('');
+	$('[data-behavior="new-task-content"]').val('');
+	$('[data-behavior="new-task-deadline"]').val('');
 
 	//different div class for different partials + table rows get inserted into view via AJAX
-	$(".new-task-insert").prepend('<%= j render @task %>');
-	$(".new-task-insert-2").prepend('<%= j render partial: "tasks/task_between", locals: { task: @task } %>');
+	$('[data-behavior="task-insert"]').prepend('<%= j render @task %>');
+	$('[data-behavior="task-insert-between"]').prepend('<%= j render partial: "tasks/task_between", locals: { task: @task } %>');
 	$("#task_<%= @task.id %>").hide().fadeIn(1000);
 
 	//pagination(x)*every task has 2 tr + extra task that must be hidden(2)=x*2+2

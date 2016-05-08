@@ -1,4 +1,4 @@
-$('.new-task-insert').append('<%= j render @tasks %>');
+$('[data-behavior="task-insert"]').append('<%= j render @tasks %>');
 <% if @tasks.next_page %>
   $('.pagination').replaceWith('<%= j will_paginate @tasks %>');
 <% else %>

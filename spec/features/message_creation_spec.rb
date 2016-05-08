@@ -13,7 +13,7 @@ feature "creating message" do
     visit user_path(recipient)
     fill_in "message[body]", with: "new body"
     find("#message_body").native.send_keys(:return)
-    within ".chatboxcontent" do
+    within ".chatbox-content" do
       expect(page).to have_content("new body")
     end
     within "#message_body" do

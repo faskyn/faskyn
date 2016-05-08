@@ -2,59 +2,60 @@
 $(document).on("page:change", function() {
 
   //one page change chat gonna show the last message
-  var chatbox = $(".chatboxcontent");
+  var chatbox = $('[data-behavior="message-insert"]');
     if (chatbox.length){
       chatbox.scrollTop(chatbox[0].scrollHeight);
     };
 });
 
 //chat message sending
-$(document).on('keydown', '.chatboxtextarea', function (event) {
-  var id = $(this).data('cid');
-  checkMessageInputKey(event, $(this), id);
+$(document).on('keydown', '[data-behavior="new-message-body"]', function (event) {
+  //var id = $(this).data('cid');
+  checkMessageInputKey(event, $(this));
 });
 
-function checkMessageInputKey(event, chatboxtextarea, conversation_id) {
+function checkMessageInputKey(event, message_body_text_area) {
   if (event.keyCode == 13 && event.shiftKey == 0) {
 
     event.preventDefault();
 
     //checking if field is empty and submitting the form
-    message = chatboxtextarea.val();
+    message = message_body_text_area.val();
     message = message.replace(/^\s+|\s+$/g, "");
     if (message != '') {
-      $('#conversation_form_' + conversation_id).submit();
+      //$('#conversation_form_' + conversation_id).submit();
+      $('[data-behavior="new-message-body-form"]').submit();
     }
   }
 
-  var adjustedHeight = chatboxtextarea.clientHeight;
+  var adjustedHeight = message_body_text_area.clientHeight;
   var maxHeight = 94;
 
   if (maxHeight > adjustedHeight) {
-      adjustedHeight = Math.max(chatboxtextarea.scrollHeight, adjustedHeight);
+      adjustedHeight = Math.max(message_body_text_area.scrollHeight, adjustedHeight);
       if (maxHeight)
           adjustedHeight = Math.min(maxHeight, adjustedHeight);
-      if (adjustedHeight > chatboxtextarea.clientHeight)
-          $(chatboxtextarea).css('height', adjustedHeight + 8 + 'px');
+      if (adjustedHeight > message_body_text_area.clientHeight)
+          $(message_body_text_area).css('height', adjustedHeight + 8 + 'px');
   } else {
-      $(chatboxtextarea).css('overflow', 'auto');
+      $(message_body_text_area).css('overflow', 'auto');
   }
 };
 
 function chatMessageSender (sender_id, message_rendered) {
-  var chatbox = $(".chatboxcontent");
-  var receiver_id = $('#bodycurrentuser').data('currentuserid');
+  var chatbox = $('[data-behavior="message-insert"]');
+  var receiver_id = $('#body-current-user').data('currentuserid');
 
   if (event.handled !== true) {
     chatbox.append(message_rendered);
     chatbox.scrollTop(chatbox[0].scrollHeight);
     
-    $(".chatboxtextarea").val("");
-    $(".chatboxtextarea").focus();
-    $(".chatboxtextarea").css('height', '44px');
-    var timeField = (message_rendered).find('.timefield');
-    var nameField = (message_rendered).find('#chatname');
-    var createdAt = timeField.attr('datetime');
+    $('[data-behavior="new-message-body"]').val("");
+    $('[data-behavior="new-message-body"]').focus();
+    $('[data-behavior="new-message-body"]').css('height', '44px');
+    var timeField = (message_rendered).find('[data-behavior="chat-time"]');
+    var nameField = (message_rendered).find('[data-behavior="chat-name"]');
+    var createdAt = timeField.data('datetime');
     var momentCreatedAt = moment(createdAt).format('hh:mm A');
     timeField.remove();
     $( "<span class='newtime'>" + " • " + momentCreatedAt + "</span>" ).insertAfter(nameField);
