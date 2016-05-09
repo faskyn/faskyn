@@ -13,7 +13,7 @@ feature "updating post comment" do
     sign_in(user)
     visit root_path
     within "#postcomment-#{post_comment.id}" do
-      page.find(".post-comment-body").hover
+      page.find('[data-behavior="post-comment-body"]').hover
       expect(page).to have_css("#activate-comment-edit-#{post_comment.id}")
       page.find("#activate-comment-edit-#{post_comment.id}").click
     end
@@ -28,7 +28,7 @@ feature "updating post comment" do
     sign_in(user)
     visit root_path
     within "#postcomment-#{other_post_comment.id}" do
-      page.find(".post-comment-body").hover
+      page.find('[data-behavior="post-comment-body"]').hover
       expect(page).to_not have_css("#activate-comment-edit-#{post_comment.id}")
     end
   end

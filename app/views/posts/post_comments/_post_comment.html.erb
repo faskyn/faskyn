@@ -1,6 +1,6 @@
 <% cache ['post-comment', post_comment, post_comment.user.profile] do %>
 
-  <div class="post-comment" id="postcomment-<%= post_comment.id %>" data-commentauthorid="<%= post_comment.user_id %>">
+  <div class="post-comment" id="postcomment-<%= post_comment.id %>" data-commentauthorid="<%= post_comment.user_id %>" data-behavior="post-comment">
     <div class="row post-comment-box">
       <div class="col-md-10">
         <div class="col-md-2">
@@ -15,10 +15,10 @@
             <% end %>
             <span class="post-comment-updated"><%= local_time_ago(post_comment.updated_at) %></span>
           </div>
-          <div class="post-comment-body">
+          <div class="post-comment-body" data-behavior="post-comment-body">
 
               <%= find_links(best_in_place post_comment, :body, as: :input, url: post_post_comment_path(post_comment.post, post_comment), activator: "#activate-comment-edit-#{post_comment.id}")%>
-              <span class="post-comment-editing-deleting hidden">
+              <span class="post-comment-editing-deleting hidden" data-behavior="post-comment-editing-deleting">
                 <span class="post-comment-edit-fa">
                   <i class="fa fa-pencil" id="activate-comment-edit-<%=post_comment.id %>"></i>
                 </span>
@@ -28,7 +28,7 @@
               </span>
 
           </div>
-          <a class="open-post-comment-reply" data-pcid="<%= post_comment.id %>">
+          <a class="open-post-comment-reply" data-pcid="<%= post_comment.id %>" data-behavior="open-post-comment-reply">
             <span><i class="fa fa-reply"></i></span>
             <span id="post-comment-number-<%= post_comment.id %>">
               <% if post_comment.post_comment_replies.size == 0 %>
@@ -43,10 +43,10 @@
       <div class="col-md-2">
       </div>
     </div>
-    <div id="post-comment-replies-<%= post_comment.id%>" class="post-comment-replies">
+    <div id="post-comment-replies-<%= post_comment.id%>" class="post-comment-replies" data-behavior="post-comment-replies">
         <div class = "row reply-row">
           <div class="col-md-12">
-            <div class="col-md-10 col-md-offset-2 post-comment-reply-insert-<%= post_comment.id%>">
+            <div class="col-md-10 col-md-offset-2" data-behavior="post-comment-reply-insert-<%= post_comment.id%>">
               <%= render partial: 'posts/post_comment_replies/post_comment_reply', collection: post_comment.post_comment_replies.ordered.includes(:user, :user_profile), as: :post_comment_reply, locals: { post_comment: post_comment } %>
             </div>
           </div>

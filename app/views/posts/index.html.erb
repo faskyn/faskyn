@@ -12,7 +12,7 @@
       <%= render 'new_form' %>
     </div>
   <% end %>
-  <div class="post-index new-post-insert">
+  <div data-behavior="post-insert">
     <% cache ["posts-index", @posts.map(&:id), @posts.map(&:updated_at).max, @posts.map {|post| post.user.profile.updated_at}.max] do %>
       <%= render @posts %>
     <% end %>
@@ -35,7 +35,7 @@
         <h4 class="modal-title" id="myModalLabel">Image</h4>
       </div>
       <div class="modal-body">
-        <div id ="post-image-insert" style="text-align:center;">
+        <div style="text-align:center;" data-behavior="post-image-insert">
           <!-- ON CLICKING THE IMAGE MODAL WILL POP UP WITH THE IMAGE RENDERED BY JS -->
         </div>
       </div>
@@ -50,14 +50,14 @@
 
 <!-- EDIT POST MODAL -->
 
-<div class="modal fade updatepost" id="update-post-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="update-post-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content" style="text-align:left">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="edit-post-modal-h4">Edit Post</h4>
       </div>
-      <div class="post-edit-form-insert">
+      <div data-behavior="post-edit-form-insert">
         <!-- FORM GETS RENDERED HERE VIA JS -->
       </div>
     </div>
@@ -79,7 +79,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" id="deletepostclose">Close</button>
-        <a href="#" id="delete-post-link-insert" type="button" class="btn btn-danger" data-postdestroylink >Delete Post</a>
+        <a href="#" type="button" class="btn btn-danger" data-behavior="delete-post-submit" data-postdestroylink >Delete Post</a>
           <!-- DESTROY LINK GETS INSERTED HERE -->      
       </div>
     </div>

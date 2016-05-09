@@ -1,6 +1,6 @@
 <% cache ['post-comment-reply', post_comment_reply, post_comment_reply.user.profile] do %>
 
-  <div class="post-comment-reply" id="postcommentreply-<%= post_comment_reply.id %>" data-replyauthorid="<%= post_comment_reply.user_id %>">
+  <div class="post-comment-reply" id="postcommentreply-<%= post_comment_reply.id %>" data-replyauthorid="<%= post_comment_reply.user_id %>" data-behavior="post-comment-reply">
     <div class="row post-comment-reply-box">
       <div class="col-md-10">
         <div class="col-md-2">
@@ -15,9 +15,9 @@
             <% end %>
             <span class="post-comment-reply-updated"><%= local_time_ago(post_comment_reply.updated_at) %></span>
           </div>
-          <div class="post-comment-reply-body">
+          <div class="post-comment-reply-body" data-behavior="post-comment-reply-body">
               <%= find_links(best_in_place post_comment_reply, :body, as: :input, url: post_comment_post_comment_reply_path(post_comment_reply.post_comment, post_comment_reply), activator: "#activate-comment-reply-edit-#{post_comment_reply.id}")%>
-              <span class="post-comment-reply-editing-deleting hidden">
+              <span class="post-comment-reply-editing-deleting hidden" data-behavior="post-comment-reply-editing-deleting">
                 <span class="post-comment-reply-edit-fa">
                   <i class="fa fa-pencil" id="activate-comment-reply-edit-<%=post_comment_reply.id %>"></i>
                 </span>

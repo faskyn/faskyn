@@ -1,2 +1,2 @@
-$('#post-image-insert').html('<%= j image_tag @post.post_image.url %>');
+$('[data-behavior="post-image-insert"]').html('<%= j image_tag @post.post_image.url %>');
 //TODO also rendering the image path for the original

@@ -14,9 +14,9 @@ feature "updating post comment reply" do
     sign_in(user)
     visit root_path
     within "#postcomment-#{post_comment.id}" do
-      find(".open-post-comment-reply").click
+      find('[data-behavior="open-post-comment-reply"]').click
       within "#postcommentreply-#{post_comment_reply.id}" do
-        find(".post-comment-reply-body").hover
+        find('[data-behavior="post-comment-reply-body"]').hover
         expect(page).to have_css("#activate-comment-reply-edit-#{post_comment_reply.id}")
         page.find("#activate-comment-reply-edit-#{post_comment_reply.id}").click
       end
@@ -24,20 +24,15 @@ feature "updating post comment reply" do
     bip_text post_comment_reply, :body, "new post comment reply body"
     expect(page).to have_content("new post comment reply body")
     expect(page).to_not have_content("original post comment reply body")
-    # page.find("#navbar-home").click
-    # within "#postcomment-#{post_comment.id}" do
-    #   find("#post-comment-number-#{post_comment.id}").click
-    # end
-    # expect(page).to have_content("new post comment reply body")
   end
 
   scenario "not allowed for others", js: true do
     sign_in(user)
     visit root_path
     within "#postcomment-#{post_comment.id}" do
-      find(".open-post-comment-reply").click
+      find('[data-behavior="open-post-comment-reply"]').click
       within "#postcommentreply-#{other_post_comment_reply.id}" do
-        page.find(".post-comment-reply-body").hover
+        page.find('[data-behavior="post-comment-reply-body"]').hover
         expect(page).to_not have_css("#activate-comment-reply-edit-#{other_post_comment_reply.id}")
       end
     end

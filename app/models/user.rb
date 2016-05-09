@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
   end
 
   def decrease_new_chat_notifications
-    decrement!(:new_chat_notification) if self.new_chat_notification > 0
+    decrement!(:new_chat_notification) if new_chat_notification > 0
   end
 
   def reset_new_chat_notifications
@@ -77,7 +77,7 @@ class User < ActiveRecord::Base
   end
 
   def decrease_new_other_notifications
-    decrement!(:new_other_notification) if self.new_other_notification > 0
+    decrement!(:new_other_notification) if new_other_notification > 0
   end
 
   def reset_new_other_notifications

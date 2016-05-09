@@ -19,7 +19,7 @@
           <div class="post-body">
             <%= simple_format(find_links(h post.body)) %>
           </div>
-          <div class="post-image" data-postlink="<%= post_path(post) %>">
+          <div data-postlink="<%= post_path(post) %>" data-behavior="post-image">
             <% if post.post_image? %>
               <button data-toggle="modal" data-target="#post-image-modal">
                 <%= image_tag post.post_image.url(:base_thumb) %>
@@ -30,16 +30,16 @@
 
         <div class="col-md-2" style="text-align:right;">
      
-          <li class="dropdown edit-post-dropdown-button hidden" data-postauthorid ="<%= post.user_id%>">
+          <li class="dropdown hidden" data-postauthorid ="<%= post.user_id%>" data-behavior="edit-post-dropdown-button">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <i class="fa fa-angle-down"></i>
             </a>
             <ul class = "dropdown-menu dropdown-menu-right">
               <li>
-                <%= link_to "Edit Post", edit_post_path(post), remote: true, type: "button", 'data-toggle' => "modal", 'data-target' => "#update-post-modal", 'data-posteditlink' => "#{edit_post_path(post)}", class: 'open-edit-post-modal' %>
+                <%= link_to "Edit Post", edit_post_path(post), remote: true, type: "button", 'data-toggle' => "modal", 'data-target' => "#update-post-modal", data: { posteditlink: edit_post_path(post), behavior: "open-edit-post-modal" } %>
               </li>   
               <li>
-                <a href="#" data-toggle="modal" role="button" data-target="#delete-post-modal" class="open-delete-post-modal" data-postdeletelink="<%=post_path(post) %>">Delete Post</a>
+                <a href="#" data-toggle="modal" role="button" data-target="#delete-post-modal" data-behavior="open-delete-post-modal" data-postdeletelink="<%=post_path(post) %>">Delete Post</a>
               </li>
             </ul>
           </li>
@@ -61,16 +61,16 @@
         </div>
       </div>
       <% if post.post_comments.size > 3 %>
-        <div class="row open-all-post-comments-row" style="padding-bottom:10px;c">
+        <div class="row" style="padding-bottom:10px;" data-behavior="open-all-post-comments-row">
           <div class="col-md-12">
             <div class="col-md-12">
-              <a class="open-all-post-comments" data-pid="<%= post.id %>">Show all</a>
+              <a class="open-all-post-comments" data-pid="<%= post.id %>" data-behavior="open-all-post-comments">Show all</a>
             </div>
           </div>
         </div>
       <% end %>
       <div class = "row">
-        <div class="col-md-12 post-comment-insert-<%= post.id%>">
+        <div class="col-md-12" data-behavior="post-comment-insert-<%= post.id%>">
           <%= render partial: 'posts/post_comments/post_comment', collection: post.post_comments.ordered.includes(:user, :user_profile), as: :post_comment, locals: {post: post} %>
         </div>
       </div>

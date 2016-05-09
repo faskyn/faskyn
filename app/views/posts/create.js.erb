@@ -8,11 +8,11 @@ $("ul.errors").html("");
 <% else %>
 	$('ul.errors').hide();
 	$('.alert-danger').hide();
-	$('.post-index').prepend('<%= j render @post %>');
+	$('[data-behavior="post-insert"]').prepend('<%= j render @post %>');
 	collectionPostEditDropdown();
-	$('.post-create-body').val('');
-	$('#img-prev').attr('src', "#");
-	$('#img-prev').addClass('hidden');
-	$('.btn-create-post').prop('disabled',true);
-	$('.remove-post-preview').addClass('hidden');
+	$('[data-behavior="post-create-body"]').val('');
+	$('[data-behavior="img-prev"]').attr('src', "#");
+	$('[data-behavior="img-prev"]').addClass('hidden');
+	$('[data-behavior="new-post-submit"]').prop('disabled',true);
+	$('[data-behavior="remove-post-preview"]').addClass('hidden');
 <% end %>

@@ -1,6 +1,7 @@
 $posts = '<%= j render @posts %>'
-$('.new-post-insert').append($posts);
+$('[data-behavior="post-insert"]').append($posts);
 collectionPostEditDropdown();
+$(".best_in_place").best_in_place();
 <% if @posts.next_page %>
   $('.pagination').replaceWith('<%= j will_paginate @posts %>');
 <% else %>

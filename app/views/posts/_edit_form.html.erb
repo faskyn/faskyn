@@ -5,21 +5,21 @@
         <%= render 'layouts/error_messages', object: f.object %>
       </ul>
     </div>
-    <div id="old-post-image" style="text-align:center; margin-bottom:10px"><%= image_tag(@post.post_image.url) if @post.post_image? %></div>
-    <img id="img-prev-update" style="margin-bottom:10px;" width=600 height=400 src="#" class="img-thumbnail hidden"/>
-    <div class="remove-post-preview-update hidden" style="margin-bottom:10px;">
+    <div style="text-align:center; margin-bottom:10px" data-behavior="old-post-image"><%= image_tag(@post.post_image.url) if @post.post_image? %></div>
+    <img style="margin-bottom:10px;" width=600 height=400 src="#" class="img-thumbnail hidden" data-behavior="img-prev-update"/>
+    <div class="hidden" style="margin-bottom:10px;" data-behavior="remove-post-preview-update">
       <a href="#">Remove Image</a>
     </div>
     <div class="field form-group">
-      <%= f.text_area :body, class: "form-control edit-post-body" %>
+      <%= f.text_area :body, class: "form-control" %>
     </div>   
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal" id="updatepostclose">Close</button>
-    <span class="btn btn-success btn-message-file" data-originalimage="">Upload Image
-      <%= f.file_field :post_image, id: "avatar-upload-update", class: "choose-post-file" %>
+    <span class="btn btn-success btn-post-file" data-originalimage="">Upload Image
+      <%= f.file_field :post_image, data: { behavior: "post-image-upload-update" } %>
     </span>
     <%= f.hidden_field :post_image_cache %>
-    <%= f.button "Update post", class: 'btn btn-primary edit-post-submit', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
+    <%= f.button "Update post", class: 'btn btn-primary', data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
   </div>
 <% end %>
