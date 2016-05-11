@@ -9,7 +9,6 @@ class Posts::PostCommentsController < ApplicationController
     #@post_comment.save!
     if @post_comment.save
       @post.send_post_comment_creation_notification(@post_comment)
-      @post_comment_reply = PostCommentReply.new
       respond_to :js
     end
   end

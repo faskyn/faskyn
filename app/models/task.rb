@@ -46,9 +46,9 @@ class Task < ActiveRecord::Base
   end
   #end of getter setter method for new task executor
 
-  # def completed?
-  #   completed_at
-  # end
+  def completed?
+    completed_at
+  end
 
   private
 

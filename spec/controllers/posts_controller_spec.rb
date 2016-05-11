@@ -30,8 +30,6 @@ describe PostsController do
       it "assigns posts" do
         expect(assigns(:posts)).to eq([post])
         expect(assigns(:post)).to be_a_new(Post)
-        expect(assigns(:post_comment)).to be_a_new(PostComment)
-        expect(assigns(:post_comment_reply)).to be_a_new(PostCommentReply)
       end
 
       it { is_expected.to respond_with 200 }
@@ -48,9 +46,6 @@ describe PostsController do
       it "assigns post" do
         expect(assigns(:post)).to eq(post)
       end
-
-      #it { is_expected.to respond_with 200 }
-      #it { is_expected.to render_template :show }
     end
 
     describe "GET edit" do
@@ -77,12 +72,6 @@ describe PostsController do
           expect{ create_action }.to change{ Post.count }.by(1)
         end
 
-        it "assigns new comment and reply" do
-          create_action
-          expect(assigns(:post_comment)).to be_a_new(PostComment)
-          expect(assigns(:post_comment_reply)).to be_a_new(PostCommentReply)
-        end
-
         it "responds with success" do
           create_action
           expect(response).to have_http_status(200)
@@ -107,8 +96,6 @@ describe PostsController do
         it "assigns the post and the new comment and reply" do
           xhr :patch, :update, id: post.id, post: attributes_for(:post)
           expect(assigns(:post)).to eq(post)
-          expect(assigns(:post_comment)).to be_a_new(PostComment)
-          expect(assigns(:post_comment_reply)).to be_a_new(PostCommentReply)
         end
 
         it "changes the attributes" do

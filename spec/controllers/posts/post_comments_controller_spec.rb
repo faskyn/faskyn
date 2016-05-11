@@ -35,7 +35,6 @@ describe Posts::PostCommentsController do
           expect(assigns(:post)).to eq(post_instance)
           #expect(assigns(:post_comment)).to be_a_new(PostComment)
           #expect(assigns(:post_comment.user)).to eq(@user)
-          expect(assigns(:post_comment_reply)).to be_a_new(PostCommentReply)
         end
 
         it "assigns all the instance variables"

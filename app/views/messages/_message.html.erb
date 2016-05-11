@@ -1,4 +1,4 @@
-<% cache ['messages-index-single', message, message.conversation.sender.profile, message.conversation.recipient.profile] do %>
+<% cache ['messages-index-single', message, message.conversation.sender.profile, message.conversation.recipient.profile, current_user] do %>
   <li class="<%= self_or_other(message) %>">
     <div class="chatboxmessagecontent">
       <p>

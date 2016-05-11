@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_and_authorize_post, only: [:show, :edit, :update, :destroy]
-  before_action :set_new_comment_and_reply, only: [:index, :create, :update]
 
   def index
     @q_posts = Post.ransack(params[:q])
@@ -80,10 +79,4 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
       authorize @post
     end
-
-    def set_new_comment_and_reply
-      @post_comment = PostComment.new
-      @post_comment_reply = PostCommentReply.new
-    end
-
 end

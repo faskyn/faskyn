@@ -100,5 +100,11 @@ RSpec.describe Task, type: :model do
       task_setter.task_name_company = "John Doe Faskyn"
       expect(task_setter.executor).to eq(user_setter)
     end
+
+    it "completed?" do
+      task_completed = create(:task, completed_at: DateTime.now - 2)
+      expect(task.completed?).to eq(nil)
+      expect(task_completed.completed?).to_not eq(nil)
+    end
   end
 end
