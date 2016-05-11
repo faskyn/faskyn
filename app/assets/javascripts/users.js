@@ -17,12 +17,12 @@ $(document).on("page:change", function() {
   //in case of current user's profile edit button gets visible (important for caching)
   if ($('.profile-container').length > 0) {
     if ($('.profile-container').data('profileuserid') == $('#body-current-user').data('currentuserid')) {
-      $('#edit-profile-button').removeClass('hidden');
+      $('[data-behavior="edit-profile-button"]').removeClass('hidden');
     };
   };
 });
 
-$(document).on('mouseup', '.btn-social-icon', function() {
+$(document).on('mouseup', '[data-behavior="btn-social-icon"]', function() {
   $(this).blur();
 });
   

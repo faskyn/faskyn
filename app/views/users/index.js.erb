@@ -1,4 +1,4 @@
-$('.user-profile-index').append('<%= j render partial: "users/user" %>');
+$('[data-behavior="user-profile-index"]').append('<%= j render partial: "users/user" %>');
 <% if @users.next_page %>
   $('.pagination').replaceWith('<%= j will_paginate partial: "users/user" %>');
 <% else %>

@@ -2,12 +2,12 @@
   
   <% if current_user.id == task.assigner.id %>
     <tr id="task_<%= task.id %>">
-      <td class = "col-md-3">
-        <div class="row" style="display: table;width: 100%;">
-          <div class = "col-md-3" style="vertical-align:middle;display:table-cell;float:none;">
-              <i class="fa fa-sign-out" style="color:#007cc3;"></i>
+      <td class = "col-md-3 name-cell">
+        <div class="row name-row">
+          <div class = "col-md-3 sign-column">
+              <i class="fa fa-sign-out fa-color"></i>
           </div>
-          <div class = "col-md-9" style="padding-left:0px;width:100%;float:left;text-align:left">
+          <div class = "col-md-9 name-column">
             <%= link_to user_path(id: task.executor.id) do %>
               <div class="table-user-name">
                 <%= task.executor.full_name %>
@@ -21,12 +21,12 @@
       </td>
   <% else %>
     <tr id="task_<%= task.id %>">
-      <td class = "col-md-3">
-        <div class="row" style="display: table;width: 100%;">
-          <div class = "col-md-3" style="vertical-align:middle;display:table-cell;float:none;">
+      <td class = "col-md-3 name-cell">
+        <div class="row name-row">
+          <div class = "col-md-3 sign-column">
               <i class="fa fa-sign-in"></i>
           </div>
-          <div class = "col-md-9" style="padding-left:0px;width:100%;float:left;text-align:left">
+          <div class = "col-md-9 name-column">
             <%= link_to user_path(id: task.assigner.id) do %>
               <div class="table-user-name">
                 <%= task.assigner.full_name %>
@@ -52,9 +52,9 @@
     </td>
 
     <td class="col-md-1">
-      <div class="dropdown">
+      <div class="dropdown dropdown-cell">
         <a data-target="task-change-<%= task.id %>" id="task-change-<%= task.id %>" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-ellipsis-v fa-lg" style="padding: 10px 20px 10px 20px;"></i>
+          <i class="fa fa-ellipsis-v fa-lg fa-styling"></i>
         </a>
         <ul class = "dropdown-menu dropdown-menu-right" aria-labelledby="task-change-<%= task.id %>">
           <li>

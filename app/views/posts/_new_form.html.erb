@@ -6,8 +6,8 @@
       </ul>
     </div>
     <div class="form-group">
-      <img style="margin-bottom:10px;" width=300 height=200 src="#" class="img-thumbnail hidden" data-behavior="img-prev"/>
-      <div class="hidden" style="margin-bottom:10px;" data-behavior="remove-post-preview">
+      <img class="img-thumbnail hidden" width=300 height=200 src="#" data-behavior="img-prev"/>
+      <div class="remove-post-preview hidden" data-behavior="remove-post-preview">
         <a href="#">Remove image</a>
       </div>
       <%= f.text_area :body, placeholder: "Share something useful..", class: "form-control", data: { behavior: "post-create-body" } %>

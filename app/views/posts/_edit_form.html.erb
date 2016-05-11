@@ -5,9 +5,9 @@
         <%= render 'layouts/error_messages', object: f.object %>
       </ul>
     </div>
-    <div style="text-align:center; margin-bottom:10px" data-behavior="old-post-image"><%= image_tag(@post.post_image.url) if @post.post_image? %></div>
-    <img style="margin-bottom:10px;" width=600 height=400 src="#" class="img-thumbnail hidden" data-behavior="img-prev-update"/>
-    <div class="hidden" style="margin-bottom:10px;" data-behavior="remove-post-preview-update">
+    <div class="old-post-image" data-behavior="old-post-image"><%= image_tag(@post.post_image.url) if @post.post_image? %></div>
+    <img width=600 height=400 src="#" class="img-thumbnail hidden" data-behavior="img-prev-update"/>
+    <div class="remove-post-preview-update hidden" data-behavior="remove-post-preview-update">
       <a href="#">Remove Image</a>
     </div>
     <div class="field form-group">

@@ -2,7 +2,7 @@
 <div class="container-fluid product-container">
   <div class="row title-row">
     <div class="col-md-6 title-col">
-      <h3><i class="fa fa-cubes" style="padding-right:10px;"></i>My Products</h3>
+      <h3><i class="fa fa-cubes"></i><span class="space">My Products</span></h3>
     </div><!-- SPACE WOULD BREAK INLINE BLOCK
     --><div class="col-md-6 title-col">
       <div class = "product-search">
@@ -14,7 +14,7 @@
   </div>
   <div class="panel panel-default">
     <table class="table">
-      <tbody class="product-profile-index new-product-insert">
+      <tbody class="product-index new-product-insert">
         <% cache(['own-products', @products.map(&:id), @products.map(&:updated_at).max]) do %>
           <%= render @products %>
         <% end %>

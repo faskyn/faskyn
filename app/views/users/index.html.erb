@@ -8,10 +8,10 @@
     </div>
   <% end %>
   <div class="row title-row">
-    <div class="col-md-6 title-col" style="padding-left:5px;">
-      <h3><i class="fa fa-users" style="padding-right:10px;"></i>Users</h3>
+    <div class="col-md-6 title-col">
+      <h3><i class="fa fa-users fa-sign"></i>Users</h3>
     </div><!-- SPACE WOULD BREAK INLINE BLOCK
-    --><div class="col-md-6 title-col" style="padding-right:5px;">
+    --><div class="col-md-6 title-col">
       <div class = "user-search">
         
           
@@ -19,7 +19,7 @@
       </div>
     </div>
   </div>
-  <div class="user-profile-index">
+  <div class="user-profile-index" data-behavior="user-profile-index">
     <%= render :partial => "user" %>
   </div>
   <div id="infinite-user-scrolling">

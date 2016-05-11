@@ -1,7 +1,7 @@
 <div id = "sidebar-product">
   <div class="list-name">
     <%= link_to products_path do %>
-      <h4><i class="fa fa-cubes" style="padding-right:7px;"></i>Latest products</h4>
+      <h4><i class="fa fa-cubes"></i><span class="space">Latest products</span></h4>
     <% end %>
   </div>
   <div class = "list-elements">
@@ -12,9 +12,7 @@
             <%= link_to product do %>
               <div class="hover">
                 <li>
-                  <span class="product-sidebar-picture">
-                    <%= image_tag(product.product_image_url(:small_thumb), style:"height:40px;width:40px;border-radius:50%;margin-bottom: 10px;") %>
-                  </span>
+                  <%= image_tag(product.product_image.url(:small_thumb), class: "product-image") %>
                   <span class="element-name">
                     <%= truncate(product.name, length: 25) %>
                   </span>

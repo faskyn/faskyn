@@ -2,7 +2,7 @@
 
   <div class="panel panel-default product-panel">
       <div class="panel-heading">
-        <%= link_to(product, html_options = {style:"display:block;"}) do %>
+        <%= link_to product, style:"display:block;" do %>
           <div class="product-list">
             <%= image_tag(product.product_image_url(:base_thumb)) %>
             <h4><%= product.name.upcase %></h4>

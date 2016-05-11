@@ -1,10 +1,11 @@
 <% cache(['index-single-common-task', task, task.assigner_profile, task.executor_profile]) do %>
+
   <tr id="task_<%= task.id %>">
-    <td class="col-md-8">
-      <div class="row" style="display: table;width: 100%;">
-        <div class="col-md-2" style="vertical-align:middle;display:table-cell;float:none;">
+    <td class="col-md-8 name-cell">
+      <div class="row name-row">
+        <div class="col-md-2 sign-column">
           <% if current_user.id == task.assigner.id %>
-            <i class="fa fa-sign-out" style="color:#007cc3;"></i>
+            <i class="fa fa-sign-out fa-color"></i>
           <% else %>
              <i class="fa fa-sign-in"></i>
            <% end %>
@@ -16,10 +17,10 @@
     <td class="col-md-3">
       <%= local_time(task.deadline, "%d %b %I%p") %>
     </td>
-    <td class="col-md-1" style="padding:0px">
+    <td class="col-md-1">
       <div class="dropdown">
         <a data-target="task-change-<%= task.id %>" id="task-change-<%= task.id %>" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-ellipsis-v fa-lg" style="padding: 8px 15px 8px 15px;color:#5E5E5E"></i>
+          <i class="fa fa-ellipsis-v fa-lg fa-styling"></i>
         </a>
         <ul class = "dropdown-menu dropdown-menu-right" aria-labelledby="task-change-<%= task.id %>">
           <li>
@@ -39,6 +40,7 @@
       </div>
     </td>
   </tr>
+
 <% end %>
 
 

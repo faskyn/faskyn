@@ -28,7 +28,7 @@
           </div>
         </div>
 
-        <div class="col-md-2" style="text-align:right;">
+        <div class="col-md-2 dropdown-column">
      
           <li class="dropdown hidden" data-postauthorid ="<%= post.user_id%>" data-behavior="edit-post-dropdown-button">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -48,9 +48,9 @@
       </div>
 
     </div>
-    <div class="panel-body" style="padding-top:0px;background:#f9f9f9;">
-      <div class = "row comment-top-row" style="padding-bottom:10px;">
-        <div class="col-md-12 post-comment-form">
+    <div class="panel-body">
+      <div class = "row post-comment-form-row">
+        <div class="col-md-12">
           <div class="row">
             <div class="col-md-12">
               <div class="col-md-12">
@@ -61,7 +61,7 @@
         </div>
       </div>
       <% if post.post_comments.size > 3 %>
-        <div class="row" style="padding-bottom:10px;" data-behavior="open-all-post-comments-row">
+        <div class="row open-all-post-comments-row" data-behavior="open-all-post-comments-row">
           <div class="col-md-12">
             <div class="col-md-12">
               <a class="open-all-post-comments" data-pid="<%= post.id %>" data-behavior="open-all-post-comments">Show all</a>

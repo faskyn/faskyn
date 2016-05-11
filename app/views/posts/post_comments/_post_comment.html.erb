@@ -43,8 +43,8 @@
       <div class="col-md-2">
       </div>
     </div>
-    <div id="post-comment-replies-<%= post_comment.id%>" class="post-comment-replies" data-behavior="post-comment-replies">
-        <div class = "row reply-row">
+    <div class="post-comment-replies" id="post-comment-replies-<%= post_comment.id%>" data-behavior="post-comment-replies">
+        <div class = "row">
           <div class="col-md-12">
             <div class="col-md-10 col-md-offset-2" data-behavior="post-comment-reply-insert-<%= post_comment.id%>">
               <%= render partial: 'posts/post_comment_replies/post_comment_reply', collection: post_comment.post_comment_replies.ordered.includes(:user, :user_profile), as: :post_comment_reply, locals: { post_comment: post_comment } %>
@@ -52,9 +52,9 @@
           </div>
         </div>
         <div>
-          <div class="row reply-form-row">
+          <div class="row">
             <div class="col-md-12">
-              <div class="col-md-10 col-md-offset-2 comment-reply-form">
+              <div class="col-md-10 col-md-offset-2">
               <%= render partial: 'posts/post_comment_replies/post_comment_reply_form', locals: { post_comment: post_comment } %>
               </div>
             </div>
@@ -63,29 +63,25 @@
     </div>
   </div>
 
-  <% if policy(post_comment).destroy? %>
-
-    <%= form_for([post_comment.post, post_comment], method: :delete, remote: true) do |f| %>
-      <div class="modal fade" id="deletepostcomment_<%= post_comment.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content" style="text-align:left">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Delete Comment</h4>
-            </div>
-            <div class="modal-body">
-              <h4>Are you sure?</h4>
-              <p> </p>  
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal" id="deletepostcommentclose">Close</button>
-                <%= f.submit "Delete Comment", class: 'btn btn-danger' %>
-            </div>
+  <%= form_for([post_comment.post, post_comment], method: :delete, remote: true) do |f| %>
+    <div class="modal fade" id="deletepostcomment_<%= post_comment.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" style="text-align:left">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Delete Comment</h4>
+          </div>
+          <div class="modal-body">
+            <h4>Are you sure?</h4>
+            <p> </p>  
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="deletepostcommentclose">Close</button>
+              <%= f.submit "Delete Comment", class: 'btn btn-danger' %>
           </div>
         </div>
       </div>
-    <% end %>
-
+    </div>
   <% end %>
 
 <% end %>

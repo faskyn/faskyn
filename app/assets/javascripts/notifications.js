@@ -27,8 +27,8 @@ $(document).on("page:change", function() {
   };
 });
 
-$(document).on('click', '#other-notification-dropdown-list', function(){
-  $('.other-notifications-json-data').html("<li style='text-align:center'><a href='#' style='color:#5E5E5E'><i class='fa fa-circle-o-notch fa-2x fa-spin'></i></a></li>");
+$(document).on('click', '[data-behavior="other-notification-dropdown-list"]', function(){
+  $('[data-behavior="other-notifications-json-data"]').html("<li style='text-align:center'><a href='#' style='color:#5E5E5E'><i class='fa fa-circle-o-notch fa-2x fa-spin'></i></a></li>");
   var current_user_id = $('#body-current-user').data('currentuserid');
   $.ajax({
     type: "GET",
@@ -43,23 +43,23 @@ $(document).on('click', '#other-notification-dropdown-list', function(){
         return "<li><a href='" + notification.url + "'><span><img class='avatar-notification' src='" + notification.profile_image_url + "'</span><span style='padding-left:10px'>" + notification.sender_name + " " + notification.what.did + ".</span></a></li>";
       });
       if (items.length > 0) {
-        $('.other-notifications-json-data').html(items);
-        $('.other-notifications-json-data').append(viewall);
+        $('[data-behavior="other-notifications-json-data"]').html(items);
+        $('[data-behavior="other-notifications-json-data"]').append(viewall);
       }
       else {
-        $('.other-notifications-json-data').html(empty);
-        $('.other-notifications-json-data').append(viewall);
+        $('[data-behavior="other-notifications-json-data"]').html(empty);
+        $('[data-behavior="other-notifications-json-data"]').append(viewall);
       }
     },
     error: function(){
-      $('.other-notifications-json-data').html("<li><a href='#'>Couldn't load new notifications.</a></li>");
-      $('.other-notifications-json-data').append(viewall);
+      $('[data-behavior="other-notifications-json-data"]').html("<li><a href='#'>Couldn't load new notifications.</a></li>");
+      $('[data-behavior="other-notifications-json-data"]').append(viewall);
     }
   });
 });
 
-$(document).on('click', '#chat-notification-dropdown-list', function(){
-  $('.chat-notifications-json-data').html("<li style='text-align:center'><a href='#' style='color:#5E5E5E'><i class='fa fa-circle-o-notch fa-2x fa-spin'></i></a></li>");
+$(document).on('click', '[data-behavior="chat-notification-dropdown-list"]', function(){
+  $('[data-behavior="chat-notifications-json-data"]').html("<li style='text-align:center'><a href='#' style='color:#5E5E5E'><i class='fa fa-circle-o-notch fa-2x fa-spin'></i></a></li>");
   var current_user_id = $('#body-current-user').data('currentuserid');
   $.ajax({
     type: "GET",
@@ -74,17 +74,17 @@ $(document).on('click', '#chat-notification-dropdown-list', function(){
         return "<li><a href='" + notification.url + "'><span><img class='avatar-notification' src='" + notification.profile_image_url + "'</span><span style='padding-left:10px'>" + notification.sender_name + " " + notification.what.did + ".</span></a></li>";
       });
       if (items.length > 0) {
-        $('.chat-notifications-json-data').html(items);
-        $('.chat-notifications-json-data').append(viewall);
+        $('[data-behavior="chat-notifications-json-data"]').html(items);
+        $('[data-behavior="chat-notifications-json-data"]').append(viewall);
       }
       else {
-        $('.chat-notifications-json-data').html(empty);
-        $('.chat-notifications-json-data').append(viewall);
+        $('[data-behavior="chat-notifications-json-data"]').html(empty);
+        $('[data-behavior="chat-notifications-json-data"]').append(viewall);
       }
     },
     error: function(){
-      $('.chat-notifications-json-data').html("<li><a href='#'>Couldn't load new notifications.</a></li>");
-      $('.chat-notifications-json-data').append(viewall);
+      $('[data-behavior="chat-notifications-json-data"]').html("<li><a href='#'>Couldn't load new notifications.</a></li>");
+      $('[data-behavior="chat-notifications-json-data"]').append(viewall);
     }
   });
 });

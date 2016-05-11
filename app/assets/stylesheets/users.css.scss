@@ -3,6 +3,19 @@ $garmin-blue: #007cc3;
 $dark-grey: #5E5E5E; //text color
 $light-grey: #f7f7f7; //super light background color
 
+//LOGIN
+
+.sign-up-panel, .sign-in-panel {
+  margin-top:20px;
+  .panel-body {
+    padding-top:30px;
+    .password-group {
+      margin-bottom:15px;
+    }
+  }
+}
+
+//SOCIALS
 .btn-social-reg {
   color: white;
   &.btn-linkedin {
@@ -38,9 +51,9 @@ $light-grey: #f7f7f7; //super light background color
 }
 
 .user-container {
-  padding-left:70px;
-  padding-right:70px;
-  padding-top:30px;
+  padding-left: 70px;
+  padding-right: 70px;
+  padding-top: 30px;
   .title-row {
     padding-bottom: 15px;
     .title-col {
@@ -48,6 +61,15 @@ $light-grey: #f7f7f7; //super light background color
        vertical-align: middle;
        float:none;
        color: $dark-grey;
+       &:first-child {
+        padding-left: 5px;
+       }
+       &:last-child {
+        padding-right: 5px;
+       }
+       .fa-sign {
+        padding-right: 10px;
+       }
        h3 {
          display:inline;
        }
@@ -71,9 +93,9 @@ $light-grey: #f7f7f7; //super light background color
     }
     tbody tr .name {
       vertical-align: middle;
-      padding-left:10px;
-      padding-top:3px;
-      padding-bottom:3px;
+      padding-left: 10px;
+      padding-top: 3px;
+      padding-bottom: 3px;
       .user-fullname {
         margin-top: 4px;
         font-weight: bold;
@@ -96,9 +118,13 @@ $light-grey: #f7f7f7; //super light background color
 //index page
 .user-profile-index {
   text-align: center;
+  .user-column {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
   .user-index-well  {
     background:white;
-    margin-bottom:10px;
+    margin-bottom: 10px;
     .profile-index-avatar {
       border-radius: 50%;
       width: 65px;
@@ -110,6 +136,9 @@ $light-grey: #f7f7f7; //super light background color
     &:hover {
       background-color: $grey-medium-light;
       cursor: pointer;
+    }
+    h4 {
+      color: black;
     }
   }
   a {
@@ -134,8 +163,8 @@ $light-grey: #f7f7f7; //super light background color
 }
 
 .account-well h2 {
-  margin-top:0px;
-  margin-bottom:15px;
+  margin-top: 0px;
+  margin-bottom: 15px;
 }
 
 .profile-well, .account-well {
@@ -145,6 +174,15 @@ $light-grey: #f7f7f7; //super light background color
     text-align: center;
   }
   background-color: white;
+  .profile-form {
+    .profile-image {
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      margin-bottom: 10px;
+      margin-left: 10px;
+    }
+  }
 }
 
 .edit_user, .new_user {
@@ -166,23 +204,37 @@ $light-grey: #f7f7f7; //super light background color
 .profile-container {
   background: $light-grey;
   padding: 40px 70px 0px 70px;
+  .socials-container {
+    padding-left: 230px;
+    padding-right: 230px;
+    text-align: center;
+    .twitter-row, .linkedin-row {
+      padding-bottom: 25px;
+    }
+  }
   .profile-show-well {
     background-color: white;
     h3 {
       margin-top: 0px;
       margin-bottom: 15px;
     }
-    .profile-show-avatar{
-      float: left;
-      margin-right: 15px;
-      //width: 85px;
-      //height: 85px;
-      border-radius: 50%;
-      margin-bottom: 10px;
+    .profile-header {
+      .profile-show-avatar{
+        float: left;
+        margin-right: 15px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+      }
+      .name-socials-column {
+        padding-left: 0px;
+      }
+      .edit-profile-column {
+        text-align: right;
+      }
     }
     .product-list {
       .description {
-        padding-top:2px;
+        padding-top: 2px;
         padding-bottom: 12px;
         padding-left: 10px;
       }
@@ -207,7 +259,7 @@ $light-grey: #f7f7f7; //super light background color
 }
 
 .user-profile-show-sidebar {
-  margin-bottom:35px;
+  margin-bottom: 35px;
   color: $dark-grey;
   a {
     text-decoration: none;
@@ -225,17 +277,13 @@ $light-grey: #f7f7f7; //super light background color
     border-radius: 50%;
   }
   p {
-    margin-bottom:3px;
+    margin-bottom: 3px;
   }
 }
 
 //COMMON MEDIAS
 
 .common-medias-container {
-  padding-right:0px;
-  padding-left:0px;
-  .common-medias-col {
-    padding-left:20px;
-    padding-right:20px;
-  }
+  padding-right: 0px;
+  padding-left: 0px;
 }

@@ -15,11 +15,28 @@ $light-grey: #f7f7f7; //super light background color
       color: $dark-grey;
       h3 {
         display:inline;
+        .space {
+          padding-left:10px;
+        }
       }
       .product-search {
         text-align:right;
       }
     }
+  }
+}
+
+.product-form {
+  .old-product-image {
+    border-radius:10%;
+    margin-bottom: 10px;
+    margin-left:10px;
+  }
+  .website-company-row {
+    margin-top:15px;
+  }
+  .back-button {
+    margin-left:10px;
   }
 }
 
@@ -47,12 +64,17 @@ $light-grey: #f7f7f7; //super light background color
   }
 }
 
-.product-show-name {
-  margin-bottom:15px;
-  h3 {
-    display: inline;
-    vertical-align: middle;
-    padding-left:5px;
+.product-show {
+  .product-show-name {
+    margin-bottom:15px;
+    h3 {
+      display: inline;
+      vertical-align: middle;
+      padding-left:5px;
+    }
+  }
+  .delete-button {
+    margin-left:10px;
   }
 }
 
@@ -71,7 +93,7 @@ $light-grey: #f7f7f7; //super light background color
   }
 }
 
-.product-profile-index {
+.product-index {
   .product-index-row {
     &:hover {
       background-color: $grey-medium-light;
@@ -81,6 +103,11 @@ $light-grey: #f7f7f7; //super light background color
 		text-align: center;
     vertical-align: middle;
 	}
+  .image {
+    .image-tag {
+      border-radius:10%;
+    }
+  }
   .link-name, .link-oneliner, .link-updated {
     padding: 10px 5px 10px 5px;
   }
@@ -152,10 +179,4 @@ $light-grey: #f7f7f7; //super light background color
     background: white;
     cursor: inherit;
     display: block;
-}
-
-.product-sidebar-picture {
-  float: left;
-  margin-right: 8px;
-  vertical-align: middle;
 }

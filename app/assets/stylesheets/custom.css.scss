@@ -86,8 +86,14 @@ body {
   background: $light-grey;
 }
 
+html.static_pages-controller {
+  position: relative;
+  min-height:100%;
+}
+
 body.static_pages-controller {
   background: white;
+  margin-bottom:90px;
 }
 
 body, p {
@@ -123,12 +129,35 @@ a {
       }
     }
   }
+  .navbar-image {
+    margin-left:0px;
+    padding-top:9px;
+    padding-bottom:9px;
+  }
+}
+
+.navbar-brand > img {
+  object-fit: contain;
+  max-height: 100%;
+  height: 100%;
+}
+
+.navbar-static-top {
+  margin-bottom: 0px;
 }
 
 .signedinbar .navbar-default {
   .navbar-btn .btn-danger {
     border-color: $garmin-blue;
     color: white;
+  }
+  .navbar-image {
+    margin-left:0px;
+    padding-top:9px;
+    padding-bottom:9px;
+  }
+  .navbar-text {
+    padding-left:7px;
   }
   .navbar-right {
     margin-right:5px;
@@ -168,9 +197,11 @@ a {
       color: black;
     }
   }
+
   .navbar-brand {
     color:white;
   }
+
   .dropdown-toggle:active, .open .dropdown-toggle {
     background:white !important;
     color:$garmin-blue !important;
@@ -185,43 +216,7 @@ a {
   // }
 }
 
-//FOOTER
-
-#footer {
-  vertical-align: middle;
-  text-align: center;
-  padding-top: 5px;
-  background-color: $light-grey;
-
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-
-  ul {
-    float: right;
-    list-style: none;
-    li {
-      float: left;
-      margin-left: 15px;
-    }
-  }
-}
-
-/* navbar */
-.navbar-brand > img {
-  object-fit: contain;
-  max-height: 100%;
-  height: 100%;
-}
-
-.navbar-static-top {
-  margin-bottom: 0px;
-}
-
-.navbar-static-bottom {
-  margin-bottom: 0px;
-}
+//BODY
 
 .container-form {
   padding-top:30px;
@@ -371,6 +366,9 @@ a {
       border: 1px $garmin-blue solid;
     }
   }
+  .sidebar-fa {
+    padding-right: 5px;
+  }
 }
 
 #sidebar-user, #sidebar-product {
@@ -383,6 +381,9 @@ a {
     padding-left:15px;
     h4 {
       margin:0px;
+      .space {
+        padding-left:7px;
+      }
     }
   }
   .list-elements {
@@ -408,13 +409,21 @@ a {
       vertical-align: middle;
       
     }
-    .left-sidebar-avatar {
+    .profile-image {
       float: left;
       margin-right: 8px;
       border-radius: 50%;
       // width: 40px;
       // height: 40px;
       vertical-align: middle;
+    }
+    .product-image {
+      float: left;
+      margin-right: 8px;
+      vertical-align: middle;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
     }
     .element-name {
       margin-top: 4px;

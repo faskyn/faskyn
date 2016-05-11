@@ -4,7 +4,7 @@
     <h3>Completed Tasks</h3>
       <span class="rightfloat">
         <div class="btn-group" role="group" aria-label="...">
-          <%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-default", style: "margin-right:0px;border-right:0px;" %>
+          <%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-default" %>
           <%= link_to "Outgoing Tasks", outgoing_tasks_user_tasks_path(current_user), class: "btn btn-default" %>
           <%= link_to "All Tasks", user_tasks_path(current_user), class: "btn btn-default" %>
         </div>

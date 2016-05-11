@@ -6,7 +6,7 @@
       <%= link_to "Common Medias", common_medias_user_common_medias_path(@user), class: "btn btn-default", id: "rightone"%>
     </span>
   </div>
-  <div class="panel panel-default" style="margin:0px;">
+  <div class="panel panel-default">
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -22,10 +22,10 @@
       </tbody>
     </table>
   </div>
-  <div id="infinite-task-scrolling" style="text-align:center;display:none">
+  <div id="infinite-task-scrolling">
     <%= will_paginate @tasks %>
   </div>
-  <div class="no-more" style="display:none;padding-left:20px;">
+  <div class="no-more">
     <p>No more tasks.</p>
   </div>
 </div>

@@ -1,7 +1,5 @@
-<div class="post-comment-input" style="margin-top:15px;">
-  <%= form_for([post, @post_comment], remote: true, html: { id: "post-comment-form-#{post.id}" }, data: { behavior: "post-comment-form" }) do |f| %>
-    <div class="form-group" style="margin-bottom: 0px;">
-      <%= f.text_field :body, class: "form-control", id: "post-comment-text-area-#{post.id}", placeholder: "Comment something..", data: { pid: post.id, behavior: "post-comment-text-area" } %>
-    </div>
-  <% end %>
-</div>
+<%= form_for([post, @post_comment], remote: true, html: { id: "post-comment-form-#{post.id}" }, data: { behavior: "post-comment-form" }) do |f| %>
+  <div class="form-group post-comment-input">
+    <%= f.text_field :body, class: "form-control", id: "post-comment-text-area-#{post.id}", placeholder: "Comment something..", data: { pid: post.id, behavior: "post-comment-text-area" } %>
+  </div>
+<% end %>

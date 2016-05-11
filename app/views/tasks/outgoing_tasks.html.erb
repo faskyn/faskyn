@@ -5,7 +5,7 @@
     <span class="rightfloat">
       <a href="#" type="button" class="btn btn-primary newbutton" data-toggle="modal" data-target="#new-task">NEW TASK</a>
       <div class="btn-group" role="group" aria-label="...">
-        <%= link_to "Completed Tasks", completed_tasks_user_tasks_path(current_user), class: "btn btn-default", style: "margin-right:0px;border-right:0px;" %>
+        <%= link_to "Completed Tasks", completed_tasks_user_tasks_path(current_user), class: "btn btn-default" %>
         <%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-default" %>
         <%= link_to "All Tasks", user_tasks_path(current_user), class: "btn btn-default" %>
       </div>

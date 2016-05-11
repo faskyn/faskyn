@@ -15,11 +15,11 @@
         </button>
         <%= link_to root_path, id: "navbar-home" do %>
           <% if user_signed_in? %>
-            <%= image_tag "firstlogosmallgarminwhite.png", class: "navbar-brand", style: "margin-left:0px;padding-top:9px;padding-bottom:9px", alt: "faskyn_logo", title: "faskyn logo" %>
+            <%= image_tag "firstlogosmallgarminwhite.png", class: "navbar-brand navbar-image", alt: "faskyn_logo", title: "faskyn logo" %>
           <% else %>
-            <%= image_tag "firstlogosmallgarmin.png", class: "navbar-brand", style: "margin-left:0px;padding-top:9px;padding-bottom:9px", alt: "faskyn_logo", title: "faskyn logo" %>
+            <%= image_tag "firstlogosmallgarmin.png", class: "navbar-brand navbar-image", alt: "faskyn_logo", title: "faskyn logo" %>
           <% end %>
-          <span class="navbar-brand" style="padding-left:7px;">faskyn</span>
+          <span class="navbar-brand">faskyn</span>
         <% end %>
       </div>
 
@@ -28,22 +28,22 @@
         <% if user_signed_in? %>
           <li>
             <%= link_to users_path, 'data-toggle' => "tooltip", 'data-placement' => "bottom", 'data-delay' => '{"show":"250"}', 'title' => "Users" do %>
-              <i class="fa fa-users" style="padding-right:4px"></i>
+              <i class="fa fa-users"></i>
             <% end %>
           </li>
           <% if has_profile? %>
             <li class="dropdown">
-              <%= link_to chat_notifications_dropdown_user_notifications_path(current_user), class: "dropdown-toggle", id: "chat-notification-dropdown-list", 'data-toggle' => "dropdown", 'type' => "button", 'aria-haspopup' => "true", 'aria-expanded' => "false" do %>
+              <%= link_to chat_notifications_dropdown_user_notifications_path(current_user), class: "dropdown-toggle", 'data-toggle' => "dropdown", 'type' => "button", 'aria-haspopup' => "true", 'aria-expanded' => "false", data: { behavior: "chat-notification-dropdown-list" } do %>
                 <span id="notify"><i class="fa fa-comments"></i><%= render 'notifications/newchatnotification' %></span>
               <% end %>
-              <ul class = "dropdown-menu scrollable-bootstrap-menu chat-notifications-json-data">
+              <ul class = "dropdown-menu scrollable-bootstrap-menu" data-behavior="chat-notifications-json-data">
               </ul>
             </li>
             <li class="dropdown">
-              <%= link_to other_notifications_dropdown_user_notifications_path(current_user), class: "dropdown-toggle", id: "other-notification-dropdown-list", 'data-toggle' => "dropdown", 'type' => "button", 'aria-haspopup' => "true", 'aria-expanded' => "false" do %>
+              <%= link_to other_notifications_dropdown_user_notifications_path(current_user), class: "dropdown-toggle", 'data-toggle' => "dropdown", 'type' => "button", 'aria-haspopup' => "true", 'aria-expanded' => "false", data: { behavior: "other-notification-dropdown-list" } do %>
                 <span id="notify"><i class="fa fa-bell"></i><%= render 'notifications/newothernotification' %></span>
               <% end %>
-              <ul class = "dropdown-menu scrollable-bootstrap-menu other-notifications-json-data">
+              <ul class = "dropdown-menu scrollable-bootstrap-menu" data-behavior="other-notifications-json-data">
               </ul>
             </li>
           <% end %>
@@ -62,7 +62,8 @@
           <% else %>
             <li>
               <%= link_to products_path do %>
-                <i class="fa fa-dot-circle-o" style="padding-right:4px"></i>PRODUCTS
+                <i class="fa fa-dot-circle-o"></i>
+                <span style="padding-left:4px">PRODUCTS</span>
               <% end %>
             </li>
           <% end %>

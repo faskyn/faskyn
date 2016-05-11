@@ -46,6 +46,10 @@ class Task < ActiveRecord::Base
   end
   #end of getter setter method for new task executor
 
+  # def completed?
+  #   completed_at
+  # end
+
   private
 
     def deadline_date_cannot_be_in_the_past

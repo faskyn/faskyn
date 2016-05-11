@@ -17,100 +17,126 @@ $comment-grey: #f9f9f9;
 
 .post-create-well {
 	background: white;
+  .img-thumbnail {
+    margin-bottom:10px;
+  }
+  .remove-post-preview{
+    margin-bottom:10px;
+  }
 }
 
 .post-panel {
+  list-style: none;
   .panel-heading {
 	  background: white;
     a {
       color: $dark-grey;
     }
-  }
-	list-style: none;
-  .post-info {
-    a {
-      color: $dark-grey;
-    }
-    .post-user-name {
-      font-weight: bold;
-    }
-    .post-updated {
-      color: $dark-grey;
-      padding-left: 10px;
-    }
-  }
-  .post-comment-box {
-    padding-top:5px;
-    margin-bottom:5px;
-    .post-comment-info {
-      font-size:12px;
-      .post-comment-fullname{
+    .post-info {
+      a {
+        color: $dark-grey;
+      }
+      .post-user-name {
         font-weight: bold;
       }
-      .post-comment-updated {
+      .post-updated {
         color: $dark-grey;
-        padding-left: 8px;
+        padding-left: 10px;
       }
     }
-    .post-comment-body {
-      font-size: 12px;
-      .post-comment-editing-deleting {
-        //display: none;
-        .post-comment-edit-fa, .post-comment-delete-fa {
-          padding-left: 5px;
-          cursor: pointer;
-          color: $dark-grey;
-        }
+    .dropdown-column {
+      text-align:right;
+    }
+  }
+  .panel-body {
+    padding-top:0px;
+    background:#f9f9f9;
+    .post-comment-form-row {
+      padding-bottom:10px;
+      .post-comment-input {
+        margin-bottom: 0px;
+        margin-top:15px;
       }
-      // &:hover .post-comment-editing-deleting  {
-      //   display: inline;
-      //   color: $dark-grey;
-      // }
     }
-    a {
-      decoration: none;
-      color: $dark-grey;
+    .open-all-post-comments-row {
+      padding-bottom:10px;
+      .open-all-post-comments {
+        font-size: 12px;
+        cursor: pointer;
+      }
     }
-  }
-  .open-all-post-comments {
-    font-size: 12px;
-    cursor: pointer;
-  }
-  .open-post-comment-reply {
-    font-size: 12px;
-    cursor: pointer;
-  }
-  .post-comment-replies {
-    display:none;
-    .post-comment-reply-box {
+    .post-comment-box {
       padding-top:5px;
       margin-bottom:5px;
-      .post-comment-reply-info {
-        font-size: 12px;
-        .post-comment-reply-fullname{
+      .post-comment-info {
+        font-size:12px;
+        .post-comment-fullname{
           font-weight: bold;
         }
-        .post-comment-reply-updated {
+        .post-comment-updated {
           color: $dark-grey;
           padding-left: 8px;
         }
       }
-      .post-comment-reply-body {
+      .post-comment-body {
         font-size: 12px;
-        .post-comment-reply-editing-deleting {
-          .post-comment-reply-edit-fa, .post-comment-reply-delete-fa {
+        .post-comment-editing-deleting {
+          //display: none;
+          .post-comment-edit-fa, .post-comment-delete-fa {
             padding-left: 5px;
             cursor: pointer;
             color: $dark-grey;
           }
         }
-        // &:hover .post-comment-reply-editing-deleting  {
+        // &:hover .post-comment-editing-deleting  {
+        //   display: inline;
         //   color: $dark-grey;
         // }
       }
       a {
         decoration: none;
         color: $dark-grey;
+      }
+    }
+    .open-post-comment-reply {
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .post-comment-replies {
+      display:none;
+      .post-comment-reply-box {
+        padding-top:5px;
+        margin-bottom:5px;
+        .post-comment-reply-info {
+          font-size: 12px;
+          .post-comment-reply-fullname{
+            font-weight: bold;
+          }
+          .post-comment-reply-updated {
+            color: $dark-grey;
+            padding-left: 8px;
+          }
+        }
+        .post-comment-reply-body {
+          font-size: 12px;
+          .post-comment-reply-editing-deleting {
+            .post-comment-reply-edit-fa, .post-comment-reply-delete-fa {
+              padding-left: 5px;
+              cursor: pointer;
+              color: $dark-grey;
+            }
+          }
+          // &:hover .post-comment-reply-editing-deleting  {
+          //   color: $dark-grey;
+          // }
+        }
+        a {
+          decoration: none;
+          color: $dark-grey;
+        }
+      }
+      .post-comment-reply-input {
+        margin-top:10px;
       }
     }
   }
@@ -153,4 +179,25 @@ $comment-grey: #f9f9f9;
   background: white;
   cursor: inherit;
   display: block;
+}
+
+#post-image-modal {
+  .modal-body {
+    .post-image-insert {
+      text-align: center;
+    }
+  }
+}
+
+#update-post-modal {
+  .old-post-image {
+    text-align:center; 
+    margin-bottom:15px;
+  }
+  .img-thumbnail {
+    margin-bottom:10px;
+  }
+  .remove-post-preview-update {
+    margin-bottom:10px;
+  }
 }

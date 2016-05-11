@@ -24,8 +24,12 @@ $light-grey: #f7f7f7;
 			float: right;
 			display: inline;
 			.btn-group {
+				a:first-child {
+					margin-right: 0px;
+					border-right: 0px;
+				}
 				a:last-child {
-				border-left:0px;
+					border-left: 0px;
 				}
 			}
 			.btn {
@@ -74,8 +78,25 @@ $light-grey: #f7f7f7;
 		tbody tr td a {
 			text-decoration: none;
 		}
-		.inside-table {
-			border: 0px;
+		.name-cell {
+			.name-row {
+				display: table;
+				width: 100%;
+				.sign-column {
+					vertical-align: middle;
+					display: table-cell;
+					float: none;
+					.fa-color {
+						color: $garmin-blue;
+					}
+				}
+			}
+		}
+		.dropdown-cell {
+			.fa-styling {
+				padding: 8px 15px 8px 15px;
+				color: $dark-grey;
+			}
 		}
 	}
 }
@@ -97,6 +118,10 @@ $light-grey: #f7f7f7;
 			float: right;
 			display: inline;
 			.btn-group {
+				a:first-child {
+					margin-right: 0px;
+					border-right: 0px;
+				}
 				a:last-child {
 				border-left:0px;
 				}
@@ -136,7 +161,6 @@ $light-grey: #f7f7f7;
 			padding:3px;
 			border-left: 0px;
 			border-right: 0px;
-			//margin-top: 0px;
 		}
 		thead tr th {
 			text-align: center;
@@ -147,8 +171,30 @@ $light-grey: #f7f7f7;
 		tbody tr td a {
 			text-decoration: none;
 		}
-		.inside-table {
-			border: 0px;
+		.name-cell {
+			.name-row {
+				display: table;
+				width: 100%;
+				.sign-column {
+					vertical-align: middle;
+					display: table-cell;
+					float: none;
+					.fa-color {
+						color: $garmin-blue;
+					}
+				}
+				.name-column {
+					padding-left: 0px;
+					width: 100%;
+					float: left;
+					text-align: left;
+				}
+			}
+		}
+		.dropdown-cell {
+			.fa-styling {
+				padding: 10px 20px 10px 20px;
+			}
 		}
 	}
 }

@@ -6,28 +6,28 @@
   <% cache [@profile, @profile.user.email] do %>
 
     <div class="well profile-show-well">
-      <div class = "row">
+      <div class = "row profile-header">
 
         <div class="col-md-2">
           <%= image_tag @profile.avatar.url(:base_thumb), class: "profile-show-avatar" %>
         </div>
 
-        <div class="col-md-8" style="padding-left:0px;">
+        <div class="col-md-8 name-socials-column">
           <h3><%= @profile.full_name %></h3>
           <% unless @twitter.blank? %>
-            <%= link_to @twitter.page_url, target: "_blank", class: "btn btn-social-icon btn-sm btn-twitter" do %>
+            <%= link_to @twitter.page_url, target: "_blank", class: "btn btn-sm btn-twitter", data: { behavior: "btn-social-icon" } do %>
               <i class="fa fa-twitter"></i>
             <% end %>
           <% end %>
           <% unless @linkedin.blank? %>
-            <%= link_to @linkedin.page_url, target: "_blank", class: "btn btn-social-icon btn-sm btn-linkedin" do %>
+            <%= link_to @linkedin.page_url, target: "_blank", class: "btn btn-sm btn-linkedin", data: { behavior: "btn-social-icon" } do %>
               <i class="fa fa-linkedin"></i>
             <% end %>
           <% end %>
         </div>
 
-        <div class="col-md-2" style="text-align:right;">
-          <%= link_to "Edit Profile", edit_user_profile_path(current_user), class: "btn btn-primary hidden", id: "edit-profile-button" %>
+        <div class="col-md-2 edit-profile-column">
+          <%= link_to "Edit Profile", edit_user_profile_path(@profile.user), class: "btn btn-primary hidden", data: { behavior: "edit-profile-button" } %>
         </div>
       </div>
 
