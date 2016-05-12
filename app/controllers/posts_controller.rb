@@ -3,8 +3,7 @@ class PostsController < ApplicationController
   before_action :set_and_authorize_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    @q_posts = Post.ransack(params[:q])
-    @posts = @q_posts.result(distinct: true).order(updated_at: :desc).includes(:user).paginate(page: params[:page], per_page: 4)
+    @posts = Post.order(updated_at: :desc).includes(:user).paginate(page: params[:page], per_page: 4)
     authorize @posts
     @post = Post.new
     respond_to do |format|

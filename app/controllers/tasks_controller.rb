@@ -8,9 +8,6 @@ class TasksController < ApplicationController
   require 'will_paginate/array'
 
   def index
-    #@q_tasks = Task.alltasks(current_user).uncompleted.ransack(params[:q])
-    #eager loading --> @tasks = @q_tasks.result.includes(:executor_profile, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: 12)
-    #@tasks = @q_tasks.result.includes(:executor, :executor_profile, :assigner, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
     @tasks = Task.alltasks(current_user).uncompleted.includes(:executor, :executor_profile, :assigner, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
     respond_to do |format|
       format.html
@@ -19,8 +16,7 @@ class TasksController < ApplicationController
   end
 
   def outgoing_tasks
-    @q_outgoing_tasks = current_user.assigned_tasks.uncompleted.ransack(params[:q])
-    @tasks = @q_outgoing_tasks.result.includes(:executor, :executor_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
+    @tasks = current_user.assigned_tasks.uncompleted.includes(:executor, :executor_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
     respond_to do |format|
       format.html
       format.js
@@ -28,8 +24,7 @@ class TasksController < ApplicationController
   end
 
   def incoming_tasks
-    @q_incoming_tasks = current_user.executed_tasks.uncompleted.ransack(params[:q])
-    @tasks = @q_incoming_tasks.result.includes(:assigner, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
+    @tasks = current_user.executed_tasks.uncompleted.includes(:assigner, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
     respond_to do |format|
       format.html
       format.js
@@ -71,9 +66,7 @@ class TasksController < ApplicationController
   end
 
   def completed_tasks
-    @q_completed_tasks = Task.alltasks(current_user).completed.ransack(params[:q])
-    #@q_completed_tasks = current_user.tasks_completed.ransack(params[:q])
-    @tasks = @q_completed_tasks.result.includes(:assigner, :assigner_profile, :executor, :executor_profile).order(completed_at: :desc).paginate(page: params[:page], per_page: Task.pagination_per_page)
+    @tasks = Task.alltasks(current_user).completed.includes(:assigner, :assigner_profile, :executor, :executor_profile).order(completed_at: :desc).paginate(page: params[:page], per_page: Task.pagination_per_page)
     respond_to do |format|
       format.html
       format.js

@@ -14,12 +14,10 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <!-- Sorting implemented w/ ransack gem -->
-          <th class="col-md-2"><%= sort_link(@q_incoming_tasks, :assigner_profile_first_name, 'Name / Company') %></th>
-          <th class="col-md-7"><%= sort_link(@q_incoming_tasks, :content, 'Content') %></th>
-          <th class="col-md-2"><%= sort_link(@q_incoming_tasks, :deadline, 'Deadline') %></th>
+          <th class="col-md-2">Name / Company</th>
+          <th class="col-md-7">Content</th>
+          <th class="col-md-2">Deadline</th>
           <th class="col-md-1"></th>
-          <!-- End of ransack sorting-->
         </tr>
       </thead>
       <tbody data-behavior="task-insert">

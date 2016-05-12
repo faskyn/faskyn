@@ -3,8 +3,7 @@ class ProductsController < ApplicationController
   before_action :set_and_authorize_product, only: [:show, :edit, :update, :destroy]
 
   def index
-    @q_products = Product.ransack(params[:q])
-    @products = @q_products.result(distinct: true).order(created_at: :desc).paginate(page: params[:products], per_page: Product.pagination_per_page)
+    @products = Product.order(created_at: :desc).paginate(page: params[:products], per_page: Product.pagination_per_page)
     authorize @products
     respond_to do |format|
       format.html
@@ -15,8 +14,7 @@ class ProductsController < ApplicationController
   def own_products
     @user = User.find(params[:user_id])
     authorize @user, :index_own_products?
-    @q_products = current_user.products.ransack(params[:q])
-    @products = @q_products.result(distinct: true).order(updated_at: :desc).paginate(page: params[:products], per_page: Product.pagination_per_page)
+    @products = current_user.products.order(updated_at: :desc).paginate(page: params[:products], per_page: Product.pagination_per_page)
     respond_to do |format|
       format.html
       format.js

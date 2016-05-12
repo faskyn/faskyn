@@ -21,7 +21,7 @@ gem 'stackprof', '~> 0.2.8'
 gem 'flamegraph', '~> 0.1.0'
 gem 'puma', '~> 3.4'
 #gem for real-time(notifications for now, chat implemented with private pub)
-gem 'pusher', '~> 0.15.1'
+gem 'pusher', '~> 0.17.0'
 gem 'pusher-client', '~> 0.6.2'
 #error notification
 gem 'airbrake', '~> 5.2', '>= 5.2.2'
@@ -63,9 +63,9 @@ gem 'sinatra', '~> 1.4.6', :require => nil
 gem 'redis', '~> 3.3'
 #newrelic preformance checking
 gem 'newrelic_rpm'
-#searching gem + SQL query simplifier gem
-gem 'ransack', '~> 1.7.0'
-gem 'arel', '~> 6.0', '>= 6.0.3'
+# #searching gem + SQL query simplifier gem
+# gem 'ransack', '~> 1.7.0'
+# gem 'arel', '~> 6.0', '>= 6.0.3'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 #running servers easily
