@@ -5,7 +5,7 @@
       <td class = "col-md-3 name-cell">
         <div class="row name-row">
           <div class = "col-md-3 sign-column">
-              <i class="fa fa-sign-out fa-color"></i>
+              <i class="fa fa-sign-out fa-color fa-style"></i>
           </div>
           <div class = "col-md-9 name-column">
             <%= link_to user_path(id: task.executor.id) do %>
@@ -24,7 +24,7 @@
       <td class = "col-md-3 name-cell">
         <div class="row name-row">
           <div class = "col-md-3 sign-column">
-              <i class="fa fa-sign-in"></i>
+              <i class="fa fa-sign-in fa-style"></i>
           </div>
           <div class = "col-md-9 name-column">
             <%= link_to user_path(id: task.assigner.id) do %>
