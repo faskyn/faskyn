@@ -69,7 +69,7 @@ gem 'newrelic_rpm'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 #running servers easily
-gem 'foreman', '~> 0.78.0'
+gem 'foreman', '~> 0.81.0'
 gem 'net-ssh', '~> 3.0', '>= 3.0.1'
 #finding links
 gem 'rinku', '~> 1.7', '>= 1.7.3'
@@ -79,9 +79,8 @@ gem 'omniauth-linkedin', '~> 0.2.0'
 gem 'google-api-client', '~> 0.8.6', require: 'google/api_client'
 gem 'omniauth-google-oauth2', '~> 0.2.10'
 #framework for handling timeformats in js
-gem 'momentjs-rails', '~> 2.10', '>= 2.10.6'
+gem 'momentjs-rails', '~> 2.11', '>= 2.11.1'
 gem 'local_time', '~> 1.0', '>= 1.0.3'
-
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
