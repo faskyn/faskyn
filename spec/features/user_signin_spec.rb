@@ -22,6 +22,6 @@ feature "signing in" do
     fill_in "user_email", with: user.email
     fill_in "user_password", with: "a"
     click_on "LOGIN"
-    expect(page).to have_content("Invalid email or password.")
+    expect(page).to have_content("Invalid Email or Password.")
   end 
 end

@@ -19,7 +19,7 @@ gem 'rack-protection', '~> 1.5', '>= 1.5.3'
 gem 'rack-mini-profiler', '~> 0.9.8'
 gem 'stackprof', '~> 0.2.8'
 gem 'flamegraph', '~> 0.1.0'
-gem 'puma', '~> 2.13.4'
+gem 'puma', '~> 3.4'
 #gem for real-time(notifications for now, chat implemented with private pub)
 gem 'pusher', '~> 0.15.1'
 gem 'pusher-client', '~> 0.6.2'
@@ -45,7 +45,7 @@ gem 'faker', '~> 1.6', '>= 1.6.1'
 #storing ENV credentials
 gem 'figaro', '~> 1.1.1'
 #qucik authentication and authorization
-gem 'devise', '~> 3.5.2'
+gem 'devise', '~> 4.1'
 gem 'pundit', '~> 1.1'
 #image and file uploading+AWS S3 storage
 gem 'carrierwave', '~> 0.10.0'
@@ -60,7 +60,7 @@ gem 'remotipart', '~> 1.2', '>= 1.2.1'
 gem 'sidekiq', '~> 4.1'
 gem 'sinatra', '~> 1.4.6', :require => nil
 #redis
-gem 'redis', '~> 3.2.1'
+gem 'redis', '~> 3.3'
 #newrelic preformance checking
 gem 'newrelic_rpm'
 #searching gem + SQL query simplifier gem
