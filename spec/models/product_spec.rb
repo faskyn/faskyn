@@ -14,8 +14,8 @@ RSpec.describe Product, type: :model do
 
     it "has one more valid factory" do
       attrs = attributes_for(:product, user_id: user.id, industry_ids: [ industry.id ]).merge(
-        product_features_attributes: [attributes_for(:product_feature)],
-        product_competitions_attributes: [attributes_for(:product_competition)],
+        # product_features_attributes: [attributes_for(:product_feature)],
+        # product_competitions_attributes: [attributes_for(:product_competition)],
         product_usecases_attributes: [attributes_for(:product_usecase)]
         )
       expect(Product.new(attrs)).to be_valid
@@ -33,10 +33,6 @@ RSpec.describe Product, type: :model do
       expect(build_stubbed(:product, name: nil)).not_to be_valid
     end
 
-    it "is invalid without company" do
-      expect(build_stubbed(:product, company: nil)).not_to be_valid
-    end
-
     it "is invalid without website" do
       expect(build_stubbed(:product, website: nil)).not_to be_valid
     end
@@ -50,18 +46,17 @@ RSpec.describe Product, type: :model do
     end
   
     it { is_expected.to callback(:format_website).before(:validation) }
+
     it { is_expected.to validate_presence_of(:name).with_message(/can't be blank/) }
-    it { is_expected.to validate_presence_of(:company).with_message(/can't be blank/) }
     it { is_expected.to validate_presence_of(:website).with_message(/can't be blank/) }
-    it { is_expected.to validate_presence_of(:description).with_message(/can't be blank/) }
     it { is_expected.to validate_presence_of(:oneliner).with_message(/can't be blank/) }
 
-    it { is_expected.to accept_nested_attributes_for(:product_competitions) }
-    it { is_expected.to accept_nested_attributes_for(:product_features) }
+    it { is_expected.to validate_length_of(:name).is_at_most(140).with_message(/can't be longer than 140 characters/) }
+    it { is_expected.to validate_length_of(:oneliner).is_at_most(140).with_message(/can't be longer than 140 characters/) }
+    it { is_expected.to validate_length_of(:description).is_at_most(500).with_message(/can't be longer than 500 characters/) }
+
     it { is_expected.to accept_nested_attributes_for(:product_usecases) }
 
-    it { is_expected.to have_many(:product_competitions).dependent(:destroy) }
-    it { is_expected.to have_many(:product_features).dependent(:destroy) }
     it { is_expected.to have_many(:product_usecases).dependent(:destroy) }
 
     it { is_expected.to have_many(:industry_products).dependent(:destroy) }

@@ -4,31 +4,22 @@ class Product < ActiveRecord::Base
   belongs_to :user
   has_many :industry_products, dependent: :destroy, inverse_of: :product
   has_many :industries, through: :industry_products
-  has_many :product_features, dependent: :destroy, inverse_of: :product
-  has_many :product_competitions, dependent: :destroy,inverse_of: :product
   has_many :product_usecases, dependent: :destroy, inverse_of: :product
 
   accepts_nested_attributes_for :industry_products, reject_if: :all_blank, allow_destroy: true
-  accepts_nested_attributes_for :product_features, reject_if: :all_blank, allow_destroy: true
-  accepts_nested_attributes_for :product_competitions, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :product_usecases, reject_if: :all_blank, allow_destroy: true
 
   validates :user, presence: true
 
   validates :name, presence: { message: "can't be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }, uniqueness: { message: "already exists" }
-  validates :company, presence: { message: "can't be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
-  validates :website, presence: { message: "can't be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
+  validates :website, presence: { message: "can't be blank" }
   validates :oneliner, presence: { message: "can't be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
-  validates :description, presence: { message: "can't be blank" }, length: {maximum: 500, message: "can't be longer than 500 characters"}
+  validates :description, length: { maximum: 500, message: "can't be longer than 500 characters"}
 
   validates_associated :industry_products
-  validates_associated :product_features
-  validates_associated :product_competitions
   validates_associated :product_usecases
 
   validate :product_industries_limit
-  validate :product_features_limit
-  validate :product_competitions_limit
   validate :product_usecases_limit
 
   before_validation :format_website
@@ -78,22 +69,6 @@ class Product < ActiveRecord::Base
         self.errors.add :base, "You can't choose more than 5 industries."
       elsif self.industries.reject(&:marked_for_destruction?).blank?
         self.errors.add :base, "You have to choose at least 1 industry."
-      end
-    end
-
-    def product_features_limit
-      if self.product_features.reject(&:marked_for_destruction?).count > 10
-        self.errors.add :base, "You can't have more than 10 features."
-      elsif self.product_features.reject(&:marked_for_destruction?).count < 1
-        self.errors.add :base, "You must have at least 1 product feature."
-      end
-    end
-
-    def product_competitions_limit
-      if self.product_competitions.reject(&:marked_for_destruction?).count > 10
-        self.errors.add :base, "You can't have more than 10 competitions."
-      elsif self.product_competitions.reject(&:marked_for_destruction?).count < 1
-        self.errors.add :base, "You must name at least 1 competition."
       end
     end
 

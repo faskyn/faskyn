@@ -38,10 +38,6 @@
         </div>
       </div>
       <div class="col-md-6">
-        <div class="form-group">
-          <%= f.text_field :company, placeholder: "company", class: "form-control" %>
-          <div class="explanation company-explanation">Name of the company this product belongs to.</div>
-        </div>
       </div>
     </div>
 
@@ -66,20 +62,6 @@
     </div>
   </div>
 
-  <div class="well product-well feature-well">
-    <div class="row">
-      <div class="col-md-12 feature-fields">
-        <%= f.fields_for :product_features do |product_feature| %>
-          <%= render 'product_feature_fields', f: product_feature %>
-        <% end %>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="explanation product-feature-explanation">Add some general characteristics or features of your product in a few bullet points. What your customers will get out of it.</div>
-      <div class="adding-extra"><%= link_to_add_association 'Add new feature', f, :product_features %></div>
-    </div>
-  </div>
-
   <div class="well product-well usecase-well">
     <div class="row">
       <div class="col-md-12 usecase-fields">
@@ -91,20 +73,6 @@
     <div class="form-group">
       <div class="explanation usecase-explanation">Who is this good for? E.g. banks, telcos, etc. <strong>Why</strong> would they care about it? <strong>How</strong> would they use it?</div>
       <div class="adding-extra"><%= link_to_add_association 'Add new usecase', f, :product_usecases %></div>
-    </div>
-  </div>
-
-  <div class="well product-well competition-well">
-    <div class="row">
-      <div class="col-md-12 competition-fields">
-        <%= f.fields_for :product_competitions do |product_competition| %>
-          <%= render 'product_competition_fields', f: product_competition %>
-        <% end %>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="explanation competition-explanation">Who has a similar product? How is your product different than theirs? This helps you explain the uniqueness of your solution to the people who would immediately wave it down as a copycat or me-too product. Even though it is not.</div>
-      <div class="adding-extra"><%= link_to_add_association 'Add new competition', f, :product_competitions %></div>
     </div>
   </div>
   

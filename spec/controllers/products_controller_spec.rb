@@ -65,8 +65,6 @@ describe ProductsController do
       it "assigns products" do
         expect(assigns(:product)).to eq(product)
         expect(assigns(:product).product_usecases.size).to eq(1)
-        expect(assigns(:product).product_features.size).to eq(1)
-        expect(assigns(:product).product_competitions.size).to eq(1)
         expect(assigns(:product).industry_products.size).to eq(1)
       end
 
@@ -109,8 +107,6 @@ describe ProductsController do
         let!(:profile) { create(:profile, user: @user) }
         let!(:industry) { create(:industry) }
         let!(:attrs) { attributes_for(:product, user_id: @user.id, industry_ids: [ industry.id ]).merge(
-            product_features_attributes: [attributes_for(:product_feature)],
-            product_competitions_attributes: [attributes_for(:product_competition)],
             product_usecases_attributes: [attributes_for(:product_usecase)]
           ) }
         subject(:create_action) { post :create, product: attrs }
@@ -131,8 +127,6 @@ describe ProductsController do
         let!(:profile) { create(:profile, user: @user) }
         let!(:industry) { create(:industry) }
         let!(:attrs) { attributes_for(:product, user_id: @user.id, name: nil, industry_ids: [ industry.id ]).merge(
-            product_features_attributes: [attributes_for(:product_feature)],
-            product_competitions_attributes: [attributes_for(:product_competition)],
             product_usecases_attributes: [attributes_for(:product_usecase)]
           ) }
         subject(:create_action) { post :create, product: attrs }
@@ -151,8 +145,6 @@ describe ProductsController do
       let!(:profile) { create(:profile, user: @user) }
       let!(:industry) { create(:industry) }
       # let!(:product) { create(:product, user_id: @user.id, industry_ids: [ industry.id ]).merge(
-      #     product_features_attributes: [attributes_for(:product_feature)],
-      #     product_competitions_attributes: [attributes_for(:product_competition)],
       #     product_usecases_attributes: [attributes_for(:product_usecase)]
       #   ) }
       let!(:product) { create(:product, :product_with_nested_attrs, user_id: @user.id, name: "Test Product", description: "Original Description") }

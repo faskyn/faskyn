@@ -28,9 +28,7 @@ class ProductsController < ApplicationController
     @product = Product.new
     authorize @product
     @product.industry_products.build
-    @product.product_features.build
     @product.product_usecases.build
-    @product.product_competitions.build
   end
 
   def create
@@ -82,10 +80,8 @@ class ProductsController < ApplicationController
 
     def product_params
       params.require(:product).permit(:product_image, :remove_product_image, :product_image_cache,
-        :name, :company, :website, :oneliner, :description, industry_ids: [],
-        product_features_attributes: [:id, :feature, :_destroy],
-        product_usecases_attributes: [:id, :example, :detail, :_destroy],
-        product_competitions_attributes: [:id, :competitor, :differentiator, :_destroy])
+        :name, :website, :oneliner, :description, industry_ids: [],
+        product_usecases_attributes: [:id, :example, :detail, :_destroy])
     end
 
     def set_and_authorize_product

@@ -100,17 +100,6 @@ FactoryGirl.define do
     user
   end
 
-  factory :product_competition, class: ProductCompetition do
-    competitor { Faker::Commerce.product_name }
-    differentiator { Faker::Lorem.paragraph }
-    #product
-  end
-
-  factory :product_feature, class: ProductFeature do
-    feature { Faker::Lorem.paragraph }
-    #product
-  end
-
   factory :product_usecase, class: ProductUsecase do
     example { Faker::Lorem.sentence(3) }
     detail { Faker::Lorem.paragraph }
@@ -130,16 +119,13 @@ FactoryGirl.define do
   factory :product, class: Product do
     #name { Faker::Commerce.product_name }
     sequence(:name) { |n| "ABC_#{n}" }
-    company { Faker::Company.name }
     website { 'https://example.com' }
     oneliner { Faker::Lorem.sentence }
     description { Faker::Lorem.paragraph }
     user
     trait :product_with_nested_attrs do
       before(:create) do |product|
-        product.product_competitions << build(:product_competition, product: product)
         product.product_usecases << build(:product_usecase, product: product)
-        product.product_features << build(:product_feature, product: product)
         product.industries << build(:industry)
       end
     end
