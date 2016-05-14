@@ -26,6 +26,11 @@ $light-grey: #f7f7f7; //super light background color
   }
 }
 
+.product-new-container {
+  background: $light-grey;
+  padding: 30px 50px 40px 50px;
+}
+
 .product-form {
   .old-product-image {
     border-radius:10%;

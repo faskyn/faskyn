@@ -106,6 +106,18 @@ FactoryGirl.define do
     #product
   end
 
+  factory :product_customer, class: ProductCustomer do
+    customer { Faker::Company.name }
+    usage { Faker::Lorem.paragraph }
+    #product
+  end
+
+  factory :product_lead, class: ProductLead do
+    lead { Faker::Company.name }
+    pitch { Faker::Lorem.paragraph }
+    #product
+  end
+
 
   factory :industry, class: Industry do
     name "AI"
@@ -126,6 +138,8 @@ FactoryGirl.define do
     trait :product_with_nested_attrs do
       before(:create) do |product|
         product.product_usecases << build(:product_usecase, product: product)
+        product.product_customers << build(:product_customer, product: product)
+        product.product_leads << build(:product_lead, product: product)
         product.industries << build(:industry)
       end
     end

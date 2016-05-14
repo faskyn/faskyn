@@ -14,7 +14,7 @@ RSpec.describe Product, type: :model do
 
     it "has one more valid factory" do
       attrs = attributes_for(:product, user_id: user.id, industry_ids: [ industry.id ]).merge(
-        # product_features_attributes: [attributes_for(:product_feature)],
+        product_customers_attributes: [attributes_for(:product_customer)],
         # product_competitions_attributes: [attributes_for(:product_competition)],
         product_usecases_attributes: [attributes_for(:product_usecase)]
         )
@@ -58,6 +58,8 @@ RSpec.describe Product, type: :model do
     it { is_expected.to accept_nested_attributes_for(:product_usecases) }
 
     it { is_expected.to have_many(:product_usecases).dependent(:destroy) }
+    it { is_expected.to have_many(:product_customers).dependent(:destroy) }
+    it { is_expected.to have_many(:product_leads).dependent(:destroy) }
 
     it { is_expected.to have_many(:industry_products).dependent(:destroy) }
     it { is_expected.to have_many(:industries).through(:industry_products) }

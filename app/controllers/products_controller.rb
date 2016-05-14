@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
   before_action :set_and_authorize_product, only: [:show, :edit, :update, :destroy]
 
   def index
-    @products = Product.order(created_at: :desc).paginate(page: params[:products], per_page: Product.pagination_per_page)
+    @products = Product.order(created_at: :desc).paginate(page: params[:page], per_page: Product.pagination_per_page)
     authorize @products
     respond_to do |format|
       format.html
@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
   def own_products
     @user = User.find(params[:user_id])
     authorize @user, :index_own_products?
-    @products = current_user.products.order(updated_at: :desc).paginate(page: params[:products], per_page: Product.pagination_per_page)
+    @products = current_user.products.order(updated_at: :desc).paginate(page: params[:page], per_page: Product.pagination_per_page)
     respond_to do |format|
       format.html
       format.js
@@ -29,6 +29,8 @@ class ProductsController < ApplicationController
     authorize @product
     @product.industry_products.build
     @product.product_usecases.build
+    @product.product_customers.build
+    @product.product_leads.build
   end
 
   def create
@@ -81,7 +83,9 @@ class ProductsController < ApplicationController
     def product_params
       params.require(:product).permit(:product_image, :remove_product_image, :product_image_cache,
         :name, :website, :oneliner, :description, industry_ids: [],
-        product_usecases_attributes: [:id, :example, :detail, :_destroy])
+        product_usecases_attributes: [:id, :example, :detail, :_destroy],
+        product_customers_attributes: [:id, :customer, :usage, :_destroy],
+        product_leads_attributes: [:id, :lead, :pitch, :_destroy])
     end
 
     def set_and_authorize_product

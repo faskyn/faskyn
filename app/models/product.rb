@@ -1,13 +1,18 @@
 class Product < ActiveRecord::Base
+  include ActionView::Helpers::TextHelper
   mount_uploader :product_image, ProductImageUploader
 
   belongs_to :user
   has_many :industry_products, dependent: :destroy, inverse_of: :product
   has_many :industries, through: :industry_products
   has_many :product_usecases, dependent: :destroy, inverse_of: :product
+  has_many :product_customers, dependent: :destroy, inverse_of: :product
+  has_many :product_leads, dependent: :destroy, inverse_of: :product
 
   accepts_nested_attributes_for :industry_products, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :product_usecases, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :product_customers, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :product_leads, reject_if: :all_blank, allow_destroy: true
 
   validates :user, presence: true
 
@@ -18,9 +23,14 @@ class Product < ActiveRecord::Base
 
   validates_associated :industry_products
   validates_associated :product_usecases
+  validates_associated :product_customers
+  validates_associated :product_leads
 
   validate :product_industries_limit
   validate :product_usecases_limit
+  validate :product_customers_limit_max
+  validate :product_leads_limit_max
+  validate :product_customer_and_lead_limit_min
 
   before_validation :format_website
   validate :website_validator
@@ -64,19 +74,40 @@ class Product < ActiveRecord::Base
     #   self.errors.add :website, "format is invalid!" unless website_valid?  
     # end
 
-    def product_industries_limit
-      if self.industries.reject(&:marked_for_destruction?).count > 5
-        self.errors.add :base, "You can't choose more than 5 industries."
-      elsif self.industries.reject(&:marked_for_destruction?).blank?
-        self.errors.add :base, "You have to choose at least 1 industry."
+    def product_industries_limit(max = 5, min = 1)
+      if self.industries.reject(&:marked_for_destruction?).count > max
+        self.errors.add :base, "You can't choose more than #{pluralize(max, 'industry')}."
+      elsif self.industries.reject(&:marked_for_destruction?).count < min
+        self.errors.add :base, "You have to choose at least #{pluralize(min, 'industry')}."
       end
     end
 
-    def product_usecases_limit
-      if self.product_usecases.reject(&:marked_for_destruction?).count > 10
-        self.errors.add :base, "You can't have more than 10 usecases."
-      elsif self.product_usecases.reject(&:marked_for_destruction?).count < 1
-        self.errors.add :base, "You must describe at least 1 usecase."
+    def product_usecases_limit(max = 5, min = 1)
+      if self.product_usecases.reject(&:marked_for_destruction?).count > max
+        self.errors.add :base, "You can't add more than #{pluralize(max, 'usecase')}."
+      elsif self.product_usecases.reject(&:marked_for_destruction?).count < min
+        self.errors.add :base, "You have to add at least #{pluralize(min, 'usecase')}."
+      end
+    end
+
+    def product_customers_limit_max(max = 5)
+      if self.product_customers.reject(&:marked_for_destruction?).count > max
+        self.errors.add :base, "You can't add more than #{pluralize(max, 'customer')}."
+      end
+    end
+
+    def product_leads_limit_max(max = 5)
+      if self.product_leads.reject(&:marked_for_destruction?).count > max
+        self.errors.add :base, "You can't add more than #{pluralize(max, 'potential lead')}."
+      end
+    end
+
+    def product_customer_and_lead_limit_min(min = 1)
+      added_customer_count = self.product_customers.reject(&:marked_for_destruction?).count
+      added_lead_count = self.product_customers.reject(&:marked_for_destruction?).count
+      added_customer_and_lead_count = added_customer_count + added_lead_count 
+      if added_customer_and_lead_count < min
+        self.errors.add :base, "You have to add at least #{pluralize(min, 'current or potential customer')}."
       end
     end
 end

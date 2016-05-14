@@ -51,6 +51,8 @@
     </div>
   </div>
 
+  <h4 class="description-label">Description
+  </h4>
   <div class="well product-well">    
     <div class="row">
       <div class="col-md-12">
@@ -62,6 +64,7 @@
     </div>
   </div>
 
+  <h4 class="usecase-label">Usecases</h4>
   <div class="well product-well usecase-well">
     <div class="row">
       <div class="col-md-12 usecase-fields">
@@ -73,6 +76,36 @@
     <div class="form-group">
       <div class="explanation usecase-explanation">Who is this good for? E.g. banks, telcos, etc. <strong>Why</strong> would they care about it? <strong>How</strong> would they use it?</div>
       <div class="adding-extra"><%= link_to_add_association 'Add new usecase', f, :product_usecases %></div>
+    </div>
+  </div>
+
+  <h4 class="customer-labe">Customers</h4>
+  <div class="well product-well customer-well">
+    <div class="row">
+      <div class="col-md-12 customer-fields">
+        <%= f.fields_for :product_customers do |product_customer| %>
+          <%= render 'product_customer_fields', f: product_customer %>
+        <% end %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="explanation customer-explanation">Who is already using your product? How</strong> do they use it? (If you don't have any add some potential customers.)</div>
+      <div class="adding-extra"><%= link_to_add_association 'Add new customer', f, :product_customers %></div>
+    </div>
+  </div>
+
+  <h4 class="lead-label">Potential leads</h4>
+  <div class="well product-well lead-well">
+    <div class="row">
+      <div class="col-md-12 lead-fields">
+        <%= f.fields_for :product_leads do |product_lead| %>
+          <%= render 'product_lead_fields', f: product_lead %>
+        <% end %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="explanation lead-explanation">Who do you think could use your product? <strong>Why</strong> would they care about it? <strong>How</strong> would they use it?</div>
+      <div class="adding-extra"><%= link_to_add_association 'Add new potential lead', f, :product_leads %></div>
     </div>
   </div>
   

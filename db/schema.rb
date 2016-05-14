@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160513182412) do
+ActiveRecord::Schema.define(version: 20160513201955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,6 +133,16 @@ ActiveRecord::Schema.define(version: 20160513182412) do
 
   add_index "product_competitions", ["product_id"], name: "index_product_competitions_on_product_id", using: :btree
 
+  create_table "product_customers", force: :cascade do |t|
+    t.integer  "product_id", null: false
+    t.string   "customer",   null: false
+    t.text     "usage",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "product_customers", ["product_id"], name: "index_product_customers_on_product_id", using: :btree
+
   create_table "product_features", force: :cascade do |t|
     t.integer  "product_id", null: false
     t.string   "feature",    null: false
@@ -141,6 +151,16 @@ ActiveRecord::Schema.define(version: 20160513182412) do
   end
 
   add_index "product_features", ["product_id"], name: "index_product_features_on_product_id", using: :btree
+
+  create_table "product_leads", force: :cascade do |t|
+    t.integer  "product_id", null: false
+    t.string   "lead",       null: false
+    t.text     "pitch",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "product_leads", ["product_id"], name: "index_product_leads_on_product_id", using: :btree
 
   create_table "product_usecases", force: :cascade do |t|
     t.integer  "product_id", null: false
@@ -267,7 +287,9 @@ ActiveRecord::Schema.define(version: 20160513182412) do
   add_foreign_key "post_comments", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "product_competitions", "products"
+  add_foreign_key "product_customers", "products"
   add_foreign_key "product_features", "products"
+  add_foreign_key "product_leads", "products"
   add_foreign_key "product_usecases", "products"
   add_foreign_key "products", "users"
   add_foreign_key "profiles", "users"

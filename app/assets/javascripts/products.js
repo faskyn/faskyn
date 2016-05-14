@@ -27,9 +27,26 @@ $(document).on("page:change", function() {
     });
   };
 
+  //showing edit/delete button to owner
+  if ($('.product-show').length > 0) {
+    showProductEditDeleteButtons();
+  };
+
   //cocoon gem inserting behavior
-  $(".feature-well a.add_fields").data("association-insertion-method", 'prepend').data("association-insertion-node", '.feature-fields');
   $(".usecase-well a.add_fields").data("association-insertion-method", 'prepend').data("association-insertion-node", '.usecase-fields');
-  $(".competition-well a.add_fields").data("association-insertion-method", 'prepend').data("association-insertion-node", '.competition-fields');
+  $(".customer-well a.add_fields").data("association-insertion-method", 'prepend').data("association-insertion-node", '.customer-fields');
+  $(".lead-well a.add_fields").data("association-insertion-method", 'prepend').data("association-insertion-node", '.lead-fields');
 
 });
+
+function showProductEditDeleteButtons() {
+  if ($('.product-show').find('[data-behavior="edit-delete-product-buttons"]').data("product-user-id") == $('#body-current-user').data('currentuserid')) {
+    $('.product-show').find('[data-behavior="edit-delete-product-buttons"]').removeClass('hidden');
+  };
+};
+
+// function showPostEditDropdown($container) {
+//   if ($container.find('[data-behavior="edit-post-dropdown-button"]').data('postauthorid') == $('#body-current-user').data('currentuserid')) {
+//     $container.find('[data-behavior="edit-post-dropdown-button"]').removeClass('hidden');
+//   };
+// };

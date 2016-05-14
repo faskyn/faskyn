@@ -14,13 +14,15 @@
     <div class="panel-body">
 
       <div class = "row">
-        <div class="col-md-6">
+        <div class="col-md-5">
           <div class="product-list">
-            <div class="list-name">Company:</div>
-            <div class="description"><%= product.company %></div>
+            <div class="list-name">Posted_by:</div>
+            <div class="description"><%= link_to user_path(product.user) do %>
+              <%= product.user.full_name %>
+            <% end %> </div>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-7">
           <div class="product-list">
             <div class="list-name">Verticals:</div>
             <div class="description"><%= product.industries_all %></div>
@@ -29,7 +31,7 @@
       </div>
 
       <div class = "row">
-        <div class = "col-md-6">
+        <div class = "col-md-5">
           <div class="product-list">
             <div class="list-name">Website:</div>
             <div class="description"><%= link_to product.website, target: "_blank" do %>
@@ -37,12 +39,12 @@
             <% end %></div>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-7">
           <div class="product-list">
-            <div class="list-name">Posted_by:</div>
-            <div class="description"><%= link_to user_path(product.user) do %>
-              <%= product.user.full_name %>
-            <% end %> </div>
+            <div id="oneliner">
+              <div class="list-name">Oneliner:</div>
+              <div class="description"><%= product.oneliner %></div>
+            </div>
           </div>
         </div>
       </div>
@@ -50,9 +52,9 @@
       <div class= "row">
         <div class="col-md-12">
           <div class="product-list">
-            <div id="oneliner">
-              <div class="list-name">Oneliner:</div>
-              <div class="description"><%= product.oneliner %></div>
+            <div id="description">
+              <div class="list-name">Description:</div>
+              <div class="description"><%= product.description %></div>
             </div>
           </div>
         </div>

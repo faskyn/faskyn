@@ -107,8 +107,9 @@ describe ProductsController do
         let!(:profile) { create(:profile, user: @user) }
         let!(:industry) { create(:industry) }
         let!(:attrs) { attributes_for(:product, user_id: @user.id, industry_ids: [ industry.id ]).merge(
-            product_usecases_attributes: [attributes_for(:product_usecase)]
-          ) }
+            product_usecases_attributes: [attributes_for(:product_usecase)],
+            product_customers_attributes: [attributes_for(:product_customer)]
+          )}
         subject(:create_action) { post :create, product: attrs }
         # let!(:product) { build(:product, :product_with_nested_attrs, user: @user) }
 

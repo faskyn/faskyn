@@ -1,19 +1,24 @@
 <% provide(:title, @product.name) %>
 <div class= "container-fluid product-container">
-  <div class= "col-md-8 col-md-offset-2">
     <div class="product-show">
 
       <% cache [@product, @product.user.profile] do %>
 
         <div class="row product-show-name">
-          <div class="col-md-12">
+          <div class="col-md-7">
             <%= image_tag @product.product_image_url(:base_thumb) %>
             <h3><%= @product.name.upcase %></h3>
+          </div>
+          <div class="col-md-5" style="vertical-algin:middle;">
+            <span class="hidden" data-behavior="edit-delete-product-buttons" data-product-user-id= "<%=@product.user_id %>">
+              <%= link_to "Edit Product", edit_product_path(@product), class: "btn btn-primary" %>
+              <button type="button" class="btn btn-danger delete-button" data-toggle="modal" data-target="#deleteproduct_<%= @product.id %>">Delete Product</button>
+            </div>
           </div>
         </div>
         <div class="well product-well">
           <div class = "row">
-            <div class="col-md-6">
+            <div class="col-md-4 website-column">
               <div class="product-list">
                 <div class="list-name">Website:</div>
                 <div class="description"><%= link_to @product.website, target: "_blank" do %>
@@ -21,7 +26,7 @@
                 <% end %></div>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-8 vertical-column">
               <div class="product-list">
                 <div class="list-name">Verticals:</div>
                 <div class="description"><%= @product.industries_all %></div>
@@ -30,7 +35,7 @@
           </div>
 
           <div class = "row">
-            <div class="col-md-6">
+            <div class="col-md-4 posted-by-column">
               <div class="product-list">
                 <div class="list-name">Posted_by:</div>
                 <div class="description"><%= link_to user_path(@product.user) do %>
@@ -38,11 +43,7 @@
                 <% end %> </div>
               </div>
             </div>
-            <div class="col-md-6">
-            </div>
-          </div>
-          <div class = "row">
-            <div class="col-md-12">
+            <div class="col-md-8 oneliner-column">
               <div class="product-list">
                 <div id="oneliner">
                   <div class="list-name">Oneliner:</div>
@@ -51,11 +52,8 @@
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="well product-well">
           <div class = "row">
-            <div class="col-md-12">
+            <div class="col-md-12 description-column">
               <div class = "product-list">
                   <div class = "list-name">Description:</div>
                   <div class = "big-description"><%= @product.description %></div>
@@ -79,16 +77,38 @@
           </div>
         </div>
 
-      <% end %>
+        <div class="well product-well">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="product-list">
+                <div class= "list-name">Customers:</div>
+                <ul>
+                  <% @product.product_customers.each do |product_customer| %>
+                    <li><%= product_customer.customer %> : <%= product_customer.usage %></li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
 
-      <% if policy(@product).edit? %>
-        <%= link_to "Edit Product", edit_product_path(@product), class: "btn btn-primary" %>
+        <div class="well product-well">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="product-list">
+                <div class= "list-name">Potential leads:</div>
+                <ul>
+                  <% @product.product_leads.each do |product_lead| %>
+                    <li><%= product_lead.lead %> : <%= product_lead.pitch %></li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
       <% end %>
-      <% if policy(@product).destroy? %>
-        <button type="button" class="btn btn-danger delete-button" data-toggle="modal" data-target="#deleteproduct_<%= @product.id %>">Delete Product</button>
-      <% end %>
-    </div>
-  </div> 
+    </div> 
 </div>
 
   <%= form_for(@product, method: :delete) do |f| %>
