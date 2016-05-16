@@ -1,0 +1,115 @@
+$grey-medium-light: #eaeaea;
+$garmin-blue: #007cc3;
+$dark-grey: #5E5E5E;
+$light-grey: #f7f7f7;
+$comment-grey: #f9f9f9;
+
+.comment-panel {
+  .panel-heading {
+    background: $light-grey;
+  }
+  .panel-body {
+    background: white;
+  }
+}
+
+.comment-avatar {
+  //width: 40px;
+  //height: 40px;
+  border-radius: 10%;
+}
+
+.comment-reply-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 10%;
+}
+
+.comment-form-row {
+  padding-bottom:10px;
+  .comment-input {
+    margin-bottom: 0px;
+    margin-top:15px;
+  }
+}
+.open-all-comments-row {
+  padding-bottom:10px;
+  .open-all-comments {
+    font-size: 12px;
+    cursor: pointer;
+  }
+}
+.comment-box {
+  padding-top:5px;
+  margin-bottom:5px;
+  .comment-info {
+    font-size:12px;
+    .comment-fullname{
+      font-weight: bold;
+    }
+    .comment-updated {
+      color: $dark-grey;
+      padding-left: 8px;
+    }
+  }
+  .comment-body {
+    font-size: 12px;
+    .comment-editing-deleting {
+      //display: none;
+      .comment-edit-fa, .post-comment-delete-fa {
+        padding-left: 5px;
+        cursor: pointer;
+        color: $dark-grey;
+      }
+    }
+    // &:hover .post-comment-editing-deleting  {
+    //   display: inline;
+    //   color: $dark-grey;
+    // }
+  }
+  a {
+    decoration: none;
+    color: $dark-grey;
+  }
+}
+.open-comment-reply {
+  font-size: 12px;
+  cursor: pointer;
+}
+.comment-replies {
+  display:none;
+  .comment-reply-box {
+    padding-top:5px;
+    margin-bottom:5px;
+    .comment-reply-info {
+      font-size: 12px;
+      .comment-reply-fullname{
+        font-weight: bold;
+      }
+      .comment-reply-updated {
+        color: $dark-grey;
+        padding-left: 8px;
+      }
+    }
+    .comment-reply-body {
+      font-size: 12px;
+      .comment-reply-editing-deleting {
+        .comment-reply-edit-fa, .comment-reply-delete-fa {
+          padding-left: 5px;
+          cursor: pointer;
+          color: $dark-grey;
+        }
+      }
+      // &:hover .post-comment-reply-editing-deleting  {
+      //   color: $dark-grey;
+      // }
+    }
+    a {
+      decoration: none;
+      color: $dark-grey;
+    }
+  }
+  .comment-reply-input {
+    margin-top:10px;
+  }
+}

@@ -5,35 +5,35 @@ feature "updating post comment reply" do
   let!(:profile) { create(:profile, user: user) }
   let(:other_user) { create(:user) }
   let!(:other_profile) { create(:profile, user: other_user ) }
-  let(:post) { create(:post, user: user, body: "post body") }
-  let(:post_comment) { create(:post_comment, user: user, post: post, body: "post comment body") }
-  let!(:post_comment_reply) { create(:post_comment_reply, user: user, post_comment: post_comment, body: "original post comment reply body") }
-  let!(:other_post_comment_reply ) { create(:post_comment_reply, user: other_user, post_comment: post_comment, body: "original other post comment reply body") }
+  let(:commentable) { create(:post, user: user, body: "post body") }
+  let(:comment) { create(:comment, commentable: commentable, user: user, body: "comment body") }
+  let!(:comment_reply) { create(:comment_reply, comment: comment, user: user, body: "original comment reply body") }
+  let!(:other_comment_reply ) { create(:comment_reply, comment: comment, user: other_user, body: "original other comment reply body") }
 
   scenario "successfully", js: true do
     sign_in(user)
     visit root_path
-    within "#postcomment-#{post_comment.id}" do
-      find('[data-behavior="open-post-comment-reply"]').click
-      within "#postcommentreply-#{post_comment_reply.id}" do
-        find('[data-behavior="post-comment-reply-body"]').hover
-        expect(page).to have_css("#activate-comment-reply-edit-#{post_comment_reply.id}")
-        page.find("#activate-comment-reply-edit-#{post_comment_reply.id}").click
+    within "#comment-#{comment.id}" do
+      find('[data-behavior="open-comment-reply"]').click
+      within "#commentreply-#{comment_reply.id}" do
+        find('[data-behavior="comment-reply-body"]').hover
+        expect(page).to have_css("#activate-comment-reply-edit-#{comment_reply.id}")
+        page.find("#activate-comment-reply-edit-#{comment_reply.id}").click
       end
     end
-    bip_text post_comment_reply, :body, "new post comment reply body"
-    expect(page).to have_content("new post comment reply body")
-    expect(page).to_not have_content("original post comment reply body")
+    bip_text comment_reply, :body, "new comment reply body"
+    expect(page).to have_content("new comment reply body")
+    expect(page).to_not have_content("original comment reply body")
   end
 
   scenario "not allowed for others", js: true do
     sign_in(user)
     visit root_path
-    within "#postcomment-#{post_comment.id}" do
-      find('[data-behavior="open-post-comment-reply"]').click
-      within "#postcommentreply-#{other_post_comment_reply.id}" do
-        page.find('[data-behavior="post-comment-reply-body"]').hover
-        expect(page).to_not have_css("#activate-comment-reply-edit-#{other_post_comment_reply.id}")
+    within "#comment-#{comment.id}" do
+      find('[data-behavior="open-comment-reply"]').click
+      within "#commentreply-#{other_comment_reply.id}" do
+        page.find('[data-behavior="comment-reply-body"]').hover
+        expect(page).to_not have_css("#activate-comment-reply-edit-#{other_comment_reply.id}")
       end
     end
   end

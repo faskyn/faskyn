@@ -11,11 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160513201955) do
+ActiveRecord::Schema.define(version: 20160515192458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "comment_replies", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "comment_id", null: false
+    t.string   "body",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "comment_replies", ["comment_id"], name: "index_comment_replies_on_comment_id", using: :btree
+  add_index "comment_replies", ["user_id"], name: "index_comment_replies_on_user_id", using: :btree
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "user_id",          null: false
+    t.integer  "commentable_id",   null: false
+    t.string   "commentable_type", null: false
+    t.string   "body",             null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "contacts", force: :cascade do |t|
     t.string   "name",       null: false
@@ -79,28 +102,6 @@ ActiveRecord::Schema.define(version: 20160513201955) do
 
   add_index "notifications", ["recipient_id"], name: "index_notifications_on_recipient_id", using: :btree
   add_index "notifications", ["sender_id"], name: "index_notifications_on_sender_id", using: :btree
-
-  create_table "post_comment_replies", force: :cascade do |t|
-    t.integer  "user_id",         null: false
-    t.integer  "post_comment_id", null: false
-    t.string   "body",            null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  add_index "post_comment_replies", ["post_comment_id"], name: "index_post_comment_replies_on_post_comment_id", using: :btree
-  add_index "post_comment_replies", ["user_id"], name: "index_post_comment_replies_on_user_id", using: :btree
-
-  create_table "post_comments", force: :cascade do |t|
-    t.integer  "post_id",    null: false
-    t.string   "body",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "user_id",    null: false
-  end
-
-  add_index "post_comments", ["post_id"], name: "index_post_comments_on_post_id", using: :btree
-  add_index "post_comments", ["user_id"], name: "index_post_comments_on_user_id", using: :btree
 
   create_table "post_replies", force: :cascade do |t|
     t.integer  "post_id"
@@ -273,6 +274,9 @@ ActiveRecord::Schema.define(version: 20160513201955) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
+  add_foreign_key "comment_replies", "comments"
+  add_foreign_key "comment_replies", "users"
+  add_foreign_key "comments", "users"
   add_foreign_key "conversations", "users", column: "recipient_id"
   add_foreign_key "conversations", "users", column: "sender_id"
   add_foreign_key "industry_products", "industries"
@@ -281,10 +285,6 @@ ActiveRecord::Schema.define(version: 20160513201955) do
   add_foreign_key "messages", "users"
   add_foreign_key "notifications", "users", column: "recipient_id"
   add_foreign_key "notifications", "users", column: "sender_id"
-  add_foreign_key "post_comment_replies", "post_comments"
-  add_foreign_key "post_comment_replies", "users"
-  add_foreign_key "post_comments", "posts"
-  add_foreign_key "post_comments", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "product_competitions", "products"
   add_foreign_key "product_customers", "products"

@@ -37,8 +37,8 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:products) }
     it { is_expected.to have_many(:notifications) }
     it { is_expected.to have_many(:posts) }
-    it { is_expected.to have_many(:post_comments) }
-    it { is_expected.to have_many(:post_comment_replies) }
+    it { is_expected.to have_many(:comments) }
+    it { is_expected.to have_many(:comment_replies) }
 
     it { is_expected.to delegate_method(:first_name).to(:profile) }
     it { is_expected.to delegate_method(:last_name).to(:profile) }

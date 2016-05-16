@@ -3,17 +3,17 @@ require 'rails_helper'
 feature "creating post comment reply" do
   let(:user) { create(:user) }
   let!(:profile) { create(:profile, user: user) }
-  let(:post) { create(:post, user: user) }
-  let!(:post_comment) { create(:post_comment, user: user, post: post) }
+  let(:commentable) { create(:post, user: user) }
+  let!(:comment) { create(:comment, commentable: commentable, user: user) }
 
   scenario "successfully", js: true do
     sign_in(user)
     visit root_path
-    within "#postcomment-#{post_comment.id}" do
-      find('[data-behavior="open-post-comment-reply"]').click
-      fill_in "post_comment_reply[body]", with: "new post comment reply body"
+    within "#comment-#{comment.id}" do
+      find('[data-behavior="open-comment-reply"]').click
+      fill_in "comment_reply[body]", with: "new comment reply body"
     end
-    find("#post-comment-reply-text-area-#{post_comment.id}").native.send_keys(:return)
-    expect(page).to have_content("new post comment reply body")
+    find("#comment-reply-text-area-#{comment.id}").native.send_keys(:return)
+    expect(page).to have_content("new comment reply body")
   end
 end

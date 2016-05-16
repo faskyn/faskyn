@@ -1,0 +1,4 @@
+$('#deletecomment_<%= @comment.id %>').modal('hide');
+$("#comment-<%= @comment.id %>").fadeOut(400, function(){
+  $(this).remove();
+});

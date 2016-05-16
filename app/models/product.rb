@@ -3,6 +3,10 @@ class Product < ActiveRecord::Base
   mount_uploader :product_image, ProductImageUploader
 
   belongs_to :user
+
+  has_many :comments, as: :commentable, dependent: :destroy
+  has_many :users, through: :comments, source: :user
+  
   has_many :industry_products, dependent: :destroy, inverse_of: :product
   has_many :industries, through: :industry_products
   has_many :product_usecases, dependent: :destroy, inverse_of: :product

@@ -24,8 +24,8 @@ class User < ActiveRecord::Base
   has_many :products, dependent: :nullify
 
   has_many :posts
-  has_many :post_comments, through: :posts
-  has_many :post_comment_replies, through: :post_comments
+  has_many :comments
+  has_many :comment_replies, through: :comments
 
   
   #check and decrease chat notification that happens between 2 given users (max 1)
@@ -47,6 +47,12 @@ class User < ActiveRecord::Base
       checking_and_decreasing_notification(notification)
     end
   end
+
+  # def decreasing_product_notification_number(product_id)
+  #   notifications.this_product_comments(product_id).unchecked.each do |notification|
+  #     checking_and_decreasing_notification(notification)
+  #   end
+  # end
 
   def checking_and_decreasing_notification(notification)
     notification.check_notification

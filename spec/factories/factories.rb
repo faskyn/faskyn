@@ -88,15 +88,14 @@ FactoryGirl.define do
     user
   end
 
-  factory :post_comment do
+  factory :comment do
     body { Faker::Lorem.sentence }
-    post
     user
   end
 
-  factory :post_comment_reply do
+  factory :comment_reply do
     body { Faker::Lorem.sentence }
-    post_comment
+    comment
     user
   end
 

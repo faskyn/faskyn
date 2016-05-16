@@ -1,0 +1,87 @@
+<% cache ['comment', comment, comment.user.profile] do %>
+
+  <div class="comment" id="comment-<%= comment.id %>" data-commentauthorid="<%= comment.user_id %>" data-behavior="comment">
+    <div class="row comment-box">
+      <div class="col-md-10">
+        <div class="col-md-2">
+          <%= link_to user_path(comment.user) do %>
+            <%= image_tag comment.user.avatar.url(:small_thumb), class: 'comment-avatar' %>
+          <% end %>
+        </div>
+        <div class="cold-md-10">
+          <div class="comment-info">
+            <%= link_to user_path(comment.user) do %>
+              <span class="comment-fullname"><%= comment.user.full_name %></span>
+            <% end %>
+            <span class="comment-updated"><%= local_time_ago(comment.updated_at) %></span>
+          </div>
+          <div class="comment-body" data-behavior="comment-body">
+
+              <%= find_links(best_in_place comment, :body, as: :input, url: comment_path(comment), activator: "#activate-comment-edit-#{comment.id}")%>
+              <span class="comment-editing-deleting hidden" data-behavior="comment-editing-deleting">
+                <span class="comment-edit-fa">
+                  <i class="fa fa-pencil" id="activate-comment-edit-<%= comment.id %>"></i>
+                </span>
+                <span class="comment-delete-fa">
+                  <a href="#" data-toggle="modal" role="button" data-target="#deletecomment_<%= comment.id %>"><i class="fa fa-trash"></i></a>
+                </span>
+              </span>
+
+          </div>
+          <a class="open-comment-reply" data-cid="<%= comment.id %>" data-behavior="open-comment-reply">
+            <span><i class="fa fa-reply"></i></span>
+            <span id="comment-number-<%= comment.id %>">
+              <% if comment.comment_replies.size == 0 %>
+                Reply
+              <% else %>
+                <%= pluralize(comment.comment_replies.size, "Reply") %> 
+              <% end %>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+    <div class="comment-replies" id="comment-replies-<%= comment.id %>" data-behavior="comment-replies">
+        <div class = "row">
+          <div class="col-md-12">
+            <div class="col-md-10 col-md-offset-2" data-behavior="comment-reply-insert-<%= comment.id %>">
+              <%= render partial: 'comments/comment_replies/comment_reply', collection: comment.comment_replies.ordered.includes(:user, :user_profile), as: :comment_reply, locals: { comment: comment } %>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="col-md-10 col-md-offset-2">
+              <%= render partial: 'comments/comment_replies/comment_reply_form', locals: { comment: comment } %>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <%= form_for(comment, method: :delete, remote: true) do |f| %>
+    <div class="modal fade" id="deletecomment_<%= comment.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" style="text-align:left">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Delete Comment</h4>
+          </div>
+          <div class="modal-body">
+            <h4>Are you sure?</h4>
+            <p> </p>  
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="deletecommentclose">Close</button>
+              <%= f.submit "Delete Comment", class: 'btn btn-danger' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+<% end %>

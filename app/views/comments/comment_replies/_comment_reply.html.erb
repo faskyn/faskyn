@@ -1,0 +1,56 @@
+<% cache ['comment-reply', comment_reply, comment_reply.user.profile] do %>
+
+  <div class="comment-reply" id="commentreply-<%= comment_reply.id %>" data-replyauthorid="<%= comment_reply.user_id %>" data-behavior="comment-reply">
+    <div class="row comment-reply-box">
+      <div class="col-md-10">
+        <div class="col-md-2">
+          <%= link_to user_path(comment_reply.user) do %>
+            <%= image_tag comment_reply.user.avatar.url(:small_thumb), class: 'comment-reply-avatar' %>
+          <% end %>
+        </div>
+        <div class="col-md-10">
+          <div class="comment-reply-info">
+            <%= link_to user_path(comment_reply.user) do %>
+              <span class="comment-reply-fullname"><%= comment_reply.user.full_name %></span>
+            <% end %>
+            <span class="comment-reply-updated"><%= local_time_ago(comment_reply.updated_at) %></span>
+          </div>
+          <div class="comment-reply-body" data-behavior="comment-reply-body">
+              <%= find_links(best_in_place comment_reply, :body, as: :input, url: comment_comment_reply_path(comment_reply.comment, comment_reply), activator: "#activate-comment-reply-edit-#{comment_reply.id}")%>
+              <span class="comment-reply-editing-deleting hidden" data-behavior="comment-reply-editing-deleting">
+                <span class="comment-reply-edit-fa">
+                  <i class="fa fa-pencil" id="activate-comment-reply-edit-<%= comment_reply.id %>"></i>
+                </span>
+                <span class="comment-reply-delete-fa">
+                  <a href="#" data-toggle="modal" role="button" data-target="#deletecommentreply_<%= comment_reply.id %>"><i class="fa fa-trash"></i></a>
+                </span>
+              </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <%= form_for([comment_reply.comment, comment_reply], method: :delete, remote: true) do |f| %>
+    <div class="modal fade" id="deletecommentreply_<%= comment_reply.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" style="text-align:left">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Delete Reply</h4>
+          </div>
+          <div class="modal-body">
+            <h4>Are you sure?</h4>
+            <p> </p>  
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="deletecommentreplyclose">Close</button>
+              <%= f.submit "Delete Reply", class: 'btn btn-danger' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+<% end %>

@@ -48,115 +48,15 @@ $comment-grey: #f9f9f9;
       text-align:right;
     }
   }
-  .panel-body {
+  .post-panel-body {
     padding-top:0px;
     background:#f9f9f9;
-    .post-comment-form-row {
-      padding-bottom:10px;
-      .post-comment-input {
-        margin-bottom: 0px;
-        margin-top:15px;
-      }
-    }
-    .open-all-post-comments-row {
-      padding-bottom:10px;
-      .open-all-post-comments {
-        font-size: 12px;
-        cursor: pointer;
-      }
-    }
-    .post-comment-box {
-      padding-top:5px;
-      margin-bottom:5px;
-      .post-comment-info {
-        font-size:12px;
-        .post-comment-fullname{
-          font-weight: bold;
-        }
-        .post-comment-updated {
-          color: $dark-grey;
-          padding-left: 8px;
-        }
-      }
-      .post-comment-body {
-        font-size: 12px;
-        .post-comment-editing-deleting {
-          //display: none;
-          .post-comment-edit-fa, .post-comment-delete-fa {
-            padding-left: 5px;
-            cursor: pointer;
-            color: $dark-grey;
-          }
-        }
-        // &:hover .post-comment-editing-deleting  {
-        //   display: inline;
-        //   color: $dark-grey;
-        // }
-      }
-      a {
-        decoration: none;
-        color: $dark-grey;
-      }
-    }
-    .open-post-comment-reply {
-      font-size: 12px;
-      cursor: pointer;
-    }
-    .post-comment-replies {
-      display:none;
-      .post-comment-reply-box {
-        padding-top:5px;
-        margin-bottom:5px;
-        .post-comment-reply-info {
-          font-size: 12px;
-          .post-comment-reply-fullname{
-            font-weight: bold;
-          }
-          .post-comment-reply-updated {
-            color: $dark-grey;
-            padding-left: 8px;
-          }
-        }
-        .post-comment-reply-body {
-          font-size: 12px;
-          .post-comment-reply-editing-deleting {
-            .post-comment-reply-edit-fa, .post-comment-reply-delete-fa {
-              padding-left: 5px;
-              cursor: pointer;
-              color: $dark-grey;
-            }
-          }
-          // &:hover .post-comment-reply-editing-deleting  {
-          //   color: $dark-grey;
-          // }
-        }
-        a {
-          decoration: none;
-          color: $dark-grey;
-        }
-      }
-      .post-comment-reply-input {
-        margin-top:10px;
-      }
-    }
   }
 }
 
 .post-avatar {
   width: 70px;
   height: 70px;
-  border-radius: 10%;
-}
-
-.post-comment-avatar {
-  //width: 40px;
-  //height: 40px;
-  border-radius: 10%;
-}
-
-.post-comment-reply-avatar {
-  width: 35px;
-  height: 35px;
   border-radius: 10%;
 }
 

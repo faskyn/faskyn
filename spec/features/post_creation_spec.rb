@@ -9,7 +9,6 @@ feature "creating post" do
     visit root_path
     fill_in "post[body]", with: "new post body"
     click_on "SHARE"
-    #find('#q_name').native.send_keys(:return)
     expect(page).to have_content("new post body")
     page.find("#navbar-home").click
     expect(page).to have_content("new post body")

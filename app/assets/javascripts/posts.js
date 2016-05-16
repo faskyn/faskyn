@@ -1,8 +1,5 @@
 $(document).on("page:change", function() {
 
-  // Activating Best In Place
-  $(".best_in_place").best_in_place();
-
 	//disabling post form when text field is empty
   $('[data-behavior="new-post-submit"]').prop('disabled',true);
 
@@ -22,7 +19,7 @@ $(document).on("page:change", function() {
 
   //in case of anchor automatically open the replies
   if (window.location.hash.length > 0) {
-    showPostAnchorComments();
+    showAnchorComments();
   };
 
   //showing edit/delete dropdowns to author
@@ -66,76 +63,16 @@ $(document).on('click', '[data-behavior="remove-post-preview-update"]', function
   $('[data-behavior="post-image-upload-update"]').val("");
 });
 
-//POST, COMMENT AND REPLY VALIDATION/CREATION
-
-//showing edit/delete buttons on hover for comments
-$(document).on('mouseenter', '[data-behavior="post-comment-body"]', function() {
-  if ($(this).closest('[data-behavior="post-comment"]').data('commentauthorid') == $('#body-current-user').data('currentuserid')) {
-    $(this).find('[data-behavior="post-comment-editing-deleting"]').removeClass('hidden');
-  };
-}).on('mouseleave', '[data-behavior="post-comment-body"]', function() {
-  $(this).find('[data-behavior="post-comment-editing-deleting"]').addClass('hidden');
-});
-
-//showing edit/delete buttons on hover for replies
-$(document).on('mouseenter', '[data-behavior="post-comment-reply-body"]', function() {
-  if ($(this).closest('[data-behavior="post-comment-reply"]').data('replyauthorid') == $('#body-current-user').data('currentuserid')) {
-    $(this).find('[data-behavior="post-comment-reply-editing-deleting"]').removeClass('hidden');
-  };
-}).on('mouseleave', '[data-behavior="post-comment-reply-body"]', function() {
-  $(this).find('[data-behavior="post-comment-reply-editing-deleting"]').addClass('hidden');
-});
+//POST VALIDATION
 
 //enabling post creation when text area is not empty (shared via button)
 $(document).on('keyup', '[data-behavior="post-create-body"]', function() {
-	if($(this).val().length !=0){
+  if($(this).val().length !=0){
     $('[data-behavior="new-post-submit"]').attr('disabled', false);            
-	}
+  }
   else {
     $('[data-behavior="new-post-submit"]').attr('disabled',true);  
   }
-});
-
-//checking comment text creation
-$(document).on('keydown', '[data-behavior="post-comment-text-area"]', function (event) {
-  if (event.keyCode == 13 && event.shiftKey == 0) {
-    event.preventDefault();
-    var post_id = $(this).data('pid');
-    comment = $(this).val();
-    comment = comment.replace(/^\s+|\s+$/g, "");
-    if (comment != '') {
-      $('#post-comment-form-' + post_id).submit();
-      // $(this).closest('[data-behavior="post-comment-form"]').submit();
-    };
-  };
-});
-
-//checking comment text reply creation (submitted via enter)
-$(document).on('keydown', '[data-behavior="post-comment-reply-text-area"]', function (event) {
-  if (event.keyCode == 13 && event.shiftKey == 0) {
-    event.preventDefault();
-    var post_comment_id = $(this).data('pcid');
-    reply = $(this).val();
-    reply = reply.replace(/^\s+|\s+$/g, "");
-    if (reply != '') {
-      $('#post-comment-reply-form-' + post_comment_id).submit();
-    };
-  };
-});
-
-
-//open hidden post comments and replies in post thread
-$(document).on('click', '[data-behavior="open-all-post-comments"]', function (event) {
-  var post_id = $(this).data('pid');
-  var all_replies = $('#post_' + post_id).find('[data-behavior="post-comment-replies"]:has([data-behavior="post-comment-reply"])');
-  all_replies.show();
-  $(this).closest('[data-behavior="open-all-post-comments-row"]').hide();
-});
-
-//open comment replies for a certain comment
-$(document).on('click', '[data-behavior="open-post-comment-reply"]', function (event) {
-  var post_comment_id = $(this).data('pcid');
-  $('#post-comment-replies-' + post_comment_id).toggle();
 });
 
 //SHOW EDIT AND DELETE POST VIA AJAX
@@ -210,14 +147,6 @@ function editPostHideDanger($container) {
   });
 };
 
-//on clicking notification that takes to the post the comments/replies get shown
-function showPostAnchorComments() {
-  var post_id = window.location.hash.substr(1);
-  var all_replies = $('#' + post_id).find('[data-behavior="post-comment-replies"]:has([data-behavior="post-comment-reply"])');
-  all_replies.show();
-  $('#' + post_id).find('[data-behavior="open-all-post-comments-row"]').hide();
-};
-
 //showing edit/delete dropdown on a certain post to author (important for caching)
 function showPostEditDropdown($container) {
   if ($container.find('[data-behavior="edit-post-dropdown-button"]').data('postauthorid') == $('#body-current-user').data('currentuserid')) {
@@ -233,9 +162,4 @@ function collectionPostEditDropdown() {
     };
   });
 };
-
-
-
-
-
 

@@ -46,11 +46,15 @@ Rails.application.routes.draw do
   end
 
   resources :posts do
-    resources :post_comments, only: [:create, :update, :destroy], module: :posts
+    resources :comments, only: :create, module: :posts
   end
 
-  resources :post_comments, only: [] do 
-    resources :post_comment_replies, only: [:create, :update, :destroy], module: :posts
+  resources :products do
+    resources :comments, only: :create, module: :products
+  end
+
+  resources :comments, only: [:update, :destroy] do 
+    resources :comment_replies, only: [:create, :update, :destroy], module: :comments
   end
 
   get 'users/:user_id/common_medias', to: 'common_medias#common_medias', as: :common_medias_user_common_medias

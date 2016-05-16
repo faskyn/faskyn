@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-md-10">
+    <div class="col-md-12">
+      <div class="comment-reply-input">
+        <%= form_for([comment, CommentReply.new], remote: true, html: { id: "comment-reply-form-#{comment.id}" }) do |f| %>
+          <div class="form-group">
+            <%= f.text_field :body, class: "form-control input-sm", id:"comment-reply-text-area-#{comment.id}", placeholder: "Reply..", data: { cid: comment.id, behavior: "comment-reply-text-area" } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

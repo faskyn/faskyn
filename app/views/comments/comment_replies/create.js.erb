@@ -1,0 +1,6 @@
+<% unless @comment_reply.errors.any? %>
+  $("#comment-reply-text-area-<%= @comment_reply.comment_id%>").val('');
+  $('[data-behavior="comment-reply-insert-<%= @comment_reply.comment_id %>"]').append('<%= j render @comment_reply %>');
+  $(".best_in_place").best_in_place();
+  $("#comment-number-<%= @comment.id %>").html("<%= pluralize(@comment.comment_replies.size, 'Reply') %>");
+<% end %>
