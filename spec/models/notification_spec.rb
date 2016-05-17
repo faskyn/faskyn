@@ -80,9 +80,14 @@ RSpec.describe Notification, type: :model do
       expect(Notification.unchecked).not_to include(post_notification)
     end
 
-    it "belongs to this post(this_post_comments)" do
-      expect(Notification.this_post_comments(post.id)).to eq([post_notification])
-      expect(Notification.this_post_comments(other_post.id)).not_to include(post_notification)
+    it "is checked(checked)" do
+      expect(Notification.checked).to include(post_notification)
+      expect(Notification.checked).not_to include(chat_notification)
+    end
+
+    it "belongs to this notifiable comments)" do
+      expect(Notification.this_notifiable_comments("Post", post.id)).to eq([post_notification])
+      expect(Notification.this_notifiable_comments("Post", other_post.id)).not_to include(post_notification)
     end
 
     it "belongs to this chat recipient(between_chat_recipient)" do
@@ -131,6 +136,12 @@ RSpec.describe Notification, type: :model do
       number = user.new_other_notification
       expect(Pusher).to receive(:trigger_async).with(('private-' + user.id.to_s), 'new_other_notification', {number: number} )
       other_notification.increased_other_number_pusher
+    end
+
+    it "completed?" do
+      notification_checked= create(:notification, checked_at: DateTime.now - 2)
+      expect(notification.checked?).to eq(nil)
+      expect(notification_checked.checked?).to_not eq(nil)
     end
   end
 

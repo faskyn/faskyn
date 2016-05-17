@@ -20,9 +20,10 @@ class Notification < ActiveRecord::Base
   scope :task, -> { where(notifiable_type: "Task") }
   scope :post, -> { where(notifiable_type: "Post") }
   scope :unchecked, -> { where(checked_at: nil) }
+  scope :checked, -> { where.not(checked_at: nil) }
 
-  scope :this_post_comments, -> (post_id) do
-    where("notifications.notifiable_id = ?", post_id)
+  scope :this_notifiable_comments, -> (notifiable_type, notifiable_id) do
+    where("notifications.notifiable_type = ? AND notifications.notifiable_id = ?", notifiable_type, notifiable_id)
   end
 
   scope :between_chat_recipient, -> (sender_id) do
@@ -35,6 +36,10 @@ class Notification < ActiveRecord::Base
 
   def self.pagination_per_page
     12
+  end
+
+  def checked?
+    checked_at
   end
   
   def check_notification #chat notification gets checked

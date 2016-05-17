@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :set_and_authorize_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    @posts = Post.order(updated_at: :desc).includes(:user).paginate(page: params[:page], per_page: 4)
+    @posts = Post.order(created_at: :desc).includes(:user).paginate(page: params[:page], per_page: 4)
     authorize @posts
     @post = Post.new
     respond_to do |format|

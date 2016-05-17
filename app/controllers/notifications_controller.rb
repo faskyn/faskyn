@@ -33,8 +33,8 @@ class NotificationsController < ApplicationController
   end
 
   def dropdown_checking_decreasing
-    current_user.decreasing_post_notification_number(params[:post_id])
-    redirect_to posts_path(anchor: params[:anchor_param])
+    current_user.decreasing_comment_notification_number(params[:notifiable_type], params[:notifiable_id])
+    redirect_to notification_redirection_path(params[:notifiable_type], params[:notifiable_id])
   end
 
   private

@@ -18,7 +18,7 @@ class Comments::CommentRepliesController < ApplicationController
     authorize @comment_reply
     @comment_reply.user = current_user
     if @comment_reply.save
-      @comment_reply.send_comment_reply_creation_notification(@comment) unless @comment.commentable_type == "Product"
+      @comment_reply.send_comment_reply_creation_notification(@comment)
       respond_to :js
     end
   end

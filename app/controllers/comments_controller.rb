@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
       authorize @comment
       @comment.user = current_user
       if @comment.save
-        @comment.send_comment_creation_notification(@commentable) unless @comment.commentable_type == "Product"
+        @comment.send_comment_creation_notification(@commentable)
         respond_to :js
       end
     end

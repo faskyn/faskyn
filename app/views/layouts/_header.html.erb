@@ -34,14 +34,14 @@
           <% if has_profile? %>
             <li class="dropdown">
               <%= link_to chat_notifications_dropdown_user_notifications_path(current_user), class: "dropdown-toggle", 'data-toggle' => "dropdown", 'type' => "button", 'aria-haspopup' => "true", 'aria-expanded' => "false", data: { behavior: "chat-notification-dropdown-list" } do %>
-                <span id="notify"><i class="fa fa-comments"></i><%= render 'notifications/newchatnotification' %></span>
+                <span id="chat-notify"><i class="fa fa-comments"></i><%= render 'notifications/newchatnotification' %></span>
               <% end %>
               <ul class = "dropdown-menu scrollable-bootstrap-menu" data-behavior="chat-notifications-json-data">
               </ul>
             </li>
             <li class="dropdown">
               <%= link_to other_notifications_dropdown_user_notifications_path(current_user), class: "dropdown-toggle", 'data-toggle' => "dropdown", 'type' => "button", 'aria-haspopup' => "true", 'aria-expanded' => "false", data: { behavior: "other-notification-dropdown-list" } do %>
-                <span id="notify"><i class="fa fa-bell"></i><%= render 'notifications/newothernotification' %></span>
+                <span id="other-notify"><i class="fa fa-bell"></i><%= render 'notifications/newothernotification' %></span>
               <% end %>
               <ul class = "dropdown-menu scrollable-bootstrap-menu" data-behavior="other-notifications-json-data">
               </ul>

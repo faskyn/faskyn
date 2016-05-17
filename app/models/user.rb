@@ -41,18 +41,12 @@ class User < ActiveRecord::Base
     end
   end
 
-  #check and decrease the post notification that belongs to a given post
-  def decreasing_post_notification_number(post_id)
-    notifications.this_post_comments(post_id).unchecked.each do |notification|
+  #check and decrease the comment notification that belongs to a given notifiable
+  def decreasing_comment_notification_number(notifiable_type, notifiable_id)
+    notifications.this_notifiable_comments(notifiable_type, notifiable_id).unchecked.each do |notification|
       checking_and_decreasing_notification(notification)
     end
   end
-
-  # def decreasing_product_notification_number(product_id)
-  #   notifications.this_product_comments(product_id).unchecked.each do |notification|
-  #     checking_and_decreasing_notification(notification)
-  #   end
-  # end
 
   def checking_and_decreasing_notification(notification)
     notification.check_notification
