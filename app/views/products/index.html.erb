@@ -1,5 +1,5 @@
 <% provide(:title, 'Products') %>
-<div class="container-fluid product-container">
+<div class="container-fluid product-container product-index-container">
   <% unless has_profile? %>
     <div class="row">
       <div class="well onboard-well">
@@ -21,7 +21,7 @@
   </div>
   <div class="panel panel-default">
     <table class="table">
-      <tbody class="product-index new-product-insert">
+      <tbody class="product-index-list new-product-insert">
         <% cache(['products-index', @products.map(&:id), @products.map(&:updated_at).max]) do %>
           <%= render @products %>
         <% end %>

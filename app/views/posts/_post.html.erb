@@ -48,6 +48,9 @@
       </div>
 
     </div>
+
+<% end %>
+
     <div class="panel-body post-panel-body">
       <div class = "row comment-form-row">
         <div class="col-md-12">
@@ -71,10 +74,16 @@
       <% end %>
       <div class = "row">
         <div class="col-md-12" data-behavior="comment-insert-<%= post.id%>">
-          <%= render partial: 'comments/comment', collection: post.comments.ordered.includes(:user, :user_profile), as: :comment, locals: { commentable: post } %>
+
+          <%= cache ['comments-index-post', post.comments.ordered_with_profile.map(&:id), post.comments.ordered_with_profile.map(&:updated_at).max, post.comments.ordered_with_profile.map{ |comment| comment.user.profile.updated_at }.max] do %>
+
+            <%= render partial: 'comments/comment', collection: post.comments.ordered_with_profile, as: :comment %>
+
+          <% end %>
+          
         </div>
       </div>
     </div>
   </div>      
 
-<% end %>
+

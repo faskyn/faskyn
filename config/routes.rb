@@ -39,8 +39,6 @@ Rails.application.routes.draw do
 
   resources :socials, only: [:create, :update, :destroy]
 
-  resources :products
-
   resources :conversations, only: [] do
     resources :messages, only: :create
   end
@@ -51,6 +49,16 @@ Rails.application.routes.draw do
 
   resources :products do
     resources :comments, only: :create, module: :products
+    resources :product_customers, only: [:show], module: :products
+    resources :product_leads, only: [:show], module: :products
+  end
+
+  resources :product_customers, only: [] do
+    resources :comments, only: :create, module: :product_customers
+  end
+
+  resources :product_leads, only: [] do
+    resources :comments, only: :create, module: :product_leads
   end
 
   resources :comments, only: [:update, :destroy] do 

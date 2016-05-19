@@ -1,0 +1,75 @@
+<% provide(:title, @product.name + " customer") %>
+<div class= "container-fluid product-container">
+  <div class="product-customer-lead-container">
+
+    <% cache [@product_customer, @product_customer.user.profile] do %>
+
+      <div class="panel panel-default product-panel" data-behavior="commentable_<%= @product_customer.id %>">
+
+        <div class="panel-heading">
+          <div class= "product-header">
+            <%= link_to @product do %>
+              <%= image_tag @product.product_image_url(:base_thumb) %>
+              <h3><%= @product.name %>
+            <% end %>
+            's customer case</h3>
+          </div>
+        </div>
+
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="product-list">
+                <div class="list-name" style="padding-bottom: 10px;">
+                  <h4><%= @product_customer.customer %>:</h4>
+                </div>
+                <div class="description">
+                  <%= @product_customer.usage %>
+                </div>            
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    <% end %>
+
+    <div class="panel panel-default" id="comment-panel">
+      <div class="panel-heading">
+        <div class = "row comment-form-row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="col-md-12">
+                  <%= render partial: 'comments/form', locals: { commentable: @product_customer } %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% if @comments.size > 3 %>
+          <div class="row open-all-comments-row" data-behavior="open-all-comments-row">
+            <div class="col-md-12">
+              <div class="col-md-12">
+                <a class="open-all-comments" data-commentableid="<%= @product_lead.id %>" data-behavior="open-all-comments">Show all</a>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="panel-body">
+        <div class = "row">
+          <div class="col-md-12" data-behavior="comment-insert-<%= @product_customer.id%>">
+            <% cache ['comments-index-customer', @comments.map(&:id), @comments.map(&:updated_at).max, @comments.map{ |comment| comment.user.profile.updated_at }.max] do %>
+
+               <%= render partial: "comments/comment", collection: @comments %>
+
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -12,7 +12,7 @@
   </div>
   <div class="panel panel-default">
     <table class="table">
-      <tbody class="product-index new-product-insert">
+      <tbody class="product-index-list new-product-insert">
         <% cache(['own-products', @products.map(&:id), @products.map(&:updated_at).max]) do %>
           <%= render @products %>
         <% end %>

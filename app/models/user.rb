@@ -22,6 +22,8 @@ class User < ActiveRecord::Base
   has_many :notifications, foreign_key: "recipient_id", dependent: :destroy
 
   has_many :products, dependent: :nullify
+  has_many :product_customers, through: :products
+  has_many :product_leads, through: :products
 
   has_many :posts
   has_many :comments

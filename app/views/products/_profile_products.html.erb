@@ -6,7 +6,9 @@
       <h3>Products posted by <%=@profile.first_name %></h3>
     <% end %>
   </div>
-    <% cache ['profile-products', @profile_products.map(&:id), @profile_products.map(&:updated_at).max, @profile_products.map{|pp| pp.user.profile.updated_at}.max] do %>
-      <%= render partial: "products/profile_product", collection: @profile_products, as: :product %>
-    <% end %>
+  <% cache ['profile-products', @profile_products.map(&:id), @profile_products.map(&:updated_at).max, @profile_products.map{|pp| pp.user.profile.updated_at}.max] do %>
+
+    <%= render partial: "products/profile_product", collection: @profile_products, as: :product %>
+    
+  <% end %>
 </div>

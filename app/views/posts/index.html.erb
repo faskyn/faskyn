@@ -9,13 +9,15 @@
   <% end %>
   <% if policy(@post).create? %>
     <div class="post-create">
+
       <%= render 'new_form' %>
+      
     </div>
   <% end %>
   <div data-behavior="post-insert">
-    <% cache ["posts-index", @posts.map(&:id), @posts.map(&:updated_at).max, @posts.map {|post| post.user.profile.updated_at}.max] do %>
-      <%= render @posts %>
-    <% end %>
+      
+    <%= render @posts %>
+
   </div>
   <div id="infinite-post-scrolling">
     <%= will_paginate @posts %>

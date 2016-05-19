@@ -26,4 +26,25 @@ describe ApplicationController do
       end
     end
   end
+
+  describe "notifications redirection" do
+    before(:each) do
+      login_user
+    end
+    
+    let(:product) { create(:product, :product_with_nested_attrs, user: @user, created_at: DateTime.now - 6, updated_at: DateTime.now - 2) }
+    let!(:product_customer) { create(:product_customer, product: product) }
+
+    it "returns product path" do
+      notifiable_type = "Product"
+      notifiable_id = product.id
+      expect(subject.notification_redirection_path(notifiable_type, notifiable_id)).to eq("/products/#{product.id}#comment-panel")
+    end
+
+    it "returns product customer path" do
+      notifiable_type = "ProductCustomer"
+      notifiable_id = product_customer.id
+      expect(subject.notification_redirection_path(notifiable_type, notifiable_id)).to eq("/products/#{product.id}/product_customers/#{product_customer.id}#comment-panel")
+    end
+  end
 end

@@ -28,20 +28,19 @@ $(document).on("page:change", function() {
   };
 
   //showing edit/delete button to owner
-  if ($('.product-show').length > 0) {
+  if ($('.product-show-container').length > 0) {
     showProductEditDeleteButtons();
   };
 
   //cocoon gem inserting behavior
-  $(".usecase-well a.add_fields").data("association-insertion-method", 'prepend').data("association-insertion-node", '.usecase-fields');
   $(".customer-well a.add_fields").data("association-insertion-method", 'prepend').data("association-insertion-node", '.customer-fields');
   $(".lead-well a.add_fields").data("association-insertion-method", 'prepend').data("association-insertion-node", '.lead-fields');
 
 });
 
 function showProductEditDeleteButtons() {
-  if ($('.product-show').find('[data-behavior="edit-delete-product-buttons"]').data("product-user-id") == $('#body-current-user').data('currentuserid')) {
-    $('.product-show').find('[data-behavior="edit-delete-product-buttons"]').removeClass('hidden');
+  if ($('.product-show-container').find('[data-behavior="edit-delete-product-buttons"]').data("product-user-id") == $('#body-current-user').data('currentuserid')) {
+    $('.product-show-container').find('[data-behavior="edit-delete-product-buttons"]').removeClass('hidden');
   };
 };
 

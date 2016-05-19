@@ -24,7 +24,7 @@
         </tr>
       </thead>
       <tbody data-behavior="task-insert">
-        <% cache ['tasks-index', @tasks.map(&:id), @tasks.map(&:updated_at).max, @tasks.map{|task| task.assigner.profile.updated_at}.max, @tasks.map{|task| task.executor.profile.updated_at}.max] do %>
+        <% cache ['tasks-index', @tasks.map(&:id), @tasks.map(&:updated_at).max, @tasks.map{ |task| task.assigner.profile.updated_at }.max, @tasks.map{ |task| task.executor.profile.updated_at }.max] do %>
           <%= render @tasks %>
         <% end %>
       </tbody>

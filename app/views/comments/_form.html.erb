@@ -1,5 +1,9 @@
 <%= form_for([commentable, Comment.new], remote: true, html: { id: "comment-form-#{commentable.id}" }, data: { behavior: "comment-form" }) do |f| %>
   <div class="form-group comment-input">
-    <%= f.text_field :body, class: "form-control", id: "comment-text-area-#{commentable.id}", placeholder: "Comment something..", data: { commentableid: commentable.id, behavior: "comment-text-area" } %>
+    <% if commentable.class.name == "Post" %>
+      <%= f.text_field :body, class: "form-control", id: "comment-text-area-#{commentable.id}", placeholder: "Comment something..", data: { commentableid: commentable.id, behavior: "comment-text-area" } %>
+    <% else %>
+      <%= f.text_field :body, class: "form-control", id: "comment-text-area-#{commentable.id}", placeholder: "Ask something about the #{commentable.model_name.human.downcase}..." %>
+    <% end %>
   </div>
 <% end %>

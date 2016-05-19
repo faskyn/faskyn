@@ -64,7 +64,6 @@ describe ProductsController do
       
       it "assigns products" do
         expect(assigns(:product)).to eq(product)
-        expect(assigns(:product).product_usecases.size).to eq(1)
         expect(assigns(:product).industry_products.size).to eq(1)
       end
 
@@ -107,7 +106,6 @@ describe ProductsController do
         let!(:profile) { create(:profile, user: @user) }
         let!(:industry) { create(:industry) }
         let!(:attrs) { attributes_for(:product, user_id: @user.id, industry_ids: [ industry.id ]).merge(
-            product_usecases_attributes: [attributes_for(:product_usecase)],
             product_customers_attributes: [attributes_for(:product_customer)]
           )}
         subject(:create_action) { post :create, product: attrs }
@@ -127,9 +125,7 @@ describe ProductsController do
       context "with invalid attributes" do
         let!(:profile) { create(:profile, user: @user) }
         let!(:industry) { create(:industry) }
-        let!(:attrs) { attributes_for(:product, user_id: @user.id, name: nil, industry_ids: [ industry.id ]).merge(
-            product_usecases_attributes: [attributes_for(:product_usecase)]
-          ) }
+        let!(:attrs) { attributes_for(:product, user_id: @user.id, name: nil, industry_ids: [ industry.id ]) }
         subject(:create_action) { post :create, product: attrs }
 
         it "doesn't save the new product in the db" do

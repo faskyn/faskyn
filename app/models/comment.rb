@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  belongs_to :commentable, polymorphic: true, touch: true
+  belongs_to :commentable, polymorphic: true
   belongs_to :user
   has_one :user_profile, through: :user, source: :profile
   has_many :comment_replies, dependent: :destroy
@@ -10,6 +10,11 @@ class Comment < ActiveRecord::Base
   validates :body, presence: true, length: { maximum: 500 }
 
   scope :ordered, -> { order(updated_at: :desc) }
+  scope :with_profile, -> { includes(:user, :user_profile) }
+
+  def self.ordered_with_profile
+    ordered.with_profile
+  end
 
   def send_comment_creation_notification(commentable)
     commenters = ([commentable.user] + commentable.users).uniq - [ user ]

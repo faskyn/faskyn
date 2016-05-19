@@ -27,7 +27,7 @@ RSpec.describe Comment, type: :model do
     it { is_expected.to validate_length_of(:body).is_at_most(500) }
  
     it { is_expected.to belong_to(:user) }
-    it { is_expected.to belong_to(:commentable).touch }
+    it { is_expected.to belong_to(:commentable) }
     it { is_expected.to have_many(:comment_replies) }
     it { is_expected.to have_many(:users).through(:comment_replies) } 
   end
@@ -51,10 +51,21 @@ RSpec.describe Comment, type: :model do
     let(:comment) { create(:comment, commentable: commentable, user: comment_user) }
     let!(:other_comment) { create(:comment, commentable: commentable, user: other_user) }
     
-    it "send__comment_creation_notification" do
+    it "send_comment_creation_notification" do
       expect{
         comment.send_comment_creation_notification(commentable)
         }.to change{Notification.count}.by(2)
+    end
+  end
+
+  describe "class methods" do
+    let(:commentable) { create(:post) }
+    let(:user) { create(:user) }
+    let(:comment) { create(:comment, user: user, commentable: commentable, updated_at: DateTime.now - 3 ) }
+    let(:new_comment) { create(:comment, user: user, commentable: commentable, updated_at: DateTime.now - 2 ) }
+
+    it "ordered_with_profile" do
+      expect(Comment.ordered_with_profile).to eq([new_comment, comment])
     end
   end
 end

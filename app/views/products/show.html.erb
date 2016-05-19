@@ -5,11 +5,11 @@
       <% cache [@product, @product.user.profile] do %>
 
         <div class="row product-show-name">
-          <div class="col-md-7">
+          <div class="col-md-6">
             <%= image_tag @product.product_image_url(:base_thumb) %>
             <h3><%= @product.name.upcase %></h3>
           </div>
-          <div class="col-md-5" style="vertical-algin:middle;">
+          <div class="col-md-6" style="vertical-algin:middle;">
             <span class="hidden" data-behavior="edit-delete-product-buttons" data-product-user-id= "<%=@product.user_id %>">
               <%= link_to "Edit Product", edit_product_path(@product), class: "btn btn-primary" %>
               <button type="button" class="btn btn-danger delete-button" data-toggle="modal" data-target="#deleteproduct_<%= @product.id %>">Delete Product</button>
@@ -62,53 +62,45 @@
           </div>
         </div>
 
-        <div class="well product-well">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="product-list">
-                <div class= "list-name">Usecases:</div>
-                <ul>
-                  <% @product.product_usecases.each do |product_usecase| %>
-                    <li><%= product_usecase.example %> : <%= product_usecase.detail %></li>
-                  <% end %>
-                </ul>
+        <% if @product.product_customers.any? %>
+          <div class="well product-well">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="product-list">
+                  <div class= "list-name">Customers:</div>
+                  <ul>
+                    <% @product.product_customers.each do |product_customer| %>
+                      <%= link_to product_product_customer_path(@product, product_customer) do %>
+                        <li><%= product_customer.customer %> : <%= product_customer.usage %></li>
+                      <% end %>
+                    <% end %>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        <% end %>
 
-        <div class="well product-well">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="product-list">
-                <div class= "list-name">Customers:</div>
-                <ul>
-                  <% @product.product_customers.each do |product_customer| %>
-                    <li><%= product_customer.customer %> : <%= product_customer.usage %></li>
-                  <% end %>
-                </ul>
+        <% if @product.product_leads.any? %>
+          <div class="well product-well">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="product-list">
+                  <div class= "list-name">Potential leads:</div>
+                  <ul>
+                    <% @product.product_leads.each do |product_lead| %>
+                      <%= link_to product_product_lead_path(@product, product_lead) do %>
+                        <li><%= product_lead.lead %> : <%= product_lead.pitch %></li>
+                      <% end %>
+                    <% end %>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="well product-well">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="product-list">
-                <div class= "list-name">Potential leads:</div>
-                <ul>
-                  <% @product.product_leads.each do |product_lead| %>
-                    <li><%= product_lead.lead %> : <%= product_lead.pitch %></li>
-                  <% end %>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+        <% end %>
 
       <% end %>
-
 
       <div class="panel panel-default" id="comment-panel">
         <div class="panel-heading">
@@ -123,7 +115,7 @@
               </div>
             </div>
           </div>
-          <% if @product.comments.size > 3 %>
+          <% if @comments.size > 3 %>
             <div class="row open-all-comments-row" data-behavior="open-all-comments-row">
               <div class="col-md-12">
                 <div class="col-md-12">
@@ -136,12 +128,13 @@
         <div class="panel-body">
           <div class = "row">
             <div class="col-md-12" data-behavior="comment-insert-<%= @product.id%>">
-              <%= render partial: 'comments/comment', collection: @product.comments.ordered.includes(:user, :user_profile), as: :comment, locals: { commentable: @product } %>
+              <% cache ['comments-index-product', @comments.map(&:id), @comments.map(&:updated_at).max, @comments.map{ |comment| comment.user.profile.updated_at }.max] do %>
+                <%= render @comments %>
+              <% end %>
             </div>
           </div>
         </div>
       </div>
-
 
     </div> 
 </div>

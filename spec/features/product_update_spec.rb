@@ -11,10 +11,10 @@ feature "creating product" do
     sign_in(user)
     visit product_path(product)
     click_on "Edit Product"
-    fill_in "product[product_usecases_attributes][0][example]", with: "enterprise"
-    fill_in "product[product_usecases_attributes][0][detail]", with: "share what your business needs and find who can solve it"
+    fill_in "product[product_customers_attributes][0][customer]", with: "Faskyn"
+    fill_in "product[product_customers_attributes][0][usage]", with: "using the API to connect different services"
     click_on "Save product"
     expect(page).to have_content("Product was successfully updated!")
-    expect(page).to have_content("share what your business needs and find who can solve it")
+    expect(page).to have_content("using the API to connect different services")
   end
 end

@@ -50,7 +50,8 @@ else
       user.products.build(industry_ids: [ Industry.all.order("RANDOM()").first.id, Industry.all.order("RANDOM()").first.id ] , oneliner: Faker::Lorem.sentence(8), name: Faker::Commerce.product_name, company: Faker::Company.name, website: Faker::Internet.url, description: Faker::Lorem.sentence(24),
         #product_features_attributes: [{feature: Faker::Lorem.sentence}, feature: Faker::Lorem.sentence}],
         #product_competitions_attributes: [{competitor: Faker::Company.name, differentiator: Faker::Lorem.sentence(12)}, {competitor: Faker::Company.name, differentiator: Faker::Lorem.sentence(12)}],
-        product_usecases_attributes: [{example: Faker::Lorem.sentence(2), detail: Faker::Lorem.sentence(12)}, {example: Faker::Lorem.sentence(2), detail: Faker::Lorem.sentence(12) }])
+        #product_usecases_attributes: [{example: Faker::Lorem.sentence(2), detail: Faker::Lorem.sentence(12)}, {example: Faker::Lorem.sentence(2), detail: Faker::Lorem.sentence(12) }])
+        product_customers_attributes: [{customer: Faker::Company.name}, feature: Faker::Lorem.sentence}]
       user.product.save!
     end
   end

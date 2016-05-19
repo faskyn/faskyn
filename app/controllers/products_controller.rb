@@ -22,13 +22,13 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @comments = @product.comments.ordered_with_profile
   end
 
   def new
     @product = Product.new
     authorize @product
     @product.industry_products.build
-    @product.product_usecases.build
     @product.product_customers.build
     @product.product_leads.build
   end
@@ -83,7 +83,6 @@ class ProductsController < ApplicationController
     def product_params
       params.require(:product).permit(:product_image, :remove_product_image, :product_image_cache,
         :name, :website, :oneliner, :description, industry_ids: [],
-        product_usecases_attributes: [:id, :example, :detail, :_destroy],
         product_customers_attributes: [:id, :customer, :usage, :_destroy],
         product_leads_attributes: [:id, :lead, :pitch, :_destroy])
     end
