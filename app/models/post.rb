@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_one :user_profile, through: :user, source: :profile
   has_many :comments, as: :commentable, dependent: :destroy
-  has_many :users, through: :comments, source: :user
+  has_many :commenters, through: :comments, source: :user
 
   validates :user, presence: true
 

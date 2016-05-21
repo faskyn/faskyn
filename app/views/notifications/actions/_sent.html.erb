@@ -1,4 +1,4 @@
-<% cache ['notifications-index-single', notification, notification.sender] do %>
+<% cache ['notifications-index-single', notification, notification.sender.profile] do %>
 
   <% if notification.checked? %>
     <div class="notification-line notification-line-checked" data-nid="notification.id">
@@ -13,7 +13,7 @@
         </div>
         <div class="time">
           <% if notification.created_at.today? %>      
-              Sent at<%= local_time(notification.created_at, "%H:%M %p") %>
+              Sent at <%= local_time(notification.created_at, "%H:%M %p") %>
           <% else %>
               Sent at <%= local_time(notification.created_at, "%d %b %H:%M %p") %>
           <% end %>

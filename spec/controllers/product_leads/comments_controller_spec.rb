@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Posts::CommentsController do
+describe ProductLeads::CommentsController do
 
   describe "when user is logged in" do
     
@@ -13,12 +13,14 @@ describe Posts::CommentsController do
     end
 
     describe "POST create" do
-      let!(:user) { create(:user) }
+      let(:user) { create(:user) }
       let!(:profile) { create(:profile, user: @user) }
-      let!(:commentable) { create(:post, user: user) }
+      let(:product) { create(:product, :product_with_nested_attrs) }
+      let!(:product_user) { create(:product_user, product: product, user: user, role: "owner") }
+      let!(:commentable) { create(:product_lead, product: product) }
 
       context "with valid attributes" do
-        subject(:create_action) { xhr :post, :create, post_id: commentable, comment: attributes_for(:comment, commentable: commentable, user: @user) }
+        subject(:create_action) { xhr :post, :create, product_lead_id: commentable, comment: attributes_for(:comment, commentable: commentable, user: @user) }
 
         it "saves the new task in the db" do
           expect{ create_action }.to change{ Comment.count }.by(1)
@@ -41,7 +43,7 @@ describe Posts::CommentsController do
       end
 
       context "with invalid attributes" do
-        subject(:create_action) { xhr :post, :create, post_id: commentable, comment: attributes_for(:comment, commentable: commentable, user: @user, body: "") }
+        subject(:create_action) { xhr :post, :create, product_lead_id: commentable, comment: attributes_for(:comment, commentable: commentable, user: @user, body: "") }
 
         it "doesn't save the new product in the db" do
           expect{ create_action }.to_not change{ Comment.count }

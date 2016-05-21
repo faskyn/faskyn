@@ -39,7 +39,7 @@ $(document).on("page:change", function() {
 });
 
 function showProductEditDeleteButtons() {
-  if ($('.product-show-container').find('[data-behavior="edit-delete-product-buttons"]').data("product-user-id") == $('#body-current-user').data('currentuserid')) {
+  if ($('.product-show-container').find('[data-behavior="edit-delete-product-buttons"]').data("product-owner-id") == $('#body-current-user').data('currentuserid')) {
     $('.product-show-container').find('[data-behavior="edit-delete-product-buttons"]').removeClass('hidden');
   };
 };

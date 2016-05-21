@@ -2,10 +2,12 @@ class Product < ActiveRecord::Base
   include ActionView::Helpers::TextHelper
   mount_uploader :product_image, ProductImageUploader
 
-  belongs_to :user
+  has_many :users, through: :product_users
+  has_many :product_users, dependent: :destroy
+  has_many :owners, -> { where(product_users: { role: "owner" }) }, through: :product_users, source: :user
 
   has_many :comments, as: :commentable, dependent: :destroy
-  has_many :users, through: :comments, source: :user
+  has_many :commenters, through: :comments, source: :user
   
   has_many :industry_products, dependent: :destroy, inverse_of: :product
   has_many :industries, through: :industry_products
@@ -16,8 +18,6 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :product_customers, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :product_leads, reject_if: :all_blank, allow_destroy: true
 
-  validates :user, presence: true
-
   validates :name, presence: { message: "can't be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }, uniqueness: { message: "already exists" }
   validates :website, presence: { message: "can't be blank" }
   validates :oneliner, presence: { message: "can't be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
@@ -27,6 +27,7 @@ class Product < ActiveRecord::Base
   validates_associated :product_customers
   validates_associated :product_leads
 
+  validate :product_users_limit
   validate :product_industries_limit
   validate :product_customers_limit_max
   validate :product_leads_limit_max
@@ -37,6 +38,10 @@ class Product < ActiveRecord::Base
 
   def self.pagination_per_page
     12
+  end
+
+  def owner
+    owners.first
   end
 
   def industries_all
@@ -74,32 +79,38 @@ class Product < ActiveRecord::Base
     #   self.errors.add :website, "format is invalid!" unless website_valid?  
     # end
 
+    def product_users_limit(min: 1)
+      if product_users.size < min
+        errors.add :base, "There is no user associated!"
+      end
+    end
+
     def product_industries_limit(max: 5, min: 1)
-      if self.industries.reject(&:marked_for_destruction?).count > max
-        self.errors.add :base, "You can't choose more than #{pluralize(max, 'industry')}."
-      elsif self.industries.reject(&:marked_for_destruction?).count < min
-        self.errors.add :base, "You have to choose at least #{pluralize(min, 'industry')}."
+      if industries.reject(&:marked_for_destruction?).size > max
+        errors.add :base, "You can't choose more than #{pluralize(max, 'industry')}."
+      elsif industries.reject(&:marked_for_destruction?).size < min
+        errors.add :base, "You have to choose at least #{pluralize(min, 'industry')}."
       end
     end
 
     def product_customers_limit_max(max: 5)
-      if self.product_customers.reject(&:marked_for_destruction?).count > max
-        self.errors.add :base, "You can't add more than #{pluralize(max, 'customer')}."
+      if product_customers.reject(&:marked_for_destruction?).size > max
+        errors.add :base, "You can't add more than #{pluralize(max, 'customer')}."
       end
     end
 
     def product_leads_limit_max(max: 5)
-      if self.product_leads.reject(&:marked_for_destruction?).count > max
-        self.errors.add :base, "You can't add more than #{pluralize(max, 'potential lead')}."
+      if product_leads.reject(&:marked_for_destruction?).size > max
+        errors.add :base, "You can't add more than #{pluralize(max, 'potential lead')}."
       end
     end
 
     def product_customer_and_lead_limit_min(min: 1)
-      added_customer_count = self.product_customers.reject(&:marked_for_destruction?).count
-      added_lead_count = self.product_customers.reject(&:marked_for_destruction?).count
+      added_customer_count = product_customers.reject(&:marked_for_destruction?).size
+      added_lead_count = product_customers.reject(&:marked_for_destruction?).size
       added_customer_and_lead_count = added_customer_count + added_lead_count 
       if added_customer_and_lead_count < min
-        self.errors.add :base, "You have to add at least #{pluralize(min, 'current or potential customer')}."
+        errors.add :base, "You have to add at least #{pluralize(min, 'current or potential customer')}."
       end
     end
 end

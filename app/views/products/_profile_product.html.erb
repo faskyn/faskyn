@@ -1,4 +1,4 @@
-<% cache ['profile-product-single', product, product.user.profile] do %>
+<% cache ['profile-product-single', product, product.owner.profile] do %>
 
   <div class="panel panel-default product-panel">
 
@@ -17,8 +17,8 @@
         <div class="col-md-5">
           <div class="product-list">
             <div class="list-name">Posted_by:</div>
-            <div class="description"><%= link_to user_path(product.user) do %>
-              <%= product.user.full_name %>
+            <div class="description"><%= link_to user_profile_path(product.owner) do %>
+              <%= product.owner.full_name %>
             <% end %> </div>
           </div>
         </div>

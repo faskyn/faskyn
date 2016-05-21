@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :lockable,
+  devise :invitable, :database_authenticatable, :registerable, :lockable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   validates :email, presence: true
@@ -21,7 +21,10 @@ class User < ActiveRecord::Base
 
   has_many :notifications, foreign_key: "recipient_id", dependent: :destroy
 
-  has_many :products, dependent: :nullify
+  has_many :product_users
+  has_many :products, through: :product_users
+  has_many :own_products, -> { where(product_users: { role: "owner" }) }, through: :product_users, source: :product
+
   has_many :product_customers, through: :products
   has_many :product_leads, through: :products
 

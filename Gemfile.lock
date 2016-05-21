@@ -111,6 +111,9 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+    devise_invitable (1.6.0)
+      actionmailer (>= 3.2.6)
+      devise (>= 3.2.0)
     diff-lcs (1.2.5)
     domain_name (0.5.20160216)
       unf (>= 0.0.5, < 1.0.0)
@@ -582,6 +585,7 @@ DEPENDENCIES
   dalli (~> 2.7, >= 2.7.5)
   database_cleaner (~> 1.5, >= 1.5.1)
   devise (~> 4.1)
+  devise_invitable (~> 1.6)
   factory_girl_rails (~> 4.6)
   faker (~> 1.6, >= 1.6.1)
   figaro (~> 1.1.1)
@@ -647,5 +651,8 @@ DEPENDENCIES
   web-console (~> 2.0)
   will_paginate (~> 3.1)
 
+RUBY VERSION
+   ruby 2.3.1p112
+
 BUNDLED WITH
-   1.11.2
+   1.12.3

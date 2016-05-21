@@ -16,7 +16,7 @@ describe CommentsController do
     #   let!(:user) { create(:user) }
     #   let!(:profile) { create(:profile, user: @user) }
     #   let!(:commentable) { create(:post, user: @user) }
-    #   let!(:other_Comment) { create(:comment, commentable: commentable, user: user) }
+    #   let!(:other_comment) { create(:comment, commentable: commentable, user: user) }
 
     #   context "with valid attributes" do
     #     subject(:create_action) { xhr :post, :create, post_id: commentable, comment: attributes_for(:comment, commentable: commentable, user: @user) }
@@ -42,17 +42,17 @@ describe CommentsController do
     #     end
     #   end
 
-      # context "with invalid attributes" do
-      #   subject(:create_action) { xhr :post, :create, post_id: post_instance.id, post_comment: attributes_for(:post_comment, post_id: post_instance.id, user: @user, body: "") }
+    #   context "with invalid attributes" do
+    #     subject(:create_action) { xhr :post, :create, post_id: post_instance.id, post_comment: attributes_for(:post_comment, post_id: post_instance.id, user: @user, body: "") }
 
-      #   it "doesn't save the new product in the db" do
-      #     expect{ create_action }.to_not change{ PostComment.count }
-      #   end
+    #     it "doesn't save the new product in the db" do
+    #       expect{ create_action }.to_not change{ PostComment.count }
+    #     end
 
-      #   it "doesn't send notification" do
-      #     expect{ create_action }.to_not change{ Notification.count }
-      #   end
-      # end
+    #     it "doesn't send notification" do
+    #       expect{ create_action }.to_not change{ Notification.count }
+    #     end
+    #   end
     # end
 
     describe "PATCH update" do

@@ -18,8 +18,8 @@ describe ApplicationController do
     end
 
     context "set_sidebar_products" do
-      let!(:product) { create(:product, :product_with_nested_attrs, user: @user, created_at: DateTime.now - 6, updated_at: DateTime.now - 2) }
-      let!(:product_older) { create(:product, :product_with_nested_attrs, user: @user, created_at: DateTime.now - 6, updated_at: DateTime.now - 4) }
+      let!(:product) { create(:product, :product_with_nested_attrs, created_at: DateTime.now - 6, updated_at: DateTime.now - 2) }
+      let!(:product_older) { create(:product, :product_with_nested_attrs, created_at: DateTime.now - 6, updated_at: DateTime.now - 4) }
 
       it "assigns sidebar profiles" do
         expect(subject.set_sidebar_products).to include(product, product_older)
@@ -32,7 +32,7 @@ describe ApplicationController do
       login_user
     end
     
-    let(:product) { create(:product, :product_with_nested_attrs, user: @user, created_at: DateTime.now - 6, updated_at: DateTime.now - 2) }
+    let(:product) { create(:product, :product_with_nested_attrs, created_at: DateTime.now - 6, updated_at: DateTime.now - 2) }
     let!(:product_customer) { create(:product_customer, product: product) }
 
     it "returns product path" do

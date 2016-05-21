@@ -13,10 +13,10 @@ describe Products::CommentsController do
     end
 
     describe "POST create" do
-      let!(:user) { create(:user) }
+      let(:user) { create(:user) }
       let!(:profile) { create(:profile, user: @user) }
-      let!(:commentable) { create(:product, :product_with_nested_attrs, user: @user) }
-      let!(:other_Comment) { create(:comment, commentable: commentable, user: user) }
+      let(:commentable) { create(:product, :product_with_nested_attrs) }
+      let!(:product_user) { create(:product_user, product: commentable, user: user, role: "owner") }
 
       context "with valid attributes" do
         subject(:create_action) { xhr :post, :create, product_id: commentable, comment: attributes_for(:comment, commentable: commentable, user: @user) }
@@ -25,9 +25,9 @@ describe Products::CommentsController do
           expect{ create_action }.to change{ Comment.count }.by(1)
         end
 
-        it "sends notification" #do
-        #   expect{ create_action }.to change{ Notification.count }.by(1)
-        # end
+        it "sends notification" do
+          expect{ create_action }.to change{ Notification.count }.by(1)
+        end
 
         it "assigns instance variables" do
           create_action

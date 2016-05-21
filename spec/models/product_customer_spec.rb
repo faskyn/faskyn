@@ -29,11 +29,12 @@ RSpec.describe ProductCustomer, type: :model do
 
   describe "instance methods" do
     let(:user) { create(:user) }
-    let(:product) { create(:product, :product_with_nested_attrs, user: user) }
+    let(:product) { create(:product, :product_with_nested_attrs) }
+    let!(:product_user) { create(:product_user, user: user, product: product, role: "owner") }
     let!(:product_customer) { create(:product_customer, product: product) }
 
     it "returns product user" do
-      expect(product_customer.user).to eq(user)
+      expect(product_customer.owner).to eq(user)
     end
   end
 end

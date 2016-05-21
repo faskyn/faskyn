@@ -16,15 +16,15 @@ class ProductPolicy < ApplicationPolicy
   end
 
   def edit?
-    user.present? && user == product.user
+    user.present? && user == product.owner
   end
 
   def update?
-    user.present? && user == product.user
+    user.present? && user == product.owner
   end
 
   def destroy?
-    user.present? && user == product.user
+    user.present? && user == product.owner
   end
 
   private

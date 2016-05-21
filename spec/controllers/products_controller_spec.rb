@@ -22,7 +22,7 @@ describe ProductsController do
 
     describe "GET index" do
       let!(:profile) { create(:profile, user: @user) }
-      let!(:product) { create(:product, :product_with_nested_attrs, user: @user) }
+      let!(:product) { create(:product, :product_with_nested_attrs) }
       before(:each) do
         get :index
       end
@@ -38,9 +38,10 @@ describe ProductsController do
     describe "GET own_products" do
       let!(:profile) { create(:profile, user: @user) }
       let!(:user) { create(:user) }
+      let!(:product_user) { create(:product_user, user_id: @user.id, product_id: product.id, role: "owner") }
       let!(:profile_other) { create(:profile, user: user) }
-      let!(:product) { create(:product, :product_with_nested_attrs, user: @user) }
-      let!(:product_other) { create(:product, :product_with_nested_attrs, user: user) }
+      let(:product) { create(:product, :product_with_nested_attrs) }
+      let!(:product_other) { create(:product, :product_with_nested_attrs) }
       before(:each) do
         get :own_products, user_id: @user.id
       end
@@ -57,7 +58,8 @@ describe ProductsController do
 
     describe "GET show" do
       let!(:profile) { create(:profile, user: @user) }
-      let!(:product) { create(:product, :product_with_nested_attrs, user: @user) }
+      let(:product) { create(:product, :product_with_nested_attrs) }
+      let!(:product_user) { create(:product_user, user_id: @user.id, product_id: product.id, role: "owner") }
       before(:each) do
         get :show, id: product
       end
@@ -87,7 +89,8 @@ describe ProductsController do
 
     describe "GET edit" do
       let!(:profile) { create(:profile, user: @user) }
-      let!(:product) { create(:product, :product_with_nested_attrs, user: @user) }
+      let(:product) { create(:product, :product_with_nested_attrs) }
+      let!(:product_user) { create(:product_user, user_id: @user.id, product_id: product.id, role: "owner") }
       before(:each) do
         get :edit, id: product.id
       end
@@ -109,7 +112,6 @@ describe ProductsController do
             product_customers_attributes: [attributes_for(:product_customer)]
           )}
         subject(:create_action) { post :create, product: attrs }
-        # let!(:product) { build(:product, :product_with_nested_attrs, user: @user) }
 
         it "saves the new product in the db" do
           expect{ create_action }.to change{ Product.count }.by(1)
@@ -141,10 +143,8 @@ describe ProductsController do
     describe "PATCH update" do
       let!(:profile) { create(:profile, user: @user) }
       let!(:industry) { create(:industry) }
-      # let!(:product) { create(:product, user_id: @user.id, industry_ids: [ industry.id ]).merge(
-      #     product_usecases_attributes: [attributes_for(:product_usecase)]
-      #   ) }
-      let!(:product) { create(:product, :product_with_nested_attrs, user_id: @user.id, name: "Test Product", description: "Original Description") }
+      let(:product) { create(:product, :product_with_nested_attrs, name: "Test Product", description: "Original Description") }
+      let!(:product_user) { create(:product_user, user_id: @user.id, product_id: product.id, role: "owner") }
 
       context "with valid attributes" do
 
@@ -184,7 +184,8 @@ describe ProductsController do
     end
 
     describe "DELETE destroy" do
-      let!(:product) { create(:product, :product_with_nested_attrs, user_id: @user.id) }
+      let(:product) { create(:product, :product_with_nested_attrs) }
+      let!(:product_user) { create(:product_user, user_id: @user.id, product_id: product.id, role: "owner") }
       subject(:destroy_action) { delete :destroy, id: product.id }
 
       it "destroys the product" do

@@ -3,7 +3,7 @@
 <div class= "container-fluid product-container">
   <div class="product-customer-lead-container" >
 
-  <% cache [@product_lead, @product_lead.user.profile] do %>
+  <% cache [@product_lead, @product_lead.owner.profile] do %>
 
     <div class="panel panel-default product-panel" data-behavior="commentable_<%= @product_lead.id %>">
 

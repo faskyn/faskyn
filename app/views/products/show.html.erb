@@ -2,7 +2,7 @@
 <div class= "container-fluid product-container">
     <div class="product-show-container" data-behavior="commentable_<%= @product.id %>">
 
-      <% cache [@product, @product.user.profile] do %>
+      <% cache [@product, @product.owner.profile] do %>
 
         <div class="row product-show-name">
           <div class="col-md-6">
@@ -10,7 +10,7 @@
             <h3><%= @product.name.upcase %></h3>
           </div>
           <div class="col-md-6" style="vertical-algin:middle;">
-            <span class="hidden" data-behavior="edit-delete-product-buttons" data-product-user-id= "<%=@product.user_id %>">
+            <span class="hidden" data-behavior="edit-delete-product-buttons" data-product-owner-id= "<%=@product.owner.id %>">
               <%= link_to "Edit Product", edit_product_path(@product), class: "btn btn-primary" %>
               <button type="button" class="btn btn-danger delete-button" data-toggle="modal" data-target="#deleteproduct_<%= @product.id %>">Delete Product</button>
             </span>
@@ -38,8 +38,8 @@
             <div class="col-md-4 posted-by-column">
               <div class="product-list">
                 <div class="list-name">Posted_by:</div>
-                <div class="description"><%= link_to user_path(@product.user) do %>
-                  <%= @product.user.full_name %>
+                <div class="description"><%= link_to user_path(@product.owner) do %>
+                  <%= @product.owners.first.full_name %>
                 <% end %> </div>
               </div>
             </div>
@@ -57,6 +57,23 @@
               <div class = "product-list">
                   <div class = "list-name">Description:</div>
                   <div class = "big-description"><%= @product.description %></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="well product-well">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="product-list">
+                <div class= "list-name">Creators:</div>
+                <ul>
+                  <% @product.users.each do | product_user| %>
+                    <%= link_to user_profile_path(product_user) do %>
+                      <li><%= product_user.full_name %></li>
+                    <% end %>
+                  <% end %>
+                </ul>
               </div>
             </div>
           </div>

@@ -46,6 +46,7 @@ gem 'faker', '~> 1.6', '>= 1.6.1'
 gem 'figaro', '~> 1.1.1'
 #qucik authentication and authorization
 gem 'devise', '~> 4.1'
+gem 'devise_invitable', '~> 1.6'
 gem 'pundit', '~> 1.1'
 #image and file uploading+AWS S3 storage
 gem 'carrierwave', '~> 0.10.0'

@@ -17,8 +17,13 @@ class Comment < ActiveRecord::Base
   end
 
   def send_comment_creation_notification(commentable)
-    commenters = ([commentable.user] + commentable.users).uniq - [ user ]
-    commenters.each do | commenter |
+    if commentable_type == "Post"
+      commentable_user = commentable.user
+    else
+      commentable_user = commentable.owner
+    end
+    commented = ([commentable_user] + commentable.commenters).uniq - [ user ]
+    commented.each do | commenter |
       Notification.create(recipient_id: commenter.id, sender_id: user_id, notifiable: commentable, action: "commented")
     end
   end

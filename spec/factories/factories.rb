@@ -1,8 +1,6 @@
 FactoryGirl.define do
   factory :user do
-    #email { Faker::Internet.email }
     sequence(:email) { |n| "example#{n}@gmail.com" }
-    #sequence(:email) { Faker::Internet.email }
     confirmed_at { Faker::Time.between(DateTime.now - 1, DateTime.now - 2) }
     password 'example0000'
     password_confirmation 'example0000'
@@ -99,12 +97,6 @@ FactoryGirl.define do
     user
   end
 
-  # factory :product_usecase, class: ProductUsecase do
-  #   example { Faker::Lorem.sentence(3) }
-  #   detail { Faker::Lorem.paragraph }
-  #   #product
-  # end
-
   factory :product_customer, class: ProductCustomer do
     customer { Faker::Company.name }
     usage { Faker::Lorem.paragraph }
@@ -114,32 +106,32 @@ FactoryGirl.define do
   factory :product_lead, class: ProductLead do
     lead { Faker::Company.name }
     pitch { Faker::Lorem.paragraph }
-    #product
   end
-
 
   factory :industry, class: Industry do
     name "AI"
   end
 
   factory :industry_product, class: IndustryProduct do
-    #product
     industry
   end
 
+  factory :product_user do
+    role "member"
+    user
+  end
+
   factory :product, class: Product do
-    #name { Faker::Commerce.product_name }
     sequence(:name) { |n| "ABC_#{n}" }
     website { 'https://example.com' }
     oneliner { Faker::Lorem.sentence }
     description { Faker::Lorem.paragraph }
-    user
     trait :product_with_nested_attrs do
       before(:create) do |product|
-        #product.product_usecases << build(:product_usecase, product: product)
         product.product_customers << build(:product_customer, product: product)
         product.product_leads << build(:product_lead, product: product)
         product.industries << build(:industry)
+        product.product_users << build(:product_user)
       end
     end
   end
