@@ -15,6 +15,6 @@ else
   json.profile_image_url notification.sender.profile.avatar.url(:small_thumb)
 end
 json.what do
-  json.did "#{notification.action} you to join a #{notification.notifiable.model_name.human.downcase}"
+  json.did "#{notification.action} you to join a #{notification.notifiable_type.downcase}"
 end
 json.url dropdown_checking_decreasing_user_notifications_path(current_user, notifiable_type: notification.notifiable_type, notifiable_id: notification.notifiable_id, action: notification.action)

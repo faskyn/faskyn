@@ -9,7 +9,7 @@
       <%= image_tag notification.sender.avatar.url(:small_thumb), class: 'notification-index-avatar' %>
       <span>
         <div class="subject">
-          <%= notification.sender.full_name %> has <%= notification.action %> you to join a <%= notification.notifiable.model_name.human.downcase %> as a team member.
+          <%= notification.sender.full_name %> has <%= notification.action %> you to join a <%= notification.notifiable_type.downcase %> as a team member.
         </div>
         <div class="time">
           <% if notification.created_at.today? %>      

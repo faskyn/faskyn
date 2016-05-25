@@ -9,7 +9,7 @@
       <%= image_tag notification.sender.avatar.url(:small_thumb), class: 'notification-index-avatar' %>
       <span>
         <div class="subject">
-          <%= notification.sender.full_name %> has <%= notification.action %> on a <%= notification.notifiable.model_name.human.downcase %> you are following.
+          <%= notification.sender.full_name %> has <%= notification.action %> on a <%= notification.notifiable_type.downcase %> you are following.
         </div>
         <div class="time">
           <% if notification.created_at.today? %>      
