@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "creating product" do
+feature "updating product" do
   let!(:industry) { create(:industry, name: "AI") }
   let!(:industry_2) { create(:industry, name: "Education") }
   let(:user) { create(:user) }

@@ -9,6 +9,7 @@ class Rack::Attack
     # end
     #puts env
     [429, {'Retry-After' => retry_after.to_s}, [ActionView::Base.new.render(file: 'public/429.html', content_type: 'text/html')]]
+    # match "/hello" => proc { |env| [200, {}, "#{env['rack.session']['flash']['error']}"] }, :as => :hello
     # if env["HTTP_X_REQUESTED_WITH"] && env["HTTP_X_REQUESTED_WITH"] == "XMLHttpRequest"
     #   [429, {'Retry-After' => retry_after.to_s}, [window.location.href = '/429.html', content_type: 'application/javascript']]
     # else

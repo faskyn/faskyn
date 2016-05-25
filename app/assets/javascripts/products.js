@@ -44,8 +44,14 @@ function showProductEditDeleteButtons() {
   };
 };
 
-// function showPostEditDropdown($container) {
-//   if ($container.find('[data-behavior="edit-post-dropdown-button"]').data('postauthorid') == $('#body-current-user').data('currentuserid')) {
-//     $container.find('[data-behavior="edit-post-dropdown-button"]').removeClass('hidden');
-//   };
-// };
+//deleting product user via modal
+$(document).on('click', '[data-behavior="open-delete-product-user-modal"]', function (event) {
+  var productUserDeleteLink = $(this).data("productuserdeletelink");
+  $('[data-behavior="delete-product-user-submit"]').attr("href", productUserDeleteLink);
+});
+
+//deleting product invitation via modal
+$(document).on('click', '[data-behavior="open-delete-product-invitation-modal"]', function (event) {
+  var productInvitationDeleteLink = $(this).data("productinvitationdeletelink");
+  $('[data-behavior="delete-product-invitation-submit"]').attr("href", productInvitationDeleteLink);
+});

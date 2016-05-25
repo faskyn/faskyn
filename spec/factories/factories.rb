@@ -121,6 +121,10 @@ FactoryGirl.define do
     user
   end
 
+  factory :product_invitation do
+    accepted false
+  end
+
   factory :product, class: Product do
     sequence(:name) { |n| "ABC_#{n}" }
     website { 'https://example.com' }

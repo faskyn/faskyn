@@ -18,6 +18,12 @@ $(document).on("page:change", function() {
   }
 });
 
+//making flash hidden if user clicks anywhere
+$(document).on('click', window, function() {
+  var alert = $('.alert.flash-alert');
+  alert.hide();
+});
+
 
 //making whole tr linkable
 $(document).on('click', 'tr[data-link]', function() {

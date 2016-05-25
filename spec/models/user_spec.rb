@@ -52,98 +52,112 @@ RSpec.describe User, type: :model do
   end
 
   describe "instance methods" do
-    let(:sender) { create(:user) }
-    let(:user) { create(:user) }
-    let(:post) { create(:post) }
-    let(:chat_notification) { create(:notification, notifiable_type: "Message", recipient: user, sender: sender, checked_at: nil) }
-    let(:task_notification) { create(:notification, notifiable_type: "Task", recipient: user, sender: sender, checked_at: nil) }
-    let(:post_notification) { create(:notification, notifiable_type: "Post", recipient: user, sender: sender, checked_at: nil, notifiable_id: post.id)}
+    describe "notification methods" do
+      let(:sender) { create(:user) }
+      let(:user) { create(:user) }
+      let(:post) { create(:post) }
+      let(:chat_notification) { create(:notification, notifiable_type: "Message", recipient: user, sender: sender, checked_at: nil) }
+      let(:task_notification) { create(:notification, notifiable_type: "Task", recipient: user, sender: sender, checked_at: nil) }
+      let(:post_notification) { create(:notification, notifiable_type: "Post", recipient: user, sender: sender, checked_at: nil, notifiable_id: post.id)}
 
-    it "decreasing_chat_notification_number" do
-      expect(user).to receive(:checking_and_decreasing_notification).with(chat_notification)
-      user.decreasing_chat_notification_number(sender)
-    end
-
-    it "decreasing_task_notification_number" do
-      expect(user).to receive(:checking_and_decreasing_notification).with(task_notification)
-      user.decreasing_task_notification_number(sender)
-    end
-
-    it "decreasing_post_notification_number" do
-      expect(user).to receive(:checking_and_decreasing_notification).with(post_notification)
-      user.decreasing_comment_notification_number("Post", post.id)
-    end
-
-    it "checking_and_decreasing_notification with chat notification" do
-      expect(chat_notification).to receive(:check_notification)
-      expect(user).to receive(:decrease_new_chat_notifications)
-      expect(user).to receive(:decreased_chat_number_pusher)
-      user.checking_and_decreasing_notification(chat_notification)
-    end
-
-    it "checking_and_decreasing_notification with other notification" do
-      expect(task_notification).to receive(:check_notification)
-      expect(user).to receive(:decrease_new_other_notifications)
-      expect(user).to receive(:decreased_other_number_pusher)
-      user.checking_and_decreasing_notification(task_notification)
-    end
-
-    it "increase_new_chat_notifications" do
-      expect{user.increase_new_chat_notifications}.to change{user.new_chat_notification}.by(1)
-    end
-
-    context "decrease_new_other_notifications" do
-      it "doesn't decrease the number if 0" do
-        user.new_chat_notification = 0
-        expect{user.decrease_new_chat_notifications}.to change{user.new_chat_notification}.by(0)
+      it "decreasing_chat_notification_number" do
+        expect(user).to receive(:checking_and_decreasing_notification).with(chat_notification)
+        user.decreasing_chat_notification_number(sender)
       end
 
-      it "decrease the number if greater than 0" do
-        user.new_chat_notification = 1
-        expect{user.decrease_new_chat_notifications}.to change{user.new_chat_notification}.by(-1)
+      it "decreasing_task_notification_number" do
+        expect(user).to receive(:checking_and_decreasing_notification).with(task_notification)
+        user.decreasing_task_notification_number(sender)
+      end
+
+      it "decreasing_post_notification_number" do
+        expect(user).to receive(:checking_and_decreasing_notification).with(post_notification)
+        user.decreasing_comment_notification_number("Post", post.id)
+      end
+
+      it "checking_and_decreasing_notification with chat notification" do
+        expect(chat_notification).to receive(:check_notification)
+        expect(user).to receive(:decrease_new_chat_notifications)
+        expect(user).to receive(:decreased_chat_number_pusher)
+        user.checking_and_decreasing_notification(chat_notification)
+      end
+
+      it "checking_and_decreasing_notification with other notification" do
+        expect(task_notification).to receive(:check_notification)
+        expect(user).to receive(:decrease_new_other_notifications)
+        expect(user).to receive(:decreased_other_number_pusher)
+        user.checking_and_decreasing_notification(task_notification)
+      end
+
+      it "increase_new_chat_notifications" do
+        expect{user.increase_new_chat_notifications}.to change{user.new_chat_notification}.by(1)
+      end
+
+      context "decrease_new_other_notifications" do
+        it "doesn't decrease the number if 0" do
+          user.new_chat_notification = 0
+          expect{user.decrease_new_chat_notifications}.to change{user.new_chat_notification}.by(0)
+        end
+
+        it "decrease the number if greater than 0" do
+          user.new_chat_notification = 1
+          expect{user.decrease_new_chat_notifications}.to change{user.new_chat_notification}.by(-1)
+        end
+      end
+
+      it "reset_new_chat_notifications" do
+        user.new_chat_notification = 2
+        number = user.new_chat_notification
+        expect{user.reset_new_chat_notifications}.to change{user.new_chat_notification}.by(-number)
+      end
+
+      it "increase_new_other_notifications" do
+        expect{user.increase_new_other_notifications}.to change{user.new_other_notification}.by(1)
+      end
+
+      context "decrease_new_other_notifications" do
+        it "doesn't decrease the number if 0" do
+          user.new_other_notification = 0
+          expect{user.decrease_new_other_notifications}.to change{user.new_other_notification}.by(0)
+        end
+
+        it "decrease the number if greater than 0" do
+          user.new_other_notification = 1
+          expect{user.decrease_new_other_notifications}.to change{user.new_other_notification}.by(-1)
+        end
+      end
+
+      it "reset_new_other_notifications" do
+        user.new_other_notification = 2
+        number = user.new_other_notification
+        expect{user.reset_new_other_notifications}.to change{user.new_other_notification}.by(-number)
+      end
+
+      it "decreased_chat_number_pusher" do
+        user.new_chat_notification = 3
+        number = user.new_chat_notification
+        expect(Pusher).to receive(:trigger_async).with(('private-' + user.id.to_s), 'new_chat_notification', {number: number} )
+        user.decreased_chat_number_pusher
+      end
+
+      it "decreased_other_number_pusher" do
+        user.new_other_notification = 4
+        number = user.new_other_notification
+        expect(Pusher).to receive(:trigger_async).with(('private-' + user.id.to_s), 'new_other_notification', {number: number} )
+        user.decreased_other_number_pusher
       end
     end
 
-    it "reset_new_chat_notifications" do
-      user.new_chat_notification = 2
-      number = user.new_chat_notification
-      expect{user.reset_new_chat_notifications}.to change{user.new_chat_notification}.by(-number)
-    end
-
-    it "increase_new_other_notifications" do
-      expect{user.increase_new_other_notifications}.to change{user.new_other_notification}.by(1)
-    end
-
-    context "decrease_new_other_notifications" do
-      it "doesn't decrease the number if 0" do
-        user.new_other_notification = 0
-        expect{user.decrease_new_other_notifications}.to change{user.new_other_notification}.by(0)
+    describe "product invitation methods" do
+      let(:owner) { create(:user) }
+      let(:no_member) { create(:user) }
+      let(:product) { create(:product, :product_with_nested_attrs) }
+      let!(:product_user) { create(:product_user, product: product, user: owner, role: "owner") }
+      
+      it "is invited or a team member?" do
+       expect(owner.is_invited_or_team_member?(product)).to eq(true)
+       expect(no_member.is_invited_or_team_member?(product)).to eq(false)
       end
-
-      it "decrease the number if greater than 0" do
-        user.new_other_notification = 1
-        expect{user.decrease_new_other_notifications}.to change{user.new_other_notification}.by(-1)
-      end
-    end
-
-    it "reset_new_other_notifications" do
-      user.new_other_notification = 2
-      number = user.new_other_notification
-      expect{user.reset_new_other_notifications}.to change{user.new_other_notification}.by(-number)
-    end
-
-    it "decreased_chat_number_pusher" do
-      user.new_chat_notification = 3
-      number = user.new_chat_notification
-      expect(Pusher).to receive(:trigger_async).with(('private-' + user.id.to_s), 'new_chat_notification', {number: number} )
-      user.decreased_chat_number_pusher
-    end
-
-    it "decreased_other_number_pusher" do
-      user.new_other_notification = 4
-      number = user.new_other_notification
-      expect(Pusher).to receive(:trigger_async).with(('private-' + user.id.to_s), 'new_other_notification', {number: number} )
-      user.decreased_other_number_pusher
     end
   end
 end

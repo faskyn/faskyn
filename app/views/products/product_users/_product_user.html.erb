@@ -1,0 +1,17 @@
+ <tr>
+  <td class = "col-md-6">
+    <%= link_to user_path(product_user.user) do %>
+      <div class="table-user-name">
+        <%= product_user.user.full_name %>
+      </div>
+    <% end %>
+  </td>
+  <td class="col-md-3">
+    <%= product_user.role %>
+  </td>
+  <td class="col-md-1">
+    <% unless product_user.role == "owner" %>
+      <a href="#" data-toggle="modal" role="button" data-target="#delete-product-user-modal" data-behavior="open-delete-product-user-modal" data-productuserdeletelink="<%= product_product_user_path(product, product_user) %>">Remove User</a>
+    <% end %>
+  </td>  
+</tr>

@@ -19,5 +19,4 @@ class UserPolicy < ApplicationPolicy
   def index_own_products?
     user.present? && user.id == record.id
   end
-
 end

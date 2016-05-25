@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_and_authorize_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_and_authorize_product, only: [:show, :edit, :update, :destroy, :product_members]
 
   def index
     @products = Product.order(created_at: :desc).paginate(page: params[:page], per_page: Product.pagination_per_page)
@@ -39,12 +39,12 @@ class ProductsController < ApplicationController
     authorize @product
     if @product.save
       respond_to do |format|
-        format.html { redirect_to @product, notice: "Product got created!" }
+        format.html { redirect_to new_product_product_invitation_path(@product), notice: "Product got created!" }
         format.js
       end
     else
       respond_to do |format|
-        format.html { render action: :new, alert: "Product couldn't be created!" }
+        format.html { render :new }
         format.js
       end
     end
@@ -69,13 +69,9 @@ class ProductsController < ApplicationController
 
   def destroy
     if @product.destroy
-      respond_to do |format|
-        format.html { redirect_to products_path, notice: "Product got deleted!"}
-      end
+      redirect_to products_path, notice: "Product got deleted!"
     else
-      respond_to do |format|
-        format.html { redirect_to products_path, notice: "Product couldn't be deleted!"}
-      end
+      redirect_to products_path, notice: "Product couldn't be deleted!"
     end
   end
 

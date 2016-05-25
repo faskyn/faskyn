@@ -8,20 +8,25 @@ post_creation:
   period: 600
   path: /posts
 
-post_comment_creation:
+comment_creation:
   limit: 5
   period: 45
-  path: /post_comments
+  path: /comments
 
-post_comment_reply_creation:
+comment_reply_creation:
   limit: 5
   period: 45
-  path: /post_comment_replies
+  path: /comment_replies
 
 messages_creation:
   limit: 20
   period: 10
   path: /messages
+
+product_invitation_creation:
+  limit: 5
+  period: 60
+  path: /product_invitations
 
 default:
   limit: 10

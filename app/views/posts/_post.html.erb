@@ -39,7 +39,7 @@
                 <%= link_to "Edit Post", edit_post_path(post), remote: true, type: "button", 'data-toggle' => "modal", 'data-target' => "#update-post-modal", data: { posteditlink: edit_post_path(post), behavior: "open-edit-post-modal" } %>
               </li>   
               <li>
-                <a href="#" data-toggle="modal" role="button" data-target="#delete-post-modal" data-behavior="open-delete-post-modal" data-postdeletelink="<%=post_path(post) %>">Delete Post</a>
+                <a href="#" data-toggle="modal" role="button" data-target="#delete-post-modal" data-behavior="open-delete-post-modal" data-postdeletelink="<%= post_path(post) %>">Delete Post</a>
               </li>
             </ul>
           </li>

@@ -27,11 +27,11 @@ class User < ActiveRecord::Base
 
   has_many :product_customers, through: :products
   has_many :product_leads, through: :products
+  has_many :product_invitations, foreign_key: "recipient_id", dependent: :destroy
 
   has_many :posts
   has_many :comments
   has_many :comment_replies, through: :comments
-
   
   #check and decrease chat notification that happens between 2 given users (max 1)
   def decreasing_chat_notification_number(user)
@@ -95,5 +95,14 @@ class User < ActiveRecord::Base
 
   def decreased_other_number_pusher( number = new_other_notification)
     Pusher.trigger_async('private-'+ id.to_s, 'new_other_notification', { number: number })
+  end
+
+  def is_invited_or_team_member?(product)
+    if product.users.where("user_id = ?", self.id).any? || 
+      product.product_invitations.where("recipient_id = ?", self.id).any?
+      true
+    else
+      false
+    end
   end
 end

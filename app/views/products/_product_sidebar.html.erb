@@ -14,10 +14,10 @@
                 <li>
                   <%= image_tag(product.product_image.url(:small_thumb), class: "product-image") %>
                   <span class="element-name">
-                    <%= truncate(product.name, length: 25) %>
+                    <%= truncate(product.name, length: 23) %>
                   </span>
                   <span class="second-element-name">
-                    <%= truncate(product.oneliner, length:25) %>
+                    <%= truncate(product.oneliner, length:23) %>
                   </span>
                 </li>
               </div>

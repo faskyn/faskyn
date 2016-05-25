@@ -19,6 +19,8 @@ feature "creating product" do
     fill_in "product[product_customers_attributes][0][usage]", with: "B2B distribution for their flagship product"
     click_on "Save product"
     expect(page).to have_content("Product got created!")
+    expect(page).to have_content("Invite a New Member")
+    click_on "Skip and go to product page"
     expect(page).to have_content("AI, Education")
     expect(page).to have_content("B2B distribution for their flagship product")
   end

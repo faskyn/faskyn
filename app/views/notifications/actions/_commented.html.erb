@@ -5,7 +5,7 @@
   <% else %>
     <div class ="notification-line notification-line-unchecked" data-nid="notification.id">
   <% end %>
-    <%= link_to dropdown_checking_decreasing_user_notifications_path(current_user, notifiable_type: notification.notifiable_type, notifiable_id: notification.notifiable_id) do %>
+    <%= link_to dropdown_checking_decreasing_user_notifications_path(current_user, notifiable_type: notification.notifiable_type, notifiable_id: notification.notifiable_id, action: notification.action) do %>
       <%= image_tag notification.sender.avatar.url(:small_thumb), class: 'notification-index-avatar' %>
       <span>
         <div class="subject">

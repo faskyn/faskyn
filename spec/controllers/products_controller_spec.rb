@@ -26,6 +26,10 @@ describe ProductsController do
       before(:each) do
         get :index
       end
+
+      it "avatar not nil for show" do
+        expect(@user.avatar).to_not be_nil
+      end
         
       it "assigns products" do
         expect(assigns(:products)).to eq([product])
@@ -58,10 +62,14 @@ describe ProductsController do
 
     describe "GET show" do
       let!(:profile) { create(:profile, user: @user) }
-      let(:product) { create(:product, :product_with_nested_attrs) }
-      let!(:product_user) { create(:product_user, user_id: @user.id, product_id: product.id, role: "owner") }
+      let!(:product_user) { create(:product_user, user: @user, product: product, role: "owner") }
+      let!(:product) { create(:product, :product_with_nested_attrs) }
       before(:each) do
         get :show, id: product
+      end
+
+      it "avatar not nil for show" do
+        expect(@user.avatar).to_not be_nil
       end
       
       it "assigns products" do
@@ -119,7 +127,7 @@ describe ProductsController do
 
         it "redirects to product page and shows the flash" do
           create_action
-          expect(response).to redirect_to product_path(Product.last)
+          expect(response).to redirect_to new_product_product_invitation_path(Product.last)
           expect(controller).to set_flash[:notice].to("Product got created!")
         end
       end

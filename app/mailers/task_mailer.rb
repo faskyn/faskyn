@@ -5,7 +5,7 @@ class TaskMailer < ActionMailer::Base
     @executor = executor
     @assigner = assigner
 
-    mail(from: 'faskyn@gmail.com',
+    mail(from: "faskyn@gmail.com",
          to: "#{executor.email}",
          subject: "[Faskyn] New task from #{assigner.profile.full_name}"
          )

@@ -10,7 +10,12 @@ class CommentReply < ActiveRecord::Base
   scope :ordered, -> { order(updated_at: :asc) }
 
   def send_comment_reply_creation_notification(comment)
-    repliers = ([comment.user] + [comment.commentable.user] + comment.users).uniq - [ user ]
+    if comment.commentable_type == "Post"
+      commentable_user = comment.commentable.user
+    else
+      commentable_user = comment.commentable.owner
+    end
+    repliers = ([comment.user] + [commentable_user] + comment.users).uniq - [ user ]
     repliers.each do |replier|
       Notification.create(recipient_id: replier.id, sender_id: user_id, notifiable: comment.commentable, action: "commented")
     end

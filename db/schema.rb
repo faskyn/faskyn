@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160520140941) do
+ActiveRecord::Schema.define(version: 20160523155604) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,6 +153,19 @@ ActiveRecord::Schema.define(version: 20160520140941) do
 
   add_index "product_features", ["product_id"], name: "index_product_features_on_product_id", using: :btree
 
+  create_table "product_invitations", force: :cascade do |t|
+    t.integer  "product_id",                   null: false
+    t.integer  "recipient_id",                 null: false
+    t.integer  "sender_id",                    null: false
+    t.boolean  "accepted",     default: false, null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "product_invitations", ["product_id"], name: "index_product_invitations_on_product_id", using: :btree
+  add_index "product_invitations", ["recipient_id"], name: "index_product_invitations_on_recipient_id", using: :btree
+  add_index "product_invitations", ["sender_id"], name: "index_product_invitations_on_sender_id", using: :btree
+
   create_table "product_leads", force: :cascade do |t|
     t.integer  "product_id", null: false
     t.string   "lead",       null: false
@@ -174,9 +187,11 @@ ActiveRecord::Schema.define(version: 20160520140941) do
   add_index "product_usecases", ["product_id"], name: "index_product_usecases_on_product_id", using: :btree
 
   create_table "product_users", force: :cascade do |t|
-    t.integer "user_id",    null: false
-    t.integer "product_id", null: false
-    t.string  "role",       null: false
+    t.integer  "user_id",    null: false
+    t.integer  "product_id", null: false
+    t.string   "role",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "product_users", ["product_id"], name: "index_product_users_on_product_id", using: :btree
@@ -310,6 +325,9 @@ ActiveRecord::Schema.define(version: 20160520140941) do
   add_foreign_key "product_competitions", "products"
   add_foreign_key "product_customers", "products"
   add_foreign_key "product_features", "products"
+  add_foreign_key "product_invitations", "products"
+  add_foreign_key "product_invitations", "users", column: "recipient_id"
+  add_foreign_key "product_invitations", "users", column: "sender_id"
   add_foreign_key "product_leads", "products"
   add_foreign_key "product_usecases", "products"
   add_foreign_key "product_users", "products"

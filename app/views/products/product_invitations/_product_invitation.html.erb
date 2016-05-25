@@ -1,0 +1,23 @@
+<tr>
+  <td class="col-md-3">
+    <%= product_invitation.recipient.email %>
+  <td class="col-md-3">
+    <% if product_invitation.recipient.profile %>
+      <%= link_to user_path(product_invitation.recipient) do %>
+        <div class="table-user-name">
+          <%= product_invitation.recipient.full_name %>
+        </div>
+      <% end %>
+    <% end %>
+  </td>
+  <td class="col-md-3">
+    <% if product_invitation.accepted == true %>
+      Accepted
+    <% else %>
+      Pending
+    <% end %>
+  </td>
+  <td class="col-md-3">
+    <a href="#" data-toggle="modal" role="button" data-target="#delete-product-invitation-modal" data-behavior="open-delete-product-invitation-modal" data-productinvitationdeletelink="<%= product_product_invitation_path(product, product_invitation) %>">Delete Invitation</a>
+  </td>  
+</tr>

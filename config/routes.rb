@@ -48,6 +48,12 @@ Rails.application.routes.draw do
   end
 
   resources :products do
+    resources :product_invitations, only: [:new, :create, :destroy], module: :products do
+      member do
+        patch :accept
+      end
+    end
+    resources :product_users, only: [:index, :destroy], module: :products
     resources :comments, only: :create, module: :products
     resources :product_customers, only: [:show], module: :products
     resources :product_leads, only: [:show], module: :products
