@@ -1,39 +1,7 @@
 <% provide(:title, @product.name + " members") %>
 <div class= "container-fluid product-container">
   <div class="product-show-container">
-    <h4>Product Members</h4>
-    <div class="panel panel-default" style="margin-bottom:25px;">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th class="col-md-6">Name</th>
-            <th class="col-md-3">Role</th>
-            <th class="col-md-3">Remove</th>
-          </tr>
-        </thead>
-        <tbody>
-          <%= render partial: "products/product_users/product_user", collection: @product_users, as: :product_user, locals: { product: @product } %>
-        </tbody>
-      </table>
-    </div>
-
-    <h4>Product Member Invitations</h4>
-    <div class="panel panel-default" style="margin-bottom:25px;">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th class="col-md-3">Email</th>
-            <th class="col-md-3">Name</th>
-            <th class="col-md-3">Status</th>
-            <th class="col-md-3">Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          <%= render partial: "products/product_invitations/product_invitation", collection: @product_invitations, as: :product_invitation, locals: { product: @product } %>
-        </tbody>
-      </table>
-    </div>
-
+    
     <h4>Invite a New Member</h4>
     <%= form_for([@product, ProductInvitation.new]) do |f| %>
       <div class= "row">
@@ -54,6 +22,39 @@
         </div>
       </div>
     <% end %>
+
+    <h4>Product Members</h4>
+    <div class="panel panel-default product-users-panel">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th class="col-md-6">Name</th>
+            <th class="col-md-3">Role</th>
+            <th class="col-md-3">Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: "products/product_users/product_user", collection: @product_users, as: :product_user, locals: { product: @product } %>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Product Member Invitations</h4>
+    <div class="panel panel-default product-users-panel">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th class="col-md-3">Email</th>
+            <th class="col-md-3">Name</th>
+            <th class="col-md-3">Status</th>
+            <th class="col-md-3">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: "products/product_invitations/product_invitation", collection: @product_invitations, as: :product_invitation, locals: { product: @product } %>
+        </tbody>
+      </table>
+    </div>
 
   </div>
 </div>

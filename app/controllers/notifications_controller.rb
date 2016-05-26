@@ -32,9 +32,9 @@ class NotificationsController < ApplicationController
     respond_to :json
   end
 
-  def dropdown_checking_decreasing
+  def checking_decreasing
     current_user.decreasing_comment_notification_number(params[:notifiable_type], params[:notifiable_id])
-    redirect_to notification_redirection_path(params[:notifiable_type], params[:notifiable_id])
+    redirect_to notification_redirection_path(params[:notifiable_type], params[:notifiable_id], params[:notification_action])
   end
 
   private

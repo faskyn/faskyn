@@ -97,17 +97,17 @@ describe NotificationsController do
       it { is_expected.to respond_with 200 }
     end
 
-    context "GET dropdown_checking_decreasing" do
+    context "GET checking_decreasing" do
       let!(:post) { create(:post, user: @user,) }
-      let!(:notification) { create(:notification, sender: user, recipient: @user, notifiable_type: "Post", notifiable_id: post.id) }
+      let!(:notification) { create(:notification, sender: user, recipient: @user, notifiable_type: "Post", notifiable_id: post.id, action: "commented") }
 
       # it "invokes decreasing_comment_notification_number on current user" do
       #   expect(@user).to receive(:decreasing_comment_notification_number).with("Post", post.id)
-      #   get :dropdown_checking_decreasing, user_id: @user.id, notifiable_type: notification.notifiable_type, notifiable_id: notification.notifiable_id
+      #   get :checking_decreasing, user_id: @user.id, notifiable_type: notification.notifiable_type, notifiable_id: notification.notifiable_id
       # end
 
       it "redirects to notifiable" do
-        get :dropdown_checking_decreasing, user_id: @user.id, notifiable_type: notification.notifiable_type, notifiable_id: notification.notifiable_id
+        get :checking_decreasing, user_id: @user.id, notifiable_type: notification.notifiable_type, notifiable_id: notification.notifiable_id, notification_action: notification.action
         expect(response).to redirect_to "/posts#post_#{notification.notifiable_id}"
       end
     end

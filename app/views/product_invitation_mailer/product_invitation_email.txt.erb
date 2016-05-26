@@ -3,7 +3,7 @@ Hi <%= @product_invitation.recipient.first_name %>,
 <% else %>
 Hi there,
 <% end %>
-<%= @product_invitation.sender.full_name %> has invited you to join the <%= @product_invitation.product %> team.
+<%= @product_invitation.sender.full_name %> has invited you to join the <%= @product_invitation.product.name %> team.
 
 You can accept the invitation on the <%= link_to "product page", product_url(@product_invitation.product) %>.
 

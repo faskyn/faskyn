@@ -17,4 +17,4 @@ end
 json.what do
   json.did "#{notification.action} you to join a #{notification.notifiable_type.downcase}"
 end
-json.url dropdown_checking_decreasing_user_notifications_path(current_user, notifiable_type: notification.notifiable_type, notifiable_id: notification.notifiable_id, action: notification.action)
+json.url checking_decreasing_user_notifications_path(current_user, notifiable_type: notification.notifiable_type, notifiable_id: notification.notifiable_id, notification_action: notification.action)

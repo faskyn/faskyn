@@ -185,6 +185,11 @@ $light-grey: #f7f7f7; //super light background color
   }
 }
 
+.pending-product-invitation-row {
+  padding-bottom:20px;
+  text-align:center;
+}
+
 .product-index-list {
   .product-index-row {
     &:hover {
@@ -278,4 +283,21 @@ $light-grey: #f7f7f7; //super light background color
     background: white;
     cursor: inherit;
     display: block;
+}
+
+.product-user-row {
+  padding-top:20px;
+}
+
+.product-user-avatar {
+  border-radius: 10%;
+  margin-right: 5px;
+}
+
+.product-delete-button {
+  margin-left: 10px;
+}
+
+.product-users-panel {
+  margin-bottom:25px;
 }

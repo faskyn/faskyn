@@ -8,11 +8,7 @@
   <div class = "other-notifications-index">
     <% cache ['other-notifications-index', @other_notifications.map(&:id), @other_notifications.map(&:updated_at).max, @other_notifications.map{|noti| noti.sender.profile.updated_at}.max] do %>
 
-      <% @other_notifications.each do |notification| %>
-        <% if lookup_context.template_exists?(notification.action, "notifications/actions", true) %>
-          <%= render partial: "notifications/actions/#{notification.action}", locals: { notification: notification } %>
-        <% end %>
-      <% end %>
+      <%= render @other_notifications %>
 
     <% end %>
   </div>

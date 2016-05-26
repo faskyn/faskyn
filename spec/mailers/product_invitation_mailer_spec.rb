@@ -31,6 +31,10 @@ RSpec.describe ProductInvitationMailer, type: :mailer do
       expect(mail.body.encoded).to match(product_invitation.sender.full_name)
     end
 
+    it "assigns the product name" do
+      expect(mail.body.encoded).to match(product_invitation.product.name)
+    end
+
     it "assigns product page" do
       expect(mail.body.encoded).to match("/products/#{product.id}")
     end
