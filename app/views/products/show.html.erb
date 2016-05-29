@@ -88,7 +88,7 @@
               <div class="product-list">
                 <div class= "list-name">Creators:</div>
                 <ul>
-                  <% @product.users.each_slice(2) do |user_row| %>
+                  <% @users.each_slice(2) do |user_row| %>
                     <div class="row product-user-row">
                       <% user_row.each do |user| %>
                         <%= link_to user_profile_path(user) do %>
@@ -114,9 +114,15 @@
                   <div class= "list-name">Customers:</div>
                   <ul>
                     <% @product.product_customers.each do |product_customer| %>
-                      <%= link_to product_product_customer_path(@product, product_customer) do %>
-                        <li><%= product_customer.customer %> : <%= product_customer.usage %></li>
-                      <% end %>
+                      <li>
+                        <%= link_to product_customer.website, target: "_blank" do %>
+                          <%= product_customer.customer %>
+                        <% end %>
+                        : 
+                        <%= link_to product_product_customer_path(@product, product_customer) do %>
+                          <%= product_customer.usage %>
+                        <% end %>
+                      </li>
                     <% end %>
                   </ul>
                 </div>

@@ -13,13 +13,18 @@ FactoryGirl.define do
     last_name { "Doe" }
     job_title { Faker::Name.title }
     company { "Faskyn" }
-    avatar { Faker::Avatar.image }
+    avatar { "default.png" }
     location { Faker::Address.city }
     description { Faker::Lorem.sentence }
     phone_number { Faker::PhoneNumber.cell_phone }
+    created_at  { DateTime.now - 4 }
+    updated_at { DateTime.now - 2 }
     # image.image  fixture_file_upload( Rails.root + 'spec/fixtures/images/example.jpg', "image/jpg")
     # image.caption           "Some random caption"
     user
+    # after :create do |b|
+    #   b.update_column(:avatar, "default.png")
+    # end
   end
 
   factory :social do
@@ -100,6 +105,7 @@ FactoryGirl.define do
   factory :product_customer, class: ProductCustomer do
     customer { Faker::Company.name }
     usage { Faker::Lorem.paragraph }
+    website { 'https://examplecustomer.com' }
     #product
   end
 

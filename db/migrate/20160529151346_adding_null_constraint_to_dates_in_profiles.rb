@@ -1,0 +1,11 @@
+class AddingNullConstraintToDatesInProfiles < ActiveRecord::Migration
+  def up
+    change_column_null :profiles, :created_at, false
+    change_column_null :profiles, :updated_at, false
+  end
+
+  def down
+    change_column_null :profiles, :created_at, true
+    change_column_null :profiles, :updated_at, true
+  end
+end

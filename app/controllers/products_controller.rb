@@ -22,6 +22,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @users = @product.users
     @comments = @product.comments.ordered_with_profile
   end
 
@@ -80,7 +81,7 @@ class ProductsController < ApplicationController
     def product_params
       params.require(:product).permit(:product_image, :remove_product_image, :product_image_cache,
         :name, :website, :oneliner, :description, industry_ids: [], user_ids: [],
-        product_customers_attributes: [:id, :customer, :usage, :_destroy],
+        product_customers_attributes: [:id, :customer, :usage, :website, :_destroy],
         product_leads_attributes: [:id, :lead, :pitch, :_destroy])
     end
 

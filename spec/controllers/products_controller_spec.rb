@@ -50,6 +50,10 @@ describe ProductsController do
         get :own_products, user_id: @user.id
       end
 
+      it "avatar not nil for show" do
+        expect(@user.avatar).to_not be_nil
+      end
+
       it "assigns own products" do
         expect(assigns(:user)).to eq(@user)
         expect(assigns(:products)).to eq([product])

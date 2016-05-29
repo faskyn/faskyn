@@ -20,6 +20,7 @@ RSpec.describe ProductCustomer, type: :model do
 
     it { is_expected.to validate_presence_of(:customer).with_message(/can't be blank/) }
     it { is_expected.to validate_presence_of(:usage).with_message(/can't be blank/) }
+    #it { is_expected.to validate_presence_of(:website).with_message(/can't be blank/) }
     it { is_expected.to validate_length_of(:customer).is_at_most(80).with_message(/can't be longer than 80 characters/) }
     it { is_expected.to validate_presence_of(:product) }
     

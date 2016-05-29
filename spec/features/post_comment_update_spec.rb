@@ -4,7 +4,7 @@ feature "updating post comment" do
   let(:user) { create(:user) }
   let!(:profile) { create(:profile, user: user) }
   let(:other_user) { create(:user) }
-  let!(:other_profile) { create(:profile, user: other_user ) }
+  let!(:other_profile) { create(:profile, user: other_user) }
   let(:commentable) { create(:post, user: user, body: "original body") }
   let!(:comment) { create(:comment, commentable: commentable, user: user, body: "original comment body") }
   let!(:other_comment ) { create(:comment, commentable: commentable, user: other_user, body: "original other comment body") }
