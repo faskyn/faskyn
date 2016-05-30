@@ -16,7 +16,7 @@ describe Products::ProductInvitationsController do
       let(:product) { create(:product, :product_with_nested_attrs) }
       let!(:owner) { create(:product_user, product_id: product.id, role: "owner", user_id: @user.id) }
       before(:each) do
-        request.env["HTTP_REFERER"] = product_product_users_path(product)
+        request.env["HTTP_REFERER"] = product_product_owner_panels_path(product)
       end
 
       context "with vaild attributes" do
@@ -38,7 +38,7 @@ describe Products::ProductInvitationsController do
 
           it "redirects to back and shows the flash" do
             create_action
-            expect(response).to redirect_to product_product_users_path(product)
+            expect(response).to redirect_to product_product_owner_panels_path(product)
             expect(controller).to set_flash[:alert].to("User already invited or team member!")
           end
         end
@@ -66,7 +66,7 @@ describe Products::ProductInvitationsController do
 
           it "redirects to back and shows the flash" do
             create_action
-            expect(response).to redirect_to product_product_users_path(product)
+            expect(response).to redirect_to product_product_owner_panels_path(product)
             expect(controller).to set_flash[:notice].to("Invitation sent!")
           end
         end
@@ -93,7 +93,7 @@ describe Products::ProductInvitationsController do
 
           it "redirects to back with flash" do
             create_action
-            expect(response).to redirect_to product_product_users_path(product)
+            expect(response).to redirect_to product_product_owner_panels_path(product)
             expect(controller).to set_flash[:notice].to("Invitation sent!")
           end
         end
@@ -104,13 +104,13 @@ describe Products::ProductInvitationsController do
         let!(:owner) { create(:product_user, product_id: product.id, role: "owner", user_id: @user.id) }
         let(:attrs) { attributes_for(:product_user, sender_id: @user.id, email: "") }
         before(:each) do
-          request.env["HTTP_REFERER"] = product_product_users_path(product)
+          request.env["HTTP_REFERER"] = product_product_owner_panels_path(product)
         end
         subject(:create_action) { post :create, product_id: product.id, product_invitation: attrs }
 
         it "redirects to back with flash" do
           create_action
-          expect(response).to redirect_to product_product_users_path(product)
+          expect(response).to redirect_to product_product_owner_panels_path(product)
           expect(controller).to set_flash[:error].to("Type an email address!")
         end
       end
@@ -155,7 +155,7 @@ describe Products::ProductInvitationsController do
       let!(:product_invitation) { create(:product_invitation, product_id: product.id,
         sender_id: sender.id, recipient_id: @user.id, email: @user.email) }
       before(:each) do
-        request.env["HTTP_REFERER"] = product_product_users_path(product)
+        request.env["HTTP_REFERER"] = product_product_owner_panels_path(product)
       end
       subject(:destroy_action) { delete :destroy, product_id: product.id, id: product_invitation.id }
 
@@ -165,7 +165,7 @@ describe Products::ProductInvitationsController do
 
       it "redirects to referer" do
         destroy_action
-        expect(response).to redirect_to product_product_users_path(product)
+        expect(response).to redirect_to product_product_owner_panels_path(product)
         expect(controller).to set_flash[:notice].to("Invitation got deleted!")
       end
     end

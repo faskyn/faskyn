@@ -39,6 +39,12 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:posts) }
     it { is_expected.to have_many(:comments) }
     it { is_expected.to have_many(:comment_replies) }
+    it { is_expected.to have_many(:product_customer_users) }
+    it { is_expected.to have_many(:referencable_product_customers).through(:product_customer_users) }
+    it { is_expected.to have_many(:product_users) }
+    it { is_expected.to have_many(:products).through(:product_users) }
+    it { is_expected.to have_many(:own_products).through(:product_users) }
+    it { is_expected.to have_many(:product_invitations) }
 
     it { is_expected.to delegate_method(:first_name).to(:profile) }
     it { is_expected.to delegate_method(:last_name).to(:profile) }

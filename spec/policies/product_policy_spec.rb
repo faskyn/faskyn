@@ -46,6 +46,14 @@ describe ProductPolicy do
         expect(subject).to_not permit(other_user, product)
       end
     end
+
+    permissions :index_product_owner_panels? do
+
+      it "only allows access for owner" do
+        expect(subject).to permit(user, product)
+        expect(subject).to_not permit(other_user, product)
+      end
+    end
   end
 
   describe "policies belongs to product user" do
@@ -56,14 +64,6 @@ describe ProductPolicy do
     let(:product) { create(:product, :product_with_nested_attrs) }
     let!(:owner_product_user) { create(:product_user, user_id: owner.id, product: product, role: "owner") }
     let(:member_product_user) { build_stubbed(:product_user, user_id: member.id, product: product, role: "member") }
-
-    permissions :index_product_users? do
-
-      it "only allows access for owner" do
-        expect(subject).to permit(owner, product)
-        expect(subject).to_not permit(member, product)
-      end
-    end
 
     permissions :destroy_product_users? do
       it "allows access for owner and member" do

@@ -10,8 +10,7 @@ feature "creating product invitation" do
 
   scenario "successfully invites non faskyn user" do
     sign_in(user)
-    visit product_path(product)
-    click_on "Manage Members"
+    visit product_product_owner_panels_path(product)
     fill_in "product_invitation[email]", with: "not_registered_yet@gmail.com"
     click_on "Invite a New Member"
     expect(page).to have_content("Invitation sent!")
@@ -21,8 +20,7 @@ feature "creating product invitation" do
 
   scenario "successfully invites faskyn user" do
     sign_in(user)
-    visit product_path(product)
-    click_on "Manage Members"
+    visit product_product_owner_panels_path(product)
     fill_in "product_invitation[email]", with: "jackblack@gmail.com"
     click_on "Invite a New Member"
     expect(page).to have_content("Invitation sent!")

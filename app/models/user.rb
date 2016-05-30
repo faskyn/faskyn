@@ -25,9 +25,13 @@ class User < ActiveRecord::Base
   has_many :products, through: :product_users
   has_many :own_products, -> { where(product_users: { role: "owner" }) }, through: :product_users, source: :product
 
-  has_many :product_customers, through: :products
-  has_many :product_leads, through: :products
+  has_many :referencable_product_customers, through: :product_customer_users, source: :product_customer
+  has_many :product_customer_users
+
+  #has_many :product_customers, through: :products
+  #has_many :product_leads, through: :products
   has_many :product_invitations, foreign_key: "recipient_id", dependent: :destroy
+  #has_many :sent_product_invitations, foreign_key: "sender_id", dependdent: : destroy
 
   has_many :posts
   has_many :comments

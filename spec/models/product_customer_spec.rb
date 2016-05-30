@@ -20,12 +20,14 @@ RSpec.describe ProductCustomer, type: :model do
 
     it { is_expected.to validate_presence_of(:customer).with_message(/can't be blank/) }
     it { is_expected.to validate_presence_of(:usage).with_message(/can't be blank/) }
-    #it { is_expected.to validate_presence_of(:website).with_message(/can't be blank/) }
+    it { is_expected.to validate_presence_of(:website).with_message(/can't be blank/) }
     it { is_expected.to validate_length_of(:customer).is_at_most(80).with_message(/can't be longer than 80 characters/) }
     it { is_expected.to validate_presence_of(:product) }
     
     it { is_expected.to belong_to(:product).touch }
     it { is_expected.to have_many(:comments) }
+    it { is_expected.to have_many(:product_customer_users) }
+    it { is_expected.to have_many(:product_referencers).through(:product_customer_users) }
   end
 
   describe "instance methods" do

@@ -53,10 +53,15 @@ Rails.application.routes.draw do
         patch :accept
       end
     end
-    resources :product_users, only: [:index, :destroy], module: :products
+    resources :product_owner_panels, only: :index, module: :products
+    resources :product_users, only: :destroy, module: :products
     resources :comments, only: :create, module: :products
     resources :product_customers, only: [:show], module: :products
     resources :product_leads, only: [:show], module: :products
+  end
+
+  resources :product_customers, only: [] do
+    resources :product_customer_users, only: :destroy, module: :product_customers
   end
 
   resources :product_customers, only: [] do

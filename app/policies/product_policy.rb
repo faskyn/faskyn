@@ -27,7 +27,7 @@ class ProductPolicy < ApplicationPolicy
     user.present? && user == product.owner
   end
 
-  def index_product_users?
+  def index_product_owner_panels?
     user.present? && user == product.owner
   end
 

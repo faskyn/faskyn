@@ -3,6 +3,7 @@
   <div class="product-show-container">
     
     <h4>Invite a New Member</h4>
+    <p>Product members will appear on the product's page alongside the product owner.</p>
     <%= form_for([@product, ProductInvitation.new]) do |f| %>
       <div class= "row">
         <div class="col-md-6">
@@ -17,7 +18,7 @@
         </div>
         <div class="col-md-6">
           <div class="form-group">
-            <%= f.button "Invite a New Member", class: "btn btn-primary", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i>Sending Invitation..."} %>
+            <%= f.button "Invite a New Member", class: "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i>Sending Invitation..." } %>
           </div>
         </div>
       </div>
@@ -52,6 +53,24 @@
         </thead>
         <tbody>
           <%= render partial: "products/product_invitations/product_invitation", collection: @product_invitations, as: :product_invitation, locals: { product: @product } %>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Product Referencers</h4>
+    <p>Product referencers (persons) can verify they are using your product and 
+    can write reviews on the product customer page.</p>
+    <div class="panel panel-default product-users-panel">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th class="col-md-6">Name</th>
+            <th class="col-md-3">Customer case</th>
+            <th class="col-md-3">Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: "products/product_customer_users/product_customer_user", collection: @product_customer_users, as: :product_customer_user %>
         </tbody>
       </table>
     </div>
@@ -103,5 +122,24 @@
   </div>
 </div>
 
+<!-- DELETE PRODUCT CUSTOMER REFERENCER MODAL -->
 
-
+<div class="modal fade" id="delete-product-customer-user-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="text-align:left">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Remove User from Product Customer Referencers</h4>
+      </div>
+      <div class="modal-body">
+        <h4>Are you sure?</h4>
+        <p> </p>  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="deleteproductcustomeruserclose">Close</button>
+        <a href="#" type="button" class="btn btn-danger" data-method="delete" data-behavior="delete-product-customer-user-submit" data-productuserdestroylink >Remove User</a>
+          <!-- DESTROY LINK GETS INSERTED HERE -->      
+      </div>
+    </div>
+  </div>
+</div>

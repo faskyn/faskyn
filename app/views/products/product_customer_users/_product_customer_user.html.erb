@@ -1,0 +1,15 @@
+<tr>
+  <td class = "col-md-6">
+    <%= link_to user_path(product_customer_user.user) do %>
+      <div class="table-user-name">
+        <%= product_customer_user.user.full_name %>
+      </div>
+    <% end %>
+  </td>
+  <td class="col-md-3">
+    <%= product_customer_user.product_customer.customer %>
+  </td>
+  <td class="col-md-1">
+    <a href="#" data-toggle="modal" role="button" data-target="#delete-product-customer-user-modal" data-behavior="open-delete-product-customer-user-modal" data-productcustomeruserdeletelink="<%= product_customer_product_customer_user_path(product_customer_user.product_customer, product_customer_user) %>">Remove User</a>
+  </td>  
+</tr>

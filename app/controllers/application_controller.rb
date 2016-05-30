@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
     elsif action == "invited"
       product_path(notifiable_id, anchor: "product-invitation-well")
     elsif action == "accepted"
-      product_product_users_path(notifiable_id)
+      product_product_owner_panels_path(notifiable_id)
     end
   end
 

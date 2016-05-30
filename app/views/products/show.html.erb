@@ -32,7 +32,7 @@
           <div class="col-md-6" style="text-align:right">
             <span class="hidden" data-behavior="edit-delete-product-buttons" data-product-owner-id= "<%=@product.owner.id %>">
               <%= link_to "Edit Product", edit_product_path(@product), class: "btn btn-primary" %>
-              <%= link_to "Manage Members", product_product_users_path(@product), class: "btn btn-primary" %>
+              <%= link_to "Manage Access", product_product_owner_panels_path(@product), class: "btn btn-primary" %>
             </span>
           </div>
         </div>
@@ -115,13 +115,16 @@
                   <ul>
                     <% @product.product_customers.each do |product_customer| %>
                       <li>
-                        <%= link_to product_customer.website, target: "_blank" do %>
-                          <%= product_customer.customer %>
-                        <% end %>
-                        : 
-                        <%= link_to product_product_customer_path(@product, product_customer) do %>
-                          <%= product_customer.usage %>
-                        <% end %>
+                        <div class="product-customer-customer">
+                          <%= link_to product_customer.website, target: "_blank" do %>
+                            <%= product_customer.customer %>
+                          <% end %>
+                        </div>
+                        <div class="product-customer-usage">
+                          <%= link_to product_product_customer_path(@product, product_customer) do %>
+                            <%= product_customer.usage %>
+                          <% end %>
+                        </div>
                       </li>
                     <% end %>
                   </ul>
@@ -139,9 +142,16 @@
                   <div class= "list-name">Potential leads:</div>
                   <ul>
                     <% @product.product_leads.each do |product_lead| %>
-                      <%= link_to product_product_lead_path(@product, product_lead) do %>
-                        <li><%= product_lead.lead %> : <%= product_lead.pitch %></li>
-                      <% end %>
+                      <li>
+                        <div class="product-lead-lead">
+                          <%= product_lead.lead %>
+                        </div>
+                        <div class="product-lead-pitch">
+                          <%= link_to product_product_lead_path(@product, product_lead) do %>
+                            <%= product_lead.pitch %>
+                          <% end %>
+                        </div>
+                      </li>
                     <% end %>
                   </ul>
                 </div>

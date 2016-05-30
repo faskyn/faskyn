@@ -12,6 +12,7 @@ class Product < ActiveRecord::Base
   has_many :industry_products, dependent: :destroy, inverse_of: :product
   has_many :industries, through: :industry_products
   has_many :product_customers, dependent: :destroy, inverse_of: :product
+  has_many :product_customer_users, through: :product_customers
   has_many :product_leads, dependent: :destroy, inverse_of: :product
   has_many :product_invitations, dependent: :destroy
 

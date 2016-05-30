@@ -3,9 +3,12 @@ class ProductCustomer < ActiveRecord::Base
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :commenters, through: :comments, source: :user
 
+  has_many :product_referencers, through: :product_customer_users, source: :user
+  has_many :product_customer_users
+
   validates :customer, presence: { message: "can't be blank" }, length: { maximum: 80, message: "can't be longer than 80 characters" }
   validates :usage, presence: { message: "can't be blank" }
-  #validates :website, presence: { message: "can't be blank" }
+  validates :website, presence: { message: "can't be blank" }
 
   validates :product, presence: true
 

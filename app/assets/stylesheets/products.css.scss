@@ -262,6 +262,12 @@ $light-grey: #f7f7f7; //super light background color
   .adding-extra {
     padding-top:10px;
   }
+  .product-customer-customer, .product-lead-lead {
+    padding-top: 15px;
+  }
+  .product-customer-usage, .product-lead-pitch {
+    padding: 5px 0px 5px 15px; 
+  }
 }
 
 .btn-product-image {

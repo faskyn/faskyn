@@ -1,13 +1,7 @@
 class Products::ProductUsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_product
-  before_action :set_product_user, only: :destroy
-
-  def index
-    authorize @product, :index_product_users?
-    @product_users = @product.product_users.order(created_at: :desc)
-    @product_invitations = @product.product_invitations.order(created_at: :desc)
-  end
+  before_action :set_product_user
 
   def destroy
     authorize @product, :destroy_product_users?

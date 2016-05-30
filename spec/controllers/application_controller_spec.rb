@@ -39,7 +39,7 @@ describe ApplicationController do
       notifiable_type = "Product"
       notifiable_id = product.id
       notification_action = "accepted"
-      expect(subject.notification_redirection_path(notifiable_type, notifiable_id, notification_action)).to eq("/products/#{product.id}/product_users")
+      expect(subject.notification_redirection_path(notifiable_type, notifiable_id, notification_action)).to eq("/products/#{product.id}/product_owner_panels")
     end
 
     it "returns product customer path" do

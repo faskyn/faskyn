@@ -127,6 +127,10 @@ FactoryGirl.define do
     user
   end
 
+  factory :product_customer_user do
+    user
+  end
+
   factory :product_invitation do
     accepted false
   end

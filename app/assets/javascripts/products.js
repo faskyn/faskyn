@@ -55,3 +55,9 @@ $(document).on('click', '[data-behavior="open-delete-product-invitation-modal"]'
   var productInvitationDeleteLink = $(this).data("productinvitationdeletelink");
   $('[data-behavior="delete-product-invitation-submit"]').attr("href", productInvitationDeleteLink);
 });
+
+//deleting product customer user via modal
+$(document).on('click', '[data-behavior="open-delete-product-customer-user-modal"]', function (event) {
+  var productCustomerUserDeleteLink = $(this).data("productcustomeruserdeletelink");
+  $('[data-behavior="delete-product-customer-user-submit"]').attr("href", productCustomerUserDeleteLink);
+});
