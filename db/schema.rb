@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160530103719) do
+ActiveRecord::Schema.define(version: 20160530171007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,17 +103,6 @@ ActiveRecord::Schema.define(version: 20160530103719) do
   add_index "notifications", ["recipient_id"], name: "index_notifications_on_recipient_id", using: :btree
   add_index "notifications", ["sender_id"], name: "index_notifications_on_sender_id", using: :btree
 
-  create_table "post_replies", force: :cascade do |t|
-    t.integer  "post_id"
-    t.integer  "post_comment_id"
-    t.string   "body"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  add_index "post_replies", ["post_comment_id"], name: "index_post_replies_on_post_comment_id", using: :btree
-  add_index "post_replies", ["post_id"], name: "index_post_replies_on_post_id", using: :btree
-
   create_table "posts", force: :cascade do |t|
     t.integer  "user_id",    null: false
     t.text     "body",       null: false
@@ -123,16 +112,6 @@ ActiveRecord::Schema.define(version: 20160530103719) do
   end
 
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
-
-  create_table "product_competitions", force: :cascade do |t|
-    t.integer  "product_id",     null: false
-    t.string   "competitor",     null: false
-    t.text     "differentiator", null: false
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  add_index "product_competitions", ["product_id"], name: "index_product_competitions_on_product_id", using: :btree
 
   create_table "product_customer_users", force: :cascade do |t|
     t.integer  "user_id",             null: false
@@ -154,15 +133,6 @@ ActiveRecord::Schema.define(version: 20160530103719) do
   end
 
   add_index "product_customers", ["product_id"], name: "index_product_customers_on_product_id", using: :btree
-
-  create_table "product_features", force: :cascade do |t|
-    t.integer  "product_id", null: false
-    t.string   "feature",    null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "product_features", ["product_id"], name: "index_product_features_on_product_id", using: :btree
 
   create_table "product_invitations", force: :cascade do |t|
     t.integer  "product_id",                   null: false
@@ -186,16 +156,6 @@ ActiveRecord::Schema.define(version: 20160530103719) do
   end
 
   add_index "product_leads", ["product_id"], name: "index_product_leads_on_product_id", using: :btree
-
-  create_table "product_usecases", force: :cascade do |t|
-    t.integer  "product_id", null: false
-    t.string   "example",    null: false
-    t.text     "detail",     null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "product_usecases", ["product_id"], name: "index_product_usecases_on_product_id", using: :btree
 
   create_table "product_users", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -333,16 +293,13 @@ ActiveRecord::Schema.define(version: 20160530103719) do
   add_foreign_key "notifications", "users", column: "recipient_id"
   add_foreign_key "notifications", "users", column: "sender_id"
   add_foreign_key "posts", "users"
-  add_foreign_key "product_competitions", "products"
   add_foreign_key "product_customer_users", "product_customers"
   add_foreign_key "product_customer_users", "users"
   add_foreign_key "product_customers", "products"
-  add_foreign_key "product_features", "products"
   add_foreign_key "product_invitations", "products"
   add_foreign_key "product_invitations", "users", column: "recipient_id"
   add_foreign_key "product_invitations", "users", column: "sender_id"
   add_foreign_key "product_leads", "products"
-  add_foreign_key "product_usecases", "products"
   add_foreign_key "product_users", "products"
   add_foreign_key "product_users", "users"
   add_foreign_key "products", "users"
