@@ -14,10 +14,10 @@ describe ProductCustomers::ProductCustomerUsersController do
 
     describe "DELETE destroy" do
       let(:referencer_user) { create(:user) }
-      #let!(:referencer_profile) { create(:profile, user: referencer_user) }
-      #let!(:profile) { create(:profile, user: @user) }
+      let!(:referencer_profile) { create(:profile, user: referencer_user) }
+      let!(:profile) { create(:profile, user: @user) }
       let(:product) { create(:product, :product_with_nested_attrs) }
-      #let!(:owner) { create(:product_user, product_id: product.id, role: "owner", user_id: @user.id) }
+      let!(:owner) { create(:product_user, product_id: product.id, role: "owner", user_id: @user.id) }
       let(:product_customer) { create(:product_customer, product: product) }
       let!(:referencer) { create(:product_customer_user, product_customer: product_customer, user: referencer_user) }
       subject(:destroy_action) { delete :destroy, product_customer_id: product_customer.id, id: referencer.id }

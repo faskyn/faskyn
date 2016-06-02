@@ -75,7 +75,7 @@
       <div class = "row">
         <div class="col-md-12" data-behavior="comment-insert-<%= post.id%>">
 
-          <%= cache ['comments-index-post', post.comments.ordered_with_profile.map(&:id), post.comments.ordered_with_profile.map(&:updated_at).max, post.comments.ordered_with_profile.map{ |comment| comment.user.profile.updated_at }.max] do %>
+          <%= cache ['comments-index-post', post.comments.ordered.map(&:id), post.comments.ordered_with_profile.map(&:updated_at).max, post.comments.ordered_with_profile.map{ |comment| comment.user_profile.updated_at }.max] do %>
 
             <%= render partial: 'comments/comment', collection: post.comments.ordered_with_profile, as: :comment %>
 

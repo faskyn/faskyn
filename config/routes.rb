@@ -54,17 +54,22 @@ Rails.application.routes.draw do
       end
     end
     resources :product_owner_panels, only: :index, module: :products
+    resources :group_invitations, only: [:new, :create], module: :products
     resources :product_users, only: :destroy, module: :products
     resources :comments, only: :create, module: :products
     resources :product_customers, only: [:show], module: :products
-    resources :product_leads, only: [:show], module: :products
+    resources :product_leads, only: :show, module: :products
+  end
+
+  resources :group_invitations, only: :destroy do
+    member do
+      patch :accept
+    end
   end
 
   resources :product_customers, only: [] do
     resources :product_customer_users, only: :destroy, module: :product_customers
-  end
-
-  resources :product_customers, only: [] do
+    resources :group_invitations, only: :create, module: :product_customers
     resources :comments, only: :create, module: :product_customers
   end
 

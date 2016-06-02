@@ -14,6 +14,4 @@ feature "creating profile" do
     expect(page).to have_content("Profile successfully created!")
     expect(page).to have_content("Skip")
   end
-
-  scenario "adding twitter and linkedin"
 end

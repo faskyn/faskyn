@@ -9,7 +9,7 @@
       <%= image_tag notification.sender.avatar.url(:small_thumb), class: 'notification-index-avatar' %>
       <span>
         <div class="subject">
-          <%= notification.sender.full_name %> has sent you a <%= notification.notifiable_type.underscore %> on chat.
+          <%= notification.sender.full_name %> has sent you a <%= human_model_name(notification.notifiable_type) %> on chat.
         </div>
         <div class="time">
           <% if notification.created_at.today? %>      

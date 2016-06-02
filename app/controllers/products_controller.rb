@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @users = @product.users
+    @users = @product.users.includes(:profile)
     @comments = @product.comments.ordered_with_profile
   end
 
@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
     authorize @product
     if @product.save
       respond_to do |format|
-        format.html { redirect_to new_product_product_invitation_path(@product), notice: "Product got created!" }
+        format.html { redirect_to new_product_group_invitation_path(@product), notice: "Product got created!" }
         format.js
       end
     else

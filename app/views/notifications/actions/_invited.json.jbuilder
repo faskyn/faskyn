@@ -5,7 +5,7 @@ json.sender_id notification.sender_id
 json.sender_name notification.sender.profile.full_name
 json.action notification.action
 json.notifiable notification.notifiable_type
-if notification.sender.profile.avatar_url == "default.png"
+if notification.sender.avatar.url == "default.png"
   if Rails.env.development?
     json.profile_image_url "assets/small_thumb_default.png"
   elsif Rails.env.production?

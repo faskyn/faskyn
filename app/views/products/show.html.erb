@@ -2,7 +2,7 @@
 <div class= "container-fluid product-container">
     <div class="product-show-container" data-behavior="commentable_<%= @product.id %>">
 
-      <% @product.product_invitations.pending_user(current_user).each do |product_invitation| %>
+      <% @product.group_invitations.pending_user(current_user).each do |group_invitation| %>
 
         <div class="well product-well" id="product-invitation-well">
           <div class="row pending-product-invitation-row">
@@ -11,11 +11,9 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-3 col-md-offset-3">
-              <%= link_to "Accept Invitation", accept_product_product_invitation_path(@product, product_invitation), method: :patch, class: "btn btn-primary" %>
-            </div>
-            <div class="col-md-3">
-              <%= link_to "Decline Invitation", product_product_invitation_path(@product, product_invitation), method: :delete, class: "btn btn-danger" %>
+            <div class="col-md-12">
+              <%= link_to "Accept Invitation", accept_group_invitation_path(group_invitation), method: :patch, class: "btn btn-primary" %>
+              <%= link_to "Decline Invitation", group_invitation_path(group_invitation), method: :delete, class: "btn btn-danger delete-invitation-button" %>
             </div>
           </div>
         </div>
@@ -82,30 +80,6 @@
           </div>
         </div>
 
-        <div class="well product-well">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="product-list">
-                <div class= "list-name">Creators:</div>
-                <ul>
-                  <% @users.each_slice(2) do |user_row| %>
-                    <div class="row product-user-row">
-                      <% user_row.each do |user| %>
-                        <%= link_to user_profile_path(user) do %>
-                          <div class="col-md-6">
-                            <%= image_tag user.avatar.url(:small_thumb), class: "product-user-avatar" %>
-                            <%= user.full_name %>
-                          </div>
-                        <% end %>
-                      <% end %>
-                    </div>
-                  <% end %>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <% if @product.product_customers.any? %>
           <div class="well product-well">
             <div class="row">
@@ -119,6 +93,9 @@
                           <%= link_to product_customer.website, target: "_blank" do %>
                             <%= product_customer.customer %>
                           <% end %>
+                          <% if product_customer.users.any? %>
+                            <span class="product-customer-verification">Verified</span>
+                          <% end %> 
                         </div>
                         <div class="product-customer-usage">
                           <%= link_to product_product_customer_path(@product, product_customer) do %>
@@ -162,6 +139,32 @@
 
       <% end %>
 
+      <div class="well product-well">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="product-list">
+              <div class= "list-name">Creators:</div>
+              <ul>
+
+                <% @users.each_slice(2) do |user_row| %>
+                  <div class="row product-user-row">
+                    <% user_row.each do |user| %>
+                      <%= link_to user_profile_path(user) do %>
+                        <div class="col-md-6">
+                          <%= image_tag user.avatar.url(:small_thumb), class: "product-user-avatar" %>
+                          <%= user.full_name %>
+                        </div>
+                      <% end %>
+                    <% end %>
+                  </div>
+                <% end %>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="panel panel-default" id="comment-panel">
         <div class="panel-heading">
           <div class = "row comment-form-row">
@@ -169,12 +172,15 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="col-md-12">
+
                     <%= render partial: 'comments/form', locals: { commentable: @product } %>
+
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
           <% if @comments.size > 3 %>
             <div class="row open-all-comments-row" data-behavior="open-all-comments-row">
               <div class="col-md-12">
@@ -184,6 +190,7 @@
               </div>
             </div>
           <% end %>
+
         </div>
         <div class="panel-body">
           <div class = "row">

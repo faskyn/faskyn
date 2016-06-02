@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
   #has_many :product_leads, through: :products
   has_many :product_invitations, foreign_key: "recipient_id", dependent: :destroy
   #has_many :sent_product_invitations, foreign_key: "sender_id", dependdent: : destroy
+  has_many :group_invitations, foreign_key: "recipient_id", dependent: :destroy
 
   has_many :posts
   has_many :comments
@@ -101,9 +102,9 @@ class User < ActiveRecord::Base
     Pusher.trigger_async('private-'+ id.to_s, 'new_other_notification', { number: number })
   end
 
-  def is_invited_or_team_member?(product)
-    if product.users.where("user_id = ?", self.id).any? || 
-      product.product_invitations.where("recipient_id = ?", self.id).any?
+  def is_invited_or_member?(group_invitable)
+    if (group_invitable.users.where("user_id = ?", self.id).any? || 
+      group_invitable.group_invitations.where("recipient_id = ?", self.id).any?)
       true
     else
       false

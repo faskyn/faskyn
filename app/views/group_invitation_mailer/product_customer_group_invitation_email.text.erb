@@ -1,0 +1,11 @@
+<% if @group_invitation.recipient.profile %>
+Hi <%= @group_invitation.recipient.first_name %>,
+<% else %>
+Hi there,
+<% end %>
+
+<%= @group_invitation.sender.full_name %> has invited you to join <%= @group_invitation.group_invitable.product.name %> as a referencer. With this you can help him by verifying that you are using the product and by writing customer review.
+
+You can accept the invitation on the <%= link_to "product customer page", product_product_customer_url(@group_invitation.group_invitable.product, @group_invitation.group_invitable) %>.
+
+Cheers,<br />Faskyn Team

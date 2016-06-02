@@ -45,9 +45,21 @@ class ApplicationController < ActionController::Base
                product_product_customer_path(product_id, notifiable_id, anchor: "comment-panel") #/products/#{product_id}/#{notifiable_type}/#{notifiable_id}#comment-panel"
               end
     elsif action == "invited"
-      product_path(notifiable_id, anchor: "product-invitation-well")
+      if notifiable_type == "Product"
+        product_path(notifiable_id, anchor: "product-invitation-well")
+      elsif notifiable_type == "ProductCustomer"
+        product_customer = ProductCustomer.find(notifiable_id)
+        product_id = product_customer.product_id
+        product_product_customer_path(product_id, notifiable_id)
+      end
     elsif action == "accepted"
-      product_product_owner_panels_path(notifiable_id)
+      if notifiable_type == "Product" #team member invitation
+        product_product_owner_panels_path(notifiable_id)
+      elsif notifiable_type == "ProductCustomer" #referencer invitation
+        product_customer = ProductCustomer.find(notifiable_id)
+        product_id = product_customer.product_id
+        product_product_owner_panels_path(product_id)
+      end
     end
   end
 

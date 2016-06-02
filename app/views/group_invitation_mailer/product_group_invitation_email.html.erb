@@ -1,0 +1,10 @@
+<% if @group_invitation.recipient.profile %>
+  <p>Hi <%= @group_invitation.recipient.first_name %>,</p>
+<% else %>
+  <p>Hi there,</p>
+<% end %>
+<p><%= @group_invitation.sender.full_name %> has invited you to join the <%= @group_invitation.group_invitable.name %> team.</p>
+
+<p>You can accept the invitation on the <%= link_to "product page", product_url(@group_invitation.group_invitable) %>.</p>
+
+<p>Cheers,<br />Faskyn Team</p>

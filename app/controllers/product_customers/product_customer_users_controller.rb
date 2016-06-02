@@ -1,10 +1,10 @@
-class ProductCustomers::ProductCustomerUsersController < CommentsController
+class ProductCustomers::ProductCustomerUsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_product_customer
+  before_action :set_product_and_product_customer
   before_action :set_product_customer_user
 
   def destroy
-    #authorize @product, :destroy_product_users?
+    authorize @product, :destroy_product_customer_users?
     if @product_customer_user.destroy
       redirect_to :back, notice: "User removed from product referencers!"
     end
@@ -12,8 +12,9 @@ class ProductCustomers::ProductCustomerUsersController < CommentsController
 
   private
 
-    def set_product_customer
+    def set_product_and_product_customer
       @product_customer = ProductCustomer.find(params[:product_customer_id])
+      @product = @product_customer.product
     end
 
     def set_product_customer_user

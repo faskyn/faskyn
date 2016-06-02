@@ -1,19 +1,18 @@
 class CommentsController < ApplicationController
-    before_action :authenticate_user!
+  before_action :authenticate_user!
+  before_action :set_and_authorize_comment, only: [:update, :destroy]
 
-    def create
-      @comment = @commentable.comments.new(comment_params)
-      authorize @comment
-      @comment.user = current_user
-      if @comment.save
-        @comment.send_comment_creation_notification(@commentable)
-        respond_to :js
-      end
+  def create
+    @comment = @commentable.comments.new(comment_params)
+    authorize @comment
+    @comment.user = current_user
+    if @comment.save
+      @comment.send_comment_creation_notification(@commentable)
+      respond_to :js
     end
+  end
 
   def update
-    @comment = Comment.find(params[:id])
-    authorize @comment
     if @comment.update_attributes(comment_params)
       respond_to do |format|
         format.json { respond_with_bip(@comment) }
@@ -26,8 +25,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
-    authorize @comment
     if @comment.destroy
       respond_to :js
     else
@@ -39,5 +36,10 @@ class CommentsController < ApplicationController
 
     def comment_params
       params.require(:comment).permit(:body)
+    end
+
+    def set_and_authorize_comment
+      @comment = Comment.find(params[:id])
+      authorize @comment
     end
 end

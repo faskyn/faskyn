@@ -35,11 +35,23 @@ class ProductPolicy < ApplicationPolicy
     user.present? && user == product.owner
   end
 
+  def destroy_product_customer_users?
+    user.present? && user == product.owner
+  end
+
   def new_product_invitations?
     user.present? && user == product.owner
   end
 
   def create_product_invitations?
+    user.present? && user == product.owner
+  end
+
+  def new_group_invitations?
+    user.present? && user == product.owner
+  end
+
+  def create_group_invitations?
     user.present? && user == product.owner
   end
 

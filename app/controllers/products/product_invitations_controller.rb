@@ -9,12 +9,11 @@ class Products::ProductInvitationsController < ApplicationController
 
   def create
     authorize @product, :create_product_invitations?
-    @product_invitation = @product.product_invitations.new(product_invitations_params)
-    @recipient = User.find_by(email: email)
-    if @recipient && @recipient.is_invited_or_team_member?(@product)
+    @recipient = User.invite!({ email: email }, @product.owner)
+    if @recipient.is_invited_or_team_member?(@product)
       redirect_to :back, alert: "User already invited or team member!"
     else
-      @recipient = User.invite!({ email: email }, @product.owner) unless @recipient
+      @product_invitation = @product.product_invitations.new(product_invitations_params)
       @product_invitation.sender = @product.owner
       @product_invitation.recipient = @recipient
       if @product_invitation.save

@@ -22,4 +22,8 @@ module ApplicationHelper
       notice: 'alert-success'
     }[flash_type.to_sym] || flash_type.to_s
   end
+
+  def human_model_name(notification_type)
+    notification_type.tableize.singularize.humanize.downcase
+  end
 end

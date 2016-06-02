@@ -63,9 +63,6 @@ $light-grey: #f7f7f7; //super light background color
       padding-left:5px;
     }
   }
-  .delete-button {
-    margin-left:10px;
-  }
 }
 
 .product-profile-container {
@@ -248,6 +245,10 @@ $light-grey: #f7f7f7; //super light background color
   			padding-top: 0px;
   		}
   	}
+    .product-customer-verification {
+      color: $dark-grey;
+      font-size: 10px;
+    }
   	#oneliner {
   		.description {
   			padding-bottom: 0px;
@@ -300,7 +301,7 @@ $light-grey: #f7f7f7; //super light background color
   margin-right: 5px;
 }
 
-.product-delete-button {
+.product-delete-button, .delete-invitation-button {
   margin-left: 10px;
 }
 

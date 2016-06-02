@@ -1,0 +1,23 @@
+<tr>
+  <td class="col-md-3">
+    <%= group_invitation.recipient.email %>
+  <td class="col-md-3">
+    <% if group_invitation.recipient.profile %>
+      <%= link_to user_path(group_invitation.recipient) do %>
+        <div class="table-user-name">
+          <%= group_invitation.recipient.full_name %>
+        </div>
+      <% end %>
+    <% end %>
+  </td>
+  <td class="col-md-3">
+    <% if group_invitation.accepted == true %>
+      Accepted
+    <% else %>
+      Pending
+    <% end %>
+  </td>
+  <td class="col-md-3">
+    <a href="#" data-toggle="modal" role="button" data-target="#delete-group-invitation-modal" data-behavior="open-delete-group-invitation-modal" data-groupinvitationdeletelink="<%= group_invitation_path(group_invitation) %>">Delete Invitation</a>
+  </td>  
+</tr>

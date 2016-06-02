@@ -56,8 +56,20 @@ $(document).on('click', '[data-behavior="open-delete-product-invitation-modal"]'
   $('[data-behavior="delete-product-invitation-submit"]').attr("href", productInvitationDeleteLink);
 });
 
+//deleting group invitation via modal
+$(document).on('click', '[data-behavior="open-delete-group-invitation-modal"]', function (event) {
+  var groupInvitationDeleteLink = $(this).data("groupinvitationdeletelink");
+  $('[data-behavior="delete-group-invitation-submit"]').attr("href", groupInvitationDeleteLink);
+});
+
 //deleting product customer user via modal
 $(document).on('click', '[data-behavior="open-delete-product-customer-user-modal"]', function (event) {
   var productCustomerUserDeleteLink = $(this).data("productcustomeruserdeletelink");
   $('[data-behavior="delete-product-customer-user-submit"]').attr("href", productCustomerUserDeleteLink);
+});
+
+$(document).on('change', '#product-customer-collection-select', function () {
+  var newRouteId = $(this).val();
+  var newActionURL = "/product_customers/" + newRouteId + "/group_invitations";
+  $(this).closest("form").attr("action", newActionURL);
 });

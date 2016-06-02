@@ -44,7 +44,6 @@ $(document).on('keydown', '[data-behavior="comment-text-area"]', function (event
     comment = comment.replace(/^\s+|\s+$/g, "");
     if (comment != '') {
       $('#comment-form-' + commentable_id).submit();
-      // $(this).closest('[data-behavior="post-comment-form"]').submit();
     };
   };
 });

@@ -5,7 +5,7 @@ json.sender_id notification.sender_id
 json.sender_name notification.sender.profile.full_name
 json.action notification.action
 json.notifiable notification.notifiable_type
-if notification.sender.profile.avatar_url == "default.png"
+if notification.sender.avatar.url == "default.png"
   if Rails.env.development?
     json.profile_image_url "assets/small_thumb_default.png"
   elsif Rails.env.production?
@@ -15,6 +15,6 @@ else
   json.profile_image_url notification.sender.profile.avatar.url(:small_thumb)
 end
 json.what do
-  json.did "#{notification.action} on a #{notification.notifiable_type.downcase}"
+  json.did "#{notification.action} on a #{ human_model_name(notification.notifiable_type) }"
 end
 json.url checking_decreasing_user_notifications_path(current_user, notifiable_type: notification.notifiable_type, notifiable_id: notification.notifiable_id, notification_action: notification.action)

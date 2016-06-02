@@ -4,24 +4,57 @@
     
     <h4>Invite a New Member</h4>
     <p>Product members will appear on the product's page alongside the product owner.</p>
-    <%= form_for([@product, ProductInvitation.new]) do |f| %>
+    <%= form_for([@product, @group_invitation], html: { class: "product-group-invitation-form" }) do |f| %>
       <div class= "row">
         <div class="col-md-6">
           <%= render 'layouts/error_messages', object: f.object %>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-8">
           <div class="form-group">
             <%= f.email_field :email, class: 'form-control', placeholder: "Type an email address..." %>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <div class="form-group">
-            <%= f.button "Invite a New Member", class: "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i>Sending Invitation..." } %>
+            <%= f.button "Invite Member", class: "btn btn-primary btn-block", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Sending Invitation..." } %>
           </div>
         </div>
       </div>
+    <% end %>
+
+    <h4>Invite a New Referencer</h4>
+    <p>Product referencers (customers, that you added to product) can verify they are using your product and 
+    can write reviews on the product customer page.</p>
+
+    <% if @product.product_customers.any? %>
+
+      <%= form_for([@product_customers.first, @group_invitation], html: { class: "product-customer-group-invitation-form" }) do |f| %>
+        <div class= "row">
+          <div class="col-md-12">
+            <%= render 'layouts/error_messages', object: f.object %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= f.email_field :email, class: 'form-control', placeholder: "Type an email address..." %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= f.collection_select :group_invitable_id, @product_customers, :id, :customer, {}, { class: 'form-control', id: "product-customer-collection-select" } %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= f.button "Invite Referencer", class: "btn btn-primary btn-block", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Sending Invitation..." } %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
     <% end %>
 
     <h4>Product Members</h4>
@@ -52,7 +85,7 @@
           </tr>
         </thead>
         <tbody>
-          <%= render partial: "products/product_invitations/product_invitation", collection: @product_invitations, as: :product_invitation, locals: { product: @product } %>
+          <%= render partial: "group_invitations/group_invitation", collection: @product_group_invitations, as: :group_invitation  %>
         </tbody>
       </table>
     </div>
@@ -71,6 +104,23 @@
         </thead>
         <tbody>
           <%= render partial: "products/product_customer_users/product_customer_user", collection: @product_customer_users, as: :product_customer_user %>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Product Referencer Invitations</h4>
+    <div class="panel panel-default product-users-panel">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th class="col-md-3">Email</th>
+            <th class="col-md-3">Name</th>
+            <th class="col-md-3">Status</th>
+            <th class="col-md-3">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: "group_invitations/group_invitation", collection: @product_customer_group_invitations, as: :group_invitation  %>
         </tbody>
       </table>
     </div>
@@ -100,9 +150,9 @@
   </div>
 </div>
 
-<!-- DELETE PRODUCT INVITATION MODAL -->
+<!-- DELETE GROUP INVITATION MODAL -->
 
-<div class="modal fade" id="delete-product-invitation-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="delete-group-invitation-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content" style="text-align:left">
       <div class="modal-header">
@@ -114,8 +164,8 @@
         <p> </p>  
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" id="deleteproductinvitationclose">Close</button>
-        <a href="#" type="button" class="btn btn-danger" data-method="delete" data-behavior="delete-product-invitation-submit" data-productinvitationdestroylink >Delete Invitation</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="deletegroupinvitationclose">Close</button>
+        <a href="#" type="button" class="btn btn-danger" data-method="delete" data-behavior="delete-group-invitation-submit" data-groupinvitationdestroylink >Delete Invitation</a>
           <!-- DESTROY LINK GETS INSERTED HERE -->      
       </div>
     </div>

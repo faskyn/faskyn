@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe ProductInvitationPolicy do
-  subject { ProductInvitationPolicy }
+describe GroupInvitationPolicy do
+  subject { GroupInvitationPolicy }
 
   let(:owner) { build_stubbed(:user) }
   let(:invited_user) { build_stubbed(:user) }
@@ -9,22 +9,22 @@ describe ProductInvitationPolicy do
   let(:other_profile) { build_stubbed(:profile, user: invited_user) }
   let(:product) { build_stubbed(:product, :product_with_nested_attrs) }
   let(:product_user) { build_stubbed(:product_user, user: owner, product: product, role: "owner") }
-  let(:product_invitation) { build_stubbed(:product_invitation, 
-    product: product, recipient: invited_user, sender: owner, email: invited_user.email) }
+  let(:group_invitation) { build_stubbed(:group_invitation, 
+    group_invitable: product, recipient: invited_user, sender: owner, email: invited_user.email) }
 
   permissions :accept? do
 
     it "only allows access for recipient" do
-      expect(subject).to permit(invited_user, product_invitation)
-      expect(subject).to_not permit(owner, product_invitation)
+      expect(subject).to permit(invited_user, group_invitation)
+      expect(subject).to_not permit(owner, group_invitation)
     end
   end
 
   permissions :destroy? do
 
     it "allows accss for recipient and sender" do
-      expect(subject).to permit(invited_user, product_invitation)
-      expect(subject).to permit(owner, product_invitation)
+      expect(subject).to permit(invited_user, group_invitation)
+      expect(subject).to permit(owner, group_invitation)
     end
   end
 end

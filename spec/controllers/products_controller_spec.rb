@@ -131,7 +131,7 @@ describe ProductsController do
 
         it "redirects to product page and shows the flash" do
           create_action
-          expect(response).to redirect_to new_product_product_invitation_path(Product.last)
+          expect(response).to redirect_to new_product_group_invitation_path(Product.last)
           expect(controller).to set_flash[:notice].to("Product got created!")
         end
       end

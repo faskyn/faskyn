@@ -161,8 +161,8 @@ RSpec.describe User, type: :model do
       let!(:product_user) { create(:product_user, product: product, user: owner, role: "owner") }
       
       it "is invited or a team member?" do
-       expect(owner.is_invited_or_team_member?(product)).to eq(true)
-       expect(no_member.is_invited_or_team_member?(product)).to eq(false)
+       expect(owner.is_invited_or_member?(product)).to eq(true)
+       expect(no_member.is_invited_or_member?(product)).to eq(false)
       end
     end
   end
