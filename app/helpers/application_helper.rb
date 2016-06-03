@@ -23,7 +23,7 @@ module ApplicationHelper
     }[flash_type.to_sym] || flash_type.to_s
   end
 
-  def human_model_name(notification_type)
-    notification_type.tableize.singularize.humanize.downcase
+  def human_model_name(notifiable_type)
+    notifiable_type.tableize.singularize.humanize.downcase
   end
 end
