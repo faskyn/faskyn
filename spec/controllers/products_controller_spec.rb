@@ -66,14 +66,12 @@ describe ProductsController do
 
     describe "GET show" do
       let!(:profile) { create(:profile, user: @user) }
-      let!(:product_user) { create(:product_user, user: @user, product: product, role: "owner") }
+      let(:owner) { create(:user) }
+      let!(:owner_profile) { create(:profile, user: owner) }
+      let!(:product_user) { create(:product_user, user: owner, product: product, role: "owner") }
       let!(:product) { create(:product, :product_with_nested_attrs) }
       before(:each) do
-        get :show, id: product
-      end
-
-      it "avatar not nil for show" do
-        expect(@user.avatar).to_not be_nil
+        get :show, id: product.id
       end
       
       it "assigns products" do

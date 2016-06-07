@@ -2,6 +2,7 @@ $grey-medium-light: #eaeaea;
 $garmin-blue: #007cc3;
 $dark-grey: #5E5E5E; //text color
 $light-grey: #f7f7f7; //super light background color
+$black: #333333;
 
 .product-container {
   background: $light-grey;
@@ -63,6 +64,18 @@ $light-grey: #f7f7f7; //super light background color
       padding-left:5px;
     }
   }
+  .product-name-owner-panel {
+    margin-bottom: 15px;
+    h3 {
+      display: inline;
+      vertical-align: middle;
+      padding-left:5px;
+    }
+    a {
+      color: $black;
+      text-decoration: none;
+    }
+  }
 }
 
 .product-profile-container {
@@ -78,7 +91,7 @@ $light-grey: #f7f7f7; //super light background color
       padding:0;
       a {
         text-decoration: none;
-        color: black;
+        color: $black;
         &:hover {
           color: $garmin-blue;
         }
@@ -96,10 +109,6 @@ $light-grey: #f7f7f7; //super light background color
         padding-bottom: 12px;
         padding-left: 10px;
       }
-      .big-description {
-        padding-left: 17px;
-        padding-top: 7px;
-      }
       .list-name {
         font-weight: bold;
         padding-top: 10px;
@@ -113,14 +122,6 @@ $light-grey: #f7f7f7; //super light background color
         }
       }
     }
-    .explanation {
-      font-size: 12px;
-      color: $dark-grey;
-      padding-left: 3px;
-    }
-    .adding-extra {
-      padding-top:10px;
-    }
   }
 }
 
@@ -131,12 +132,12 @@ $light-grey: #f7f7f7; //super light background color
     padding-bottom:15px;
     width:100%;
   }
-  .product-panel {
+  .product-customer-lead-panel {
     .panel-heading {
       background: white;
       padding:0;
       a {
-        color: black;
+        color: $black;
         text-decoration: none;
         &:hover {
           color: $garmin-blue;
@@ -149,35 +150,18 @@ $light-grey: #f7f7f7; //super light background color
         background-color: $grey-medium-light;
       }
     }
-    .product-list {
-      .description {
-        padding: 0px 20px 15px 20px;
-      }
-      .big-description {
-        padding-left: 17px;
-        padding-top: 7px;
-      }
+    .product-customer-list {
       .list-name {
         font-weight: bold;
-        padding-top: 10px;
         padding-bottom: 10px;
-        &:first-child {
-          padding-top: 0px;
+        a {
+          text-decoration: none;
+          color: $black;
+          &:hover {
+            color: $garmin-blue;
+          }
         }
       }
-      #oneliner {
-        .description {
-          padding-bottom: 0px;
-        }
-      }
-    }
-    .explanation {
-      font-size: 12px;
-      color: $dark-grey;
-      padding-left: 3px;
-    }
-    .adding-extra {
-      padding-top:10px;
     }
   }
 }
@@ -222,7 +206,13 @@ $light-grey: #f7f7f7; //super light background color
   h3, h4 {
     display: inline;
     vertical-align: middle;
-    padding-left: 5px;
+  }
+}
+
+.product-customer-lead-panel {
+  h3, h4 {
+    display: inline;
+    vertical-align: middle;
   }
 }
 
@@ -230,13 +220,8 @@ $light-grey: #f7f7f7; //super light background color
   background-color: white;//$light-grey;
   .product-list {
   	.description {
-  		padding-top:2px;
-  		padding-bottom: 12px;
-  		padding-left: 10px;
-  	}
-  	.big-description {
-  		padding-left: 17px;
-  		padding-top: 7px;
+  		padding-top:5px;
+  		padding-bottom: 15px;
   	}
   	.list-name {
   		font-weight: bold;
@@ -255,19 +240,25 @@ $light-grey: #f7f7f7; //super light background color
   		}
   	}
   }
-  .explanation {
-    font-size: 12px;
-    color: $dark-grey;
-    padding-left: 3px;
-  }
   .adding-extra {
     padding-top:10px;
   }
+  .product-customer-row, .product-lead-row {
+    a {
+      color: $black;
+      text-decoration: none;
+    }
+    &:hover {
+      cursor: pointer;
+      background-color: $grey-medium-light;
+    }
+  }
   .product-customer-customer, .product-lead-lead {
-    padding-top: 15px;
+    padding-top: 10px;
+    font-weight: bold;
   }
   .product-customer-usage, .product-lead-pitch {
-    padding: 5px 0px 5px 15px; 
+    padding: 5px 0px 10px 0px; 
   }
 }
 
@@ -294,11 +285,18 @@ $light-grey: #f7f7f7; //super light background color
 
 .product-user-row {
   padding-top:20px;
+  a {
+    text-decoration: none;
+  }
 }
 
 .product-user-avatar {
   border-radius: 10%;
   margin-right: 5px;
+}
+
+.product-customer-user-avatar {
+  border-radius: 50%;
 }
 
 .product-delete-button, .delete-invitation-button {

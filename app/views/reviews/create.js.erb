@@ -1,0 +1,21 @@
+$("ul.errors").html("");
+<% if @review.errors.any? %>
+  $('.alert-danger').show();
+  $('ul.errors').show();
+  <% @review.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"));
+  <% end %>
+<% else %>
+  if ($('[data-behavior="review-insert"]').length == 0) {
+    $(".reviews-index").html('<div class="well product-well" data-behavior="review-insert-anchor"><h4>Reviews by users</h4><div data-behavior="review-insert"></div><%= j render partial: "reviews/update_review_modal" %><%= j render partial: "reviews/destroy_review_modal" %></div>');
+  };
+  $('ul.errors').hide();
+  $('.alert-danger').hide();
+  $review = $('<%= j render partial: "reviews/review", locals: { review: @review, product_customer: @review.product_customer } %>');
+  $('[data-behavior="review-insert"]').prepend($review);
+  $('[data-behavior="review-create-body"]').val('');
+  showReviewEditButton($review);
+  $('html, body').animate({
+    scrollTop: $('[data-behavior="review-insert-anchor"]').offset().top
+  }, "slow");
+<% end %>

@@ -2,3 +2,6 @@ $('#delete-post-modal').modal('hide');
 $("#post_<%= @post.id %>").fadeOut(400, function(){
 	$(this).remove();
 });
+$('html, body').animate({
+  scrollTop: $('[data-behavior="review-insert-anchor"]').offset().top
+}, "slow");

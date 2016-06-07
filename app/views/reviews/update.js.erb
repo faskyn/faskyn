@@ -1,0 +1,20 @@
+$("ul.errors").html("");
+<% if @review.errors.any? %>
+  $('.alert-danger').show();
+  $('ul.errors').show();
+  <% @review.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"));
+    <% end %>
+<% else %>
+  $('ul.errors').hide();
+  $('.alert-danger').hide();
+  $('#update-review-modal').modal('hide');
+  $review = $('<%= j render partial: "reviews/review", locals: { review: @review, product_customer: @review.product_customer } %>');
+  editReviewHideDanger($review);
+  $('#review_<%= @review.id %>').remove();
+  $('[data-behavior="review-insert"]').prepend($review);
+  $('html, body').animate({
+    scrollTop: $('[data-behavior="review-insert-anchor"]').offset().top
+  }, "slow");
+  showReviewEditDropdown($review);
+<% end %>

@@ -2,9 +2,9 @@ require 'rails_helper'
 
 feature "updating task" do
   let!(:user) { create(:user) }
-  let!(:profie) { create(:profile, user: user) }
-  let!(:other_profile) { create(:profile, first_name: "Peter", last_name: "Thief", company: "PT") }
-  let!(:other_user) { create(:user, profile: other_profile) }
+  let!(:profile) { create(:profile, user: user) }
+  let!(:other_profile) { create(:profile, first_name: "Peter", last_name: "Thief", company: "PT", user: other_user) }
+  let!(:other_user) { create(:user) }
   let!(:task) { create(:task, assigner: user, executor: other_user, content: "original content") }
   let!(:conversation) { create(:conversation, sender: user, recipient: other_user) }
   

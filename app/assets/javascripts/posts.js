@@ -108,6 +108,7 @@ $(document).on('click', '[data-behavior="open-delete-post-modal"]', function (ev
 
 $(document).on('click', '[data-behavior="delete-post-submit"]', function (event) {
   var href = $(this).data("postdestroylink");
+  alert(href);
   $.ajax({
     type: "DELETE",
     url: href,

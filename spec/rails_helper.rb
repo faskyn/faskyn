@@ -12,6 +12,7 @@ require 'capybara/rails'
 require 'capybara/poltergeist'
 require 'best_in_place'
 require 'best_in_place/test_helpers'
+require 'rinku'
 Capybara.javascript_driver = :poltergeist
 
 

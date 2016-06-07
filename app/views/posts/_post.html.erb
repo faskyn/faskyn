@@ -34,7 +34,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <i class="fa fa-angle-down"></i>
             </a>
-            <ul class = "dropdown-menu dropdown-menu-right">
+            <ul class="dropdown-menu dropdown-menu-right">
               <li>
                 <%= link_to "Edit Post", edit_post_path(post), remote: true, type: "button", 'data-toggle' => "modal", 'data-target' => "#update-post-modal", data: { posteditlink: edit_post_path(post), behavior: "open-edit-post-modal" } %>
               </li>   

@@ -22,10 +22,10 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :product_customers, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :product_leads, reject_if: :all_blank, allow_destroy: true
 
-  validates :name, presence: { message: "can't be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }, uniqueness: { message: "already exists" }
+  validates :name, presence: { message: "can't be blank" }, length: { maximum: 140, message: "can't be longer than %{count} characters" }, uniqueness: { message: "already exists" }
   validates :website, presence: { message: "can't be blank" }
-  validates :oneliner, presence: { message: "can't be blank" }, length: { maximum: 140, message: "can't be longer than 140 characters" }
-  validates :description, length: { maximum: 500, message: "can't be longer than 500 characters"}
+  validates :oneliner, presence: { message: "can't be blank" }, length: { maximum: 140, message: "can't be longer than %{count} characters" }
+  validates :description, length: { maximum: 500, message: "can't be longer than %{count} characters"}
 
   validates_associated :industry_products
   validates_associated :product_customers

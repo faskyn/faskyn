@@ -1,0 +1,17 @@
+<%= form_for @review, method: :patch, remote: true do |f| %>
+  <div class="modal-body">
+    <div class="alert alert-danger" style="display:none">
+      <ul class="errors" style="display:none">
+        <%= render 'layouts/error_messages', object: f.object %>
+      </ul>
+    </div>
+    <div class="field form-group">
+      <%= f.label :body, "Body *" %>
+      <%= f.text_area :body, class: "form-control" %>
+    </div>   
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" id="updatereviewclose">Close</button>
+    <%= f.button "Update Review", class: 'btn btn-primary', data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
+  </div>
+<% end %>

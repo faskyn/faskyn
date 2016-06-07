@@ -2,6 +2,7 @@ $grey-medium-light: #eaeaea;
 $garmin-blue: #007cc3;
 $dark-grey: #5E5E5E; //text color
 $light-grey: #f7f7f7; //super light background color
+$black: #333333;
 
 //LOGIN
 
@@ -138,7 +139,7 @@ $light-grey: #f7f7f7; //super light background color
       cursor: pointer;
     }
     h4 {
-      color: black;
+      color: $black;
     }
   }
   a {
@@ -237,10 +238,6 @@ $light-grey: #f7f7f7; //super light background color
         padding-top: 2px;
         padding-bottom: 12px;
         padding-left: 10px;
-      }
-      .big-description {
-        padding-left: 17px;
-        padding-top: 7px;
       }
       .list-name {
         font-weight: bold;

@@ -44,7 +44,7 @@ Rails.application.routes.draw do
   end
 
   resources :posts do
-    resources :comments, only: :create, module: :posts
+    resources :comments, only: :create, module: :posts #polymorphic
   end
 
   resources :products do
@@ -54,11 +54,11 @@ Rails.application.routes.draw do
       end
     end
     resources :product_owner_panels, only: :index, module: :products
-    resources :group_invitations, only: [:new, :create], module: :products
+    resources :group_invitations, only: [:new, :create], module: :products #polymorphic
     resources :product_users, only: :destroy, module: :products
-    resources :comments, only: :create, module: :products
-    resources :product_customers, only: [:show], module: :products
-    resources :product_leads, only: :show, module: :products
+    resources :comments, only: :create, module: :products #polymorphic
+    resources :product_customers, only: [:show], module: :products #create/update/delete is nested attr
+    resources :product_leads, only: :show, module: :products #create/update/delete is nested attr 
   end
 
   resources :group_invitations, only: :destroy do
@@ -69,12 +69,15 @@ Rails.application.routes.draw do
 
   resources :product_customers, only: [] do
     resources :product_customer_users, only: :destroy, module: :product_customers
-    resources :group_invitations, only: :create, module: :product_customers
-    resources :comments, only: :create, module: :product_customers
+    resources :group_invitations, only: :create, module: :product_customers #polymorphic
+    resources :comments, only: :create, module: :product_customers #polymorphic
+    resources :reviews, only: :create
   end
 
+  resources :reviews, only: [:edit, :update, :destroy]
+
   resources :product_leads, only: [] do
-    resources :comments, only: :create, module: :product_leads
+    resources :comments, only: :create, module: :product_leads #polymorphic
   end
 
   resources :comments, only: [:update, :destroy] do 

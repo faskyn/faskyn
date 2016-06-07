@@ -1,0 +1,43 @@
+$grey-medium-light: #eaeaea;
+$garmin-blue: #007cc3;
+$dark-grey: #5E5E5E;
+$light-grey: #f7f7f7;
+$black: #333333;
+
+.review-well {
+  background-color: white;//$light-grey;
+}
+
+.review-user-row {
+  padding-top:20px;
+  padding-bottom:20px;
+}
+
+.review-info {
+  padding-left:10px;
+  a {
+    text-decoration: none;
+    color: $black;
+  }
+  .review-fullname {
+    font-weight: bold;
+  }
+  .review-job-title {
+    color: $dark-grey;
+    padding-left: 5px;
+  }
+  .review-updated {
+    color: $dark-grey;
+    padding-left: 5px;
+  }
+  .review-body {
+    padding-top:10px;
+  }
+}
+
+.review-edit-delete-panel {
+  a {
+    text-decoration: none;
+    color: $dark-grey;
+  }
+}

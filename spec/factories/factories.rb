@@ -114,6 +114,12 @@ FactoryGirl.define do
     pitch { Faker::Lorem.paragraph }
   end
 
+  factory :review, class: Review do
+    user
+    product_customer
+    body { Faker::Lorem.paragraph }
+  end
+
   factory :industry, class: Industry do
     name "AI"
   end

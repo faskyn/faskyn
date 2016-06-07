@@ -2,7 +2,7 @@ module ApplicationHelper
   require 'rinku'
 
   def has_profile?
-    current_user.profile
+    current_user.profile if current_user.present?
   end
 
   def find_links(text)

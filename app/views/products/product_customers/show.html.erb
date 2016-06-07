@@ -13,17 +13,25 @@
         </div>
         <div class="row" style="text-align:center;">
           <div class="col-md-12">
-            <%= link_to "Accept Invitation", accept_group_invitation_path(group_invitation), method: :patch, class: "btn btn-primary" %>
-            <%= link_to "Decline Invitation", group_invitation_path(group_invitation), method: :delete, class: "btn btn-danger delete-invitation-button" %>
+            <%= link_to "Accept Invitation", accept_group_invitation_path(group_invitation), method: :patch, class: "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Accepting..."} %>
+            <%= link_to "Decline Invitation", group_invitation_path(group_invitation), method: :delete, class: "btn btn-danger delete-invitation-button", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Deleting..."} %>
           </div>
         </div>
       </div>
 
     <% end %>
 
-    <% cache [@product_customer, @product_customer.owner.profile] do %>
+    <% if policy(@product_customer).create_reviews? %>
+      <div class="well product-well">
+        <h4>Write a Review!</h4>
+        <p>As a customer and user of <%= @product.name %> you can help them by posting a review.</p>
+        <%= render partial: 'reviews/new_form' %>
+      </div>
+    <% end %>
 
-      <div class="panel panel-default product-panel" data-behavior="commentable_<%= @product_customer.id %>">
+    <% cache [@product_customer, @product_customer.owner.profile, @product_customer.users.map(&:id), @product_customer.users.map{ |user| user.profile.updated_at }.max] do %>
+
+      <div class="panel panel-default product-customer-lead-panel" data-behavior="commentable_<%= @product_customer.id %>">
 
         <div class="panel-heading">
           <%= link_to @product do %>
@@ -38,10 +46,10 @@
         <div class="panel-body">
           <div class="row">
             <div class="col-md-12">
-              <div class="product-list">
+              <div class="product-customer-list">
                 <div class="list-name">
                   <%= link_to @product_customer.website, target: "_blank" do %>
-                    <h4><%= @product_customer.customer %></h4>
+                    <%= @product_customer.customer %>
                   <% end %>
                 </div>
                 <div class="description">
@@ -50,11 +58,38 @@
               </div>
             </div>
           </div>
-        </div>
 
+          <% if @product_customer.users.any? %>
+            <div class="row product-user-row">
+              <div class="col-md-12">
+                <% @product_customer.users.each do |user| %>
+                  <span>
+                    <%= link_to user_profile_path(user), 'data-toggle' => "tooltip", 'data-placement' => "bottom", 'data-delay' => '{"show":"40"}', 'title' => "#{user.full_name}" do %>
+                      <%= image_tag user.avatar.url(:small_thumb), class: "product-customer-user-avatar" %>
+                    <% end %>
+                  </span>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+
+        </div>
       </div>
 
     <% end %>
+
+    <div class="reviews-index">
+      <% if @reviews.any? %>
+        <h4>Reviews</h4>
+        <div class="well product-well" data-behavior="review-insert-anchor">
+          <div data-behavior="review-insert">
+            <%= render partial: "reviews/review", collection: @reviews, locals: { product_customer: @product_customer, product: @product } %>
+          </div>
+        </div>
+        <%= render partial: "reviews/update_review_modal" %>
+        <%= render partial: "reviews/destroy_review_modal" %>
+      <% end %>
+    </div>
 
     <div class="panel panel-default" id="comment-panel">
       <div class="panel-heading">

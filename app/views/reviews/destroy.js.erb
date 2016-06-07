@@ -1,0 +1,7 @@
+$('#delete-review-modal').modal('hide');
+$("#review_<%= @review.id %>").fadeOut(400, function(){
+  $(this).remove();
+  if ($(".review-user-row").length == 0) {
+    $(".reviews-index").html("");
+  };
+});

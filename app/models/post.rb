@@ -8,7 +8,7 @@ class Post < ActiveRecord::Base
 
   validates :user, presence: true
 
-  validates :body, presence: { message: "can't be blank" }, length: { maximum: 500, message: "can't be longer than 500 characters" }
+  validates :body, presence: { message: "can't be blank" }, length: { maximum: 500, message: "can't be longer than %{count} characters" }
 
   # def send_comment_creation_notification(comment)
   #   post_commenters = ([user] + users).uniq - [ comment.user ]

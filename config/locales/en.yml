@@ -59,5 +59,9 @@ en:
     product_invitation_policy:
       accept?: "Only the invited person can accept the invitation."
       destroy?: "Only the inviter and the invited persons can delete the invitation."
+    product_customer_policy:
+      show?: "You have to create a profile first!"
+      create_reviews?: "Only customers can create reviews!"
+      destroy_review?: "Only the owner can delete reviews!"
 
 

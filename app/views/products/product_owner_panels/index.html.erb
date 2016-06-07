@@ -1,7 +1,16 @@
 <% provide(:title, @product.name + " members") %>
 <div class= "container-fluid product-container">
   <div class="product-show-container">
-    
+    <div class="row product-name-owner-panel">
+      <div class="col-md-8">
+        <%= link_to product_path(@product) do %>
+          <%= image_tag @product.product_image_url(:small_thumb) %>
+          <h3><%= @product.name %> 
+        <% end %>
+        owner panel</h3>
+      </div>
+    </div>
+
     <h4>Invite a New Member</h4>
     <p>Product members will appear on the product's page alongside the product owner.</p>
     <%= form_for([@product, @group_invitation], html: { class: "product-group-invitation-form" }) do |f| %>
@@ -143,7 +152,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" id="deleteproductuserclose">Close</button>
-        <a href="#" type="button" class="btn btn-danger" data-method="delete" data-behavior="delete-product-user-submit" data-productuserdestroylink >Remove User</a>
+        <a href="#" type="button" class="btn btn-danger" data-method="delete" data-behavior="delete-product-user-submit" data-disable-with="<i class='fa fa-spinner fa-spin'></i> Deleting..." data-productuserdestroylink >Remove User</a>
           <!-- DESTROY LINK GETS INSERTED HERE -->      
       </div>
     </div>
@@ -165,7 +174,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" id="deletegroupinvitationclose">Close</button>
-        <a href="#" type="button" class="btn btn-danger" data-method="delete" data-behavior="delete-group-invitation-submit" data-groupinvitationdestroylink >Delete Invitation</a>
+        <a href="#" type="button" class="btn btn-danger" data-method="delete" data-behavior="delete-group-invitation-submit" data-disable-with="<i class='fa fa-spinner fa-spin'></i> Deleting..." data-groupinvitationdestroylink >Delete Invitation</a>
           <!-- DESTROY LINK GETS INSERTED HERE -->      
       </div>
     </div>
@@ -187,7 +196,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" id="deleteproductcustomeruserclose">Close</button>
-        <a href="#" type="button" class="btn btn-danger" data-method="delete" data-behavior="delete-product-customer-user-submit" data-productuserdestroylink >Remove User</a>
+        <a href="#" type="button" class="btn btn-danger" data-method="delete" data-behavior="delete-product-customer-user-submit" data-disable-with="<i class='fa fa-spinner fa-spin'></i> Deleting..." data-productuserdestroylink >Remove User</a>
           <!-- DESTROY LINK GETS INSERTED HERE -->      
       </div>
     </div>
