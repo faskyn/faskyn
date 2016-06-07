@@ -40,6 +40,7 @@ RSpec.describe Task, type: :model do
 
     it { is_expected.to belong_to(:assigner) }
     it { is_expected.to belong_to(:executor) }
+    it { is_expected.to have_many(:notifications).dependent(:destroy) }
   end
 
   describe "scopes" do

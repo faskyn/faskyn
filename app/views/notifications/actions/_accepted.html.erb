@@ -12,7 +12,7 @@
           <% if notification.notifiable_type == "Product" %>
             <%= notification.sender.full_name %> has <%= notification.action %> your invitation to join <%= notification.notifiable.name %> as a team member.
           <% elsif notification.notifiable_type == "ProductCustomer" %>
-            <%= notification.sender.full_name %> has <%= notification.action %> your invitation to join <%= notification.notifiable.product.name %> as a referencer.
+            <%= notification.sender.full_name %> has <%= notification.action %> your invitation to join the <%= notification.notifiable.customer %> customer case as a referencer.
           <% end %>
         </div>
         <div class="time">

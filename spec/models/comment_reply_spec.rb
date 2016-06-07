@@ -51,7 +51,7 @@ RSpec.describe CommentReply, type: :model do
     let(:comment_reply) { create(:comment_reply, comment: comment, user: reply_user)}
     let!(:other_reply) { create(:comment_reply, comment: comment, user: other_user) }
     
-    it "send__comment_creation_notification" do
+    it "send_comment_creation_notification" do
       expect{
         comment_reply.send_comment_reply_creation_notification(comment)
         }.to change{Notification.count}.by(3)

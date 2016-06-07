@@ -73,8 +73,9 @@ RSpec.describe Product, type: :model do
     it { is_expected.to have_many(:product_leads).dependent(:destroy) }
     it { is_expected.to have_many(:industry_products).dependent(:destroy) }
     it { is_expected.to have_many(:industries).through(:industry_products) }
-    it { is_expected.to have_many(:comments) }
+    it { is_expected.to have_many(:comments).dependent(:destroy) }
     it { is_expected.to have_many(:commenters).through(:comments) }
+    it { is_expected.to have_many(:notifications).dependent(:destroy) }
     it { is_expected.to have_many(:users).through(:product_users) }
     it { is_expected.to have_many(:product_users).dependent(:destroy) }
   

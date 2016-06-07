@@ -6,6 +6,8 @@ class Post < ActiveRecord::Base
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :commenters, through: :comments, source: :user
 
+  has_many :notifications, as: :notifiable, dependent: :destroy
+
   validates :user, presence: true
 
   validates :body, presence: { message: "can't be blank" }, length: { maximum: 500, message: "can't be longer than %{count} characters" }

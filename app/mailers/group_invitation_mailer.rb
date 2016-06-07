@@ -1,20 +1,19 @@
 class GroupInvitationMailer < ActionMailer::Base
+  default from: 'faskyn@gmail.com'
 
   def product_group_invitation_email(group_invitation)
     @group_invitation = group_invitation
 
-    mail(from: "#{@group_invitation.sender.email}",
-         to: "#{@group_invitation.recipient.email}",
-         subject: "[Faskyn] #{@group_invitation.sender.full_name} invited you to join #{@group_invitation.group_invitable.name}!"
+    mail(to: "#{@group_invitation.recipient.email}",
+         subject: "[Faskyn] #{@group_invitation.sender.full_name} invited you to join a product!"
          )
   end
 
   def product_customer_group_invitation_email(group_invitation)
     @group_invitation = group_invitation
 
-    mail(from: "#{@group_invitation.sender.email}",
-         to: "#{@group_invitation.recipient.email}",
-         subject: "[Faskyn] #{@group_invitation.sender.full_name} invited you to write a reference for #{@group_invitation.group_invitable.product.name}!"
+    mail(to: "#{@group_invitation.recipient.email}",
+         subject: "[Faskyn] #{@group_invitation.sender.full_name} invited you to join a customer case!"
          ) 
   end
 end

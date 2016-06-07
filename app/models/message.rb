@@ -4,6 +4,7 @@ class Message < ActiveRecord::Base
 
   belongs_to :conversation
   belongs_to :user
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
   validates :conversation, presence: true
   validates :user, presence: true

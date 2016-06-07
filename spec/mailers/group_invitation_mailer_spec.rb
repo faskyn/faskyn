@@ -15,7 +15,7 @@ RSpec.describe GroupInvitationMailer, type: :mailer do
       let(:mail) { GroupInvitationMailer.product_group_invitation_email(group_invitation) }
 
       it "renders the subject" do
-        expect(mail.subject).to eq("[Faskyn] #{sender.full_name} invited you to join #{group_invitation.group_invitable.name}!")
+        expect(mail.subject).to eq("[Faskyn] #{ group_invitation.sender.full_name } invited you to join a product!")
       end
 
       it "renders the recipient email" do
@@ -23,7 +23,7 @@ RSpec.describe GroupInvitationMailer, type: :mailer do
       end
 
       it "renders the sender email" do
-        expect(mail.from).to eq([sender.email])
+        expect(mail.from).to eq(["faskyn@gmail.com"])
       end
 
       it "assigns recipient first_name" do
@@ -49,7 +49,7 @@ RSpec.describe GroupInvitationMailer, type: :mailer do
       let(:mail) { GroupInvitationMailer.product_customer_group_invitation_email(group_invitation) }
 
       it "renders the subject" do
-        expect(mail.subject).to eq("[Faskyn] #{group_invitation.sender.full_name} invited you to write a reference for #{group_invitation.group_invitable.product.name}!")
+        expect(mail.subject).to eq("[Faskyn] #{ group_invitation.sender.full_name } invited you to join a customer case!")
       end
 
       it "renders the recipient email" do
@@ -57,7 +57,7 @@ RSpec.describe GroupInvitationMailer, type: :mailer do
       end
 
       it "renders the sender email" do
-        expect(mail.from).to eq([sender.email])
+        expect(mail.from).to eq(["faskyn@gmail.com"])
       end
 
       it "assigns recipient first_name" do

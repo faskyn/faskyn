@@ -21,7 +21,8 @@ RSpec.describe Post, type: :model do
     it { is_expected.to validate_length_of(:body).is_at_most(500).with_message(/can't be longer than 500 characters/) }
  
     it { is_expected.to belong_to(:user) }
-    it { is_expected.to have_many(:comments) }
+    it { is_expected.to have_many(:comments).dependent(:destroy) }
     it { is_expected.to have_many(:commenters).through(:comments) }
+    it { is_expected.to have_many(:notifications).dependent(:destroy) }
   end
 end

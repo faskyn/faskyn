@@ -25,7 +25,8 @@ RSpec.describe ProductCustomer, type: :model do
     it { is_expected.to validate_presence_of(:product) }
     
     it { is_expected.to belong_to(:product).touch }
-    it { is_expected.to have_many(:comments) }
+    it { is_expected.to have_many(:comments).dependent(:destroy) }
+    it { is_expected.to have_many(:notifications).dependent(:destroy) }
     it { is_expected.to have_many(:product_customer_users) }
     it { is_expected.to have_many(:users).through(:product_customer_users) }
     it { is_expected.to have_many(:reviews) }

@@ -8,6 +8,8 @@ class Product < ActiveRecord::Base
 
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :commenters, through: :comments, source: :user
+
+  has_many :notifications, as: :notifiable, dependent: :destroy
   
   has_many :industry_products, dependent: :destroy, inverse_of: :product
   has_many :industries, through: :industry_products

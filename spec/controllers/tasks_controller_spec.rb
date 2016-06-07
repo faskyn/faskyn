@@ -148,10 +148,8 @@ describe TasksController do
           expect{ create_action }.to change{ Notification.count }.by(1)
         end
 
-        it 'triggers task email active job' do
+        it 'triggers task email job' do
           expect{ create_action }.to change{ ActiveJob::Base.queue_adapter.enqueued_jobs.count }.by(1)
-          #expect(TaskCreatorJob).to receive(:perform_later).once
-          #create_action
         end
 
         it "responds with success" do

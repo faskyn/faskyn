@@ -60,6 +60,10 @@ class ApplicationController < ActionController::Base
         product_id = product_customer.product_id
         product_product_owner_panels_path(product_id)
       end
+    elsif action == "wrote"
+      product_customer = ProductCustomer.find(notifiable_id)
+      product_id = product_customer.product_id
+      product_product_customer_path(product_id, notifiable_id)
     end
   end
 

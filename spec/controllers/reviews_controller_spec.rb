@@ -43,6 +43,14 @@ describe ReviewsController do
           expect{ create_action }.to change{ Review.count }.by(1)
         end
 
+        it "sends notification" do
+          expect{ create_action }.to change{ Notification.count }.by(1)
+        end
+
+        it 'triggers review writer job' do
+          expect{ create_action }.to change{ ActiveJob::Base.queue_adapter.enqueued_jobs.count }.by(1)
+        end
+
         it "responds with success" do
           create_action
           expect(response).to have_http_status(200)

@@ -8,7 +8,13 @@ class ReviewsController < ApplicationController
     @review = @product_customer.reviews.new(review_params)
     @review.user = current_user
     if @review.save
-      #@review.send_review_creation_notification(@product_customer)
+      Notification.create(
+                          recipient: @product_customer.owner, 
+                          sender: @review.user,
+                          notifiable: @product_customer,
+                          action: "wrote"
+                          )
+      ReviewWriterJob.perform_later(@review, @product_customer)
       respond_to :js
     else
       respond_to :js

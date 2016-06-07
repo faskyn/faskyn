@@ -2,6 +2,7 @@ class ProductCustomer < ActiveRecord::Base
   belongs_to :product, touch: true
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :commenters, through: :comments, source: :user
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
   has_many :users, through: :product_customer_users, source: :user
   has_many :product_customer_users

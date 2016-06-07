@@ -9,11 +9,7 @@
       <%= image_tag notification.sender.avatar.url(:small_thumb), class: 'notification-index-avatar' %>
       <span>
         <div class="subject">
-          <% if notification.notifiable_type == "Product" %>
-            <%= notification.sender.full_name %> has <%= notification.action %> you to join <%= notification.notifiable.name %> as a team member.
-          <% elsif notification.notifiable_type == "ProductCustomer" %>
-            <%= notification.sender.full_name %> has <%= notification.action %> you to join the <%= notification.notifiable.customer %> customer case as a referencer.
-          <% end %>
+          <%= notification.sender.full_name %> <%= notification.action %> a review on the <%= notification.notifiable.customer %> case.
         </div>
         <div class="time">
           <% if notification.created_at.today? %>      
@@ -25,5 +21,5 @@
       </span>
     <% end %>
   </div>
-  
+
 <% end %>

@@ -18,7 +18,7 @@ RSpec.describe PostMailer, type: :mailer do
     end
 
     it "renders the sender email" do
-      expect(mail.from).to eq([writer.email])
+      expect(mail.from).to eq(["faskyn@gmail.com"])
     end
 
     it "assigns reader first_name" do

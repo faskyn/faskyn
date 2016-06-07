@@ -30,6 +30,7 @@ RSpec.describe Message, type: :model do
 
     it { is_expected.to belong_to(:user) }
     it { is_expected.to belong_to(:conversation) }
+    it { is_expected.to have_many(:notifications).dependent(:destroy) }
   end
 
   describe "scopes" do

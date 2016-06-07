@@ -4,6 +4,7 @@ class Task < ActiveRecord::Base
 
   has_one :assigner_profile, through: :assigner, source: :profile
   has_one :executor_profile, through: :executor, source: :profile
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
   validates :assigner, presence: true
   validates :executor, presence: { message: "must be valid"}

@@ -19,7 +19,6 @@ class Products::ProductInvitationsController < ApplicationController
       if @product_invitation.save
         Notification.create(recipient_id: @product_invitation.recipient_id,
           sender_id: @product_invitation.sender_id, notifiable: @product, action: "invited")
-        ProductInvitationJob.perform_later(@product_invitation)
         redirect_to :back, notice: "Invitation sent!"
       else
         flash[:error] = "Type an email address!"
