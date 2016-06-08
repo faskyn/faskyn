@@ -23,10 +23,10 @@ messages_creation:
   period: 10
   path: /messages
 
-product_invitation_creation:
+group_invitation_creation:
   limit: 5
   period: 60
-  path: /product_invitations
+  path: /group_invitations
 
 default:
   limit: 10

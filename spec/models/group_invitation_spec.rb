@@ -43,4 +43,30 @@ RSpec.describe GroupInvitation, type: :model do
     it { is_expected.to belong_to(:sender) }
     it { is_expected.to belong_to(:group_invitable) }
   end
+
+  describe "scopes" do
+    let(:referencer) { create(:user) }
+    let(:member) { create(:user) }
+    let(:owner) { create(:user) }
+    let(:product) { create(:product, :product_with_nested_attrs) }
+    let!(:product_user) { create(:product_user, product: product, role: "owner", user: owner) }
+    let(:product_customer) { create(:product_customer, product: product) }
+    let!(:accepted_customer_group_invitation) { create(:group_invitation, group_invitable: product_customer, recipient: referencer, sender: owner, email: referencer.email ,accepted: true) }
+    let!(:pending_product_group_invitation) { create(:group_invitation, group_invitable: product, recipient: member, sender: owner, email: member.email) }
+
+    it "pending users" do
+      expect(product.group_invitations.pending_user(member)).to eq([pending_product_group_invitation])
+      expect(product.group_invitations.pending_user(member)).to_not include(accepted_customer_group_invitation)
+    end
+
+    it "belonging to product user" do
+      expect(product.group_invitations.belonging_to_product_user(member)).to eq([pending_product_group_invitation])
+      expect(product.group_invitations.belonging_to_product_user(member)).to_not include(accepted_customer_group_invitation)
+    end
+
+    it "belonging to product customer user" do
+      expect(product_customer.group_invitations.belonging_to_product_customer_user(referencer)).to eq([accepted_customer_group_invitation])
+      expect(product_customer.group_invitations.belonging_to_product_customer_user(referencer)).to_not include(pending_product_group_invitation)
+    end
+  end
 end

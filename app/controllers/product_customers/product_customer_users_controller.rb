@@ -6,6 +6,8 @@ class ProductCustomers::ProductCustomerUsersController < ApplicationController
   def destroy
     authorize @product, :destroy_product_customer_users?
     if @product_customer_user.destroy
+      @user = @product_customer_user.user
+      @product_customer.group_invitations.belonging_to_product_customer_user(@user).destroy_all
       redirect_to :back, notice: "User removed from product referencers!"
     end
   end

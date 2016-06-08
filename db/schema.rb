@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160607232315) do
+ActiveRecord::Schema.define(version: 20160608110245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,19 +143,6 @@ ActiveRecord::Schema.define(version: 20160607232315) do
   end
 
   add_index "product_customers", ["product_id"], name: "index_product_customers_on_product_id", using: :btree
-
-  create_table "product_invitations", force: :cascade do |t|
-    t.integer  "product_id",                   null: false
-    t.integer  "recipient_id",                 null: false
-    t.integer  "sender_id",                    null: false
-    t.boolean  "accepted",     default: false, null: false
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-  end
-
-  add_index "product_invitations", ["product_id"], name: "index_product_invitations_on_product_id", using: :btree
-  add_index "product_invitations", ["recipient_id"], name: "index_product_invitations_on_recipient_id", using: :btree
-  add_index "product_invitations", ["sender_id"], name: "index_product_invitations_on_sender_id", using: :btree
 
   create_table "product_leads", force: :cascade do |t|
     t.integer  "product_id", null: false
@@ -317,9 +304,6 @@ ActiveRecord::Schema.define(version: 20160607232315) do
   add_foreign_key "product_customer_users", "product_customers"
   add_foreign_key "product_customer_users", "users"
   add_foreign_key "product_customers", "products"
-  add_foreign_key "product_invitations", "products"
-  add_foreign_key "product_invitations", "users", column: "recipient_id"
-  add_foreign_key "product_invitations", "users", column: "sender_id"
   add_foreign_key "product_leads", "products"
   add_foreign_key "product_users", "products"
   add_foreign_key "product_users", "users"

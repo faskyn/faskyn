@@ -137,10 +137,6 @@ FactoryGirl.define do
     user
   end
 
-  factory :product_invitation do
-    accepted false
-  end
-
   factory :group_invitation do
     accepted false
   end

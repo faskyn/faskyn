@@ -40,8 +40,8 @@ en:
       destroy?: "You can't delete this product!"
       index_product_users?: "You can't view this product user page."
       destroy_product_users?: "You can't delete this product member."
-      new_product_invitations?: "Only the owner can invite new product members."
-      create_product_invitations?: "Only the owner can invite new product members."
+      new_group_invitations?: "Only the owner can invite new product members."
+      create_group_invitations?: "Only the owner can invite new product members."
     profile_policy:
       show?: "You have to be logged in to view this profile!"
       edit?: "You can't edit this profile!"
@@ -56,7 +56,7 @@ en:
       index_tasks?: "You can't view this task list!"
       index_notifications?: "You can't view this notification feed!"
       index_own_products?: "You can't view this product list!"
-    product_invitation_policy:
+    group_invitation_policy:
       accept?: "Only the invited person can accept the invitation."
       destroy?: "Only the inviter and the invited persons can delete the invitation."
     product_customer_policy:

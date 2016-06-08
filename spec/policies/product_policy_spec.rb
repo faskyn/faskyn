@@ -73,30 +73,6 @@ describe ProductPolicy do
     end
   end
 
-  describe "policies belongs to product invitation" do
-    let(:owner) { create(:user) }
-    let(:member) { build_stubbed(:user) }
-    let!(:owner_profile) { build_stubbed(:profile, user: owner) }
-    let!(:member_profile) { build_stubbed(:profile, user: member) }
-    let(:product) { create(:product, :product_with_nested_attrs) }
-    let!(:owner_product_user) { create(:product_user, user_id: owner.id, product: product, role: "owner") }
-    let(:member_product_user) { build_stubbed(:product_user, user_id: member.id, product: product, role: "member") }
-
-    permissions :new_product_invitations? do
-      it "only allows access for owner" do
-        expect(subject).to permit(owner, product)
-        expect(subject).to_not permit(member, product)
-      end
-    end
-
-    permissions :create_product_invitations? do
-      it "only allows access for owner" do
-        expect(subject).to permit(owner, product)
-        expect(subject).to_not permit(member, product)
-      end
-    end
-  end
-
   describe "policies belongs to group invitation" do
     let(:owner) { create(:user) }
     let(:member) { build_stubbed(:user) }

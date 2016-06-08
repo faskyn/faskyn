@@ -11,4 +11,6 @@ class GroupInvitation < ActiveRecord::Base
   validates :email, presence: { message: "can't be blank" }
 
   scope :pending_user, -> (user) { where("recipient_id = ? AND accepted = ?", user.id, false) }
+  scope :belonging_to_product_user, -> (user) { where("recipient_id = ? AND group_invitable_type = ?", user.id, "Product") }
+  scope :belonging_to_product_customer_user, -> (user) {where("recipient_id = ? AND group_invitable_type = ?", user.id, "ProductCustomer") }
 end

@@ -16,7 +16,6 @@ class Product < ActiveRecord::Base
   has_many :product_customers, dependent: :destroy, inverse_of: :product
   has_many :product_customer_users, through: :product_customers
   has_many :product_leads, dependent: :destroy, inverse_of: :product
-  has_many :product_invitations, dependent: :destroy
 
   has_many :group_invitations, as: :group_invitable, dependent: :destroy
 

@@ -44,7 +44,6 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:product_users) }
     it { is_expected.to have_many(:products).through(:product_users) }
     it { is_expected.to have_many(:own_products).through(:product_users) }
-    it { is_expected.to have_many(:product_invitations) }
 
     it { is_expected.to delegate_method(:first_name).to(:profile) }
     it { is_expected.to delegate_method(:last_name).to(:profile) }

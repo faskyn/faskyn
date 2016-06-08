@@ -5,7 +5,7 @@ class GroupInvitationsController < ApplicationController
   end
 
   def create
-    authorize @product, :create_product_invitations?
+    authorize @product, :create_group_invitations?
     @recipient = User.invite!({ email: email }, @product.owner)
     if @recipient.is_invited_or_member?(@group_invitable)
       redirect_to :back, alert: "User already invited or team member!"

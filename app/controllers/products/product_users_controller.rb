@@ -6,7 +6,9 @@ class Products::ProductUsersController < ApplicationController
   def destroy
     authorize @product, :destroy_product_users?
     if @product_user.destroy
-      @product.product_invitations.where('recipient_id = ?', @product_user.user_id).destroy_all
+      #@product.group_invitations.where('recipient_id = ? AND group_invitable_type = ?', @product_user.user_id, "Product").destroy_all
+      @user = @product_user.user
+      @product.group_invitations.belonging_to_product_user(@user).destroy_all
       redirect_to :back, notice: "User removed from product members!"
     end
   end

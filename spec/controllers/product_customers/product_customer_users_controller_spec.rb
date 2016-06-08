@@ -20,6 +20,7 @@ describe ProductCustomers::ProductCustomerUsersController do
       let!(:owner) { create(:product_user, product_id: product.id, role: "owner", user_id: @user.id) }
       let(:product_customer) { create(:product_customer, product: product) }
       let!(:referencer) { create(:product_customer_user, product_customer: product_customer, user: referencer_user) }
+      let!(:group_invitation) { create(:group_invitation, group_invitable: product_customer, recipient: referencer_user, sender: @user, email: referencer_user.email ,accepted: true) }
       subject(:destroy_action) { delete :destroy, product_customer_id: product_customer.id, id: referencer.id }
       before(:each) do
         request.env["HTTP_REFERER"] = product_product_owner_panels_path(product)
@@ -27,6 +28,10 @@ describe ProductCustomers::ProductCustomerUsersController do
 
       it "destroys the product customer user" do
         expect{ destroy_action }.to change{ ProductCustomerUser.count }.by(-1)
+      end
+
+      it "destroys all the invitations belonging to the product customer user" do
+        expect{ destroy_action }.to change{ GroupInvitation.count }.by(-1)
       end
 
       it "redirects to products owner panel page" do

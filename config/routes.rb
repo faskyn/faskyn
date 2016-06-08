@@ -48,11 +48,6 @@ Rails.application.routes.draw do
   end
 
   resources :products do
-    resources :product_invitations, only: [:new, :create, :destroy], module: :products do
-      member do
-        patch :accept
-      end
-    end
     resources :product_owner_panels, only: :index, module: :products
     resources :group_invitations, only: [:new, :create], module: :products #polymorphic
     resources :product_users, only: :destroy, module: :products
