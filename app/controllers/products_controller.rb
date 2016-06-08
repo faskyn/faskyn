@@ -82,7 +82,7 @@ class ProductsController < ApplicationController
       params.require(:product).permit(:product_image, :remove_product_image, :product_image_cache,
         :name, :website, :oneliner, :description, industry_ids: [], user_ids: [],
         product_customers_attributes: [:id, :customer, :usage, :website, :_destroy],
-        product_leads_attributes: [:id, :lead, :pitch, :_destroy])
+        product_leads_attributes: [:id, :lead, :pitch, :website, :_destroy])
     end
 
     def product_users_params

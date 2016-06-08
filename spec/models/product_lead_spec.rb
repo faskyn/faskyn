@@ -37,4 +37,20 @@ RSpec.describe ProductLead, type: :model do
       expect(product_lead.owner).to eq(user)
     end
   end
+
+  # describe "custom validations" do
+    
+  #   context "format lead website" do
+
+  #     it "returns nil if empty string" do
+  #       website = ""
+  #       expect(website.format_lead_website).to eq(nil)
+  #     end
+
+  #     it "returns http://webiste if http already present" do
+  #       website = "https://haha.com"
+  #       expect(website.format_lead_website).to eq("http://haha.com")
+  #     end
+  #   end
+  # end
 end

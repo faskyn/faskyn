@@ -12,7 +12,6 @@ class ProductCustomer < ActiveRecord::Base
   validates :customer, presence: { message: "can't be blank" }, length: { maximum: 80, message: "can't be longer than %{count} characters" }
   validates :usage, presence: { message: "can't be blank" }
   validates :website, presence: { message: "can't be blank" }
-
   validates :product, presence: true
 
   before_validation :format_website

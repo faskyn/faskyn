@@ -112,7 +112,7 @@ class Product < ActiveRecord::Base
 
     def product_customer_and_lead_limit_min(min: 1)
       added_customer_count = product_customers.reject(&:marked_for_destruction?).size
-      added_lead_count = product_customers.reject(&:marked_for_destruction?).size
+      added_lead_count = product_leads.reject(&:marked_for_destruction?).size
       added_customer_and_lead_count = added_customer_count + added_lead_count 
       if added_customer_and_lead_count < min
         errors.add :base, "You have to add at least #{pluralize(min, 'current or potential customer')}."

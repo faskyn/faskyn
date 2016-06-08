@@ -22,7 +22,7 @@
           <div class="col-md-12">
             <div class="product-customer-list">
               <div class="list-name">
-                <%= @product_lead.lead %>
+                <%= link_to_if @product_lead.website, @product_lead.lead, @product_lead.website, html_options = { target: "_blank" }  %>
               </div>
               <div class="description">
                 <%= @product_lead.pitch %>

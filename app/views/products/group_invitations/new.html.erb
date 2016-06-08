@@ -7,14 +7,14 @@
 
     <%= form_for([@product, GroupInvitation.new], html: { class: "product-group-invitation-form" }) do |f| %>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-8">
           <div class="form-group">
             <%= f.email_field :email, class: 'form-control', placeholder: "Type an email address..." %>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <div class="form-group">
-            <%= f.button "Invite a New Member", class: "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Sending Invitation..." } %>
+            <%= f.button "Invite Member", class: "btn btn-primary btn-block", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Sending Invitation..." } %>
           </div>
         </div>
       </div>

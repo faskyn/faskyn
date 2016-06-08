@@ -2,7 +2,7 @@
 <div class= "container-fluid product-container">
   <div class="product-show-container">
     <div class="row product-name-owner-panel">
-      <div class="col-md-8">
+      <div class="col-md-12">
         <%= link_to product_path(@product) do %>
           <%= image_tag @product.product_image_url(:small_thumb) %>
           <h3><%= @product.name %> 
