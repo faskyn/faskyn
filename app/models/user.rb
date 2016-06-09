@@ -11,29 +11,31 @@ class User < ActiveRecord::Base
   delegate :first_name, :last_name, :full_name, :job_title, :company, :phone_number, :description, :location, :avatar, to: :profile, allow_nil: true
 
   has_one :profile, dependent: :destroy
-  has_many :socials, dependent: :destroy, through: :profile
+  has_many :socials, through: :profile
 
   has_many :assigned_tasks, class_name: "Task", foreign_key: "assigner_id", dependent: :destroy
   has_many :executed_tasks, class_name: "Task", foreign_key: "executor_id", dependent: :destroy
 
   has_many :conversations, foreign_key: "sender_id", dependent: :destroy
-  has_many :messages, dependent: :destroy
+  has_many :received_conversations, class_name: "Conversation", foreign_key: "recipient_id", dependent: :destroy
 
   has_many :notifications, foreign_key: "recipient_id", dependent: :destroy
+  has_many :sent_notifications, class_name: "Notification", foreign_key: "sender_id", dependent: :destroy
 
-  has_many :product_users
+  has_many :created_products, class_name: "Product", foreign_key: "user_id", dependent: :destroy
+  has_many :product_users, dependent: :destroy
   has_many :products, through: :product_users
-  has_many :own_products, -> { where(product_users: { role: "owner" }) }, through: :product_users, source: :product
+  #has_many :own_products, -> { where(product_users: { role: "owner" }) }, through: :product_users, source: :product
 
-  has_many :referencable_product_customers, through: :product_customer_users, source: :product_customer
-  has_many :product_customer_users
+  has_many :product_customer_users, dependent: :destroy
 
   #has_many :sent_group_invitations, foreign_key: "sender_id", dependent: : destroy
   has_many :group_invitations, foreign_key: "recipient_id", dependent: :destroy
+  has_many :sent_group_invitations, class_name: "GroupInvitation", foreign_key: "sender_id", dependent: :destroy
 
-  has_many :posts
-  has_many :comments
-  has_many :comment_replies, through: :comments
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :comment_replies, through: :comments, dependent: :destroy
   
   #check and decrease chat notification that happens between 2 given users (max 1)
   def decreasing_chat_notification_number(user)

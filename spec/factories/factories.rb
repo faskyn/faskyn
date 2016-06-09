@@ -142,6 +142,7 @@ FactoryGirl.define do
   end
 
   factory :product, class: Product do
+    association :owner, factory: :user
     sequence(:name) { |n| "ABC_#{n}" }
     website { 'https://example.com' }
     oneliner { Faker::Lorem.sentence }

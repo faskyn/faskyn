@@ -5,7 +5,7 @@ class ProductCustomer < ActiveRecord::Base
   has_many :notifications, as: :notifiable, dependent: :destroy
 
   has_many :users, through: :product_customer_users, source: :user
-  has_many :product_customer_users
+  has_many :product_customer_users, dependent: :destroy
   has_many :group_invitations, as: :group_invitable, dependent: :destroy
   has_many :reviews, dependent: :destroy
 

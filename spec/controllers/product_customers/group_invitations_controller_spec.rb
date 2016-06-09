@@ -13,9 +13,8 @@ describe ProductCustomers::GroupInvitationsController do
     end
 
     describe "POST create" do
-      let(:product) { create(:product, :product_with_nested_attrs) }
+      let(:product) { create(:product, :product_with_nested_attrs, owner: @user) }
       let!(:product_customer) { create(:product_customer, product: product) }
-      let!(:owner) { create(:product_user, product: product, role: "owner", user: @user) }
       before(:each) do
         request.env["HTTP_REFERER"] = product_product_owner_panels_path(product)
       end

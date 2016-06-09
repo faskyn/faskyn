@@ -2,6 +2,7 @@ class Product < ActiveRecord::Base
   include ActionView::Helpers::TextHelper
   mount_uploader :product_image, ProductImageUploader
 
+  belongs_to :owner, class_name: "User", foreign_key: "user_id"
   has_many :users, through: :product_users
   has_many :product_users, dependent: :destroy
   has_many :owners, -> { where(product_users: { role: "owner" }) }, through: :product_users, source: :user
@@ -32,7 +33,6 @@ class Product < ActiveRecord::Base
   validates_associated :product_customers
   validates_associated :product_leads
 
-  validate :product_users_limit
   validate :product_industries_limit
   validate :product_customers_limit_max
   validate :product_leads_limit_max
@@ -43,10 +43,6 @@ class Product < ActiveRecord::Base
 
   def self.pagination_per_page
     12
-  end
-
-  def owner
-    owners.first
   end
 
   def industries_all
@@ -87,12 +83,6 @@ class Product < ActiveRecord::Base
     # def website_validator
     #   self.errors.add :website, "format is invalid!" unless website_valid?  
     # end
-
-    def product_users_limit(min: 1)
-      if product_users.size < min
-        errors.add :base, "There is no user associated!"
-      end
-    end
 
     def product_industries_limit(max: 5, min: 1)
       if industries.reject(&:marked_for_destruction?).size > max

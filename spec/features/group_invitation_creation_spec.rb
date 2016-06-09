@@ -3,8 +3,7 @@ require 'rails_helper'
 feature "creating product group invitation" do
   let(:user) { create(:user) }
   let!(:profile) { create(:profile, user: user) }
-  let(:product) { create(:product, :product_with_nested_attrs) }
-  let!(:product_user) { create(:product_user, product: product, user: user, role: "owner") }
+  let(:product) { create(:product, :product_with_nested_attrs, owner: user) }
   let(:existing_user) { create(:user, email: "jackblack@gmail.com") }
   let!(:existing_profile) { create(:profile, user: existing_user, first_name: "Jack", last_name: "Black") }
   let!(:product_customer) { create(:product_customer, product: product) }

@@ -39,16 +39,6 @@ RSpec.describe Product, type: :model do
       product.valid? 
       expect(product.errors[:base]).to include("You have to choose at least 1 industry.")
     end
-
-    it "validates the number of product users" do
-      attrs = attributes_for(:product, industry_ids: [ industry.id ]).merge(
-        product_customers_attributes: [attributes_for(:product_customer)],
-        product_leads_attributes: [attributes_for(:product_lead)]
-        )
-      product = Product.new(attrs)
-      product.valid? 
-      expect(product.errors[:base]).to include("There is no user associated!")
-    end
   end
 
   describe "model validations" do
@@ -68,6 +58,7 @@ RSpec.describe Product, type: :model do
       expect(build_stubbed(:product, oneliner: nil)).not_to be_valid
     end
 
+    it { is_expected.to belong_to(:owner) }
     it { is_expected.to have_many(:product_customers).dependent(:destroy) }
     it { is_expected.to have_many(:product_customer_users).through(:product_customers) }
     it { is_expected.to have_many(:product_leads).dependent(:destroy) }
@@ -101,10 +92,6 @@ RSpec.describe Product, type: :model do
     let(:industry) { create(:industry, name: "Automotive") }
     before do
       product.industries << industry
-    end
-
-    it "sets owner" do
-      expect(product.owner).to eq(user)
     end
 
     it "industries all" do

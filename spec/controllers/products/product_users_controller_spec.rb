@@ -16,8 +16,7 @@ describe Products::ProductUsersController do
       let(:member) { create(:user) }
       let(:other_profile) { create(:profile, user: member) }
       let!(:profile) { create(:profile, user: @user) }
-      let(:product) { create(:product, :product_with_nested_attrs) }
-      let!(:owner) { create(:product_user, product: product, role: "owner", user: @user) }
+      let(:product) { create(:product, :product_with_nested_attrs, owner: @user) }
       let!(:product_user) { create(:product_user, product: product, user: member, role: "member") }
       let!(:group_invitation) { create(:group_invitation, sender: @user, recipient: member, group_invitable: product, email: member.email, accepted: true) }
       subject(:destroy_action) { delete :destroy, product_id: product.id, id: product_user.id }

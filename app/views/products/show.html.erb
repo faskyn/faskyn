@@ -56,9 +56,12 @@
             <div class="col-md-4 posted-by-column">
               <div class="product-list">
                 <div class="list-name">Posted_by:</div>
-                <div class="description"><%= link_to user_path(@product.owner) do %>
-                  <%= @product.owner.full_name %>
-                <% end %> </div>
+                <% if @product.owner.present? %>
+                  <div class="description"><%= link_to user_path(@product.owner) do %>
+                    <%= @product.owner.full_name %>
+                  <% end %>
+                  </div>
+                <% end %>
               </div>
             </div>
             <div class="col-md-8 oneliner-column">

@@ -7,8 +7,7 @@ RSpec.describe ReviewWriterMailer, type: :mailer do
     let!(:owner_profile) { create(:profile, user: owner) }
     let(:reviewer) { create(:user) }
     let!(:recipient_profile) { create(:profile, user: reviewer, first_name: "Peter", last_name: "Thing") }
-    let!(:product) { create(:product, :product_with_nested_attrs) }
-    let!(:product_user) { create(:product_user, product: product, user: owner, role: "owner") }
+    let!(:product) { create(:product, :product_with_nested_attrs, owner: owner) }
     let!(:product_customer) { create(:product_customer, product: product) }
     let!(:review) { create(:review, user: reviewer, product_customer: product_customer) }
     let(:mail) { ReviewWriterMailer.review_writer_email(review, product_customer) }

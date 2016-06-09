@@ -5,9 +5,8 @@ feature "creating review" do
   let(:user) { create(:user) }
   let!(:owner_profile) { create(:profile, user: owner) }
   let(:owner) { create(:user) }
-  let!(:product_user) { create(:product_user, user: owner, product: product, role: "owner") }
   let!(:product_customer_user) { create(:product_customer_user, product_customer: product_customer, user: user) }
-  let(:product) { create(:product, :product_with_nested_attrs) }
+  let(:product) { create(:product, :product_with_nested_attrs, owner: owner) }
   let!(:product_customer) { create(:product_customer, product: product) }
   let!(:review) { create(:review, user: user, product_customer: product_customer, body: "original  review body") }
 

@@ -5,8 +5,7 @@ feature "updating product" do
   let!(:industry_2) { create(:industry, name: "Education") }
   let(:user) { create(:user) }
   let!(:profile) { create(:profile, user: user) }
-  let(:product) { create(:product, :product_with_nested_attrs) }
-  let!(:product_user) { create(:product_user, product: product, user: user, role: "owner") }
+  let!(:product) { create(:product, :product_with_nested_attrs, owner: user) }
 
   scenario "successfully" do
     sign_in(user)

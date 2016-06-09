@@ -83,7 +83,7 @@
         <h4>Reviews</h4>
         <div class="well product-well" data-behavior="review-insert-anchor">
           <div data-behavior="review-insert">
-            <%= render partial: "reviews/review", collection: @reviews, locals: { product_customer: @product_customer, product: @product } %>
+            <%= render partial: "reviews/review", collection: @reviews, locals: { product_customer: @product_customer } %>
           </div>
         </div>
         <%= render partial: "reviews/update_review_modal" %>

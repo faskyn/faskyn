@@ -1,6 +1,6 @@
 class Profile < ActiveRecord::Base
   belongs_to :user, touch: true
-  has_many :socials
+  has_many :socials, dependent: :destroy
 
   mount_uploader :avatar, AvatarUploader
 

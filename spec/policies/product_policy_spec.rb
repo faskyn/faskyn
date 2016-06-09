@@ -8,8 +8,7 @@ describe ProductPolicy do
     let(:other_user) { build_stubbed(:user) }
     let!(:profile) { build_stubbed(:profile, user: user) }
     let!(:other_profile) { build_stubbed(:profile, user: other_user) }
-    let(:product) { create(:product, :product_with_nested_attrs) }
-    let!(:product_user) { create(:product_user, user: user, product: product, role: "owner") }
+    let(:product) { create(:product, :product_with_nested_attrs, owner: user) }
     let(:user_without_profile) { build_stubbed(:user) }
 
     permissions :index? do
@@ -61,8 +60,7 @@ describe ProductPolicy do
     let(:member) { build_stubbed(:user) }
     let!(:owner_profile) { build_stubbed(:profile, user: owner) }
     let!(:member_profile) { build_stubbed(:profile, user: member) }
-    let(:product) { create(:product, :product_with_nested_attrs) }
-    let!(:owner_product_user) { create(:product_user, user_id: owner.id, product: product, role: "owner") }
+    let(:product) { create(:product, :product_with_nested_attrs, owner: owner) }
     let(:member_product_user) { build_stubbed(:product_user, user_id: member.id, product: product, role: "member") }
 
     permissions :destroy_product_users?, :destroy_product_customer_users? do
@@ -78,8 +76,7 @@ describe ProductPolicy do
     let(:member) { build_stubbed(:user) }
     let!(:owner_profile) { build_stubbed(:profile, user: owner) }
     let!(:member_profile) { build_stubbed(:profile, user: member) }
-    let(:product) { create(:product, :product_with_nested_attrs) }
-    let!(:owner_product_user) { create(:product_user, user_id: owner.id, product: product, role: "owner") }
+    let(:product) { create(:product, :product_with_nested_attrs, owner: owner) }
     let(:member_product_user) { build_stubbed(:product_user, user_id: member.id, product: product, role: "member") }
 
     permissions :new_group_invitations? do

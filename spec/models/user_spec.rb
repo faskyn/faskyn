@@ -28,22 +28,22 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_presence_of(:password) }
     it { is_expected.to validate_numericality_of(:new_chat_notification).only_integer.is_greater_than_or_equal_to(0) }
     it { is_expected.to validate_numericality_of(:new_other_notification).only_integer.is_greater_than_or_equal_to(0) }
-    it { is_expected.to have_many(:conversations) }
-    it { is_expected.to have_many(:messages) }
-    it { is_expected.to have_one(:profile) }
+    it { is_expected.to have_many(:conversations).dependent(:destroy) }
+    it { is_expected.to have_many(:received_conversations).dependent(:destroy) }
+    it { is_expected.to have_one(:profile).dependent(:destroy) }
     it { is_expected.to have_many(:socials) }
-    it { is_expected.to have_many(:assigned_tasks) }
-    it { is_expected.to have_many(:executed_tasks) }
+    it { is_expected.to have_many(:assigned_tasks).dependent(:destroy) }
+    it { is_expected.to have_many(:executed_tasks).dependent(:destroy) }
     it { is_expected.to have_many(:products) }
-    it { is_expected.to have_many(:notifications) }
-    it { is_expected.to have_many(:posts) }
-    it { is_expected.to have_many(:comments) }
-    it { is_expected.to have_many(:comment_replies) }
-    it { is_expected.to have_many(:product_customer_users) }
-    it { is_expected.to have_many(:referencable_product_customers).through(:product_customer_users) }
-    it { is_expected.to have_many(:product_users) }
+    it { is_expected.to have_many(:notifications).dependent(:destroy) }
+    it { is_expected.to have_many(:sent_notifications).dependent(:destroy) }
+    it { is_expected.to have_many(:posts).dependent(:destroy) }
+    it { is_expected.to have_many(:comments).dependent(:destroy) }
+    it { is_expected.to have_many(:comment_replies).dependent(:destroy) }
+    it { is_expected.to have_many(:product_customer_users).dependent(:destroy) }
+    it { is_expected.to have_many(:product_users).dependent(:destroy) }
     it { is_expected.to have_many(:products).through(:product_users) }
-    it { is_expected.to have_many(:own_products).through(:product_users) }
+    it { is_expected.to have_many(:created_products).dependent(:destroy) }
 
     it { is_expected.to delegate_method(:first_name).to(:profile) }
     it { is_expected.to delegate_method(:last_name).to(:profile) }

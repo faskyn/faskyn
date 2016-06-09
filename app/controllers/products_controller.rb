@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
   def own_products
     @user = User.find(params[:user_id])
     authorize @user, :index_own_products?
-    @products = current_user.own_products.order(updated_at: :desc).paginate(page: params[:page], per_page: Product.pagination_per_page)
+    @products = current_user.created_products.order(updated_at: :desc).paginate(page: params[:page], per_page: Product.pagination_per_page)
     respond_to do |format|
       format.html
       format.js
@@ -36,6 +36,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    @product.user_id = current_user.id
     @product.product_users.build(user_id: current_user.id, role: "owner")
     authorize @product
     if @product.save
