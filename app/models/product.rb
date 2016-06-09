@@ -57,6 +57,10 @@ class Product < ActiveRecord::Base
     industry_array.join(", ")
   end
 
+  def twitter_share_text
+    TwitterProductShare.new(self).return_text
+  end
+
   private
 
     def format_website

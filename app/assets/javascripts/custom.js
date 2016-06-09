@@ -30,3 +30,12 @@ $(document).on('click', 'tr[data-link]', function() {
 	window.location = $(this).data('link');
 });
 
+$(document).on('click', '[data-behavior="twitter-share"]',function() {
+  twitter = $(this);
+  twitterWindow = 'http://twitter.com/share?text='
+    + twitter.data('twittertext') + '&url='
+    + twitter.data('twitterurl')
+    + twitter.data('twitteranchor');
+  window.open(twitterWindow, '_blank', 'width=800, height=500, top=200, left=300');
+});
+

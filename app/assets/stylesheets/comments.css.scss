@@ -14,15 +14,13 @@ $comment-grey: #f9f9f9;
 }
 
 .comment-avatar {
-  //width: 40px;
-  //height: 40px;
-  border-radius: 10%;
+  border-radius: 50%;
 }
 
 .comment-reply-avatar {
   width: 35px;
   height: 35px;
-  border-radius: 10%;
+  border-radius: 50%;
 }
 
 .comment-form-row {
@@ -62,10 +60,6 @@ $comment-grey: #f9f9f9;
         color: $dark-grey;
       }
     }
-    // &:hover .post-comment-editing-deleting  {
-    //   display: inline;
-    //   color: $dark-grey;
-    // }
   }
   a {
     decoration: none;
@@ -100,9 +94,6 @@ $comment-grey: #f9f9f9;
           color: $dark-grey;
         }
       }
-      // &:hover .post-comment-reply-editing-deleting  {
-      //   color: $dark-grey;
-      // }
     }
     a {
       decoration: none;

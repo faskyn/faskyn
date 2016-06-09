@@ -186,7 +186,7 @@ a {
     .navbar-avatar {
       width:30px;
       height:30px;
-      border-radius: 10%;
+      border-radius: 50%;
     }
     .avatar-notification {
       width:30px;
@@ -437,5 +437,13 @@ a {
       text-decoration: none;
       color: $dark-grey;
     }
+  }
+}
+
+.twitter-share {
+  color: $dark-grey;
+  &:hover {
+    cursor: pointer;
+    color: #1da1f2;
   }
 }

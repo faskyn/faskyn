@@ -6,9 +6,12 @@
   </div>
   <div class = "list-elements">
     <ol>
-      <% cache ['sidebar-products-index', @products_sidebar.first] do %>
+      <% cache ['sidebar-products-index', @products_sidebar.map(&:id), @products_sidebar.map(&:updated_at).max] do %>
+
         <% @products_sidebar.each do |product| %>
+
           <% cache ['sidebar-products-single', product] do %>
+
             <%= link_to product do %>
               <div class="hover">
                 <li>
@@ -22,8 +25,11 @@
                 </li>
               </div>
             <% end %>
+
           <% end %>
+
         <% end %> 
+
       <% end %>
     </ol>
   </div>

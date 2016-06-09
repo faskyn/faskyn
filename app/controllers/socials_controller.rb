@@ -2,9 +2,6 @@ class SocialsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    #when user clicks on button to authorize the given social site
-    #google calendar needs refresh token (new query on every calendar click) unlike the linkedin and twitter
-    #binding.pry
     begin
       @profile = current_user.profile
       @social = @profile.socials.find_or_create_from_auth_hash(auth_hash)

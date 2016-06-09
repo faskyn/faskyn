@@ -12,13 +12,13 @@ class Social < ActiveRecord::Base
   end
 
   def self.find_or_create_from_auth_hash(auth_hash)
-    #checking if the connected account exists (one use can have one acc/provider at the moment)
     social_acc = where(provider: auth_hash.provider).first_or_create
     social_acc.update(
       #no first_name, last_name and phone for twitter
       uid: auth_hash.uid,
       token: auth_hash.credentials.token,
       secret: auth_hash.credentials.secret,
+      nickname: auth_hash.info.nickname,
       picture_url: auth_hash.info.image,
       location: auth_hash.info.location,
       description: auth_hash.info.description,
