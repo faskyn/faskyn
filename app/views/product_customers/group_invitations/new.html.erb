@@ -25,6 +25,8 @@
     <% end %>
 
     <h3>Invite a New Referencer</h3>
+    <p>Product referencers (customers, that you added to product) can verify they are using your product and 
+      can write reviews on the product customer page.</p>
 
     <% if @product.product_customers.any? %>
 
@@ -52,6 +54,10 @@
           </div>
         </div>
       <% end %>
+
+    <% else %>
+
+      <p><strong>Once you have added customers you will be able to send invitations.</strong></p>
 
     <% end %>
 

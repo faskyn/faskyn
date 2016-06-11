@@ -1,7 +1,7 @@
 <div class="container-fluid common-medias-container">
   <div class = "col-md-9">
     <div class= "container-fluid task-container">
-      <div class="row task-header">
+      <div class="row title-row">
         <h3>Medias with <%= link_to user_profile_path(@user) do %><%= @user.first_name %><% end %></h3>
         <span class="rightfloat">
           <%= link_to "Common Tasks", user_path(@user), class: "btn btn-default" %>

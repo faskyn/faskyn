@@ -3,35 +3,30 @@
     <div class="product-show-container" data-behavior="commentable_<%= @product.id %>">
 
       <% @product.group_invitations.pending_user(current_user).each do |group_invitation| %>
-
-        <div class="well product-well" id="product-invitation-well">
-          <div class="row pending-product-invitation-row">
-            <div class="col-md-12">
-              <h4>You have a pending invitation to join this product as a member</h4>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12" style="text-align:center;">
-              <%= link_to "Accept Invitation", accept_group_invitation_path(group_invitation), method: :patch, class: "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Accepting..."} %>
-              <%= link_to "Decline Invitation", group_invitation_path(group_invitation), method: :delete, class: "btn btn-danger delete-invitation-button", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Deleting..."} %>
-            </div>
-          </div>
-        </div>
-
+        <%= render partial: "products/group_invitations/group_invitation", locals: { group_invitation: group_invitation} %>
       <% end %>
 
       <% cache [@product, @product.owner.profile] do %>
 
         <div class="row product-show-name">
-          <div class="col-md-6">
-            <%= image_tag @product.product_image_url(:base_thumb) %>
+          <div class="col-md-10">
+            <%= image_tag @product.product_image_url(:base_thumb), class: "product-image" %>
             <h3><%= @product.name %></h3>
           </div>
-          <div class="col-md-6" style="text-align:right">
-            <span class="hidden" data-behavior="edit-delete-product-buttons" data-product-owner-id= "<%=@product.owner.id %>">
-              <%= link_to "Edit Product", edit_product_path(@product), class: "btn btn-primary" %>
-              <%= link_to "Manage Access", product_product_owner_panels_path(@product), class: "btn btn-primary" %>
-            </span>
+          <div class="col-md-2" style="text-align:right">
+            <li class="dropdown hidden" data-product-owner-id ="<%= @product.owner.id %>" data-behavior="edit-delete-product-buttons">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-default"><i class="fa fa-lg fa-angle-down"></i></button>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li>
+                  <%= link_to "Edit Product", edit_product_path(@product) %>
+                </li>   
+                <li>
+                  <%= link_to "Manage Access", product_product_owner_panels_path(@product) %>
+                </li>
+              </ul>
+            </li>
           </div>
         </div>
         <div class="well product-well">
@@ -40,7 +35,7 @@
               <div class="product-list">
                 <div class="list-name">Website:</div>
                 <div class="description"><%= link_to @product.website, target: "_blank" do %>
-                   <%= @product.website %>
+                   <%= truncate(@product.website, length: 23) %>
                 <% end %></div>
               </div>
             </div>

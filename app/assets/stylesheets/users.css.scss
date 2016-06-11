@@ -52,16 +52,14 @@ $black: #333333;
 }
 
 .user-container {
-  padding-left: 70px;
-  padding-right: 70px;
-  padding-top: 30px;
+  padding: 30px 70px 20px 70px;
   .title-row {
     padding-bottom: 15px;
     .title-col {
        display: inline-block;
        vertical-align: middle;
        float:none;
-       color: $dark-grey;
+       color: $black;
        &:first-child {
         padding-left: 5px;
        }

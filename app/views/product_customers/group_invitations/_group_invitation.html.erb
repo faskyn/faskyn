@@ -1,0 +1,14 @@
+<div class="well product-well" id="product-invitation-well">
+  <div class="row pending-product-invitation-row">
+    <div class="col-md-12">
+      <h4>You have a pending invitation to join this customer case as a referencer.</h4>
+      <p>By joining you will be able to verify that you are using the product. You will also be able to write a review to help the product become more compelling.</p>
+    </div>
+  </div>
+  <div class="row" style="text-align:center;">
+    <div class="col-md-12">
+      <%= link_to "Accept Invitation", accept_group_invitation_path(group_invitation), method: :patch, class: "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Accepting..."} %>
+      <%= link_to "Decline Invitation", group_invitation_path(group_invitation), method: :delete, class: "btn btn-danger delete-invitation-button", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Deleting..."} %>
+    </div>
+  </div>
+</div>

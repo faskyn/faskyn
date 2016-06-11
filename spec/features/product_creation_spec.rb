@@ -18,7 +18,7 @@ feature "creating product" do
     fill_in "product[product_customers_attributes][0][customer]", with: "Fasykn"
     fill_in "product[product_customers_attributes][0][website]", with: "examplecustomer.com"
     fill_in "product[product_customers_attributes][0][usage]", with: "B2B distribution for their flagship product"
-    click_on "Save product"
+    click_on "Save Product"
     expect(page).to have_content("Product got created!")
     expect(page).to have_content("Invite a New Member")
     click_on "Skip and go to product page"

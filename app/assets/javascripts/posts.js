@@ -30,6 +30,13 @@ $(document).on("page:change", function() {
 
 //////////////////////////////////////////////////////////
 
+//POST FORM DISABLING WHEN THERE IS NO TEST
+
+$(document).on('ajax:complete', '[data-behavior="new-post-creation-form"]', function(event, xhr, status) {
+  alert("haha");
+  $('[data-behavior="new-post-submit"]').attr('disabled',true);
+});
+
 //POST IMAGE MANIPULATING
 
 //showing image preview for create action
@@ -108,7 +115,6 @@ $(document).on('click', '[data-behavior="open-delete-post-modal"]', function (ev
 
 $(document).on('click', '[data-behavior="delete-post-submit"]', function (event) {
   var href = $(this).data("postdestroylink");
-  alert(href);
   $.ajax({
     type: "DELETE",
     url: href,

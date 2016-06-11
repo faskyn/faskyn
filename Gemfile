@@ -72,7 +72,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 #running servers easily
 gem 'foreman', '~> 0.81.0'
 gem 'net-ssh', '~> 3.0', '>= 3.0.1'
-#finding links
+#links
 gem 'rinku', '~> 1.7', '>= 1.7.3'
 #social media integration
 gem 'omniauth-twitter', '~> 1.2', '>= 1.2.1'

@@ -1,5 +1,5 @@
 <div class="well post-create-well">
-  <%= form_for @post, remote: true, method: :post, :html => { :multipart => true } do |f| %>
+  <%= form_for @post, remote: true, method: :post, html: { multipart: true }, data: { behavior: "new-post-creation-form" } do |f| %>
     <div class="alert alert-danger" style="display:none">
       <ul class="errors" style="display:none">
         <%= render 'layouts/error_messages', object: f.object %>
@@ -13,11 +13,11 @@
       <%= f.text_area :body, placeholder: "Share something useful..", class: "form-control", data: { behavior: "post-create-body" } %>
     </div>
     <div class="form-group">
-      <%= f.button "SHARE", class: "btn btn-primary btn-sm", data: { behavior: "new-post-submit", disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
+      <%= f.button "SHARE", class: "btn btn-primary btn-sm", data: { behavior: "new-post-submit", disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..." } %>
       <span class="btn btn-success btn-sm btn-post-file">Upload Image
         <%= f.file_field :post_image, data: { behavior: "post-image-upload" } %>
+        <%= f.hidden_field :post_image_cache %>
       </span>
-      <%= f.hidden_field :post_image_cache %>
     </div>
   <% end %>
 </div>

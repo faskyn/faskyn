@@ -13,7 +13,7 @@ feature "updating product" do
     click_on "Edit Product"
     fill_in "product[product_customers_attributes][0][customer]", with: "Faskyn"
     fill_in "product[product_customers_attributes][0][usage]", with: "using the API to connect different services"
-    click_on "Save product"
+    click_on "Save Product"
     expect(page).to have_content("Product was successfully updated!")
     expect(page).to have_content("using the API to connect different services")
   end

@@ -15,7 +15,7 @@
             <%= link_to product do %>
               <div class="hover">
                 <li>
-                  <%= image_tag(product.product_image.url(:small_thumb), class: "product-image") %>
+                  <%= image_tag(product.product_image.url(:small_thumb), class: "product-sidebar-image") %>
                   <span class="element-name">
                     <%= truncate(product.name, length: 23) %>
                   </span>

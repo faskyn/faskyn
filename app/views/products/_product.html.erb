@@ -2,7 +2,7 @@
   <tr class = "product-index-row">
     <td class="col-md-1 image">
       <%= link_to product_path(product) do %>
-        <%= image_tag product.product_image.url(:base_thumb), class: "image-tag" %>
+        <%= image_tag product.product_image.url(:base_thumb), class: "product-image" %>
       <% end %>
     </td>
     <td class="col-md-3 name">

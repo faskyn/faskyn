@@ -11,7 +11,7 @@ feature "creating task" do
   scenario "successfully on index page", js: true do
     sign_in(user)
     visit user_tasks_path(user)   
-    within ".task-header" do
+    within ".title-row" do
       click_on "NEW TASK"
     end
     fill_in "task[task_name_company]", with: "Peter Thief PT"
@@ -24,7 +24,7 @@ feature "creating task" do
   scenario "successfully on other user's page", js: true do
     sign_in(user)
     visit user_path(other_user)   
-    within ".task-header" do
+    within ".title-row" do
       click_on "NEW TASK"
     end
     fill_in "task[content]", with: "do that task"

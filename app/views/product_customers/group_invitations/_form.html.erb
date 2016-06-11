@@ -1,0 +1,24 @@
+<%= form_for([product_customers.first, GroupInvitation.new], html: { class: "product-customer-group-invitation-form" }) do |f| %>
+  <div class= "row">
+    <div class="col-md-12">
+      <%= render 'layouts/error_messages', object: f.object %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.email_field :email, class: 'form-control', placeholder: "Type an email address..." %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.collection_select :group_invitable_id, product_customers, :id, :customer, {}, { class: 'form-control', id: "product-customer-collection-select" } %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.button "Invite Referencer", class: "btn btn-primary btn-block", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Sending Invitation..." } %>
+      </div>
+    </div>
+  </div>
+<% end %>

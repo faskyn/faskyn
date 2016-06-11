@@ -1,15 +1,19 @@
 <% provide(:title, 'Outgoing tasks') %>
 <div class= "container-fluid task-container">
-  <div class="row task-header">
-    <h3>Outgoing Tasks</h3>
-    <span class="rightfloat">
-      <a href="#" type="button" class="btn btn-primary newbutton" data-toggle="modal" data-target="#new-task">NEW TASK</a>
-      <div class="btn-group" role="group" aria-label="...">
-        <%= link_to "Completed Tasks", completed_tasks_user_tasks_path(current_user), class: "btn btn-default" %>
-        <%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-default" %>
-        <%= link_to "All Tasks", user_tasks_path(current_user), class: "btn btn-default" %>
-      </div>
-    </span>
+  <div class="row title-row">
+    <div class="col-md-5 title-col">
+      <h3><i class="fa fa-tasks"></i><span class="space">Outgoing Tasks</span></h3>
+    </div>
+    <div class="col-md-7 title-col">
+      <span class="rightfloat">
+        <a href="#" type="button" class="btn btn-sm btn-primary newbutton" data-toggle="modal" data-target="#new-task">NEW TASK</a>
+        <div class="btn-group" role="group" aria-label="...">
+          <%= link_to "Completed Tasks", completed_tasks_user_tasks_path(current_user), class: "btn btn-sm btn-default" %>
+          <%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-sm btn-default" %>
+          <%= link_to "All Tasks", user_tasks_path(current_user), class: "btn btn-sm btn-default" %>
+        </div>
+      </span>
+    </div>
   </div>
   <div class="panel panel-default">
     <table class="table table-bordered">

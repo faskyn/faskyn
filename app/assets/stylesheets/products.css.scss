@@ -12,11 +12,8 @@ $black: #333333;
 .product-index-container {
   .title-row {
     padding-bottom: 15px;
+    color: $black;
     .title-col {
-      display: inline-block;
-      vertical-align: middle;
-      float:none;
-      color: $dark-grey;
       h3 {
         display:inline;
         .space {
@@ -25,12 +22,6 @@ $black: #333333;
       }
       .product-search {
         text-align:right;
-      }
-      .product-desc {
-        margin-top: 0px;
-        h2 {
-          margin-top: 0px;
-        }
       }
     }
   }
@@ -51,19 +42,15 @@ $black: #333333;
     .back-button {
       margin-left:10px;
     }
+    .explanation {
+      font-size: 12px;
+      color: $dark-grey;
+    }
   }
 }
 
 .product-show-container {
   padding: 0px 50px 0px 50px;
-  .product-show-name {
-    margin-bottom:15px;
-    h3 {
-      display: inline;
-      vertical-align: middle;
-      padding-left:5px;
-    }
-  }
   .product-name-owner-panel {
     margin-bottom: 15px;
     h3 {
@@ -75,6 +62,16 @@ $black: #333333;
       color: $black;
       text-decoration: none;
     }
+  }
+}
+
+.product-show-name {
+  margin-bottom:15px;
+  list-style: none;
+  h3 {
+    display: inline;
+    vertical-align: middle;
+    padding-left:5px;
   }
 }
 
@@ -181,11 +178,6 @@ $black: #333333;
 		text-align: center;
     vertical-align: middle;
 	}
-  .image {
-    .image-tag {
-      border-radius:10%;
-    }
-  }
   .link-name, .link-oneliner, .link-updated {
     padding: 10px 5px 10px 5px;
   }
@@ -288,6 +280,10 @@ $black: #333333;
   a {
     text-decoration: none;
   }
+}
+
+.product-image {
+  border-radius: 10%;
 }
 
 .product-user-avatar {

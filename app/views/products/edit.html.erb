@@ -1,11 +1,12 @@
-<% provide(:title, @product.name + " edit") %>
+<% provide(:title, "Edit product") %>
 <div class = "container-fluid product-new-edit-container">
   <div class= "col-md-10 col-md-offset-1">
-    <h3>EDIT PRODUCT</h3>
+    <h3>Edit Product</h3>
     <div class="product-form">
       <%= render "form" %>
-        <button type="button" class="btn btn-danger product-delete-button" data-toggle="modal" data-target="#deleteproduct_<%= @product.id %>">Delete Product</button>
-        </div> <!--THIS DIV COMES FROM FORM -->
+      <button type="button" class="btn btn-danger product-delete-button" data-toggle="modal" data-target="#deleteproduct_<%= @product.id %>">Delete Product</button>
+      <%= link_to "Back to Product", :back, class: "btn btn-default back-button" %>
+      </div> <!--THIS DIV COMES FROM FORM -->
     </div>
   </div>
 </div>

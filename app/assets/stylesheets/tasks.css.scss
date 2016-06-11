@@ -2,6 +2,7 @@ $grey-medium-light: #eaeaea;
 $garmin-blue: #007cc3;
 $dark-grey: #5E5E5E;
 $light-grey: #f7f7f7;
+$black: #333333;
 
 .task-well {
 	margin-top:10px;
@@ -10,15 +11,16 @@ $light-grey: #f7f7f7;
 .between-task-container {
 	background: $light-grey;
 	padding: 30px 60px 40px 60px;
-	.task-header {
-		margin: 0 0 15px 0;
-		display: table;
-		width:100%;
-		h3 {
-			color: $dark-grey;
-			max-width:250px;
-			vertical-align:middle;
-			display:table-cell;
+	.title-row {
+		padding-bottom:15px;
+		color: $black;
+		.title-col {
+			h3 {
+				display: inline;
+				.space {
+					padding-left:10px;
+				}
+			}
 		}
 		.rightfloat {
 			float: right;
@@ -33,13 +35,13 @@ $light-grey: #f7f7f7;
 				}
 			}
 			.btn {
-				margin-left: 10px;
+				margin-left: 5px;
 			}
 			#rightone {
 					margin-right: 0px;
 			}
 			.btn-group {
-				margin-left:10px;
+				margin-left:5px;
 				.btn {
 					margin-left: 0px;
 					margin-right: 0px;
@@ -107,15 +109,16 @@ $light-grey: #f7f7f7;
 .task-container {
 	background: $light-grey;
 	padding: 40px 100px 40px 100px;
-	.task-header {
-		margin: 0 0 15px 0;
-		display:table;
-		width:100%;
-		h3 {
-			max-width:250px;
-			vertical-align:middle;
-			display:table-cell;
-			color: $dark-grey;
+	.title-row {
+		padding-bottom:15px;
+		color: $black;
+		.title-col {
+			h3 {
+				display:inline;
+				.space {
+	        padding-left:10px;
+	      }
+			}
 		}
 		.rightfloat {
 			float: right;
@@ -130,13 +133,13 @@ $light-grey: #f7f7f7;
 				}
 			}
 			.btn {
-				margin-left: 10px;
+				margin-left: 5px;
 			}
 			#rightone {
 					margin-right: 0px;
 			}
 			.btn-group {
-				margin-left:10px;
+				margin-left:5px;
 				.btn {
 					margin-left: 0px;
 					margin-right: 0px;

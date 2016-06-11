@@ -1,15 +1,18 @@
 <% provide(:title, 'Completed tasks') %>
 <div class= "container-fluid task-container">
-  <div class="row task-header">
-    <h3>Completed Tasks</h3>
+  <div class="row title-row">
+    <div class="col-md-6 title-col">
+      <h3><i class="fa fa-tasks"></i><span class="space">Completed Tasks</span></h3>
+    </div>
+    <div class="col-md-6 title-col">
       <span class="rightfloat">
         <div class="btn-group" role="group" aria-label="...">
-          <%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-default" %>
-          <%= link_to "Outgoing Tasks", outgoing_tasks_user_tasks_path(current_user), class: "btn btn-default" %>
-          <%= link_to "All Tasks", user_tasks_path(current_user), class: "btn btn-default" %>
+          <%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-sm btn-default" %>
+          <%= link_to "Outgoing Tasks", outgoing_tasks_user_tasks_path(current_user), class: "btn btn-sm btn-default" %>
+          <%= link_to "All Tasks", user_tasks_path(current_user), class: "btn btn-sm btn-default" %>
         </div>
       </span>
-    </h3>  
+    </div>
   </div>
   <div class="panel panel-default">
     <table class="table table-bordered">

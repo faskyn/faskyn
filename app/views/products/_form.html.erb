@@ -8,43 +8,45 @@
     </div>
 
     <div class = "row">
-      <div class="col-md-4">
+      <div class="col-md-12">
         <div class="form-group">
           <%= f.text_field :name, placeholder: "product name", class: "form-control" %>
           <div class="explanation name-explanation">Choose a name for your product e.g. Faskyn for Entreprise</div>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= f.text_field :website, placeholder: "product site", class: "form-control" %>
+          <div class="explanation website-explanation">URL to the website where you explain more about this product.</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
         <div class="form-group">
           <%= f.file_field :product_image %>
           <%= f.hidden_field :product_image_cache %>
           <div class="explanation image-explanation">Choose a product image</div>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-8">
         <%= image_tag(@product.product_image_url(:base_thumb), class: "old-product-image") if @product.product_image? %>
       </div>
-      <div class="col-md-4">
+    </div>
+    <div class="row">
+      <div class="col-md-6">
         <div class="form-group">
           <%= f.collection_select :industry_ids, Industry.all.order(name: :asc), :id, :name, {}, { multiple: true, class: "form-control" } %>
           <div class="explanation industry-explanation">Choose one or more industries</div>
         </div>
       </div>
     </div>
-    
-    <div class = "row website-company-row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <%= f.text_field :website, placeholder: "product site", class: "form-control" %>
-          <div class="explanation website-explanation">URL to the website where you explain more about this product.</div>
-        </div>
-      </div>
-      <div class="col-md-6">
-      </div>
-    </div>
-
     <div class = "row">
       <div class="col-md-12">
         <div class="form-group">
-          <%= f.text_field :oneliner, placeholder: "oneliner", class: "form-control" %>
+          <%= f.text_area :oneliner, placeholder: "oneliner", class: "form-control" %>
           <div class="explanation oneliner-explanation">Short, max 140-character-long description of the product. Something catchy that helps people quickly understand and remember it.</div>
         </div>
       </div>
@@ -95,6 +97,5 @@
   </div>
   
   <div class="form-group">
-    <%= f.button "Save product", class: "btn btn-primary", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
+    <%= f.button "Save Product", class: "btn btn-primary", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
   <% end %>
-    <%= link_to "Cancel", :back, class: "btn btn-default back-button" %>

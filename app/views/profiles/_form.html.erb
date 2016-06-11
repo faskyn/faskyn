@@ -1,45 +1,69 @@
 <%= form_for @profile, url: user_profile_path do |f| %>
   <%= render 'layouts/error_messages', object: f.object %>
-  <div class="col-md-6">
-    <div class="form-group">
-      <%= f.label :first_name, "First name *" %>
-      <%= f.text_field :first_name, class: 'form-control' %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :first_name, "First name *" %>
+        <%= f.text_field :first_name, class: 'form-control' %>
+      </div>
     </div>
-    <div class="form-group">
-      <%= f.label :last_name, "Last name *" %>
-      <%= f.text_field :last_name, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :avatar %>
-      <%= image_tag @profile.avatar_url(:base_thumb), class: "profile-image" if @profile.avatar? %>
-      <%= f.file_field :avatar %>
-      <%= f.hidden_field :avatar_cache %>
-    </div>
-    <div class="form-group">
-      <%= f.label :company, "Company *" %>
-      <%= f.text_field :company, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.button "Save profile", class: 'btn btn-primary', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
-      <%= link_to 'Cancel', :back, class: 'btn btn-default' %>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :job_title, "Job title *" %>
+        <%= f.text_field :job_title, class: 'form-control' %>
+      </div>
     </div>
   </div>
-  <div class="col-md-6">
-    <div class="form-group">
-      <%= f.label :job_title, "Job title *" %>
-      <%= f.text_field :job_title, class: 'form-control' %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :last_name, "Last name *" %>
+        <%= f.text_field :last_name, class: 'form-control' %>
+      </div>
     </div>
-    <div class="form-group">
-      <%= f.label :city %>
-      <%= f.text_field :location, class: 'form-control' %>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :city %>
+        <%= f.text_field :location, class: 'form-control' %>
+      </div>
     </div>
-    <div class="form-group">
-      <%= f.label :phone_number %>
-      <%= f.text_field :phone_number, class: 'form-control' %>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :avatar %>
+        <%= image_tag @profile.avatar_url(:base_thumb), class: "profile-image" if @profile.avatar? %>
+        <%= f.file_field :avatar %>
+        <%= f.hidden_field :avatar_cache %>
+      </div>
     </div>
-    <div class="form-group">
-      <%= f.label :description %>
-      <%= f.text_area :description, class: 'form-control' %>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :phone_number %>
+        <%= f.text_field :phone_number, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :company, "Company *" %>
+        <%= f.text_field :company, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_area :description, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <%= f.button "Save profile", class: 'btn btn-primary', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
+        <%= link_to 'Cancel', :back, class: 'btn btn-default' %>
+      </div>
     </div>
   </div>
 <%end%>
