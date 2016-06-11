@@ -64,7 +64,7 @@
                 <div id="oneliner">
                   <div class="list-name">Oneliner:</div>
                   <div class="description"><%= @product.oneliner %></div>
-                  <a class="twitter-share" data-behavior="twitter-share" data-twittertext="<%= @product.twitter_share_text %>" data-twitterurl="<%= product_url(@product) %>" data-twitteranchor>
+                  <a class="twitter-share" data-behavior="twitter-share" data-twittertext="<%= twitter_product_share_text(@product) %>" data-twitterurl="<%= product_url(@product) %>" data-twitteranchor>
                     <i class="fa fa-lg fa-twitter"></i>
                   </a>
                 </div>

@@ -1,5 +1,6 @@
 class TwitterProductShare
   URL_LENGTH = 23 #defined by twitter API
+  SPACE_LENGTH = 1
   TWITTER_MAX = 140
   attr_reader :name, :oneliner
 
@@ -12,20 +13,25 @@ class TwitterProductShare
     if full_length <= TWITTER_MAX
       return basic_text
     else
-      difference = URL_LENGTH - TWITTER_MAX
       return basic_text[0...-(difference + text_end.length)] + text_end
     end
   end
 
-  def basic_text
-    "#{name}: #{oneliner}"
-  end
+  private
 
-  def full_length
-    basic_text.length + URL_LENGTH
-  end
+    def basic_text
+      "#{name}: #{oneliner}"
+    end
 
-  def text_end
-    "..."
-  end
+    def difference
+      full_length - TWITTER_MAX
+    end
+
+    def full_length
+      basic_text.length + SPACE_LENGTH + URL_LENGTH
+    end
+
+    def text_end
+      "..."
+    end
 end

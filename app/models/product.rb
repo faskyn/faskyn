@@ -54,10 +54,6 @@ class Product < ActiveRecord::Base
     industry_array.join(", ")
   end
 
-  def twitter_share_text
-    TwitterProductShare.new(self).return_text
-  end
-
   private
 
     def format_website
@@ -76,15 +72,6 @@ class Product < ActiveRecord::Base
       #!!website.match(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-=\?]*)*\/?$/)
       !!website.match(/\A(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?\z/i)
     end
-
-    # def website_valid?
-    #   url = URI.parse(website) rescue false
-    #   url.kind_of?(URI::HTTP) || url.kind_of?(URI::HTTPS)
-    # end
-
-    # def website_validator
-    #   self.errors.add :website, "format is invalid!" unless website_valid?  
-    # end
 
     def product_industries_limit(max: 5, min: 1)
       if industries.reject(&:marked_for_destruction?).size > max
