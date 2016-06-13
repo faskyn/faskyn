@@ -27,7 +27,7 @@ class ProfilesController < ApplicationController
   def show
     @twitter = @profile.socials.where(provider: "twitter").first
     @linkedin = @profile.socials.where(provider: "linkedin").first
-    @profile_products = @user.products.order(updated_at: :desc).includes(:industries)
+    @profile_products = @user.created_products.order(updated_at: :desc).includes(:industries)
   end
 
   def edit

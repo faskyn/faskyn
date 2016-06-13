@@ -1,6 +1,7 @@
 class Product < ActiveRecord::Base
-  require 'uri'
+  WEBSITE_REGEX = /\A(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?\z/i
   include ActionView::Helpers::TextHelper
+  include Concerns::Validatable
   mount_uploader :product_image, ProductImageUploader
 
   belongs_to :owner, class_name: "User", foreign_key: "user_id"
@@ -26,7 +27,7 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :product_leads, reject_if: :all_blank, allow_destroy: true
 
   validates :name, presence: { message: "can't be blank" }, length: { maximum: 140, message: "can't be longer than %{count} characters" }, uniqueness: { message: "already exists" }
-  validates :website, presence: { message: "can't be blank" }
+  validates :website, presence: { message: "can't be blank" }, format: { with: WEBSITE_REGEX, message: "format is invalid" }
   validates :oneliner, presence: { message: "can't be blank" }, length: { maximum: 140, message: "can't be longer than %{count} characters" }
   validates :description, length: { maximum: 500, message: "can't be longer than %{count} characters"}
 
@@ -40,7 +41,6 @@ class Product < ActiveRecord::Base
   validate :product_customer_and_lead_limit_min
 
   before_validation :format_website
-  validate :website_validator
 
   def self.pagination_per_page
     12
@@ -55,23 +55,6 @@ class Product < ActiveRecord::Base
   end
 
   private
-
-    def format_website
-      unless website.nil? || self.website[/^https?/]
-       self.website = "http://#{self.website}"
-      end
-    end
-
-    def website_validator
-      unless website.nil?
-        self.errors.add :website, "format is invalid!" unless website_valid?
-      end
-    end
-
-    def website_valid?
-      #!!website.match(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-=\?]*)*\/?$/)
-      !!website.match(/\A(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?\z/i)
-    end
 
     def product_industries_limit(max: 5, min: 1)
       if industries.reject(&:marked_for_destruction?).size > max
@@ -89,7 +72,7 @@ class Product < ActiveRecord::Base
 
     def product_leads_limit_max(max: 5)
       if product_leads.reject(&:marked_for_destruction?).size > max
-        errors.add :base, "You can't add more than #{pluralize(max, 'potential lead')}."
+        errors.add :base, "You can't add more than #{pluralize(max, 'target customer')}."
       end
     end
 
@@ -98,7 +81,7 @@ class Product < ActiveRecord::Base
       added_lead_count = product_leads.reject(&:marked_for_destruction?).size
       added_customer_and_lead_count = added_customer_count + added_lead_count 
       if added_customer_and_lead_count < min
-        errors.add :base, "You have to add at least #{pluralize(min, 'current or potential customer')}."
+        errors.add :base, "You have to add at least #{pluralize(min, 'current or target customer')}."
       end
     end
 end

@@ -11,11 +11,19 @@ RSpec.describe ProductCustomer, type: :model do
     end
     
     it "is invalid without example" do
-      expect(build_stubbed(:product_customer, customer: nil)).not_to be_valid
+      expect(build_stubbed(:product_customer, product: product, customer: nil)).not_to be_valid
     end
 
     it "is invalid without detail" do
-      expect(build_stubbed(:product_customer, usage: nil)).not_to be_valid
+      expect(build_stubbed(:product_customer, product: product, usage: nil)).not_to be_valid
+    end
+
+    it "is invalid without website" do
+      expect(build_stubbed(:product_customer, product: product, website: nil)).not_to be_valid
+    end
+
+    it "is invalid with wrong website format" do
+      expect(build_stubbed(:product_customer, product: product, website: "example")).not_to be_valid
     end
 
     it { is_expected.to validate_presence_of(:customer).with_message(/can't be blank/) }

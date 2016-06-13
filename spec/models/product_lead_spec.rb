@@ -10,11 +10,19 @@ RSpec.describe ProductLead, type: :model do
     end
     
     it "is invalid without example" do
-      expect(build_stubbed(:product_lead, lead: nil)).not_to be_valid
+      expect(build_stubbed(:product_lead, product: product, lead: nil)).not_to be_valid
     end
 
     it "is invalid without detail" do
-      expect(build_stubbed(:product_lead, pitch: nil)).not_to be_valid
+      expect(build_stubbed(:product_lead, product: product, pitch: nil)).not_to be_valid
+    end
+
+    it "is valid without website" do
+      expect(build_stubbed(:product_lead, product: product, website: nil)).to be_valid
+    end
+
+    it "is invalid with wrong website format" do
+      expect(build_stubbed(:product_lead, product: product, website: "example")).not_to be_valid
     end
 
     it { is_expected.to validate_presence_of(:lead).with_message(/can't be blank/) }
@@ -36,20 +44,4 @@ RSpec.describe ProductLead, type: :model do
       expect(product_lead.owner).to eq(user)
     end
   end
-
-  # describe "custom validations" do
-    
-  #   context "format lead website" do
-
-  #     it "returns nil if empty string" do
-  #       website = ""
-  #       expect(website.format_lead_website).to eq(nil)
-  #     end
-
-  #     it "returns http://webiste if http already present" do
-  #       website = "https://haha.com"
-  #       expect(website.format_lead_website).to eq("http://haha.com")
-  #     end
-  #   end
-  # end
 end

@@ -42,7 +42,10 @@ else
                        deadline: Faker::Time.between(DateTime.now + 1, DateTime.now + 10) )
   end
 
-  Industry.create!([{name: "IoT"}, {name: "AI"}, {name: "FinTech"}, {name: "Automotive"}, {name: "Health & Welness"}, {name: "IT & Data Science"}, {name: "FinTech"}, {name: "Education"}, {name: "Retail"}])
+  Industry.create!([{ name: "IoT" }, { name: "AI" }, { name: "Mobility & Transportation" }, { name: "Health & Wellness" }, { name: "IT & Data Science"},
+                    { name: "FinTech" }, { name: "Education" }, { name: "Retail & Ecommerce" }, { name: "Industrial & Manufacturing" },
+                    { name: "UAV" }, { name: "AR/VR" }, { name: "Consumer Internet" }, { name: "SaaS" }, { name: "Marketplace"},
+                    { name: "Robotics" } ])
 
   product_users = User.order(created_at: :DESC).take(10)
   product_users.each do |user|

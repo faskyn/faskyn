@@ -27,7 +27,7 @@ RSpec.describe Product, type: :model do
       attrs = attributes_for(:product, industry_ids: [ industry.id ])
       product = Product.new(attrs)
       product.valid? 
-      expect(product.errors[:base]).to include("You have to add at least 1 current or potential customer.")
+      expect(product.errors[:base]).to include("You have to add at least 1 current or target customer.")
     end
 
     it "validates the number of product industries" do
@@ -48,6 +48,10 @@ RSpec.describe Product, type: :model do
 
     it "is invalid without website" do
       expect(build_stubbed(:product, website: nil)).not_to be_valid
+    end
+
+    it "is invalid with wrong website format" do
+      expect(build_stubbed(:product, website: "example")).not_to be_valid
     end
 
     it "is invalid without description" do
@@ -96,19 +100,6 @@ RSpec.describe Product, type: :model do
 
     it "industries all" do
       expect(product.industries_all).to eq("AI, Automotive")
-    end
-
-    context "formats website" do
-
-      it "is valid when addreess without http" do
-        product.website = "faskyn.com"
-        expect(product).to be_valid
-      end
-
-      it "is invalid when wrong format" do
-        product.website = "faskyn"
-        expect(product).not_to be_valid
-      end
     end
   end
 end

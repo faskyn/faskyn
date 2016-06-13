@@ -11,7 +11,7 @@
       <div class="col-md-12">
         <div class="form-group">
           <%= f.text_field :name, placeholder: "product name", class: "form-control" %>
-          <div class="explanation name-explanation">Choose a name for your product e.g. Faskyn for Entreprise</div>
+          <div class="explanation name-explanation">Choose a name for your product e.g. UberX, Dropbox for Business</div>
         </div>
       </div>
     </div>
@@ -19,7 +19,7 @@
       <div class="col-md-12">
         <div class="form-group">
           <%= f.text_field :website, placeholder: "product site", class: "form-control" %>
-          <div class="explanation website-explanation">URL to the website where you explain more about this product.</div>
+          <div class="explanation website-explanation">URL to the page with more info about this product</div>
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@
       <div class="col-md-12">
         <div class="form-group">
           <%= f.text_area :oneliner, placeholder: "oneliner", class: "form-control" %>
-          <div class="explanation oneliner-explanation">Short, max 140-character-long description of the product. Something catchy that helps people quickly understand and remember it.</div>
+          <div class="explanation oneliner-explanation">140-character-long brief description of the product (tweetable)</div>
         </div>
       </div>
     </div>
@@ -60,13 +60,13 @@
       <div class="col-md-12">
         <div class="form-group">
           <%= f.text_area :description, placeholder: "description", class: "form-control" %>
-          <div class="explanation description-explanation">Max 500-character-long descripiton of the product. Something for the people who got interested after the oneliner.</div>
+          <div class="explanation description-explanation">Up to  500-character-long description of the product (e.g. for email intros)</div>
         </div>
       </div>
     </div>
   </div>
 
-  <h4 class="customer-label" style="display:inline-block;">Customers </h4> <p style="display:inline;"> ( If you don't have any add some potential leads. )</p>
+  <h4 class="customer-label" style="display:inline-block;">Customers </h4> <p style="display:inline;"> ( If you don't have any add some target customers. )</p>
   <div class="well product-well customer-well">
     <div class="row">
       <div class="col-md-12 customer-fields">
@@ -76,12 +76,12 @@
       </div>
     </div>
     <div class="form-group">
-      <div class="explanation customer-explanation">Who is already using your product? How</strong> do they use it?</div>
+      <div class="explanation customer-explanation">Who is using your product? <strong>What</strong> is your unique selling point to this customer?</div>
       <div class="adding-extra"><%= link_to_add_association 'Add new customer', f, :product_customers %></div>
     </div>
   </div>
 
-  <h4 class="lead-label">Potential leads</h4>
+  <h4 class="lead-label">Target Customers</h4>
   <div class="well product-well lead-well">
     <div class="row">
       <div class="col-md-12 lead-fields">
@@ -92,7 +92,7 @@
     </div>
     <div class="form-group">
       <div class="explanation lead-explanation">Who do you think could use your product? <strong>Why</strong> would they care about it? <strong>How</strong> would they use it?</div>
-      <div class="adding-extra"><%= link_to_add_association 'Add new potential lead', f, :product_leads %></div>
+      <div class="adding-extra"><%= link_to_add_association 'Add new target customer', f, :product_leads %></div>
     </div>
   </div>
   
