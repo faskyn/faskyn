@@ -33,7 +33,6 @@ $(document).on("page:change", function() {
 //POST FORM DISABLING WHEN THERE IS NO TEST
 
 $(document).on('ajax:complete', '[data-behavior="new-post-creation-form"]', function(event, xhr, status) {
-  alert("haha");
   $('[data-behavior="new-post-submit"]').attr('disabled',true);
 });
 
@@ -86,7 +85,7 @@ $(document).on('keyup', '[data-behavior="post-create-body"]', function() {
 
 //showing post image modal via show action
 $(document).on('click', '[data-behavior="post-image"]', function (event) {
-  $('[data-behavior="post-image-insert"]').html("<div style='text-align:center'><i class='fa fa-circle-o-notch fa-2x fa-spin' style='color:#5E5E5E'></i></div>");
+  $('[data-behavior="post-image-insert"]').html("<div style='text-align:center;padding-top:20px;padding-bottom:20px;'><i class='fa fa-circle-o-notch fa-2x fa-spin' style='color:#5E5E5E'></i></div>");
   var href = $(this).data("postlink");
   $.ajax({
     type: "GET",
@@ -98,7 +97,7 @@ $(document).on('click', '[data-behavior="post-image"]', function (event) {
 
 //editing post in modal
 $(document).on('click', '[data-behavior="open-edit-post-modal"]', function (event) {
-  $('[data-behavior="post-edit-form-insert"]').html("<div style='text-align:center'><i class='fa fa-circle-o-notch fa-2x fa-spin' style='color:#5E5E5E'></i></div>");
+  $('[data-behavior="post-edit-form-insert"]').html("<div style='text-align:center;padding-top:20px;padding-bottom:20px;'><i class='fa fa-circle-o-notch fa-2x fa-spin' style='color:#5E5E5E'></i></div>");
   var href = $(this).data("posteditlink");
   $.ajax({
     type: "GET",

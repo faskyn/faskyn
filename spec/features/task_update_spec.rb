@@ -14,7 +14,7 @@ feature "updating task" do
     page.find("#task-change-#{task.id}").click
     click_on "Edit Task"
     fill_in "task[content]", with: "updated content"
-    click_on "Update task"
+    click_on "Update Task"
     expect(page).to have_content("updated content")
   end
 
@@ -24,7 +24,7 @@ feature "updating task" do
     page.find("#task-change-#{task.id}").click
     click_on "Edit Task"
     fill_in "task[content]", with: "updated content"
-    click_on "Update task"
+    click_on "Update Task"
     expect(page).to have_content("updated content")
     expect(page).to_not have_content("original content")
   end

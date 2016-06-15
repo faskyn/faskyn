@@ -10,7 +10,7 @@
       <div class="remove-post-preview hidden" data-behavior="remove-post-preview">
         <a href="#">Remove image</a>
       </div>
-      <%= f.text_area :body, placeholder: "Share who should contact you..", class: "form-control", data: { behavior: "post-create-body" } %>
+      <%= f.text_area :body, placeholder: "Share who should contact you..", rows: "3", class: "form-control", data: { behavior: "post-create-body" } %>
     </div>
     <div class="form-group">
       <%= f.button "SHARE", class: "btn btn-primary btn-sm", data: { behavior: "new-post-submit", disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..." } %>

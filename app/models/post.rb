@@ -9,8 +9,21 @@ class Post < ActiveRecord::Base
   has_many :notifications, as: :notifiable, dependent: :destroy
 
   validates :user, presence: true
-
   validates :body, presence: { message: "can't be blank" }, length: { maximum: 500, message: "can't be longer than %{count} characters" }
+
+  validate :post_daily_limit, on: :create
+
+  scope :last_day, -> { where("created_at > ?", Time.zone.now - 24.hours) }
+
+
+  private
+
+    def post_daily_limit
+      if user.posts.last_day.any?
+        errors.add :base, "You can only create one post a day."
+      end
+    end
+
 
   # def send_comment_creation_notification(comment)
   #   post_commenters = ([user] + users).uniq - [ comment.user ]

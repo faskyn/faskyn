@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   validates :new_chat_notification, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :new_other_notification, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
-  delegate :first_name, :last_name, :full_name, :job_title, :company, :phone_number, :description, :location, :avatar, to: :profile, allow_nil: true
+  delegate :first_name, :last_name, :full_name, :job_title, :company, :phone_number, :description, :location, :avatar, :avatar_url, to: :profile, allow_nil: true
 
   has_one :profile, dependent: :destroy
   has_many :socials, through: :profile
@@ -51,8 +51,13 @@ class User < ActiveRecord::Base
   end
 
   #check and decrease the comment notification that belongs to a given notifiable
-  def decreasing_comment_notification_number(notifiable_type, notifiable_id)
-    notifications.this_notifiable_comments(notifiable_type, notifiable_id).unchecked.each do |notification|
+  # def decreasing_comment_notification_number(notifiable_type, notifiable_id)
+  #   notifications.this_notifiable_comments(notifiable_type, notifiable_id).unchecked.each do |notification|
+  #     checking_and_decreasing_notification(notification)
+  #   end
+  # end
+  def decreasing_comment_notification_number(noti)
+    notifications.this_notifiable_comments(noti.notifiable_type, noti.notifiable_id).unchecked.each do |notification|
       checking_and_decreasing_notification(notification)
     end
   end

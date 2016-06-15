@@ -150,7 +150,7 @@
                     <% user_row.each do |user| %>
                       <%= link_to user_profile_path(user) do %>
                         <div class="col-md-6">
-                          <%= image_tag user.avatar.url(:small_thumb), class: "product-user-avatar" %>
+                          <%= image_tag user.avatar_url(:small_thumb), class: "product-user-avatar" %>
                           <%= user.full_name %>
                         </div>
                       <% end %>
@@ -164,45 +164,7 @@
         </div>
       </div>
 
-      <div class="panel panel-default" id="comment-panel">
-        <div class="panel-heading">
-          <div class = "row comment-form-row">
-            <div class="col-md-12">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="col-md-12">
-
-                    <%= render partial: 'comments/form', locals: { commentable: @product } %>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <% if @comments.size > 3 %>
-            <div class="row open-all-comments-row" data-behavior="open-all-comments-row">
-              <div class="col-md-12">
-                <div class="col-md-12">
-                  <a class="open-all-comments" data-commentableid="<%= @product.id %>" data-behavior="open-all-comments">Show all</a>
-                </div>
-              </div>
-            </div>
-          <% end %>
-
-        </div>
-        <div class="panel-body">
-          <div class = "row">
-            <div class="col-md-12" data-behavior="comment-insert-<%= @product.id%>">
-              <% cache ['comments-index-product', @comments.map(&:id), @comments.map(&:updated_at).max, @comments.map{ |comment| comment.user.profile.updated_at }.max] do %>
-
-                <%= render @comments %>
-
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
+      <%= render partial: "comments/comment_panel", locals: { comments: @comments, commentable: @product } %>
 
     </div> 
 </div>

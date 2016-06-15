@@ -11,7 +11,7 @@
       <a href="#">Remove Image</a>
     </div>
     <div class="field form-group">
-      <%= f.text_area :body, class: "form-control" %>
+      <%= f.text_area :body, rows: "6", class: "form-control" %>
     </div>   
   </div>
   <div class="modal-footer">
@@ -20,6 +20,6 @@
       <%= f.file_field :post_image, data: { behavior: "post-image-upload-update" } %>
     </span>
     <%= f.hidden_field :post_image_cache %>
-    <%= f.button "Update post", class: 'btn btn-primary', data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
+    <%= f.button "Update Post", class: 'btn btn-primary', data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
   </div>
 <% end %>

@@ -18,7 +18,7 @@ feature "updating post" do
     within ".modal-body" do
       fill_in "post[body]", with: "new post body"
     end
-    click_on "Update post"
+    click_on "Update Post"
     expect(page).to have_content("new post body")
     expect(page).to_not have_content("original post body")
     page.find("#navbar-home").click

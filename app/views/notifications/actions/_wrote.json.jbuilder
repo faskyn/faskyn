@@ -17,4 +17,4 @@ end
 json.what do
   json.did "#{notification.action} a review on the #{ notification.notifiable.customer } case"
 end
-json.url checking_decreasing_user_notifications_path(current_user, notifiable_type: notification.notifiable_type, notifiable_id: notification.notifiable_id, notification_action: notification.action)
+json.url checking_decreasing_user_notifications_path(current_user, notification: notification)

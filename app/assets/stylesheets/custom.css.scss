@@ -7,16 +7,47 @@ $comment-grey: #f9f9f9; //darker than white but brighter than bg
 $font-family-sans-serif:  'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $font-family-serif:       'Georgia', serif;
 
-.fixedheight {
-  padding-top:50px;
+//DEFAULTS
+
+body {
+  background: $light-grey;
 }
 
+html.static_pages-controller {
+  position: relative;
+  min-height:100%;
+}
+
+body.static_pages-controller {
+  background: white;
+  margin-bottom:90px;
+}
+
+body, p {
+  font-family: $font-family-sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-family: $font-family-sans-serif;
+}
+
+a {
+  font-family: $font-family-sans-serif;
+}
+
+
+//controller name gets inserted on body tag by default; this padding is required for the NOT fixed navbar display
 .confirmations-controller, .invitations-controller, .passwords-controller, .registrations-controller, .sessions-controller {
   padding-top:0px;
 }
 
+//the one devise controller action that needs logged in controller, so navbar must be fixed (navbar height is 50px)
 .registrations-controller.edit-action {
   padding-top: 50px;
+}
+
+.fixedheight {
+  padding-top:50px;
 }
 
 .loggedouthtml {
@@ -34,6 +65,25 @@ $font-family-serif:       'Georgia', serif;
 #home_loggedout {
   overflow: visible;
   height: auto;
+}
+
+//ERROR MESSAGES
+
+.flash-container {
+  background: $light-grey; 
+}
+
+.alert.flash-alert {
+  overflow: hidden;
+  z-index: 9999;
+  width:300px;
+  text-align: center;
+  position: absolute;
+  padding-top:6px;
+  padding-bottom:6px;
+  top: 0;
+  left: calc(50% - (300px/2));
+  //right:0;
 }
 
 .panel-primary .panel-heading {
@@ -81,38 +131,6 @@ $font-family-serif:       'Georgia', serif;
     transition: 0.25s;
   }
 }
-
-body {
-  background: $light-grey;
-}
-
-html.static_pages-controller {
-  position: relative;
-  min-height:100%;
-}
-
-body.static_pages-controller {
-  background: white;
-  margin-bottom:90px;
-}
-
-body, p {
-  font-family: $font-family-sans-serif;
-}
-
-h1, h2, h3, h4 {
-  font-family: $font-family-sans-serif;
-}
-
-a {
-  font-family: $font-family-sans-serif;
-}
-
-/*@mixin box_sizing {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  }*/
 
 //NAVBAR
 
@@ -331,25 +349,6 @@ a {
 #infinite-product-scrolling, #infinite-task-scrolling, #infinite-user-scrolling, #infinite-chatnotification-scrolling, #infinite-othernotification-scrolling, #infinite-post-scrolling {
    text-align: center;
    display: none;
-}
-
-//ERROR PAGES
-
-.flash-container {
-  background: $light-grey; 
-}
-
-.alert.flash-alert {
-  overflow: hidden;
-  z-index: 9999;
-  width:300px;
-  text-align: center;
-  position: absolute;
-  padding-top:6px;
-  padding-bottom:6px;
-  top: 0;
-  left: calc(50% - (300px/2));
-  //right:0;
 }
 
 /*SIDEBARS */

@@ -77,7 +77,7 @@ RSpec.describe User, type: :model do
 
       it "decreasing_post_notification_number" do
         expect(user).to receive(:checking_and_decreasing_notification).with(post_notification)
-        user.decreasing_comment_notification_number("Post", post.id)
+        user.decreasing_comment_notification_number(post_notification)
       end
 
       it "checking_and_decreasing_notification with chat notification" do

@@ -49,10 +49,6 @@ describe ProductsController do
         get :own_products, user_id: @user.id
       end
 
-      it "avatar not nil for show" do
-        expect(@user.avatar).to_not be_nil
-      end
-
       it "assigns own products" do
         expect(assigns(:user)).to eq(@user)
         expect(assigns(:products)).to eq([product])
@@ -65,8 +61,6 @@ describe ProductsController do
 
     describe "GET show" do
       let!(:profile) { create(:profile, user: @user) }
-      let(:owner) { create(:user) }
-      let!(:owner_profile) { create(:profile, user: owner) }
       let!(:product) { create(:product, :product_with_nested_attrs, owner: @user) }
       before(:each) do
         get :show, id: product.id
