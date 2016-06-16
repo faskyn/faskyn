@@ -125,6 +125,13 @@ describe NotificationsController do
       expect(response).to redirect_to("/products/#{product.id}/product_customers/#{product_customer.id}#comment-panel")
     end
 
+    it "returns product lead path for commented action" do
+      product_lead = create(:product_lead, product: product)
+      notification = create(:notification, notifiable_type: "ProductLead", notifiable_id: product_lead.id, action: "commented")
+      get :checking_decreasing, user_id: @user.id, notification: notification
+      expect(response).to redirect_to("/products/#{product.id}/product_leads/#{product_lead.id}#comment-panel")
+    end
+
     it "returns product path for product customer invited action" do
       notification = create(:notification, notifiable_type: "ProductCustomer", notifiable_id: product_customer.id, action: "invited")
       get :checking_decreasing, user_id: @user.id, notification: notification

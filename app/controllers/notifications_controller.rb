@@ -51,9 +51,9 @@ class NotificationsController < ApplicationController
                 when "Product"
                   product_path(notifiable_id, anchor: "comment-panel")#/products/#{notifiable_id}#comment-panel"
                 when "ProductLead"
-                  product_product_lead_path(product_id, notifiable_id, anchor: "comment-panel")#{}"/products/#{product_id}/#{notifiable_type}/#{notifiable_id}#comment-panel"
                   product_lead = ProductLead.find(notifiable_id)
                   product_id = product_lead.product_id
+                  product_product_lead_path(product_id, notifiable_id, anchor: "comment-panel")#{}"/products/#{product_id}/#{notifiable_type}/#{notifiable_id}#comment-panel"
                 when "ProductCustomer"
                   product_customer = ProductCustomer.find(notifiable_id)
                   product_id = product_customer.product_id
