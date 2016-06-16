@@ -81,28 +81,34 @@
           </div>
         </div>
 
-        <% if @product.product_customers.any? %>
+        <% if @product_customers.any? %>
           <h4>Customers</h4>
           <div class="well product-well">
             <div class="row">
               <div class="col-md-12">
                 <div class="product-list">
-                  <% @product.product_customers.each do |product_customer| %>
-                    <div class="row product-customer-row">
-                      <%= link_to product_product_customer_path(@product, product_customer) do %>
-                        <div class="col-md-12">
-                          <div class="product-customer-customer">
-                            <%= product_customer.customer %>
-                            <% if product_customer.users.any? %>
-                              <span class="product-customer-verification">Verified</span>
-                            <% end %> 
+                  <% @product_customers.each do |product_customer| %>
+
+                    <% cache ['product-customer-index-single', product_customer, product_customer.users.map(&:id)] do %>
+                    
+                      <div class="row product-customer-row">
+                        <%= link_to product_product_customer_path(@product, product_customer) do %>
+                          <div class="col-md-12">
+                            <div class="product-customer-customer">
+                              <%= product_customer.customer %>
+                              <% if product_customer.users.any? %>
+                                <span class="product-customer-verification">Verified</span>
+                              <% end %> 
+                            </div>
+                            <div class="product-customer-usage">
+                              <%= product_customer.usage %>
+                            </div>
                           </div>
-                          <div class="product-customer-usage">
-                            <%= product_customer.usage %>
-                          </div>
-                        </div>
-                      <% end %>
-                    </div>
+                        <% end %>
+                      </div>
+
+                    <% end %>
+
                   <% end %>
                 </div>
               </div>
@@ -110,25 +116,32 @@
           </div>
         <% end %>
 
-        <% if @product.product_leads.any? %>
+        <% if @product_leads.any? %>
           <h4>Target Customers</h4>
           <div class="well product-well">
             <div class="row">
               <div class="col-md-12">
                 <div class="product-list">
-                  <% @product.product_leads.each do |product_lead| %>
-                    <div class="row product-customer-row">
-                      <%= link_to product_product_lead_path(@product, product_lead) do %>
-                        <div class="col-md-12">
-                          <div class="product-lead-lead">
-                            <%= product_lead.lead %>
+
+                  <% @product_leads.each do |product_lead| %>
+
+                    <% cache ['product-lead-index-single', product_lead ] do %>
+
+                      <div class="row product-customer-row">
+                        <%= link_to product_product_lead_path(@product, product_lead) do %>
+                          <div class="col-md-12">
+                            <div class="product-lead-lead">
+                              <%= product_lead.lead %>
+                            </div>
+                            <div class="product-lead-pitch">
+                              <%= product_lead.pitch %>
+                            </div>
                           </div>
-                          <div class="product-lead-pitch">
-                            <%= product_lead.pitch %>
-                          </div>
-                        </div>
-                      <% end %>
-                    </div>
+                        <% end %>
+                      </div>
+
+                    <% end %>
+
                   <% end %>
                 </div>
               </div>

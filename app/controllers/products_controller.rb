@@ -22,6 +22,8 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @product_customers = @product.product_customers
+    @product_leads = @product.product_leads
     @users = @product.users.includes(:profile)
     @comments = @product.comments.ordered_with_profile
   end

@@ -8,7 +8,8 @@ class TasksController < ApplicationController
   require 'will_paginate/array'
 
   def index
-    @tasks = Task.alltasks(current_user).uncompleted.includes(:executor, :executor_profile, :assigner, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
+    #@tasks = Task.alltasks(current_user).uncompleted.includes(:executor, :executor_profile, :assigner, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
+    @tasks = Task.alltasks(current_user).index_default
     respond_to do |format|
       format.html
       format.js
@@ -16,7 +17,8 @@ class TasksController < ApplicationController
   end
 
   def outgoing_tasks
-    @tasks = current_user.assigned_tasks.uncompleted.includes(:executor, :executor_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
+    # @tasks = current_user.assigned_tasks.uncompleted.includes(:executor, :executor_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
+    @tasks = current_user.assigned_tasks.assigned_default(page: params[:page])
     respond_to do |format|
       format.html
       format.js
@@ -24,7 +26,8 @@ class TasksController < ApplicationController
   end
 
   def incoming_tasks
-    @tasks = current_user.executed_tasks.uncompleted.includes(:assigner, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
+    # @tasks = current_user.executed_tasks.uncompleted.includes(:assigner, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
+    @tasks = current_user.executed_tasks.executed_default(page: params[:page])
     respond_to do |format|
       format.html
       format.js
@@ -67,7 +70,8 @@ class TasksController < ApplicationController
   end
 
   def completed_tasks
-    @tasks = Task.alltasks(current_user).completed.includes(:assigner, :assigner_profile, :executor, :executor_profile).order(completed_at: :desc).paginate(page: params[:page], per_page: Task.pagination_per_page)
+    #@tasks = Task.alltasks(current_user).completed.includes(:assigner, :assigner_profile, :executor, :executor_profile).order(completed_at: :desc).paginate(page: params[:page], per_page: Task.pagination_per_page)
+    @tasks = Task.alltasks(current_user).completed_default(page: 1)
     respond_to do |format|
       format.html
       format.js

@@ -65,12 +65,18 @@
 
     <div class="reviews-index">
       <% if @reviews.any? %>
-        <h4>Reviews</h4>
-        <div class="well product-well" data-behavior="review-insert-anchor">
-          <div data-behavior="review-insert">
-            <%= render partial: "reviews/review", collection: @reviews, locals: { product_customer: @product_customer } %>
+
+        <% cache ['reviews-index', @reviews.map(&:id), @reviews.map(&:updated_at).max, @reviews.map{ |review| review.user.profile.updated_at}.max] do %>
+        
+          <h4>Reviews</h4>
+          <div class="well product-well" data-behavior="review-insert-anchor">
+            <div data-behavior="review-insert">
+              <%= render partial: "reviews/review", collection: @reviews, locals: { product_customer: @product_customer } %>
+            </div>
           </div>
-        </div>
+
+        <% end %>
+
         <%= render partial: "reviews/update_review_modal" %>
         <%= render partial: "reviews/destroy_review_modal" %>
       <% end %>

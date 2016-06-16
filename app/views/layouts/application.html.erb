@@ -16,7 +16,7 @@
     <% if user_signed_in? %>
       <script type="text/javascript" charset="utf-8">
         $(function() {
-          if (typeof(Pusher) !== 'undefined') {
+          //if (typeof(Pusher) !== 'undefined') {
             var pusher = new Pusher('<%= Pusher.key %>'); //Pusher.key
             //notifications
             var other_notification_channel = pusher.subscribe('private-'+'<%= current_user.id %>');
@@ -95,7 +95,7 @@
                 $('#chat-notifications').hide();
               }
             }
-          }
+          //}
         });
       </script>
     <% end %>

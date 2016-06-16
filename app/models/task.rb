@@ -26,6 +26,34 @@ class Task < ActiveRecord::Base
     12
   end
 
+  def self.ordered
+    order("deadline DESC")
+  end
+
+  def self.paginated(page: 1)
+    paginate(page: page, per_page: self.pagination_per_page)
+  end
+
+  def self.included
+    includes(:executor_profile, :assigner_profile)
+  end
+
+  def self.assigned_default(page: 1)
+    uncompleted.included.ordered.paginated(page: page)
+  end
+
+  def self.executed_default(page: 1)
+    uncompleted.included.ordered.paginated(page: page)
+  end
+
+  def self.completed_default(page: 1)
+    completed.included.order(completed_at: :desc).paginated(page: page)
+  end
+
+  def self.index_default(page: 1)
+    uncompleted.included.ordered.paginated(page: page)    
+  end
+
   #getter setter for displaying time in form
   def deadline_string
     deadline.to_datetime.iso8601

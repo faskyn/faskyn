@@ -44,7 +44,7 @@
       <%= task.content %>
     </td>
     <td class="col-md-2">
-      <% if task.completed_at %>
+      <% if task.completed? %>
         <%= local_time(task.completed_at, "%d %b %I%p") %>
       <% else %>
         <%= local_time(task.deadline, "%d %b %I%p") %>
