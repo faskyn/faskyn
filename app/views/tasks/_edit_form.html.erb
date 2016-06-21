@@ -18,6 +18,7 @@
     </div>  
   </div>
   <div class="modal-footer">
-    <%= f.button "Update Task", class: 'btn btn-primary', data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
+    <button type="button" class="btn btn-default" data-dismiss="modal" id="updatepostclose">Close</button>
+    <%= f.button "Update Message", class: 'btn btn-primary', data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
   </div>
 <% end %>

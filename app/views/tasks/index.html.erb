@@ -1,16 +1,16 @@
-<% provide(:title, 'Tasks') %>
+<% provide(:title, 'Messages') %>
 <div class= "container-fluid task-container">
   <div class="row title-row">
     <div class="col-md-4 title-col">
-      <h3><i class="fa fa-tasks"></i><span class="space">All Tasks</span></h3>
+      <h3><i class="fa fa-tasks"></i><span class="space">All Messages</span></h3>
     </div>
     <div class="col-md-8 title-col">
       <span class="rightfloat">
-        <a href="#" type="button" class="btn btn-sm btn-primary newbutton" data-toggle="modal" data-target="#new-task">NEW TASK</a>
+        <a href="#" type="button" class="btn btn-sm btn-primary new-task-button" data-toggle="modal" data-target="#new-task">NEW MESSAGE</a>
         <div class="btn-group" role="group" aria-label="...">
-          <%= link_to "Completed Tasks", completed_tasks_user_tasks_path(current_user), class: "btn btn-sm btn-default" %>
-          <%= link_to "Outgoing Tasks", outgoing_tasks_user_tasks_path(current_user), class: "btn btn-sm btn-default" %>
-          <%= link_to "Incoming Tasks", incoming_tasks_user_tasks_path(current_user), class: "btn btn-sm btn-default" %> 
+          <%= link_to "COMPLETED", completed_tasks_user_tasks_path(current_user), class: "btn btn-sm btn-default" %>
+          <%= link_to "OUTGOING", outgoing_tasks_user_tasks_path(current_user), class: "btn btn-sm btn-default" %>
+          <%= link_to "INCOMING", incoming_tasks_user_tasks_path(current_user), class: "btn btn-sm btn-default" %> 
         </div>
       </span>
     </div>
@@ -42,7 +42,6 @@
   </div>
 </div>
   
-<%= render "new_task_modal" %>
 <%= render 'edit_task_modal' %>
 <%= render 'delete_task_modal' %>
 

@@ -13,7 +13,7 @@ feature "accepting product group invitation" do
     sign_in(user)
     visit product_path(product)
     click_on "Accept Invitation"
-    expect(page).to have_content("Invitation accepted!")
+    expect(page).to have_css(".flash-alert", text: "Invitation accepted!")
     expect(page).to have_content("John Doe")
     expect(page).to have_content("Jack Black")
   end
@@ -33,7 +33,7 @@ feature "accepting product customer group invitation" do
     sign_in(user)
     visit product_product_customer_path(product, product_customer)
     click_on "Accept Invitation"
-    expect(page).to have_content("Invitation accepted!")
+    expect(page).to have_css(".flash-alert", text: "Invitation accepted!")
     expect(page).to have_content("Best Inc")
   end
 end

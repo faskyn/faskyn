@@ -11,7 +11,7 @@ feature "creating profile" do
     fill_in "profile[company]", with: "Performance Inc"
     fill_in "profile[job_title]", with: "General Partner"
     click_on "Save profile"
-    expect(page).to have_content("Profile successfully created!")
+    expect(page).to have_css(".flash-alert", text: "Profile successfully created!")
     expect(page).to have_content("Skip")
   end
 end

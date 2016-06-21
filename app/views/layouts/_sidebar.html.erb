@@ -1,8 +1,6 @@
 <div id= "sidebar-wrapper">
   <div id= "sidebar-button">
-    <%= link_to user_tasks_path(current_user), type:"button", class: "btn btn-primary btn-block" do %>
-      <i class="fa fa-plus sidebar-fa"></i>NEW TASK
-    <% end %>
+    <a href="#" type="button" class="btn btn-primary btn-block new-task-button" data-toggle="modal" data-target="#new-task"><i class="fa fa-plus sidebar-fa"></i>NEW MESSAGE</a>
     <%= link_to new_product_path, type:"button", class: "btn btn-primary btn-block" do %>
       <i class="fa fa-plus sidebar-fa"></i>NEW PRODUCT
     <% end %>

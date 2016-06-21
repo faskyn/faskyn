@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_action :set_and_authorize_user_tasks, only: [:index, :outgoing_tasks, :incoming_tasks, :completed_tasks, :completed_incoming_tasks, :completed_outgoing_tasks]
   before_action :set_user, only: [:create, :edit, :update, :destroy, :uncomplete]
   before_action :set_and_authorize_task, only: [:edit, :update, :destroy, :complete, :uncomplete]
-  before_action :set_new_task, only: [:index, :outgoing_tasks]
+  #after_action { flash.discard if request.xhr? }, only: :create
 
   require 'will_paginate/array'
 
@@ -43,7 +43,7 @@ class TasksController < ApplicationController
       TaskCreatorJob.perform_later(@task, @task.executor, @task.assigner)
       Conversation.create_or_find_conversation(@task.assigner_id, @task.executor_id)
       respond_to do |format|
-        format.js
+        format.js { flash.now[:notice] = "Message sent!" }
       end     
     else
       respond_to do |format|
@@ -132,9 +132,5 @@ class TasksController < ApplicationController
     def set_and_authorize_task
       @task = Task.find(params[:id])
       authorize @task
-    end
-
-    def set_new_task
-      @task = Task.new
     end
 end

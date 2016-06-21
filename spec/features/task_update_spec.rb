@@ -12,9 +12,9 @@ feature "updating task" do
     sign_in(user)
     visit user_tasks_path(user)   
     page.find("#task-change-#{task.id}").click
-    click_on "Edit Task"
+    click_on "Edit Message"
     fill_in "task[content]", with: "updated content"
-    click_on "Update Task"
+    click_on "Update Message"
     expect(page).to have_content("updated content")
   end
 
@@ -22,9 +22,9 @@ feature "updating task" do
     sign_in(user)
     visit user_path(other_user)
     page.find("#task-change-#{task.id}").click
-    click_on "Edit Task"
+    click_on "Edit Message"
     fill_in "task[content]", with: "updated content"
-    click_on "Update Task"
+    click_on "Update Message"
     expect(page).to have_content("updated content")
     expect(page).to_not have_content("original content")
   end

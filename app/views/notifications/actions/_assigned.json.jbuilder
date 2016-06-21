@@ -15,6 +15,6 @@ else
   json.profile_image_url notification.sender.profile.avatar.url(:small_thumb)
 end
 json.what do
-   json.did "#{notification.action} you a #{ human_model_name(notification.notifiable_type) }"
+   json.did "#{notification.action} you a message"
 end
 json.url user_path(notification.sender, task_notification_id: notification.notifiable_id)

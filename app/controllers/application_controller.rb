@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_sidebar_users
   before_action :set_sidebar_products
+  before_action :set_new_task
 
   def google7df1f819c8dc9008
   end
@@ -23,6 +24,10 @@ class ApplicationController < ActionController::Base
 
   def set_sidebar_products
     @products_sidebar = Product.order(updated_at: :desc).limit(3) if user_signed_in?
+  end
+
+  def set_new_task
+    @task = Task.new
   end
 
   private

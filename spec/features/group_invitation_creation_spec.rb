@@ -15,7 +15,7 @@ feature "creating product group invitation" do
       fill_in "group_invitation[email]", with: "not_registered_yet@gmail.com"
     end
     click_on "Invite Member"
-    expect(page).to have_content("Invitation sent!")
+    expect(page).to have_css(".flash-alert", "Invitation sent!")
     expect(page).to have_css("td", text: "not_registered_yet@gmail.com")
     expect(page).to have_content("Pending")
   end
@@ -27,7 +27,7 @@ feature "creating product group invitation" do
       fill_in "group_invitation[email]", with: "jackblack@gmail.com"
     end
     click_on "Invite Member"
-    expect(page).to have_content("Invitation sent!")
+    expect(page).to have_css(".flash-alert", text: "Invitation sent!")
     expect(page).to have_css("td", text: "jackblack@gmail.com")
     expect(page).to have_content("Pending")
     expect(page).to have_content("Jack Black")
@@ -40,7 +40,7 @@ feature "creating product group invitation" do
       fill_in "group_invitation[email]", with: "not_registered_yet_other@gmail.com"
     end
     click_on "Invite Referencer"
-    expect(page).to have_content("Invitation sent!")
+    expect(page).to have_css(".flash-alert", text: "Invitation sent!")
     expect(page).to have_css("td", text: "not_registered_yet_other@gmail.com")
     expect(page).to have_css("td", text: "Pending")
   end
@@ -52,7 +52,7 @@ feature "creating product group invitation" do
       fill_in "group_invitation[email]", with: "jackblack@gmail.com"
     end
     click_on "Invite Referencer"
-    expect(page).to have_content("Invitation sent!")
+    expect(page).to have_css(".flash-alert", text: "Invitation sent!")
     expect(page).to have_css("td", text: "jackblack@gmail.com")
     expect(page).to have_css("td", text: "Pending")
     expect(page).to have_css("td", text: "Jack Black")

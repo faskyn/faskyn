@@ -2,12 +2,12 @@ $(document).on("page:change", function() {
 
 	//choosing user on task creation; needed only for new task
 	$('[data-behavior="new-task-executor"]').autocomplete({
-  	source: "/users/:user_id/tasknamecompanies"
+  	source: "/tasknamecompanies"
 	});
 
 	//unfocus the new task button after modal open
 	$('#new-task').on('shown.bs.modal', function (e) {
-    $('.newbutton').one('focus', function (e) {
+    $('.new-task-button').one('focus', function (e) {
     	$(this).blur();
 		});
 	});

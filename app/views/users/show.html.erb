@@ -8,39 +8,7 @@
   </div>
 </div>
 
- <!-- Modal for new task -->
-  <%= form_for([current_user, @task_between], remote: true) do |f| %>
-    <div class="modal fade" id="new-task" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">New Task</h4>
-          </div>
-          <div class="modal-body">
-            <div class="alert alert-danger" style="display:none">
-              <ul class="errors" style="display:none">
-                <%= render 'layouts/error_messages', object: f.object %>
-              </ul>
-            </div>
-            <div class="field form-group">
-              <%= f.hidden_field :executor_id, value: @user.id %>
-              <p><strong>Executor: <%= @user.full_name %>, <%= @user.company %></strong></p>
-            </div>
-            <div class="field form-group">
-              <%= f.label :content %>
-              <%= f.text_area :content, class: "form-control", data: { behavior: "new-task-content" } %>
-            </div>     
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" id="new-task-close">Close</button>
-            <%= f.button "Create Task", class: "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
-          </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
-  <!-- Modal End for new task -->
+<%= render partial: 'tasks/new_between_task_modal', locals: { task: @task_between, user: @user } %>
 
 
 

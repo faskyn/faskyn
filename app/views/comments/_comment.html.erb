@@ -13,6 +13,7 @@
             <%= link_to user_path(comment.user) do %>
               <span class="comment-fullname"><%= comment.user.full_name %></span>
             <% end %>
+            <span class="comment-company-job-title"><%= comment.user.job_title %>, <%= comment.user.company %></span>
             <span class="comment-updated"><%= local_time_ago(comment.updated_at) %></span>
           </div>
           <div class="comment-body" data-behavior="comment-body">

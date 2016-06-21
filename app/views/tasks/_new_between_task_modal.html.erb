@@ -1,4 +1,4 @@
-<%= form_for([current_user, @task], remote: true) do |f| %>
+<%= form_for([current_user, @task_between], remote: true) do |f| %>
   <div class="modal fade" id="new-task" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -13,17 +13,17 @@
             </ul>
           </div>
           <div class="field form-group">
-            <%= f.label :Name_or_Company %>
-            <%= f.text_field :task_name_company, class: "form-control", value: "", data: { behavior: "new-task-executor", autocomplete_source: tasknamecompanies_path } %>
+            <%= f.hidden_field :executor_id, value: @user.id %>
+            <p><strong>Executor: <%= @user.full_name %>, <%= @user.company %></strong></p>
           </div>
           <div class="field form-group">
             <%= f.label :content %>
             <%= f.text_area :content, class: "form-control", data: { behavior: "new-task-content" } %>
-          </div> 
+          </div>     
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal" id="new-task-close">Close</button>
-          <%= f.button "Create Message", class: 'btn btn-primary', data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..." } %>
+          <%= f.button "Create Message", class: "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
         </div>
       </div>
     </div>

@@ -26,7 +26,7 @@ Rails.application.routes.draw do
         get :add_socials
       end
     end
-    resources :tasknamecompanies, only: :index
+    
     resources :tasks, except: [:new, :show] do
       member do
         patch :complete, :uncomplete
@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :tasknamecompanies, only: :index
   resources :socials, only: [:create, :update, :destroy]
 
   resources :conversations, only: [] do

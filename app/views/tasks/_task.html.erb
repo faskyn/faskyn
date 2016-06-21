@@ -59,16 +59,16 @@
         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="task-change-<%= task.id %>">
           <li>
           <% if task.completed? %>
-            <%= link_to "Uncomplete Task", uncomplete_user_task_path(id: task.id), action: :uncomplete, remote: true, method: :patch %>
+            <%= link_to "Uncomplete Message", uncomplete_user_task_path(id: task.id), action: :uncomplete, remote: true, method: :patch %>
           <% else %>
-            <%= link_to "Complete Task", complete_user_task_path(id: task.id), action: :complete, remote: true, method: :patch %>
+            <%= link_to "Complete Message", complete_user_task_path(id: task.id), action: :complete, remote: true, method: :patch %>
           <% end %>
           </li>
           <li>
-            <%= link_to "Edit Task", edit_user_task_path(id: task.id), remote: true, type: "button", 'data-toggle' => "modal", 'data-target' => "#update-task-modal", 'data-task-edit-link' => "#{edit_user_task_path(id: task.id)}", data: { behavior: "open-edit-task-modal" } %>
+            <%= link_to "Edit Message", edit_user_task_path(id: task.id), remote: true, type: "button", 'data-toggle' => "modal", 'data-target' => "#update-task-modal", 'data-task-edit-link' => "#{edit_user_task_path(id: task.id)}", data: { behavior: "open-edit-task-modal" } %>
           </li>
           <li>
-            <a href="#" data-toggle="modal" role="button" data-target="#delete-task-modal" data-behavior="open-delete-task-modal" data-task-delete-link="<%= user_task_path(current_user, task) %>">Delete Task</a>
+            <a href="#" data-toggle="modal" role="button" data-target="#delete-task-modal" data-behavior="open-delete-task-modal" data-task-delete-link="<%= user_task_path(current_user, task) %>">Delete Message</a>
           </li>
         </ul>
       </div>
