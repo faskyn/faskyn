@@ -47,7 +47,7 @@
       <% if task.completed? %>
         <%= local_time(task.completed_at, "%d %b %I%p") %>
       <% else %>
-        <%= local_time(task.deadline, "%d %b %I%p") %>
+        <%= local_time(task.updated_at, "%d %b %I%p") %>
       <% end %>
     </td>
 

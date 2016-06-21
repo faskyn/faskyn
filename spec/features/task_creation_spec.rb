@@ -16,8 +16,7 @@ feature "creating task" do
     end
     fill_in "task[task_name_company]", with: "Peter Thief PT"
     fill_in "task[content]", with: "do this task"
-    fill_in "task[deadline]", with: "05/04/2030 09:00 AM"
-    click_on "Create task"
+    click_on "Create Task"
     expect(page).to have_content("do this task")
   end
 
@@ -28,7 +27,6 @@ feature "creating task" do
       click_on "NEW TASK"
     end
     fill_in "task[content]", with: "do that task"
-    fill_in "task[deadline]", with: "05/04/2030 09:00 AM"
     click_on "Create Task"
     expect(page).to have_content("do that task")
   end

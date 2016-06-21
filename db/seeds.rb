@@ -9,10 +9,7 @@
 require 'faker'
 include Faker
 
-if Rails.env.production?
-  Industry.create!([{name: "IoT"}, {name: "AI"}, {name: "FinTech"}, {name: "Automotive"}, {name: "Health & Welness"}, {name: "IT & Data Science"}, {name: "FinTech"}, {name: "Education"}, {name: "Retail"}])
-
-else
+unless Rails.env.production?
   User.create!(
                email: "example@superfaskynka.org",
                password:              "foobar1111",
@@ -39,7 +36,6 @@ else
     Task.create!(assigner_id: random1,
                        executor_id: random2, 
                        content: Faker::Lorem.sentence(2), 
-                       deadline: Faker::Time.between(DateTime.now + 1, DateTime.now + 10) )
   end
 
   Industry.create!([{ name: "IoT" }, { name: "AI" }, { name: "Mobility & Transportation" }, { name: "Health & Wellness" }, { name: "IT & Data Science"},

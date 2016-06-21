@@ -10,8 +10,6 @@ class Task < ActiveRecord::Base
   validates :executor, presence: { message: "must be valid"}
 
   validates :content, presence: { message: "can't be blank" }, length: { maximum: 140, message: "can't be longer than %{count} characters" }
-  validates :deadline, presence: { messsage: "can't be blank" }
-  validate :deadline_date_cannot_be_in_the_past
   validate :completed_at_date_cannot_be_in_the_future
 
   scope :completed, -> { where.not(completed_at: nil) }
@@ -27,7 +25,7 @@ class Task < ActiveRecord::Base
   end
 
   def self.ordered
-    order("deadline DESC")
+    order("updated_at DESC")
   end
 
   def self.paginated(page: 1)
@@ -54,15 +52,6 @@ class Task < ActiveRecord::Base
     uncompleted.included.ordered.paginated(page: page)    
   end
 
-  #getter setter for displaying time in form
-  def deadline_string
-    deadline.to_datetime.iso8601
-  end
-
-  def deadline_string=(deadline_str)
-    self.deadline = deadline_str
-  end
-
   #getter setter method code for new task executor search/select/autocomplete
   def task_name_company
     [executor.try(:profile).try(:first_name), executor.try(:profile).try(:last_name), executor.try(:profile).try(:company)].join(' ')
@@ -80,11 +69,6 @@ class Task < ActiveRecord::Base
   end
 
   private
-
-    def deadline_date_cannot_be_in_the_past
-      errors.add(:deadline, "can't be in the past") if
-        deadline.present? && deadline < Time.zone.now
-    end
 
     def completed_at_date_cannot_be_in_the_future
       errors.add(:completed_at, "can't be in the future") if

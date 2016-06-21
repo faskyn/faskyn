@@ -21,7 +21,6 @@
 //= require cocoon
 //= require local_time
 //= require moment
-//= require bootstrap-datetimepicker
 //= require_tree .
 
 Turbolinks.enableProgressBar();

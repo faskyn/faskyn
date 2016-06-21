@@ -1,37 +1,31 @@
-<!-- Modal for new task -->
-  <%= form_for([current_user, @task], remote: true, data: { behavior: "new-task-modal-form" }) do |f| %>
-    <div class="modal fade" id="new-task" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">New Task</h4>
+<%= form_for([current_user, @task], remote: true) do |f| %>
+  <div class="modal fade" id="new-task" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">New Task</h4>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger" style="display:none">
+            <ul class="errors" style="display:none">
+              <%= render 'layouts/error_messages', object: f.object %>
+            </ul>
           </div>
-          <div class="modal-body">
-            <div class="alert alert-danger" style="display:none">
-              <ul class="errors" style="display:none">
-                <%= render 'layouts/error_messages', object: f.object %>
-              </ul>
-            </div>
-            <div class="field form-group">
-              <%= f.label :Name_or_Company %>
-              <%= f.text_field :task_name_company, class: "form-control", value: "", data: { behavior: "new-task-executor", autocomplete_source: user_tasknamecompanies_path } %>
-            </div>
-            <div class="field form-group">
-              <%= f.label :content %>
-              <%= f.text_area :content, class: "form-control", data: { behavior: "new-task-content" } %>
-            </div>
-            <div class="field form-group">
-              <%= f.label :deadline %>
-              <%= f.text_field :deadline, class: "form-control", data: { behavior: "new-task-deadline" } %>
-            </div> 
+          <div class="field form-group">
+            <%= f.label :Name_or_Company %>
+            <%= f.text_field :task_name_company, class: "form-control", value: "", data: { behavior: "new-task-executor", autocomplete_source: user_tasknamecompanies_path } %>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" id="new-task-close">Close</button>
-            <%= f.button "Create task", class: 'btn btn-primary', data: { behavior: "new-task-submit", disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
-          </div>
+          <div class="field form-group">
+            <%= f.label :content %>
+            <%= f.text_area :content, class: "form-control", data: { behavior: "new-task-content" } %>
+          </div> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="new-task-close">Close</button>
+          <%= f.button "Create Task", class: 'btn btn-primary', data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..." } %>
         </div>
       </div>
     </div>
-  <% end %>
-<!-- Modal End for new task -->
+  </div>
+<% end %>

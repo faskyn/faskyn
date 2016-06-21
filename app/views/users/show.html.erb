@@ -9,7 +9,7 @@
 </div>
 
  <!-- Modal for new task -->
-  <%= form_for([current_user, @task_between], remote: true, data: { behavior: "new-task-modal-form" }) do |f| %>
+  <%= form_for([current_user, @task_between], remote: true) do |f| %>
     <div class="modal fade" id="new-task" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -30,15 +30,11 @@
             <div class="field form-group">
               <%= f.label :content %>
               <%= f.text_area :content, class: "form-control", data: { behavior: "new-task-content" } %>
-            </div>
-            <div class="field form-group">
-              <%= f.label :deadline %>
-              <%= f.text_field :deadline, class: "form-control", data: { behavior: "new-task-deadline" } %>
-            </div>      
+            </div>     
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal" id="new-task-close">Close</button>
-            <%= f.button "Create Task", class: "btn btn-primary", data: { behavior: "new-task-submit", disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
+            <%= f.button "Create Task", class: "btn btn-primary", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
           </div>
         </div>
       </div>

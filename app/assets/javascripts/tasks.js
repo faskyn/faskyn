@@ -12,28 +12,10 @@ $(document).on("page:change", function() {
 		});
 	});
 
-  //on submitting changing datetime to UTC for backend
-  $('[data-behavior="new-task-submit"]').on('click', function (e){
-    e.preventDefault();
-    var localMoment = moment($('[data-behavior="new-task-deadline"]').val());
-    $('[data-behavior="new-task-deadline"]').val(localMoment.toISOString());
-    $('[data-behavior="new-task-modal-form"]').submit();
-  });
-
 	//when task modal closes error messages get hidden
 	$('#new-task').on('hidden.bs.modal', function (e) {
 		$('.alert-danger').hide();
 	});
-
-  //datetimepicker js code for new task
-  $(function () {
-    $('[data-behavior="new-task-deadline"]').datetimepicker({
-      sideBySide: true,
-      format: 'MM/DD/YYYY hh:mm A',
-      stepping: 15,
-      widgetPositioning: { vertical: 'bottom' }
-    });
-  });
 
 	//infinite scrolling for tasks based on pagination gem
 	if ($('#infinite-task-scrolling').size() > 0) {
@@ -50,25 +32,9 @@ $(document).on("page:change", function() {
   };
 });
 
-//setting time and datetimepicker when opening edit task modal
-$(document).on('shown.bs.modal', '#update-task-modal', function (e) {
-  editTaskTimeSetting();
-});
-
 $(document).on('hidden.bs.modal', '#update-task-modal', function (e) {
   $('.alert-danger').hide();
 });
-
-//setting time to RoR format when updating task
-$(document).on('click', '[data-behavior="edit-task-submit"]', function (e){
-  e.preventDefault();
-  var deadlineField = $('[data-behavior="edit-task-deadline"]');
-  var localMoment = moment(deadlineField.val());
-  var railsDate = localMoment.toISOString();
-  deadlineField.val(railsDate);
-  $('[data-behavior="task-update-form"]').submit();
-});
-
 
 //editing task via modal
 $(document).on('click', '[data-behavior="open-edit-task-modal"]', function (event) {
@@ -95,16 +61,3 @@ $(document).on('click', '[data-behavior="delete-task-submit"]', function (event)
     dataType: "script"
   });
 });
-
-function editTaskTimeSetting() {
-  var deadlineField =  $('[data-behavior="edit-task-deadline"]');
-  var deadlineValue = deadlineField.attr('value');
-  var momentDeadline = moment(deadlineValue).format('MM/DD/YYYY hh:mm A');
-  deadlineField.val(momentDeadline);
-  deadlineField.datetimepicker({
-    sideBySide: true,
-    format: 'MM/DD/YYYY hh:mm A',
-    stepping: 15,
-    widgetPositioning: { vertical: 'bottom' }
-  });
-};

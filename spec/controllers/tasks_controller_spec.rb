@@ -34,8 +34,8 @@ describe TasksController do
   
     describe "collections" do
       let!(:user) { create(:user) }
-      let!(:assigned_task) { create(:task, assigner: @user, executor: user, deadline: DateTime.now + 2) }
-      let!(:executed_task) { create(:task, executor: @user, assigner: user, deadline: DateTime.now + 3) }
+      let!(:assigned_task) { create(:task, assigner: @user, executor: user) }
+      let!(:executed_task) { create(:task, executor: @user, assigner: user) }
       let!(:completed_task) { create(:task, executor: @user, assigner: user, completed_at: DateTime.now - 2) } 
       let!(:profile) { create(:profile, user: @user) }
       let!(:profile_2) { create(:profile, user: user) }
@@ -172,7 +172,7 @@ describe TasksController do
     end
 
     describe "PUT update" do
-      let!(:task) { create(:task, assigner: @user, deadline: DateTime.now + 2, content: "original content") }
+      let!(:task) { create(:task, assigner: @user, content: "original content") }
       
       context "with valid attributes" do
 
@@ -182,9 +182,8 @@ describe TasksController do
         end
 
         it "changes the attributes" do
-          xhr :patch, :update, user_id: @user.id, id: task.id, task: attributes_for(:task, deadline: DateTime.now + 2 , content: "new content")
+          xhr :patch, :update, user_id: @user.id, id: task.id, task: attributes_for(:task, content: "new content")
           task.reload
-          expect(task.deadline).to be_within(1.day).of(DateTime.now + 2)
           expect(task.content).to eq("new content")
         end
 
@@ -197,16 +196,15 @@ describe TasksController do
       context "with invalid attributes" do
 
         it "doesn't change the attributes" do
-          xhr :patch, :update, user_id: @user.id, id: task.id, task: attributes_for(:task, deadline: DateTime.now - 2, content: "new content")
+          xhr :patch, :update, user_id: @user.id, id: task.id, task: attributes_for(:task, content: nil)
           task.reload
-          expect(task.deadline).to be_within(1.day).of(DateTime.now + 2)
-          expect(task.content).not_to eq("new content")
+          expect(task.content).to eq("original content")
         end
       end
     end
 
     describe "DELETE destroy" do
-      let!(:task) { create(:task, assigner: @user, deadline: DateTime.now + 2, content: "original content") }
+      let!(:task) { create(:task, assigner: @user, content: "original content") }
 
       it "destroys the product" do
         expect{ xhr :delete, :destroy, user_id: @user.id, id: task.id }.to change{ Task.count }.by(-1)

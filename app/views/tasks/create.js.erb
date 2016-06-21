@@ -14,7 +14,6 @@ $("ul.errors").html("");
 	$("#new-task").modal('hide');
 	$('[data-behavior="new-task-executor"]').val('');
 	$('[data-behavior="new-task-content"]').val('');
-	$('[data-behavior="new-task-deadline"]').val('');
 
 	//different div class for different partials + table rows get inserted into view via AJAX
 	$('[data-behavior="task-insert"]').prepend('<%= j render @task %>');

@@ -8,7 +8,7 @@ class TasksController < ApplicationController
   require 'will_paginate/array'
 
   def index
-    #@tasks = Task.alltasks(current_user).uncompleted.includes(:executor, :executor_profile, :assigner, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
+    #@tasks = Task.alltasks(current_user).uncompleted.includes(:executor, :executor_profile, :assigner, :assigner_profile).order("created_at DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
     @tasks = Task.alltasks(current_user).index_default
     respond_to do |format|
       format.html
@@ -17,7 +17,7 @@ class TasksController < ApplicationController
   end
 
   def outgoing_tasks
-    # @tasks = current_user.assigned_tasks.uncompleted.includes(:executor, :executor_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
+    # @tasks = current_user.assigned_tasks.uncompleted.includes(:executor, :executor_profile).order("created_at DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
     @tasks = current_user.assigned_tasks.assigned_default(page: params[:page])
     respond_to do |format|
       format.html
@@ -26,7 +26,7 @@ class TasksController < ApplicationController
   end
 
   def incoming_tasks
-    # @tasks = current_user.executed_tasks.uncompleted.includes(:assigner, :assigner_profile).order("deadline DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
+    # @tasks = current_user.executed_tasks.uncompleted.includes(:assigner, :assigner_profile).order("created_at DESC").paginate(page: params[:page], per_page: Task.pagination_per_page)
     @tasks = current_user.executed_tasks.executed_default(page: params[:page])
     respond_to do |format|
       format.html
@@ -93,10 +93,8 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update_attributes(task_params)
-        format.html { redirect_to user_tasks_path(current_user), notice: "Task was successfully updated!"}
         format.js
       else
-        format.html { render action: :edit, alert: "Task couldn't be updated!"}
         format.js
       end
     end
@@ -119,7 +117,7 @@ class TasksController < ApplicationController
   private
 
     def task_params
-      params.require(:task).permit(:executor_id, :name, :content, :deadline, :task_name_company, :assigner_id, :executor_profile, :assigner_profile, :deadline_string)
+      params.require(:task).permit(:executor_id, :name, :content, :task_name_company, :assigner_id, :executor_profile, :assigner_profile)
     end
 
     def set_and_authorize_user_tasks

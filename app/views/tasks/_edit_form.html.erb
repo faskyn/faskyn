@@ -1,28 +1,23 @@
-<div class="modal-body">
-  <%= form_for([current_user, @task], method: :patch, remote: true, data: { behavior: "task-update-form"}) do |f| %>
-  <div class="alert alert-danger" style="display:none">
-    <ul class="errors" style="display:none">
-      <%= render 'layouts/error_messages', object: f.object %>
-    </ul>
+<%= form_for([current_user, @task], method: :patch, remote: true) do |f| %>
+  <div class="modal-body"> 
+    <div class="alert alert-danger" style="display:none">
+      <ul class="errors" style="display:none">
+        <%= render 'layouts/error_messages', object: f.object %>
+      </ul>
+    </div>
+    <div class="field form-group">
+      <% if current_user.id == @task.assigner.id %>
+        <p><strong>Executor: <%= @task.executor.full_name %>, <%= @task.executor.company %></strong></p>
+      <% else %>
+        <p><strong>Assigner: <%= @task.assigner.full_name %>, <%= @task.assigner.company %></strong></p>
+      <% end %>
+    </div>
+    <div class="field form-group">
+      <%= f.label :content %>
+      <%= f.text_area :content, class: "form-control" %>
+    </div>  
   </div>
-  <div class="field form-group">
-    <% if current_user.id == @task.assigner.id %>
-      <p><strong>Executor: <%= @task.executor.full_name %>, <%= @task.executor.company %></strong></p>
-    <% else %>
-      <p><strong>Assigner: <%= @task.assigner.full_name %>, <%= @task.assigner.company %></strong></p>
-    <% end %>
+  <div class="modal-footer">
+    <%= f.button "Update Task", class: 'btn btn-primary', data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
   </div>
-  <div class="field form-group">
-    <%= f.label :content %>
-    <%= f.text_area :content, class: "form-control" %>
-  </div>
-  <div class="field form-group">
-    <%= f.label :deadline %>
-    <%= f.text_field :deadline_string, class: "form-control", data: { behavior: "edit-task-deadline" } %>
-  </div>    
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-default" data-dismiss="modal" id="update-task-close">Close</button>
-  <%= f.button "Update Task", class: 'btn btn-primary', data: { behavior: "edit-task-submit", disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..." } %>
-  <% end %>
-</div>
+<% end %>
