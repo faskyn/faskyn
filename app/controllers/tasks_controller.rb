@@ -41,7 +41,6 @@ class TasksController < ApplicationController
     if @task.save
       Notification.create(recipient_id: @task.executor_id, sender_id: current_user.id, notifiable: @task, action: "assigned")
       TaskCreatorJob.perform_later(@task, @task.executor, @task.assigner)
-      Conversation.create_or_find_conversation(@task.assigner_id, @task.executor_id)
       respond_to do |format|
         format.js { flash.now[:notice] = "Message sent!" }
       end     

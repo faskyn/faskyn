@@ -16,10 +16,14 @@
       <div class = "row">
         <div class="col-md-5">
           <div class="product-list">
-            <div class="list-name">Posted_by:</div>
-            <div class="description"><%= link_to user_profile_path(product.owner) do %>
-              <%= product.owner.full_name %>
-            <% end %> </div>
+            <div class="list-name">
+              Posted by:
+            </div>
+            <div class="description">
+              <%= link_to user_path(product.owner) do %>
+                <%= product.owner.full_name %>
+              <% end %>
+            </div>
           </div>
         </div>
         <div class="col-md-7">

@@ -9,7 +9,7 @@
       <% cache(['sidebar-profiles-index', @profiles_sidebar.map(&:id), @profiles_sidebar.map(&:updated_at).max]) do %>
         <% @profiles_sidebar.each do |profile| %>
           <% cache ['sidebar-profiles-single', profile] do %>
-            <%= link_to user_path(profile.user) do %>
+            <%= link_to user_profile_path(profile.user) do %>
               <div class="hover">
                 <li>
                   <%= image_tag profile.avatar.url(:small_thumb), class: "profile-image" %>

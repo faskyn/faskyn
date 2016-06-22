@@ -3,7 +3,7 @@
     <%= group_invitation.recipient.email %>
   <td class="col-md-3">
     <% if group_invitation.recipient.profile %>
-      <%= link_to user_path(group_invitation.recipient) do %>
+      <%= link_to user_profile_path(group_invitation.recipient) do %>
         <div class="table-user-name">
           <%= group_invitation.recipient.full_name %>
         </div>

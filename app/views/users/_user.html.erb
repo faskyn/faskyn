@@ -4,13 +4,16 @@
       <% users_for_row.each do |user| %>
         <% cache ['users-index-single', user.profile] do %>
           <div class="col-md-3 user-column">
-            <%= link_to user do %>
+            <%= link_to user_profile_path(user) do %>
               <div class="well user-index-well">
-                  <div><%= image_tag user.profile.avatar.url(:base_thumb), class: "profile-index-avatar" %></div>
-                  <h4><%= user.full_name %></h4>
-                  <h5><%= user.company %></h5>
-                  <h5><%= user.job_title %></h5>
+                <div><%= image_tag user.profile.avatar.url(:base_thumb), class: "profile-index-avatar" %></div>
+                <h4><%= user.full_name %></h4>
+                <h5><%= user.company %></h5>
+                <h5><%= user.job_title %></h5>
+                <div class="conversation-button-area">
+                  <%= link_to "CONVERSATION", user, class: "btn btn-sm btn-default btn-to-conversation" %>
                 </div>
+              </div>
             <% end %>
           </div>
         <% end %>

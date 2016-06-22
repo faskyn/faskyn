@@ -14,10 +14,10 @@
     <% end %>
   </div>
   <div class="chatboxinput">
-    <%= form_for([@conversation, @message], remote: true, data: { behavior: "new-message-body-form"}) do |f| %>
+    <%= form_for([@conversation, Message.new], remote: true, data: { behavior: "new-message-body-form"}) do |f| %>
         <%= f.text_area :body, class: "chatbox-text-area", data: { cid: "#{@conversation.id}", behavior: "new-message-body" } %>
     <% end %>
-    <%= form_for([@conversation, @message], remote: true, data: { behavior: "message-upload-form" }) do |form| %>
+    <%= form_for([@conversation, Message.new], remote: true, data: { behavior: "message-upload-form" }) do |form| %>
         <span class="btn btn-success btn-sm btn-message-file">Choose file
         <%= form.attachment_field :message_attachment, presigned: true, direct: true, data: { behavior: "new-message-file" } %></span>
         <%= form.submit "Send File", class: "btn btn-primary btn-sm", style:"display:none", data: { behavior: "message-upload-submit" } %>

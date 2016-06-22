@@ -48,7 +48,6 @@ describe UsersController do
 
     describe "GET show" do
       let!(:user_2) { create(:user) }
-      let!(:user_3) { create(:user) }
       let!(:profile) { create(:profile, user: @user) }
       let!(:profile_2) { create(:profile, user: user_2) }
       let!(:task) { create(:task, executor: user_2, assigner: @user, updated_at: DateTime.now - 2) }
@@ -69,20 +68,19 @@ describe UsersController do
           expect(assigns(:conversation)).to eq(conversation)
           expect(assigns(:tasks)).to eq([task])
           expect(assigns(:messages)).to eq([message])
-          expect(assigns(:message)).to be_a_new(Message)
         end
 
         it { is_expected.to respond_with 200 }
         it { is_expected.to render_template :show }
       end
 
-      context "redirect to somewhere else" do
+      context "redirects to profile page if it's own show page" do
         before(:each) do
-          get :show, id: user_3
+          get :show, id: @user
         end
 
         it "assigns user" do
-          expect(assigns(:user)).to eq(user_3)
+          expect(assigns(:user)).to eq(@user)
         end
 
         it { is_expected.to respond_with 302 }

@@ -1,4 +1,4 @@
-<%= form_for([current_user, @task_between], remote: true) do |f| %>
+<%= form_for([current_user, Task.new], remote: true) do |f| %>
   <div class="modal fade" id="new-task" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">

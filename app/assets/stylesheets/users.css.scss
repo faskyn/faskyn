@@ -139,6 +139,16 @@ $black: #333333;
     h4 {
       color: $black;
     }
+    .conversation-button-area {
+      padding: 10px 0 10px 0;
+      .btn-to-conversation {
+        &:hover {
+          color: white;
+          background-color: $garmin-blue;
+          border-color: $garmin-blue;
+        }
+      } 
+    }
   }
   a {
     text-decoration: none;
