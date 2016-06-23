@@ -41,46 +41,51 @@ class NotificationsController < ApplicationController
   private
 
     def notification_redirection_path(notification)
-      type = notification.notifiable_type
-      notifiable_id = notification.notifiable_id
-      action = notification.action
-      if action == "commented"
-        route = case type
-                when "Post"
-                  posts_path(anchor: "post_#{notifiable_id}")#{}"/posts#post_#{notifiable_id}"
-                when "Product"
-                  product_path(notifiable_id, anchor: "comment-panel")#/products/#{notifiable_id}#comment-panel"
-                when "ProductLead"
-                  product_lead = ProductLead.find(notifiable_id)
-                  product_id = product_lead.product_id
-                  product_product_lead_path(product_id, notifiable_id, anchor: "comment-panel")#{}"/products/#{product_id}/#{notifiable_type}/#{notifiable_id}#comment-panel"
-                when "ProductCustomer"
-                  product_customer = ProductCustomer.find(notifiable_id)
-                  product_id = product_customer.product_id
-                  product_product_customer_path(product_id, notifiable_id, anchor: "comment-panel") #/products/#{product_id}/#{notifiable_type}/#{notifiable_id}#comment-panel"
-                end
-      elsif action == "invited"
-        if type == "Product"
-          product_path(notifiable_id, anchor: "product-invitation-well")
-        elsif type == "ProductCustomer"
-          product_customer = ProductCustomer.find(notifiable_id)
-          product_id = product_customer.product_id
-          product_product_customer_path(product_id, notifiable_id)
-        end
-      elsif action == "accepted"
-        if type == "Product" #team member invitation
-          product_product_owner_panels_path(notifiable_id)
-        elsif type == "ProductCustomer" #referencer invitation
-          product_customer = ProductCustomer.find(notifiable_id)
-          product_id = product_customer.product_id
-          product_product_owner_panels_path(product_id)
-        end
-      elsif action == "wrote"
-        product_customer = ProductCustomer.find(notifiable_id)
-        product_id = product_customer.product_id
-        product_product_customer_path(product_id, notifiable_id)
-      end
+      klass = "NotificationRedirections::#{notification.notifiable_type}Redirection".constantize
+      klass.new(notification: notification).send(notification.action)
     end
+
+    # def notification_redirection_path(notification)
+    #   type = notification.notifiable_type
+    #   notifiable_id = notification.notifiable_id
+    #   action = notification.action
+    #   if action == "commented"
+    #     route = case type
+    #             when "Post"
+    #               posts_path(anchor: "post_#{notifiable_id}")#{}"/posts#post_#{notifiable_id}"
+    #             when "Product"
+    #               product_path(notifiable_id, anchor: "comment-panel")#/products/#{notifiable_id}#comment-panel"
+    #             when "ProductLead"
+    #               product_lead = ProductLead.find(notifiable_id)
+    #               product_id = product_lead.product_id
+    #               product_product_lead_path(product_id, notifiable_id, anchor: "comment-panel")#{}"/products/#{product_id}/#{notifiable_type}/#{notifiable_id}#comment-panel"
+    #             when "ProductCustomer"
+    #               product_customer = ProductCustomer.find(notifiable_id)
+    #               product_id = product_customer.product_id
+    #               product_product_customer_path(product_id, notifiable_id, anchor: "comment-panel") #/products/#{product_id}/#{notifiable_type}/#{notifiable_id}#comment-panel"
+    #             end
+    #   elsif action == "invited"
+    #     if type == "Product"
+    #       product_path(notifiable_id, anchor: "product-invitation-well")
+    #     elsif type == "ProductCustomer"
+    #       product_customer = ProductCustomer.find(notifiable_id)
+    #       product_id = product_customer.product_id
+    #       product_product_customer_path(product_id, notifiable_id)
+    #     end
+    #   elsif action == "accepted"
+    #     if type == "Product" #team member invitation
+    #       product_product_owner_panels_path(notifiable_id)
+    #     elsif type == "ProductCustomer" #referencer invitation
+    #       product_customer = ProductCustomer.find(notifiable_id)
+    #       product_id = product_customer.product_id
+    #       product_product_owner_panels_path(product_id)
+    #     end
+    #   elsif action == "wrote"
+    #     product_customer = ProductCustomer.find(notifiable_id)
+    #     product_id = product_customer.product_id
+    #     product_product_customer_path(product_id, notifiable_id)
+    #   end
+    # end
 
     def set_and_authorize_user_notifications
       @user = User.find(params[:user_id])
