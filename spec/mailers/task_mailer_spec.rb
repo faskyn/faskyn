@@ -10,7 +10,7 @@ RSpec.describe TaskMailer, type: :mailer do
     let(:mail) { TaskMailer.task_created(task, executor, assigner) }
 
     it "renders the subject" do
-      expect(mail.subject).to eq("[Faskyn] New task from #{assigner.profile.full_name}")
+      expect(mail.subject).to eq("[Faskyn] New message from #{assigner.profile.full_name}")
     end
 
     it "renders the receiver email" do

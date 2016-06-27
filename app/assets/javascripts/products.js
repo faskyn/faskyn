@@ -73,3 +73,41 @@ $(document).on('change', '#product-customer-collection-select', function () {
   var newActionURL = "/product_customers/" + newRouteId + "/group_invitations";
   $(this).closest("form").attr("action", newActionURL);
 });
+
+$(document).on('keyup', '[data-behavior="oneliner-text-area"]', function (event) {
+  var textLength = $(this).val().length;
+  var textLengthLimit = 140;
+  $('[data-behavior="oneliner-counter"]').html(textLengthLimit - textLength);
+  if ((textLengthLimit - textLength) < 0) {
+    $('[data-behavior="oneliner-counter').addClass('oneliner-description-count-warning');
+  } else {
+    $('[data-behavior="oneliner-counter').removeClass('oneliner-description-count-warning');
+  };
+});
+
+$(document).on('focusout', '[data-behavior="oneliner-text-area"]', function (event) {
+  var textLength = $(this).val().length;
+  var textLengthLimit = 140;
+  if ((textLengthLimit - textLength) >= 0) {
+    $('[data-behavior="oneliner-counter"]').html("");
+  };
+});
+
+$(document).on('keyup', '[data-behavior="description-text-area"]', function (event) {
+  var textLength = $(this).val().length;
+  var textLengthLimit = 500;
+  $('[data-behavior="description-counter"]').html(textLengthLimit - textLength);
+  if ((textLengthLimit - textLength) < 0) {
+    $('[data-behavior="description-counter').addClass('oneliner-description-count-warning');
+  } else {
+    $('[data-behavior="description-counter').removeClass('oneliner-description-count-warning');
+  };
+});
+
+$(document).on('focusout', '[data-behavior="description-text-area"]', function (event) {
+  var textLength = $(this).val().length;
+  var textLengthLimit = 500;
+  if ((textLengthLimit - textLength) >= 0) {
+    $('[data-behavior="description-counter"]').html("");
+  };
+});

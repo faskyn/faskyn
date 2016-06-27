@@ -1,6 +1,6 @@
 <p>Hi <%= @product_customer.owner.first_name %>,</p>
 
-<p><%= @review.user.full_name %> has written a review on the <%= @product_customer.customer %> customer case.</p>
+<p><%= @review.user.full_name %> just wrote a review on the <%= @product_customer.customer %> customer usecase.</p>
 
 <p>You can check out the review on the <%= link_to "customer case page", product_product_customer_url(@product_customer.product, @product_customer) %>.</p>
 

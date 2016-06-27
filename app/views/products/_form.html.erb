@@ -46,8 +46,8 @@
     <div class = "row">
       <div class="col-md-12">
         <div class="form-group">
-          <%= f.text_area :oneliner, placeholder: "oneliner", class: "form-control" %>
-          <div class="explanation oneliner-explanation">140-character-long brief description of the product (tweetable)</div>
+          <%= f.text_area :oneliner, placeholder: "oneliner", class: "form-control", data: { behavior: "oneliner-text-area"} %>
+          <span class="explanation oneliner-explanation">140-character-long brief description of the product (tweetable)</span><span class="explanation oneliner-description-counter" data-behavior="oneliner-counter"></span>
         </div>
       </div>
     </div>
@@ -59,8 +59,8 @@
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
-          <%= f.text_area :description, placeholder: "description", class: "form-control" %>
-          <div class="explanation description-explanation">Up to  500-character-long description of the product (e.g. for email intros)</div>
+          <%= f.text_area :description, placeholder: "description",rows: "4", class: "form-control", data: { behavior: "description-text-area" } %>
+          <span class="explanation description-explanation">Up to  500-character-long description of the product (e.g. for email intros)</span><span class="explanation oneliner-description-counter" data-behavior="description-counter"></span>
         </div>
       </div>
     </div>

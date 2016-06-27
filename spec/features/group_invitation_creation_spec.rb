@@ -27,10 +27,7 @@ feature "creating product group invitation" do
       fill_in "group_invitation[email]", with: "jackblack@gmail.com"
     end
     click_on "Invite Member"
-    expect(page).to have_css(".flash-alert", text: "Invitation sent!")
-    expect(page).to have_css("td", text: "jackblack@gmail.com")
-    expect(page).to have_content("Pending")
-    expect(page).to have_content("Jack Black")
+    expect_page_registered_user
   end
 
   scenario "successfully invites non faskyn user to join as product customer referencer" do
@@ -52,6 +49,10 @@ feature "creating product group invitation" do
       fill_in "group_invitation[email]", with: "jackblack@gmail.com"
     end
     click_on "Invite Referencer"
+    expect_page_registered_user
+  end
+
+  def expect_page_registered_user
     expect(page).to have_css(".flash-alert", text: "Invitation sent!")
     expect(page).to have_css("td", text: "jackblack@gmail.com")
     expect(page).to have_css("td", text: "Pending")
