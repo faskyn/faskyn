@@ -5,7 +5,7 @@
     <div class="product-form">
       <%= render "form" %>
       <button type="button" class="btn btn-danger product-delete-button" data-toggle="modal" data-target="#deleteproduct_<%= @product.id %>">Delete Product</button>
-      <%= link_to "Back to Product", :back, class: "btn btn-default back-button" %>
+      <%= link_to "Back to Product", @product, class: "btn btn-default back-button" %>
       </div> <!--THIS DIV COMES FROM FORM -->
     </div>
   </div>

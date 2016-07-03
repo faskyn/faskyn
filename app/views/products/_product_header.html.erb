@@ -1,0 +1,24 @@
+<div class="row product-show-name">
+  <div class="col-md-10">
+    <%= image_tag product.product_image_url(:base_thumb), class: "product-image" %>
+    <h3><%= product.name %></h3>
+  </div>
+  <div class="col-md-2" style="text-align:right">
+    <li class="dropdown hidden" data-product-owner-id ="<%= product.owner.id %>" data-behavior="edit-delete-product-buttons">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        <button class="btn btn-default"><i class="fa fa-lg fa-angle-down"></i></button>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-right">
+        <li>
+          <%= link_to "Edit Product", edit_product_path(product) %>
+        </li> 
+        <li>
+          <%= link_to "Manage Product Access", product_product_owner_panels_path(product) %>
+        </li>
+        <li>
+          <%= product.company.present? ? (link_to "Edit Company", edit_product_company_path(product)) : (link_to "Add Company To Product", new_product_company_path(product)) %>
+        </li>
+      </ul>
+    </li>
+  </div>
+</div>

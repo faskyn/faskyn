@@ -1,8 +1,8 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
-  before_action :if_no_profile_exists, only: :show
   before_action :set_and_authorize_profile, only: [:show, :edit, :update, :add_socials]
+  before_action :set_socials, only: [:add_socials, :show, :edit]
 
   def new
     @profile = Profile.new
@@ -20,20 +20,13 @@ class ProfilesController < ApplicationController
   end
 
   def add_socials
-    @twitter = @profile.socials.where(provider: "twitter").first
-    @linkedin = @profile.socials.where(provider: "linkedin").first
   end
 
   def show
-    @twitter = @profile.socials.where(provider: "twitter").first
-    @linkedin = @profile.socials.where(provider: "linkedin").first
     @profile_products = @user.created_products.order(updated_at: :desc).includes(:industries)
   end
 
   def edit
-    #users can only have one account from each platform
-    @twitter = @profile.socials.where(provider: "twitter").first
-    @linkedin = @profile.socials.where(provider: "linkedin").first
   end
 
   def update
@@ -59,11 +52,9 @@ class ProfilesController < ApplicationController
       authorize @profile
     end
 
-    def if_no_profile_exists
-      unless @user.profile(current_user)
-        flash[:warning] = "Please create a profile first!"
-        redirect_to new_user_profile_path(current_user)
-      end
+    def set_socials
+      @twitter = @profile.socials.where(provider: "twitter").first
+      @linkedin = @profile.socials.where(provider: "linkedin").first
     end
 end
 

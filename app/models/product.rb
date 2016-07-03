@@ -4,6 +4,8 @@ class Product < ActiveRecord::Base
   include Concerns::Validatable
   mount_uploader :product_image, ProductImageUploader
 
+  delegate :name, to: :company, prefix: true, allow_nil: true
+
   belongs_to :owner, class_name: "User", foreign_key: "user_id"
   has_many :users, through: :product_users
   has_many :product_users, dependent: :destroy
@@ -14,6 +16,7 @@ class Product < ActiveRecord::Base
 
   has_many :notifications, as: :notifiable, dependent: :destroy
   
+  has_one :company, dependent: :destroy
   has_many :industry_products, dependent: :destroy, inverse_of: :product
   has_many :industries, through: :industry_products
   has_many :product_customers, dependent: :destroy, inverse_of: :product

@@ -45,6 +45,7 @@ $black: #333333;
     .explanation {
       font-size: 12px;
       color: $dark-grey;
+      //display:none;
     }
     .oneliner-description-counter {
       float:right;
@@ -80,7 +81,12 @@ $black: #333333;
     vertical-align: middle;
     padding-left:5px;
   }
+  a {
+    text-decoration: none;
+    color: $black;
+  }
 }
+
 
 .product-profile-container {
   background: $light-grey;

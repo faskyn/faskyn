@@ -47,6 +47,18 @@ class ProductPolicy < ApplicationPolicy
     user.present? && user == product.owner
   end
 
+  def new_company?
+    user.present? && user == product.owner && product.company.blank?
+  end
+
+  def create_company?
+    user.present? && user == product.owner && product.company.blank?
+  end
+
+  def destroy_company?
+    user.present? && user == product.owner
+  end
+
   private
 
     def product

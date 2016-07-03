@@ -1,183 +1,176 @@
 <% provide(:title, @product.name) %>
 <div class= "container-fluid product-container">
-    <div class="product-show-container" data-behavior="commentable_<%= @product.id %>">
+  <div class="product-show-container" data-behavior="commentable_<%= @product.id %>">
 
-      <% @product.group_invitations.pending_user(current_user).each do |group_invitation| %>
-        <%= render partial: "products/group_invitations/group_invitation", locals: { group_invitation: group_invitation} %>
-      <% end %>
+    <% @product.group_invitations.pending_user(current_user).each do |group_invitation| %>
+      <%= render partial: "products/group_invitations/group_invitation", locals: { group_invitation: group_invitation} %>
+    <% end %>
 
-      <% cache [@product, @product.owner.profile] do %>
+    <% cache [@product, @product.owner.profile, @product.company_name] do %>
 
-        <div class="row product-show-name">
-          <div class="col-md-10">
-            <%= image_tag @product.product_image_url(:base_thumb), class: "product-image" %>
-            <h3><%= @product.name %></h3>
-          </div>
-          <div class="col-md-2" style="text-align:right">
-            <li class="dropdown hidden" data-product-owner-id ="<%= @product.owner.id %>" data-behavior="edit-delete-product-buttons">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <button class="btn btn-default"><i class="fa fa-lg fa-angle-down"></i></button>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-right">
-                <li>
-                  <%= link_to "Edit Product", edit_product_path(@product) %>
-                </li>   
-                <li>
-                  <%= link_to "Manage Access", product_product_owner_panels_path(@product) %>
-                </li>
-              </ul>
-            </li>
-          </div>
-        </div>
-        <div class="well product-well">
-          <div class = "row">
-            <div class="col-md-4 website-column">
-              <div class="product-list">
-                <div class="list-name">Website:</div>
-                <div class="description"><%= link_to @product.website, target: "_blank" do %>
-                   <%= truncate(@product.website, length: 23) %>
-                <% end %></div>
-              </div>
-            </div>
-            <div class="col-md-8 vertical-column">
-              <div class="product-list">
-                <div class="list-name">Verticals:</div>
-                <div class="description"><%= @product.industries_all %></div>
-              </div>
-            </div>
-          </div>
+      <%= render partial: "products/product_header", locals: { product: @product } %>
 
-          <div class = "row">
-            <div class="col-md-4 posted-by-column">
-              <div class="product-list">
-                <div class="list-name">Posted by:</div>
-                  <div class="description">
-                    <%= link_to user_profile_path(@product.owner) do %>
-                      <%= @product.owner.full_name %>
-                    <% end %>
-                  </div>
-              </div>
-            </div>
-            <div class="col-md-8 oneliner-column">
-              <div class="product-list">
-                <div id="oneliner">
-                  <div class="list-name">Oneliner:</div>
-                  <div class="description"><%= @product.oneliner %></div>
-                  <a class="twitter-share" data-behavior="twitter-share" data-twittertext="<%= twitter_product_share_text(@product) %>" data-twitterurl="<%= product_url(@product) %>" data-twitteranchor>
-                    <i class="fa fa-lg fa-twitter"></i><span class="twitter-share-text">TWEET</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class = "row">
-            <div class="col-md-12 description-column">
-              <div class = "product-list">
-                  <div class = "list-name">Description:</div>
-                  <div class = "description"><%= @product.description %></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <% if @product_customers.any? %>
-          <h4>Customers</h4>
-          <div class="well product-well">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="product-list">
-                  <% @product_customers.each do |product_customer| %>
-
-                    <% cache ['product-customer-index-single', product_customer, product_customer.users.map(&:id)] do %>
-                    
-                      <div class="row product-customer-row">
-                        <%= link_to product_product_customer_path(@product, product_customer) do %>
-                          <div class="col-md-12">
-                            <div class="product-customer-customer">
-                              <%= product_customer.customer %>
-                              <% if product_customer.users.any? %>
-                                <span class="product-customer-verification">Verified</span>
-                              <% end %> 
-                            </div>
-                            <div class="product-customer-usage">
-                              <%= product_customer.usage %>
-                            </div>
-                          </div>
-                        <% end %>
-                      </div>
-
-                    <% end %>
-
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% end %>
-
-        <% if @product_leads.any? %>
-          <h4>Target Customers</h4>
-          <div class="well product-well">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="product-list">
-
-                  <% @product_leads.each do |product_lead| %>
-
-                    <% cache ['product-lead-index-single', product_lead ] do %>
-
-                      <div class="row product-customer-row">
-                        <%= link_to product_product_lead_path(@product, product_lead) do %>
-                          <div class="col-md-12">
-                            <div class="product-lead-lead">
-                              <%= product_lead.lead %>
-                            </div>
-                            <div class="product-lead-pitch">
-                              <%= product_lead.pitch %>
-                            </div>
-                          </div>
-                        <% end %>
-                      </div>
-
-                    <% end %>
-
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% end %>
-
-      <% end %>
-
-      <h4>Creators</h4>
       <div class="well product-well">
+        <div class = "row">
+          <div class="col-md-4">
+            <div class="product-list">
+              <div class="list-name">Website:</div>
+              <div class="description"><%= link_to @product.website, target: "_blank" do %>
+                 <%= truncate(@product.website, length: 23) %>
+              <% end %></div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="product-list">
+              <div class="list-name">Verticals:</div>
+              <div class="description"><%= @product.industries_all %></div>
+            </div>
+          </div>
+        </div>
+
+        <div class = "row">
+          <div class="col-md-4">
+            <div class="product-list">
+              <div class="list-name">Posted by:</div>
+                <div class="description">
+                  <%= link_to user_profile_path(@product.owner) do %>
+                    <%= @product.owner.full_name %>
+                  <% end %>
+                </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="product-list">
+              <div class="list-name">Company:</div>
+              <div class="description">
+                <%= link_to product_company_path(@product) do %>
+                  <%= @product.company_name %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="row">
           <div class="col-md-12">
             <div class="product-list">
-              <ul>
-
-                <% @users.each_slice(2) do |user_row| %>
-                  <div class="row product-user-row">
-                    <% user_row.each do |user| %>
-                      <%= link_to user_profile_path(user) do %>
-                        <div class="col-md-6">
-                          <%= image_tag user.avatar_url(:small_thumb), class: "product-user-avatar" %>
-                          <%= user.full_name %>
-                        </div>
-                      <% end %>
-                    <% end %>
-                  </div>
-                <% end %>
-                
-              </ul>
+              <div id="oneliner">
+                <div class="list-name">Oneliner:</div>
+                <div class="description"><%= @product.oneliner %></div>
+                <a class="twitter-share" data-behavior="twitter-share" data-twittertext="<%= twitter_product_share_text(@product) %>" data-twitterurl="<%= product_url(@product) %>" data-twitteranchor>
+                  <i class="fa fa-lg fa-twitter"></i><span class="twitter-share-text"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="padding-top:15px;">
+          <div class="col-md-12">
+            <div class = "product-list">
+                <div class = "list-name">Description:</div>
+                <div class = "description"><%= @product.description %></div>
             </div>
           </div>
         </div>
       </div>
 
-      <%= render partial: "comments/comment_panel", locals: { comments: @comments, commentable: @product } %>
+      <% if @product_customers.any? %>
+        <h4>Customers</h4>
+        <div class="well product-well">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="product-list">
+                <% @product_customers.each do |product_customer| %>
 
-    </div> 
+                  <% cache ['product-customer-index-single', product_customer, product_customer.users.map(&:id)] do %>
+                  
+                    <div class="row product-customer-row">
+                      <%= link_to product_product_customer_path(@product, product_customer) do %>
+                        <div class="col-md-12">
+                          <div class="product-customer-customer">
+                            <%= product_customer.customer %>
+                            <% if product_customer.users.any? %>
+                              <span class="product-customer-verification">Verified</span>
+                            <% end %> 
+                          </div>
+                          <div class="product-customer-usage">
+                            <%= product_customer.usage %>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+
+                  <% end %>
+
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <% if @product_leads.any? %>
+        <h4>Target Customers</h4>
+        <div class="well product-well">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="product-list">
+
+                <% @product_leads.each do |product_lead| %>
+
+                  <% cache ['product-lead-index-single', product_lead ] do %>
+
+                    <div class="row product-customer-row">
+                      <%= link_to product_product_lead_path(@product, product_lead) do %>
+                        <div class="col-md-12">
+                          <div class="product-lead-lead">
+                            <%= product_lead.lead %>
+                          </div>
+                          <div class="product-lead-pitch">
+                            <%= product_lead.pitch %>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+
+                  <% end %>
+
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+    <% end %>
+
+    <h4>Creators</h4>
+    <div class="well product-well">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="product-list">
+            <ul>
+
+              <% @users.each_slice(2) do |user_row| %>
+                <div class="row product-user-row">
+                  <% user_row.each do |user| %>
+                    <%= link_to user_profile_path(user) do %>
+                      <div class="col-md-6">
+                        <%= image_tag user.avatar_url(:small_thumb), class: "product-user-avatar" %>
+                        <%= user.full_name %>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              <% end %>
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render partial: "comments/comment_panel", locals: { comments: @comments, commentable: @product } %>
+
+  </div> 
 </div>
 

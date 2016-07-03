@@ -55,6 +55,22 @@ describe ProductPolicy do
     end
   end
 
+  describe "policies belongs to company" do
+    let(:owner) { build_stubbed(:user) }
+    let(:other_user) { build_stubbed(:user) }
+    let!(:profile) { build_stubbed(:profile, user: owner) }
+    let!(:other_profile) { build_stubbed(:profile, user: other_user) }
+    let(:product) { build_stubbed(:product, :product_with_nested_attrs, owner: owner) }
+    let(:user_without_profile) { build_stubbed(:user) }
+
+    permissions :new_company?, :create_company?, :destroy_company? do
+      it "allows only for product owner" do
+        expect(subject).to permit(owner, product)
+        expect(subject).to_not permit(other_user, product)
+      end
+    end
+  end
+
   describe "policies belongs to product owner" do
     let(:owner) { create(:user) }
     let(:member) { build_stubbed(:user) }

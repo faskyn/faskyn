@@ -63,6 +63,7 @@ RSpec.describe Product, type: :model do
     end
 
     it { is_expected.to belong_to(:owner) }
+    it { is_expected.to have_one(:company).dependent(:destroy) }
     it { is_expected.to have_many(:product_customers).dependent(:destroy) }
     it { is_expected.to have_many(:product_customer_users).through(:product_customers) }
     it { is_expected.to have_many(:product_leads).dependent(:destroy) }

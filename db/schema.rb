@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160621122534) do
+ActiveRecord::Schema.define(version: 20160630221130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,27 @@ ActiveRecord::Schema.define(version: 20160621122534) do
 
   add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "companies", force: :cascade do |t|
+    t.integer  "product_id",                        null: false
+    t.string   "name",                              null: false
+    t.string   "location",                          null: false
+    t.date     "founded",                           null: false
+    t.integer  "team_size",                         null: false
+    t.integer  "engineer_number",                   null: false
+    t.integer  "investment",                        null: false
+    t.string   "investor",                          null: false
+    t.string   "revenue_type",                      null: false
+    t.string   "revenue",                           null: false
+    t.string   "company_pitch_attachment"
+    t.string   "company_pitch_attachment_id"
+    t.string   "company_pitch_attachment_filename"
+    t.integer  "company_pitch_attachment_size"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+  end
+
+  add_index "companies", ["product_id"], name: "index_companies_on_product_id", using: :btree
 
   create_table "contacts", force: :cascade do |t|
     t.string   "name",       null: false
@@ -294,6 +315,7 @@ ActiveRecord::Schema.define(version: 20160621122534) do
   add_foreign_key "comment_replies", "comments"
   add_foreign_key "comment_replies", "users"
   add_foreign_key "comments", "users"
+  add_foreign_key "companies", "products"
   add_foreign_key "conversations", "users", column: "recipient_id"
   add_foreign_key "conversations", "users", column: "sender_id"
   add_foreign_key "industry_products", "industries"

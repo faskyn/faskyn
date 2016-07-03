@@ -139,8 +139,6 @@ describe ProfilesController do
         end
 
         it "renders the edit template" do
-          #patch :update, user_id: @user.id, id: profile.id, profile: attributes_for(:profile, first_name: nil, last_name: "Hun")
-          #expect(response).to render_template :edit
           expect(invalid_update_action).to render_template :edit
         end
       end

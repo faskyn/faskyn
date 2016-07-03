@@ -1,7 +1,7 @@
 class ProfilePolicy < ApplicationPolicy
 
   def show?
-    user.present?
+    user.present? && user.profile.present?
   end
 
   def new?

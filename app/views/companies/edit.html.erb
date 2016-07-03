@@ -1,0 +1,35 @@
+<% provide(:title, "Edit Company") %>
+<div class = "container-fluid company-new-edit-container">
+  <div class= "col-md-10 col-md-offset-1">
+    <h3>Edit <%= @product.name %>'s Company</h3>
+    <div class="company-form">
+      <%= render "form" %>
+      <button type="button" class="btn btn-danger product-delete-button" data-toggle="modal" data-target="#deletecompany_<%= @company.id %>">Delete Company</button>
+      <%= link_to "Back to Company", product_company_path(@product), class: "btn btn-default back-button" %>
+      </div> <!--THIS DIV COMES FROM FORM -->
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="deletecompany_<%= @company.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <%= form_for @product, url: product_company_path(@product), method: :delete do |f| %>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="text-align:left">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Delete Company</h4>
+      </div>
+      <div class="modal-body">
+        <h4>Are you sure?</h4>
+        <p> </p>  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="deletecompanyclose">Close</button>
+          <%= f.submit "Delete Company", class: 'btn btn-danger' %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

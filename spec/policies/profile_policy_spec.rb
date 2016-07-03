@@ -5,7 +5,7 @@ describe ProfilePolicy do
 
   let(:current_user) { build_stubbed(:user) }
   let(:other_user) { build_stubbed(:user) } 
-  let(:profile) { build_stubbed(:profile, user: current_user) }
+  let!(:profile) { build_stubbed(:profile, user: current_user) }
   let(:other_profile) { build_stubbed(:profile, user: other_user) }
 
   permissions :show? do

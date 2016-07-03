@@ -1,0 +1,72 @@
+$grey-medium-light: #eaeaea;
+$garmin-blue: #007cc3;
+$dark-grey: #5E5E5E; //text color
+$light-grey: #f7f7f7; //super light background color
+$black: #333333;
+
+.company-container {
+  background: $light-grey;
+  padding: 30px 100px 40px 100px;
+}
+
+.product-show-container {
+  padding: 0px 50px 0px 50px;
+  .product-name-owner-panel {
+    margin-bottom: 15px;
+    h3 {
+      display: inline;
+      vertical-align: middle;
+      padding-left:5px;
+    }
+    a {
+      color: $black;
+      text-decoration: none;
+    }
+  }
+}
+
+.company-well {
+  background-color: white;//$light-grey;
+  .company-list {
+    .description {
+      padding-top:5px;
+      padding-bottom: 15px;
+    }
+    .list-name {
+      font-weight: bold;
+      padding-top: 10px;
+      &:first-child {
+        padding-top: 0px;
+      }
+    }
+  }
+}
+
+.company-new-edit-container {
+  background: $light-grey;
+  padding: 30px 50px 40px 50px;
+  .company-form {
+    .website-company-row {
+      margin-top:15px;
+    }
+    .back-button {
+      margin-left:10px;
+    }
+    .explanation {
+      font-size: 12px;
+      color: $dark-grey;
+    }
+    .oneliner-description-counter {
+      float:right;
+    }
+    .oneliner-description-count-warning {
+      color: red;
+      font-weight: bold;
+    }
+  }
+}
+
+.company-date-select {
+  width: 100px;
+  display: inline-block;
+}

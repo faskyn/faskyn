@@ -156,6 +156,18 @@ FactoryGirl.define do
     end
   end
 
+  factory :company, class: Company do
+    name { Faker::Company.name }
+    location { Faker::Address.city }
+    founded { Faker::Time.between(Date.today - 2, Date.today - 5)  }
+    team_size { Faker::Number.between(10, 20) }
+    engineer_number { Faker::Number.between(1, 10) }
+    revenue_type { ["no revenue", "recurring", "non-recurring"].sample }
+    revenue { ["< 100k", "100k - 1M", "> 1M"] }
+    investment { Faker::Number.between(50000, 500000) }
+    investor { Faker::Company.name }
+  end
+
   factory :contact, class: Contact do
     name { "John Doe" }
     email { Faker::Internet.email }

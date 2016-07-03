@@ -74,6 +74,7 @@ $(document).on('change', '#product-customer-collection-select', function () {
   $(this).closest("form").attr("action", newActionURL);
 });
 
+//character counter for product oneliner
 $(document).on('keyup', '[data-behavior="oneliner-text-area"]', function (event) {
   var textLength = $(this).val().length;
   var textLengthLimit = 140;
@@ -93,6 +94,7 @@ $(document).on('focusout', '[data-behavior="oneliner-text-area"]', function (eve
   };
 });
 
+//character counter for product description
 $(document).on('keyup', '[data-behavior="description-text-area"]', function (event) {
   var textLength = $(this).val().length;
   var textLengthLimit = 500;
@@ -111,3 +113,18 @@ $(document).on('focusout', '[data-behavior="description-text-area"]', function (
     $('[data-behavior="description-counter"]').html("");
   };
 });
+
+//showing explanation when field is active
+// $(document).on('focus', '.form-group', function (event) {
+//   if ($('.product-form').length > 0) {
+//     $(this).find('.explanation').show();
+//   };
+// });
+
+// $(document).on('focusout', '.form-group', function (event) {
+//   if ($('.product-form').length > 0) {
+//     $(this).find('.explanation').hide();
+//   };
+// });
+
+

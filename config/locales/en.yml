@@ -38,10 +38,12 @@ en:
       edit?: "You can't edit this product!"
       update?: "You can't update this product!"
       destroy?: "You can't delete this product!"
-      index_product_users?: "You can't view this product user page."
-      destroy_product_users?: "You can't delete this product member."
-      new_group_invitations?: "Only the owner can invite new product members."
-      create_group_invitations?: "Only the owner can invite new product members."
+      index_product_users?: "You can't view this product user page!"
+      destroy_product_users?: "You can't delete this product member!"
+      new_group_invitations?: "Only the owner can invite new product members!"
+      create_group_invitations?: "Only the owner can invite new product members!"
+      new_company?: "You either not the product owner or it already has a company!"
+      create_company?: "You either not the product owner or it already has a company!"
     profile_policy:
       show?: "You have to be logged in to view this profile!"
       edit?: "You can't edit this profile!"
@@ -63,5 +65,10 @@ en:
       show?: "You have to create a profile first!"
       create_reviews?: "Only customers can create reviews!"
       destroy_review?: "Only the owner can delete reviews!"
+    company_policy:
+      show?: "You have to create a profile first!"
+      edit?: "Only the product owner can edit the company!"
+      update?: "Only the product owner can update the company!"
+      destroy?: "Only the product owner can delete the company!"
 
 
