@@ -162,7 +162,7 @@ FactoryGirl.define do
     founded { Faker::Time.between(Date.today - 2, Date.today - 5)  }
     team_size { Faker::Number.between(10, 20) }
     engineer_number { Faker::Number.between(1, 10) }
-    revenue_type { ["no revenue", "recurring", "non-recurring"].sample }
+    revenue_type { ["recurring", "non-recurring"].sample }
     revenue { ["< 100k", "100k - 1M", "> 1M"] }
     investment { Faker::Number.between(50000, 500000) }
     investor { Faker::Company.name }

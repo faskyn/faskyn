@@ -30,6 +30,7 @@ $(document).on("page:change", function() {
   //showing edit/delete button to owner
   if ($('.product-show-container').length > 0) {
     showProductEditDeleteButtons();
+    showAddCompanyButton();
   };
 
   //cocoon gem inserting behavior
@@ -41,6 +42,13 @@ $(document).on("page:change", function() {
 function showProductEditDeleteButtons() {
   if ($('.product-show-container').find('[data-behavior="edit-delete-product-buttons"]').data("product-owner-id") == $('#body-current-user').data('currentuserid')) {
     $('.product-show-container').find('[data-behavior="edit-delete-product-buttons"]').removeClass('hidden');
+  };
+};
+
+function showAddCompanyButton() {
+  if (($('[data-behavior="company-new-button"]').is(':empty')) && ($('.product-show-container').find('[data-behavior="company-new-button"]').data("product-owner-id") == $('#body-current-user').data('currentuserid'))) {
+    var product_id = $('[data-behavior="company-new-button"]').data("product-id");
+    $('[data-behavior="company-new-button"]').html('<a href="' + product_id + '/company/new">Add new company for better discovery</a>');
   };
 };
 
@@ -126,5 +134,4 @@ $(document).on('focusout', '[data-behavior="description-text-area"]', function (
 //     $(this).find('.explanation').hide();
 //   };
 // });
-
 

@@ -42,11 +42,15 @@
           <div class="col-md-8">
             <div class="product-list">
               <div class="list-name">Company:</div>
-              <div class="description">
-                <%= link_to product_company_path(@product) do %>
-                  <%= @product.company_name %>
-                <% end %>
-              </div>
+              <% if @product.company.present? %>
+                <div class="description" id="company-description" data-behavior="company-new-button" data-product-id="<%= @product.id%>" data-product-owner-id="<%= @product.owner.id %>">
+                    <%= link_to product_company_path(@product) do %>
+                      <%= @product.company_name %>
+                    <% end %>
+                </div>
+              <% else %>
+                <div class="description" id="company-description" data-behavior="company-new-button" data-product-id="<%= @product.id%>" data-product-owner-id="<%= @product.owner.id %>"></div>
+              <% end %>
             </div>
           </div>
         </div>

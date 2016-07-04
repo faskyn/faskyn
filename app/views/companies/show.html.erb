@@ -113,20 +113,6 @@
           </div>
         </div>
       </div>
-      <div class = "row">
-        <div class="col-md-6">
-          <div class = "company-list">
-            <div class = "list-name">Revenue type:</div>
-            <div class = "description"><%= @company.revenue_type %></div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="company-list">
-            <div class="list-name">Revenue:</div>
-            <div class="description"><%= @company.revenue %> MRR</div>
-          </div>
-        </div>
-      </div>
       <div class="row">
         <div class="col-md-6">
           <div class="company-list">
@@ -141,7 +127,13 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class = "row">
+        <div class="col-md-6">
+          <div class = "company-list">
+            <div class = "list-name">Revenue:</div>
+            <div class = "description"><%= revenue_text(@company.revenue_type, @company.revenue) %></div>
+          </div>
+        </div>
         <div class="col-md-6">
           <div class="company-list">
             <div class="list-name">Updated at:</div>

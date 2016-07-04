@@ -13,12 +13,19 @@ class Company < ActiveRecord::Base
   validate :team_size_greater_than_engineer_number
   validate :founded_in_the_past
   validate :investor_investment_relation
+  validate :revenue_type_revenue_relation
 
   before_validation :format_investment
 
   def format_investment
     if investment.blank? || investment < 0
       self.investment = 0
+    end
+  end
+
+  def revenue_type_revenue_relation
+    if revenue_type == "no revenue" && revenue != "$0"
+      errors.add :base, 'If you choose no revenue as revenue type then revenue must be $0'
     end
   end
 

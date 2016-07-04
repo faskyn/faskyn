@@ -1,4 +1,4 @@
-<%= form_for @company, url: product_company_path(@product) do |f| %>
+<%= form_for @company, url: product_company_path(@product), data: { behavior: "company-form" } do |f| %>
 
   <div class="well company-well">
     <div class= "row">
@@ -58,21 +58,22 @@
     </div>
 
     <div class = "row">
-      <div class="col-md-4">
+      <div class="col-md-5">
         <div class="form-group">
           <div><%= f.label :revenue_type, "Revenue Type" %></div>
-          <%= f.select :revenue_type, ["recurring revenue", "non-recurring revenue", "no revenue"], { :selected => "recurring revenue" }, { "data-behavior" => "revenue-type-select", class: "form-control" } %>
+          <%= f.select :revenue_type, ["recurring revenue", "non-recurring revenue", "no revenue"], {}, { "data-behavior" => "revenue-type-select", class: "form-control" } %>
           <!-- <div class="explanation revenue-type-explanation">What kind of revenue do you have?</div> -->
         </div>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-5">
         <div class="form-group">
           <div><%= f.label :revenue %></div>
-          <%= f.select :revenue, ["< $100k", "$100k < $1M", "> $1M"], {}, { "data-behavior" => "revenue-number-select", class: "form-control" } %>
-          <div class="explanation revenue-explanation">What is the company's MRR?</div>
+          <!-- if numbers change here they must be also changed in companies.js -->
+          <%= f.select :revenue, ["< $100k", "$100k < $1M", "> $1M", "$0"], {}, { "data-behavior" => "revenue-number-select", class: "form-control" } %>
+          <div class="explanation revenue-explanation" data-behavior="revenue-explanation">ARR (annual recurring revenue)</div>
         </div>
       </div>
     </div>
