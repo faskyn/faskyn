@@ -10,9 +10,8 @@
     <div class = "row">
       <div class="col-md-12">
         <div class="form-group">
-          <%= f.label :name, "Company Name" %>
+          <%= f.label :name, "Company Name *" %>
           <%= f.text_field :name, placeholder: "e.g. Google Inc.", class: "form-control" %>
-          <!-- <div class="explanation name-explanation">Add company name e.g. "Google Inc."</div> -->
         </div>
       </div>
     </div>
@@ -20,9 +19,8 @@
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
-          <%= f.label :location %>
+          <%= f.label :location, "Location *" %>
           <%= f.text_field :location, placeholder: "Main location of the company e.g. San Francisco, CA", class: "form-control" %>
-          <!-- <div class="explanation location-explanation">What is the main location of the company? e.g. San Francisco, CA or London, UK</div> -->
         </div>
       </div>
     </div>
@@ -30,7 +28,16 @@
     <div class = "row">
       <div class="col-md-12">
         <div class="form-group">
-          <div><%= f.label :founded, "Founding Date" %></div>
+          <%= f.label :website, "Website *" %>
+          <%= f.text_field :website, placeholder: "e.g. http://faskyn.com", autocomplete: "off", class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div class = "row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <div><%= f.label :founded, "Founding Date *" %></div>
           <%= f.date_select :founded, { order: [:month, :year], start_year: 15.years.ago.year, end_year: Date.current.year }, { class: "form-control company-date-select" } %>
           <div class="explanation founded-explanation">When did the company get founded?</div>
         </div>
@@ -40,9 +47,8 @@
     <div class = "row">
       <div class="col-md-12">
         <div class="form-group">
-          <%= f.label :team_size %>
+          <%= f.label :team_size, "Team Size *" %>
           <%= f.text_field :team_size, placeholder: "Rough estimation of the number of people working at the company", autocomplete: "off", class: "form-control" %>
-          <!-- <div class="explanation team-size-explanation">A rough estimation of the number of people working at the company.</div> -->
         </div>
       </div>
     </div>
@@ -50,9 +56,8 @@
     <div class = "row">
       <div class="col-md-12">
         <div class="form-group">
-          <%= f.label :engineer_number, "Number of Engingeers" %>
+          <%= f.label :engineer_number, "Number of Engineers *" %>
           <%= f.text_field :engineer_number, placeholder: "number of engineers", autocomplete: "off", class: "form-control" %>
-          <!-- <div class="explanation engineer-number-explanation">How many of them are engineers?</div> -->
         </div>
       </div>
     </div>
@@ -60,9 +65,8 @@
     <div class = "row">
       <div class="col-md-5">
         <div class="form-group">
-          <div><%= f.label :revenue_type, "Revenue Type" %></div>
+          <div><%= f.label :revenue_type, "Revenue Type *" %></div>
           <%= f.select :revenue_type, ["recurring revenue", "non-recurring revenue", "no revenue"], {}, { "data-behavior" => "revenue-type-select", class: "form-control" } %>
-          <!-- <div class="explanation revenue-type-explanation">What kind of revenue do you have?</div> -->
         </div>
       </div>
     </div>
@@ -70,7 +74,7 @@
     <div class="row">
       <div class="col-md-5">
         <div class="form-group">
-          <div><%= f.label :revenue %></div>
+          <div><%= f.label :revenue, "Revenue *" %></div>
           <!-- if numbers change here they must be also changed in companies.js -->
           <%= f.select :revenue, ["< $100k", "$100k < $1M", "> $1M", "$0"], {}, { "data-behavior" => "revenue-number-select", class: "form-control" } %>
           <div class="explanation revenue-explanation" data-behavior="revenue-explanation">ARR (annual recurring revenue)</div>
@@ -83,7 +87,6 @@
         <div class="form-group">
           <%= f.label :investment, "Investment" %>
           <%= f.text_field :investment, placeholder: "All the investment raised to date in USD", class: "form-control" %>
-          <!-- <div class="explanation investment-explanation">Investment raised to date in USD</div> -->
         </div>
       </div>
     </div>
@@ -93,13 +96,22 @@
         <div class="form-group">
           <%= f.label :investor, "Investors" %>
           <%= f.text_field :investor, placeholder: "List of investors who have invested", class: "form-control" %>
-          <!-- <div class="explanation investor-explanation">List of investors who invested in the company</div> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= f.label :company_pitch_attachment, "Pitch (10MB max in PDF format)" %>
+          <%= f.attachment_field :company_pitch_attachment, presigned: true, direct: true, data: { behavior: "new-company-file" } %>
+          <span data-behavior="company-file-upload-progress"></span>
         </div>
       </div>
     </div>
   </div>
 
   <div class="form-group">
-    <%= f.button "Save Company", class: "btn btn-primary", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..." } %>
+    <%= f.button "Save Company", class: "btn btn-primary", data: { behavior: "company-submit-button", disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..." } %>
 
 <% end %>

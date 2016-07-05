@@ -10,4 +10,5 @@ describe ProductsController do
   it { is_expected.to route(:delete, '/products/1').to(action: :destroy, id: 1) }
 
   it { is_expected.to route(:get, 'users/1/products').to(action: :own_products, user_id: 1) }
+  it { is_expected.to route(:get, '/products/1/add_company').to(action: :add_company, id:1) }
 end

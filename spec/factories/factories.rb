@@ -166,6 +166,7 @@ FactoryGirl.define do
     revenue { ["< 100k", "100k - 1M", "> 1M"] }
     investment { Faker::Number.between(50000, 500000) }
     investor { Faker::Company.name }
+    website { 'https://examplecompany.com' }
   end
 
   factory :contact, class: Contact do

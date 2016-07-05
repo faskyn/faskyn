@@ -1,5 +1,4 @@
 module CompaniesHelper
-
   def revenue_text( revenue_type, revenue)
     if revenue_type == "no revenue"
       "No revenue yet"

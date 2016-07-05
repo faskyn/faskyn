@@ -38,7 +38,7 @@ describe ProductPolicy do
       end
     end
 
-    permissions :edit?, :update?, :destroy? do
+    permissions :edit?, :update?, :destroy?, :add_company? do
 
       it "only allows access for product user" do
         expect(subject).to permit(user, product)

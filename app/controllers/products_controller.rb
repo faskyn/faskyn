@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_and_authorize_product, only: [:show, :edit, :update, :destroy, :product_members]
+  before_action :set_and_authorize_product, only: [:show, :edit, :update, :destroy, :product_members, :add_company]
 
   def index
     @products = Product.order(created_at: :desc).paginate(page: params[:page], per_page: Product.pagination_per_page)
@@ -77,6 +77,9 @@ class ProductsController < ApplicationController
     else
       redirect_to products_path, notice: "Product couldn't be deleted!"
     end
+  end
+
+  def add_company
   end
 
   private

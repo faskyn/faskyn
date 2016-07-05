@@ -66,13 +66,28 @@ describe ProductsController do
         get :show, id: product.id
       end
       
-      it "assigns products" do
+      it "assigns product" do
         expect(assigns(:product)).to eq(product)
         expect(assigns(:product).industry_products.size).to eq(1)
       end
 
       it { is_expected.to respond_with 200 }
       it { is_expected.to render_template :show }
+    end
+
+    describe "GET add company" do
+      let!(:profile) { create(:profile, user: @user) }
+      let!(:product) { create(:product, :product_with_nested_attrs, owner: @user) }
+      before(:each) do
+        get :add_company, id: product.id
+      end
+
+      it "assigns product" do
+        expect(assigns(:product)).to eq(product)
+      end
+
+      it { is_expected.to respond_with 200 }
+      it { is_expected.to render_template :add_company }
     end
 
     describe "GET new" do

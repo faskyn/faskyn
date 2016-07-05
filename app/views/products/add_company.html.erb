@@ -1,0 +1,16 @@
+<% provide(:title, 'Add company') %>
+<div class="container-fluid product-container">
+  <div class="add-company-container">
+    <div class="well product-well">
+      <div class="row">
+        <div class="col-md-12">
+          <h3><strong>Add company details to your product</strong></h3>
+          <p>By adding company details people will have a better understanding how your product is doing.</p>
+          <%= link_to "Add Company to Product", new_product_company_path(@product), class: "btn btn-primary btn-block" %>
+        </div>
+      </div>
+    </div>
+    <%= link_to "Skip and go to product page", product_path(@product) %>
+  </div>
+</div>
+

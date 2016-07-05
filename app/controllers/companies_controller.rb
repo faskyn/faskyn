@@ -45,7 +45,7 @@ class CompaniesController < ApplicationController
   private
 
     def company_params
-      params.require(:company).permit(:name, :location, :founded, :team_size, :revenue_type, :revenue, :engineer_number, :investment, :investor, :company_pitch_attachment, :company_pitch_attachment_id, :company_pitch_attachment_cache_id, :remove_company_pitch_attachment)
+      params.require(:company).permit(:name, :location, :website, :founded, :team_size, :revenue_type, :revenue, :engineer_number, :investment, :investor, :company_pitch_attachment, :company_pitch_attachment_id, :company_pitch_attachment_cache_id, :remove_company_pitch_attachment)
     end
 
     def set_product

@@ -46,6 +46,7 @@ RSpec.describe Company, type: :model do
     it { is_expected.to validate_presence_of(:engineer_number).with_message(/can't be blank/) }
     it { is_expected.to validate_presence_of(:revenue_type).with_message(/can't be blank/) }
     it { is_expected.to validate_presence_of(:revenue).with_message(/can't be blank/) }
+    it { is_expected.to validate_presence_of(:website).with_message(/can't be blank/) }
 
     it { is_expected.to validate_numericality_of(:team_size).with_message(/must be an integer/) }
     it { is_expected.to validate_numericality_of(:engineer_number).with_message(/must be an integer/) }

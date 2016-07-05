@@ -42,6 +42,7 @@ en:
       destroy_product_users?: "You can't delete this product member!"
       new_group_invitations?: "Only the owner can invite new product members!"
       create_group_invitations?: "Only the owner can invite new product members!"
+      add_company?: "You either not the product owner or it already has a company!"
       new_company?: "You either not the product owner or it already has a company!"
       create_company?: "You either not the product owner or it already has a company!"
     profile_policy:

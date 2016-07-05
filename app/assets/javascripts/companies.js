@@ -29,3 +29,33 @@ $(document).on('change', '[data-behavior="revenue-number-select"]', function (ev
     $('[data-behavior="revenue-explanation"]').html("ARR (annual recurring revenue)");
   };
 });
+
+//on choosing file progress bar shows up and submit button gets disabled
+$(document).on("upload:start", '[data-behavior="company-form"]', function(e) {
+  //$(this).find("input[type=submit]").show();
+  $(this).find('[data-behavior="company-submit-button"]').attr("disabled", true);
+  $('[data-behavior="company-file-upload-progress"]').show();
+  $('[data-behavior="company-file-upload-progress"]').text("Uploading...");
+});
+
+//showing progress to users
+$(document).on("upload:progress", '[data-behavior="company-form"]', function(e) {
+    var filename = $('[data-behavior="new-company-file"]').val();
+    var detail = e.originalEvent.detail;
+    var percentComplete = Math.round(detail.progress.loaded / detail.progress.total * 100);
+    $('[data-behavior="company-file-upload-progress"]').text(percentComplete + "% uploaded ");
+});
+
+//when upload is ready user gets allowed to submit the message
+$(document).on("upload:success", '[data-behavior="company-form"]', function(e) {
+  if (!$(this).find("input.uploading").length) {
+    $(this).find('[data-behavior="company-submit-button"]').attr("disabled", false);
+  };
+});
+
+// //when file upload submitted file form is set back to its default form
+// $(document).on('click', '[data-behavior="message-upload-submit"]', function() {
+//   $('[data-behavior="message-upload-form"]').find("input[type=submit]").hide();
+//   $('[data-behavior="new-message-file"]').val("");
+//   $('[data-behavior="message-upload-progress"]').hide();
+// });

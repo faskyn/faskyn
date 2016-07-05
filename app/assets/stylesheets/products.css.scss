@@ -7,6 +7,14 @@ $black: #333333;
 .product-container {
   background: $light-grey;
   padding: 30px 100px 40px 100px;
+  .add-company-container {
+    padding-left: 150px;
+    padding-right: 150px;
+    text-align: center;
+    h3, p {
+      padding-bottom: 15px;
+    }
+  }
 }
 
 .product-index-container {

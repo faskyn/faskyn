@@ -49,6 +49,9 @@ Rails.application.routes.draw do
   end
 
   resources :products do
+    member do
+      get :add_company
+    end
     resource :company
     resources :product_owner_panels, only: :index, module: :products
     resources :group_invitations, only: [:new, :create], module: :products #polymorphic

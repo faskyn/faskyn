@@ -16,8 +16,17 @@ aws = {
 
 Refile.backends["message_files_backend"] = Refile::S3.new(prefix: "store/message_files", **aws)
 Refile.backends["product_files_backend"] = Refile::S3.new(prefix: "store/product_files", **aws)
-Refile.cache = Refile::S3.new(max_size: 5.megabytes, prefix: "cache", **aws)
+Refile.backends["company_files_backend"] = Refile::S3.new(prefix: "store/company_files", **aws)
+Refile.cache = Refile::S3.new(max_size: 10.megabytes, prefix: "cache", **aws)
 Refile.cdn_host = ENV['CLOUDFRONT_URL']
+
+# Refile.backends["message_files_backend"] = Refile::S3.new(prefix: "store/message_files", **aws)
+# Refile.backends["product_files_backend"] = Refile::S3.new(prefix: "store/product_files", **aws)
+# Refile.backends["company_files_backend"] = Refile::S3.new(prefix: "store/company_files", **aws)
+# Refile.backends["message_files_cache"] = Refile::S3.new(max_size: 5.megabytes, prefix: "cache/message_files", **aws)
+# Refile.backends["product_files_cache"] = Refile::S3.new(max_size: 5.megabytes, prefix: "cache/product_files", **aws)
+# Refile.backends["company_files_cache"] = Refile::S3.new(max_size: 20.megabytes, prefix: "cache/company_files", **aws)
+# Refile.cdn_host = ENV['CLOUDFRONT_URL']
 
 
 

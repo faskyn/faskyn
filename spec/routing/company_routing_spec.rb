@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe CompaniesController do
   it { is_expected.to_not route(:get, 'products/1/companies').to(action: :index, product_id: 1) }
+  #it { is_expected.to route(:get, 'products/1/company/add_company').to(action: :add_company, product_id: 1) }
   it { is_expected.to route(:get, 'products/1/company/new').to(action: :new, product_id: 1) }
   it { is_expected.to route(:post, 'products/1/company').to(action: :create, product_id: 1) }
   it { is_expected.to route(:get, 'products/1/company').to(action: :show, product_id: 1) }

@@ -21,6 +21,8 @@ feature "creating product" do
     click_on "Save Product"
     expect(page).to have_css(".flash-alert", text: "Product got created!")
     expect(page).to have_content("Invite a New Member")
+    click_on "Skip and go to next page"
+    expect(page).to have_content("Add Company to Product")
     click_on "Skip and go to product page"
     expect(page).to have_content("AI, Education")
     expect(page).to have_content("B2B distribution for their flagship product")

@@ -2,146 +2,173 @@
 <div class= "container-fluid company-container">
   <div class="product-show-container">
 
-    <div class="row product-show-name">
-      <div class="col-md-10">
-        <%= link_to product_path(@product) do %>
-          <%= image_tag @product.product_image_url(:base_thumb), class: "product-image" %>
-          <h3><%= @product.name %>'s<% end %> company details</h3>
-      </div>
-      <div class="col-md-2" style="text-align:right">
-        <li class="dropdown hidden" data-product-owner-id ="<%= @product.owner.id %>" data-behavior="edit-delete-product-buttons">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <button class="btn btn-default"><i class="fa fa-lg fa-angle-down"></i></button>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-right">
-            <li>
-              <%= link_to "Edit Product", edit_product_path(@product) %>
-            </li> 
-            <li>
-              <%= link_to "Manage Product Access", product_product_owner_panels_path(@product) %>
-            </li>
-            <li>
-              <%= @product.company.present? ? (link_to "Edit Company", edit_product_company_path(@product)) : (link_to "Add Company To Product", new_product_company_path(@product)) %>
-            </li>
-          </ul>
-        </li>
-      </div>
-    </div>
+    <% cache ["product-company-show", @product, @product.owner.profile] do %>
 
-    <h4>Product</h4>
-    <div class="well product-well">
-      <div class = "row">
-        <div class="col-md-4">
-          <div class="product-list">
-            <div class="list-name">Website:</div>
-            <div class="description"><%= link_to @product.website, target: "_blank" do %>
-               <%= truncate(@product.website, length: 23) %>
-            <% end %></div>
-          </div>
+      <div class="row product-show-name">
+        <div class="col-md-10">
+          <%= link_to product_path(@product) do %>
+            <%= image_tag @product.product_image_url(:base_thumb), class: "product-image" %>
+            <h3><%= @product.name %>'s<% end %> company details</h3>
         </div>
-        <div class="col-md-8">
-          <div class="product-list">
-            <div class="list-name">Verticals:</div>
-            <div class="description"><%= @product.industries_all %></div>
-          </div>
+        <div class="col-md-2" style="text-align:right">
+          <li class="dropdown hidden" data-product-owner-id ="<%= @product.owner.id %>" data-behavior="edit-delete-product-buttons">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <button class="btn btn-default"><i class="fa fa-lg fa-angle-down"></i></button>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li>
+                <%= link_to "Edit Product", edit_product_path(@product) %>
+              </li> 
+              <li>
+                <%= link_to "Manage Product Access", product_product_owner_panels_path(@product) %>
+              </li>
+              <li>
+                <%= @product.company.present? ? (link_to "Edit Company", edit_product_company_path(@product)) : (link_to "Add Company To Product", new_product_company_path(@product)) %>
+              </li>
+            </ul>
+          </li>
         </div>
       </div>
 
-      <div class = "row">
-        <div class="col-md-4">
-          <div class="product-list">
-            <div class="list-name">Posted by:</div>
-              <div class="description">
-                <%= link_to user_profile_path(@product.owner) do %>
-                  <%= @product.owner.full_name %>
-                <% end %>
+      <h4>Product</h4>
+      <div class="well product-well">
+        <div class = "row">
+          <div class="col-md-4">
+            <div class="product-list">
+              <div class="list-name">Website:</div>
+              <div class="description"><%= link_to @product.website, target: "_blank" do %>
+                 <%= truncate(@product.website, length: 23) %>
+              <% end %></div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="product-list">
+              <div class="list-name">Verticals:</div>
+              <div class="description"><%= @product.industries_all %></div>
+            </div>
+          </div>
+        </div>
+
+        <div class = "row">
+          <div class="col-md-4">
+            <div class="product-list">
+              <div class="list-name">Posted by:</div>
+                <div class="description">
+                  <%= link_to user_profile_path(@product.owner) do %>
+                    <%= @product.owner.full_name %>
+                  <% end %>
+                </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="product-list">
+              <div id="oneliner">
+                <div class="list-name">Oneliner:</div>
+                <div class="description"><%= @product.oneliner %></div>
+                <a class="twitter-share" data-behavior="twitter-share" data-twittertext="<%= twitter_product_share_text(@product) %>" data-twitterurl="<%= product_url(@product) %>" data-twitteranchor>
+                  <i class="fa fa-lg fa-twitter"></i><span class="twitter-share-text"></span>
+                </a>
               </div>
+            </div>
           </div>
         </div>
-        <div class="col-md-8">
-          <div class="product-list">
-            <div id="oneliner">
-              <div class="list-name">Oneliner:</div>
-              <div class="description"><%= @product.oneliner %></div>
-              <a class="twitter-share" data-behavior="twitter-share" data-twittertext="<%= twitter_product_share_text(@product) %>" data-twitterurl="<%= product_url(@product) %>" data-twitteranchor>
-                <i class="fa fa-lg fa-twitter"></i><span class="twitter-share-text"></span>
-              </a>
+        <div class = "row">
+          <div class="col-md-12">
+            <div class = "product-list">
+                <div class = "list-name">Description:</div>
+                <div class = "description"><%= @product.description %></div>
             </div>
           </div>
         </div>
       </div>
-      <div class = "row">
-        <div class="col-md-12">
-          <div class = "product-list">
-              <div class = "list-name">Description:</div>
-              <div class = "description"><%= @product.description %></div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <h4>Company</h4>
-    <div class="well company-well">
-      <div class = "row">
-        <div class="col-md-6">
-          <div class="company-list">
-            <div class="list-name">Name:</div>
-            <div class="description">
-               <%= truncate(@company.name, length: 23) %>
+    <% end %>
+
+    <% cache ["company-show", @company] do %>
+
+      <h4>Company</h4>
+      <div class="well company-well">
+        <div class = "row">
+          <div class="col-md-6">
+            <div class="company-list">
+              <div class="list-name">Name:</div>
+              <div class="description">
+                 <%= truncate(@company.name, length: 23) %>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="company-list">
+              <div class="list-name">Location:</div>
+              <div class="description"><%= @company.location %></div>
             </div>
           </div>
         </div>
-        <div class="col-md-6">
-          <div class="company-list">
-            <div class="list-name">Location:</div>
-            <div class="description"><%= @company.location %></div>
+
+        <div class = "row">
+          <div class="col-md-6">
+            <div class="company-list">
+              <div class="list-name">Website:</div>
+              <div class="description"><%= link_to @company.website, target: "_blank" do %>
+                 <%= truncate(@company.website, length: 23) %>
+              <% end %></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="company-list">
+              <div class="list-name">Founded:</div>
+              <div class="description"><%= local_time(@company.founded, "%m/%Y") %></div>
+            </div>
+          </div>
+        </div>
+
+        <div class = "row">
+          <div class="col-md-6">
+            <div class = "company-list">
+              <div class="list-name">Team size:</div>
+              <div class="description"><%= @company.team_size %> (<%= pluralize(@company.engineer_number, 'engineer') %>)</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="company-list">
+              <div class = "list-name">Revenue:</div>
+              <div class="description"><%= revenue_text(@company.revenue_type, @company.revenue) %></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="company-list">
+              <div class="list-name">Investment (raised to date):</div>
+              <div class="description">$<%= number_with_delimiter(@company.investment, delimiter: ".") %></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="company-list">
+              <div class="list-name">Investors:</div>
+              <div class="description"><%= @company.investor %></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="company-list">
+              <div class="list-name">Pitch deck:</div>
+              <div class="description"><%= link_to "#{@company.name}'s pitch", attachment_url(@company, :company_pitch_attachment), target: "_blank" %></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="company-list">
+              <div class="list-name">Updated at:</div>
+              <div class="description"><%= local_time(@company.updated_at, "%m/%d/%Y") %></div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class = "row">
-        <div class="col-md-6">
-          <div class="company-list">
-            <div class="list-name">Founded:</div>
-            <div class="description"><%= local_time(@company.founded, "%m/%Y") %></div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="company-list">
-            <div class="list-name">Team size:</div>
-            <div class="description"><%= @company.team_size %> (<%= pluralize(@company.engineer_number, 'engineer') %>)</div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="company-list">
-            <div class="list-name">Investment (raised to date):</div>
-            <div class="description">$<%= number_with_delimiter(@company.investment, delimiter: ".") %></div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="company-list">
-            <div class="list-name">Investors:</div>
-            <div class="description"><%= @company.investor %></div>
-          </div>
-        </div>
-      </div>
-      <div class = "row">
-        <div class="col-md-6">
-          <div class = "company-list">
-            <div class = "list-name">Revenue:</div>
-            <div class = "description"><%= revenue_text(@company.revenue_type, @company.revenue) %></div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="company-list">
-            <div class="list-name">Updated at:</div>
-            <div class="description"><%= local_time(@company.updated_at, "%m/%d/%Y") %></div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <% end %>
 
   </div>
 </div>

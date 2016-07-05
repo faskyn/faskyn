@@ -27,6 +27,10 @@ class ProductPolicy < ApplicationPolicy
     user.present? && user == product.owner
   end
 
+  def add_company?
+    user.present? && user == product.owner && product.company.blank?
+  end
+
   def index_product_owner_panels?
     user.present? && user == product.owner
   end
