@@ -1,6 +1,6 @@
 <div class="panel panel-default" id="comment-panel">
   <div class="panel-heading">
-    <div class = "row comment-form-row">
+    <div class="row comment-form-row">
       <div class="col-md-12">
         <div class="row">
           <div class="col-md-12">
@@ -30,7 +30,7 @@
       <div class="col-md-12" data-behavior="comment-insert-<%= commentable.id%>">
         <% cache ['comments-index-#{ comment.commentable_type.downcase }', comments.map(&:id), comments.map(&:updated_at).max, comments.map{ |comment| comment.user.profile.updated_at }.max] do %>
 
-          <%= render partial: "comments/comment", collection: comments %>
+          <%= render partial: 'comments/comment', collection: comments %>
 
         <% end %>
       </div>

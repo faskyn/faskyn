@@ -1,5 +1,5 @@
-<% if lookup_context.template_exists?(notification.action, "notifications/actions", true) %>
-  <%= render partial: "notifications/actions/#{notification.action}", locals: { notification: notification } %>
+<% if lookup_context.template_exists?(notification.action, 'notifications/actions', true) %>
+  <%= render partial: 'notifications/actions/#{notification.action}', locals: { notification: notification } %>
 <% end %>
 
 

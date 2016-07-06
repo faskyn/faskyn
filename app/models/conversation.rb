@@ -14,6 +14,14 @@ class Conversation < ActiveRecord::Base
     where("(conversations.sender_id = ? AND conversations.recipient_id = ?) OR (conversations.sender_id = ? AND conversations.recipient_id = ?)", sender_id, recipient_id, recipient_id, sender_id)
   end
 
+  def sender_profile
+    sender.profile
+  end
+
+  def recipient_profile
+    recipient.profile
+  end
+
   def self.create_or_find_conversation(task_assigner_id, task_executor_id)
     Conversation.between(task_assigner_id, task_executor_id).first_or_create do |conversation|
       conversation.sender_id = task_assigner_id

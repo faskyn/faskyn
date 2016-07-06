@@ -5,7 +5,7 @@
       <div class="col-md-10">
         <div class="col-md-2">
           <%= link_to user_path(comment.user) do %>
-            <%= image_tag comment.user.avatar.url(:small_thumb), class: 'comment-avatar' %>
+            <%= image_tag comment.user.avatar.url(:small_thumb), class: "comment-avatar" %>
           <% end %>
         </div>
         <div class="cold-md-10">
@@ -32,11 +32,7 @@
           <a class="open-comment-reply" data-cid="<%= comment.id %>" data-behavior="open-comment-reply">
             <span><i class="fa fa-reply"></i></span>
             <span id="comment-number-<%= comment.id %>">
-              <% if comment.comment_replies.size == 0 %>
-                Reply
-              <% else %>
-                <%= pluralize(comment.comment_replies.size, "Reply") %> 
-              <% end %>
+              <%= comment.comment_replies.any? ? pluralize(comment.comment_replies.size, "Reply") : "Reply" %>
             </span>
           </a>
         </div>
@@ -45,22 +41,22 @@
       </div>
     </div>
     <div class="comment-replies" id="comment-replies-<%= comment.id %>" data-behavior="comment-replies">
-        <div class = "row">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="col-md-10 col-md-offset-2" data-behavior="comment-reply-insert-<%= comment.id %>">
+            <%= render partial: 'comments/comment_replies/comment_reply', collection: comment.comment_replies.ordered.includes(:user, :user_profile), as: :comment_reply, locals: { comment: comment } %>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="row">
           <div class="col-md-12">
-            <div class="col-md-10 col-md-offset-2" data-behavior="comment-reply-insert-<%= comment.id %>">
-              <%= render partial: 'comments/comment_replies/comment_reply', collection: comment.comment_replies.ordered.includes(:user, :user_profile), as: :comment_reply, locals: { comment: comment } %>
+            <div class="col-md-10 col-md-offset-2">
+            <%= render partial: 'comments/comment_replies/comment_reply_form', locals: { comment: comment } %>
             </div>
           </div>
         </div>
-        <div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="col-md-10 col-md-offset-2">
-              <%= render partial: 'comments/comment_replies/comment_reply_form', locals: { comment: comment } %>
-              </div>
-            </div>
-          </div>
-        </div>
+      </div>
     </div>
   </div>
 

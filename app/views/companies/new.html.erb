@@ -1,9 +1,9 @@
 <% provide(:title, "New company") %>
-<div class = "container-fluid company-new-edit-container">
-  <div class= "col-md-10 col-md-offset-1">
+<div class="container-fluid company-new-edit-container">
+  <div class="col-md-10 col-md-offset-1">
     <h3>Add Company To <%= @product.name %></h3>
     <div class="company-form">
-      <%= render "form" %>
+      <%= render 'form' %>
       <%= link_to "Back to Product", product_path(@product), class: "btn btn-default back-button" %>
       </div> <!-- THIS DIV COMES FROM FORM -->
     </div>

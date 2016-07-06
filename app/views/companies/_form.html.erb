@@ -1,13 +1,13 @@
 <%= form_for @company, url: product_company_path(@product), data: { behavior: "company-form" } do |f| %>
 
   <div class="well company-well">
-    <div class= "row">
+    <div class="row">
       <div class="col-md-12">
         <%= render 'layouts/error_messages', object: f.object %>
       </div>
     </div>
 
-    <div class = "row">
+    <div class ="row">
       <div class="col-md-12">
         <div class="form-group">
           <%= f.label :name, "Company Name *" %>
@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    <div class = "row">
+    <div class="row">
       <div class="col-md-12">
         <div class="form-group">
           <%= f.label :website, "Website *" %>
@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <div class = "row">
+    <div class="row">
       <div class="col-md-12">
         <div class="form-group">
           <div><%= f.label :founded, "Founding Date *" %></div>
@@ -44,7 +44,7 @@
       </div>
     </div>
 
-    <div class = "row">
+    <div class="row">
       <div class="col-md-12">
         <div class="form-group">
           <%= f.label :team_size, "Team Size *" %>
@@ -53,7 +53,7 @@
       </div>
     </div>
 
-    <div class = "row">
+    <div class="row">
       <div class="col-md-12">
         <div class="form-group">
           <%= f.label :engineer_number, "Number of Engineers *" %>
@@ -62,7 +62,7 @@
       </div>
     </div>
 
-    <div class = "row">
+    <div class="row">
       <div class="col-md-5">
         <div class="form-group">
           <div><%= f.label :revenue_type, "Revenue Type *" %></div>
@@ -117,5 +117,5 @@
 
   <div class="form-group">
     <%= f.button "Save Company", class: "btn btn-primary", data: { behavior: "company-submit-button", disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..." } %>
-
+    <!-- closing div in new and edit views -->
 <% end %>

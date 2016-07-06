@@ -2,13 +2,9 @@
   <td class="col-md-3">
     <%= group_invitation.recipient.email %>
   <td class="col-md-3">
-    <% if group_invitation.recipient.profile %>
-      <%= link_to user_profile_path(group_invitation.recipient) do %>
-        <div class="table-user-name">
-          <%= group_invitation.recipient.full_name %>
-        </div>
-      <% end %>
-    <% end %>
+    <div class="table-user-name">
+      <%= link_to_if(group_invitation.recipient_profile, group_invitation.recipient.full_name, user_profile_path(group_invitation.recipient)){}  %>
+    </div>
   </td>
   <td class="col-md-3">
     <% if group_invitation.accepted == true %>

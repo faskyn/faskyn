@@ -14,7 +14,7 @@
     <% end %>
   </div>
   <div class="chatboxinput">
-    <%= form_for([@conversation, Message.new], remote: true, data: { behavior: "new-message-body-form"}) do |f| %>
+    <%= form_for([@conversation, Message.new], remote: true, data: { behavior: "new-message-body-form" }) do |f| %>
       <%= f.text_area :body, class: "chatbox-text-area", data: { cid: "#{@conversation.id}", behavior: "new-message-body" } %>
     <% end %>
     <%= form_for([@conversation, Message.new], remote: true, data: { behavior: "message-upload-form" }) do |form| %>

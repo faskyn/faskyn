@@ -1,8 +1,8 @@
 <% provide(:title, @company.name) %>
-<div class= "container-fluid company-container">
+<div class="container-fluid company-container">
   <div class="product-show-container">
 
-    <% cache ["product-company-show", @product, @product.owner.profile] do %>
+    <% cache ['product-company-show', @product, @product.owner.profile] do %>
 
       <div class="row product-show-name">
         <div class="col-md-10">
@@ -32,13 +32,14 @@
 
       <h4>Product</h4>
       <div class="well product-well">
-        <div class = "row">
+        <div class="row">
           <div class="col-md-4">
             <div class="product-list">
               <div class="list-name">Website:</div>
-              <div class="description"><%= link_to @product.website, target: "_blank" do %>
-                 <%= truncate(@product.website, length: 23) %>
-              <% end %></div>
+              <div class="description">
+                <%= link_to @product.website, target: "_blank" do %>
+                  <%= truncate(@product.website, length: 23) %>
+                <% end %></div>
             </div>
           </div>
           <div class="col-md-8">
@@ -49,7 +50,7 @@
           </div>
         </div>
 
-        <div class = "row">
+        <div class="row">
           <div class="col-md-4">
             <div class="product-list">
               <div class="list-name">Posted by:</div>
@@ -72,11 +73,11 @@
             </div>
           </div>
         </div>
-        <div class = "row">
+        <div class="row">
           <div class="col-md-12">
             <div class = "product-list">
-                <div class = "list-name">Description:</div>
-                <div class = "description"><%= @product.description %></div>
+                <div class="list-name">Description:</div>
+                <div class="description"><%= @product.description %></div>
             </div>
           </div>
         </div>
@@ -84,17 +85,15 @@
 
     <% end %>
 
-    <% cache ["company-show", @company] do %>
+    <% cache ['company-show', @company] do %>
 
       <h4>Company</h4>
       <div class="well company-well">
-        <div class = "row">
+        <div class="row">
           <div class="col-md-6">
             <div class="company-list">
               <div class="list-name">Name:</div>
-              <div class="description">
-                 <%= truncate(@company.name, length: 23) %>
-              </div>
+              <div class="description"><%= truncate(@company.name, length: 23) %></div>
             </div>
           </div>
           <div class="col-md-6">
@@ -105,28 +104,30 @@
           </div>
         </div>
 
-        <div class = "row">
+        <div class="row">
           <div class="col-md-6">
             <div class="company-list">
               <div class="list-name">Website:</div>
-              <div class="description"><%= link_to @company.website, target: "_blank" do %>
-                 <%= truncate(@company.website, length: 23) %>
-              <% end %></div>
+              <div class="description">
+                <%= link_to @company.website, target: "_blank" do %>
+                  <%= truncate(@company.website, length: 23) %>
+                <% end %>
+              </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="company-list">
               <div class="list-name">Founded:</div>
-              <div class="description"><%= local_time(@company.founded, "%m/%Y") %></div>
+              <div class="description"><%= local_time(@company.founded, '%m/%Y') %></div>
             </div>
           </div>
         </div>
 
-        <div class = "row">
+        <div class="row">
           <div class="col-md-6">
             <div class = "company-list">
               <div class="list-name">Team size:</div>
-              <div class="description"><%= @company.team_size %> (<%= pluralize(@company.engineer_number, 'engineer') %>)</div>
+              <div class="description"><%= @company.team_size %> (<%= pluralize(@company.engineer_number, 'engineer') %></div>
             </div>
           </div>
           <div class="col-md-6">
@@ -141,7 +142,7 @@
           <div class="col-md-6">
             <div class="company-list">
               <div class="list-name">Investment (raised to date):</div>
-              <div class="description">$<%= number_with_delimiter(@company.investment, delimiter: ".") %></div>
+              <div class="description">$<%= number_with_delimiter(@company.investment, delimiter: '.') %></div>
             </div>
           </div>
           <div class="col-md-6">
@@ -164,7 +165,7 @@
           <div class="col-md-6">
             <div class="company-list">
               <div class="list-name">Updated at:</div>
-              <div class="description"><%= local_time(@company.updated_at, "%m/%d/%Y") %></div>
+              <div class="description"><%= local_time(@company.updated_at, '%m/%d/%Y') %></div>
             </div>
           </div>
         </div>

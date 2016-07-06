@@ -13,4 +13,8 @@ class GroupInvitation < ActiveRecord::Base
   scope :pending_user, -> (user) { where("recipient_id = ? AND accepted = ?", user.id, false) }
   scope :belonging_to_product_user, -> (user) { where("recipient_id = ? AND group_invitable_type = ?", user.id, "Product") }
   scope :belonging_to_product_customer_user, -> (user) {where("recipient_id = ? AND group_invitable_type = ?", user.id, "ProductCustomer") }
+
+  def recipient_profile
+    recipient.profile
+  end
 end
