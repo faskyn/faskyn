@@ -1,23 +1,15 @@
 <% cache ['products-index-single', product] do %>
   <tr class = "product-index-row">
-    <td class="col-md-1 image">
+    <td class="col-md-2 image-col">
       <%= link_to product_path(product) do %>
-        <%= image_tag product.product_image.url(:base_thumb), class: "product-image" %>
+        <%= image_tag product.product_image.url(:large_thumb), class: "product-index-image" %>
       <% end %>
     </td>
-    <td class="col-md-3 name">
+    <td class="col-md-10 description-col">
       <%= link_to product_path(product) do %>
-          <div class="link-name"><%= product.name %></div>
-      <% end %>
-    </td>
-    <td class="col-md-6 oneliner">
-      <%= link_to product_path(product) do %>
-        <div class="link-oneliner"><%= product.oneliner %></div>
-      <% end %>
-    </td>
-    <td class="col-md-2 updated">
-      <%= link_to product_path(product) do %>
-        <div class="link-updated"><%= local_time_ago(product.updated_at) %></div>
+        <div class="name"><%= product.name %></div>
+        <div class="oneliner"><%= product.oneliner %></div>
+        <div class="updated">Posted: <%= local_relative_time(product.created_at, type: 'time-or-date') %></div>
       <% end %>
     </td>
   </tr>

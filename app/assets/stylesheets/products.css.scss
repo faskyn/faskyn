@@ -195,23 +195,23 @@ $black: #333333;
       background-color: $grey-medium-light;
     }
   }
-	.image, .oneliner, .company, .updated {
-		text-align: center;
-    vertical-align: middle;
-	}
-  .link-name, .link-oneliner, .link-updated {
-    padding: 10px 5px 10px 5px;
+  .image-col, .description-col {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
   }
   .name {
-    text-align: left;
-    vertical-align: middle;
+    font-size: 16px;
+    color: $black;
+    font-weight: bold;
+  }
+  .oneliner {
+  }
+  .updated {
   }
   a {
     text-decoration: none;
     color: $dark-grey;
-    &:hover {
-      color: $garmin-blue;
-    }
   }
 }
 
@@ -304,6 +304,10 @@ $black: #333333;
 }
 
 .product-image {
+  border-radius: 10%;
+}
+
+.product-index-image {
   border-radius: 10%;
 }
 

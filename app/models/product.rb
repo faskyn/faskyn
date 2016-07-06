@@ -46,7 +46,7 @@ class Product < ActiveRecord::Base
   before_validation :format_website
 
   def self.pagination_per_page
-    12
+    8
   end
 
   def industries_all
