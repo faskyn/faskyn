@@ -103,10 +103,14 @@
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
-          <%= f.label :company_pitch_attachment, "Pitch (10MB max in PDF format)" %>
+          <%= f.label :company_pitch_attachment, "Pitch (10MB max in PDF format)", class: "company-attachment-label" %>
           <%= f.attachment_field :company_pitch_attachment, presigned: true, direct: true, data: { behavior: "new-company-file" } %>
-          <span data-behavior="company-file-upload-progress"></span>
+          <% if @company.company_pitch_attachment_id %>
+            <span>Remove <%= truncate(@company.company_pitch_attachment_filename, length: 25) %> :</span>
+            <%= f.check_box :remove_company_pitch_attachment %>
+          <% end %>
         </div>
+        <span data-behavior="company-file-upload-progress"></span>
       </div>
     </div>
   </div>

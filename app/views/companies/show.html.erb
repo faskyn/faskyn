@@ -156,7 +156,9 @@
           <div class="col-md-6">
             <div class="company-list">
               <div class="list-name">Pitch deck:</div>
-              <div class="description"><%= link_to "#{@company.name}'s pitch", attachment_url(@company, :company_pitch_attachment), target: "_blank" %></div>
+              <div class="description">
+                <%= link_to_if(@company.company_pitch_attachment_url, "#{@company.name}'s pitch", attachment_url(@company, :company_pitch_attachment), html_options = { target: "_blank" }){} %>
+              </div>
             </div>
           </div>
           <div class="col-md-6">

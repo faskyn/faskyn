@@ -1,4 +1,5 @@
 require "rails_helper"
+# require "refile/file_double"
 
 RSpec.describe Company, type: :model do
 
@@ -36,6 +37,15 @@ RSpec.describe Company, type: :model do
     it "is invalid without revenue" do
       expect(build_stubbed(:company, product: product, revenue: nil)).not_to be_valid
     end
+
+    # it "allows attaching a file" do
+    #   company = build_stubbed(:company, product: product)
+
+    #   company.company_pitch_attachment = Refile::FileDouble.new("dummy", "logo.pdf", content_type: "application/pdf")
+    #   company.save
+
+    #   expect(company.company_pitch_attachment_id).not_to be_nil
+    # end
 
     it { is_expected.to callback(:format_investment).before(:validation) }
 

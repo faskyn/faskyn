@@ -1,5 +1,4 @@
 require "rails_helper"
-# require "pry"
 
 describe SocialsController do
 
@@ -15,8 +14,6 @@ describe SocialsController do
       it "creates or updates social" do
         post :create
         expect(assigns(:profile)).to eq(profile)
-        #expect(assigns(:profile)).to eq(receive)
-        #expect(@profile).to receive(:find_or_create_from_auth_hash)
       end
 
       it "testing socials"

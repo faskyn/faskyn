@@ -37,15 +37,6 @@ FactoryGirl.define do
     profile
   end
 
-  # factory :auth_hash do
-  #   uid { Faker::Number.number(8) }
-  #   token { Faker::Number.number(10) }
-  #   first_name { "John" }
-  #   last_name { "Doe" }
-  #   provider { "twitter"}
-  #   page_url { "https://twitter.com/jdoe" }
-  # end
-
   factory :notification do
     notifiable_id { Faker::Number.between(1, 10) }
     notifiable_type { Faker::Lorem.word }
@@ -105,7 +96,6 @@ FactoryGirl.define do
     customer { Faker::Company.name }
     usage { Faker::Lorem.paragraph }
     website { 'https://examplecustomer.com' }
-    #product
   end
 
   factory :product_lead, class: ProductLead do
