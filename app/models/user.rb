@@ -38,14 +38,14 @@ class User < ActiveRecord::Base
   has_many :comment_replies, through: :comments, dependent: :destroy
   
   #check and decrease chat notification that happens between 2 given users (max 1)
-  def decreasing_chat_notification_number(user)
-    notification = notifications.between_chat_recipient(user).unchecked.first
+  def decreasing_chat_notification_number(sender)
+    notification = notifications.between_chat_recipient(sender).unchecked.first
     checking_and_decreasing_notification(notification) if notification.present?
   end
 
   #check and decrease task notifications that happens between 2 given users
-  def decreasing_task_notification_number(user)
-    notifications.task.between_other_recipient(user).unchecked.each do |notification|
+  def decreasing_task_notification_number(sender)
+    notifications.task.between_other_recipient(sender).unchecked.each do |notification|
       checking_and_decreasing_notification(notification)
     end
   end
@@ -98,12 +98,12 @@ class User < ActiveRecord::Base
     update_attributes(new_other_notification: 0)
   end
 
-  def decreased_chat_number_pusher(number = new_chat_notification)
-    Pusher.trigger_async('private-'+ id.to_s, 'new_chat_notification', { number: number })
+  def decreased_chat_number_pusher
+    Pusher.trigger_async('private-'+ id.to_s, 'new_chat_notification', { number: new_chat_notification })
   end
 
-  def decreased_other_number_pusher( number = new_other_notification)
-    Pusher.trigger_async('private-'+ id.to_s, 'new_other_notification', { number: number })
+  def decreased_other_number_pusher
+    Pusher.trigger_async('private-'+ id.to_s, 'new_other_notification', { number: new_other_notification })
   end
 
   def is_invited_or_member?(group_invitable)

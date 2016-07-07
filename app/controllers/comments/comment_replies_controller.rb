@@ -2,16 +2,6 @@ class Comments::CommentRepliesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    # @post_comment = PostComment.find(params[:post_comment_id])
-    # @post = @post_comment.post
-    # @post_comment_reply = @post_comment.post_comment_replies.build(post_comment_reply_params)
-    # authorize @post_comment_reply
-    # @post_comment_reply.user = current_user
-    # #@post_comment_reply.save!
-    # if @post_comment_reply.save
-    #   @post_comment.send_post_comment_reply_creation_notification(@post_comment_reply)
-    #   respond_to :js
-    # end
     @comment = Comment.find(params[:comment_id])
     @commentable = @comment.commentable
     @comment_reply = @comment.comment_replies.new(comment_reply_params)
@@ -24,15 +14,6 @@ class Comments::CommentRepliesController < ApplicationController
   end
 
   def update
-    # @post_comment_reply = PostCommentReply.find(params[:id])
-    # authorize @post_comment_reply
-    # respond_to do |format|
-    #   if @post_comment_reply.update_attributes(post_comment_reply_params)
-    #     format.json { respond_with_bip(@post_comment_reply) }
-    #   else
-    #     format.json { respond_with_bip(@post_comment_reply) }
-    #   end
-    # end
     @comment_reply = CommentReply.find(params[:id])
     authorize @comment_reply
     respond_to do |format|
