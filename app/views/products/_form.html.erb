@@ -31,7 +31,7 @@
           <%= f.label :product_image, "Product Image" %>
           <%= f.file_field :product_image %>
           <%= f.hidden_field :product_image_cache %>
-          <!-- <div class="explanation image-explanation">Choose a product image</div> -->
+          <div class="explanation image-explanation">Choose an image that refers to your product.</div>
         </div>
       </div>
       <div class="col-md-8">
@@ -51,7 +51,7 @@
       <div class="col-md-12">
         <div class="form-group">
           <%= f.label :oneliner %>
-          <%= f.text_area :oneliner, placeholder: "140-character-long brief description of the product (tweetable)", class: "form-control", data: { behavior: "oneliner-text-area"} %>
+          <%= f.text_area :oneliner, rows: "3", placeholder: '140-character-long (tweetable) brief description of the product, e.g. "Asana is the easiest way for teams to track their work—and get results"', class: "form-control", data: { behavior: "oneliner-text-area"} %>
           <!-- <span class="explanation oneliner-explanation">140-character-long brief description of the product (tweetable)</span> -->
           <span class="explanation oneliner-description-counter" data-behavior="oneliner-counter"></span>
         </div>

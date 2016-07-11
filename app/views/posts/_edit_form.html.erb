@@ -16,7 +16,7 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal" id="updatepostclose">Close</button>
-    <span class="btn btn-success btn-post-file" data-originalimage="">Upload Image
+    <span class="btn btn-default btn-post-file" data-originalimage="">Upload Image
       <%= f.file_field :post_image, data: { behavior: "post-image-upload-update" } %>
     </span>
     <%= f.hidden_field :post_image_cache %>

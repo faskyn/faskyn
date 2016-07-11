@@ -37,10 +37,11 @@ a {
 
 
 //controller name gets inserted on body tag by default; this padding is required for the NOT fixed navbar display
-.confirmations-controller, .invitations-controller, .passwords-controller, .registrations-controller, .sessions-controller {
-  padding-top:0px;
+.fixedheight {
+  &.confirmations-controller, &.invitations-controller, &.passwords-controller, &.registrations-controller, &.sessions-controller {
+    padding-top:0px;
+  }
 }
-
 //the one devise controller action that needs logged in controller, so navbar must be fixed (navbar height is 50px)
 .registrations-controller.edit-action {
   padding-top: 50px;

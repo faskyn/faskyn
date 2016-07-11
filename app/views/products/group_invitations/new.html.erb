@@ -3,16 +3,17 @@
 <div class= "container-fluid product-container">
   <div class="product-show-container">
 
-    <h3>Invite a New Member</h3>
+    <h3>Invite Collaborators</h3>
     <div class="well product-well">
-      <p>Product members will appear on the product's page alongside the product owner.</p>
+      <p>Invite the colleagues who worked with you on <%= @product.name %>!</p>
+      <p>Collaborators will appear on the product's page alongside the product owner.</p>
 
       <%= render partial: "products/group_invitations/form", locals: { product: @product } %>
     </div>
 
     <% if @product_group_invitations.any? %>
 
-      <h3>Product Member Invitations</h3>
+      <h3>Collaborator Invitations</h3>
       <div class="panel panel-default">
         <table class="table table-bordered">
           <thead>
@@ -34,7 +35,8 @@
     <h3>Invite a New Referencer</h3>
 
     <div class="well product-well">
-      <p>Product referencers (customers, that you added to product) can verify they are using your product and 
+      <p>Tell the community who is using <%= @product.name %>!</p>
+      <p>Product referencers (customers, that accepted your invitation) can verify they are using your product and 
       can write reviews on the product customer page.</p>
       <% if @product.product_customers.any? %>
 

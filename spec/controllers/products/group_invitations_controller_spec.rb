@@ -38,7 +38,7 @@ describe Products::GroupInvitationsController do
           it "redirects to back and shows the flash" do
             create_action
             expect(response).to redirect_to product_product_owner_panels_path(product)
-            expect(controller).to set_flash[:alert].to("User already invited or team member!")
+            expect(controller).to set_flash[:alert].to("User already invited!")
           end
         end
 

@@ -10,7 +10,7 @@ feature "creating profile" do
     click_on "Edit Profile"
     fill_in "profile[first_name]", with: "Jack"
     fill_in "profile[last_name]", with: "Black"
-    click_on "Save profile"
+    click_on "Save Profile"
     expect(page).to have_css(".flash-alert", text: "Profile updated!")
     expect(page).to have_content("Jack Black")
   end

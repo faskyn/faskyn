@@ -183,14 +183,12 @@ $black: #333333;
     text-align: center;
   }
   background-color: white;
-  .profile-form {
-    .profile-image {
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      margin-bottom: 10px;
-      margin-left: 10px;
-    }
+  .profile-image {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+    margin-left: 10px;
   }
 }
 

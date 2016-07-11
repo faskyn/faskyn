@@ -11,8 +11,9 @@
       </div>
     </div>
 
-    <h4>Invite a New Member</h4>
+    <h4>Invite Collaboratros</h4>
     <div class="well product-well">
+      <p>Invite the colleagues who worked with you on <%= @product.name %>!</p>
       <p>Product members will appear on the product's page alongside the product owner.</p>
   
       <%= render partial: "products/group_invitations/form", locals: { product: @product } %>
@@ -20,7 +21,8 @@
 
     <h4>Invite a New Referencer</h4>
     <div class="well product-well">
-      <p>Product referencers (customers, that you added to product) can verify they are using your product and 
+      <p>Tell the community who is using <%= @product.name %>!</p>
+      <p>Product referencers (customers, that accepted your invitation) can verify they are using your product and 
       can write reviews on the product customer page.</p>
 
       <% if @product.product_customers.any? %>
@@ -34,7 +36,7 @@
       <% end %>
     </div>
 
-    <h4>Product Members</h4>
+    <h4>Product Collaborators</h4>
     <div class="panel panel-default product-users-panel">
       <table class="table table-bordered">
         <thead>
@@ -50,7 +52,7 @@
       </table>
     </div>
 
-    <h4>Product Member Invitations</h4>
+    <h4>Collaborator Invitations</h4>
     <div class="panel panel-default product-users-panel">
       <table class="table table-bordered">
         <thead>

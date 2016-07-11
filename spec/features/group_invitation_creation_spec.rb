@@ -14,7 +14,7 @@ feature "creating product group invitation" do
     within ".product-group-invitation-form" do
       fill_in "group_invitation[email]", with: "not_registered_yet@gmail.com"
     end
-    click_on "Invite Member"
+    click_on "Invite Collaborator"
     expect(page).to have_css(".flash-alert", "Invitation sent!")
     expect(page).to have_css("td", text: "not_registered_yet@gmail.com")
     expect(page).to have_content("Pending")
@@ -26,7 +26,7 @@ feature "creating product group invitation" do
     within ".product-group-invitation-form" do
       fill_in "group_invitation[email]", with: "jackblack@gmail.com"
     end
-    click_on "Invite Member"
+    click_on "Invite Collaborator"
     expect_page_registered_user
   end
 
