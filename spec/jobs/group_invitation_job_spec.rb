@@ -15,7 +15,7 @@ describe GroupInvitationJob, type: :job do
     let!(:owner) { create(:product_user, product: product, role: "owner", user: sender) }
     let!(:group_invitation) { create(:group_invitation, group_invitable: product,
       sender: sender, recipient: recipient, email: recipient.email) }
-    subject(:job) { described_class.perform_later(group_invitation) }
+    subject(:job) { described_class.perform_later(group_invitation.id) }
 
     it "invokes the mailer" do
       expect(GroupInvitationMailer).to receive_message_chain(:product_group_invitation_email, :deliver)

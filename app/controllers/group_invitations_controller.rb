@@ -20,7 +20,7 @@ class GroupInvitationsController < ApplicationController
                             notifiable: @group_invitable, 
                             action: "invited"
                             )
-        GroupInvitationJob.perform_later(@group_invitation)
+        GroupInvitationJob.perform_later(@group_invitation.id)
         redirect_to :back, notice: "Invitation sent!"
       else
         flash[:error] = "Type an email address!"

@@ -3,7 +3,11 @@ $(document).on('change', '[data-behavior="revenue-type-select"]', function (even
   if ($(this).val() === "no revenue") {
     $('[data-behavior="revenue-number-select').prop("selectedIndex", 3);
     $('[data-behavior="revenue-explanation"]').html("");
-  } 
+  }
+  else if ($(this).val() === "don't want to share") {
+    $('[data-behavior="revenue-number-select').prop("selectedIndex", 3);
+    $('[data-behavior="revenue-explanation"]').html("");
+  }
   else if ($(this).val() === "recurring revenue") {
     if ($('[data-behavior="revenue-number-select"]').val() === "$0") {
       $('[data-behavior="revenue-number-select"]').prop("selectedIndex", 0);

@@ -17,7 +17,7 @@ describe ReviewWriterJob, type: :job do
     let!(:product_user) { create(:product_user, product: product, user: owner, role: "owner") }
     let!(:product_customer) { create(:product_customer, product: product) }
     let!(:review) { create(:review, user: reviewer, product_customer: product_customer) }
-    subject(:job) { described_class.perform_later(review, product_customer) }
+    subject(:job) { described_class.perform_later(review.id, product_customer.id) }
 
     it "invokes the mailer" do
       expect(ReviewWriterMailer).to receive_message_chain(:review_writer_email, :deliver)

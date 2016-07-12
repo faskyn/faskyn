@@ -1,6 +1,6 @@
-Hi <%= "#{@executor.profile.first_name}" %>,
+Hi <%= @executor.profile.first_name %>,
 
-<%= "#{@assigner.profile.full_name}" %> just assigned you a new message.
+<%= @assigner.profile.full_name %> just assigned you a new message.
 
 You can check it out <%= link_to "here", user_url(@assigner) %>.
 

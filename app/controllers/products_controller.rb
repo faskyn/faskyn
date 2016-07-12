@@ -42,6 +42,7 @@ class ProductsController < ApplicationController
     @product.product_users.build(user_id: current_user.id, role: "owner")
     authorize @product
     if @product.save
+      ProductCreatorJob.set(wait: 2.days).perform_later(@product.id)
       respond_to do |format|
         format.html { redirect_to new_product_group_invitation_path(@product), notice: "Product got created!" }
         format.js

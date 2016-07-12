@@ -1,8 +1,8 @@
-Hi <%= "#{@reader.profile.first_name}" %>,
+Hi <%= @reader.profile.first_name %>,
 
 I just posted something on faskyn.
 
 You can check it out <%= link_to "here", posts_url %>.
 
 Cheers,
-<%= "#{@writer.profile.full_name}" %>
+<%= @writer.profile.full_name %>

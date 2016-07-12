@@ -1,0 +1,8 @@
+Hi <%= @product.owner.first_name %>,
+
+You successfully created <%= @product.name %>, but you haven't added the product's company yet.
+
+For better discovering we recommend to add company info to your product <%= link_to "here", new_product_company_url(@product) %>.
+
+Cheers,
+Faskyn team

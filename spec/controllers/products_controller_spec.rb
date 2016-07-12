@@ -133,6 +133,10 @@ describe ProductsController do
           expect{ create_action }.to change{ Product.count }.by(1)
         end
 
+        it 'triggers product email job' do
+          expect{ create_action }.to change{ ActiveJob::Base.queue_adapter.enqueued_jobs.count }.by(1)
+        end
+
         it "redirects to product page and shows the flash" do
           create_action
           expect(response).to redirect_to new_product_group_invitation_path(Product.last)

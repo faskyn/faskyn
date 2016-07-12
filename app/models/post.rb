@@ -36,7 +36,7 @@ class Post < ActiveRecord::Base
   #   users = User.all - [writer]
   #   users.each do |reader|
   #     if reader.profile.present?
-  #       PostCreatorJob.perform_later(self, writer, reader)
+  #       PostCreatorJob.perform_later(self.id, writer.id, reader.id)
   #     end
   #   end
   # end

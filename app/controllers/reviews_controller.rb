@@ -14,7 +14,7 @@ class ReviewsController < ApplicationController
                           notifiable: @product_customer,
                           action: "wrote"
                           )
-      ReviewWriterJob.perform_later(@review, @product_customer)
+      ReviewWriterJob.perform_later(@review.id, @product_customer.id)
       respond_to :js
     else
       respond_to :js
