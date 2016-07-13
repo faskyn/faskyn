@@ -1,10 +1,12 @@
 class Message < ActiveRecord::Base
+  include Concerns::Notifiable
+
   serialize :link
   attachment :message_attachment, store: 'message_files_backend', extension: ["pdf", "txt", "doc", "docx", "xls", "xlsx", "html", "png", "img", "jpg"]
 
   belongs_to :conversation
   belongs_to :user
-  has_many :notifications, as: :notifiable, dependent: :destroy
+  # has_many :notifications, as: :notifiable, dependent: :destroy
 
   validates :conversation, presence: true
   validates :user, presence: true

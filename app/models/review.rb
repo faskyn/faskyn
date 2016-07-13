@@ -1,7 +1,9 @@
 class Review < ActiveRecord::Base
+  include Concerns::Notifiable
+
   belongs_to :product_customer, touch: true
   belongs_to :user
-  has_many :notifications, as: :notifiable, dependent: :destroy
+  # has_many :notifications, as: :notifiable, dependent: :destroy
 
   validates :product_customer, presence: true
   validates :user, presence: true

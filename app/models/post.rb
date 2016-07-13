@@ -1,12 +1,14 @@
 class Post < ActiveRecord::Base
   mount_uploader :post_image, PostImageUploader
+  include Concerns::Commentable
+  include Concerns::Notifiable
 
   belongs_to :user
   has_one :user_profile, through: :user, source: :profile
-  has_many :comments, as: :commentable, dependent: :destroy
-  has_many :commenters, through: :comments, source: :user
+  # has_many :comments, as: :commentable, dependent: :destroy
+  # has_many :commenters, through: :comments, source: :user
 
-  has_many :notifications, as: :notifiable, dependent: :destroy
+  # has_many :notifications, as: :notifiable, dependent: :destroy
 
   validates :user, presence: true
   validates :body, presence: { message: "can't be blank" }, length: { maximum: 500, message: "can't be longer than %{count} characters" }
