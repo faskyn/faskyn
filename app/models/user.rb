@@ -66,17 +66,17 @@ class User < ActiveRecord::Base
     notification.check_notification
     if notification.notifiable_type == "Message"
       decrease_new_chat_notifications
-      decreased_chat_number_pusher
+      chat_notification_number_to_pusher
     else
       decrease_new_other_notifications
-      decreased_other_number_pusher
+      other_notification_number_to_pusher
     end
   end
 
   #counting notifications for user
-  def increase_new_chat_notifications
-    increment!(:new_chat_notification)
-  end
+  # def increase_new_chat_notifications
+  #   increment!(:new_chat_notification)
+  # end
 
   def decrease_new_chat_notifications
     decrement!(:new_chat_notification) if new_chat_notification > 0
@@ -86,9 +86,9 @@ class User < ActiveRecord::Base
     update_attributes(new_chat_notification: 0)
   end
 
-  def increase_new_other_notifications
-    increment!(:new_other_notification)
-  end
+  # def increase_new_other_notifications
+  #   increment!(:new_other_notification)
+  # end
 
   def decrease_new_other_notifications
     decrement!(:new_other_notification) if new_other_notification > 0
@@ -98,11 +98,11 @@ class User < ActiveRecord::Base
     update_attributes(new_other_notification: 0)
   end
 
-  def decreased_chat_number_pusher
+  def chat_notification_number_to_pusher
     Pusher.trigger_async('private-'+ id.to_s, 'new_chat_notification', { number: new_chat_notification })
   end
 
-  def decreased_other_number_pusher
+  def other_notification_number_to_pusher
     Pusher.trigger_async('private-'+ id.to_s, 'new_other_notification', { number: new_other_notification })
   end
 

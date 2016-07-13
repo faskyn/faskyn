@@ -42,7 +42,7 @@ RSpec.describe Notification, type: :model do
     it { is_expected.to belong_to(:recipient) }
     it { is_expected.to belong_to(:notifiable) } 
 
-    it { is_expected.to callback(:increasing_notification).after(:create) }
+    it { is_expected.to callback(:send_notification).after(:create) }
   end
 
   describe "scopes" do
@@ -110,32 +110,6 @@ RSpec.describe Notification, type: :model do
     it "checks notification(check_notification)" do
       notification.check_notification
       expect(notification.checked_at).not_to eq(nil)
-    end
-
-    it "increasing_notification with chat notification" do
-      expect(chat_notification.recipient).to receive(:increase_new_chat_notifications)
-      expect(chat_notification).to receive(:increased_chat_number_pusher)
-      chat_notification.increasing_notification
-    end
-
-    it "increasing_notification with other notification" do
-      expect(other_notification.recipient).to receive(:increase_new_other_notifications)
-      expect(other_notification).to receive(:increased_other_number_pusher)
-      other_notification.increasing_notification
-    end
-
-    it "increased_chat_number_pusher" do
-      user.new_chat_notification = 1
-      number = user.new_chat_notification
-      expect(Pusher).to receive(:trigger_async).with(('private-' + user.id.to_s), 'new_chat_notification', {number: number} )
-      chat_notification.increased_chat_number_pusher
-    end
-
-    it "increased_other_number_pusher" do
-      user.new_other_notification = 1
-      number = user.new_other_notification
-      expect(Pusher).to receive(:trigger_async).with(('private-' + user.id.to_s), 'new_other_notification', {number: number} )
-      other_notification.increased_other_number_pusher
     end
 
     it "completed?" do

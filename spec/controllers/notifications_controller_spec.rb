@@ -113,26 +113,26 @@ describe NotificationsController do
       expect(response).to redirect_to("/posts#post_#{notification.notifiable_id}")
     end
 
-    it "returns product owner panels path for accepted action" do
+    it "redirects to product owner panels path for accepted action" do
       notification = create(:notification, notifiable_type: "Product", notifiable_id: product.id, action: "accepted")
       get :checking_decreasing, user_id: @user.id, notification: notification
       expect(response).to redirect_to("/products/#{product.id}/product_owner_panels")
     end
 
-    it "returns product customer path for commented action" do
+    it "redirects to product customer path for commented action" do
       notification = create(:notification, notifiable_type: "ProductCustomer", notifiable_id: product_customer.id, action: "commented")
       get :checking_decreasing, user_id: @user.id, notification: notification
       expect(response).to redirect_to("/products/#{product.id}/product_customers/#{product_customer.id}#comment-panel")
     end
 
-    it "returns product lead path for commented action" do
+    it "redirects to product lead path for commented action" do
       product_lead = create(:product_lead, product: product)
       notification = create(:notification, notifiable_type: "ProductLead", notifiable_id: product_lead.id, action: "commented")
       get :checking_decreasing, user_id: @user.id, notification: notification
       expect(response).to redirect_to("/products/#{product.id}/product_leads/#{product_lead.id}#comment-panel")
     end
 
-    it "returns product path for product customer invited action" do
+    it "redirects to product path for product customer invited action" do
       notification = create(:notification, notifiable_type: "ProductCustomer", notifiable_id: product_customer.id, action: "invited")
       get :checking_decreasing, user_id: @user.id, notification: notification
       expect(response).to redirect_to("/products/#{product.id}/product_customers/#{product_customer.id}")
