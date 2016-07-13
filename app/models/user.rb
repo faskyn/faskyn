@@ -52,12 +52,12 @@ class User < ActiveRecord::Base
 
   #check and decrease the comment notification that belongs to a given notifiable
   # def decreasing_comment_notification_number(notifiable_type, notifiable_id)
-  #   notifications.this_notifiable_comments(notifiable_type, notifiable_id).unchecked.each do |notification|
+  #   notifications.this_notifiable(notifiable_type, notifiable_id).unchecked.each do |notification|
   #     checking_and_decreasing_notification(notification)
   #   end
   # end
-  def decreasing_comment_notification_number(noti)
-    notifications.this_notifiable_comments(noti.notifiable_type, noti.notifiable_id).unchecked.each do |notification|
+  def decreasing_other_notification_number(noti)
+    notifications.this_notifiable(noti.notifiable_type, noti.notifiable_id).unchecked.each do |notification|
       checking_and_decreasing_notification(notification)
     end
   end

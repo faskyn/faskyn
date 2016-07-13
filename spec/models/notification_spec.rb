@@ -86,8 +86,8 @@ RSpec.describe Notification, type: :model do
     end
 
     it "belongs to this notifiable comments)" do
-      expect(Notification.this_notifiable_comments("Post", post.id)).to eq([post_notification])
-      expect(Notification.this_notifiable_comments("Post", other_post.id)).not_to include(post_notification)
+      expect(Notification.this_notifiable("Post", post.id)).to eq([post_notification])
+      expect(Notification.this_notifiable("Post", other_post.id)).not_to include(post_notification)
     end
 
     it "belongs to this chat recipient(between_chat_recipient)" do

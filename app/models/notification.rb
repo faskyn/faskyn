@@ -22,7 +22,7 @@ class Notification < ActiveRecord::Base
   scope :unchecked, -> { where(checked_at: nil) }
   scope :checked, -> { where.not(checked_at: nil) }
 
-  scope :this_notifiable_comments, -> (notifiable_type, notifiable_id) do
+  scope :this_notifiable, -> (notifiable_type, notifiable_id) do
     where("notifications.notifiable_type = ? AND notifications.notifiable_id = ?", notifiable_type, notifiable_id)
   end
 

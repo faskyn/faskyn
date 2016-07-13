@@ -34,7 +34,7 @@ class NotificationsController < ApplicationController
 
   def checking_decreasing
     notification = Notification.find(params[:notification])
-    current_user.decreasing_comment_notification_number(notification)
+    current_user.decreasing_other_notification_number(notification)
     redirect_to notification_redirection_path(notification)
   end
 
