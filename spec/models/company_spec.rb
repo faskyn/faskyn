@@ -4,6 +4,8 @@ require "rails_helper"
 RSpec.describe Company, type: :model do
 
   describe "model validations" do
+    REVENUE_TYPES = ["recurring revenue", "non-recurring revenue", "no revenue", "don't want to share"]
+    REVENUES = ["< $100k", "$100k < $1M", "> $1M", "$0"]
     let!(:product) { create(:product, :product_with_nested_attrs) }
 
     it "has a valid factory" do
@@ -38,15 +40,6 @@ RSpec.describe Company, type: :model do
       expect(build_stubbed(:company, product: product, revenue: nil)).not_to be_valid
     end
 
-    # it "allows attaching a file" do
-    #   company = build_stubbed(:company, product: product)
-
-    #   company.company_pitch_attachment = Refile::FileDouble.new("dummy", "logo.pdf", content_type: "application/pdf")
-    #   company.save
-
-    #   expect(company.company_pitch_attachment_id).not_to be_nil
-    # end
-
     it { is_expected.to callback(:format_investment).before(:validation) }
 
     it { is_expected.to validate_presence_of(:name).with_message(/can't be blank/) }
@@ -58,6 +51,8 @@ RSpec.describe Company, type: :model do
     it { is_expected.to validate_presence_of(:revenue).with_message(/can't be blank/) }
     it { is_expected.to validate_presence_of(:website).with_message(/can't be blank/) }
 
+    it { is_expected.to validate_inclusion_of(:revenue_type).in_array(REVENUE_TYPES) }
+    it { is_expected.to validate_inclusion_of(:revenue).in_array(REVENUES) }
     it { is_expected.to validate_numericality_of(:team_size).with_message(/must be an integer/) }
     it { is_expected.to validate_numericality_of(:engineer_number).with_message(/must be an integer/) }
     it { is_expected.to validate_numericality_of(:investment).with_message(/must be an integer/) }

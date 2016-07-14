@@ -1,5 +1,4 @@
 class Product < ActiveRecord::Base
-  #WEBSITE_REGEX = /\A(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?\z/i
   include ActionView::Helpers::TextHelper
   include Concerns::Validateable
   include Concerns::Commentable
@@ -11,13 +10,7 @@ class Product < ActiveRecord::Base
   belongs_to :owner, class_name: "User", foreign_key: "user_id"
   has_many :users, through: :product_users
   has_many :product_users, dependent: :destroy
-  has_many :owners, -> { where(product_users: { role: "owner" }) }, through: :product_users, source: :user
-
-  # has_many :comments, as: :commentable, dependent: :destroy
-  # has_many :commenters, through: :comments, source: :user
-
-  # has_many :notifications, as: :notifiable, dependent: :destroy
-  
+  has_many :owners, -> { where(product_users: { role: "owner" }) }, through: :product_users, source: :user 
   has_one :company, dependent: :destroy
   has_many :industry_products, dependent: :destroy, inverse_of: :product
   has_many :industries, through: :industry_products
@@ -44,8 +37,6 @@ class Product < ActiveRecord::Base
   validate :product_customers_limit_max
   validate :product_leads_limit_max
   validate :product_customer_and_lead_limit_min
-
-  # before_validation :format_website
 
   def self.pagination_per_page
     8

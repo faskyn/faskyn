@@ -73,11 +73,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  #counting notifications for user
-  # def increase_new_chat_notifications
-  #   increment!(:new_chat_notification)
-  # end
-
   def decrease_new_chat_notifications
     decrement!(:new_chat_notification) if new_chat_notification > 0
   end
@@ -85,10 +80,6 @@ class User < ActiveRecord::Base
   def reset_new_chat_notifications
     update_attributes(new_chat_notification: 0)
   end
-
-  # def increase_new_other_notifications
-  #   increment!(:new_other_notification)
-  # end
 
   def decrease_new_other_notifications
     decrement!(:new_other_notification) if new_other_notification > 0

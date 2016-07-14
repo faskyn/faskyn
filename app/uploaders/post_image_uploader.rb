@@ -1,9 +1,4 @@
-# encoding: utf-8
-
 class PostImageUploader < CarrierWave::Uploader::Base
-
-  # Include RMagick or MiniMagick support:
-  # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
 
   if Rails.env.production?
@@ -29,5 +24,4 @@ class PostImageUploader < CarrierWave::Uploader::Base
   # def default_url
   #   [version_name, "post_image.png"].compact.join('_')
   # end
-
 end

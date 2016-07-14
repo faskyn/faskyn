@@ -3,14 +3,11 @@ class Task < ActiveRecord::Base
 
   belongs_to :assigner, class_name: "User"
   belongs_to :executor, class_name: "User"
-
   has_one :assigner_profile, through: :assigner, source: :profile
   has_one :executor_profile, through: :executor, source: :profile
-  # has_many :notifications, as: :notifiable, dependent: :destroy
 
   validates :assigner, presence: true
   validates :executor, presence: { message: "must be valid"}
-
   validates :content, presence: { message: "can't be blank" }, length: { maximum: 140, message: "can't be longer than %{count} characters" }
   validate :completed_at_date_cannot_be_in_the_future
 
@@ -21,7 +18,6 @@ class Task < ActiveRecord::Base
     where("(tasks.assigner_id = ? AND tasks.executor_id = ?) OR (tasks.assigner_id = ? AND tasks.executor_id = ?)", assigner_id, executor_id, executor_id, assigner_id)
   end
 
-  #number of tasks to appear on different task index pages
   def self.pagination_per_page
     12
   end
@@ -64,7 +60,6 @@ class Task < ActiveRecord::Base
   rescue ArgumentError
     self.executor = nil
   end
-  #end of getter setter method for new task executor
 
   def completed?
     completed_at

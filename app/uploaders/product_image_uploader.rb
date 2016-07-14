@@ -1,7 +1,4 @@
 class ProductImageUploader < CarrierWave::Uploader::Base
-
-  # Include RMagick or MiniMagick support:
-  # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
 
   if Rails.env.production?
@@ -35,5 +32,4 @@ class ProductImageUploader < CarrierWave::Uploader::Base
   def default_url
     [version_name, "product_image.png"].compact.join('_')
   end
-
 end

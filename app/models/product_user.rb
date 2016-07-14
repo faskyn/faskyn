@@ -2,8 +2,6 @@ class ProductUser < ActiveRecord::Base
   belongs_to :user
   belongs_to :product, touch: true
 
-  #before_destroy :check_for_owner
-
   validates :product, presence: true
   validates :user, presence: true
   validates :role, presence: true

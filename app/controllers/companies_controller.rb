@@ -3,7 +3,6 @@ class CompaniesController < ApplicationController
   before_action :set_product
   before_action :set_and_authorize_company, only: [:show, :edit, :update]
 
-
   def show
   end
 

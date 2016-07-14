@@ -1,5 +1,6 @@
 class Company < ActiveRecord::Base
-  # WEBSITE_REGEX = /\A(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?\z/i
+  REVENUE_TYPES = ["recurring revenue", "non-recurring revenue", "no revenue", "don't want to share"]
+  REVENUES = ["< $100k", "$100k < $1M", "> $1M", "$0"]
   include Concerns::Validateable
 
   attachment :company_pitch_attachment, store: 'company_files_backend', extension: ["pdf"]
@@ -11,8 +12,8 @@ class Company < ActiveRecord::Base
   validates :founded, presence: { message: "can't be blank" }
   validates :team_size, presence: { message: "can't be blank" }, numericality: { only_integer: true, message: "must be an integer" }
   validates :engineer_number, presence: { message: "can't be blank" }, numericality: { only_integer: true, message: "must be an integer" }
-  validates :revenue_type, presence: { message: "can't be blank" }
-  validates :revenue, presence: { message: "can't be blank" }
+  validates :revenue_type, presence: { message: "can't be blank" }, inclusion: { in: REVENUE_TYPES, message: "%{value} is not a valid revenue type option" } 
+  validates :revenue, presence: { message: "can't be blank" }, inclusion: { in: REVENUES, message: "%{value} is not a valid revenue option" }
   validates :website, presence: { message: "can't be blank" }, format: { with: WEBSITE_REGEX, message: "format is invalid" }
   validates :investment, numericality: { only_integer: true, message: "must be an integer" }
 
@@ -22,7 +23,6 @@ class Company < ActiveRecord::Base
   validate :revenue_type_revenue_relation
 
   before_validation :format_investment
-  # before_validation :format_website
 
   def format_investment
     if investment.blank? || investment < 0

@@ -112,8 +112,8 @@ RSpec.describe Notification, type: :model do
       expect(notification.checked_at).not_to eq(nil)
     end
 
-    it "completed?" do
-      notification_checked= create(:notification, checked_at: DateTime.now - 2)
+    it "checked?" do
+      notification_checked = create(:notification, checked_at: DateTime.now - 2)
       expect(notification.checked?).to eq(nil)
       expect(notification_checked.checked?).to_not eq(nil)
     end

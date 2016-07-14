@@ -1,4 +1,5 @@
 class CompanyPolicy < ApplicationPolicy
+  
   def show?
     user.present? && user.profile.present?
   end
