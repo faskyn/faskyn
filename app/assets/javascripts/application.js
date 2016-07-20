@@ -21,6 +21,7 @@
 //= require cocoon
 //= require local_time
 //= require moment
+//= require geocomplete
 //= require_tree .
 
 Turbolinks.enableProgressBar();

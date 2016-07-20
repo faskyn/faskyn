@@ -82,6 +82,8 @@ gem 'omniauth-google-oauth2', '~> 0.2.10'
 #framework for handling timeformats in js
 gem 'momentjs-rails', '~> 2.11', '>= 2.11.1'
 gem 'local_time', '~> 1.0', '>= 1.0.3'
+#geolocation integration
+gem 'geocomplete_rails', '~> 1.7'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

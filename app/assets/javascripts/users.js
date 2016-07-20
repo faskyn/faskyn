@@ -1,5 +1,11 @@
 $(document).on("page:change", function() {
 
+  if ($('[data-behavior="profile-location"]').length > 0) {
+    $(function() {
+      $('[data-behavior="profile-location"]').geocomplete();
+    });
+  };
+
   //infinite scrolling on user index page
   if ($('#infinite-user-scrolling').size() > 0) {
     $(window).on('scroll', function() {
